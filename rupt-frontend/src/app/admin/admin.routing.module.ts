@@ -4,10 +4,12 @@ import { ModuleWithProviders } from '@angular/core';
 
 import { LoginComponent } from './login/login.component';
 import { AdministradoresComponent } from './administradores/administradores.component';
+import { PainelAdministrativoComponent } from './painel-administrativo/painel-administrativo.component';
 
 const AdminRoutes: Routes = [
-    { path : 'admin', component: LoginComponent},
-    { path : 'admin/administradores', component: AdministradoresComponent},
+    { path : 'admin', component: PainelAdministrativoComponent, children: [
+        { path : 'administradores', component: AdministradoresComponent}
+    ]}
 ];
 
 @NgModule({
