@@ -16,6 +16,7 @@ export class AdministradoresComponent implements OnInit {
 
 
   modalActions = new EventEmitter<string|MaterializeAction>();
+  
   openModal() {
     this.modalActions.emit({action:"modal",params:['open']});
   }
