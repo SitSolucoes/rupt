@@ -45,4 +45,12 @@ class AdminController extends Controller
             'token' => $token
         ],200 );
     }
+
+    public function getAdmins(){
+        $admins = Admin::all();
+        $response = [
+            'admins' => $admins
+        ];
+        return response()->json($response, 200);
+    }
 }

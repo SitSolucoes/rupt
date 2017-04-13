@@ -25,3 +25,7 @@ Route::post('/signin',[
             'uses' => 'AdminController@signin'
 ]);
 
+Route::get('/getAdmins',[
+            'uses' => 'AdminController@getAdmins'
+]);
+
