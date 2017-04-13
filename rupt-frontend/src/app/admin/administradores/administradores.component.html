@@ -1,0 +1,199 @@
+<body class="row">
+
+<a class="waves-effect waves-light btn modal-trigger" (click)="openModal()">Modal</a>
+ 
+<!-- Modal Structure -->
+<div id="modal1" class="modal bottom-sheet" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions">
+  <div class="modal-content">
+    <h4>Modal Header</h4>
+    <p>A bunch of text</p>
+  </div>
+  <div class="modal-footer">
+    <a class="waves-effect waves-green btn-flat" (click)="closeModal()">Close</a>
+    <a class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+  </div>
+</div>
+
+
+
+    <div class="admin-menu-top col s12 m12 l12 xl12">
+        <div class="col s12 m12 l3 xl3">
+            <i class="material-icons">wallpaper</i>
+            Rupt
+        </div>
+        <div class="col s12 m12 l9 xl9 right-align">
+            <a class='dropdown-button btn' href='#' data-activates='dropdown1'>Administrador</a>
+
+            <!-- Dropdown Structure -->
+            <ul id='dropdown1' class='dropdown-content'>
+                <li><a href="#!"><i class="material-icons">create</i>Editar</a></li>
+                <li><a href="#!"><i class="material-icons">power_settings_new</i>Sair</a></li>
+            </ul>
+        </div>
+    </div>
+	<div class="admin-menu-left col s12 m12 l3 xl2">
+		<div class="navbar-left">
+            <ul class="collapsible" data-collapsible="accordion">
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">home</i>Início</div>
+                </li>
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">create</i>Cadastros</div>
+                    <div class="collapsible-body">
+                        <ul class="collapsible" data-collapsible="accordion">
+                            <li>
+                                <div class="collapsible-header"><i class="material-icons">keyboard_arrow_right</i>Administradores</div>
+                            </li>
+                            <li>
+                                <div class="collapsible-header"><i class="material-icons">keyboard_arrow_right</i>Categorias</div>
+                            </li>
+                            <li>
+                                <div class="collapsible-header"><i class="material-icons">keyboard_arrow_right</i>Colaboradores</div>
+                            </li>
+                            <li>
+                                <div class="collapsible-header"><i class="material-icons">keyboard_arrow_right</i>Leitores</div>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">chat</i>Mensagens</div>
+                </li>
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">library_books</i>Posts</div>
+                </li>
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">equalizer</i>Relatórios</div>
+                </li>
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">power_settings_new</i>Sair</div>
+                </li>
+            </ul>
+            
+        </div>
+    </div>
+
+    <div class="content col s12 m12 l9 xl10">		
+        <div class="col col s10 m10 l10 xl10 offset-s1 offset-m1 offset-l1 offset-xl1">
+            <div class="title">
+                <i class="material-icons">view_list</i> 
+                Administradores
+            </div>
+
+            <div class="row">
+                <div class="col s12 m12 l4 xl2">
+                    <a class="modal-trigger" href="#modal">
+                        <div class="btn new">
+                            Novo
+                        </div>
+                    </a>
+                </div>
+                <div class="col s12 m12 l8 xl10 search">
+                    <nav>
+                        <div class="nav-wrapper">
+                            <form>
+                                <div class="input-field">
+                                    <input id="search" type="search" required>
+                                    <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                                    <i class="material-icons">close</i>
+                                </div>
+                            </form>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+
+            <ul class="collapsible list">
+                <li>
+                    <div class="list-item header">
+                        <div class="col s8 m9 l9 xl9 item">
+                            Nome
+                        </div>
+                        <div class="option-icons col s2 m1 l1 xl1 right-align"> 
+                            Status
+                        </div>
+                        <div class="option-icons col s2 m2 l2 xl2 right-align">
+                            <div class="margin-right-1">Editar</div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="list-item option-icons">
+                        <div class="col s8 m9 l9 xl9 item">
+                            Bruno Felipe Cardoso
+                        </div>
+                        <div class="col s2 m1 l1 xl1 right-align"> 
+                            Ativo 
+                        </div>
+                        <div class="option-icons col s2 m2 l2 xl2">
+                            <i class="material-icons">mode_edit</i>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="list-item option-icons">
+                        <div class="col s8 m9 l9 xl9 item">
+                            Gilberto Vieira Junior
+                        </div>
+                        <div class="option-icons col s2 m1 l1 xl1 right-align"> 
+                            Inativo
+                        </div>
+                        <div class="option-icons col s2 m2 l2 xl2">
+                            <i class="material-icons">mode_edit</i>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+            
+
+            <!-- Modal Structure -->
+            <div id="modal" class="modal modal-fixed-footer">
+                <div class="modal-content">
+                    <h4>Cadastrar / Editar</h4>
+                
+                    <div class="row">
+                        <form class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                <input id="nome" name="nome" type="text" class="validate">
+                                <label for="nome">Nome Completo</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                <input id="email" name="email" type="text" class="validate">
+                                <label for="email">Email</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                <input id="senha" name="senha" type="password" class="validate">
+                                <label for="senha">Senha //so aparece se for o proprio adm</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                <input id="confirm-senha" name="confirm-senha" type="password" class="validate">
+                                <label for="confirm-senha">Repetir Senha //so aparece se for o proprio adm</label>
+                                </div>
+                            </div>
+                            
+                            <div class="input-field col s12">
+                                <select>
+                                    <option value="s">Ativo</option>
+                                    <option value="n">Inativo</option>
+                                </select>
+                                <label>Status //só vai aparecer quando for editar</label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
+                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Salvar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

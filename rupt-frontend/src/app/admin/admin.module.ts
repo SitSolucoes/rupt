@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { LoginComponent } from './login/login.component';
+import { AdministradoresComponent } from './administradores/administradores.component';
 
 @NgModule({
   imports: [
@@ -11,7 +12,8 @@ import { LoginComponent } from './login/login.component';
     LoginComponent
   ],
   declarations: [
-    LoginComponent
+    LoginComponent,
+    AdministradoresComponent
   ]
 })
 export class AdminModule { }
