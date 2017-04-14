@@ -1,5 +1,5 @@
-import { AdminService } from './../admin.service';
-import { Admin } from './../admin';
+import { AdministradoresService } from './administradores.service';
+import { Admin } from './admin';
 import { Component, OnInit, EventEmitter } from '@angular/core';
 
 import {MaterializeAction} from 'angular2-materialize';
@@ -11,7 +11,7 @@ import {MaterializeAction} from 'angular2-materialize';
 })
 export class AdministradoresComponent implements OnInit {
 
-  constructor(private _adminService: AdminService) { }
+  constructor(private _adminService: AdministradoresService) { }
 
   ngOnInit() {
     this._adminService.getAdmins()
@@ -42,6 +42,10 @@ export class AdministradoresComponent implements OnInit {
 
   modalActions = new EventEmitter<string|MaterializeAction>();
 
+  updateAdmin(){
+
+  }
+
   openModal() {
     this.admin_selecionado = null;
     this.modalActions.emit({action:"modal",params:['open']});
@@ -56,6 +60,5 @@ export class AdministradoresComponent implements OnInit {
   closeModal() {
     this.editando = false;
     this.modalActions.emit({action:"modal",params:['close']});
-    
   }
 }

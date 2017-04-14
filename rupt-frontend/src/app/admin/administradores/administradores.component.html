@@ -19,29 +19,29 @@
                 <div class="row">
                     <div class="input-field col s12">
                         <input id="senha" name="senha" type="password" class="validate" value="{{admin_selecionado?.password}}">
-                        <label for="senha">Senha //so aparece se for o proprio adm</label>
+                        <label for="senha">Senha </label>
                     </div>
                 </div>
                 <div class="row" *ngIf="admin_selecionado == null">
                     <div class="input-field col s12">
                         <input id="confirm-senha" name="confirm-senha" type="password" class="validate">
-                        <label for="confirm-senha">Repetir Senha //so aparece se for o proprio adm</label>
+                        <label for="confirm-senha">Confirmar Senha </label>
                     </div>
                 </div>
-
-                <div class="input-field col s12">
-                    <select>
-                                    <option value="s">Ativo</option>
-                                    <option value="n">Inativo</option>
-                                </select>
-                    <label>Status //só vai aparecer quando for editar</label>
+                <div class="row">
+                     <div class="input-field col s12">
+                        <select>
+                        <option value="1" [style.selected]="admin_selecionado.ativo">Ativo</option>
+                        <option value="0" [style.selected]="!admin_selecionado.ativo">Desativado</option>
+                        </select>
+                    </div>
                 </div>
             </form>
         </div>
     </div>
     <div class="modal-footer">
         <a (click)="closeModal()" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
-        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Salvar</a>
+        <a (click)="updateAdmin()" class="modal-action modal-close waves-effect waves-green btn-flat ">Salvar</a>
     </div>
 </div>
 <div class="title">

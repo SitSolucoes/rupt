@@ -10,6 +10,7 @@ import { AdminService } from './admin.service';
 import { MenuEsquerdaComponent } from './menu-esquerda/menu-esquerda.component';
 import { PainelAdministrativoComponent } from './painel-administrativo/painel-administrativo.component';
 import { MenuTopComponent } from './menu-top/menu-top.component';
+import { AdministradoresService } from './administradores/administradores.service';
 
 
 
@@ -31,7 +32,8 @@ import { MenuTopComponent } from './menu-top/menu-top.component';
     MenuTopComponent
   ],
   providers: [
-    AdminService
+    AdminService,
+    AdministradoresService
   ]
 })
 export class AdminModule { }

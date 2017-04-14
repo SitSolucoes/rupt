@@ -1,16 +1,13 @@
-import { Http, Response, Headers } from '@angular/http';
 import { Injectable } from '@angular/core';
+import { Http, Response, Headers } from '@angular/http';
 import { Admin } from './admin';
 
 import 'rxjs/Rx';
 import { Observable } from 'rxjs';
 
 @Injectable()
-export class AdminService {
-
-  //constructor() { }
-
-   private _url: string = 'http://localhost:8000/api/';
+export class AdministradoresService {
+  private _url: string = 'http://localhost:8000/api/';
   constructor(private _http: Http) { }
 
   createAdmin(){
@@ -34,4 +31,5 @@ export class AdminService {
         }
       );
   }
+
 }

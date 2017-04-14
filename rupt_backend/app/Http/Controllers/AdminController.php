@@ -53,4 +53,18 @@ class AdminController extends Controller
         ];
         return response()->json($response, 200);
     }
+
+    public function updateAdmin(Request $request, $id)
+    {
+        $admin = Admin::find($id);
+        if (!$admin) {
+            return response()->json(['message' => 'Document not found'], 404);
+        }
+        $admin->name = $request->input('name');
+        $admin->email = $request->input('email');
+        $admin->password = bcrypt($request->input('password'));
+        $admin->ativo = $request->input('ativo');
+        $quote->save();
+        return response()->json(['quote' => $quote], 200);
+    }
 }
