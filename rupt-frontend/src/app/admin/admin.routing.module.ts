@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
 
@@ -10,7 +10,8 @@ import { AdminHomeComponent } from './admin-home/admin-home.component';
 const AdminRoutes: Routes = [
     { path : 'admin', component: PainelAdministrativoComponent, children: [
         { path : 'administradores', component: AdministradoresComponent},
-        { path : 'home', component: AdminHomeComponent}
+        { path : 'home', component: AdminHomeComponent},
+        { path : 'login', component: LoginComponent}
     ]}
 ];
 
