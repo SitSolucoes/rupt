@@ -30,9 +30,8 @@
                 </div>
                 <div class="row">
                      <div class="input-field col s12">
-                        <select>
-                        <option value="1" [style.selected]="admin_selecionado.ativo">Ativo</option>
-                        <option value="0" [style.selected]="!admin_selecionado.ativo">Desativado</option>
+                        <select materialize="material_select" [materializeSelectOptions]="selectOptions">
+                             <option *ngFor="let option of selectOptions" [value]="option.value">{{option.name}}</option>
                         </select>
                     </div>
                 </div>

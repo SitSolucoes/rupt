@@ -8,6 +8,7 @@ import { AdminModule } from './admin/admin.module';
 import { RuptRoutingModule } from './rupt.routing.module';
 import { MaterializeModule } from 'angular2-materialize';
 
+
 @NgModule({
   declarations: [
     AppComponent

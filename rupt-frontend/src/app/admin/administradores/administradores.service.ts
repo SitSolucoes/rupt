@@ -10,9 +10,7 @@ export class AdministradoresService {
   private _url: string = 'http://localhost:8000/api/';
   constructor(private _http: Http) { }
 
-  createAdmin(){
-
-  }
+  createAdmin(){  }
 
   getAdmins(): Observable<any>{
      return this._http.get(this._url + 'getAdmins')
