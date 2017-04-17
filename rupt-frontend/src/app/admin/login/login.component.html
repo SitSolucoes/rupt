@@ -1,13 +1,25 @@
-<a class="waves-effect waves-light btn modal-trigger" (click)="openModal()">Modal</a>
- 
-<!-- Modal Structure -->
-<div id="modal1" class="modal" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions">
-  <div class="modal-content">
-    <h4>Modal Header</h4>
-    <p>A bunch of text</p>
-  </div>
-  <div class="modal-footer">
-    <a class="waves-effect waves-green btn-flat" (click)="closeModal()">Close</a>
-    <a class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-  </div>
+<div class="content-login">
+    
+    <div id="modal" class="modal" style="display:block">
+      <div class="modal-content">
+        <h4>Login</h4>
+        
+        <form class="col s12">
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="first_name" type="text" class="validate">
+              <label for="first_name">Email</label>
+            </div>
+            <div class="input-field col s12">
+              <input id="last_name" type="text" class="validate">
+              <label for="last_name">Senha</label>
+            </div>
+          </div>
+          <input type="submit" class="btn btn-login" name="Login" value="Login"> 
+        </form>
+        
+        <a href="#!"class="btn btn-forget btn-flat">esqueci minha senha</a>
+        
+      </div>
+    </div>
 </div>

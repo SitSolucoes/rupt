@@ -259,3 +259,35 @@ span.badge.new:after {
 	font-size: 5em;
 }
 
+/*login*/
+.content-login{
+	width: 100%;
+	left: 0px;
+	top: 0px;
+	min-height: 100%;
+	position: fixed;
+	background-color: rgba(0,0,0,.8);
+}
+
+.content-login .row::after{
+	clear: none;
+}
+
+.content-login .modal{
+	top: 60px;
+	max-width: 500px;
+}
+
+.content-login .modal-content{
+	padding-bottom: 5px;
+}
+
+.content-login .btn-forget{
+	margin-top: 5px;
+	width: 100%;
+}
+
+.content-login .btn-login{
+	width: 100%;
+	background-color: orange;
+}
