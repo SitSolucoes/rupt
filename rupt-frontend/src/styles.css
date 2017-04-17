@@ -1,12 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css?family=Athiti');
 
+@font-face {
+	font-family: "Nexa Light";
+	src: url("NexaLight.otf");
+}
+
+@font-face {
+	font-family: "Gilroy";
+	src: url("Gilroy-Light.otf");
+}
+
 html, body{
 	height: 100%;
 	min-height: 100%;
 	/*background-image: url(https://image.freepik.com/free-vector/dark-background-with-a-geometric-design_1048-1454.jpg);*/
 	background-color: #ededed;
 	font-size: 16px;
+	font-family: "Gilroy";
 }
 
 a{
@@ -34,11 +45,12 @@ a{
 }
 
 .dropdown-content li>a{
-	color: black;
+	color: #131313;
 }
 
 h4{
 	margin-bottom: 30px;
+	font-family: "Nexa Light";
 }
 
 .margin-right-1{
@@ -66,8 +78,8 @@ h4{
 	height: 50px;
 	/*background-color: #1a1a1a;*/
 	font-size: 22px;
-	background-color: #141414;
-	color:  #fc6e02;
+	background-color: #131313;
+	color: #F97000;
 }
 
 .admin-menu-top .col{
@@ -84,13 +96,13 @@ h4{
 
 .admin-menu-top .btn{
 	font-size: 16px;
-	background-color: #fc6e02;
+	background-color: #F97000;
 }
 
 
 /*menu lateral*/
 .admin-menu-left{
-	background-color: #141414;
+	background-color: #131313;
 	font-family: 'Athiti', sans-serif;
 	font-size: 22px;
 	min-height: 100%;
@@ -130,7 +142,7 @@ span.badge {
 }	
 
 span.badge.new{
-	background-color: #fc6e02;
+	background-color: #F97000;
 }
 
 span.badge.new:after {
@@ -149,7 +161,8 @@ span.badge.new:after {
 	font-size: 32px;
 	padding-top: 25px;
 	margin-bottom: 20px;
-	border-bottom: 1px solid #1a1a1a;
+	border-bottom: 1px solid #131313;
+	font-family: "Nexa Light";
 }
 
 .content .title .material-icons{
@@ -167,7 +180,7 @@ span.badge.new:after {
 }
 
 .content .new{
-	background-color:  #ff7e02;
+	background-color: #F97000;
 	color: white;
 	font-size: 20px;
 	display: block;
@@ -199,10 +212,8 @@ span.badge.new:after {
 .content nav .material-icons{
 	padding-top: -5px;
 	margin-top: -7px;
-	color: #1a1a1a;
+	color: #131313;
 }
-
-
 
 /*modal*/
 .modal{
@@ -231,7 +242,7 @@ span.badge.new:after {
 }
 
 .header{
-	background-color: #141414;
+	background-color: #131313;
 	color: white;
 	margin-right: 10px;
 }
@@ -289,5 +300,6 @@ span.badge.new:after {
 
 .content-login .btn-login{
 	width: 100%;
-	background-color: orange;
+	background-color: #F97000;
+	margin-bottom: 10px;
 }
