@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth.service';
 import { Component, OnInit, EventEmitter } from '@angular/core';
 
 import {MaterializeAction} from 'angular2-materialize';
@@ -11,7 +12,7 @@ export class LoginComponent implements OnInit {
 
   modalActions = new EventEmitter<string|MaterializeAction>();
 
-  constructor() { 
+  constructor(private _authService: AuthService) { 
   }
 
   ngOnInit() {
@@ -34,16 +35,20 @@ export class LoginComponent implements OnInit {
     //Add 'implements AfterContentInit' to the class.
     this.openModal1();
   }
-
-
   
   openModal1() {
     this.modalActions.emit({action:"modal",params:['open']});
     console.log("open")
   }
+
   closeModal() {
     this.modalActions.emit({action:"modal",params:['close']});
     console.log("close");
   }
 
+  /*login(form) {
+    this._authService.signin(form.value.email, form.value.senha).subscribe(
+      (response: any) => console.log(response)
+    );
+  }*/
 }

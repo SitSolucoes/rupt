@@ -43,8 +43,13 @@ class AdminController extends Controller
         }catch(JWTException $e){
             return response()->json(['error' => 'Login ou senha incorretos'],401);
         }
+        $admin = Admin::where('email', $request->input('email'))
+                      ->where('password', bcrypt($request->input('password')))
+                      ->where('ativo', 1)
+                      ->first();
         return response()->json([
-            'token' => $token
+            'token' => $token,
+            'admin_name' => $admin->name
         ],200 );
     }
 

@@ -87,6 +87,7 @@ export class AdministradoresComponent implements OnInit {
     //pega o admin selecionado
     this.modalActions.emit({action:"modal",params:['open']});
   }
+
   closeModal() {
     this.editando = false;
     this.email_valido = true;
