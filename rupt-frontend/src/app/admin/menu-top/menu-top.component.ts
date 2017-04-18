@@ -7,21 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuTopComponent implements OnInit {
 
-  notificacoes;
-  notColaboradores;
-  notMensagens;
-  notDenuncias;
-
   constructor() { }
 
-  ngOnInit() {
-    this.notColaboradores = 5;
-    this.notMensagens = 7;
-    this.notDenuncias = 2;
-
-    this.notificacoes = this.notColaboradores + this.notMensagens + this.notDenuncias;
-    if (this.notificacoes > 99)
-      this.notificacoes = 99;
-  }
+  ngOnInit() {}
 
 }

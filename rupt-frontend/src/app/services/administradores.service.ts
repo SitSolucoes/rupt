@@ -44,7 +44,7 @@ export class AdministradoresService {
       response.json()
     });
     //return this._http.post('http://laravel-ng2-vue.dev/api/quote?token=' + token, body, {headers: headers});
-  }
+  }  
 
    validaEmail(email){
     return this._http.get(this._url + 'validaEmail/' + email)
