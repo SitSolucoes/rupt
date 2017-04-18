@@ -11,6 +11,7 @@ import { PainelAdministrativoComponent } from './painel-administrativo/painel-ad
 import { MenuTopComponent } from './menu-top/menu-top.component';
 import { AdministradoresService } from '../services/administradores.service';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
+import { EsqueciSenhaComponent } from './esqueci-senha/esqueci-senha.component';
 
 
 
@@ -21,7 +22,8 @@ import { AdminHomeComponent } from './admin-home/admin-home.component';
     MenuEsquerdaComponent,
     PainelAdministrativoComponent,
     MenuTopComponent,
-    AdminHomeComponent
+    AdminHomeComponent,
+    EsqueciSenhaComponent
   ],
   imports: [
     CommonModule,
