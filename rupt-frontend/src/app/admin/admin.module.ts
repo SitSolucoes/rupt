@@ -1,3 +1,4 @@
+import { AuthService } from './../services/auth.service';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -27,15 +28,16 @@ import { EsqueciSenhaComponent } from './esqueci-senha/esqueci-senha.component';
   ],
   imports: [
     CommonModule,
-    AdminRoutingModule,
     MaterializeModule,
-    FormsModule
+    FormsModule,
+    AdminRoutingModule
   ],
   exports: [
     LoginComponent
   ],
   providers: [
-    AdministradoresService
+    AdministradoresService,
+    AuthService
   ]
 })
 export class AdminModule { }

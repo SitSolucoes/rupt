@@ -18,37 +18,11 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  ngAfterViewChecked() {
-    //Called after every check of the component's view. Applies to components only.
-    //Add 'implements AfterViewChecked' to the class.
-    this.openModal1();
-  }
-
-  ngAfterContentChecked() {
-    //Called after every check of the component's or directive's content.
-    //Add 'implements AfterContentChecked' to the class.
-    this.openModal1();
-  }
-
-  ngAfterContentInit() {
-    //Called after ngOnInit when the component's or directive's content has been initialized.
-    //Add 'implements AfterContentInit' to the class.
-    this.openModal1();
-  }
-  
-  openModal1() {
-    this.modalActions.emit({action:"modal",params:['open']});
-    console.log("open")
-  }
-
-  closeModal() {
-    this.modalActions.emit({action:"modal",params:['close']});
-    console.log("close");
-  }
-
-  /*login(form) {
+  login(form) {
+    alert('entrou no método do form');
     this._authService.signin(form.value.email, form.value.senha).subscribe(
       (response: any) => console.log(response)
     );
-  }*/
+    alert('saiu no método do form');
+  }
 }

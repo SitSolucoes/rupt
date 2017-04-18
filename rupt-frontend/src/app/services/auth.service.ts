@@ -13,6 +13,7 @@ export class AuthService {
 
 
   signin(email: string, password: string) {
+    console.log('oie');
     return this.http.post(this._url + 'signin',
       {email: email, 
        password: password},
