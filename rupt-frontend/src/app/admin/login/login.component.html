@@ -4,15 +4,15 @@
       <div class="modal-content">
         <h4>Login</h4>
         
-        <form class="col s12">
+        <form class="col s12" #f (ngSubmit)="login(f)">
           <div class="row">
             <div class="input-field col s12">
-              <input id="first_name" type="text" class="validate">
-              <label for="first_name">Email</label>
+              <input id="email" type="email" data-error="Email Invalido" data-success="Ok" name="email" class="validate" ngModel>
+              <label for="email">Email</label>
             </div>
             <div class="input-field col s12">
-              <input id="last_name" type="text" class="validate">
-              <label for="last_name">Senha</label>
+              <input id="senha" type="password" name="senha" class="validate" ngModel>
+              <label for="senha">Senha</label>
             </div>
           </div>
           <input type="submit" class="btn btn-login" name="Login" value="Login"> 

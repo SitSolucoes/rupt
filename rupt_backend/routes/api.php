@@ -21,11 +21,20 @@ Route::post('/signup',[
             'uses' => 'AdminController@signup'
 ]);
 
+
+Route::post('/storeAdmin',[
+            'uses' => 'AdminController@store'
+]);
+
 Route::post('/signin',[
             'uses' => 'AdminController@signin'
 ]);
 
 Route::get('/getAdmins',[
             'uses' => 'AdminController@getAdmins'
+]);
+
+Route::get('/validaEmail/{email}',[
+           'uses' => "AdminController@validaEmail"
 ]);
 

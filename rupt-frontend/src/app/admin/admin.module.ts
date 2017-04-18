@@ -9,7 +9,7 @@ import { MaterializeModule } from 'angular2-materialize';
 import { MenuEsquerdaComponent } from './menu-esquerda/menu-esquerda.component';
 import { PainelAdministrativoComponent } from './painel-administrativo/painel-administrativo.component';
 import { MenuTopComponent } from './menu-top/menu-top.component';
-import { AdministradoresService } from './administradores/administradores.service';
+import { AdministradoresService } from '../services/administradores.service';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 
 
