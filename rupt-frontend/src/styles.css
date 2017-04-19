@@ -92,8 +92,11 @@ h4{
 	font-size: 32px;
 	float: left;
 	margin-right: 10px;
-	color: #F4F4F4;
 }
+
+.admin-menu-top .menu{
+	color: #F4F4F4;
+}	
 
 .admin-menu-top .notification{
 	float: left;

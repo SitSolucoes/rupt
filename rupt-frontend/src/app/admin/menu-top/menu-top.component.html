@@ -1,7 +1,7 @@
 <div class="admin-menu-top col s12 m12 l12 xl12">
         <div class="col s3 m3 l2 xl1">
-            <i class="material-icons">menu</i>
-            <span class="notification">{{ notificacoes }}</span>
+            <i class="material-icons menu">menu</i>
+            <span *ngIf="contNotificacoes > 0" class="notification">{{ contNotificacoes }}</span>
         </div>
         <div class="col s7 m6 l2 xl2">
             <div class="rupt">Rupt</div>

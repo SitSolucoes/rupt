@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'menu-esquerda',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./menu-esquerda.component.css']
 })
 export class MenuEsquerdaComponent implements OnInit {
+
+  @Input() notificacoes;
 
   constructor() { }
 

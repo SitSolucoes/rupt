@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminHomeComponent implements OnInit {
 
+  notificacoes = [{"escritores":0},{"mensagens":0},{"denuncias":0}];
+
   constructor() { }
 
   ngOnInit() {
+    this.notificacoes["escritores"] = 2;
+    this.notificacoes["mensagens"] = 0;
+    this.notificacoes["denuncias"]  = 9;
   }
 
 }

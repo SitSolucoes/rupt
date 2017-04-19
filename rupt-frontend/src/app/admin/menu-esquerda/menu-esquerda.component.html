@@ -5,7 +5,7 @@
             <a routerLink="home"><div class="collapsible-header"><i class="material-icons">home</i>Início</div></a>
         </li>
         <li>
-            <div class="collapsible-header"><i class="material-icons">create</i>Cadastros</div>
+            <div class="collapsible-header"><i class="material-icons">create</i>Cadastros<span *ngIf="notificacoes['escritores'] != 0" class="new badge">{{ notificacoes["escritores"] }}</span></div>
             <div class="collapsible-body">
                 <ul class="collapsible" data-collapsible="accordion">
                     <li routerLinkActive="active">
@@ -17,7 +17,7 @@
                         <div class="collapsible-header"><i class="material-icons">keyboard_arrow_right</i>Categorias</div>
                     </li>
                     <li>
-                        <div class="collapsible-header"><i class="material-icons">keyboard_arrow_right</i>Colaboradores</div>
+                        <div class="collapsible-header"><i class="material-icons">keyboard_arrow_right</i>Escritores<span *ngIf="notificacoes['escritores'] != 0" class="new badge">{{ notificacoes["escritores"] }}</span></div>
                     </li>
                     <li>
                         <div class="collapsible-header"><i class="material-icons">keyboard_arrow_right</i>Leitores</div>
@@ -26,10 +26,10 @@
             </div>
         </li>
         <li>
-            <div class="collapsible-header"><i class="material-icons">chat</i>Mensagens</div>
+            <div class="collapsible-header"><i class="material-icons">chat</i>Mensagens<span *ngIf="notificacoes['mensagens'] != 0" class="new badge">{{ notificacoes["mensagens"] }}</span></div>
         </li>
         <li>
-            <div class="collapsible-header"><i class="material-icons">library_books</i>Posts</div>
+            <div class="collapsible-header"><i class="material-icons">library_books</i>Posts<span *ngIf="notificacoes['denuncias'] != 0" class="new badge">{{ notificacoes["denuncias"] }}</span></div>
         </li>
         <li>
             <div class="collapsible-header"><i class="material-icons">equalizer</i>Relatórios</div>

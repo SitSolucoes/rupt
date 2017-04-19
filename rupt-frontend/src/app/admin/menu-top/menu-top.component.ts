@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'menu-top',
@@ -7,8 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuTopComponent implements OnInit {
 
+  @Input() notificacoes;
+  contNotificacoes: number;
+
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.contNotificacoes = this.notificacoes["denuncias"] + this.notificacoes["escritores"] + this.notificacoes["mensagens"];
+    if (this.contNotificacoes > 99)
+      this.contNotificacoes = 99;
+  }
 
 }
