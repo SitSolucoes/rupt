@@ -19,10 +19,9 @@ export class LoginComponent implements OnInit {
   }
 
   login(form) {
-    alert('entrou no método do form');
-    this._authService.signin(form.value.email, form.value.senha).subscribe(
+    //console.log(form);
+    this._authService.signin(form).subscribe(
       (response: any) => console.log(response)
     );
-    alert('saiu no método do form');
   }
 }
