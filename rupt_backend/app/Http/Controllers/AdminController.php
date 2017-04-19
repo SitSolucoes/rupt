@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Admin;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Exceptions\JWTException;
+use Illuminate\Support\Facades\Hash;
 use JWTAuth;
 use Illuminate\Support\Facades\DB;
 
@@ -44,13 +45,15 @@ class AdminController extends Controller
             return response()->json(['error' => 'Login ou senha incorretos'],401);
         }
         $admin = Admin::where('email', $request->input('email'))
-                      ->where('password', bcrypt($request->input('password')))
                       ->where('ativo', 1)
                       ->first();
-        return response()->json([
-            'token' => $token,
-            'admin_name' => $admin->name
-        ],200 );
+        if (Hash::check($request->input('password'), $admin->password)) {
+             return response()->json([
+                'token' => $token,
+                'admin_name' => $admin->name
+            ],200);
+        }                      
+       
     }
 
     public function getAdmins(){
