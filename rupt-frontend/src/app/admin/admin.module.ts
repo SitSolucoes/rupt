@@ -13,6 +13,7 @@ import { MenuTopComponent } from './menu-top/menu-top.component';
 import { AdministradoresService } from '../services/administradores.service';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { EsqueciSenhaComponent } from './esqueci-senha/esqueci-senha.component';
+import { LeitoresComponent } from './leitores/leitores.component';
 
 
 
@@ -24,7 +25,8 @@ import { EsqueciSenhaComponent } from './esqueci-senha/esqueci-senha.component';
     PainelAdministrativoComponent,
     MenuTopComponent,
     AdminHomeComponent,
-    EsqueciSenhaComponent
+    EsqueciSenhaComponent,
+    LeitoresComponent
   ],
   imports: [
     CommonModule,

@@ -7,13 +7,11 @@ import { AppComponent } from './app.component';
 import { AdminModule } from './admin/admin.module';
 import { RuptRoutingModule } from './rupt.routing.module';
 import { MaterializeModule } from 'angular2-materialize';
-import { LeitoresComponent } from './leitores/leitores.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LeitoresComponent
   ],
   imports: [
     BrowserModule,
