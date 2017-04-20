@@ -2,8 +2,8 @@
     
     <div id="modal" class="modal" style="display:block">
       <div class="modal-content">
-        <h4>Esqueceu a senha?</h4>
-        <p>Informe seu email para recuperaração.</p>
+        <h4>{{ titulo }}</h4>
+        <p>{{ info }}</p>
         
         <form class="col s12">
           <div class="row">
@@ -12,8 +12,10 @@
               <label for="first_name">Email</label>
             </div>
           </div>
-          <input type="submit" class="btn btn-login" name="Login" value="Enviar email"> 
+          <input type="submit" class="btn btn-login" value="{{ button }}" (click)="enviarEmail()"> 
         </form>
+
+        <a routerLink="../login" class="btn btn-forget btn-flat">voltar para login</a>
       </div>
     </div>
 </div>

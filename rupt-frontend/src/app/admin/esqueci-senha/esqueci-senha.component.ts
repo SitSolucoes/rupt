@@ -7,9 +7,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EsqueciSenhaComponent implements OnInit {
 
+  titulo : string = "Esqueceu a senha?";
+  info : string = "Informe seu email para recuperaração.";
+  button : string = "Enviar email";
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  enviarEmail(){
+    this.titulo = "Verifique seu email."
+    this.info = "Enviamos um email com as instruções para recuperação da senha.";
+    this.button = "Reenviar email";
   }
 
 }
