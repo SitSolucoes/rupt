@@ -64,8 +64,7 @@ class AdminController extends Controller
         return response()->json($response, 200);
     }
 
-    public function updateAdmin(Request $request, $id)
-    {
+    public function updateAdmin(Request $request, $id){
         $admin = Admin::find($id);
         if (!$admin) {
             return response()->json(['message' => 'Document not found'], 404);
@@ -83,5 +82,20 @@ class AdminController extends Controller
         if(Admin::where('email', $email)->first())
             $retorno = false;
         return response()->json(['valido' => $retorno], 200);
+    }
+
+    public function validaToken(){
+        try{
+            if(! $admin = JWTAuth::parseToken()->authenticate())
+                return response()->json(['valido' => false], 401);
+            return response()->json(['valido' => true], 200);
+        }catch(Exception $exception){
+                return response()->json(['valido' => false], 401);
+        }    
+    }
+
+    public function invalidaToken(){
+        JWTAuth::invalidate(JWTAuth::getToken());
+        return response()->json(['result' => true], 401);
     }
 }

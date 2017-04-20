@@ -2,6 +2,7 @@ import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
 
+import { AuthGuard } from './../guards/auth.guard';
 import { LoginComponent } from './login/login.component';
 import { EsqueciSenhaComponent } from './esqueci-senha/esqueci-senha.component';
 import { AdministradoresComponent } from './administradores/administradores.component';
@@ -9,11 +10,13 @@ import { PainelAdministrativoComponent } from './painel-administrativo/painel-ad
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 
 const AdminRoutes: Routes = [
-    { path : 'admin', component: PainelAdministrativoComponent, children: [
-        { path : 'administradores', component: AdministradoresComponent},
+    { path : 'admin/login', component: LoginComponent},
+    { path : 'admin', component: PainelAdministrativoComponent,
+        canActivate: [AuthGuard],
+        children: [
         { path : 'home', component: AdminHomeComponent},
-        { path : 'login', component: LoginComponent},
-        { path : 'esqueci-a-senha', component: EsqueciSenhaComponent}
+        { path : 'administradores', component: AdministradoresComponent},
+        { path : 'esqueci-a-senha', component: EsqueciSenhaComponent}       
     ]}
 ];
 

@@ -6,7 +6,7 @@ import 'rxjs/Rx';
 
 @Injectable()
 export class AuthService {
-  constructor(private http: Http) {
+  constructor(private _http: Http) {
 
   }
 
@@ -14,7 +14,7 @@ export class AuthService {
 
 
   signin(form: NgForm) {
-    return this.http.post(this._url + 'signin', {email: form.value.email, password: form.value.senha}, {headers: new Headers({'X-Requested-With': 'XMLHttpRequest'})})
+    return this._http.post(this._url + 'signin', {email: form.value.email, password: form.value.senha}, {headers: new Headers({'X-Requested-With': 'XMLHttpRequest'})})
       .map(
         (response: Response) => {
           const token = response.json().token;
@@ -23,9 +23,9 @@ export class AuthService {
           const base64 = base64Url.replace('-', '+').replace('_', '/');
           return {token: token, 
                   decoded: JSON.parse(window.atob(base64)), 
-                  admin_name: admin_name};
+                  admin_name: admin_name}
         })
-      .do(
+        .do(
         tokenData => {
           localStorage.setItem('token', tokenData.token);
           localStorage.setItem('adminLogado', tokenData.admin_name);
@@ -33,7 +33,30 @@ export class AuthService {
       );
   }
 
+  logout(){
+    let token = this.getToken();
+    return this._http.get(this._url + 'invalidaToken?token=' + token)
+      .map(
+        (response: Response) => {
+          return response.json().result;
+        }
+      );
+  }
+
   getToken() {
     return localStorage.getItem('token');
+  }
+
+  validateToken(){
+    let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    let valido = false;
+    //console.log('chegou aqui');
+    let token = this.getToken();
+    return this._http.get(this._url + 'validaToken?token=' + token, {headers: headers})
+        .map(
+          (response: Response) => {
+            return response.json().valido;
+          }
+        );
   }
 }

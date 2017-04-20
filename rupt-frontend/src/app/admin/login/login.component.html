@@ -5,6 +5,9 @@
         <h4>Login</h4>
         
         <form class="col s12" #f="ngForm" (ngSubmit)="login(f)">
+          <div class="row" *ngIf="login_error != ''">
+            <font color="red">{{login_error}}</font>
+          </div>
           <div class="row">
             <div class="input-field col s12">
               <input id="email" type="email" data-error="Email Invalido" data-success="Ok" name="email" class="validate" ngModel>

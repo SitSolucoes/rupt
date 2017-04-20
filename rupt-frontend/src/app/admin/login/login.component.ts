@@ -2,6 +2,7 @@ import { AuthService } from './../../services/auth.service';
 import { Component, OnInit, EventEmitter } from '@angular/core';
 
 import {MaterializeAction} from 'angular2-materialize';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'login',
@@ -12,8 +13,11 @@ export class LoginComponent implements OnInit {
 
   modalActions = new EventEmitter<string|MaterializeAction>();
 
-  constructor(private _authService: AuthService) { 
+  constructor(private _authService: AuthService,
+              private _router: Router) { 
   }
+
+  login_error: string = '';
 
   ngOnInit() {
   }
@@ -21,7 +25,14 @@ export class LoginComponent implements OnInit {
   login(form) {
     //console.log(form);
     this._authService.signin(form).subscribe(
-      (response: any) => console.log(response)
+      (response: any) => {
+          if(response.json().error == null){
+            console.log("Login Efetuado");        
+            this._router.navigate(['/admin/home']);
+          }else{
+            this.login_error = response.json().error
+          }
+      }
     );
   }
 }

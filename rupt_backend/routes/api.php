@@ -38,3 +38,7 @@ Route::get('/validaEmail/{email}',[
            'uses' => "AdminController@validaEmail"
 ]);
 
+Route::get('/validaToken',[
+           'uses' => "AdminController@validaToken"
+]);
+
