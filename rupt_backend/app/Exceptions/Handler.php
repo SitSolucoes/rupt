@@ -50,13 +50,13 @@ class Handler extends ExceptionHandler
     {
         $tokenResponse = ['valido' => false];
         if($exception instanceof TokenExpiredException){
-            return Response::json($tokenResponse, $exception->getStatusCode());
+            return Response::json(['valido' => false, 'motivo' => 'Token Expirado'], $exception->getStatusCode());
         }
         else if($exception instanceof TokenInvalidException){
-            return Response::json($tokenResponse, $exception->getStatusCode());
+            return Response::json(['valido' => false, 'motivo' => 'Token Invalido'], $exception->getStatusCode());
         }
         else if($exception instanceof JWTException){
-            return Response::json($tokenResponse, $exception->getStatusCode());
+            return Response::json(['valido' => false, 'motivo' => 'Token Não Encontrado'], $exception->getStatusCode());
         }
         return parent::render($request, $exception);
     }

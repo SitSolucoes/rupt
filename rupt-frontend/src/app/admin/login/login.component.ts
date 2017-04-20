@@ -17,21 +17,18 @@ export class LoginComponent implements OnInit {
               private _router: Router) { 
   }
 
-  login_error: string = '';
-
   ngOnInit() {
   }
 
+  login_error: string = '';
+
   login(form) {
-    //console.log(form);
     this._authService.signin(form).subscribe(
       (response: any) => {
-          if(response.json().error == null){
-            console.log("Login Efetuado");        
-            this._router.navigate(['/admin/home']);
-          }else{
-            this.login_error = response.json().error
-          }
+        if(response.admin_name != null){
+          this._router.navigateByUrl('admin/home');
+        }else
+          this.login_error = 'Email ou senha incorretos.'
       }
     );
   }

@@ -1,3 +1,4 @@
+import { MockNgModuleResolver } from '@angular/compiler/testing';
 import { Injectable } from '@angular/core';
 
 import { CanActivate, ActivatedRoute, 
@@ -11,20 +12,18 @@ export class AuthGuard implements CanActivate{
 
   constructor(private _authService: AuthService,
               private _router: Router) { }
-  ok: boolean = false
+  ok: any = null;
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
   ): Observable<boolean> | boolean{
-    let status: boolean = false
-    this._authService.validateToken().subscribe(
-      (response: boolean) => {
-          return response;
-      }
-    );
-    console.log(status);
-    return status;
+    if(this._authService.getToken()){
+      return true;
+    }
+      
+    this._router.navigate(['/admin/login']);
+    return false;
   }
 
 }

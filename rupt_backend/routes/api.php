@@ -42,3 +42,7 @@ Route::get('/validaToken',[
            'uses' => "AdminController@validaToken"
 ]);
 
+Route::post('/invalidaToken',[
+           'uses' => "AdminController@invalidaToken"
+]);
+

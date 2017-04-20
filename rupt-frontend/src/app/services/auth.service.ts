@@ -1,16 +1,21 @@
 import { NgForm } from '@angular/forms/src/directives';
 import { Injectable } from "@angular/core";
 import { Http, Headers, Response } from "@angular/http";
+
 import { Observable } from 'rxjs';
 import 'rxjs/Rx';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthService {
-  constructor(private _http: Http) {
+  constructor(private _http: Http,
+              private _router: Router) {
 
   }
 
   private _url: string = 'http://localhost:8000/api/';
+
+  private token: string;
 
 
   signin(form: NgForm) {
@@ -29,34 +34,17 @@ export class AuthService {
         tokenData => {
           localStorage.setItem('token', tokenData.token);
           localStorage.setItem('adminLogado', tokenData.admin_name);
+          this.token = tokenData.token;
         }
       );
   }
 
   logout(){
-    let token = this.getToken();
-    return this._http.get(this._url + 'invalidaToken?token=' + token)
-      .map(
-        (response: Response) => {
-          return response.json().result;
-        }
-      );
+    this.token = null;
+    localStorage.removeItem('token');
   }
-
   getToken() {
     return localStorage.getItem('token');
   }
 
-  validateToken(){
-    let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-    let valido = false;
-    //console.log('chegou aqui');
-    let token = this.getToken();
-    return this._http.get(this._url + 'validaToken?token=' + token, {headers: headers})
-        .map(
-          (response: Response) => {
-            return response.json().valido;
-          }
-        );
-  }
 }

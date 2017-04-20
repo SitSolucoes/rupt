@@ -95,7 +95,7 @@ class AdminController extends Controller
     }
 
     public function invalidaToken(){
-        JWTAuth::invalidate(JWTAuth::getToken());
-        return response()->json(['result' => true], 401);
+        JWTAuth::parseToken()->invalidate();
+        return response()->json(['result' => true], 200);
     }
 }

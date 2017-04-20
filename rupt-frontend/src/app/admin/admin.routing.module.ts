@@ -12,11 +12,11 @@ import { AdminHomeComponent } from './admin-home/admin-home.component';
 const AdminRoutes: Routes = [
     { path : 'admin/login', component: LoginComponent},
     { path : 'admin', component: PainelAdministrativoComponent,
-        canActivate: [AuthGuard],
+        //canActivate: [AuthGuard],
         children: [
-        { path : 'home', component: AdminHomeComponent},
-        { path : 'administradores', component: AdministradoresComponent},
-        { path : 'esqueci-a-senha', component: EsqueciSenhaComponent}       
+        { path : 'home', canActivate: [AuthGuard], component: AdminHomeComponent},
+        { path : 'administradores', canActivate: [AuthGuard], component: AdministradoresComponent},
+        { path : 'esqueci-a-senha', canActivate: [AuthGuard], component: EsqueciSenhaComponent}       
     ]}
 ];
 

@@ -29,7 +29,7 @@ export class AdministradoresComponent implements OnInit {
   ngOnInit() {
     this._adminService.getAdmins()
       .subscribe(
-        (admins: Admin[]) => this.admins = admins
+        (admins: Admin[]) => {this.admins = admins;}
       );
   }
 

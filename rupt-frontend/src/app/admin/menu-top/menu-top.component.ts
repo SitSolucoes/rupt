@@ -23,15 +23,8 @@ export class MenuTopComponent implements OnInit {
   }
 
   logout(){
-    this._authService.logout().subscribe(
-      (response: any) => {
-        console.log(response);
-        if(response){
-          this._router.navigate(['/admin/login']);
-        }
-          
-      }
-    );
+    this._authService.logout();
+    this._router.navigate(['/admin/login']);
   }
 
 }
