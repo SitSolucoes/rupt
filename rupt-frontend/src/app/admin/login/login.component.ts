@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
     this._authService.signin(form).subscribe(
       (response: any) => {
         if(response.admin_name != null){
-          this._router.navigateByUrl('admin/home');
+          this._router.navigate(['admin/home']);
         }else
           this.login_error = 'Email ou senha incorretos.'
       }
