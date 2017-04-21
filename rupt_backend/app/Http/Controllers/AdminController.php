@@ -39,10 +39,12 @@ class AdminController extends Controller
         $credentials = $request->only('email', 'password');
         try{
             if(!$token = JWTAuth::attempt($credentials)){
-                return response()->json(['error' => 'Login ou senha incorretos'],401);
+                return response()->json([
+                    'error' => 'Login ou senha incorretos'
+                ],401);
             }
         }catch(JWTException $e){
-            return response()->json(['error' => 'Login ou senha incorretos'],401);
+            return response()->json(['error' => 'Erro JWT'],401);
         }
         $admin = Admin::where('email', $request->input('email'))
                       ->where('ativo', 1)
@@ -64,17 +66,23 @@ class AdminController extends Controller
         return response()->json($response, 200);
     }
 
-    public function updateAdmin(Request $request, $id){
+    public function update(Request $request, $id){
         $admin = Admin::find($id);
         if (!$admin) {
-            return response()->json(['message' => 'Document not found'], 404);
+            return response()->json(['message' => 'Admin não encontrado'], 404);
         }
+        //echo $request->input('ativo');
         $admin->name = $request->input('name');
         $admin->email = $request->input('email');
         $admin->password = bcrypt($request->input('password'));
         $admin->ativo = $request->input('ativo');
-        $quote->save();
-        return response()->json(['quote' => $quote], 200);
+        $admin->save();
+
+        $response = [
+            'message' => "Admin Alterado com Sucesso"
+        ];
+
+        return response()->json($response, 200);
     }
 
     public function validaEmail($email){

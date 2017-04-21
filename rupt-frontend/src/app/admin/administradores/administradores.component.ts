@@ -21,7 +21,8 @@ export class AdministradoresComponent implements OnInit {
   modalActions = new EventEmitter<string|MaterializeAction>();
   filtro: string;
   editando: boolean;
-  admin_selecionado: Admin;
+  message: string;
+  admin_selecionado: Admin = this.newAdmin();
   email_valido: boolean = false;
 
   constructor(private _adminService: AdministradoresService) { }
@@ -31,6 +32,10 @@ export class AdministradoresComponent implements OnInit {
       .subscribe(
         (admins: Admin[]) => {this.admins = admins;}
       );
+  }
+
+  newAdmin(){
+    return {id: null, name: '', email: '', password: '', createdAt: null, UpdatedAt: null, rememberToken: null, ativo: true};
   }
 
   getAdmins(){
@@ -48,35 +53,47 @@ export class AdministradoresComponent implements OnInit {
   onSubmit(form){
     if(!this.editando){
       this._adminService.createAdmin(form).subscribe(
-        (response: any) => alert("Admin Criado com Sucesso!")
-      );
-      this._adminService.getAdmins()
-      .subscribe(
-        (admins: Admin[]) => this.admins = admins
+          (response: any) => {
+              alert("Admin Criado com Sucesso!");
+              this._adminService.getAdmins().subscribe(
+                  (admins: Admin[]) => this.admins = admins
+              );
+          }
       );
     }else{
-      //this._adminService.createAdmin(admin).subscribe();
+      this._adminService.updateAdmin(form, this.admin_selecionado.id).subscribe(
+        (response: any) => {
+          this.message = response;
+          this._adminService.getAdmins().subscribe(
+            (admins: Admin[]) => {
+              this.admins = admins;
+              //console.log(this.admins);
+              }
+          );
+          alert(this.message);
+        }
+      );
+      
     }
     //this._adminService.createAdmin()
     //  .subscribe();
   }
 
   validaEmail(form){
-    if(form.value.email != '')
+    if(form.value.email != '' && form.value.email != this.admin_selecionado.email)
       this._adminService.validaEmail(form.value.email).subscribe(
           (response: any) => this.email_valido = response
         );
-    console.log(this.email_valido);
-      //if(!this.email_valido){
-       // alert('Email já utilizado');
-      //  form.value.email = '';
-      //}else
-      //  alert("teste");
+  }
+
+  validaConfirmaSenha(form){
+    if(form.value.senha != form.value.confirm_senha && form.value.senha != '')
+      this.message = 'As senhas devem coincidir';
   }
 
   openModal() {
     this.email_valido = true;
-    this.admin_selecionado = null;
+    this.admin_selecionado = this.newAdmin();
     this.modalActions.emit({action:"modal",params:['open']});
   }
 
@@ -84,6 +101,7 @@ export class AdministradoresComponent implements OnInit {
     //flag para mostrar dados
     this.email_valido = true;
     this.admin_selecionado = admin;
+    this.editando = true;
     //pega o admin selecionado
     this.modalActions.emit({action:"modal",params:['open']});
   }
@@ -91,6 +109,7 @@ export class AdministradoresComponent implements OnInit {
   closeModal() {
     this.editando = false;
     this.email_valido = true;
+    this.admin_selecionado = this.newAdmin();
     this.modalActions.emit({action:"modal",params:['close']});
   }
 }

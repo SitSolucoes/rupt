@@ -34,6 +34,9 @@ Route::get('/getAdmins',[
             'uses' => 'AdminController@getAdmins'
 ]);
 
+Route::put('/updateAdmin/{id}',[
+            'uses' => 'AdminController@update'
+]);
 Route::get('/validaEmail/{email}',[
            'uses' => "AdminController@validaEmail"
 ]);

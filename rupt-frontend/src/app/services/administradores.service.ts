@@ -46,6 +46,25 @@ export class AdministradoresService {
     //return this._http.post('http://laravel-ng2-vue.dev/api/quote?token=' + token, body, {headers: headers});
   }  
 
+  updateAdmin(form, id){
+    const body = JSON.stringify(
+        {name: form.value.nome,
+         email: form.value.email,
+         password: form.value.senha,
+         ativo: form.value.ativo
+        }
+    );
+    console.log('form: '+form);
+    console.log('body: '+body);
+    const headers = new Headers({'Content-Type': 'application/json'});
+    return this._http.put(this._url + 'updateAdmin/'+ id, body, {headers: headers}).map(
+    (response: any)=>{
+      return response.json().message;
+    });
+
+    
+  }
+
    validaEmail(email){
     return this._http.get(this._url + 'validaEmail/' + email)
       .map(

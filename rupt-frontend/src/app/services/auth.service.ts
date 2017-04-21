@@ -19,7 +19,11 @@ export class AuthService {
 
 
   signin(form: NgForm) {
-    return this._http.post(this._url + 'signin', {email: form.value.email, password: form.value.senha}, {headers: new Headers({'X-Requested-With': 'XMLHttpRequest'})})
+    const body = {
+      email: form.value.email, 
+      password: form.value.senha
+    }
+    return this._http.post(this._url + 'signin', body , {headers: new Headers({'X-Requested-With': 'XMLHttpRequest'})})
       .map(
         (response: Response) => {
           const token = response.json().token;

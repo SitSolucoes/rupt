@@ -24,11 +24,11 @@ export class LoginComponent implements OnInit {
 
   login(form) {
     this._authService.signin(form).subscribe(
-      (response: any) => {
-        if(response.admin_name != null){
+      tokenData => {
           this._router.navigate(['admin/home']);
-        }else
-          this.login_error = 'Email ou senha incorretos.'
+      },
+      error => {
+          this.login_error = error.json().error;
       }
     );
   }
