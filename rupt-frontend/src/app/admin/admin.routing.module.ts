@@ -8,6 +8,7 @@ import { EsqueciSenhaComponent } from './esqueci-senha/esqueci-senha.component';
 import { AdministradoresComponent } from './administradores/administradores.component';
 import { PainelAdministrativoComponent } from './painel-administrativo/painel-administrativo.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
+import { LeitoresComponent } from './leitores/leitores.component';
 
 const AdminRoutes: Routes = [
     
@@ -18,6 +19,7 @@ const AdminRoutes: Routes = [
         { path : 'esqueci-a-senha', component: EsqueciSenhaComponent},
         { path : 'home', canActivate: [AuthGuard], component: AdminHomeComponent},
         { path : 'administradores', canActivate: [AuthGuard], component: AdministradoresComponent},
+        { path : 'leitores', canActivate: [AuthGuard], component: LeitoresComponent},
     ]}
 ];
 
