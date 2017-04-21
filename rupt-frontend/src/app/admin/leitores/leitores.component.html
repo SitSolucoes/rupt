@@ -1,3 +1,108 @@
-<p>
-  leitores works!
-</p>
+<!-- Modal Structure -->
+<div id="modal1" class="modal center-sheet" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions">
+    <form class="col s12" #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <div class="modal-content">
+        <h4>Cadastrar</h4>
+        <div class="row">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="nome" name="nome" minlength="4" maxlength="100" type="text" class="validate" value="{{leitor_selecionado?.name}}" ngModel>
+                        <label for="nome" data-error="Erro" data-success="Ok">Nome Completo*</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="email" (blur)="validaEmail(f)" name="email" type="email" minlength="10" class="validate" value="{{leitor_selecionado?.email}}" ngModel>
+                        <div *ngIf="!email_valido"><font color="red">Email Já Utilizado</font></div>
+                        <label for="email" data-error="Erro" data-success="Ok">Email*</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="senha" name="senha" type="password" class="validate" ngModel>
+                        <label for="senha">Senha*</label>
+                    </div>
+                </div>
+                <div class="row" *ngIf="leitor_selecionado == null">
+                    <div class="input-field col s12">
+                        <input id="confirm-senha" name="confirm-senha" type="password" class="validate" ngModel>
+                        <label for="confirm-senha">Confirmar Senha*</label>
+                    </div>
+                </div>
+                <div class="row">
+                     <div class="input-field col s12">
+                        <select name="ativo" materialize="material_select" [materializeSelectOptions]="selectOptions" ngModel>
+                             <option *ngFor="let option of selectOptions" [value]="option.value">{{option.name}}</option>
+                        </select>
+                    </div>
+                </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a (click)="closeModal()" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
+        <button type="submit" class="modal-action modal-close waves-effect waves-green btn-flat">Salvar</button>
+    </div>
+    </form> 
+</div>
+<div class="title">
+    <i class="material-icons">view_list</i> Leitores
+</div>
+
+<div class="row">
+    <div class="col s12 m12 l4 xl2">
+        <a class="modal-trigger" (click)="openModal()">
+            <div class="btn new">
+                Novo
+            </div>
+        </a>
+    </div>
+    <div class="col s12 m12 l8 xl10 search">
+        <nav>
+            <div class="nav-wrapper">
+                <form>
+                    <div class="input-field">
+                        <input id="search" name="filtro" type="search" [(ngModel)]="filtro">
+                        <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                        <i class="material-icons">close</i>
+                    </div>
+                </form>
+            </div>
+        </nav>
+    </div>
+</div>
+
+<ul class="collapsible list">
+    <li>
+        <div class="list-item header">
+            <div class="col s3 m3 l3 xl3 item">
+                Usuário
+            </div>
+            <div class="col s4 m4 l4 xl4 item">
+                Nome
+            </div>
+            <div class="col s3 m3 l3 xl3 item">
+                Email
+            </div>
+            <div class="option-icons col s2 m2 l2 xl2 right-align">
+                <div class="margin-right-1">Editar</div>
+            </div>
+        </div>
+    </li>
+    <li *ngFor="let l of getLeitores()">
+        <div class="list-item option-icons">
+            <div class="col s3 m3 l3 xl3 item">
+                {{l.nick}}
+            </div>
+            <div class="col s3 m3 l3 xl3 item">
+                {{l.nome}}
+            </div>
+            <div class="col s2 m1 l1 xl1 right-align">
+                <div *ngIf="!a.ativo">Desativado</div>
+                <div *ngIf="a.ativo">Ativo</div>
+            </div>
+            <div class="option-icons col s2 m2 l2 xl2">
+                <i class="material-icons" (click)="openModalEdit(a)">mode_edit</i>
+            </div>
+        </div>
+    </li>
+</ul>
