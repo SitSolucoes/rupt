@@ -20,13 +20,15 @@ export class EsqueciSenhaComponent implements OnInit {
   esqueciSenha(form){
     this._authService.envia_esqueciSenha(form).subscribe(
       retorno => {
-        this.info = retorno;
-        this.titulo = "Verifique seu email."
-      },
-      error => {
-        this.info = error.json().error;
-        this.titulo = "Erro"
+        if(retorno.json().error){
+          this.info = retorno.json().error;
+          this.titulo = "Erro";
+        }else{
+          this.info = retorno.json().retorno;
+          this.titulo = "Verifique seu email."
+        }
       }
     );
+
   }
 }

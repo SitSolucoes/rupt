@@ -8,6 +8,7 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 use Illuminate\Support\Facades\Hash;
 use JWTAuth;
 use App\Mail\EsqueciSenhaAdmin;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
@@ -111,11 +112,11 @@ class AdminController extends Controller
     public function envia_esqueciSenha(Request $request){
         $email = $request->input('email');
         $error = "";
-        $admin = Admin::where('email', $email);
+        $admin = Admin::where('email', $email)->first();
         if($admin != null)
             if($admin->ativo){
                 $nova_senha = str_random(6);
-                $admin->senha = bcrypt($nova_senha);
+                $admin->password = bcrypt($nova_senha);
                 $admin->save();
             }else
                 $error = "Seu cadastro encontra-se inativado, por favor, contate outro administrador.";

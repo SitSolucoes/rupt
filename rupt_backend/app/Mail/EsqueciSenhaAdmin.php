@@ -30,7 +30,7 @@ class EsqueciSenhaAdmin extends Mailable
      */
     public function build()
     {
-        return $this->view('mail.esqueciSenha')
+        return $this->view('mail.esqueciSenhaAdmin')
                     ->with($this->senha)
                     ->subject('Recuperação de Senha');
     }

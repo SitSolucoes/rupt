@@ -60,8 +60,8 @@ export class AuthService {
     return this._http.put(this._url + 'envia_esqueciSenha', body, {headers: new Headers({'X-Requested-With': 'XMLHttpRequest'})})
                      .map(
                         response => {
-                          resp = response.json().retorno;
-                          return resp;
+                          //resp = response.json().retorno;
+                          return response;
                         }
                      );
   }

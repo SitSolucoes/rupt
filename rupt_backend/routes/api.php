@@ -17,6 +17,8 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
+//Administradores
+
 Route::post('/signup',[
             'uses' => 'AdminController@signup'
 ]);
@@ -49,14 +51,12 @@ Route::post('/invalidaToken',[
            'uses' => "AdminController@invalidaToken"
 ]);
 
-<<<<<<< HEAD
+
 Route::put('/envia_esqueciSenha', [
            'uses' => "AdminController@envia_esqueciSenha"
 ]);
-=======
-//Leitores 
+
+//Leitores
 Route::post('/storeLeitor',[
             'uses' => 'LeitorController@store'
 ]);
-
->>>>>>> b3f29c8c4a3d94ff84e66965b914ac7d630ee598
