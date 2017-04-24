@@ -54,7 +54,8 @@ class AdminController extends Controller
         if (Hash::check($request->input('password'), $admin->password)) {
              return response()->json([
                 'token' => $token,
-                'admin_name' => $admin->name
+                'admin_name' => $admin->name,
+                'admin_id' => $admin->id
             ],200);
         }                      
        
@@ -64,6 +65,14 @@ class AdminController extends Controller
         $admins = Admin::all();
         $response = [
             'admins' => $admins
+        ];
+        return response()->json($response, 200);
+    }
+
+    public function getAdmin($id){
+        $admin = Admin::find($id);
+        $response = [
+            'admin' => $admin
         ];
         return response()->json($response, 200);
     }

@@ -12,6 +12,7 @@ export class MenuTopComponent implements OnInit {
 
   @Input() notificacoes;
   contNotificacoes: number;
+  admin_name: string = localStorage.getItem('adminLogado');
 
   constructor(private _authService: AuthService,
               private _router: Router) { }
@@ -25,6 +26,10 @@ export class MenuTopComponent implements OnInit {
   logout(){
     this._authService.logout();
     this._router.navigate(['/admin/login']);
+  }
+
+  editAdmin(){
+    this._router.navigate(['/admin/editAdmin', localStorage.getItem('admin_id')]);
   }
 
 }

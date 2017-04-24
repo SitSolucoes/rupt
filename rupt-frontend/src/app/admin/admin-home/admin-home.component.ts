@@ -11,6 +11,8 @@ export class AdminHomeComponent implements OnInit {
 
   constructor() { }
 
+  admin_name: string = localStorage.getItem('adminLogado');
+
   ngOnInit() {
     this.notificacoes["escritores"] = 2;
     this.notificacoes["mensagens"] = 0;

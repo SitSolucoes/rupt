@@ -20,7 +20,7 @@ export class AdministradoresService {
   }
 
   getAdmin(id: number): Observable<any>{
-     return this._http.get(this._url + 'getAdmin')
+     return this._http.get(this._url + 'getAdmin/' + id)
       .map(
         (response: Response) => {
           return response.json().admin;

@@ -1,10 +1,12 @@
-import { NgForm } from '@angular/forms/src/directives';
-import { Option } from './../../shared/option';
-import { AdministradoresService } from '../../services/administradores.service';
-import { Admin } from './admin';
 import { Component, OnInit, EventEmitter } from '@angular/core';
+import { NgForm } from '@angular/forms/src/directives';
 
 import {MaterializeAction} from 'angular2-materialize';
+import { AdministradoresService } from '../../services/administradores.service';
+import { Admin } from './admin';
+import { Router } from '@angular/router';
+import { Option } from './../../shared/option';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'administradores',
@@ -26,9 +28,21 @@ export class AdministradoresComponent implements OnInit {
   admin_selecionado: Admin = this.newAdmin();
   email_valido: boolean = false;
 
-  constructor(private _adminService: AdministradoresService) { }
+  constructor(private _adminService: AdministradoresService,
+              private _route: ActivatedRoute) { }
 
   ngOnInit() {
+    if(this._route.snapshot.params['id']){
+      console.log(this._route.snapshot.params['id']);
+      this._adminService.getAdmin(+this._route.snapshot.params['id']).subscribe(
+        (admin: any) => {
+          this.admin_selecionado = admin;
+          this.openModalEdit(this.admin_selecionado);
+          //setTimeout(()=> {this.openModal()},2000)
+        }
+      );
+    }
+      
     this._adminService.getAdmins()
       .subscribe(
         (admins: Admin[]) => {this.admins = admins;}

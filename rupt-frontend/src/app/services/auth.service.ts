@@ -28,16 +28,19 @@ export class AuthService {
         (response: Response) => {
           const token = response.json().token;
           const admin_name = response.json().admin_name;
+          const admin_id = response.json().admin_id;
           const base64Url = token.split('.')[1];
           const base64 = base64Url.replace('-', '+').replace('_', '/');
           return {token: token, 
                   decoded: JSON.parse(window.atob(base64)), 
-                  admin_name: admin_name}
+                  admin_name: admin_name,
+                  admin_id: admin_id}
         })
         .do(
         tokenData => {
           localStorage.setItem('token', tokenData.token);
           localStorage.setItem('adminLogado', tokenData.admin_name);
+          localStorage.setItem('admin_id', tokenData.admin_id);
           this.token = tokenData.token;
         }
       );
