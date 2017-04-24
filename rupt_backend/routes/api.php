@@ -49,3 +49,6 @@ Route::post('/invalidaToken',[
            'uses' => "AdminController@invalidaToken"
 ]);
 
+Route::put('/envia_esqueciSenha', [
+           'uses' => "AdminController@envia_esqueciSenha"
+]);

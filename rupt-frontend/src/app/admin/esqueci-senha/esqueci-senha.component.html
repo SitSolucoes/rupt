@@ -2,17 +2,17 @@
     
     <div id="modal" class="modal" style="display:block">
       <div class="modal-content">
-        <h4>{{ titulo }}</h4>
+        <h4>{{ titulo }} aa</h4>
         <p>{{ info }}</p>
         
-        <form class="col s12">
+        <form class="col s12" #f="ngForm" (ngSubmit)="login(f)">
           <div class="row">
             <div class="input-field col s12">
-              <input id="first_name" type="text" class="validate">
+              <input id="first_name" type="text" class="validate" ngModel>
               <label for="first_name">Email</label>
             </div>
           </div>
-          <input type="submit" class="btn btn-login" value="{{ button }}" (click)="enviarEmail()"> 
+          <input type="submit" class="btn btn-login" value="enviar"> 
         </form>
 
         <a routerLink="../login" class="btn btn-forget btn-flat">voltar para login</a>

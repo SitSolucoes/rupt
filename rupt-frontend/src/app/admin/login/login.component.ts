@@ -12,15 +12,19 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   modalActions = new EventEmitter<string|MaterializeAction>();
+  login_error: string = '';
+  message: string = '';
 
   constructor(private _authService: AuthService,
               private _router: Router) { 
   }
 
+
+
   ngOnInit() {
   }
 
-  login_error: string = '';
+  
 
   login(form) {
     this._authService.signin(form).subscribe(
@@ -32,4 +36,6 @@ export class LoginComponent implements OnInit {
       }
     );
   }
+
+  
 }

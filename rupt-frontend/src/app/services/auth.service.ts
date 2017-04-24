@@ -47,8 +47,24 @@ export class AuthService {
     this.token = null;
     localStorage.removeItem('token');
   }
+
   getToken() {
     return localStorage.getItem('token');
   }
 
+  envia_esqueciSenha(form: NgForm){
+    const body = {
+      email: form.value.email
+    };
+    let resp: string = '';
+    return this._http.put(this._url + 'envia_esqueciSenha', body, {headers: new Headers({'X-Requested-With': 'XMLHttpRequest'})})
+                     .map(
+                        response => {
+                          resp = response.json().retorno;
+                          return resp;
+                        }
+                     );
+  }
+
+  
 }

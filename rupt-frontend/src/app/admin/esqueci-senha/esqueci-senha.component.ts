@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -11,15 +12,21 @@ export class EsqueciSenhaComponent implements OnInit {
   info : string = "Informe seu email para recuperaração.";
   button : string = "Enviar email";
 
-  constructor() { }
+  constructor(private _authService: AuthService) { }
 
   ngOnInit() {
   }
 
-  enviarEmail(){
-    this.titulo = "Verifique seu email."
-    this.info = "Enviamos um email com as instruções para recuperação da senha.";
-    this.button = "Reenviar email";
+  esqueciSenha(form){
+    this._authService.envia_esqueciSenha(form).subscribe(
+      retorno => {
+        this.info = retorno;
+        this.titulo = "Verifique seu email."
+      },
+      error => {
+        this.info = error.json().error;
+        this.titulo = "Erro"
+      }
+    );
   }
-
 }

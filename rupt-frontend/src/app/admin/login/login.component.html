@@ -1,28 +1,24 @@
 <div class="content-login">
-    
-    <div id="modal" class="modal" style="display:block">
-      <div class="modal-content">
-        <h4>Login</h4>
-        
-        <form class="col s12" #f="ngForm" (ngSubmit)="login(f)">
-          
-          <div class="row">
-            <div class="input-field col s12">
-              <input id="email" type="email" data-error="Email Invalido" data-success="Ok" name="email" class="validate" ngModel>
-              <label for="email">Email</label>
-            </div>
-            <div class="input-field col s12">
-              <input id="senha" type="password" name="senha" class="validate" ngModel>
-              <label for="senha">Senha</label>
-            </div>
+  <div id="modal" class="modal" style="display:block">
+    <div class="modal-content">
+      <h4>Login</h4>
+      <form class="col s12" #f="ngForm" (ngSubmit)="login(f)">
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="email" type="email" data-error="Email Invalido" data-success="Ok" name="email" class="validate" ngModel>
+            <label for="email">Email</label>
           </div>
-          <div class="row" *ngIf="login_error != ''">
-            <font color="red">{{login_error}}</font>
-          </div>  
-          <button type="submit" class="btn btn-login" name="Login">Login</button>
-        </form>
-        
-        <a routerLink="../esqueci-a-senha" class="btn btn-forget btn-flat">esqueci minha senha</a>
-      </div>
+          <div class="input-field col s12">
+            <input id="senha" type="password" name="senha" class="validate" ngModel>
+            <label for="senha">Senha</label>
+          </div>
+        </div>
+        <div class="row" *ngIf="login_error != ''">
+          <font color="red">{{login_error}}</font>
+        </div>
+        <button type="submit" class="btn btn-login" name="Login">Login</button>
+      </form>
+      <a routerLink="../esqueci-a-senha" class="btn btn-forget btn-flat">esqueci minha senha</a>
     </div>
+  </div>
 </div>

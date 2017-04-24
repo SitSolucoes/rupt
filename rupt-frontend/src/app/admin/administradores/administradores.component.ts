@@ -67,7 +67,6 @@ export class AdministradoresComponent implements OnInit {
           this._adminService.getAdmins().subscribe(
             (admins: Admin[]) => {
               this.admins = admins;
-              //console.log(this.admins);
               }
           );
           alert(this.message);
@@ -75,8 +74,6 @@ export class AdministradoresComponent implements OnInit {
       );
       
     }
-    //this._adminService.createAdmin()
-    //  .subscribe();
   }
 
   validaEmail(form){
