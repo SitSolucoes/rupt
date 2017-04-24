@@ -18,6 +18,7 @@ class CreateLeitoresTable extends Migration
             $table->string('nick', 20);
             $table->string('nome', 60);
             $table->string('sexo', 1);
+            $table->date('nascimento');
             $table->string('src_foto', 30);
             $table->string('email', 30)->unique();
             $table->string('password', 80);

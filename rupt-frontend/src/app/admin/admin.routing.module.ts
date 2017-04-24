@@ -1,3 +1,4 @@
+import { CategoriasComponent } from './categorias/categorias.component';
 import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
@@ -19,6 +20,7 @@ const AdminRoutes: Routes = [
         { path : 'esqueci-a-senha', component: EsqueciSenhaComponent},
         { path : 'home', canActivate: [AuthGuard], component: AdminHomeComponent},
         { path : 'administradores', canActivate: [AuthGuard], component: AdministradoresComponent},
+        { path : 'categorias', canActivate: [AuthGuard], component: CategoriasComponent},
         { path : 'leitores', canActivate: [AuthGuard], component: LeitoresComponent},
     ]}
 ];

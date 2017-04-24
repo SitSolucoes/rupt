@@ -21,7 +21,6 @@ Route::post('/signup',[
             'uses' => 'AdminController@signup'
 ]);
 
-
 Route::post('/storeAdmin',[
             'uses' => 'AdminController@store'
 ]);
@@ -37,6 +36,7 @@ Route::get('/getAdmins',[
 Route::put('/updateAdmin/{id}',[
             'uses' => 'AdminController@update'
 ]);
+
 Route::get('/validaEmail/{email}',[
            'uses' => "AdminController@validaEmail"
 ]);
@@ -47,5 +47,10 @@ Route::get('/validaToken',[
 
 Route::post('/invalidaToken',[
            'uses' => "AdminController@invalidaToken"
+]);
+
+//Leitores 
+Route::post('/storeLeitor',[
+            'uses' => 'LeitorController@store'
 ]);
 

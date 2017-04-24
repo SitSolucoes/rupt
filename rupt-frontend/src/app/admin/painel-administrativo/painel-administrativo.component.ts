@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class PainelAdministrativoComponent implements OnInit {
 
-  notificacoes = [{"escritores":0},{"mensagens":0},{"denuncias":0}];
+  notificacoes = [{"escritores":0},{"mensagens":0},{"denuncias":0},{"categorias":0}];
   
   constructor(private _router: Router) { }
 
@@ -16,6 +16,7 @@ export class PainelAdministrativoComponent implements OnInit {
     this.notificacoes["escritores"] = 2;
     this.notificacoes["mensagens"] = 0;
     this.notificacoes["denuncias"]  = 9;
+    this.notificacoes["categorias"] = 1;
 
     this._router.navigate(['/admin/home']);
   }
