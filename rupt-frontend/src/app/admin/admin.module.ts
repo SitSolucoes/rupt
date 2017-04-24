@@ -1,3 +1,4 @@
+import { LeitoresService } from './../services/leitores.service';
 import { AuthService } from './../services/auth.service';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
@@ -14,6 +15,7 @@ import { AdministradoresService } from '../services/administradores.service';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { EsqueciSenhaComponent } from './esqueci-senha/esqueci-senha.component';
 import { LeitoresComponent } from './leitores/leitores.component';
+import { CategoriasComponent } from './categorias/categorias.component';
 
 
 
@@ -26,7 +28,8 @@ import { LeitoresComponent } from './leitores/leitores.component';
     MenuTopComponent,
     AdminHomeComponent,
     EsqueciSenhaComponent,
-    LeitoresComponent
+    LeitoresComponent,
+    CategoriasComponent
   ],
   imports: [
     CommonModule,
@@ -39,6 +42,7 @@ import { LeitoresComponent } from './leitores/leitores.component';
   ],
   providers: [
     AdministradoresService,
+    LeitoresService,
     AuthService
   ]
 })

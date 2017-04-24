@@ -17,6 +17,7 @@ export class AdministradoresComponent implements OnInit {
     {value: 1, name: 'Ativo'},
     {value: 0, name: 'Inativado'}
   ];
+  
   admins: Admin[];
   modalActions = new EventEmitter<string|MaterializeAction>();
   filtro: string;

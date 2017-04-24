@@ -14,7 +14,9 @@
                       </a>
                     </li>
                     <li>
-                        <div class="collapsible-header"><i class="material-icons">keyboard_arrow_right</i>Categorias</div>
+                        <a routerLink="categorias">
+                            <div class="collapsible-header"><i class="material-icons">keyboard_arrow_right</i>Categorias<span *ngIf="notificacoes['categorias'] != 0" class="new badge">{{ notificacoes["categorias"] }}</span></div>
+                        </a>
                     </li>
                     <li>
                         <div class="collapsible-header"><i class="material-icons">keyboard_arrow_right</i>Escritores<span *ngIf="notificacoes['escritores'] != 0" class="new badge">{{ notificacoes["escritores"] }}</span></div>
