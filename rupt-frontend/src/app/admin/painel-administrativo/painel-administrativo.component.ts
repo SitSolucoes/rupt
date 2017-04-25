@@ -18,7 +18,7 @@ export class PainelAdministrativoComponent implements OnInit {
     this.notificacoes["denuncias"]  = 9;
     this.notificacoes["categorias"] = 1;
 
-    this._router.navigate(['/admin/home']);
+    //this._router.navigate(['/admin/home']);
   }
 
 }

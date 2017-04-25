@@ -23,6 +23,8 @@ const AdminRoutes: Routes = [
         { path : 'categorias', canActivate: [AuthGuard], component: CategoriasComponent},
         { path : 'leitores', canActivate: [AuthGuard], component: LeitoresComponent},
         { path : 'editAdmin/:id', canActivate: [AuthGuard], component: AdministradoresComponent},
+        { path : '', redirectTo: 'home', pathMatch: 'full'},
+        { path : '**', redirectTo: 'home', pathMatch: 'full'}
     ]}
 ];
 
