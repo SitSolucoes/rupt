@@ -10,5 +10,6 @@ export class Leitor {
 
     constructor(){
         this.src_foto = "path_do_sem_imagem";
+        this.sexo = "m";
     }
 }

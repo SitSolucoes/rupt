@@ -14,6 +14,7 @@ export class LeitoresComponent implements OnInit {
 
   message: string;
   modalActions = new EventEmitter<string|MaterializeAction>();
+  filtro: string;
   leitores;
   leitor;
   selectOptions: Option[] = [
@@ -25,14 +26,25 @@ export class LeitoresComponent implements OnInit {
 
   ngOnInit() {
     this.leitor = new Leitor();
-    this._leitorService.getLeitores()
-      .subscribe(
+    this._leitorService.getLeitores().subscribe(
         (leitores: Leitor[]) => {this.leitores = leitores}
       );
   }
 
   getLeitores(){
-    return this.leitores;
+    if ( this.filtro === undefined || this.leitores.length === 0 || this.filtro.trim() === ''){
+      return this.leitores;
+    }
+      return this.leitores.filter((v) => {
+      if (
+        v.nome.toLowerCase().indexOf(this.filtro.toLowerCase()) >= 0 ||
+        v.nick.toLowerCase().indexOf(this.filtro.toLowerCase()) >= 0 ||
+        v.email.toLowerCase().indexOf(this.filtro.toLowerCase()) >= 0
+      ) 
+        return true;
+      
+      return false;
+    });
   }
 
   openModal() {
@@ -48,13 +60,10 @@ export class LeitoresComponent implements OnInit {
       this._leitorService.createLeitor(form).subscribe(
         (response: any) => {
           this.message = response;
-          /*this._adminService.getAdmins().subscribe(
-            (admins: Admin[]) => {
-              this.admins = admins;
-              //console.log(this.admins);
-              }
-          );*/
-          alert(this.message);
+          
+         this._leitorService.getLeitores().subscribe(
+            (leitores: Leitor[]) => {this.leitores = leitores}
+          );
         }
       );
       

@@ -10,8 +10,6 @@ export class LeitoresService {
   constructor(private _http: Http) { }
 
   createLeitor(form){
-    console.log(form);
-
     const body = JSON.stringify(
         {nome: form.value.nome,
          nick: form.value.nick,

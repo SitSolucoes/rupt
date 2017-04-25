@@ -11,8 +11,6 @@ class LeitorController extends Controller
      public function store(Request $request){
         $date = str_replace('/', '-', $request->input("nascimento"));
 
-        echo $request;
-		
         $leitor = new leitor([
             'nome' => $request->input('nome'),
             'nick' => $request->input('nick'),
