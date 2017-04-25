@@ -1,3 +1,4 @@
+import { Leitor } from './../../classes/leitor';
 import { Component, OnInit, EventEmitter } from '@angular/core';
 
 import {MaterializeAction} from 'angular2-materialize';
@@ -14,7 +15,7 @@ export class LeitoresComponent implements OnInit {
   message: string;
   modalActions = new EventEmitter<string|MaterializeAction>();
   leitores;
-  leitor_selecionado;
+  leitor;
   selectOptions: Option[] = [
     {value: "f", name: 'Feminino'},
     {value: "m", name: 'Masculino'}
@@ -23,7 +24,11 @@ export class LeitoresComponent implements OnInit {
   constructor(private _leitorService: LeitoresService) {}
 
   ngOnInit() {
-    this.leitor_selecionado = null;
+    this.leitor = new Leitor();
+    this._leitorService.getLeitores()
+      .subscribe(
+        (leitores: Leitor[]) => {this.leitores = leitores}
+      );
   }
 
   getLeitores(){
@@ -31,7 +36,12 @@ export class LeitoresComponent implements OnInit {
   }
 
   openModal() {
+    this.leitor = new Leitor();
     this.modalActions.emit({action:"modal",params:['open']});
+  }
+
+  closeModal() {
+    this.modalActions.emit({action:"modal",params:['close']});
   }
 
   onSubmit(form){
@@ -49,5 +59,5 @@ export class LeitoresComponent implements OnInit {
       );
       
     }
-  
+
 }

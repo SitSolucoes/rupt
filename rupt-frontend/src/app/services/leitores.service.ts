@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 
+import { Observable } from 'rxjs';
+
 @Injectable()
 export class LeitoresService {
 
@@ -8,13 +10,15 @@ export class LeitoresService {
   constructor(private _http: Http) { }
 
   createLeitor(form){
-    //const token = this.authService.getToken();
+    console.log(form);
+
     const body = JSON.stringify(
-        {name: form.value.nome,
+        {nome: form.value.nome,
          nick: form.value.nick,
          email: form.value.email,
          nascimento: form.value.nascimento,
-         sexo: form.value.nascimento,
+         sexo: form.value.sexo,
+         src_foto: form.value.src_foto,
          password: form.value.senha
         }
     );
@@ -25,4 +29,13 @@ export class LeitoresService {
       response.json()
     });
   } 
+
+  getLeitores(): Observable<any>{
+     return this._http.get(this._url + 'getLeitores')
+      .map(
+        (response: Response) => {
+          return response.json().leitores;
+        }
+      );
+  }
 }

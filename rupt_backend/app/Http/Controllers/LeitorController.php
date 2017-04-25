@@ -9,12 +9,17 @@ use App\Leitor;
 class LeitorController extends Controller
 {
      public function store(Request $request){
+        $date = str_replace('/', '-', $request->input("nascimento"));
+
+        echo $request;
+		
         $leitor = new leitor([
-            'name' => $request->input('name'),
+            'nome' => $request->input('nome'),
             'nick' => $request->input('nick'),
             'email' => $request->input('email'),
-            'nascimento' => $request->input('nascimento'),
+            'nascimento' => date('Y-m-d', strtotime($date)),
             'sexo' => $request->input('sexo'),
+            'src_foto' => $request->input('src_foto'),
             'password' => bcrypt($request->input('password')),
         ]);
 
@@ -26,7 +31,7 @@ class LeitorController extends Controller
     }
 
     public function getLeitores(){
-        $leitores = Leitores::all();
+        $leitores = Leitor::all();
         $response = [
             'leitores' => $leitores
         ];
