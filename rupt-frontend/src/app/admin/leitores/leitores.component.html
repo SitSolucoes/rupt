@@ -2,28 +2,29 @@
 <div id="modal1" class="modal center-sheet" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions">
     <form class="col s12" #f="ngForm" (ngSubmit)="onSubmit(f)">
         <div class="modal-content">
-            <h4>Cadastrar</h4>
+            <h4 *ngIf="leitor.id == 0">Cadastrar</h4>
+            <h4 *ngIf="leitor.id != 0">Editar</h4>
             <div class="row">
                 <div class="col s12 m12 l12 xl12">
                     <div class="input-field col s12">
-                        <input id="nome" name="nome" minlength="4" maxlength="100" type="text" class="validate" value="" [(ngModel)]="leitor.name">
-                        <label for="nome">Nome Completo*</label>
+                        <input id="nome" name="nome" minlength="4" maxlength="100" type="text" class="validate" [(ngModel)]="leitor.nome">
+                        <label [ngClass]="{'active': leitor?.nome}" for="nome">Nome Completo*</label>
                     </div>
                 </div>
                 <div class="row col s12 m12 l12 xl12">
                     <div class="input-field col s12 m12 l5 xl5">
-                        <input id="nick" name="nick" minlength="4" maxlength="100" type="text" class="validate" value="" [(ngModel)]="leitor.nick">
-                        <label for="nick">Nick*</label>
+                        <input id="nick" name="nick" minlength="4" maxlength="100" type="text" class="validate" [(ngModel)]="leitor.nick">
+                        <label [ngClass]="{'active': leitor?.nick}" for="nick">Nick*</label>
                     </div>
                     <div class="input-field col s12 m12 l6 xl6 right">
-                        <input id="email" name="email" type="email" minlength="10" class="validate" value="" [(ngModel)]="leitor.email">
-                        <label for="email">Email*</label>
+                        <input id="email" name="email" type="email" minlength="10" class="validate" [(ngModel)]="leitor.email">
+                        <label [ngClass]="{'active': leitor?.email}" for="email">Email*</label>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s12 m12 l5 xl5">
-                        <input id="nascimento" name="nascimento" type="text" class="validate" [(ngModel)]="leitor.nascimento">
-                        <label for="nascimento">Data de Nascimento*</label>
+                    <div class="input-field col s12 m12 l5 xl5">            
+                        <input id="nascimento" name="nascimento" type="text" class="validate" [ngModel]="leitor.nascimento | date:'dd/MM/yyyy' " (ngModelChange)="leitor.vaue=$event">
+                        <label [ngClass]="{'active': leitor?.nascimento}" for="nascimento">Data de Nascimento*</label>
                     </div>
                     <div class="input-field col s12 m12 l6 xl6 right">
                         <select name="sexo" materialize="material_select" [materializeSelectOptions]="selectOptions" [(ngModel)]="leitor.sexo">
@@ -32,7 +33,7 @@
                         <label for="sexo">Sexo*</label>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" *ngIf="leitor.id == 0">
                     <div class="input-field col s12 m12 l5 xl5">
                         <input id="senha" name="senha" type="password" class="validate" [(ngModel)]="leitor.senha">
                         <label for="senha">Senha*</label>
@@ -95,7 +96,7 @@
             </div>
         </div>
     </li>
-    <li *ngFor="let l of getLeitores()">
+    <li *ngFor="let l of listLeitores()">
         <div class="list-item option-icons">
             <div class="col s3 m3 l3 xl3 item">
                 {{l.nick}}
@@ -107,7 +108,7 @@
                 {{l.email}}
             </div>
             <div class="option-icons col s2 m2 l2 xl2">
-                <i class="material-icons" (click)="openModalEdit(a)">mode_edit</i>
+                <i class="material-icons" (click)="openModalEdit(l)">mode_edit</i>
             </div>
         </div>
     </li>

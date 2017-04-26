@@ -26,12 +26,16 @@ export class LeitoresComponent implements OnInit {
 
   ngOnInit() {
     this.leitor = new Leitor();
-    this._leitorService.getLeitores().subscribe(
+    this.getLeitores();
+  }
+
+  getLeitores(){
+     this._leitorService.getLeitores().subscribe(
         (leitores: Leitor[]) => {this.leitores = leitores}
       );
   }
 
-  getLeitores(){
+  listLeitores(){
     if ( this.filtro === undefined || this.leitores.length === 0 || this.filtro.trim() === ''){
       return this.leitores;
     }
@@ -52,21 +56,34 @@ export class LeitoresComponent implements OnInit {
     this.modalActions.emit({action:"modal",params:['open']});
   }
 
+  openModalEdit(leitor: Leitor){
+    this.leitor = leitor;
+    this.modalActions.emit({action:"modal",params:['open']});
+  }
+
   closeModal() {
     this.modalActions.emit({action:"modal",params:['close']});
   }
 
   onSubmit(form){
+    if (this.leitor.id == 0){
       this._leitorService.createLeitor(form).subscribe(
         (response: any) => {
           this.message = response;
-          
-         this._leitorService.getLeitores().subscribe(
-            (leitores: Leitor[]) => {this.leitores = leitores}
-          );
+          this.getLeitores();
         }
       );
-      
     }
+    else {
+      this._leitorService.updateLeitor(form, this.leitor.id).subscribe(
+          (response: any) => {
+            this.message = response;
+            this.getLeitores();
+          }
+        );
+    }
+ }
+
+  
 
 }

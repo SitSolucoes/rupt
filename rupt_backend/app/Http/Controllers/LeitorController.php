@@ -36,4 +36,25 @@ class LeitorController extends Controller
         return response()->json($response, 200);
     }
 
+    public function update(Request $request, $id){
+        $leitor = Leitor::find($id);
+        if (!$leitor) {
+            return response()->json(['message' => 'Leitor não encontrado'], 404);
+        }
+        
+        $leitor->nome = $request->input('nome');
+        $leitor->nick = $request->input('nick');
+        $leitor->email = $request->input('email');
+        $date = str_replace('/', '-', $request->input("nascimento"));
+        $leitor->nascimento = date('Y-m-d', strtotime($date));
+        $leitor->sexo = $request->input('sexo');
+        $leitor->save();
+
+        $response = [
+            'message' => "Leitor alterado com Sucesso"
+        ];
+
+        return response()->json($response, 200);
+    }
+
 }

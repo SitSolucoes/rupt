@@ -9,6 +9,7 @@ export class Leitor {
     password: string;
 
     constructor(){
+        this.id = 0;
         this.src_foto = "path_do_sem_imagem";
         this.sexo = "m";
     }

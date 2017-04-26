@@ -67,3 +67,7 @@ Route::post('/storeLeitor',[
 Route::get('/getLeitores',[
             'uses' => 'LeitorController@getLeitores'
 ]);
+
+Route::put('/updateLeitor/{id}',[
+            'uses' => 'LeitorController@update'
+]);

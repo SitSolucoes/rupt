@@ -43,6 +43,10 @@ a{
 	margin-top: 0px;
 }
 
+.input-field.col label {
+	left: 0px;
+}
+
 .dropdown-content li>a{
 	color: #131313;
 }
