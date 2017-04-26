@@ -55,6 +55,7 @@ Route::post('/invalidaToken',[
            'uses' => "AdminController@invalidaToken"
 ]);
 
+
 Route::put('/envia_esqueciSenha', [
            'uses' => "AdminController@envia_esqueciSenha"
 ]);
@@ -62,8 +63,4 @@ Route::put('/envia_esqueciSenha', [
 //Leitores
 Route::post('/storeLeitor',[
             'uses' => 'LeitorController@store'
-]);
-
-Route::get('/getLeitores',[
-            'uses' => 'LeitorController@getLeitores'
 ]);

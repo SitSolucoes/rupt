@@ -6,13 +6,17 @@
             <div class="row">
                 <div class="row">
                     <div class="input-field col s12">
-                        <input id="nome" name="nome" minlength="4" maxlength="100" type="text" class="validate" [(ngModel)]="admin_selecionado.name" value=".">
+                        <input id="nome" name="nome" class="validate" type="text" value="."
+                               minlength="4" maxlength="100" required
+                               [(ngModel)]="admin_selecionado.name" >
                         <label for="nome" data-error="Erro" data-success="Ok">Nome Completo*</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                        <input id="email" (blur)="validaEmail(f)" name="email" type="email" minlength="10" class="validate" [(ngModel)]="admin_selecionado.email" value=".">
+                        <input id="email" name="email" type="email" class="validate"
+                          minlength="10" pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
+                        [(ngModel)]="admin_selecionado.email" (blur)="validaEmail(f)" value=".">
                         <div *ngIf="!email_valido"><font color="red">Email Já Utilizado</font></div>
                         <label for="email" data-error="Erro" data-success="Ok">Email*</label>
                     </div>
