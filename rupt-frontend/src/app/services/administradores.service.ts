@@ -54,8 +54,6 @@ export class AdministradoresService {
          ativo: form.value.ativo
         }
     );
-    console.log('form: '+form);
-    console.log('body: '+body);
     const headers = new Headers({'Content-Type': 'application/json'});
     return this._http.put(this._url + 'updateAdmin/'+ id, body, {headers: headers}).map(
     (response: any)=>{

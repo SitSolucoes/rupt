@@ -14,6 +14,7 @@ export class LeitoresComponent implements OnInit {
 
   message: string;
   modalActions = new EventEmitter<string|MaterializeAction>();
+  filtro: string;
   leitores;
   leitor;
   selectOptions: Option[] = [
@@ -25,18 +26,38 @@ export class LeitoresComponent implements OnInit {
 
   ngOnInit() {
     this.leitor = new Leitor();
-    this._leitorService.getLeitores()
-      .subscribe(
+    this.getLeitores();
+  }
+
+  getLeitores(){
+     this._leitorService.getLeitores().subscribe(
         (leitores: Leitor[]) => {this.leitores = leitores}
       );
   }
 
-  getLeitores(){
-    return this.leitores;
+  listLeitores(){
+    if ( this.filtro === undefined || this.leitores.length === 0 || this.filtro.trim() === ''){
+      return this.leitores;
+    }
+      return this.leitores.filter((v) => {
+      if (
+        v.nome.toLowerCase().indexOf(this.filtro.toLowerCase()) >= 0 ||
+        v.nick.toLowerCase().indexOf(this.filtro.toLowerCase()) >= 0 ||
+        v.email.toLowerCase().indexOf(this.filtro.toLowerCase()) >= 0
+      ) 
+        return true;
+      
+      return false;
+    });
   }
 
   openModal() {
     this.leitor = new Leitor();
+    this.modalActions.emit({action:"modal",params:['open']});
+  }
+
+  openModalEdit(leitor: Leitor){
+    this.leitor = leitor;
     this.modalActions.emit({action:"modal",params:['open']});
   }
 
@@ -45,19 +66,24 @@ export class LeitoresComponent implements OnInit {
   }
 
   onSubmit(form){
+    if (this.leitor.id == 0){
       this._leitorService.createLeitor(form).subscribe(
         (response: any) => {
           this.message = response;
-          /*this._adminService.getAdmins().subscribe(
-            (admins: Admin[]) => {
-              this.admins = admins;
-              //console.log(this.admins);
-              }
-          );*/
-          alert(this.message);
+          this.getLeitores();
         }
       );
-      
     }
+    else {
+      this._leitorService.updateLeitor(form, this.leitor.id).subscribe(
+          (response: any) => {
+            this.message = response;
+            this.getLeitores();
+          }
+        );
+    }
+ }
+
+  
 
 }

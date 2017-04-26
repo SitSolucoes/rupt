@@ -64,3 +64,11 @@ Route::put('/envia_esqueciSenha', [
 Route::post('/storeLeitor',[
             'uses' => 'LeitorController@store'
 ]);
+
+Route::get('/getLeitores',[
+            'uses' => 'LeitorController@getLeitores'
+]);
+
+Route::put('/updateLeitor/{id}',[
+            'uses' => 'LeitorController@update'
+]);
