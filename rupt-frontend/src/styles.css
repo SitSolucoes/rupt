@@ -13,9 +13,8 @@
 
 html, body{
 	height: 100%;
-	min-height: 100%;
 	/*background-image: url(https://image.freepik.com/free-vector/dark-background-with-a-geometric-design_1048-1454.jpg);*/
-	background-color: #ededed;
+	background-color: #131313;
 	font-size: 16px;
 }
 
@@ -28,7 +27,8 @@ a{
 }
 
 .row .col{
-	padding: 0px;		
+	padding: 0px;
+	word-wrap: break-word;		
 }
 
 .page{
@@ -127,15 +127,14 @@ h4{
 .admin-menu-top .btn{
 	font-size: 16px;
 	background-color: #F97000;
+	min-width: 150px;
 }
-
 
 /*menu lateral*/
 .admin-menu-left{
 	background-color: #131313;
 	font-family: 'Athiti', sans-serif;
 	font-size: 22px;
-	min-height: 100%;
 	height: calc(100% - 50px);
 }
 
@@ -159,12 +158,6 @@ h4{
 
 .admin-menu-left .navbar-left{
 	margin-left: 0px;
-	min-height: calc(100% - 50px);
-}
-
-.admin-menu-left .navbar-left .logoff{
-	bottom: 5px;
-	position: absolute;
 }
 
 span.badge {
@@ -183,8 +176,8 @@ span.badge.new:after {
 /*content*/
 .content{
 	background-color: #ededed;
-	float: left;
-	margin-top: 20px;
+	height: calc(100% - 50px);
+	overflow-y: scroll;
 }	
 
 .content .title{
@@ -262,13 +255,18 @@ span.badge.new:after {
 	display: inline-block; 
     cursor: pointer; 
     min-height: 3rem; 
-    line-height: 3rem; 
+    line-height: 1rem; 
     padding-left: 15px;
     background-color: #fff; 
     border-bottom: 1px solid #ddd; 
 	min-height: 40px;
 	margin-bottom: -7px;
 	width: 100%;
+}
+
+.list-item .item{
+	margin-top: 15px;
+	margin-bottom: 15px;
 }
 
 .header{
