@@ -9,7 +9,7 @@
                         <input id="nome" name="nome" class="validate" type="text" value="."
                                minlength="4" maxlength="100" required="required" aria-required="true"
                                [(ngModel)]="admin_selecionado.name" #nome="ngModel">
-                        <label for="nome" data-error="Este campo é obrigatório">Nome Completo*</label>
+                        <label [ngClass]="{'active': admin_selecionado?.name}" for="nome" data-error="Este campo é obrigatório">Nome Completo*</label>
                     </div>
                 </div>
                 <div class="row">
@@ -18,17 +18,17 @@
                           minlength="10" pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
                         [(ngModel)]="admin_selecionado.email" (blur)="validaEmail(f)" value=".">
                         <div *ngIf="!email_valido"><font color="red">Email Já Utilizado</font></div>
-                        <label for="email" data-error="Email Invalido">Email*</label>
+                        <label [ngClass]="{'active': admin_selecionado?.email}"for="email" data-error="Email Invalido">Email*</label>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" *ngIf="admin_selecionado.id == 0" >
                     <div class="input-field col s12">
                         <input id="senha" name="senha" type="password" class="validate" 
                                [(ngModel)]="admin_selecionado.senha">
                         <label for="senha">Senha*</label>
                     </div>
                 </div>
-                <div class="row" *ngIf="admin_selecionado.name == ''">
+                <div class="row" *ngIf="admin_selecionado.id == 0">
                     <div class="input-field col s12">
                         <input id="confirm-senha" name="confirm_senha" type="password" class="validate" 
                                ngModel>
@@ -88,10 +88,10 @@
             <div class="col s8 m9 l9 xl9 item">
                 Nome
             </div>
-            <div class="option-icons col s2 m1 l1 xl1 right-align">
+            <div class="option-icons col s2 m1 l1 xl1 right-align item">
                 Status
             </div>
-            <div class="option-icons col s2 m2 l2 xl2 right-align">
+            <div class="option-icons col s2 m2 l2 xl2 right-align item">
                 <div class="margin-right-1">Editar</div>
             </div>
         </div>
@@ -101,8 +101,8 @@
             <div class="col s8 m9 l9 xl9 item">
                 {{a.name}}
             </div>
-            <div class="col s2 m1 l1 xl1 right-align">
-                <div *ngIf="!a.ativo">Desativado</div>
+            <div class="col s2 m1 l1 xl1 right-align item">
+                <div *ngIf="!a.ativo">Inativo</div>
                 <div *ngIf="a.ativo">Ativo</div>
             </div>
             <div class="option-icons col s2 m2 l2 xl2">

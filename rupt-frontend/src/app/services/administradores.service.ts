@@ -8,7 +8,18 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class AdministradoresService {
   private _url: string = 'http://localhost:8000/api/';
+  private headers = new Headers({'Content-Type': 'application/json'});
+
   constructor(private _http: Http) { }
+
+  private createBody(form){
+    return JSON.stringify(
+        {name: form.value.nome,
+         email: form.value.email,
+         password: form.value.senha,
+         ativo: form.value.ativo
+        });
+  }
 
   getAdmins(): Observable<any>{
      return this._http.get(this._url + 'getAdmins')
@@ -28,18 +39,10 @@ export class AdministradoresService {
       );
   }
 
- 
-
-  createAdmin(form){
-    //const token = this.authService.getToken();
-    const body = JSON.stringify(
-        {name: form.value.nome,
-         email: form.value.email,
-         password: form.value.senha
-        }
-    );
-    const headers = new Headers({'Content-Type': 'application/json'});
-    return this._http.post(this._url + 'storeAdmin', body, {headers: headers}).map(
+ createAdmin(form){
+    const body = this.createBody(form);
+    
+    return this._http.post(this._url + 'storeAdmin', body, {headers: this.headers}).map(
     (response: Response)=>{
       response.json()
     });
@@ -47,20 +50,14 @@ export class AdministradoresService {
   }  
 
   updateAdmin(form, id){
-    const body = JSON.stringify(
-        {name: form.value.nome,
-         email: form.value.email,
-         password: form.value.senha,
-         ativo: form.value.ativo
-        }
-    );
-    const headers = new Headers({'Content-Type': 'application/json'});
-    return this._http.put(this._url + 'updateAdmin/'+ id, body, {headers: headers}).map(
+    const body = this.createBody(form);
+
+    console.log(form);
+    
+    return this._http.put(this._url + 'updateAdmin/'+ id, body, {headers: this.headers}).map(
     (response: any)=>{
       return response.json().message;
     });
-
-    
   }
 
    validaEmail(email){

@@ -17,7 +17,7 @@ export class AdministradoresComponent implements OnInit {
 
   selectOptions: Option[] = [
     {value: 1, name: 'Ativo'},
-    {value: 0, name: 'Inativado'}
+    {value: 0, name: 'Inativo'}
   ];
   
   admins: Admin[];
@@ -33,7 +33,6 @@ export class AdministradoresComponent implements OnInit {
 
   ngOnInit() {
     if(this._route.snapshot.params['id']){
-      console.log(this._route.snapshot.params['id']);
       this._adminService.getAdmin(+this._route.snapshot.params['id']).subscribe(
         (admin: any) => {
           this.admin_selecionado = admin;
@@ -42,7 +41,12 @@ export class AdministradoresComponent implements OnInit {
         }
       );
     }
-      
+    
+    this.getList();
+    
+  }
+
+  getList(){
     this._adminService.getAdmins()
       .subscribe(
         (admins: Admin[]) => {this.admins = admins;}
@@ -50,7 +54,7 @@ export class AdministradoresComponent implements OnInit {
   }
 
   newAdmin(){
-    return {id: null, name: '', email: '', password: '', createdAt: null, UpdatedAt: null, rememberToken: null, ativo: true};
+    return {id: 0, name: '', email: '', password: '', createdAt: null, UpdatedAt: null, rememberToken: null, ativo: true};
   }
 
   getAdmins(){
@@ -70,20 +74,14 @@ export class AdministradoresComponent implements OnInit {
       this._adminService.createAdmin(form).subscribe(
           (response: any) => {
               alert("Admin Criado com Sucesso!");
-              this._adminService.getAdmins().subscribe(
-                  (admins: Admin[]) => this.admins = admins
-              );
+              this.getList();
           }
       );
     }else{
       this._adminService.updateAdmin(form, this.admin_selecionado.id).subscribe(
         (response: any) => {
           this.message = response;
-          this._adminService.getAdmins().subscribe(
-            (admins: Admin[]) => {
-              this.admins = admins;
-              }
-          );
+          this.getList();
           alert(this.message);
         }
       );

@@ -23,8 +23,8 @@ class AdminController extends Controller
         $admin = new Admin([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
-            'password' => bcrypt($request->input('password')),
-            'ativo' => 1
+            'ativo' => $request->input('ativo'),
+            'password' => bcrypt($request->input('password'))
         ]);
         $admin->save();
 
@@ -85,7 +85,6 @@ class AdminController extends Controller
         //echo $request->input('ativo');
         $admin->name = $request->input('name');
         $admin->email = $request->input('email');
-        $admin->password = bcrypt($request->input('password'));
         $admin->ativo = $request->input('ativo');
         $admin->save();
 
