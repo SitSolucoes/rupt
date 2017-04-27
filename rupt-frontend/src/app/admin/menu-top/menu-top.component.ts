@@ -18,7 +18,8 @@ export class MenuTopComponent implements OnInit {
               private _router: Router) { }
 
   ngOnInit() {
-    this.contNotificacoes = this.notificacoes["denuncias"] + this.notificacoes["escritores"] + this.notificacoes["mensagens"];
+    this.contNotificacoes = this.notificacoes["denuncias"] + this.notificacoes["escritores"] + this.notificacoes["mensagens"]
+    + this.notificacoes["categorias"];
     if (this.contNotificacoes > 99)
       this.contNotificacoes = 99;
   }

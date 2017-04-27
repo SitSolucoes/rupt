@@ -13,12 +13,10 @@ export class PainelAdministrativoComponent implements OnInit {
   constructor(private _router: Router) { }
 
   ngOnInit() {
-    this.notificacoes["escritores"] = 2;
+    this.notificacoes["escritores"] = 3;
     this.notificacoes["mensagens"] = 0;
     this.notificacoes["denuncias"]  = 9;
     this.notificacoes["categorias"] = 1;
-
-    //this._router.navigate(['/admin/home']);
   }
 
 }

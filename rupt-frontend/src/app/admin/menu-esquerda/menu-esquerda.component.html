@@ -5,7 +5,7 @@
             <a routerLink="home"><div class="collapsible-header"><i class="material-icons">home</i>Início</div></a>
         </li>
         <li>
-            <div class="collapsible-header"><i class="material-icons">create</i>Cadastros<span *ngIf="notificacoes['escritores'] != 0" class="new badge">{{ notificacoes["escritores"] }}</span></div>
+            <div class="collapsible-header"><i class="material-icons">create</i>Cadastros<span *ngIf="notificacoes['escritores'] + notificacoes['categorias'] != 0" class="new badge">{{ notificacoes["escritores"] + notificacoes["categorias"] }}</span></div>
             <div class="collapsible-body">
                 <ul class="collapsible" data-collapsible="accordion">
                     <li routerLinkActive="active">

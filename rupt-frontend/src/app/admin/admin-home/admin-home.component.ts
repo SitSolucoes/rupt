@@ -7,16 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminHomeComponent implements OnInit {
 
-  notificacoes = [{"escritores":0},{"mensagens":0},{"denuncias":0}];
+  notificacoes = [{"escritores":0},{"mensagens":0},{"denuncias":0},{"categorias":0}];
 
   constructor() { }
 
   admin_name: string = localStorage.getItem('adminLogado');
 
   ngOnInit() {
-    this.notificacoes["escritores"] = 2;
+    this.notificacoes["escritores"] = 3;
     this.notificacoes["mensagens"] = 0;
     this.notificacoes["denuncias"]  = 9;
+    this.notificacoes["categorias"] = 1;
   }
 
 }

@@ -1,89 +1,114 @@
-<div class="content col s12 m12 l12 xl10">		
-    <div class="col col s12 m10 l12 xl10">
-      <h4>
-          Olá, {{admin_name}}
-      </h4>
+<div class="col col s12 m10 l12 xl12">
+  <h4>
+      Olá, {{admin_name}}
+  </h4>
 
-      <div class="row">
-        <div class="col s12 m6 l4 xl4">
-          <div class="card"
-            [ngClass]="{
-            'red darken-3': notificacoes['denuncias'] > 0,
-            'grey darken-1': notificacoes['denuncias'] == 0
-            }"
-          >
-            <div class="card-content white-text">
-              <i class="material-icons">report_problem</i>
-              <span class="card-title">
-                Denúncias
-              </span>
+  <div class="row">
+    <div class="col s12 m6 l4 xl3">
+      <div class="card"
+        [ngClass]="{
+        'red darken-3': notificacoes['denuncias'] > 0,
+        'grey darken-1': notificacoes['denuncias'] == 0
+        }"
+      >
+        <div class="card-content white-text">
+          <i class="material-icons">report_problem</i>
+          <span class="card-title">
+            Denúncias
+          </span>
 
-              <p *ngIf="notificacoes['denuncias'] > 1">
-                Existem {{ notificacoes['denuncias'] }} denúncias pendentes
-              </p>
-              <p *ngIf="notificacoes['denuncias'] == 1">
-               Existe 1 denúncia pendente
-              </p>
-              <p *ngIf="notificacoes['denuncias'] == 0">
-                Não existem denuncias pendentes
-              </p>
+          <p *ngIf="notificacoes['denuncias'] > 1">
+            Existem {{ notificacoes['denuncias'] }} denúncias pendentes
+          </p>
+          <p *ngIf="notificacoes['denuncias'] == 1">
+            Existe 1 denúncia pendente
+          </p>
+          <p *ngIf="notificacoes['denuncias'] == 0">
+            Não existem denuncias pendentes
+          </p>
 
-            </div>
-          </div>
         </div>
-
-				<div class="col s12 m6 l4 xl4">
-					<div class="card"
-            [ngClass]="{
-            'green': notificacoes['escritores'] > 0,
-            'grey darken-1': notificacoes['escritores'] == 0
-            }"
-          >
-						<div class="card-content white-text">
-              <i class="material-icons">person_add</i>
-							<span class="card-title">
-                Solicitações
-              </span>
-							
-              <p *ngIf="notificacoes['escritores'] > 1">
-                Existem {{ notificacoes["escritores"] }} solicitações pendentes
-              </p>
-              <p *ngIf="notificacoes['escritores'] == 1">
-               Existe 1 solicitação pendente
-              </p>
-              <p *ngIf="notificacoes['escritores'] == 0">
-                Não existem solicitações pendentes
-              </p>
-
-						</div>
-					</div>
-				</div>
-
-        <div class="col s12 m6 l4 xl4">
-					<div class="card"
-            [ngClass]="{
-            'blue darken-3': notificacoes['mensagens'] > 0,
-            'grey darken-1': notificacoes['mensagens'] == 0
-            }"
-          >
-						<div class="card-content white-text">
-              <i class="material-icons">chat</i>
-							<span class="card-title">
-                Mensagens
-              </span>
-              
-							<p *ngIf="notificacoes['mensagens'] > 1">
-                Existem {{ notificacoes["mensagens"] }} mensagens não lidas
-              </p>
-              <p *ngIf="notificacoes['mensagens'] == 1">
-                Existe 1 mensagen não lida
-              </p>
-              <p *ngIf="notificacoes['mensagens'] == 0">
-                Não existem mensagens não lidas
-              </p>
-						</div>
-					</div>
-				</div>
       </div>
     </div>
+
+    <div class="col s12 m6 l4 xl3">
+      <div class="card"
+        [ngClass]="{
+        'green': notificacoes['escritores'] > 0,
+        'grey darken-1': notificacoes['escritores'] == 0
+        }"
+      >
+        <div class="card-content white-text">
+          <i class="material-icons">person_add</i>
+          <span class="card-title">
+            Solicitações
+          </span>
+          
+          <p *ngIf="notificacoes['escritores'] > 1">
+            Existem {{ notificacoes["escritores"] }} solicitações pendentes
+          </p>
+          <p *ngIf="notificacoes['escritores'] == 1">
+            Existe 1 solicitação pendente
+          </p>
+          <p *ngIf="notificacoes['escritores'] == 0">
+            Não existem solicitações pendentes
+          </p>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="col s12 m6 l4 xl3">
+      <div class="card"
+        [ngClass]="{
+        'blue darken-3': notificacoes['mensagens'] > 0,
+        'grey darken-1': notificacoes['mensagens'] == 0
+        }"
+      >
+        <div class="card-content white-text">
+          <i class="material-icons">chat</i>
+          <span class="card-title">
+            Mensagens
+          </span>
+          
+          <p *ngIf="notificacoes['mensagens'] > 1">
+            Existem {{ notificacoes["mensagens"] }} mensagens não lidas
+          </p>
+          <p *ngIf="notificacoes['mensagens'] == 1">
+            Existe 1 mensagen não lida
+          </p>
+          <p *ngIf="notificacoes['mensagens'] == 0">
+            Não existem mensagens não lidas
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col s12 m6 l4 xl3">
+      <div class="card"
+        [ngClass]="{
+        'orange lighten-1': notificacoes['categorias'] > 0,
+        'grey darken-1': notificacoes['categorias'] == 0
+        }"
+      >
+        <div class="card-content white-text">
+          <i class="material-icons">label</i>
+          <span class="card-title">
+            Categorias
+          </span>
+          
+          <p *ngIf="notificacoes['categorias'] > 1">
+            Existem {{ notificacoes["categorias"] }} sugestões de categorias
+          </p>
+          <p *ngIf="notificacoes['categorias'] == 1">
+            Existe 1 sugestão de categoria
+          </p>
+          <p *ngIf="notificacoes['categorias'] == 0">
+            Não existem sugestões de categorias
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
