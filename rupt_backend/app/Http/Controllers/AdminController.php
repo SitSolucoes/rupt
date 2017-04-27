@@ -62,9 +62,10 @@ class AdminController extends Controller
     }
 
     public function getAdmins(){
-        $admins = Admin::all();
+        $admins = Admin::orderBy('name');
+
         $response = [
-            'admins' => $admins
+            'admins' => $admins->get()
         ];
         return response()->json($response, 200);
     }
