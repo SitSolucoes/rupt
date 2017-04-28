@@ -285,6 +285,30 @@ span.badge.new:after {
     margin-right: 1rem;
 }
 
+/* pagination */
+.pagination{
+	text-align: center;
+	height: 50px;
+	padding-top: 10px;
+	background-color: #fff; 
+}
+
+.pagination .collection-item {
+    background-color: #fff; 
+    line-height: 1.5rem;
+    padding: 0px;
+    margin: 0;
+    border-bottom: 1px solid #e0e0e0;
+	cursor: pointer;
+}
+
+.ng2-pagination .current {
+    padding: 0.1875rem 0.625rem;
+    background: red;
+    color: #fefefe;
+    cursor: default;
+}
+
 /* card */
 .card {
 	margin-right: 25px;

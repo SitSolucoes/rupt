@@ -1,7 +1,6 @@
+import { Admin } from './../admin/admin';
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
-import { Admin } from '../admin/administradores/admin';
-
 import 'rxjs/Rx';
 import { Observable } from 'rxjs';
 

@@ -1,3 +1,4 @@
+import {Ng2PaginationModule} from 'ng2-pagination';
 import { LeitoresService } from './../services/leitores.service';
 import { AuthService } from './../services/auth.service';
 import { FormsModule } from '@angular/forms';
@@ -18,7 +19,6 @@ import { LeitoresComponent } from './leitores/leitores.component';
 import { CategoriasComponent } from './categorias/categorias.component';
 
 
-
 @NgModule({
   declarations: [
     LoginComponent,
@@ -32,6 +32,7 @@ import { CategoriasComponent } from './categorias/categorias.component';
     CategoriasComponent
   ],
   imports: [
+    Ng2PaginationModule,
     CommonModule,
     MaterializeModule,
     FormsModule,

@@ -29,10 +29,12 @@ class LeitorController extends Controller
     }
 
     public function getLeitores(){
-        $leitores = Leitor::orderBy('nome')->paginate(2);
+        $leitores = Leitor::orderBy("nome");
+
         $response = [
-            'leitores' => $leitores
+            'leitores' => $leitores->get()
         ];
+
         return response()->json($response, 200);
     }
 

@@ -97,7 +97,7 @@
         </div>
     </li>
     
-    <li *ngFor="let l of listLeitores()">
+    <li *ngFor="let l of listLeitores() | paginate: {itemsPerPage: 3, currentPage:page, id: '1'}; let i = index">
         <div class="list-item option-icons">
             <div class="col s3 m3 l3 xl3 item">
                 {{l.nick}}
@@ -113,4 +113,16 @@
             </div>
         </div>
     </li>
+
+    <ul class="collection pagination">
+      <li class="collection-item">
+        <pagination-controls (pageChange)="page = $event" id="1"
+            maxSize="5"
+            directionLinks="true"
+            autoHide="true">
+        </pagination-controls>
+      </li>
+    </ul>
+
+    
 </ul>
