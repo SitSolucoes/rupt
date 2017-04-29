@@ -1,3 +1,84 @@
-<p>
-  denuncias works!
-</p>
+<div class="title">
+    <i class="material-icons">view_list</i> Denúncias
+</div>
+
+<div class="row">
+    <form class="col s12 search-full">
+      <div class="row">
+        <div class="input-field col s11 m11 l5 xl5 margin-right-1">
+          <input id="data" type="text" class="validate">
+          <label for="data">Data</label>
+        </div>
+        <div class="input-field col s11 m11 l5 xl5 margin-right-1">
+          <select multiple name="ativo" materialize="material_select" 
+                  [materializeSelectOptions]="selectOptions" [(ngModel)]="admin_selecionado.ativo">
+                <option *ngFor="let option of selectOptions" [value]="option.value">{{option.name}}</option>
+          </select>
+          <label for="ativo">Denúncia</label>
+        </div>
+        <div class="input-field col s11 m11 l5 xl5 margin-right-1">
+          <input id="autor" type="text" class="validate">
+          <label for="autor">Autor</label>
+        </div>
+        <div class="input-field col s11 m11 l5 xl5 margin-right-1">
+          <input id="titulo" type="text" class="validate">
+          <label for="titulo">Título</label>
+        </div>
+      </div>
+    </form>
+  </div>
+
+<ul class="collapsible list">
+    <li>
+        <div class="list-item header">
+            <div class="col s2 m2 l1 xl1 item">
+                Data
+            </div>
+            <div class="col s4 m4 l2 xl2 item">
+                Autor
+            </div>
+            <div class="col s4 m4 l4 xl4 item">
+                Título
+            </div>
+            <div class="col s3 m3 l2 xl2 item">
+                Denúncia
+            </div>
+            <div class="col s4 m4 l2 xl2 item">
+                Quantidade
+            </div>
+            <div class="option-icons col s3 m2 l1 xl1 right-align item">
+                <div class="margin-right-1">Analisar</div>
+            </div>
+        </div>
+    </li>
+    
+    <li *ngFor="let l of listLeitores() | paginate: {itemsPerPage: 10, currentPage:page, id: '1'}; let i = index">
+        <div class="list-item option-icons">
+            <div class="col s3 m3 l3 xl3 item">
+                {{l.nick}}
+            </div>
+            <div class="col s4 m4 l4 xl4 item">
+                {{l.nome}}
+            </div>
+            <div class="col s3 m3 l3 xl3 item">
+                {{l.email}}
+            </div>
+            <div class="option-icons col s2 m2 l2 xl2">
+                <i class="material-icons" (click)="openModalEdit(l)">mode_edit</i>
+            </div>
+        </div>
+    </li>
+</ul>
+
+<ul class="pages">
+    <li>
+        <pagination-controls (pageChange)="page = $event" id="1"
+            maxSize="5"
+            directionLinks="true"
+            autoHide="false"
+            previousLabel=""
+            nextLabel="">
+        </pagination-controls>
+    </li>
+</ul>
+

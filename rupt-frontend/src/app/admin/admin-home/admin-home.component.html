@@ -4,32 +4,34 @@
   </h4>
 
   <div class="row">
-    <div class="col s12 m6 l4 xl3">
-      <div class="card"
-        [ngClass]="{
-        'red darken-3': notificacoes['denuncias'] > 0,
-        'grey darken-1': notificacoes['denuncias'] == 0
-        }"
-      >
-        <div class="card-content white-text">
-          <i class="material-icons">report_problem</i>
-          <span class="card-title">
-            Denúncias
-          </span>
+    <a routerLink="../denuncias">
+      <div class="col s12 m6 l4 xl3">
+        <div class="card"
+          [ngClass]="{
+          'red darken-3': notificacoes['denuncias'] > 0,
+          'grey darken-1': notificacoes['denuncias'] == 0
+          }"
+        >
+          <div class="card-content white-text">
+            <i class="material-icons">report_problem</i>
+            <span class="card-title">
+              Denúncias
+            </span>
 
-          <p *ngIf="notificacoes['denuncias'] > 1">
-            Existem {{ notificacoes['denuncias'] }} denúncias pendentes
-          </p>
-          <p *ngIf="notificacoes['denuncias'] == 1">
-            Existe 1 denúncia pendente
-          </p>
-          <p *ngIf="notificacoes['denuncias'] == 0">
-            Não existem denuncias pendentes
-          </p>
+            <p *ngIf="notificacoes['denuncias'] > 1">
+              Existem {{ notificacoes['denuncias'] }} denúncias pendentes
+            </p>
+            <p *ngIf="notificacoes['denuncias'] == 1">
+              Existe 1 denúncia pendente
+            </p>
+            <p *ngIf="notificacoes['denuncias'] == 0">
+              Não existem denuncias pendentes
+            </p>
 
+          </div>
         </div>
       </div>
-    </div>
+    </a>
 
     <div class="col s12 m6 l4 xl3">
       <div class="card"

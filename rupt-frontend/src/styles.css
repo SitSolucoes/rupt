@@ -16,7 +16,6 @@ html, body{
 	/*background-image: url(https://image.freepik.com/free-vector/dark-background-with-a-geometric-design_1048-1454.jpg);*/
 	background-color: #131313;
 	font-size: 16px;
-	
 }
 
 a{
@@ -60,6 +59,8 @@ h4{
 .margin-right-1{
 	margin-right: 1rem;
 }
+
+
 
 
 /* alertas */
@@ -224,6 +225,18 @@ span.badge.new:after {
 
 .content .search{
 	padding-left: 10px;
+}
+
+.content .search-full{
+	padding-left: 10px;
+	background-color: white;
+	border: 1px solid #131313;
+	border-radius: 2px;
+	padding-top: 20px;
+}
+
+.content .search-full .input-field{
+	margin-left: 20px;
 }
 
 .content nav{

@@ -1,4 +1,4 @@
-import { CategoriasComponent } from './categorias/categorias.component';
+
 import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
@@ -10,6 +10,8 @@ import { AdministradoresComponent } from './administradores/administradores.comp
 import { PainelAdministrativoComponent } from './painel-administrativo/painel-administrativo.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { LeitoresComponent } from './leitores/leitores.component';
+import { DenunciasComponent } from './denuncias/denuncias.component';
+import { CategoriasComponent } from './categorias/categorias.component';
 
 const AdminRoutes: Routes = [
     
@@ -19,11 +21,13 @@ const AdminRoutes: Routes = [
         { path : 'login', component: LoginComponent},
         { path : 'esqueci-a-senha', component: EsqueciSenhaComponent},
         { path : 'home', canActivate: [AuthGuard], component: AdminHomeComponent},
+        
         { path : 'administradores', canActivate: [AuthGuard], component: AdministradoresComponent},
         { path : 'categorias', canActivate: [AuthGuard], component: CategoriasComponent},
+        { path : 'denuncias', canActivate: [AuthGuard], component: DenunciasComponent},
         { path : 'leitores', canActivate: [AuthGuard], component: LeitoresComponent},
-        { path : 'editar/:id', canActivate: [AuthGuard], component: AdministradoresComponent},
         
+        { path : 'editar/:id', canActivate: [AuthGuard], component: AdministradoresComponent},
         { path : '', redirectTo: 'home', pathMatch: 'full'},
         { path : '**', redirectTo: 'home', pathMatch: 'full'}
     ]}
