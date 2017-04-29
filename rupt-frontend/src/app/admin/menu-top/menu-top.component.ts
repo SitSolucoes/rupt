@@ -29,8 +29,8 @@ export class MenuTopComponent implements OnInit {
     this._router.navigate(['/admin/login']);
   }
 
-  editAdmin(){
-    this._router.navigate(['/admin/editAdmin', localStorage.getItem('admin_id')]);
+  editar(){
+    this._router.navigate(['/admin/editar', localStorage.getItem('admin_id')]);
   }
 
 }

@@ -17,6 +17,7 @@ import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { EsqueciSenhaComponent } from './esqueci-senha/esqueci-senha.component';
 import { LeitoresComponent } from './leitores/leitores.component';
 import { CategoriasComponent } from './categorias/categorias.component';
+import { DenunciasComponent } from './denuncias/denuncias.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { CategoriasComponent } from './categorias/categorias.component';
     AdminHomeComponent,
     EsqueciSenhaComponent,
     LeitoresComponent,
-    CategoriasComponent
+    CategoriasComponent,
+    DenunciasComponent
   ],
   imports: [
     Ng2PaginationModule,

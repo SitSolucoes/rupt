@@ -32,6 +32,20 @@
         </li>
         <li>
             <div class="collapsible-header"><i class="material-icons">library_books</i>Posts<span *ngIf="notificacoes['denuncias'] != 0" class="new badge">{{ notificacoes["denuncias"] }}</span></div>
+            <div class="collapsible-body">
+                <ul class="collapsible" data-collapsible="accordion">
+                    <li routerLinkActive="active">
+                      <a routerLink="denuncias">
+                        <div class="collapsible-header" ><i class="material-icons">keyboard_arrow_right</i>Denúncias<span *ngIf="notificacoes['denuncias'] != 0" class="new badge">{{ notificacoes["denuncias"] }}</span></div>
+                      </a>
+                    </li>
+                    <li>
+                        <a routerLink="posts">
+                            <div class="collapsible-header"><i class="material-icons">keyboard_arrow_right</i>Posts</div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </li>
         <li>
             <div class="collapsible-header"><i class="material-icons">equalizer</i>Relatórios</div>

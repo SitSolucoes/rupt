@@ -16,6 +16,7 @@ html, body{
 	/*background-image: url(https://image.freepik.com/free-vector/dark-background-with-a-geometric-design_1048-1454.jpg);*/
 	background-color: #131313;
 	font-size: 16px;
+	
 }
 
 a{
@@ -135,7 +136,7 @@ h4{
 	background-color: #131313;
 	font-family: 'Athiti', sans-serif;
 	font-size: 22px;
-	height: calc(100% - 50px);
+	min-height: 100% !important;
 }
 
 .admin-menu-left .collapsible{
@@ -175,9 +176,8 @@ span.badge.new:after {
 
 /*content*/
 .content{
+	min-height: 100% !important;
 	background-color: #ededed;
-	height: calc(100% - 50px);
-	overflow-y: scroll;
 }	
 
 .content .title{
