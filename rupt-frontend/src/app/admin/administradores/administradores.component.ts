@@ -25,6 +25,7 @@ export class AdministradoresComponent implements OnInit {
   filtro: string;
   editando: boolean;
   message: string;
+  admin_logado: any;
   admin_selecionado: Admin = this.newAdmin();
   email_valido: boolean = false;
 
@@ -103,6 +104,7 @@ export class AdministradoresComponent implements OnInit {
 
   openModal() {
     this.email_valido = true;
+    this.editando = false;
     this.admin_selecionado = this.newAdmin();
     this.modalActions.emit({action:"modal",params:['open']});
   }
@@ -112,6 +114,7 @@ export class AdministradoresComponent implements OnInit {
     this.email_valido = true;
     this.admin_selecionado = admin;
     this.editando = true;
+    this.admin_logado = localStorage.getItem('admin_id');
     //pega o admin selecionado
     this.modalActions.emit({action:"modal",params:['open']});
   }

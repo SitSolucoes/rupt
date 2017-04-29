@@ -21,14 +21,14 @@
                         <label [ngClass]="{'active': admin_selecionado?.email}"for="email" data-error="Email Invalido">Email*</label>
                     </div>
                 </div>
-                <div class="row" *ngIf="admin_selecionado.id == 0" >
+                <div class="row" *ngIf="admin_selecionado.id == admin_logado || !editando">
                     <div class="input-field col s12">
                         <input id="senha" name="senha" type="password" class="validate" 
                                [(ngModel)]="admin_selecionado.senha">
                         <label for="senha">Senha*</label>
                     </div>
                 </div>
-                <div class="row" *ngIf="admin_selecionado.id == 0">
+                <div class="row" *ngIf="admin_selecionado.id == admin_logado || !editando">
                     <div class="input-field col s12">
                         <input id="confirm-senha" name="confirm_senha" type="password" class="validate" 
                                ngModel>
