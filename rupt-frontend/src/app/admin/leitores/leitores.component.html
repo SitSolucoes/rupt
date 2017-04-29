@@ -113,16 +113,16 @@
             </div>
         </div>
     </li>
+</ul>
 
-    <ul class="collection pagination">
-      <li class="collection-item">
+<ul class="pages">
+    <li>
         <pagination-controls (pageChange)="page = $event" id="1"
             maxSize="5"
             directionLinks="true"
-            autoHide="true">
+            autoHide="false"
+            previousLabel=""
+            nextLabel="">
         </pagination-controls>
-      </li>
-    </ul>
-
-    
+    </li>
 </ul>
