@@ -96,7 +96,7 @@
             </div>
         </div>
     </li>
-    <li *ngFor="let a of getAdmins()">
+    <li *ngFor="let a of getAdmins() | paginate: {itemsPerPage: 10, currentPage:page, id: '1'}; let i = index">
         <div class="list-item option-icons">
             <div class="col s8 m9 l9 xl9 item">
                 {{a.name}}
@@ -109,5 +109,17 @@
                 <i class="material-icons" (click)="openModalEdit(a)">mode_edit</i>
             </div>
         </div>
+    </li>
+</ul>
+
+<ul class="pages">
+    <li>
+        <pagination-controls (pageChange)="page = $event" id="1"
+            maxSize="5"
+            directionLinks="true"
+            autoHide="false"
+            previousLabel=""
+            nextLabel="">
+        </pagination-controls>
     </li>
 </ul>

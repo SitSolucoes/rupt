@@ -42,7 +42,7 @@ export class AdministradoresComponent implements OnInit {
         }
       );
     }
-    
+    this.admin_logado = localStorage.getItem('admin_id');
     this.getList();
     
   }
@@ -114,13 +114,14 @@ export class AdministradoresComponent implements OnInit {
     this.email_valido = true;
     this.admin_selecionado = admin;
     this.editando = true;
-    this.admin_logado = localStorage.getItem('admin_id');
     //pega o admin selecionado
     this.modalActions.emit({action:"modal",params:['open']});
+    
   }
 
   closeModal() {
     this.editando = false;
+    this.message = '';
     this.email_valido = true;
     this.admin_selecionado = this.newAdmin();
     this.modalActions.emit({action:"modal",params:['close']});
