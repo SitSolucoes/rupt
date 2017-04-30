@@ -361,6 +361,21 @@ span.badge.new:after {
     background-color: #F97000;
 }
 
+.tabs .notification {
+    background-color: #F97000;
+	font-weight: 300;
+    color: #fff;
+    border-radius: 2px;
+	min-width: 3rem;
+    padding: 2px 6px;
+    margin-left: 14px;
+    text-align: center;
+    line-height: 22px;
+    height: 52px;
+    box-sizing: border-box;
+}
+
+
 
 /*login*/
 .content-login{

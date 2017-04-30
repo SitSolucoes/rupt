@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { NotificacoesService } from './../../services/notificacoes.service';
+
 @Component({
   selector: 'app-categorias',
   templateUrl: './categorias.component.html',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CategoriasComponent implements OnInit {
 
-  constructor() { }
+  notificacoes;
+
+  constructor(private _notificacoesService: NotificacoesService) { }
 
   ngOnInit() {
+    this.notificacoes = this._notificacoesService.getNotificacoes();
   }
 
 }
