@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { NotificacoesService } from './../../services/notificacoes.service';
+
 @Component({
   selector: 'app-admin-home',
   templateUrl: './admin-home.component.html',
@@ -7,17 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminHomeComponent implements OnInit {
 
-  notificacoes = [{"escritores":0},{"mensagens":0},{"denuncias":0},{"categorias":0}];
+  notificacoes;
 
-  constructor() { }
+  constructor(private _notificacoesService: NotificacoesService) { }
 
   admin_name: string = localStorage.getItem('adminLogado');
 
   ngOnInit() {
-    this.notificacoes["escritores"] = 3;
-    this.notificacoes["mensagens"] = 0;
-    this.notificacoes["denuncias"]  = 9;
-    this.notificacoes["categorias"] = 1;
+    this.notificacoes = this._notificacoesService.getNotificacoes();
   }
 
 }

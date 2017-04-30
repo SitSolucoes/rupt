@@ -1,3 +1,4 @@
+import { NotificacoesService } from './../services/notificacoes.service';
 import {Ng2PaginationModule} from 'ng2-pagination';
 import { LeitoresService } from './../services/leitores.service';
 import { AuthService } from './../services/auth.service';
@@ -46,6 +47,7 @@ import { DenunciasComponent } from './denuncias/denuncias.component';
   providers: [
     AdministradoresService,
     LeitoresService,
+    NotificacoesService,
     AuthService
   ]
 })

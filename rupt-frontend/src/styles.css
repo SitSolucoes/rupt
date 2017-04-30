@@ -336,6 +336,32 @@ span.badge.new:after {
 	font-size: 5em;
 }
 
+/* tabs */
+.tabs {
+	background-color: transparent;
+}
+
+.tab a.active {
+    color: #0a0a0a !important;
+	font-weight: bold;
+}
+
+.tabs .tab a {
+	color: #0a0a0a;
+	font-family: "Gilroy";
+	font-size: 16px;
+	border-bottom: 2px solid #e0e0e0;
+}
+
+.tabs .tab a:hover{
+	color: #F97000;
+}
+
+.tabs .indicator {
+    background-color: #F97000;
+}
+
+
 /*login*/
 .content-login{
 	width: 100%;

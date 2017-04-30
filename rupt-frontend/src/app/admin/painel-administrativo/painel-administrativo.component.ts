@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Router } from '@angular/router';
+import { NotificacoesService } from './../../services/notificacoes.service';
 @Component({
   selector: 'app-painel-administrativo',
   templateUrl: './painel-administrativo.component.html',
@@ -8,15 +8,12 @@ import { Router } from '@angular/router';
 })
 export class PainelAdministrativoComponent implements OnInit {
 
-  notificacoes = [{"escritores":0},{"mensagens":0},{"denuncias":0},{"categorias":0}];
+  notificacoes;
   
-  constructor(private _router: Router) { }
+  constructor(private _notificacoesService: NotificacoesService) { }
 
   ngOnInit() {
-    this.notificacoes["escritores"] = 3;
-    this.notificacoes["mensagens"] = 0;
-    this.notificacoes["denuncias"]  = 9;
-    this.notificacoes["categorias"] = 1;
+    this.notificacoes = this._notificacoesService.getNotificacoes();
   }
 
 }

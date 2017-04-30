@@ -1,3 +1,22 @@
-<p>
-  categorias works!
-</p>
+<div class="title">
+    <i class="material-icons">view_list</i> Categorias
+</div>
+<div class="row">
+    <div class="col s12">
+      <ul class="tabs">
+        <li class="tab col s6">
+          <a class="active" href="#sugestao">Sugestões</a>
+          <span *ngIf="notificacoes['categorias'] != 0" class="new badge">{{ notificacoes["categorias"] }}</span>
+        </li>
+        <li class="tab col s6"><a href="#categoria">Categorias</a></li>
+      </ul>
+    </div>
+    
+    <div id="sugestao" class="col s12">
+      Test 1
+    </div>
+    
+    <div id="categoria" class="col s12">
+      Test 2
+    </div>
+  </div>
