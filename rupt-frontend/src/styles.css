@@ -339,6 +339,7 @@ span.badge.new:after {
 /* tabs */
 .tabs {
 	background-color: transparent;
+	margin-bottom: 30px;
 }
 
 .tab a.active {

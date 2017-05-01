@@ -72,3 +72,8 @@ Route::get('/getLeitores',[
 Route::put('/updateLeitor/{id}',[
             'uses' => 'LeitorController@update'
 ]);
+
+//sugestões
+Route::get('/getSugestoes', [
+    'uses' => 'SugestaoController@getSugestoes'
+]);

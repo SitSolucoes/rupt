@@ -3,18 +3,59 @@
 </div>
 
 <div class="row">
-      <div class="col s12">
-        <ul class="tabs" materialize="tabs">
-          <li class="tab col s6">
-            <a class="active" href="#sugestao">
-              Sugestões
-              <span *ngIf="notificacoes['categorias'] != 0" class="notification">{{ notificacoes["categorias"] }}</span>
-            </a>
-          </li>
-          <li class="tab col s6"><a href="#categorias">Categorias</a></li>
-        </ul>
+  <div class="col s12">
+    <ul class="tabs" materialize="tabs">
+      <li class="tab col s6">
+        <a class="active" href="#sugestao">
+          Sugestões
+          <span *ngIf="notificacoes['categorias'] != 0" class="notification">{{ notificacoes["categorias"] }}</span>
+        </a>
+      </li>
+      <li class="tab col s6"><a href="#categorias">Categorias</a></li>
+    </ul>
+  </div>
+  <div id="sugestao" class="col s12">
+    <div class="row">
+      <div class="col s12 m12 l12 xl12 search">
+          <nav>
+              <div class="nav-wrapper">
+                  <form>
+                      <div class="input-field">
+                          <input id="search" name="filtro" type="search" [(ngModel)]="filtro">
+                          <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                          <i class="material-icons">close</i>
+                      </div>
+                  </form>
+              </div>
+          </nav>
       </div>
-      <div id="sugestao" class="col s12">Test 1</div>
-      <div id="categorias" class="col s12">Test 2</div>
-      
     </div>
+    <ul class="collapsible list">
+      <li>
+          <div class="list-item header">
+              <div class="col s8 m9 l9 xl9 item">
+                  Sugestão
+              </div>
+              <div class="option-icons col s2 m2 l2 xl2 right-align item">
+                  <div class="margin-right-1">Opções</div>
+              </div>
+          </div>
+      </li>
+      <li *ngFor="let s of getSugestoes() | paginate: {itemsPerPage: 10, currentPage:page, id: '1'}; let i = index">
+          <div class="list-item option-icons">
+              <div class="col s8 m9 l9 xl9 item">
+                  {{s.categoria}}
+              </div>
+              <div class="option-icons col s2 m2 l2 xl2">
+                  <i class="material-icons" (click)="openModalEdit(a)">mode_edit</i>
+              </div>
+          </div>
+      </li>
+  </ul>
+  </div>
+
+
+  <div id="categorias" class="col s12">
+    Test 2
+  </div>
+</div>
