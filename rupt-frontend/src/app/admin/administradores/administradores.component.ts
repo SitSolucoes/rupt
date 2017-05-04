@@ -79,11 +79,14 @@ export class AdministradoresComponent implements OnInit {
           }
       );
     }else{
+      console.log('entra no editando');
       this._adminService.updateAdmin(form, this.admin_selecionado.id).subscribe(
         (response: any) => {
           this.message = response;
           this.getList();
           alert(this.message);
+          this.message = '';
+          //console.log(this.message)
         }
       );
       

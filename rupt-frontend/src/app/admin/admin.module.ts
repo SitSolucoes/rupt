@@ -1,8 +1,3 @@
-import { SugestoesService } from './../services/sugestoes.service';
-import { NotificacoesService } from './../services/notificacoes.service';
-import {Ng2PaginationModule} from 'ng2-pagination';
-import { LeitoresService } from './../services/leitores.service';
-import { AuthService } from './../services/auth.service';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -20,6 +15,13 @@ import { EsqueciSenhaComponent } from './esqueci-senha/esqueci-senha.component';
 import { LeitoresComponent } from './leitores/leitores.component';
 import { CategoriasComponent } from './categorias/categorias.component';
 import { DenunciasComponent } from './denuncias/denuncias.component';
+import { DenunciasService } from './../services/denuncias.service';
+import { SugestoesService } from './../services/sugestoes.service';
+import { NotificacoesService } from './../services/notificacoes.service';
+import {Ng2PaginationModule} from 'ng2-pagination';
+import { LeitoresService } from './../services/leitores.service';
+import { AuthService } from './../services/auth.service';
+
 
 
 @NgModule({
@@ -50,7 +52,8 @@ import { DenunciasComponent } from './denuncias/denuncias.component';
     LeitoresService,
     NotificacoesService,
     SugestoesService,
-    AuthService
+    AuthService,
+    DenunciasService
   ]
 })
 export class AdminModule { }

@@ -42,7 +42,7 @@ class AdminController extends Controller
         try{
             if(!$token = JWTAuth::attempt($credentials)){
                 return response()->json([
-                    'error' => 'Login ou senha incorretos'
+                    'error' => 'Email ou senha incorretos'// $request->input('password')
                 ],401);
             }
         }catch(JWTException $e){
@@ -87,10 +87,11 @@ class AdminController extends Controller
         $admin->name = $request->input('name');
         $admin->email = $request->input('email');
         $admin->ativo = $request->input('ativo');
+        $admin->password = bcrypt($request->input('password'));
         $admin->save();
 
         $response = [
-            'message' => "Admin Alterado com Sucesso"
+            'message' => 'Administrador alterado com sucesso!'
         ];
 
         return response()->json($response, 200);

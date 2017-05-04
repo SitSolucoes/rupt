@@ -77,3 +77,8 @@ Route::put('/updateLeitor/{id}',[
 Route::get('/getSugestoes', [
     'uses' => 'SugestaoController@getSugestoes'
 ]);
+
+//denuncias
+Route::get('/getDenuncias', [
+           'uses' => 'DenunciasController@getDenuncias'
+]);

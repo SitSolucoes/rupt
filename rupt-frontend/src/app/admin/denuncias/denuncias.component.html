@@ -10,8 +10,8 @@
           <label for="data">Data</label>
         </div>
         <div class="input-field col s11 m11 l5 xl5 margin-right-1">
-          <select multiple name="ativo" materialize="material_select" 
-                  [materializeSelectOptions]="selectOptions" [(ngModel)]="admin_selecionado.ativo">
+          <select multiple name="motivo" materialize="material_select" 
+                  [materializeSelectOptions]="selectOptions">
                 <option *ngFor="let option of selectOptions" [value]="option.value">{{option.name}}</option>
           </select>
           <label for="ativo">Denúncia</label>
@@ -52,16 +52,19 @@
         </div>
     </li>
     
-    <li *ngFor="let l of listLeitores() | paginate: {itemsPerPage: 10, currentPage:page, id: '1'}; let i = index">
+    <li *ngFor="let d of denuncias" > <!--listLeitores() | paginate: {itemsPerPage: 10, currentPage:page, id: '1'}; let i = index">-->
         <div class="list-item option-icons">
             <div class="col s3 m3 l3 xl3 item">
-                {{l.nick}}
+                {{d.created_at}}
             </div>
             <div class="col s4 m4 l4 xl4 item">
-                {{l.nome}}
+                {{d.leitor.nome}}
             </div>
             <div class="col s3 m3 l3 xl3 item">
-                {{l.email}}
+                oi
+            </div>
+            <div class="col s3 m3 l3 xl3 item">
+                oi
             </div>
             <div class="option-icons col s2 m2 l2 xl2">
                 <i class="material-icons" (click)="openModalEdit(l)">mode_edit</i>

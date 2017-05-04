@@ -36,7 +36,13 @@
                 <ul class="collapsible" data-collapsible="accordion">
                     <li routerLinkActive="active">
                       <a routerLink="denuncias">
-                        <div class="collapsible-header" ><i class="material-icons">keyboard_arrow_right</i>Denúncias<span *ngIf="notificacoes['denuncias'] != 0" class="new badge">{{ notificacoes["denuncias"] }}</span></div>
+                        <div class="collapsible-header" >
+                                <i class="material-icons">keyboard_arrow_right</i>
+                                Denúncias
+                                <span *ngIf="notificacoes['denuncias'] != 0" class="new badge">
+                                    {{ notificacoes["denuncias"] }}
+                                </span>
+                        </div>
                       </a>
                     </li>
                     <li>
