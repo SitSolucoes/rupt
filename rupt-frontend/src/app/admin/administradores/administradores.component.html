@@ -96,7 +96,7 @@
             </div>
         </div>
     </li>
-    <li *ngFor="let a of getAdmins() | paginate: {itemsPerPage: 10, currentPage:page, id: '1'}; let i = index">
+    <li *ngFor="let a of getAdmins() | paginate: {itemsPerPage: 10, currentPage: page, id: '1'}; let i = index">
         <div class="list-item option-icons">
             <div class="col s8 m9 l9 xl9 item">
                 {{a.name}}

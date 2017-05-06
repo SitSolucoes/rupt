@@ -13,7 +13,9 @@ export class AuthService {
 
   }
 
-  private _url: string = 'http://localhost:8000/api/';
+  private _url: string = 
+    'http://localhost:8000/api/'; //DEV
+    //'http://api.sitsolucoes.com.br/api/';  //TESTE
 
   private token: string;
 

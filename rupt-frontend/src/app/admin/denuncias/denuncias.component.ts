@@ -28,7 +28,6 @@ export class DenunciasComponent implements OnInit {
   denuncias: Denuncia[] = [];
 
   getList(){
-    console.log('lista');
     this._denunciaService.getDenuncias()
       .subscribe(
         (denuncias: any) => {

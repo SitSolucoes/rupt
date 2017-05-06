@@ -6,7 +6,9 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class AdministradoresService {
-  private _url: string = 'http://localhost:8000/api/';
+  private _url: string = 
+    'http://localhost:8000/api/'; //DEV
+    //'http://api.sitsolucoes.com.br/api/';  //TESTE
   private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(private _http: Http) { }

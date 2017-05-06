@@ -7,6 +7,9 @@ export class NotificacoesService {
   notificacoes = [{"escritores":0},{"mensagens":0},{"denuncias":0},{"categorias":0}];
   
   constructor(private _http: Http) { }
+  private _url: string =  
+    'http://localhost:8000/api/'; //DEV
+    //'http://api.sitsolucoes.com.br/api/';  //TESTE
 
   getNotificacoes(){
     this.notificacoes["escritores"] = 2;

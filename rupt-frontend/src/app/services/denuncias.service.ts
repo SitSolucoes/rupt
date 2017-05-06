@@ -5,7 +5,9 @@ import { Http, Response, Headers } from '@angular/http';
 @Injectable()
 export class DenunciasService {
 
-  private _url: string = 'http://localhost:8000/api/';
+  private _url: string = 
+    'http://localhost:8000/api/'; //DEV
+    //'http://api.sitsolucoes.com.br/api/';  //TESTE
 
   constructor(private _http: Http) { }
 
