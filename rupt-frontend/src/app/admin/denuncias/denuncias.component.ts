@@ -36,7 +36,8 @@ export class DenunciasComponent implements OnInit {
             this.denuncias.push(new Denuncia(denuncia.id, new Post(), 
                                              this.newAdmin(), new Leitor(), 
                                              new Motivo_Denuncia(), denuncia.created_at, 
-                                             denuncia.updated_at));
+                                             denuncia.updated_at,
+                                             denuncia.quantidade));
           }
             
             

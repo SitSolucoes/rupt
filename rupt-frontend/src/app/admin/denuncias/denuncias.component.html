@@ -51,22 +51,24 @@
             </div>
         </div>
     </li>
-    
     <li *ngFor="let d of denuncias" > <!--listLeitores() | paginate: {itemsPerPage: 10, currentPage:page, id: '1'}; let i = index">-->
         <div class="list-item option-icons">
-            <div class="col s3 m3 l3 xl3 item">
-                {{d.created_at}}
+            <div class="col s2 m2 l1 xl1 item">
+                {{d.created_at | date: 'dd/MM/yy'}}
+            </div>
+            <div class="col s4 m4 l2 xl2 item">
+                autor
             </div>
             <div class="col s4 m4 l4 xl4 item">
-                {{d.leitor.nome}}
+                titulo grande que é um caralho grosso e comprido cheio de veias e anormal
             </div>
-            <div class="col s3 m3 l3 xl3 item">
-                oi
+            <div class="col s4 m4 l2 xl2 item">
+                denuncia
             </div>
-            <div class="col s3 m3 l3 xl3 item">
-                oi
+            <div class="col s3 m3 l2 xl2 item">
+                {{d.quantidade}}
             </div>
-            <div class="option-icons col s2 m2 l2 xl2">
+            <div class="option-icons col s3 m2 l1 xl1 right-align item">
                 <i class="material-icons" (click)="openModalEdit(l)">mode_edit</i>
             </div>
         </div>

@@ -11,8 +11,9 @@ export class Denuncia {
     motivo: Motivo_Denuncia;
     created_at: Date;
     updated_at: Date;
+    quantidade: number;
 
-    constructor(id: number, post: Post, admin: Admin, leitor: Leitor, motivo: Motivo_Denuncia, created_at: Date, updated_at: Date ){
+    constructor(id: number, post: Post, admin: Admin, leitor: Leitor, motivo: Motivo_Denuncia, created_at: Date, updated_at: Date, quantidade: number){
                 this.id = id;
                 this.post = post;
                 this.admin = admin;
@@ -20,5 +21,6 @@ export class Denuncia {
                 this.motivo = motivo;
                 this.created_at = created_at;
                 this.updated_at = updated_at;
+                this.quantidade = quantidade;
     }
 }
