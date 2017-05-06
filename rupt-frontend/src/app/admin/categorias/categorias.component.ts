@@ -13,6 +13,7 @@ export class CategoriasComponent implements OnInit {
 
   notificacoes;
   sugestoes;
+  filtroSugestoes;
 
   constructor(
     private _notificacoesService: NotificacoesService,
@@ -25,12 +26,20 @@ export class CategoriasComponent implements OnInit {
 
   getListSugestoes(){
     this._sugestoesService.getSugestoes().subscribe(
-      (sugestoes: Sugestao[]) => {this.sugestoes = sugestoes;}
+      (sugestoes: Sugestao[]) => {this.sugestoes = sugestoes}
     );
   }
 
-  getSugestoes(){
-    return this.sugestoes;
+  listSugestoes(){
+    if ( this.filtroSugestoes === undefined || this.sugestoes.length === 0 || this.filtroSugestoes.trim() === ''){
+      return this.sugestoes;
+    }
+    return this.sugestoes.filter((v) => {
+      if (v.categoria.toLowerCase().indexOf(this.filtroSugestoes.toLowerCase()) >= 0) 
+        return true;
+      
+      return false;
+    });
   }
 
 }

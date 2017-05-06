@@ -16,7 +16,7 @@ export class SugestoesService {
      return this._http.get(this._url + 'getSugestoes')
       .map(
         (response: Response) => {
-          return response.json().leitores;
+          return response.json().sugestoes;
         }
       );
   }
