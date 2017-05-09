@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { Http, Response, Headers } from '@angular/http';
+import { Post } from './../classes/post';
 
 @Injectable()
 export class DenunciasService {
@@ -18,6 +19,15 @@ export class DenunciasService {
           return response.json().denuncias;
         }
       );
+  }
+
+  getPost(id){
+    return this._http.get(this._url + 'getPost/' + id)
+      .map(
+          (response: Response) => { 
+            return response.json().post;
+          }
+        );
   }
 
 }

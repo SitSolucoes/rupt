@@ -83,9 +83,12 @@ class AdminController extends Controller
         if (!$admin) {
             return response()->json(['message' => 'Admin não encontrado'], 404);
         }
+        
+
         //echo $request->input('ativo');
         $admin->name = $request->input('name');
-        $admin->email = $request->input('email');
+        if($admin->email != $request->input('email'))
+            $admin->email = $request->input('email');
         $admin->ativo = $request->input('ativo');
         $admin->password = bcrypt($request->input('password'));
         $admin->save();

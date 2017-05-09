@@ -90,3 +90,7 @@ Route::get('/getSugestoes', [
 Route::get('/getDenuncias', [
            'uses' => 'DenunciasController@getDenuncias'
 ]);
+
+Route::get('/getPost/{id}', [
+          'uses' => 'DenunciasController@getPost'
+]);

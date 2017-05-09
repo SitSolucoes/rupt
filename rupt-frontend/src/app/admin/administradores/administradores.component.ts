@@ -28,6 +28,8 @@ export class AdministradoresComponent implements OnInit {
   admin_logado: any;
   admin_selecionado: Admin = this.newAdmin();
   email_valido: boolean = false;
+  senhaValida: boolean = true;
+  admin_original: Admin;
 
   constructor(private _adminService: AdministradoresService,
               private _route: ActivatedRoute) { }
@@ -78,7 +80,7 @@ export class AdministradoresComponent implements OnInit {
     if(!this.editando){
       this._adminService.createAdmin(form).subscribe(
           (response: any) => {
-              alert("Admin Criado com Sucesso!");
+              this.clear();
               this.getList();
           }
       );
@@ -87,9 +89,10 @@ export class AdministradoresComponent implements OnInit {
       this._adminService.updateAdmin(form, this.admin_selecionado.id).subscribe(
         (response: any) => {
           this.message = response;
+          localStorage.setItem('adminLogado', this.admin_selecionado.name);
           this.getList();
           alert(this.message);
-          this.message = '';
+          this.clear();
           //console.log(this.message)
         }
       );
@@ -98,44 +101,52 @@ export class AdministradoresComponent implements OnInit {
   }
 
   validaEmail(form){
-    console.log('entrou');
-    console.log(this.admin_selecionado.email);
-    if(form.value.email != '' && (form.value.email != this.admin_selecionado.email && !this.editando) ){
-      console.log('chamou o serviço')
+    if(form.value.email != '' && form.value.email != this.admin_original.email){
       this._adminService.validaEmail(form.value.email).subscribe(
           (response: any) => { this.email_valido = response;
-                               console.log('atribuiu?');}
+                               //console.log('atribuiu?');
+                              }
         );
     }
   }
 
-  validaConfirmaSenha(form){
-    if(form.value.senha != form.value.confirm_senha && form.value.senha != '')
-      this.message = 'As senhas devem coincidir';
+  comparaSenhas(e, f){
+    //console.log(f);
+    if((f.value.confirm_senha+e.key == f.value.senha) || (f.value.confirm_senha+e.key == '' && f.value.senha == '' && this.editando)){
+      this.senhaValida = true;
+      return;
+    }
+
+    this.senhaValida = false;
   }
 
   openModal() {
-    this.email_valido = true;
-    this.editando = false;
-    this.admin_selecionado = this.newAdmin();
+    this.clear();
     this.modalActions.emit({action:"modal",params:['open']});
   }
 
   openModalEdit(admin: Admin) {
     //flag para mostrar dados
-    this.email_valido = true;
+    this.clear();
     this.admin_selecionado = admin;
     this.editando = true;
+    
     //pega o admin selecionado
     this.modalActions.emit({action:"modal",params:['open']});
     
   }
 
-  closeModal() {
+  clear(){
     this.editando = false;
     this.message = '';
     this.email_valido = true;
     this.admin_selecionado = this.newAdmin();
+    this.senhaValida = true;
+  }
+
+  closeModal() {
+    this.clear();
+    this.getList();
     this.modalActions.emit({action:"modal",params:['close']});
   }
 }

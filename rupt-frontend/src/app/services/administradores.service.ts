@@ -57,6 +57,7 @@ export class AdministradoresService {
     
     return this._http.put(this._url + 'updateAdmin/'+ id, body, {headers: this.headers}).map(
     (response: any)=>{
+      console.log("editou");
       return response.json().message;
     });
   }

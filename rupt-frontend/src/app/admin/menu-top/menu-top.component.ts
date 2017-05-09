@@ -23,6 +23,10 @@ export class MenuTopComponent implements OnInit {
     if (this.contNotificacoes > 99)
       this.contNotificacoes = 99;
   }
+  
+  ngDoCheck(){
+    this.admin_name = localStorage.getItem('adminLogado');
+  }
 
   logout(){
     this._authService.logout();

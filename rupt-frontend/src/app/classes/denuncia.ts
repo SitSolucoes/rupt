@@ -6,12 +6,15 @@ import { Motivo_Denuncia } from './motivo_denuncia';
 export class Denuncia {
     id: number;
     post: Post;
+    post_titulo: string
     admin: Admin;
     leitor: Leitor;
     motivo: Motivo_Denuncia;
     created_at: Date;
     updated_at: Date;
     quantidade: number;
+
+    
 
     constructor(id: number, post: Post, admin: Admin, leitor: Leitor, motivo: Motivo_Denuncia, created_at: Date, updated_at: Date, quantidade: number){
                 this.id = id;
