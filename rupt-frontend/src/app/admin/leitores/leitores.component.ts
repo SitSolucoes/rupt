@@ -17,6 +17,7 @@ export class LeitoresComponent implements OnInit {
   filtro: string;
   leitores;
   leitor;
+  nick;
   selectOptions: Option[] = [
     {value: "f", name: 'Feminino'},
     {value: "m", name: 'Masculino'}
@@ -65,8 +66,16 @@ export class LeitoresComponent implements OnInit {
     this.modalActions.emit({action:"modal",params:['close']});
   }
 
+  validateNick(){
+    this._leitorService.validaNick(this.leitor.nick).subscribe(
+        (nick: boolean) => {this.nick = nick}
+      );
+
+      console.log(this.nick);
+  }
+
   onSubmit(form){
-    if (this.leitor.id == 0){
+    /*if (this.leitor.id == 0){
       this._leitorService.createLeitor(form).subscribe(
         (response: any) => {
           this.message = response;
@@ -81,7 +90,9 @@ export class LeitoresComponent implements OnInit {
             this.getLeitores();
           }
         );
-    }
+    }*/
+
+    console.log(form);
  }
 
   

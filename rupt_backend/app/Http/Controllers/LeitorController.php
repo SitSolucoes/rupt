@@ -59,4 +59,15 @@ class LeitorController extends Controller
         return response()->json($response, 200);
     }
 
+    public function validaNick($nick){
+        $leitor = Leitor::where("nick", $nick)->first();
+
+        echo $leitor;
+
+        if ($leitor == null)
+            return response()->json(['nick' => false], 200);
+
+        return response()->json(['nick' => true], 200);
+    }
+
 }

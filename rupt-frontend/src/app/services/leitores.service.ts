@@ -51,4 +51,12 @@ export class LeitoresService {
         }
       );
   }
+
+  validaNick(nick){
+    return this._http.get(this._url + 'validaNick/' + nick).map(
+      (response: Response) => {
+        return response.json().nick;
+      }
+    )
+  }
 }

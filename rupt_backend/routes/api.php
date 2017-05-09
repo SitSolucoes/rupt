@@ -73,6 +73,14 @@ Route::put('/updateLeitor/{id}',[
             'uses' => 'LeitorController@update'
 ]);
 
+Route::get('/validaNick/{nick}', [
+            'uses' => 'LeitorController@validaNick'
+]);
+
+Route::get('/validaEmail/{nick}', [
+            'uses' => 'LeitorController@validaEmail'
+]);
+
 //sugestões
 Route::get('/getSugestoes', [
     'uses' => 'SugestaoController@getSugestoes'
