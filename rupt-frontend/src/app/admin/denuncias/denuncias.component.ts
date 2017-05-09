@@ -42,11 +42,11 @@ export class DenunciasComponent implements OnInit {
                 console.log(p[0].conteudo);
                 post = p[0];
                 //getEscritor
-                this._postsService.getEscritor().subscribe(
-                  (e: any) => {
+                //this._postsService.getEscritor().subscribe(
+                //  (e: any) => {
 
-                  }
-                )
+                //  }
+                //)
                 console.log(post);
                 //getAdmin
                 //monta denuncia
