@@ -94,3 +94,8 @@ Route::get('/getDenuncias', [
 Route::get('/getPost/{id}', [
           'uses' => 'DenunciasController@getPost'
 ]);
+
+//Posts
+Route::get('/getEscritor/{id}', [
+          'uses' => 'PostsController@getEscritor'
+]);

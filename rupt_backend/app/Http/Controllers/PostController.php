@@ -12,4 +12,8 @@ class PostController extends Controller
 
         return $post;
     }
+
+    public function getEscritor($id){
+        
+    }
 }
