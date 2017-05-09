@@ -1,3 +1,5 @@
+import { CategoriasComponent } from '../categorias/categorias.component';
+import { format } from 'util';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit, EventEmitter } from '@angular/core';
 
@@ -24,12 +26,19 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
+  validaForm(form){
+    
+  }
   
+  mostralog(campo){
+    console.log(campo);
+  }
 
   login(form) {
     this._authService.signin(form).subscribe(
       tokenData => {
           this._router.navigate(['admin/home']);
+          
       },
       error => {
           this.login_error = error.json().error;
