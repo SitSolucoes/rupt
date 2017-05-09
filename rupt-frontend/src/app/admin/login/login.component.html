@@ -5,18 +5,22 @@
       <form class="col s12" #f="ngForm" (ngSubmit)="login(f)">
         <div class="row">
           <div class="input-field col s12">
-            <input id="email" type="email" data-error="Email Invalido" data-success="Ok" name="email" class="validate" ngModel>
-            <label for="email">Email</label>
+            <input id="email" type="email" name="email" 
+                   class="validate" ngModel #email="ngModel"
+                   required pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?">
+            <div *ngIf="email.errors?.pattern" class="error">Email invalido.</div>
+            <label for="email">Email</label>  
+            
           </div>
           <div class="input-field col s12">
-            <input id="senha" type="password" name="senha" class="validate" ngModel>
+            <input id="senha" type="password" name="senha" class="validate"  required ngModel>
             <label for="senha">Senha</label>
           </div>
         </div>
         <div class="row" *ngIf="login_error != ''">
           <font color="red">{{login_error}}</font>
         </div>
-        <button type="submit" class="btn btn-login" name="Login">Login</button>
+        <button type="submit"  class="btn btn-login" name="Login">Login</button>
       </form>
       <a routerLink="../esqueci-a-senha" class="btn btn-forget btn-flat">esqueci minha senha</a>
     </div>

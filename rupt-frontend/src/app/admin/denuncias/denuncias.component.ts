@@ -33,11 +33,12 @@ export class DenunciasComponent implements OnInit {
         (denuncias: any) => {
           for(let denuncia of denuncias){
             //get data to denuncia
-            this.denuncias.push(new Denuncia(denuncia.id, new Post(), 
+            let d = new Denuncia(denuncia.id, new Post(), 
                                              this.newAdmin(), new Leitor(), 
                                              new Motivo_Denuncia(), denuncia.created_at, 
                                              denuncia.updated_at,
-                                             denuncia.quantidade));
+                                             denuncia.quantidade);
+            this.denuncias.push(d);
           }
             
             
