@@ -12,10 +12,14 @@ export class PostsService {
     //'http://api.sitsolucoes.com.br/api/';  //TESTE
 
   getEscritor(id){
+    
     return this._http.get(this._url + 'getEscritor/' + id)
       .map(
           (response: Response) => { 
-            return response.json().post;
+            return {
+              'escritor': response.json().escritor,
+              'leitor': response.json().leitor
+            } 
           }
         );
   }

@@ -1,3 +1,4 @@
+import { PostsService } from './../services/posts.service';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -53,7 +54,8 @@ import { AuthService } from './../services/auth.service';
     NotificacoesService,
     SugestoesService,
     AuthService,
-    DenunciasService
+    DenunciasService,
+    PostsService
   ]
 })
 export class AdminModule { }

@@ -8,7 +8,12 @@ use App\Leitor;
 
 class LeitorController extends Controller
 {
-     public function store(Request $request){
+    public function getById($id){
+        $leitor = Leitor::where('id', $id)->get();
+        return $leitor;
+    }
+
+    public function store(Request $request){
         $date = str_replace('/', '-', $request->input("nascimento"));
 
         $leitor = new leitor([
