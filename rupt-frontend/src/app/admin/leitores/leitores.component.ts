@@ -17,7 +17,9 @@ export class LeitoresComponent implements OnInit {
   filtro: string;
   leitores;
   leitor;
-  nick;
+  emailInvalido;
+  nickInvalido;
+  senhaValida;
   selectOptions: Option[] = [
     {value: "f", name: 'Feminino'},
     {value: "m", name: 'Masculino'}
@@ -58,6 +60,8 @@ export class LeitoresComponent implements OnInit {
   }
 
   openModalEdit(leitor: Leitor){
+    this.emailInvalido = false;
+    this.nickInvalido = false;
     this.leitor = leitor;
     this.modalActions.emit({action:"modal",params:['open']});
   }
@@ -66,16 +70,36 @@ export class LeitoresComponent implements OnInit {
     this.modalActions.emit({action:"modal",params:['close']});
   }
 
-  validateNick(){
-    this._leitorService.validaNick(this.leitor.nick).subscribe(
-        (nick: boolean) => {this.nick = nick}
+  validaNick(){
+    if (this.leitor.nick.length >= 3){
+      this._leitorService.validaNick(this.leitor.nick, this.leitor.id).subscribe(
+        (nick: boolean) => {this.nickInvalido = nick}
       );
+    }
+    else
+      this.nickInvalido = false;
+  }
 
-      console.log(this.nick);
+  validaEmail(){
+    if (this.leitor.email.length >= 6){
+      this._leitorService.validaEmail(this.leitor.email, this.leitor.id).subscribe(
+        (email: boolean) => {this.emailInvalido = email}
+      );
+    }
+    else
+      this.emailInvalido = false;
+  }
+
+  comparaSenhas(e, confirm){
+    if(confirm.value+e.key == this.leitor.senha){
+      this.senhaValida = true;
+    }
+    else 
+      this.senhaValida = false;
   }
 
   onSubmit(form){
-    /*if (this.leitor.id == 0){
+    if (this.leitor.id == 0){
       this._leitorService.createLeitor(form).subscribe(
         (response: any) => {
           this.message = response;
@@ -90,9 +114,7 @@ export class LeitoresComponent implements OnInit {
             this.getLeitores();
           }
         );
-    }*/
-
-    console.log(form);
+    }
  }
 
   

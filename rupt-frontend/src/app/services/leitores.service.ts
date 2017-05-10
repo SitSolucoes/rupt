@@ -13,6 +13,8 @@ export class LeitoresService {
   constructor(private _http: Http) { }
 
   private createBody(form){
+    console.log(form.value.nome);
+
     return JSON.stringify(
         {
          nome: form.value.nome,
@@ -22,7 +24,7 @@ export class LeitoresService {
          sexo: form.value.sexo,
          src_foto: form.value.src_foto,
          password: form.value.senha
-        });
+      });
   }
   
   createLeitor(form){
@@ -52,10 +54,18 @@ export class LeitoresService {
       );
   }
 
-  validaNick(nick){
-    return this._http.get(this._url + 'validaNick/' + nick).map(
+  validaNick(nick, id){
+    return this._http.get(this._url + 'validaNick/' + nick + "/" + id).map(
       (response: Response) => {
         return response.json().nick;
+      }
+    )
+  }
+
+  validaEmail(email, id){
+    return this._http.get(this._url + 'validaEmailLeitor/'+ email + "/" + id).map(
+      (response: Response) => {
+        return response.json().email;
       }
     )
   }

@@ -9,18 +9,16 @@ use App\Leitor;
 class LeitorController extends Controller
 {
      public function store(Request $request){
+
+        $leitor = new Leitor(); 
+        $leitor->nome = $request->input('nome');
+        $leitor->nick = $request->input('nick');
+        $leitor->email = $request->input('email');
         $date = str_replace('/', '-', $request->input("nascimento"));
-
-        $leitor = new leitor([
-            'nome' => $request->input('nome'),
-            'nick' => $request->input('nick'),
-            'email' => $request->input('email'),
-            'nascimento' => date('Y-m-d', strtotime($date)),
-            'sexo' => $request->input('sexo'),
-            'src_foto' => $request->input('src_foto'),
-            'password' => bcrypt($request->input('password')),
-        ]);
-
+        $leitor->nascimento = date('Y-m-d', strtotime($date));
+        $leitor->sexo = $request->input('sexo');
+        $leitor->src_foto = $request->input('src_foto');
+        $leitor->password = bcrypt($request->input('password'));
         $leitor->save();
 
         return response()->json([
@@ -59,15 +57,26 @@ class LeitorController extends Controller
         return response()->json($response, 200);
     }
 
-    public function validaNick($nick){
-        $leitor = Leitor::where("nick", $nick)->first();
-
-        echo $leitor;
+    public function validaNick($nick, $id){
+        $leitor = Leitor::where("nick", $nick)
+                        ->where("id", '<>', $id)
+                        ->first();
 
         if ($leitor == null)
             return response()->json(['nick' => false], 200);
 
         return response()->json(['nick' => true], 200);
+    }
+
+    public function validaEmail($email, $id){
+        $leitor = Leitor::where("email", $email)
+                        ->where("id", '<>', $id)
+                        ->first();
+
+        if ($leitor == null)
+            return response()->json(['email' => false], 200);
+
+        return response()->json(['email' => true], 200);
     }
 
 }
