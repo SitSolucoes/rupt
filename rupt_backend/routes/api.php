@@ -97,5 +97,5 @@ Route::get('/getPost/{id}', [
 
 //Posts
 Route::get('/getEscritor/{id}', [
-          'uses' => 'PostsController@getEscritor'
+          'uses' => 'PostController@getEscritor'
 ]);

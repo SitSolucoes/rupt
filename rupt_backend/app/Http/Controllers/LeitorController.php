@@ -8,9 +8,8 @@ use App\Leitor;
 
 class LeitorController extends Controller
 {
-     public function store(Request $request){
-
-        $leitor = new Leitor(); 
+    public function store(Request $request){
+       $leitor = new Leitor(); 
         $leitor->nome = $request->input('nome');
         $leitor->nick = $request->input('nick');
         $leitor->email = $request->input('email');
@@ -24,6 +23,11 @@ class LeitorController extends Controller
         return response()->json([
                 'message'=>'Leitor criado com sucesso!'
             ],201);
+    }
+
+    public function getById($id){
+        $leitor = Leitor::where('id', $id)->get();
+        return $leitor;
     }
 
     public function getLeitores(){

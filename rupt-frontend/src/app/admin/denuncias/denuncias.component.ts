@@ -1,3 +1,4 @@
+import { Escritor } from './../../classes/escritor';
 import { Component, OnInit } from '@angular/core';
 
 import { DenunciasService } from './../../services/denuncias.service';
@@ -36,30 +37,32 @@ export class DenunciasComponent implements OnInit {
           for(let denuncia of denuncias){
             //get Leitor
             //get Post
+            console.log(denuncia);
             let post: Post;
+            let autor: Escritor;
             this._denunciaService.getPost(denuncia.post_idPost).subscribe(
               (p: any) =>{
-                console.log(p[0].conteudo);
                 post = p[0];
-                //getEscritor
-                //this._postsService.getEscritor().subscribe(
-                //  (e: any) => {
-
-                //  }
-                //)
                 console.log(post);
-                //getAdmin
-                //monta denuncia
-                let d = new Denuncia(denuncia.id, post, 
-                                                this.newAdmin(), new Leitor(), 
-                                                new Motivo_Denuncia(), denuncia.created_at, 
-                                                denuncia.updated_at,
-                                                denuncia.quantidade);
-                console.log(d);                                             
-                this.denuncias.push(d);
+                //getEscritor
+                this._postsService.getEscritor(denuncia.autor_idAutor).subscribe(
+                    (e: any) => {
+                      console.log("escritores: ");
+                      console.log(e);
+                      post.escritor = e;
+                      //getAdmin
+                      //monta denuncia
+                      let d = new Denuncia(denuncia.id, post, 
+                                                      this.newAdmin(), new Leitor(), 
+                                                      new Motivo_Denuncia(), denuncia.created_at, 
+                                                      denuncia.updated_at,
+                                                      denuncia.quantidade);
+                      console.log(d);                                             
+                      this.denuncias.push(d);
+                    }
+                )
               }
-            );
-            
+            )
           }
         }
       );
