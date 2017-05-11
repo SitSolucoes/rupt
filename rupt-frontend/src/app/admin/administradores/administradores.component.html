@@ -6,42 +6,53 @@
             <div class="row">
                 <div class="row">
                     <div class="input-field col s12">
-                        <input id="nome" name="nome" class="validate" type="text" value="." #nome="ngModel"
-                               minlength="4" maxlength="40" required="required" aria-required="true"
-                               [(ngModel)]="admin_selecionado.name"  (blur)="mostralog(nome)">
+                        <input id="nome" name="nome" type="text" value="." #nome="ngModel"
+                               minlength="3" maxlength="40" required="required"
+                               [ngClass]="{'invalid': nome.errors?.required && nome.touched}"
+                               [(ngModel)]="admin_selecionado.name">
+                        
                         <label [ngClass]="{'active': admin_selecionado?.name}" for="nome">Nome Completo*</label>
-                        <div *ngIf="nome.errors?.minlength" class="error">Este campo deve conter mais de 4 caracteres.</div>
-                        <div *ngIf="nome.errors?.required && nome.touched" class="error">É obrigatório informar o nome.</div>
+                        
+                        <div *ngIf="nome.errors?.minlength" class="error">Nome inválido.</div>
+                        <div *ngIf="nome.errors?.required && nome.touched" class="error">Campo obrigatório.</div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                        <input id="email" name="email" type="email" class="validate" #email="ngModel"
+                        <input id="email" name="email" type="email" #email="ngModel"
                           minlength="5" maxlength="100" required pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
-                        [(ngModel)]="admin_selecionado.email" (blur)="validaEmail(f)" value=".">
-                        <div *ngIf="!email_valido" class="error">Email Já Utilizado.</div>
-                        <div *ngIf="email.errors?.pattern" class="error">Email Invalido. Ex: email@email.com.</div>
-                        <div *ngIf="email.errors?.required && email.touched" class="error">É obrigatório informar o email.</div>
+                        [ngClass]="{'invalid': !email_valido && !email.errors?.pattern && email.touched}"
+                        [(ngModel)]="admin_selecionado.email" (ngModelChange)="validaEmail()">
+                        
                         <label [ngClass]="{'active': admin_selecionado?.email}"for="email">Email*</label>
+                        
+                        <div *ngIf="!email_valido" class="error">Email Já Utilizado.</div>
+                        <div *ngIf="email.errors?.pattern" class="error">Email Invalido.</div>
+                        <div *ngIf="email.errors?.required && email.touched" class="error">Campo obrigatório.</div>
                     </div>
                 </div>
                 <div class="row" *ngIf="admin_selecionado.id == admin_logado || !editando">
                     <div class="input-field col s12">
-                        <input id="senha" name="senha" #senha type="password" class="validate" 
+                        <input id="senha" name="senha" #senha="ngModel" type="password"
                                [(ngModel)]="admin_selecionado.senha"
-                               maxlength="12" [required]="!editando">
+                               maxlength="12" minlength="4" [required]="!editando">
+                        
                         <label for="senha">Senha*</label>
+
+                        <div *ngIf="senha.errors?.required && senha.touched" class="error">Campo obrigatório.</div>
+                        <div *ngIf="senha.errors?.minlength" class="error">Senha inválida.</div>
                     </div>
                 </div>
                 <div class="row" *ngIf="admin_selecionado.id == admin_logado || !editando">
                     <div class="input-field col s12">
-                        <input id="confirm-senha" name="confirm_senha" type="password" #csenha class="validate"
+                        <input id="confirm-senha" name="confirm_senha" type="password" #csenha="ngModel"
+                               [ngClass]="{'invalid': !senhaValida}"
                                ngModel (keypress)="comparaSenhas($event, f)"
                                [required]="!editando" >
                         
                         <label for="confirm-senha">Confirmar Senha*</label>
-                        <div *ngIf="!senhaValida" class="error">As senhas devem coincidir.</div>
-                        <div *ngIf="csenha.errors?.required && csenha.touched" class="error">É obrigatório preencher este campo.</div>
+                        
+                        <div *ngIf="!senhaValida" class="error">As senhas não coincidem.</div>
                     </div>
                 </div>
                 <div class="row" *ngIf="message != ''">

@@ -62,8 +62,8 @@ export class AdministradoresService {
     });
   }
 
-   validaEmail(email){
-    return this._http.get(this._url + 'validaEmail/' + email)
+   validaEmail(email, id){
+    return this._http.get(this._url + 'validaEmail/' + email + "/" + id)
       .map(
         (response: Response) => {
           console.log("retorna: "+response.json().valido);

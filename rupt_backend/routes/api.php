@@ -43,7 +43,7 @@ Route::put('/updateAdmin/{id}',[
             'uses' => 'AdminController@update'
 ]);
 
-Route::get('/validaEmail/{email}',[
+Route::get('/validaEmail/{email}/{id}',[
            'uses' => "AdminController@validaEmail"
 ]);
 

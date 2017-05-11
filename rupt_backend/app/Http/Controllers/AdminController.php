@@ -100,9 +100,9 @@ class AdminController extends Controller
         return response()->json($response, 200);
     }
 
-    public function validaEmail($email){
+    public function validaEmail($email, $id){
         $retorno = true;
-        if(Admin::where('email', $email)->first())
+        if(Admin::where('email', $email)->where("id", '<>', $id)->first())
             $retorno = false;
         return response()->json(['valido' => $retorno], 200);
     }

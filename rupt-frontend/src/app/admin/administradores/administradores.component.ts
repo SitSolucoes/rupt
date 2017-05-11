@@ -60,10 +60,6 @@ export class AdministradoresComponent implements OnInit {
     return {id: 0, name: '', email: '', password: '', createdAt: null, UpdatedAt: null, rememberToken: null, ativo: true};
   }
 
-  mostralog(campo){
-    console.log(campo);
-  }
-
   getAdmins(){
     if ( this.filtro === undefined || this.admins.length === 0 || this.filtro.trim() === ''){
       return this.admins;
@@ -100,12 +96,11 @@ export class AdministradoresComponent implements OnInit {
     }
   }
 
-  validaEmail(form){
-    if(form.value.email != '' && form.value.email != this.admin_original.email){
-      this._adminService.validaEmail(form.value.email).subscribe(
-          (response: any) => { this.email_valido = response;
-                               //console.log('atribuiu?');
-                              }
+  validaEmail(){
+    console.log(this.admin_selecionado);
+    if(this.admin_selecionado.email != '' && this.admin_selecionado.email){
+      this._adminService.validaEmail(this.admin_selecionado.email, this.admin_selecionado.id).subscribe(
+          (response: any) => { this.email_valido = response;}
         );
     }
   }
