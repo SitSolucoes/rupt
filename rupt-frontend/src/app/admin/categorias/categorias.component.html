@@ -33,31 +33,43 @@
     <ul class="collapsible list">
       <li>
           <div class="list-item header">
-              <div class="col s8 m8 l8 xl8 item">
+              <div class="col s4 m6 l6 xl8 item">
                   Sugestão
               </div>
-              <div class="col s2 m2 l2 xl2 item center-align">
+              <div class="col s4 m3 l3 xl2 item center-align">
                   Quantidade
               </div>
-              <div class="option-icons col s2 m2 l2 xl2 right-align item">
+              <div class="option-icons col s4 m3 l3 xl2 right-align item">
                   <div class="margin-right-1">Opções</div>
               </div>
           </div>
       </li>
       <li *ngFor="let s of listSugestoes() | paginate: {itemsPerPage: 10, currentPage:page, id: '1'}; let i = index">
           <div class="list-item option-icons">
-              <div class="col s8 m8 l8 xl8 item">
+              <div class="col s4 m6 l6 xl8 item">
                   {{s.categoria}}
               </div>
-              <div class="col s2 m2 l2 xl2 item center-align">
+              <div class="col s4 m3 l3 xl2 item center-align">
                   {{s.sugestoes}}
               </div>
-              <div class="option-icons col s2 m2 l2 xl2">
-                  <i class="material-icons" (click)="openModalEdit(a)">mode_edit</i>
+              <div class="option-icons col s4 m3 l3 xl2">
+                  <i class="material-icons" (click)="openModalDeleteSugestao(s)">delete</i>
+                  <i class="material-icons" (click)="openModalEdit(a)">done</i>
               </div>
           </div>
       </li>
-  </ul>
+    </ul>
+    <ul class="pages">
+        <li>
+            <pagination-controls (pageChange)="page = $event" id="1"
+                maxSize="5"
+                directionLinks="true"
+                autoHide="false"
+                previousLabel=""
+                nextLabel="">
+            </pagination-controls>
+        </li>
+    </ul>
   </div>
 
 

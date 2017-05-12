@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { MaterializeAction } from 'angular2-materialize';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 
 import { NotificacoesService } from './../../services/notificacoes.service';
 import { SugestoesService } from './../../services/sugestoes.service';
@@ -14,6 +15,9 @@ export class CategoriasComponent implements OnInit {
   notificacoes;
   sugestoes;
   filtroSugestoes;
+  sugestao: Sugestao;
+
+  modalActions = new EventEmitter<string|MaterializeAction>();
 
   constructor(
     private _notificacoesService: NotificacoesService,
@@ -42,4 +46,9 @@ export class CategoriasComponent implements OnInit {
     });
   }
 
+  openModalDelete(sugestao: Sugestao){
+    this.sugestao = sugestao;
+    this.modalActions.emit({action:"modalDelete", params:['open']});
+  }
+  
 }

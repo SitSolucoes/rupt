@@ -86,31 +86,33 @@
       </div>
     </div>
 
-    <div class="col s12 m6 l4 xl3">
-      <div class="card"
-        [ngClass]="{
-        'orange lighten-1': notificacoes['categorias'] > 0,
-        'grey darken-1': notificacoes['categorias'] == 0
-        }"
-      >
-        <div class="card-content white-text">
-          <i class="material-icons">label</i>
-          <span class="card-title">
-            Categorias
-          </span>
-          
-          <p *ngIf="notificacoes['categorias'] > 1">
-            Existem {{ notificacoes["categorias"] }} sugestões de categorias
-          </p>
-          <p *ngIf="notificacoes['categorias'] == 1">
-            Existe 1 sugestão de categoria
-          </p>
-          <p *ngIf="notificacoes['categorias'] == 0">
-            Não existem sugestões de categorias
-          </p>
+    <a routerLink="../categorias">
+      <div class="col s12 m6 l4 xl3">
+        <div class="card"
+          [ngClass]="{
+          'orange lighten-1': notificacoes['categorias'] > 0,
+          'grey darken-1': notificacoes['categorias'] == 0
+          }"
+        >
+          <div class="card-content white-text">
+            <i class="material-icons">label</i>
+            <span class="card-title">
+              Categorias
+            </span>
+            
+            <p *ngIf="notificacoes['categorias'] > 1">
+              Existem {{ notificacoes["categorias"] }} sugestões de categorias
+            </p>
+            <p *ngIf="notificacoes['categorias'] == 1">
+              Existe 1 sugestão de categoria
+            </p>
+            <p *ngIf="notificacoes['categorias'] == 0">
+              Não existem sugestões de categorias
+            </p>
+          </div>
         </div>
       </div>
-    </div>
+    </a>
   </div>
 </div>
 
