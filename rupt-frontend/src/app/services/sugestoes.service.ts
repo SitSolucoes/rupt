@@ -21,4 +21,12 @@ export class SugestoesService {
       );
   }
 
+  countSugestoes(): Observable<any>{
+    return this._http.get(this._url + 'countSugestoes').map(
+      (response: Response) => {
+        return response.json().countSugestoes;
+      }
+    )
+  }
+
 }

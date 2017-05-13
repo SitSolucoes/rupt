@@ -86,10 +86,15 @@ Route::get('/getSugestoes', [
     'uses' => 'SugestaoController@getSugestoes'
 ]);
 
+Route::get('/countSugestoes',[
+    'uses' => 'SugestaoController@countSugestoes'
+]);
+
 //denuncias
 Route::get('/getDenuncias', [
            'uses' => 'DenunciasController@getDenuncias'
 ]);
+
 
 Route::get('/getPost/{id}', [
           'uses' => 'DenunciasController@getPost'

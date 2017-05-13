@@ -46,7 +46,7 @@ export class CategoriasComponent implements OnInit {
     });
   }
 
-  openModalDelete(sugestao: Sugestao){
+  openModalDeleteSugestao(sugestao: Sugestao){
     this.sugestao = sugestao;
     this.modalActions.emit({action:"modalDelete", params:['open']});
   }
