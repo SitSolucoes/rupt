@@ -17,8 +17,8 @@ export class PostsService {
       .map(
           (response: Response) => { 
             return {
-              'escritor': response.json().escritor,
-              'leitor': response.json().leitor
+              'escritor': response.json().escritor[0],
+              'leitor': response.json().leitor[0]
             } 
           }
         );

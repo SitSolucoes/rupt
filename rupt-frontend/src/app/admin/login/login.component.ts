@@ -26,13 +26,12 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  validaForm(form){
-    
-  }
   
-  mostralog(campo){
-    console.log(campo);
+  //excluir
+  foco(s){
+    console.log(s);
   }
+  //
 
   login(form) {
     this._authService.signin(form).subscribe(

@@ -1,3 +1,4 @@
+import { race } from 'rxjs/operator/race';
 import { Escritor } from './../../classes/escritor';
 import { Component, OnInit } from '@angular/core';
 
@@ -35,37 +36,55 @@ export class DenunciasComponent implements OnInit {
       .subscribe(
         (denuncias: any) => {
           for(let denuncia of denuncias){
-            //get Leitor
-            //get Post
-            console.log(denuncia);
-            let post: Post;
-            let autor: Escritor;
-            this._denunciaService.getPost(denuncia.post_idPost).subscribe(
-              (p: any) =>{
-                post = p[0];
-                console.log(post);
-                //getEscritor
-                this._postsService.getEscritor(denuncia.autor_idAutor).subscribe(
-                    (e: any) => {
-                      console.log("escritores: ");
-                      console.log(e);
-                      post.escritor = e;
-                      //getAdmin
-                      //monta denuncia
-                      let d = new Denuncia(denuncia.id, post, 
-                                                      this.newAdmin(), new Leitor(), 
-                                                      new Motivo_Denuncia(), denuncia.created_at, 
-                                                      denuncia.updated_at,
-                                                      denuncia.quantidade);
-                      console.log(d);                                             
-                      this.denuncias.push(d);
-                    }
+            if(denuncia.admin_idAdmin == null){
+                let post: Post;
+                let autor: Escritor;
+                //getPost()
+                this._denunciaService.getPost(denuncia.post_idPost).subscribe(
+                  (p: any) =>{
+                    //getEscritor()
+                    this._postsService.getEscritor(p.autor_idLeitor).subscribe(
+                        (data: any) => {
+                        
+                          let leitor = new Leitor(data.leitor.id, data.leitor.nome, data.leitor.nick, data.leitor.sexo, 
+                                          data.leitor.nascimento, data.leitor.src_foto, data.leitor.email, data.leitor.password);
+                          
+                          console.log(data.escritor.rg);
+                          let escritor = new Escritor(leitor, data.escritor.rg, data.escritor.cpf, data.escritor.src_rg, data.escritor.src_cpf,
+                                                      data.escritor.src_foto, data.escritor.biografia, data.escritor.banco, data.escritor.agecia, 
+                                                      data.escritor.conta_corrente, data.escritor.created_at, data.escritor.updated_at);
+                          post = new Post(p.id, p.titulo, null, 
+                                          escritor, p.conteudo, p.subtitulo, 
+                                          p.visualizacoes, p.deleted_at, p.created_at, p.updated_at);
+                          //getLeitor() // quem denunciou
+                          this._denunciaService.getLeitor(denuncia.leitor_idLeitor).subscribe(
+                            (ret: any) =>{
+                              let relator = new Leitor(ret.id, ret.nome, ret.nick, ret.sexo, ret.nascimento, ret.src_foto, ret.email, ret.password);
+                              this._denunciaService.getMotivo(denuncia.motivo_idMotivo).subscribe(
+                                (mot: any) => {
+                                  let motivo = new Motivo_Denuncia(mot.id, mot.motivo, mot.ativo, mot.created_at, mot.updated_at);
+                                  //monta denuncia
+                                  let d = new Denuncia(denuncia.id, post, 
+                                                                  null, relator, 
+                                                                  motivo, denuncia.created_at, 
+                                                                  denuncia.updated_at,
+                                                                  denuncia.quantidade);
+                                  //console.log(d);                                             
+                                  this.denuncias.push(d);
+                                }
+                              )
+                              
+                            }
+                          )
+                          
+                        }
+                    )
+                  }
                 )
               }
-            )
+            }
           }
-        }
-      );
+        );
   }
 
   getPost(id): Post{

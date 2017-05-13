@@ -35,9 +35,11 @@ export class AdministradoresComponent implements OnInit {
               private _route: ActivatedRoute) { }
 
   ngOnInit() {
+    console.log('inicia de novo');
     if(this._route.snapshot.params['id']){
       this._adminService.getAdmin(+this._route.snapshot.params['id']).subscribe(
         (admin: any) => {
+          console.log('entra no console');
           this.admin_selecionado = admin;
           this.openModalEdit(this.admin_selecionado);
           //setTimeout(()=> {this.openModal()},2000)
@@ -81,7 +83,7 @@ export class AdministradoresComponent implements OnInit {
           }
       );
     }else{
-      console.log('entra no editando');
+      //console.log('entra no editando');
       this._adminService.updateAdmin(form, this.admin_selecionado.id).subscribe(
         (response: any) => {
           this.message = response;
@@ -89,6 +91,8 @@ export class AdministradoresComponent implements OnInit {
           this.getList();
           alert(this.message);
           this.clear();
+          let router: Router;
+          router.navigate(['admin/administradores']);
           //console.log(this.message)
         }
       );
@@ -97,7 +101,7 @@ export class AdministradoresComponent implements OnInit {
   }
 
   validaEmail(){
-    console.log(this.admin_selecionado);
+    //console.log(this.admin_selecionado);
     if(this.admin_selecionado.email != '' && this.admin_selecionado.email){
       this._adminService.validaEmail(this.admin_selecionado.email, this.admin_selecionado.id).subscribe(
           (response: any) => { this.email_valido = response;}
@@ -106,7 +110,7 @@ export class AdministradoresComponent implements OnInit {
   }
 
   comparaSenhas(e, f){
-    //console.log(f);
+    console.log(f);
     if((f.value.confirm_senha+e.key == f.value.senha) || (f.value.confirm_senha+e.key == '' && f.value.senha == '' && this.editando)){
       this.senhaValida = true;
       return;
@@ -143,5 +147,7 @@ export class AdministradoresComponent implements OnInit {
     this.clear();
     this.getList();
     this.modalActions.emit({action:"modal",params:['close']});
+    let router: Router;
+    router.navigate(['admin/administradores']);
   }
 }

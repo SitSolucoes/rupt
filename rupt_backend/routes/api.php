@@ -100,6 +100,9 @@ Route::get('/getPost/{id}', [
           'uses' => 'DenunciasController@getPost'
 ]);
 
+Route::get('/getLeitor/{id}',[
+           'uses' => 'DenunciasController@getLeitor'
+]);
 //Posts
 Route::get('/getEscritor/{id}', [
           'uses' => 'PostController@getEscritor'

@@ -90,7 +90,8 @@ class AdminController extends Controller
         if($admin->email != $request->input('email'))
             $admin->email = $request->input('email');
         $admin->ativo = $request->input('ativo');
-        $admin->password = bcrypt($request->input('password'));
+        if($request->input('password') != '')
+            $admin->password = bcrypt($request->input('password'));
         $admin->save();
 
         $response = [

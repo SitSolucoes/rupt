@@ -8,9 +8,16 @@ export class Leitor {
     email: string;
     password: string;
 
-    constructor(){
-        this.id = 0;
-        this.src_foto = "path_do_sem_imagem";
-        this.sexo = "m";
+    
+    constructor(id: number, nome: string, nick: string, sexo: string,  
+                nascimento: Date,src_foto: string, email: string, password: string){
+         this.id = id;
+         this.nome = nome;
+         this.nick = nick;
+         this.sexo = sexo;
+         this.nascimento = nascimento;
+         this.src_foto = src_foto;
+         this.email = email;
+         this.password = password;
     }
 }

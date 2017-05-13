@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Denuncia;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\LeitorController;
 
 class DenunciasController extends Controller
 {
@@ -24,6 +25,22 @@ class DenunciasController extends Controller
         $c = new PostController();
         $response = [
             'post' => $c->getById($id)
+        ];
+        return response()->json($response, 200);
+    }
+
+    public function getLeitor($id){
+        $c = new LeitorController();
+        $response = [
+            'leitor' => $c->getById($id)
+        ];
+        return response()->json($response, 200);
+    }
+
+    public function getMotivo($id){
+        $c = new MotivoD();
+        $response = [
+            'leitor' => $c->getById($id)
         ];
         return response()->json($response, 200);
     }

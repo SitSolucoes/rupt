@@ -7,8 +7,9 @@
           <div class="input-field col s12">
             <input id="email" type="email" name="email" 
                    class="validate" ngModel #email="ngModel"
+                   
                    required pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?">
-            <div *ngIf="email.errors?.pattern" class="error">Email invalido.</div>
+            <div *ngIf="email.errors?.required && email.touched" class="error">Informe o email.</div>
             <label for="email">Email</label>  
             
           </div>

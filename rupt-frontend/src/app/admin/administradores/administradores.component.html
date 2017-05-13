@@ -2,7 +2,8 @@
 <div id="modal1" class="modal center-sheet" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions">
     <form class="col s12" #f="ngForm" (ngSubmit)="onSubmit(f)">
         <div class="modal-content">
-            <h4>Cadastrar / Editar</h4>
+            <h4 *ngIf="editando">Editar</h4>
+            <h4 *ngIf="!editando">Cadastro</h4>
             <div class="row">
                 <div class="row">
                     <div class="input-field col s12">
@@ -13,7 +14,7 @@
                         
                         <label [ngClass]="{'active': admin_selecionado?.name}" for="nome">Nome Completo*</label>
                         
-                        <div *ngIf="nome.errors?.minlength" class="error">Nome inválido.</div>
+                        <div *ngIf="nome.errors?.minlength" class="error">Nome muito curto.</div>
                         <div *ngIf="nome.errors?.required && nome.touched" class="error">Campo obrigatório.</div>
                     </div>
                 </div>
@@ -35,6 +36,7 @@
                     <div class="input-field col s12">
                         <input id="senha" name="senha" #senha="ngModel" type="password"
                                [(ngModel)]="admin_selecionado.senha"
+                               
                                maxlength="12" minlength="4" [required]="!editando">
                         
                         <label for="senha">Senha*</label>

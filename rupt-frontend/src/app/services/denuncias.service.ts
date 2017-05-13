@@ -25,9 +25,28 @@ export class DenunciasService {
     return this._http.get(this._url + 'getPost/' + id)
       .map(
           (response: Response) => { 
-            return response.json().post;
+            return response.json().post[0];
           }
         );
   }
+
+  getLeitor(id){
+    return this._http.get(this._url + 'getLeitor/' + id)
+      .map(
+          (response: Response) => { 
+            return response.json().leitor[0];
+          }
+        );
+  }
+
+  getMotivo(id){
+    return this._http.get(this._url + 'getMotivo/' + id)
+      .map(
+          (response: Response) => { 
+            return response.json().motivo[0];
+          }
+        );
+  }
+
 
 }
