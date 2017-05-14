@@ -1,11 +1,10 @@
 import { Admin } from './../admin/admin';
-import { Escritor } from './escritor';
 
 export class Post {
     id: number;
     titulo: string;
     conteudo: string;
-    escritor: Escritor;
+    //escritor: Escritor;
     admin_del: Admin;
     subtitulo: string;
     visualizacoes: number;
@@ -13,7 +12,7 @@ export class Post {
     updated_at: Date;
     deleted_at: Date
 
-     constructor(id: number, titulo: string, admin: Admin, 
+     /*constructor(id: number, titulo: string, admin: Admin, 
                  escritor: Escritor, conteudo: string,
                  subtitulo: string, visualizacoes: number, deleted_at: Date,
                  created_at: Date, updated_at: Date){
@@ -27,5 +26,5 @@ export class Post {
                 this.created_at = created_at;
                 this.updated_at = updated_at;
                 this.deleted_at = deleted_at;
-    }
+    }*/
 }
