@@ -37,12 +37,12 @@
                         <input id="senha" name="senha" #senha="ngModel" type="password"
                                [(ngModel)]="admin_selecionado.senha"
                                
-                               maxlength="12" minlength="4" [required]="!editando">
+                               maxlength="12" minlength="6" [required]="!editando">
                         
                         <label for="senha">Senha*</label>
 
                         <div *ngIf="senha.errors?.required && senha.touched" class="error">Campo obrigatório.</div>
-                        <div *ngIf="senha.errors?.minlength" class="error">Senha inválida.</div>
+                        <div *ngIf="senha.errors?.minlength" class="error">Mínimo de 6 caracteres.</div>
                     </div>
                 </div>
                 <div class="row" *ngIf="admin_selecionado.id == admin_logado || !editando">
@@ -107,15 +107,22 @@
 <ul class="collapsible list">
     <li>
         <div class="list-item header">
-            <div class="col s8 m9 l9 xl9 item">
-                Nome
+            <div *ngIf="getAdmins() == false">
+                <div class="col s12 m12 l12 xl12 item center-align">
+                    Nenhum administrador encontrado.
+                </div>
             </div>
-            <div class="option-icons col s2 m1 l1 xl1 right-align item">
-                Status
-            </div>
-            <div class="option-icons col s2 m2 l2 xl2 right-align item">
-                <div class="margin-right-1">Editar</div>
-            </div>
+            <div *ngIf="getAdmins() != false"> 
+                <div class="col s8 m9 l9 xl9 item">
+                    Nome
+                </div>
+                <div class="option-icons col s2 m1 l1 xl1 right-align item">
+                    Status
+                </div>
+                <div class="option-icons col s2 m2 l2 xl2 right-align item">
+                    <div class="margin-right-1">Editar</div>
+                </div>
+            </div>  
         </div>
     </li>
     <li *ngFor="let a of getAdmins() | paginate: {itemsPerPage: 10, currentPage: page, id: '1'}; let i = index">
@@ -134,7 +141,7 @@
     </li>
 </ul>
 
-<ul class="pages">
+<ul class="pages" *ngIf="getAdmins() != false">
     <li>
         <pagination-controls (pageChange)="page = $event" id="1"
             maxSize="5"
