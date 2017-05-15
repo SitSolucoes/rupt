@@ -55,6 +55,7 @@ export class LeitoresComponent implements OnInit {
   }
 
   openModal() {
+    this.senhaValida = false;
     this.leitor = new Leitor();
     this.modalActions.emit({action:"modal",params:['open']});
   }
@@ -62,6 +63,7 @@ export class LeitoresComponent implements OnInit {
   openModalEdit(leitor: Leitor){
     this.emailInvalido = false;
     this.nickInvalido = false;
+    this.senhaValida = true;
     this.leitor = leitor;
     this.modalActions.emit({action:"modal",params:['open']});
   }
