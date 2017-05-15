@@ -1,9 +1,10 @@
-import { Leitor } from './../../classes/leitor';
 import { Component, OnInit, EventEmitter } from '@angular/core';
 
 import {MaterializeAction} from 'angular2-materialize';
 import { Option } from './../../shared/option';
 import { LeitoresService } from './../../services/leitores.service';
+import { DateBr } from './../../shared/dateBr';
+import { Leitor } from './../../classes/leitor';
 
 @Component({
   selector: 'app-leitores',
@@ -17,6 +18,7 @@ export class LeitoresComponent implements OnInit {
   filtro: string;
   leitores;
   leitor;
+  dataInvalida;
   emailInvalido;
   nickInvalido;
   senhaValida;
@@ -65,6 +67,7 @@ export class LeitoresComponent implements OnInit {
     this.nickInvalido = false;
     this.senhaValida = true;
     this.leitor = leitor;
+    this.leitor.nascimento = DateBr.convert(this.leitor.nascimento);
     this.modalActions.emit({action:"modal",params:['open']});
   }
 
@@ -90,6 +93,11 @@ export class LeitoresComponent implements OnInit {
     }
     else
       this.emailInvalido = false;
+  }
+
+  validaData(e){
+    this.leitor.nascimento = DateBr.mask(e);
+    this.dataInvalida = !DateBr.valida(this.leitor.nascimento);
   }
 
   comparaSenhas(e, confirm){

@@ -45,10 +45,14 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m12 l5 xl5">            
-                        <input id="nascimento" name="nascimento" type="text" 
-                            [ngModel]="leitor.nascimento | date:'dd/MM/yyyy'">
+                        <input id="nascimento" name="nascimento" type="text" maxlength="10"
+                            [ngClass]="{'invalid': nascimento.touched && dataInvalida}"
+                            [ngModel]="leitor.nascimento" #nascimento="ngModel" 
+                            (ngModelChange)="validaData($event)">
                         
                         <label [ngClass]="{'active': leitor?.nascimento}" for="nascimento">Data de Nascimento*</label>
+
+                        <div class="error" *ngIf="nascimento.touched && dataInvalida">Data inválida.</div>
                     </div>
                     <div class="input-field col s12 m12 l6 xl6 right">
                         <select name="sexo" materialize="material_select" [materializeSelectOptions]="selectOptions" [(ngModel)]="leitor.sexo">
@@ -85,7 +89,7 @@
         <div class="modal-footer">
             <a (click)="closeModal()" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
             <button type="submit" class="modal-action modal-close waves-effect waves-green btn-flat"
-                [disabled]="!f.valid || emailInvalido || nickInvalido || !senhaValida">
+                [disabled]="!f.valid || emailInvalido || nickInvalido || dataInvalida || !senhaValida">
                 Salvar
             </button>
         </div>

@@ -13,8 +13,6 @@ export class LeitoresService {
   constructor(private _http: Http) { }
 
   private createBody(form){
-    console.log(form.value.nome);
-
     return JSON.stringify(
         {
          nome: form.value.nome,
