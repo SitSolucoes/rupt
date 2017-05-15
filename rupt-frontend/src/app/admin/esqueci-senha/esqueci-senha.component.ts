@@ -9,8 +9,8 @@ import { Component, OnInit } from '@angular/core';
 export class EsqueciSenhaComponent implements OnInit {
 
   titulo : string = "Esqueceu a senha?";
-  info : string = "Informe seu email para recuperaração.";
-  button : string = "Enviar email";
+  info : string = "Informe seu e-mail para recuperaração.";
+  button : string = "Enviar e-mail";
 
   constructor(private _authService: AuthService) { }
 
@@ -25,7 +25,7 @@ export class EsqueciSenhaComponent implements OnInit {
           this.titulo = "Erro";
         }else{
           this.info = retorno.json().retorno;
-          this.titulo = "Verifique seu email."
+          this.titulo = "Verifique seu e-mail."
         }
       }
     );

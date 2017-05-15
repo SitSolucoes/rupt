@@ -29,7 +29,7 @@ class AdminController extends Controller
         $admin->save();
 
         return response()->json([
-                'message'=>'Administrador criado com sucesso!'
+                'message'=>'Administrador cadastrado com sucesso!'
             ],201);
     }
     
@@ -42,7 +42,7 @@ class AdminController extends Controller
         try{
             if(!$token = JWTAuth::attempt($credentials)){
                 return response()->json([
-                    'error' => 'Email ou senha incorretos'// $request->input('password')
+                    'error' => 'E-mail ou senha incorretos'// $request->input('password')
                 ],401);
             }
         }catch(JWTException $e){
@@ -81,7 +81,7 @@ class AdminController extends Controller
     public function update(Request $request, $id){
         $admin = Admin::find($id);
         if (!$admin) {
-            return response()->json(['message' => 'Admin não encontrado'], 404);
+            return response()->json(['message' => 'Usuário administrador não encontrado.'], 404);
         }
         
 
@@ -133,14 +133,14 @@ class AdminController extends Controller
                 $admin->password = bcrypt($nova_senha);
                 $admin->save();
             }else
-                $error = "Seu cadastro encontra-se inativado, por favor, contate outro administrador.";
+                $error = "Seu cadastro encontra-se inativado. Por favor, entre em contato com o administrador do sistema.";
         else
-            $error = "Não encontramos esse email em nosso cadastro de administradores.";
+            $error = "Não encontramos esse e-mail em nosso cadastro de administradores.";
 
         if($error != "")
             return response()->json(['error' => $error]);
         
         Mail::to($email)->send(new EsqueciSenhaAdmin($nova_senha));
-        return response()->json(['retorno' => "Um email foi enviado com a nova senha para acesso. Obrigado."]);
+        return response()->json(['retorno' => "Um e-mail foi enviado com a nova senha para acesso. Obrigado."]);
     }
 }
