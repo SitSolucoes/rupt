@@ -7,10 +7,12 @@ export class Leitor {
     src_foto: string;
     email: string;
     password: string;
+    ativo: boolean;
     
     constructor(){
         this.id = 0;
         this.src_foto = "path_do_sem_imagem";
         this.sexo = "m";
+        this.ativo = true;
     }
 }

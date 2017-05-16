@@ -83,6 +83,14 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="input-field col s12 m12 l5 xl5">
+                        <select name="ativo" materialize="material_select" [materializeSelectOptions]="selectAtivo" [(ngModel)]="leitor.ativo">
+                            <option *ngFor="let option of selectAtivo" [value]="option.value">{{option.name}}</option>
+                        </select>
+                        <label for="sexo">Ativo*</label>
+                    </div>
+                </div> 
                 <input name="src_foto" type="text" hidden [(ngModel)]="leitor.src_foto">
             </div>
         </div>

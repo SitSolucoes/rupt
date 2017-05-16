@@ -27,6 +27,11 @@ export class LeitoresComponent implements OnInit {
     {value: "m", name: 'Masculino'}
   ];
 
+  selectAtivo: Option[] = [
+    {value: 1, name: 'Ativo'},
+    {value: 0, name: 'Inativo'}
+  ];
+
   constructor(private _leitorService: LeitoresService) {}
 
   ngOnInit() {
