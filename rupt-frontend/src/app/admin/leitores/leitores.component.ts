@@ -1,3 +1,4 @@
+import { NgForm } from '@angular/forms/src/directives';
 import { Component, OnInit, EventEmitter } from '@angular/core';
 
 import {MaterializeAction} from 'angular2-materialize';
@@ -76,33 +77,43 @@ export class LeitoresComponent implements OnInit {
     this.modalActions.emit({action:"modal",params:['open']});
   }
 
-  closeModal() {
+  closeModal(form: NgForm) {
     this.modalActions.emit({action:"modal",params:['close']});
+    form.reset();
+    this.nickInvalido = false;
+    this.emailInvalido = false;
+    this.dataInvalida = false;
   }
 
   validaNick(){
-    if (this.leitor.nick.length >= 3){
-      this._leitorService.validaNick(this.leitor.nick, this.leitor.id).subscribe(
-        (nick: boolean) => {this.nickInvalido = nick}
-      );
+    if (this.leitor.nick){
+      if (this.leitor.nick.length >= 3){
+        this._leitorService.validaNick(this.leitor.nick, this.leitor.id).subscribe(
+          (nick: boolean) => {this.nickInvalido = nick}
+        );
+      }
+      else
+        this.nickInvalido = false;
     }
-    else
-      this.nickInvalido = false;
   }
 
   validaEmail(){
-    if (this.leitor.email.length >= 6){
-      this._leitorService.validaEmail(this.leitor.email, this.leitor.id).subscribe(
-        (email: boolean) => {this.emailInvalido = email}
-      );
+    if (this.leitor.email){
+      if (this.leitor.email.length >= 6){
+        this._leitorService.validaEmail(this.leitor.email, this.leitor.id).subscribe(
+          (email: boolean) => {this.emailInvalido = email}
+        );
+      }
+      else
+        this.emailInvalido = false;
     }
-    else
-      this.emailInvalido = false;
   }
 
   validaData(e){
-    this.leitor.nascimento = DateBr.mask(e);
-    this.dataInvalida = !DateBr.valida(this.leitor.nascimento);
+    if (e){
+      this.leitor.nascimento = DateBr.mask(e);
+      this.dataInvalida = !DateBr.valida(this.leitor.nascimento);
+    }
   }
 
   comparaSenhas(e, confirm){
@@ -130,7 +141,7 @@ export class LeitoresComponent implements OnInit {
           }
         );
     }
- }
+}
 
   
 

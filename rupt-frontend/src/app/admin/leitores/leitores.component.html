@@ -95,7 +95,7 @@
             </div>
         </div>
         <div class="modal-footer">
-            <a (click)="closeModal()" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
+            <a (click)="closeModal(f)" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
             <button type="submit" class="modal-action modal-close waves-effect waves-green btn-flat"
                 [disabled]="!f.valid || emailInvalido || nickInvalido || dataInvalida || !senhaValida">
                 Salvar

@@ -143,11 +143,13 @@ export class AdministradoresComponent implements OnInit {
     this.senhaValida = true;
   }
 
-  closeModal() {
+  closeModal(f: NgForm) {
     this.clear();
     this.getList();
     this.modalActions.emit({action:"modal",params:['close']});
     let router: Router;
     router.navigate(['admin/administradores']);
+    f.reset();
+    this.clear();
   }
 }
