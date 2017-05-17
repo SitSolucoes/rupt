@@ -88,7 +88,7 @@
                         <select name="ativo" materialize="material_select" [materializeSelectOptions]="selectAtivo" [(ngModel)]="leitor.ativo">
                             <option *ngFor="let option of selectAtivo" [value]="option.value">{{option.name}}</option>
                         </select>
-                        <label for="sexo">Ativo*</label>
+                        <label for="ativo">Ativo*</label>
                     </div>
                 </div> 
                 <input name="src_foto" type="text" hidden [(ngModel)]="leitor.src_foto">
@@ -133,14 +133,17 @@
 <ul class="collapsible list">
     <li *ngIf="listLeitores() != false">
         <div class="list-item header">
-            <div class="col s3 m3 l3 xl3 item">
+            <div class="col s2 m2 l2 xl2 item">
                 Usuário
             </div>
-            <div class="col s4 m4 l4 xl4 item">
+            <div class="col s3 m4 l4 xl4 item">
                 Nome
             </div>
             <div class="col s3 m3 l3 xl3 item">
                 Email
+            </div>
+            <div class="col s2 m1 l1 xl1 item">
+                Status
             </div>
             <div class="option-icons col s2 m2 l2 xl2 right-align item">
                 <div class="margin-right-1">Editar</div>
@@ -156,14 +159,18 @@
     </li>
     <li *ngFor="let l of listLeitores() | paginate: {itemsPerPage: 10, currentPage:page, id: '1'}; let i = index">
         <div class="list-item option-icons">
-            <div class="col s3 m3 l3 xl3 item">
+            <div class="col s2 m2 l2 xl2 item">
                 {{l.nick}}
             </div>
-            <div class="col s4 m4 l4 xl4 item">
+            <div class="col s3 m4 l4 xl4 item">
                 {{l.nome}}
             </div>
             <div class="col s3 m3 l3 xl3 item">
                 {{l.email}}
+            </div>
+            <div class="col s2 m1 l1 xl1 item">
+                <div *ngIf="!l.ativo">Inativo</div>
+                <div *ngIf="l.ativo">Ativo</div>
             </div>
             <div class="option-icons col s2 m2 l2 xl2">
                 <i class="material-icons" (click)="openModalEdit(l)">mode_edit</i>

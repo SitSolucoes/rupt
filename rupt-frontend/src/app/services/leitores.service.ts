@@ -20,6 +20,7 @@ export class LeitoresService {
          email: form.value.email,
          nascimento: form.value.nascimento,
          sexo: form.value.sexo,
+         ativo: form.value.ativo,
          src_foto: form.value.src_foto,
          password: form.value.senha
       });

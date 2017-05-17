@@ -18,6 +18,7 @@ class LeitorController extends Controller
         $leitor->sexo = $request->input('sexo');
         $leitor->src_foto = $request->input('src_foto');
         $leitor->password = bcrypt($request->input('password'));
+        $leitor->ativo = $request->input('ativo');
         $leitor->save();
 
         return response()->json([
@@ -52,6 +53,7 @@ class LeitorController extends Controller
         $date = str_replace('/', '-', $request->input("nascimento"));
         $leitor->nascimento = date('Y-m-d', strtotime($date));
         $leitor->sexo = $request->input('sexo');
+        $leitor->ativo = $request->input('ativo');
         $leitor->save();
 
         $response = [
