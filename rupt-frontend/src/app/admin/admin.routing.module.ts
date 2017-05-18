@@ -12,6 +12,7 @@ import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { LeitoresComponent } from './leitores/leitores.component';
 import { DenunciasComponent } from './denuncias/denuncias.component';
 import { CategoriasComponent } from './categorias/categorias.component';
+import { RedefineSenhaComponent } from './redefine-senha/redefine-senha.component';
 
 const AdminRoutes: Routes = [
     
@@ -20,6 +21,7 @@ const AdminRoutes: Routes = [
         children: [
         { path : 'login', component: LoginComponent},
         { path : 'esqueci-a-senha', component: EsqueciSenhaComponent},
+        { path : 'redefineSenha/:token', component: RedefineSenhaComponent},
         { path : 'home', canActivate: [AuthGuard], component: AdminHomeComponent},
         
         { path : 'administradores', canActivate: [AuthGuard], component: AdministradoresComponent},

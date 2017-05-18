@@ -50,6 +50,19 @@ export class AdministradoresService {
     //return this._http.post('http://laravel-ng2-vue.dev/api/quote?token=' + token, body, {headers: headers});
   }  
 
+  redefineSenha(form, token){
+    const body = JSON.stringify({
+              senha: form.value.nova_senha,
+              token: token
+        });
+    
+    return this._http.post(this._url + 'redefineSenha', body, {headers: this.headers}).map(
+      (response: Response)=>{
+        response.json()
+      });
+    
+  }  
+
   updateAdmin(form, id){
     const body = this.createBody(form);
 
@@ -64,6 +77,17 @@ export class AdministradoresService {
 
    validaEmail(email, id){
     return this._http.get(this._url + 'validaEmail/' + email + "/" + id)
+      .map(
+        (response: Response) => {
+          console.log("retorna: "+response.json().valido);
+          return response.json().valido;
+        }
+      );
+  }
+
+  validaTokenRedefine(token){
+    console.log(token);
+    return this._http.get(this._url + 'validaTokenRedefine/' + token)
       .map(
         (response: Response) => {
           console.log("retorna: "+response.json().valido);

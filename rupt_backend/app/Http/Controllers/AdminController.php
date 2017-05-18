@@ -126,11 +126,12 @@ class AdminController extends Controller
     public function envia_esqueciSenha(Request $request){
         $email = $request->input('email');
         $error = "";
+        $token = "";
         $admin = Admin::where('email', $email)->first();
         if($admin != null)
             if($admin->ativo){
-                $nova_senha = str_random(6);
-                $admin->password = bcrypt($nova_senha);
+                $token = str_random(20);
+                $admin->token_esqueci_senha = $token;
                 $admin->save();
             }else
                 $error = "Seu cadastro encontra-se inativado. Por favor, entre em contato com o administrador do sistema.";
@@ -140,7 +141,26 @@ class AdminController extends Controller
         if($error != "")
             return response()->json(['error' => $error]);
         
-        Mail::to($email)->send(new EsqueciSenhaAdmin($nova_senha));
+        Mail::to($email)->send(new EsqueciSenhaAdmin($token));
         return response()->json(['retorno' => "Um e-mail foi enviado com a nova senha para acesso. Obrigado."]);
+    }
+
+    public function validaTokenRedefine($token){
+        $admin = Admin::where('token_esqueci_senha', $token)->first();
+        if($admin != null)
+            return response()->json(['valido' => true], 200);
+        else
+            return response()->json(['valido' => false], 200);
+    }
+    public function redefineSenha(Request $r){
+        $admin = Admin::where('token_esqueci_senha', $r->input('token'))->first();
+        if($admin != null){
+            $admin->token_esqueci_senha = '';
+            $admin->password = bcrypt($r->input('senha'));
+            $admin->save();
+            return response()->json(['retorno' => "Senha redefinida com sucesso! Efetue o login"], 200);
+        }
+        echo $r->input('token');
+        return response()->json(['error' => "Administrador não encontrado"]);
     }
 }

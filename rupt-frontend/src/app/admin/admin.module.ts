@@ -22,6 +22,7 @@ import { NotificacoesService } from './../services/notificacoes.service';
 import {Ng2PaginationModule} from 'ng2-pagination';
 import { LeitoresService } from './../services/leitores.service';
 import { AuthService } from './../services/auth.service';
+import { RedefineSenhaComponent } from './redefine-senha/redefine-senha.component';
 
 
 
@@ -36,7 +37,8 @@ import { AuthService } from './../services/auth.service';
     EsqueciSenhaComponent,
     LeitoresComponent,
     CategoriasComponent,
-    DenunciasComponent
+    DenunciasComponent,
+    RedefineSenhaComponent
   ],
   imports: [
     Ng2PaginationModule,

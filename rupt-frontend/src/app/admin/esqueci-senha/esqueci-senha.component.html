@@ -6,11 +6,15 @@
       <form class="col s12" #f="ngForm" (ngSubmit)="esqueciSenha(f)">
         <div class="row">
           <div class="input-field col s12">
-            <input id="email" name="email" type="text" class="validate" ngModel>
+            <input id="email" #email name="email" type="email" class="validate"
+                   required pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"  
+                   ngModel>
             <label for="email">E-mail</label>
+            <div *ngIf="email.errors?.pattern" class="error">Email Invalido.</div>
+            <div *ngIf="email.errors?.required && email.touched" class="error">Campo obrigatório.</div>
           </div>
         </div>
-        <input type="submit" class="btn btn-login" value="enviar">
+        <input type="submit" [disabled]="!f.valid" class="btn btn-login" value="enviar">
       </form>
       <a routerLink="../login" class="btn btn-forget btn-flat">voltar para login</a>
     </div>

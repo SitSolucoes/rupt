@@ -1,0 +1,32 @@
+<div class="content-login">
+  <div id="modal" class="modal" style="display:block">
+    <div *ngIf="token_valido" class="modal-content">
+      <h4>Redefinir senha</h4>
+      <form class="col s12" #f="ngForm" (ngSubmit)="redefine(f)">
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="nova_senha" type="password" name="nova_senha" class="validate"
+                   maxlength="20" required 
+                   ngModel #nova_senha>
+            <div *ngIf="nova_senha.errors?.required && nova_senha.touched" class="error">Informe o email.</div>
+            <label for="nova_senha">Nova Senha*</label>  
+            
+          </div>
+          <div class="input-field col s12">
+            <input id="confirma" type="password" name="confirma" class="validate"
+                   maxlength="20" required 
+                   [ngClass]="{'invalid': !senhaValida}" #confirma ngModel (keypress)="validaSenhas($event, f)">
+            <label for="confirma">Confirmar Senha*</label>
+            <div *ngIf="!senhaValida" class="error">As senhas não coincidem.</div>
+          </div>
+        </div>
+        <button type="submit" [disabled]="!f.valid || !senhaValida" class="btn btn-login" name="Login">Redefinir</button>
+      </form>
+    </div>
+    <div *ngIf="!token_valido" class="modal-content">
+      <h4>Link Invalido</h4>
+        {{erro}}
+      <a routerLink="../../esqueci-a-senha" class="btn btn-forget btn-flat">Login</a>
+    </div>
+  </div>
+</div>

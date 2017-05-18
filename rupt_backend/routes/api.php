@@ -31,6 +31,14 @@ Route::post('/signin',[
             'uses' => 'AdminController@signin'
 ]);
 
+Route::post('redefineSenha',[
+           'uses' => 'AdminController@redefineSenha'
+]);
+
+Route::get('validaTokenRedefine/{token}',[
+           'uses' => 'AdminController@validaTokenRedefine'
+]);
+
 Route::get('/getAdmins',[
             'uses' => 'AdminController@getAdmins'
 ]);

@@ -17,10 +17,10 @@ class EsqueciSenhaAdmin extends Mailable
      * @return void
      */
 
-    public $senha;
-    public function __construct($senha)
+    public $token;
+    public function __construct($token)
     {   
-        $this->senha = $senha;
+        $this->token = $token;
     }
 
     /**
@@ -31,7 +31,7 @@ class EsqueciSenhaAdmin extends Mailable
     public function build()
     {
         return $this->view('mail.esqueciSenhaAdmin')
-                    ->with($this->senha)
+                    ->with($this->token)
                     ->subject('Recuperação de Senha');
     }
 }
