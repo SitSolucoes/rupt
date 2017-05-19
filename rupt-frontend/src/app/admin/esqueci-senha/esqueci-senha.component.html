@@ -3,7 +3,7 @@
     <div class="modal-content">
       <h4>{{ titulo }}</h4>
       <p>{{ info }}</p>
-      <form class="col s12" #f="ngForm" (ngSubmit)="esqueciSenha(f)">
+      <form class="col s12" #f="ngForm" (ngSubmit)="esqueciSenha(f); f.reset()">
         <div class="row">
           <div class="input-field col s12">
             <input id="email" #email name="email" type="email" class="validate"
