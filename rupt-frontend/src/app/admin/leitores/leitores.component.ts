@@ -19,7 +19,7 @@ export class LeitoresComponent implements OnInit {
   modalMessage = new EventEmitter<string|MaterializeAction>();
   filtro: string;
   leitores;
-  leitor;
+  leitor: Leitor;
   dataInvalida;
   emailInvalido;
   nickInvalido;
@@ -63,9 +63,12 @@ export class LeitoresComponent implements OnInit {
     });
   }
 
-  openModal() {
+  openModal(f: NgForm) {
     this.senhaValida = false;
     this.leitor = new Leitor();
+
+    f.resetForm(this.leitor);
+
     this.modalActions.emit({action:"modal",params:['open']});
   }
 
@@ -82,9 +85,8 @@ export class LeitoresComponent implements OnInit {
     this.modalActions.emit({action:"modal",params:['open']});
   }
 
-  closeModal(form: NgForm) {
+  closeModal() {
     this.modalActions.emit({action:"modal",params:['close']});
-    form.reset();
     this.nickInvalido = false;
     this.emailInvalido = false;
     this.dataInvalida = false;
@@ -122,7 +124,7 @@ export class LeitoresComponent implements OnInit {
   }
 
   comparaSenhas(e, confirm){
-    if(confirm.value+e.key == this.leitor.senha){
+    if(confirm.value+e.key == this.leitor.password){
       this.senhaValida = true;
     }
     else 

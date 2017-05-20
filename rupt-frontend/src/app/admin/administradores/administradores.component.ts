@@ -124,8 +124,9 @@ export class AdministradoresComponent implements OnInit {
     this.senhaValida = false;
   }
 
-  openModal() {
+  openModal(f: NgForm) {
     this.clear();
+    f.resetForm(this.admin_selecionado);
     this.modalActions.emit({action:"modal",params:['open']});
   }
 
@@ -148,13 +149,12 @@ export class AdministradoresComponent implements OnInit {
     this.senhaValida = true;
   }
 
-  closeModal(f: NgForm) {
+  closeModal() {
     this.clear();
     this.getList();
     this.modalActions.emit({action:"modal",params:['close']});
     //this._router.navigate(['/admin/administradores']);
     this._location.back();
-    f.reset();
     this.clear();
   }
 }

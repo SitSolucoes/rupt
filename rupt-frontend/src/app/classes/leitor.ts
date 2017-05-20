@@ -3,7 +3,7 @@ export class Leitor {
     nome: string;
     nick: string;
     sexo: string;
-    nascimento: Date;
+    nascimento: string;
     src_foto: string;
     email: string;
     password: string;
