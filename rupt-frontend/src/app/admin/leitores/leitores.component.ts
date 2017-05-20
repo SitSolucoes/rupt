@@ -16,6 +16,7 @@ export class LeitoresComponent implements OnInit {
 
   message: string;
   modalActions = new EventEmitter<string|MaterializeAction>();
+  modalMessage = new EventEmitter<string|MaterializeAction>();
   filtro: string;
   leitores;
   leitor;
@@ -66,6 +67,10 @@ export class LeitoresComponent implements OnInit {
     this.senhaValida = false;
     this.leitor = new Leitor();
     this.modalActions.emit({action:"modal",params:['open']});
+  }
+
+  showMessage(message: string){
+    this.modalMessage.emit({action:"modal",params:['open']});
   }
 
   openModalEdit(leitor: Leitor){
@@ -141,6 +146,8 @@ export class LeitoresComponent implements OnInit {
           }
         );
     }
+
+    this.showMessage("asdad");
 }
 
   

@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms/src/directives';
 
 import {MaterializeAction} from 'angular2-materialize';
 import { AdministradoresService } from '../../services/administradores.service';
+import { Location } from '@angular/common';
 import { Admin } from './../admin';
 import { Router } from '@angular/router';
 import { Option } from './../../shared/option';
@@ -30,9 +31,12 @@ export class AdministradoresComponent implements OnInit {
   email_valido: boolean = false;
   senhaValida: boolean = true;
   admin_original: Admin;
+  
 
   constructor(private _adminService: AdministradoresService,
-              private _route: ActivatedRoute) { }
+              private _route: ActivatedRoute,
+              private _router: Router,
+              private _location: Location) { }
 
   ngOnInit() {
     console.log('inicia de novo');
@@ -91,8 +95,9 @@ export class AdministradoresComponent implements OnInit {
           this.getList();
           alert(this.message);
           this.clear();
-          let router: Router;
-          router.navigate(['admin/administradores']);
+          if(this._route.snapshot.params['id'])
+            this._location.back();
+          //this._router.navigate(['/admin/administradores']);
           //console.log(this.message)
         }
       );
@@ -147,8 +152,8 @@ export class AdministradoresComponent implements OnInit {
     this.clear();
     this.getList();
     this.modalActions.emit({action:"modal",params:['close']});
-    let router: Router;
-    router.navigate(['admin/administradores']);
+    //this._router.navigate(['/admin/administradores']);
+    this._location.back();
     f.reset();
     this.clear();
   }

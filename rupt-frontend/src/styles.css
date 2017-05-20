@@ -270,6 +270,37 @@ span.badge.new:after {
     height: 85%;
 }
 
+.small-modal{
+	width: 400px;
+	text-align: center;
+	color: #4caf50;
+	border-radius: 15px;
+}
+
+.small-modal h4{
+	margin-bottom: 0px;
+}
+
+.small-modal .modal-content{
+	padding: 25px 0 0 0;
+}
+
+.small-modal i{
+	font-size: 70px;
+}
+
+.small-modal-footer{
+	margin-top: 25px;
+	border-top: 1px solid #bdbdbd;
+	color: #e0e0e0;
+}
+
+.small-modal-footer a{
+	width: 100%;
+}
+
+
+
 /* lista */
 .list{
 	margin-top: 20px;
