@@ -8,13 +8,12 @@ import { AuthGuard } from './guards/auth.guard';
 import { AdminModule } from './admin/admin.module';
 import { RuptRoutingModule } from './rupt.routing.module';
 import { MaterializeModule } from 'angular2-materialize';
-import { MensagensComponent } from './mensagens/mensagens.component';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    MensagensComponent,
   ],
   imports: [
     BrowserModule,
