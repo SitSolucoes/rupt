@@ -16,24 +16,19 @@ export class LoginComponent implements OnInit {
   modalActions = new EventEmitter<string|MaterializeAction>();
   login_error: string = '';
   message: string = '';
+  spinner: boolean = false;
 
   constructor(private _authService: AuthService,
               private _router: Router) { 
   }
 
-
-
   ngOnInit() {
   }
-
-  
-  //excluir
-  foco(s){
-    console.log(s);
-  }
-  //
-
+ 
   login(form) {
+    this.spinner = true;
+    this.login_error = '';
+
     this._authService.signin(form).subscribe(
       tokenData => {
           this._router.navigate(['admin/home']);
@@ -41,6 +36,7 @@ export class LoginComponent implements OnInit {
       },
       error => {
           this.login_error = error.json().error;
+          this.spinner = false;
       }
     );
   }

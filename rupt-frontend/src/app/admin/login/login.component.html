@@ -6,24 +6,42 @@
         <div class="row">
           <div class="input-field col s12">
             <input id="email" type="email" name="email" 
-                   class="validate" ngModel #email="ngModel"
-                   
-                   required pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?">
+                   ngModel #email="ngModel"
+                   required 
+                   pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?">
+            
             <div *ngIf="email.errors?.required && email.touched" class="error">Informe o email.</div>
             <label for="email">Email</label>  
             
           </div>
           <div class="input-field col s12">
-            <input id="senha" type="password" name="senha" class="validate"  required ngModel>
+            <input id="senha" type="password" name="senha" required ngModel>
             <label for="senha">Senha</label>
           </div>
         </div>
         <div class="row" *ngIf="login_error != ''">
           <font color="red">{{login_error}}</font>
         </div>
-        <button type="submit"  class="btn btn-login" name="Login">Login</button>
+        <button type="submit"  class="btn btn-login" name="Login" [disabled]="!f.valid" *ngIf="!spinner">Login</button>
+        
       </form>
-      <a routerLink="../esqueci-a-senha" class="btn btn-forget btn-flat">esqueci minha senha</a>
+      <a routerLink="../esqueci-a-senha" class="btn btn-forget btn-flat" *ngIf="!spinner">esqueci minha senha</a>
+
+      <div class="spinner" *ngIf="spinner">
+        <div class="preloader-wrapper big active" >
+          <div class="spinner-layer spinner-rupt">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div><div class="gap-patch">
+              <div class="circle"></div>
+            </div><div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
+

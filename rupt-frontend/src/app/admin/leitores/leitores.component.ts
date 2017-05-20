@@ -72,7 +72,7 @@ export class LeitoresComponent implements OnInit {
     this.modalActions.emit({action:"modal",params:['open']});
   }
 
-  showMessage(message: string){
+  showMessage(){
     this.modalMessage.emit({action:"modal",params:['open']});
   }
 
@@ -149,7 +149,7 @@ export class LeitoresComponent implements OnInit {
         );
     }
 
-    this.showMessage("asdad");
+    this.showMessage();
 }
 
   

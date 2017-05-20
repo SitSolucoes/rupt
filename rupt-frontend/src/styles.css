@@ -299,7 +299,15 @@ span.badge.new:after {
 	width: 100%;
 }
 
+/*spinner*/
+.spinner{
+	padding-bottom: 22px;
+	text-align: center;
+}
 
+.spinner-rupt{
+	border-color: #F97000;
+}
 
 /* lista */
 .list{

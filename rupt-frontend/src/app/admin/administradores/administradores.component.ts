@@ -23,6 +23,7 @@ export class AdministradoresComponent implements OnInit {
   
   admins: Admin[];
   modalActions = new EventEmitter<string|MaterializeAction>();
+  modalMessage = new EventEmitter<string|MaterializeAction>();
   filtro: string;
   editando: boolean;
   message: string;
@@ -93,7 +94,6 @@ export class AdministradoresComponent implements OnInit {
           this.message = response;
           localStorage.setItem('adminLogado', this.admin_selecionado.name);
           this.getList();
-          alert(this.message);
           this.clear();
           if(this._route.snapshot.params['id'])
             this._location.back();
@@ -101,8 +101,8 @@ export class AdministradoresComponent implements OnInit {
           //console.log(this.message)
         }
       );
-      
     }
+    this.showMessage();
   }
 
   validaEmail(){
@@ -153,8 +153,11 @@ export class AdministradoresComponent implements OnInit {
     this.clear();
     this.getList();
     this.modalActions.emit({action:"modal",params:['close']});
-    //this._router.navigate(['/admin/administradores']);
-    this._location.back();
-    this.clear();
+    if(this._route.snapshot.params['id'])
+      this._location.back();
   }
+
+   showMessage(){
+      this.modalMessage.emit({action:"modal",params:['open']});
+   }
 }
