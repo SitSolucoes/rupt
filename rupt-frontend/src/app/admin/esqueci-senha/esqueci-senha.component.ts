@@ -10,7 +10,10 @@ export class EsqueciSenhaComponent implements OnInit {
 
   titulo : string = "Esqueceu a senha?";
   info : string = "Informe seu e-mail para recuperaração.";
+  erro : string = "";
   button : string = "Enviar e-mail";
+  spinner: boolean = false;
+  succes: boolean = false;
 
   constructor(private _authService: AuthService) { }
 
@@ -18,17 +21,21 @@ export class EsqueciSenhaComponent implements OnInit {
   }
 
   esqueciSenha(form){
+    this.spinner = true;
+
     this._authService.envia_esqueciSenha(form).subscribe(
       retorno => {
         if(retorno.json().error){
-          this.info = retorno.json().error;
-          this.titulo = "Erro";
+          this.erro = retorno.json().error;
         }else{
           this.info = retorno.json().retorno;
           this.titulo = "Verifique seu e-mail."
+          this.succes = true;
         }
+        this.spinner = false;
       }
     );
 
+    
   }
 }

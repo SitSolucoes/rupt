@@ -136,13 +136,13 @@ class AdminController extends Controller
             }else
                 $error = "Seu cadastro encontra-se inativado. Por favor, entre em contato com o administrador do sistema.";
         else
-            $error = "Não encontramos esse e-mail em nosso cadastro de administradores.";
+            $error = "E-mail não encontrado no cadastro de administradores.";
 
         if($error != "")
             return response()->json(['error' => $error]);
         
         Mail::to($email)->send(new EsqueciSenhaAdmin($token));
-        return response()->json(['retorno' => "Um e-mail foi enviado com a nova senha para acesso. Obrigado."]);
+        return response()->json(['retorno' => "Um e-mail foi enviado com as instruções para recuperação da senha."]);
     }
 
     public function validaTokenRedefine($token){

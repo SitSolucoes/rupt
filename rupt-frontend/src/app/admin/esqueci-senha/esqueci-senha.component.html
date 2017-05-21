@@ -3,20 +3,38 @@
     <div class="modal-content">
       <h4>{{ titulo }}</h4>
       <p>{{ info }}</p>
-      <form class="col s12" #f="ngForm" (ngSubmit)="esqueciSenha(f); f.reset()">
+      <form class="col s12" #f="ngForm" (ngSubmit)="esqueciSenha(f); f.reset()" *ngIf="!succes" >
         <div class="row">
           <div class="input-field col s12">
-            <input id="email" #email name="email" type="email" class="validate"
+            <input id="email" #email name="email" type="email"
                    required pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"  
                    ngModel>
             <label for="email">E-mail</label>
             <div *ngIf="email.errors?.pattern" class="error">Email Invalido.</div>
             <div *ngIf="email.errors?.required && email.touched" class="error">Campo obrigatório.</div>
           </div>
+          <div class="row" *ngIf="error != ''">
+            <font color="red">{{ erro }}</font>
+          </div>
         </div>
-        <input type="submit" [disabled]="!f.valid" class="btn btn-login" value="enviar">
+        <input type="submit" [disabled]="!f.valid" class="btn btn-login" value="enviar" *ngIf="!spinner">
       </form>
-      <a routerLink="../login" class="btn btn-forget btn-flat">voltar para login</a>
+      <a routerLink="../login" class="btn btn-forget btn-flat" *ngIf="!spinner">voltar para login</a>
+
+      <div class="spinner" *ngIf="spinner">
+        <div class="preloader-wrapper big active" >
+          <div class="spinner-layer spinner-rupt">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div><div class="gap-patch">
+              <div class="circle"></div>
+            </div><div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>

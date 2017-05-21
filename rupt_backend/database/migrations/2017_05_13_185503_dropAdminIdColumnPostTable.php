@@ -15,7 +15,7 @@ class DropAdminIdColumnPostTable extends Migration
     {
         Schema::table('posts', function (Blueprint $table) {
             $table->dropColumn('admin_idAdmin');
-        }); //
+        }); 
     }
 
     /**
