@@ -23,7 +23,7 @@ export class NotificacoesService {
       
     );
 
-    this.notificacoes["escritores"] = 2;
+    this.notificacoes["escritores"] = 3;
     this.notificacoes["mensagens"] = 0;
     this.notificacoes["denuncias"]  = 8;
      

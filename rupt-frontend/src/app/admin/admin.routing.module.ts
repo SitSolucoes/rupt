@@ -1,3 +1,4 @@
+import { EscritoresComponent } from './escritores/escritores.component';
 
 import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -28,6 +29,7 @@ const AdminRoutes: Routes = [
         { path : 'categorias', canActivate: [AuthGuard], component: CategoriasComponent},
         { path : 'denuncias', canActivate: [AuthGuard], component: DenunciasComponent},
         { path : 'leitores', canActivate: [AuthGuard], component: LeitoresComponent},
+        { path : 'escritores', canActivate: [AuthGuard], component: EscritoresComponent},
         
         { path : 'editar/:id', canActivate: [AuthGuard], component: AdministradoresComponent},
         { path : '', redirectTo: 'home', pathMatch: 'full'},

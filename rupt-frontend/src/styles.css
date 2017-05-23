@@ -59,8 +59,13 @@ h4{
 	margin-right: 1rem;
 }
 
+.dropdown-button{
+	background-color: #F97000;
+}
 
-
+.dropdown-button:hover{
+	background-color: #F97000;
+}
 
 /* alertas */
 .card .card-content {
@@ -460,4 +465,40 @@ span.badge.new:after {
 	width: 100%;
 	background-color: #F97000;
 	margin-bottom: 10px;
+}
+
+/*escritores*/
+.card-escritor{
+	background-color: transparent;
+	
+}
+
+.img-escritor{
+	margin-top: 5px;
+	width: 200px;
+	height: 200px;
+}
+
+.card-escritor .content{
+	background-color: white;
+	border: 1px solid #424242;
+	border-radius: 2px;
+}
+
+.card-escritor .nome{
+	background-color: #F97000;
+	height: 30px;
+	padding-top: 5px;
+	color: white;
+	border-bottom: 1px solid #424242;
+}
+
+.card-escritor .dados{
+	padding-left: 5px;
+	text-align: left;
+}
+
+.orderby .input-field {
+	margin-left: 25px;
+	margin-top: 15px;
 }
