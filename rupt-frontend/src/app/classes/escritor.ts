@@ -1,4 +1,6 @@
-export class Escritor /*extends Leitor*/{
+import { Leitor } from './leitor';
+
+export class Escritor extends Leitor{
     //leitor: Leitor;
     rg: string;
     cpf: string;
@@ -11,14 +13,19 @@ export class Escritor /*extends Leitor*/{
     conta_corrente: string;
     created_at: Date;
     updated_at: Date;
+    status: string;
+
+    constructor(){
+        super ()
+    }
     
-    constructor(/*leitor: Leitor,*/ rg: string, cpf: string, src_rg: string, src_cpf: string,
+    /*constructor(leitor: Leitor, rg: string, cpf: string, src_rg: string, src_cpf: string,
                 src_foto: string, biografia: string, banco: string, agencia: string,
                 conta_corrente: string, created_at: Date, updated_at: Date){
          /*super(leitor.id, leitor.nome, leitor.nick,
          leitor.sexo, leitor.nascimento, leitor.src_foto, leitor.email,
          leitor.password);
-         this.leitor = leitor;*/
+         this.leitor = leitor;
          this.rg = rg;
          this.cpf = cpf;
          this.src_rg = src_rg;
@@ -30,5 +37,5 @@ export class Escritor /*extends Leitor*/{
          this.conta_corrente = conta_corrente;
          this.created_at = created_at;
          this.updated_at = updated_at;
-    }
+                }*/
 }

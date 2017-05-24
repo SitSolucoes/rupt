@@ -12,4 +12,16 @@ class EscritorController extends Controller
 
         return $escritor;
     }
+
+    public function getEscritores(){
+        $escritores = Escritor::where('status','<>', 'p')->with('leitor')->get();
+
+        return response()->json(['escritores' => $escritores], 200);
+    }
+
+    public function getSolicitacoes(){
+        $escritores = Escritor::where('status', 'a')->with('leitor')->get();
+
+        return response()->json(['escritores' => $escritores], 200);
+    }
 }

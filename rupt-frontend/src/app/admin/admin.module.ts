@@ -1,3 +1,4 @@
+import { EscritoresService } from './../services/escritores.service';
 import { PostsService } from './../services/posts.service';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
@@ -59,6 +60,7 @@ import { EscritoresComponent } from './escritores/escritores.component';
     LeitoresService,
     NotificacoesService,
     SugestoesService,
+    EscritoresService,
     AuthService,
     DenunciasService,
     PostsService

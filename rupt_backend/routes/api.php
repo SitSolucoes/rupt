@@ -89,6 +89,11 @@ Route::get('/validaEmailLeitor/{nick}/{id}', [
             'uses' => 'LeitorController@validaEmail'
 ]);
 
+//escritores
+Route::get('/getEscritores',['uses' => 'EscritorController@getEscritores']);
+
+Route::get('/getSolicitacoes', [])
+
 //sugestões
 Route::get('/getSugestoes', [
     'uses' => 'SugestaoController@getSugestoes'
