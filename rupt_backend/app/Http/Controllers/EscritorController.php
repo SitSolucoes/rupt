@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Escritor;
+use App\Http\Controllers\LeitorController;
 
 class EscritorController extends Controller
 {
@@ -14,14 +15,15 @@ class EscritorController extends Controller
     }
 
     public function getEscritores(){
-        $escritores = Escritor::where('status','<>', 'p')->with('leitor')->get();
+        $leitorController = new LeitorController();
+        $escritores = $leitorController->getEscritores();
 
         return response()->json(['escritores' => $escritores], 200);
     }
 
-    public function getSolicitacoes(){
-        $escritores = Escritor::where('status', 'a')->with('leitor')->get();
+    public function countSolicitacoes(){
+        $count = Escritor::where('status', 'p')->count();
 
-        return response()->json(['escritores' => $escritores], 200);
+        return response()->json(['countSolicitacoes' => $count], 200);
     }
 }

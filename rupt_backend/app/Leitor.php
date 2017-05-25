@@ -12,4 +12,8 @@ class Leitor extends Model
         'categoria',
         'sugestoes'
     ];
+
+    public function escritor(){
+        return $this->hasOne('App\Escritor', 'leitor_idLeitor');
+    }
 }

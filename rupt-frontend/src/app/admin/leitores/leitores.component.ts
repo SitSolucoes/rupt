@@ -18,7 +18,7 @@ export class LeitoresComponent implements OnInit {
   modalActions = new EventEmitter<string|MaterializeAction>();
   modalMessage = new EventEmitter<string|MaterializeAction>();
   filtro: string;
-  leitores;
+  leitores: Leitor[];
   leitor: Leitor;
   dataInvalida;
   emailInvalido;
@@ -55,7 +55,7 @@ export class LeitoresComponent implements OnInit {
       if (
         v.nome.toLowerCase().indexOf(this.filtro.toLowerCase()) >= 0 ||
         v.nick.toLowerCase().indexOf(this.filtro.toLowerCase()) >= 0 ||
-        v.email.toLowerCase().indexOf(this.filtro.toLowerCase()) >= 0
+        v.email.toLowerCase().indexOf(this.filtro.toLowerCase()) >= 0 
       ) 
         return true;
       

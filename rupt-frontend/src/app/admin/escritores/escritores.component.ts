@@ -11,6 +11,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EscritoresComponent implements OnInit {
 
+  filtroEscritores: string;
   notificacoes;
   escritores: Escritor[];
   selectOptions: Option[] = [
@@ -32,6 +33,24 @@ export class EscritoresComponent implements OnInit {
     this._escritoresService.getEscritores().subscribe(
       (escritores: Escritor[]) => {this.escritores = escritores}
     )
+  }
+
+  listEscritores(){
+    if ( this.filtroEscritores === undefined || this.escritores.length === 0 || this.filtroEscritores.trim() === ''){
+      return this.escritores;
+    }
+
+      return this.escritores.filter((v) => {
+      if (
+        v.cpf.toLocaleLowerCase().indexOf(this.filtroEscritores.toLowerCase()) >= 0 ||
+        v.nome.toLowerCase().indexOf(this.filtroEscritores.toLowerCase()) >= 0 ||
+        v.nick.toLowerCase().indexOf(this.filtroEscritores.toLowerCase()) >= 0 ||
+        v.email.toLowerCase().indexOf(this.filtroEscritores.toLowerCase()) >= 0
+      ) 
+        return true;
+      
+      return false;
+    });
   }
 
 }

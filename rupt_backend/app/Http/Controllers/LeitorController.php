@@ -85,4 +85,13 @@ class LeitorController extends Controller
         return response()->json(['email' => true], 200);
     }
 
+    public function getEscritores(){
+        return Leitor::join('escritores', function ($join) {
+            $join->on('leitores.id', '=', 'escritores.leitor_idLeitor')
+                 ->where('status', '<>', 'p');
+        })->get();
+    }
+
+    
+
 }
