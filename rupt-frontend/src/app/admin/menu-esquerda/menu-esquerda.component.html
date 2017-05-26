@@ -31,7 +31,8 @@
             </div>
         </li>
         <li>
-            <div class="collapsible-header"><i class="material-icons">chat</i>Mensagens<span *ngIf="notificacoes['mensagens'] != 0" class="new badge">{{ notificacoes["mensagens"] }}</span></div>
+            <a routerLink="mensagens"><div class="collapsible-header">
+                <i class="material-icons">chat</i>Mensagens<span *ngIf="notificacoes['mensagens'] != 0" class="new badge">{{ notificacoes["mensagens"] }}</span></div></a>
         </li>
         <li>
             <div class="collapsible-header"><i class="material-icons">library_books</i>Posts<span *ngIf="notificacoes['denuncias'] != 0" class="new badge">{{ notificacoes["denuncias"] }}</span></div>

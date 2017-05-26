@@ -1,4 +1,3 @@
-import { EscritoresComponent } from './escritores/escritores.component';
 
 import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -14,6 +13,8 @@ import { LeitoresComponent } from './leitores/leitores.component';
 import { DenunciasComponent } from './denuncias/denuncias.component';
 import { CategoriasComponent } from './categorias/categorias.component';
 import { RedefineSenhaComponent } from './redefine-senha/redefine-senha.component';
+import { MensagensComponent } from './mensagens/mensagens.component';
+import { EscritoresComponent } from './escritores/escritores.component';
 
 const AdminRoutes: Routes = [
     
@@ -30,6 +31,7 @@ const AdminRoutes: Routes = [
         { path : 'denuncias', canActivate: [AuthGuard], component: DenunciasComponent},
         { path : 'leitores', canActivate: [AuthGuard], component: LeitoresComponent},
         { path : 'escritores', canActivate: [AuthGuard], component: EscritoresComponent},
+        { path : 'mensagens', canActivate: [AuthGuard], component: MensagensComponent},
         
         { path : 'editar/:id', canActivate: [AuthGuard], component: AdministradoresComponent},
         { path : '', redirectTo: 'home', pathMatch: 'full'},

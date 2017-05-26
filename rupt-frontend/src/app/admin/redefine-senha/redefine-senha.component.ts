@@ -17,7 +17,6 @@ export class RedefineSenhaComponent implements OnInit {
   constructor(private _route: ActivatedRoute,
               private _adminService: AdministradoresService,
               private _router: Router) { 
-    console.log('oie');
     if(this._route.snapshot.params['token']){
       this._adminService.validaTokenRedefine(this._route.snapshot.params['token']).subscribe(
         (valido: any) => {

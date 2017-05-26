@@ -120,3 +120,13 @@ Route::get('/getLeitor/{id}',[
 Route::get('/getEscritor/{id}', [
           'uses' => 'PostController@getEscritor'
 ]);
+
+
+//Mensagens
+Route::get('/getMensagens/naoLidas', [
+          'uses' => 'MensagemController@getMensagens_nLidas'
+]);
+
+Route::get('/getCountMensagens_nLidas', [
+          'uses' => 'MensagemController@countMensagens_nLidas'
+]);

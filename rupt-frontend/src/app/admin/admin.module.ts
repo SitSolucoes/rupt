@@ -1,5 +1,3 @@
-import { EscritoresService } from './../services/escritores.service';
-import { PostsService } from './../services/posts.service';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -26,6 +24,9 @@ import { AuthService } from './../services/auth.service';
 import { RedefineSenhaComponent } from './redefine-senha/redefine-senha.component';
 import { MensagensComponent } from './mensagens/mensagens.component';
 import { EscritoresComponent } from './escritores/escritores.component';
+import { MensagensService } from './../services/mensagens.service';
+import { EscritoresService } from './../services/escritores.service';
+import { PostsService } from './../services/posts.service';
 
 
 
@@ -63,7 +64,8 @@ import { EscritoresComponent } from './escritores/escritores.component';
     EscritoresService,
     AuthService,
     DenunciasService,
-    PostsService
+    PostsService,
+    MensagensService
   ]
 })
 export class AdminModule { }
