@@ -1,9 +1,9 @@
+import { CpfCnpjPipe } from './../shared/cpf-cnpj.pipe';
 import { EscritoresService } from './../services/escritores.service';
 import { PostsService } from './../services/posts.service';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { LoginComponent } from './login/login.component';
 import { AdministradoresComponent } from './administradores/administradores.component';
 import { AdminRoutingModule } from './admin.routing.module';
@@ -27,8 +27,6 @@ import { RedefineSenhaComponent } from './redefine-senha/redefine-senha.componen
 import { MensagensComponent } from './mensagens/mensagens.component';
 import { EscritoresComponent } from './escritores/escritores.component';
 
-
-
 @NgModule({
   declarations: [
     LoginComponent,
@@ -44,13 +42,15 @@ import { EscritoresComponent } from './escritores/escritores.component';
     RedefineSenhaComponent,
     MensagensComponent,
     EscritoresComponent,
+    CpfCnpjPipe
   ],
+
   imports: [
     Ng2PaginationModule,
     CommonModule,
     MaterializeModule,
     FormsModule,
-    AdminRoutingModule
+    AdminRoutingModule,
   ],
   exports: [
     LoginComponent
