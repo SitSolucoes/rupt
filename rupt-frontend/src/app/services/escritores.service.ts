@@ -19,6 +19,14 @@ export class EscritoresService {
       )
   }
 
+  countSolicitacoes(): Observable<any>{
+    return this._http.get(this._url + 'countSolicitacoes').map(
+      (response: Response) => {
+        return response.json().countSolicitacoes;
+      }
+    )
+  }
+
   getSolicitacoes(): Observable<any>{
       return this._http.get(this._url + 'getSolicitacoes').map(
         (response: Response) => {

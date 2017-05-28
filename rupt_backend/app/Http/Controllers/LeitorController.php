@@ -92,6 +92,11 @@ class LeitorController extends Controller
         })->get();
     }
 
-    
+    public function getSolicitacoes(){
+        return Leitor::join('escritores', function ($join) {
+            $join->on('leitores.id', '=', 'escritores.leitor_idLeitor')
+                 ->where('status', 'p');
+        })->get();    
+    }
 
 }

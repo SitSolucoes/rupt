@@ -1,4 +1,5 @@
 import { MensagensService } from './mensagens.service';
+import { EscritoresService } from './escritores.service';
 import { SugestoesService } from './sugestoes.service';
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
@@ -11,7 +12,8 @@ export class NotificacoesService {
   constructor(
     private _http: Http, 
     private _sugestoesService: SugestoesService,
-    private _mensagensService: MensagensService
+    private _mensagensService: MensagensService,
+    private _escritoresService: EscritoresService
   ) { }
   
   private _url: string =  
@@ -29,7 +31,10 @@ export class NotificacoesService {
       }
     );
 
-    this.notificacoes["escritores"] = 3;
+    this._escritoresService.countSolicitacoes().subscribe(
+      (countSolicitacoes: number) => {this.notificacoes["escritores"] = countSolicitacoes}
+    );
+
     this.notificacoes["mensagens"] = 0;
     this.notificacoes["denuncias"]  = 8;
      

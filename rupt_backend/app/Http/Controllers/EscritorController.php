@@ -26,4 +26,11 @@ class EscritorController extends Controller
 
         return response()->json(['countSolicitacoes' => $count], 200);
     }
+
+    public function getSolicitacoes(){
+        $leitorController = new LeitorController();
+        $escritores = $leitorController->getSolicitacoes();
+
+        return response()->json(['solicitacoes' => $escritores], 200);
+    }
 }
