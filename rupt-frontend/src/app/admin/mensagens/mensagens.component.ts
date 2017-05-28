@@ -24,20 +24,22 @@ export class MensagensComponent implements OnInit {
 
   ngOnInit() {
     this.notificacoes = this._notificacoesService.getNotificacoes();
-    this.getMensagens_nLidas;
+    this.getMensagens_nLidas();
   }
 
   getMensagens_nLidas(){
     this._mensagemService.getMensagens_nLidas().subscribe(
         (mensagens: Mensagem[]) => {
           this.mensagens_nLidas = mensagens;
-          console.log("atribuiu");
         }
       );
   }
 
   listMensagens_nLidas(){
-    if ( this.filtroMensagens_nLidas === undefined || this.mensagens_nLidas.length === 0 || this.filtroMensagens_nLidas.trim() === ''){
+    if ( this.filtroMensagens_nLidas === undefined || 
+         this.mensagens_nLidas.length === 0 || 
+         this.filtroMensagens_nLidas.trim() === ''){
+      
       return this.mensagens_nLidas;
     }
     return this.mensagens_nLidas.filter((v) => {

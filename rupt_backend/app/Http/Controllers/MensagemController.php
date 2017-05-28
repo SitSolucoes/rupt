@@ -8,8 +8,7 @@ use App\Mensagem;
 class MensagemController extends Controller
 {
     public function getMensagens_nLidas(){
-        $mensagens = Mensagem::where('lida', false);
-
+        $mensagens = Mensagem::where('lida', false)->get();
         return response()->json(['mensagens' => $mensagens], 200);
     }
 
