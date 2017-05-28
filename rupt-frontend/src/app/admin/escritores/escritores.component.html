@@ -70,8 +70,6 @@
           </div>
         </div> 
       </div>
-
-      
     </div>
   </div>
 
@@ -100,59 +98,59 @@
         </div>
     </div>
     <ul class="collapsible list">
-    <li *ngIf="listEscritores() != false">
-        <div class="list-item header">
-            <div class="col s3 m3 l2 xl2 item">
-                Usuário
+        <li *ngIf="listEscritores() != false">
+            <div class="list-item header">
+                <div class="col s3 m3 l2 xl2 item">
+                    Usuário
+                </div>
+                <div class="col s4 m4 l3 xl3 item">
+                    Nome
+                </div>
+                <div class="col s3 m4 l2 xl2 item">
+                    Cpf / Cnpj
+                </div>
+                <div class="col s4 m4 l3 xl3 item">
+                    Email
+                </div>
+                <div class="col s2 m1 l1 xl1 item">
+                    Status
+                </div>
+                <div class="option-icons col s2 m2 l1 xl1 right-align item">
+                    <div class="margin-right-1">Editar</div>
+                </div>
             </div>
-            <div class="col s4 m4 l3 xl3 item">
-                Nome
+        </li>
+        <li *ngIf="listEscritores() == false">
+            <div class="list-item option-icons">
+                <div class="col s12 m12 l12 xl12 item center-align">
+                    Nenhum escritor encontrado.
+                </div>
             </div>
-            <div class="col s3 m4 l2 xl2 item">
-                Cpf
+        </li>
+        <li *ngFor="let e of listEscritores() | paginate: {itemsPerPage: 10, currentPage:page, id: '1'}; let i = index">
+            <div class="list-item option-icons">
+                <div class="col s3 m3 l2 xl2 item">
+                    {{e.nick}}
+                </div>
+                <div class="col s4 m4 l3 xl3 item">
+                    {{e.nome}}
+                </div>
+                <div class="col s3 m4 l2 xl2 item">
+                    {{e.cpf | cpfCnpj }}
+                </div>
+                <div class="col s4 m4 l3 xl3 item">
+                    {{e.email}}
+                </div>
+                <div class="col s2 m1 l1 xl1 item">
+                    <div *ngIf="!e.ativo">Inativo</div>
+                    <div *ngIf="e.ativo">Ativo</div>
+                </div>
+                <div class="option-icons col s2 m2 l1 xl1">
+                    <i class="material-icons" (click)="openModalEdit(l)">mode_edit</i>
+                </div>
             </div>
-            <div class="col s4 m4 l3 xl3 item">
-                Email
-            </div>
-            <div class="col s2 m1 l1 xl1 item">
-                Status
-            </div>
-            <div class="option-icons col s2 m2 l1 xl1 right-align item">
-                <div class="margin-right-1">Editar</div>
-            </div>
-        </div>
-    </li>
-    <li *ngIf="listEscritores() == false">
-        <div class="list-item option-icons">
-            <div class="col s12 m12 l12 xl12 item center-align">
-                Nenhum escritor encontrado.
-            </div>
-        </div>
-    </li>
-    <li *ngFor="let e of listEscritores() | paginate: {itemsPerPage: 10, currentPage:page, id: '1'}; let i = index">
-        <div class="list-item option-icons">
-            <div class="col s3 m3 l2 xl2 item">
-                {{e.nick}}
-            </div>
-            <div class="col s4 m4 l3 xl3 item">
-                {{e.nome}}
-            </div>
-            <div class="col s3 m4 l2 xl2 item">
-                {{e.cpf | cpfCnpj }}
-            </div>
-            <div class="col s4 m4 l3 xl3 item">
-                {{e.email}}
-            </div>
-            <div class="col s2 m1 l1 xl1 item">
-                <div *ngIf="!e.ativo">Inativo</div>
-                <div *ngIf="e.ativo">Ativo</div>
-            </div>
-            <div class="option-icons col s2 m2 l1 xl1">
-                <i class="material-icons" (click)="openModalEdit(l)">mode_edit</i>
-            </div>
-        </div>
-    </li>
-</ul>
+        </li>
+    </ul>
 
     <ul class="pages" *ngIf="listEscritores() != false">
         <li>

@@ -15,6 +15,8 @@ export class EscritoresComponent implements OnInit {
   filtroEscritores: string;
   notificacoes;
   escritores: Escritor[];
+  solicitacoes: Escritor[];
+
   selectOptions: Option[] = [
     {value: 2, name: 'Nome'},
     {value: 1, name: 'Nick'},
@@ -28,11 +30,18 @@ export class EscritoresComponent implements OnInit {
   ngOnInit() {
     this.notificacoes = this._notificacoesService.getNotificacoes();
     this.getEscritores();
+    this.getSolicitacoes();
   }
 
   getEscritores(){
     this._escritoresService.getEscritores().subscribe(
       (escritores: Escritor[]) => {this.escritores = escritores}
+    )
+  }
+
+  getSolicitacoes(){
+    this._escritoresService.getSolicitacoes().subscribe(
+      (solicitacoes: Escritor[]) => {this.solicitacoes = solicitacoes}
     )
   }
 
