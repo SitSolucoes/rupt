@@ -30,7 +30,7 @@ export class EscritoresService {
   getSolicitacoes(): Observable<any>{
       return this._http.get(this._url + 'getSolicitacoes').map(
         (response: Response) => {
-          return response.json().escritores;
+          return response.json().solicitacoes;
         }
       )
   }

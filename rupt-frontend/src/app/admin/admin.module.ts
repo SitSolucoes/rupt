@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-=======
 import { CpfCnpjPipe } from './../shared/cpf-cnpj.pipe';
-import { EscritoresService } from './../services/escritores.service';
-import { PostsService } from './../services/posts.service';
->>>>>>> 9ca21399baa8f2b5952c74d9b4c28855e7d43ed0
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';

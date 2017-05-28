@@ -3,166 +3,176 @@
 </div>
 
 <div class="row">
-  <div class="col s12">
-    <ul class="tabs" materialize="tabs">
-      <li class="tab col s6">
-        <a class="active" href="#solicitacao">
-          Solicitação
-          <span *ngIf="notificacoes['escritores'] != 0" class="notification">{{ notificacoes["escritores"] }}</span>
-        </a>
-      </li>
-      <li class="tab col s6"><a href="#escritores">Escritores</a></li>
-    </ul>
-  </div>
-
-  <div id="solicitacao" class="col s12">
-    <div class="row">
-      <div class="col s12 m12 l12 xl12">
-          <nav>
-              <div class="nav-wrapper">
-                  <form>
-                      <div class="input-field">
-                          <input id="search" name="filtro" type="search" [(ngModel)]="filtroSugestoes">
-                          <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                          <i class="material-icons">close</i>
-                      </div>
-                  </form>
-              </div>
-          </nav>
-      </div>
-
-      <div class="col s12 orderby">
-          Ordenar:
-          <div class="input-field inline">
-            <select name="ativo" materialize="material_select" 
-                    [materializeSelectOptions]="selectOptions">
-                  <option *ngFor="let option of selectOptions" [value]="option.value">{{option.name}}</option>
-            </select>
-          </div>
-        </div>
-      
-
-      <div class="col s12 m12 l12 xl12">
-        <div class="col s12 m6 l4 xl3">
-          <div class="card card-escritor">
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRidqV3uhD3LVdfmtxiXqm7UuhImO1poNtPaW3qX461w0A85K2E8A" class="img-escritor row">
-              <div class="content row">
-                <div class="nome">nick</div>
-                <div class="dados">
-                  nome: Murilo Augusto<br>
-                  CPF: 08809222998<br>
-                  Solicitado: 11/06/17
-                </div>
-              </div>
-          </div>
-        </div> 
-        <div class="col s12 m6 l4 xl3">
-          <div class="card card-escritor">
-              <img src="https://images.pandlr.com/avatars/8548/ef4ec254314bd5280c100ff9d098a928-bpfull.png" class="img-escritor row">
-              <div class="content row">
-                <div class="nome">nick</div>
-                <div class="dados">
-                  nome: Rihanna<br>
-                  CPF: 08809222998<br>
-                  Solicitado: 11/06/17
-                </div>
-              </div>
-          </div>
-        </div> 
-      </div>
+    <div class="col s12">
+        <ul class="tabs" materialize="tabs">
+            <li class="tab col s6">
+                <a class="active" href="#solicitacao">
+                    Solicitação
+                    <span *ngIf="notificacoes['escritores'] != 0" class="notification">{{ notificacoes["escritores"] }}</span>
+                </a>
+            </li>
+            <li class="tab col s6"><a href="#escritores">Escritores</a></li>
+        </ul>
     </div>
-  </div>
 
-
-  <div id="escritores" class="col s12">
-    <div class="row">
-        <div class="col s12 m12 l4 xl2">
-            <a class="modal-trigger" (click)="openModal(f);">
-                <div class="btn new">
-                    Novo
-                </div>
-            </a>
+    <div id="solicitacao" class="col s12">
+        <div class="row">
+            <div class="col s12 m12 l12 xl12">
+                <nav>
+                    <div class="nav-wrapper">
+                        <form>
+                            <div class="input-field">
+                                <input id="search" name="filtro" type="search" [(ngModel)]="filtroSolicitacoes">
+                                <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                                <i class="material-icons">close</i>
+                            </div>
+                        </form>
+                    </div>
+                </nav>
+            </div>
         </div>
-        <div class="col s12 m12 l8 xl10 search">
-            <nav>
-                <div class="nav-wrapper">
-                    <form>
-                        <div class="input-field">
-                            <input id="search" name="filtro" type="search" [(ngModel)]="filtroEscritores">
-                            <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                            <i class="material-icons">close</i>
+
+        <ul class="collapsible list" *ngIf="listSolicitacoes() == false">
+            <li>
+                <div class="list-item option-icons">
+                    <div class="col s12 m12 l12 xl12 item center-align">
+                        Nenhuma solicitação encontrada.
+                    </div>
+                </div>
+            </li>
+        </ul>
+
+        <div class="col s12 m12 l12 xl12 orderby" *ngIf="listSolicitacoes() != false">
+            <div class="row">
+                <div class="col s6 m6 l6 xl6">
+                    Ordenar:
+                    <div class="input-field inline">
+                        <select name="ativo" materialize="material_select" 
+                                [materializeSelectOptions]="selectOptions">
+                                <option *ngFor="let option of selectOptions" [value]="option.value">{{option.name}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col s6 m6 l6 xl6 right-align">
+                    Exibir:
+                    <div class="input-field inline">
+                        <select name="ativo" materialize="material_select" 
+                                [materializeSelectOptions]="selectOptions">
+                                <option *ngFor="let option of selectOptions" [value]="option.value">{{option.name}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col s12 m12 l12 xl12">
+            <div class="col s12 m6 l4 xl3" *ngFor="let s of listSolicitacoes() | paginate: {itemsPerPage: 10, currentPage:page, id: '1'}; let i = index">
+                <div class="card card-escritor">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRidqV3uhD3LVdfmtxiXqm7UuhImO1poNtPaW3qX461w0A85K2E8A" class="img-escritor row">
+                    <div class="content row">
+                        <div class="nome"> {{ s.nick }} </div>
+                        <div class="dados">
+                        nome: {{ s.nome }}<br>
+                        CPF: {{s.cpf | cpfCnpj }}  <br>
+                        Solicitado: {{ s.created_at | date:"dd/MM/yyyy" }}
                         </div>
-                    </form>
+                    </div>
                 </div>
-            </nav>
+            </div> 
         </div>
     </div>
-    <ul class="collapsible list">
-        <li *ngIf="listEscritores() != false">
-            <div class="list-item header">
-                <div class="col s3 m3 l2 xl2 item">
-                    Usuário
-                </div>
-                <div class="col s4 m4 l3 xl3 item">
-                    Nome
-                </div>
-                <div class="col s3 m4 l2 xl2 item">
-                    Cpf / Cnpj
-                </div>
-                <div class="col s4 m4 l3 xl3 item">
-                    Email
-                </div>
-                <div class="col s2 m1 l1 xl1 item">
-                    Status
-                </div>
-                <div class="option-icons col s2 m2 l1 xl1 right-align item">
-                    <div class="margin-right-1">Editar</div>
-                </div>
-            </div>
-        </li>
-        <li *ngIf="listEscritores() == false">
-            <div class="list-item option-icons">
-                <div class="col s12 m12 l12 xl12 item center-align">
-                    Nenhum escritor encontrado.
-                </div>
-            </div>
-        </li>
-        <li *ngFor="let e of listEscritores() | paginate: {itemsPerPage: 10, currentPage:page, id: '1'}; let i = index">
-            <div class="list-item option-icons">
-                <div class="col s3 m3 l2 xl2 item">
-                    {{e.nick}}
-                </div>
-                <div class="col s4 m4 l3 xl3 item">
-                    {{e.nome}}
-                </div>
-                <div class="col s3 m4 l2 xl2 item">
-                    {{e.cpf | cpfCnpj }}
-                </div>
-                <div class="col s4 m4 l3 xl3 item">
-                    {{e.email}}
-                </div>
-                <div class="col s2 m1 l1 xl1 item">
-                    <div *ngIf="!e.ativo">Inativo</div>
-                    <div *ngIf="e.ativo">Ativo</div>
-                </div>
-                <div class="option-icons col s2 m2 l1 xl1">
-                    <i class="material-icons" (click)="openModalEdit(l)">mode_edit</i>
-                </div>
-            </div>
-        </li>
-    </ul>
+    
 
-    <ul class="pages" *ngIf="listEscritores() != false">
-        <li>
-            <pagination-controls (pageChange)="page = $event" id="1"
-                maxSize="5"
-                directionLinks="true"
-                autoHide="false"
-                previousLabel=""
-                nextLabel="">
-            </pagination-controls>
-        </li>
-    </ul>
-  </div>
+
+    <div id="escritores" class="col s12">
+        <div class="row">
+            <div class="col s12 m12 l4 xl2">
+                <a class="modal-trigger" (click)="openModal(f);">
+                    <div class="btn new">
+                        Novo
+                    </div>
+                </a>
+            </div>
+            <div class="col s12 m12 l8 xl10 search">
+                <nav>
+                    <div class="nav-wrapper">
+                        <form>
+                            <div class="input-field">
+                                <input id="search" name="filtro" type="search" [(ngModel)]="filtroEscritores">
+                                <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                                <i class="material-icons">close</i>
+                            </div>
+                        </form>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <ul class="collapsible list">
+            <li *ngIf="listEscritores() != false">
+                <div class="list-item header">
+                    <div class="col s3 m3 l2 xl2 item">
+                        Usuário
+                    </div>
+                    <div class="col s4 m4 l3 xl3 item">
+                        Nome
+                    </div>
+                    <div class="col s3 m4 l2 xl2 item">
+                        Cpf / Cnpj
+                    </div>
+                    <div class="col s4 m4 l3 xl3 item">
+                        Email
+                    </div>
+                    <div class="col s2 m1 l1 xl1 item">
+                        Status
+                    </div>
+                    <div class="option-icons col s2 m2 l1 xl1 right-align item">
+                        <div class="margin-right-1">Editar</div>
+                    </div>
+                </div>
+            </li>
+            <li *ngIf="listEscritores() == false">
+                <div class="list-item option-icons">
+                    <div class="col s12 m12 l12 xl12 item center-align">
+                        Nenhum escritor encontrado.
+                    </div>
+                </div>
+            </li>
+            <li *ngFor="let e of listEscritores() | paginate: {itemsPerPage: 10, currentPage:page, id: '1'}; let i = index">
+                <div class="list-item option-icons">
+                    <div class="col s3 m3 l2 xl2 item">
+                        {{e.nick}}
+                    </div>
+                    <div class="col s4 m4 l3 xl3 item">
+                        {{e.nome}}
+                    </div>
+                    <div class="col s3 m4 l2 xl2 item">
+                        {{e.cpf | cpfCnpj }}
+                    </div>
+                    <div class="col s4 m4 l3 xl3 item">
+                        {{e.email}}
+                    </div>
+                    <div class="col s2 m1 l1 xl1 item">
+                        <div *ngIf="!e.ativo">Inativo</div>
+                        <div *ngIf="e.ativo">Ativo</div>
+                    </div>
+                    <div class="option-icons col s2 m2 l1 xl1">
+                        <i class="material-icons" (click)="openModalEdit(l)">mode_edit</i>
+                    </div>
+                </div>
+            </li>
+        </ul>
+
+        <ul class="pages" *ngIf="listEscritores() != false">
+            <li>
+                <pagination-controls (pageChange)="page = $event" id="1"
+                    maxSize="5"
+                    directionLinks="true"
+                    autoHide="false"
+                    previousLabel=""
+                    nextLabel="">
+                </pagination-controls>
+            </li>
+        </ul>
+    </div>
 </div>
 

@@ -13,6 +13,7 @@ import { Component, OnInit } from '@angular/core';
 export class EscritoresComponent implements OnInit {
 
   filtroEscritores: string;
+  filtroSolicitacoes: string;
   notificacoes;
   escritores: Escritor[];
   solicitacoes: Escritor[];
@@ -56,6 +57,24 @@ export class EscritoresComponent implements OnInit {
         v.nome.toLowerCase().indexOf(this.filtroEscritores.toLowerCase()) >= 0 ||
         v.nick.toLowerCase().indexOf(this.filtroEscritores.toLowerCase()) >= 0 ||
         v.email.toLowerCase().indexOf(this.filtroEscritores.toLowerCase()) >= 0
+      ) 
+        return true;
+      
+      return false;
+    });
+  }
+
+  listSolicitacoes(){
+    if ( this.filtroSolicitacoes === undefined || this.solicitacoes.length === 0 || this.filtroSolicitacoes.trim() === ''){
+      return this.solicitacoes;
+    }
+
+      return this.solicitacoes.filter((v) => {
+      if (
+        v.cpf.toLocaleLowerCase().indexOf(this.filtroSolicitacoes.toLowerCase()) >= 0 ||
+        v.nome.toLowerCase().indexOf(this.filtroSolicitacoes.toLowerCase()) >= 0 ||
+        v.nick.toLowerCase().indexOf(this.filtroSolicitacoes.toLowerCase()) >= 0 ||
+        v.email.toLowerCase().indexOf(this.filtroSolicitacoes.toLowerCase()) >= 0
       ) 
         return true;
       
