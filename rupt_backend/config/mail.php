@@ -57,7 +57,7 @@ return [
 
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'teste@sitsolucoes.com.br'),
-        'name' => env('MAIL_FROM_NAME', 'Redefine'),
+        'name' => env('MAIL_FROM_NAME', 'Rupt'),
     ],
 
     /*

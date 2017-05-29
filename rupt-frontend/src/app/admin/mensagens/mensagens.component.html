@@ -1,83 +1,79 @@
 <!-- Modal Structure -->
-<!--<div id="modal1" class="modal center-sheet" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions">
-    <form class="col s12" #f="ngForm" (ngSubmit)="onSubmit(f)">
+<div id="modal1" class="modal center-sheet" 
+     materialize="modal" [materializeParams]="[{dismissible: false}]" 
+     [materializeActions]="modalActions">
+    <form class="col s12" #f="ngForm" (ngSubmit)="enviaResposta(f)">
         <div class="modal-content">
-            <h4 *ngIf="editando">Editar</h4>
-            <h3></h3>
             <div class="row">
                 <div class="row">
-                    <div class="input-field col s12">
-                        <input id="nome" name="nome" type="text" value="." #nome="ngModel"
-                               minlength="3" maxlength="40" required="required"
-                               [ngClass]="{'invalid': nome.errors?.required && nome.touched}"
-                               [(ngModel)]="admin_selecionado.name">
-                        
-                        <label [ngClass]="{'active': admin_selecionado?.name}" for="nome">Nome Completo*</label>
-                        
-                        <div *ngIf="nome.errors?.minlength" class="error">Nome muito curto.</div>
-                        <div *ngIf="nome.errors?.required && nome.touched" class="error">Campo obrigatório.</div>
+                    <div class="row">
+                        <h6><b>Mensagem de:</b> {{mensagem_selecionada?.nome}}</h6>
+                    </div>
+                    <div class="row">
+                        <h6><b>Email:</b> {{mensagem_selecionada?.remetente}}</h6>
+                    </div>
+                    <div class="row">
+                        <h6><b>Assunto:</b> {{mensagem_selecionada?.assunto}}</h6>
+                    </div>
+                    <div class="row">
+                        <h6><b>Mensagem:</b> {{mensagem_selecionada?.conteudo}}</h6><p>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <textarea id="resposta" name="resposta" class="materialize-textarea"
+                                    #resp="ngModel" [ngClass]="{'invalid': resp.errors?.required && resp.touched}" [(ngModel)]="resposta"
+                                    required ></textarea>
+                            <div *ngIf="resp.errors?.required && resp.touched" class="error">Escreva uma resposta antes de enviar.</div>
+                            <label for="resposta">Responder</label>
+                        </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="input-field col s12">
-                        <input id="email" name="email" type="email" #email="ngModel"
-                          minlength="5" maxlength="100" required pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
-                        [ngClass]="{'invalid': !email_valido && !email.errors?.pattern && email.touched}"
-                        [(ngModel)]="admin_selecionado.email" (ngModelChange)="validaEmail()">
-                        
-                        <label [ngClass]="{'active': admin_selecionado?.email}"for="email">Email*</label>
-                        
-                        <div *ngIf="!email_valido" class="error">Email Já Utilizado.</div>
-                        <div *ngIf="email.errors?.pattern" class="error">Email Invalido.</div>
-                        <div *ngIf="email.errors?.required && email.touched" class="error">Campo obrigatório.</div>
-                    </div>
-                </div>
-                <div class="row" *ngIf="admin_selecionado.id == admin_logado || !editando">
-                    <div class="input-field col s12">
-                        <input id="senha" name="senha" #senha="ngModel" type="password"
-                               [(ngModel)]="admin_selecionado.senha"
-                               
-                               maxlength="12" minlength="6" [required]="!editando">
-                        
-                        <label for="senha">Senha*</label>
-
-                        <div *ngIf="senha.errors?.required && senha.touched" class="error">Campo obrigatório.</div>
-                        <div *ngIf="senha.errors?.minlength" class="error">Mínimo de 6 caracteres.</div>
-                    </div>
-                </div>
-                <div class="row" *ngIf="admin_selecionado.id == admin_logado || !editando">
-                    <div class="input-field col s12">
-                        <input id="confirm-senha" name="confirm_senha" type="password" #csenha="ngModel"
-                               [ngClass]="{'invalid': !senhaValida}"
-                               ngModel (keypress)="comparaSenhas($event, f)"
-                               [required]="!editando" >
-                        
-                        <label for="confirm-senha">Confirmar Senha*</label>
-                        
-                        <div *ngIf="!senhaValida" class="error">As senhas não coincidem.</div>
-                    </div>
-                </div>
-                <div class="row" *ngIf="message != ''">
-                    <font color="red">{{message}}</font>
-                </div>
-                <div class="row">
-                     <div class="input-field col s12">
-                        <select name="ativo" materialize="material_select" 
-                                [materializeSelectOptions]="selectOptions" [(ngModel)]="admin_selecionado.ativo">
-                             <option *ngFor="let option of selectOptions" [value]="option.value">{{option.name}}</option>
-                        </select>
-                         <label for="ativo">Status*</label>
-                    </div>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <a (click)="closeModal()" class="modal-action modal-close waves-effect waves-green btn-flat ">Fechar</a>
+                <button type="submit" [disabled]="!f.valid" class="modal-action modal-close waves-effect waves-green btn-flat">Enviar Resposta</button>
+            </div>
         </div>
-        </div>
-        <div class="modal-footer">
-            <a (click)="closeModal()" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
-            <button type="submit" [disabled]="!f.valid || !senhaValida && !email_valido" class="modal-action modal-close waves-effect waves-green btn-flat">Salvar</button>
-        </div>
-    </form> 
+    </form>
 </div>
-<modal de mensagem>
+<div id="modalLida" class="modal center-sheet" 
+     materialize="modal" [materializeParams]="[{dismissible: false}]" 
+     [materializeActions]="modalLida">
+    <form class="col s12" #f="ngForm" (ngSubmit)="enviaResposta(f)">
+        <div class="modal-content">
+            <div class="row">
+                <div class="row">
+                    <div class="row">
+                        <h6><b>Mensagem de:</b> {{mensagem_selecionada?.nome}}</h6>
+                    </div>
+                    <div class="row">
+                        <h6><b>Email:</b> {{mensagem_selecionada?.remetente}}</h6>
+                    </div>
+                    <div class="row">
+                        <h6><b>Assunto:</b> {{mensagem_selecionada?.assunto}}</h6>
+                    </div>
+                    <div class="row">
+                        <h6><b>Mensagem:</b> {{mensagem_selecionada?.conteudo}}</h6><p>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <textarea id="resposta" name="resposta" class="materialize-textarea"
+                                    #resp="ngModel" [disabled]="resposta_msg_selecionada != null" [ngClass]="{'invalid': resp.errors?.required && resp.touched}" [(ngModel)]="resposta"
+                                    required ></textarea>
+                            <div *ngIf="resp.errors?.required && resp.touched" class="error">Escreva uma resposta antes de enviar.</div>
+                            <label for="resposta">Responder</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a (click)="closeModal()" class="modal-action modal-close waves-effect waves-green btn-flat ">Fechar</a>
+                <button type="submit" [disabled]="!f.valid" class="modal-action modal-close waves-effect waves-green btn-flat">Enviar Resposta</button>
+            </div>
+        </div>
+    </form>
+</div>
+<!--modal de mensagem-->
 <div id="modalMessage" class="modal center-sheet small-modal" materialize="modal" [materializeParams]="[{dismissible: true}]" [materializeActions]="modalMessage">
     <div class="modal-content">
         <h4><i class="material-icons">check_circle</i></h4>
@@ -87,13 +83,13 @@
         </div>
     </div>
 </div>
--->
 
 <div class="title">
     <i class="material-icons">view_list</i> Mensagens
 </div>
 
 <div class="row">
+  <!-- Mensagens não lidas-->
   <div class="col s12">
     <ul class="tabs" materialize="tabs">
       <li class="tab col s6">
@@ -105,8 +101,9 @@
       <li class="tab col s6"><a href="#msg_lida">Mensagens Lidas</a></li>
     </ul>
   </div>
-
+  <!-- Tabela mensagens não lidas-->
   <div id="msg_nao_lida" class="col s12">
+    <!--filtro-->
     <div class="row">
       <div class="col s12 m12 l12 xl12 search">
           <nav>
@@ -122,8 +119,17 @@
           </nav>
       </div>
     </div>
+    <!--/filtro-->
+    <!--Caso não hajam mensagens-->
     <ul class="collapsible list">
-      <li *ngIf="listMensagens_nLidas()">
+      <li *ngIf="listMensagens_nLidas().length === 0">
+        <div class="list-item option-icons">
+            <div class="col s12 m12 l12 xl12 item center-align">
+                Não há mensagens não lidas.
+            </div>
+        </div>
+      </li>
+      <li *ngIf="listMensagens_nLidas().length > 0">
           <div class="list-item header">
                 <div class="col s2 m2 l2 xl2 item">
                     Nome Informado
@@ -139,15 +145,10 @@
                 </div>
           </div>
       </li>
-      <li *ngIf="!listMensagens_nLidas()">
-        <div class="list-item option-icons">
-            <div class="col s12 m12 l12 xl12 item center-align">
-                Não há mensagens não lidas.
-            </div>
-        </div>
-    </li>
+      
+    
       <li *ngFor="let m of listMensagens_nLidas() | paginate: {itemsPerPage: 10, currentPage:page, id: '1'}; let i = index">
-          <div class="list-item option-icons">
+          <div (click)="openModal(m)" class="list-item option-icons">
               <div class="col s2 m2 l2 xl2 item">
                   {{m.nome}}
               </div>
@@ -179,7 +180,78 @@
 
 
   <div id="msg_lida" class="col s12">
-    Test 2
+    <div class="row">
+      <div class="col s12 m12 l12 xl12 search">
+          <nav>
+              <div class="nav-wrapper">
+                  <form>
+                      <div class="input-field">
+                          <input id="search" name="filtro" type="search" [(ngModel)]="filtroMensagens_lidas">
+                          <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                          <i class="material-icons">close</i>
+                      </div>
+                  </form>
+              </div>
+          </nav>
+      </div>
+    </div>
+    <!--/filtro-->
+    <!--Caso não hajam mensagens-->
+    <ul class="collapsible list">
+      <li *ngIf="listMensagens_lidas().length === 0">
+        <div class="list-item option-icons">
+            <div class="col s12 m12 l12 xl12 item center-align">
+                Não há mensagens lidas.
+            </div>
+        </div>
+      </li>
+      <li *ngIf="listMensagens_lidas().length > 0">
+          <div class="list-item header">
+                <div class="col s2 m2 l2 xl2 item">
+                    Nome Informado
+                </div>
+                <div class="col s3 m3 l3 xl3 item left-align">
+                    Assunto
+                </div>
+                <div class="col s5 m5 l5 xl5 item left-align">
+                    Mensagem
+                </div>
+                <div class="option-icons col s2 m2 l2 xl2 right-align item">
+                    <div class="margin-right-1">Opções</div>
+                </div>
+          </div>
+      </li>
+      
+    
+      <li *ngFor="let ml of listMensagens_lidas() | paginate: {itemsPerPage: 10, currentPage:page, id: '1'}; let i = index">
+          <div (click)="openModalLida(ml)" class="list-item option-icons">
+              <div class="col s2 m2 l2 xl2 item">
+                  {{ml.nome}}
+              </div>
+              <div class="col s3 m3 l3 xl3 item left-align">
+                  {{ml.assunto}}
+              </div>
+              <div class="col s5 m5 l5 xl5 item left-align">
+                  {{ml.conteudo}}
+              </div>
+              
+              <div class="option-icons col s2 m2 l2 xl2">
+                  <i class="material-icons" (click)="openModalLida(ml)">visibility</i>
+              </div>
+          </div>
+      </li>
+    </ul>
+    <ul class="pages" *ngIf="listMensagens_lidas().length > 0">
+        <li>
+            <pagination-controls (pageChange)="page = $event" id="1"
+                maxSize="5"
+                directionLinks="true"
+                autoHide="false"
+                previousLabel=""
+                nextLabel="">
+            </pagination-controls>
+        </li>
+    </ul>
   </div>
 
 </div>

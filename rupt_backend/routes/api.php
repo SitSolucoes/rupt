@@ -77,6 +77,10 @@ Route::get('/getLeitores',[
             'uses' => 'LeitorController@getLeitores'
 ]);
 
+Route::get('/getLeitor/{id}',[
+            'uses' => 'LeitorController@getById'
+]);
+
 Route::put('/updateLeitor/{id}',[
             'uses' => 'LeitorController@update'
 ]);
@@ -127,6 +131,18 @@ Route::get('/getMensagens/naoLidas', [
           'uses' => 'MensagemController@getMensagens_nLidas'
 ]);
 
+Route::get('/getMensagens/lidas', [
+          'uses' => 'MensagemController@getMensagens_lidas'
+]);
+
+Route::get('getMensagem/{id}',[
+           'uses' => 'MensagemController@getMensagem'
+]);
+
 Route::get('/getCountMensagens_nLidas', [
           'uses' => 'MensagemController@countMensagens_nLidas'
+]);
+
+Route::post('respondeMensagem/{id}', [
+            'uses' => 'MensagemController@respondeMensagem'
 ]);

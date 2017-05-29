@@ -53,6 +53,16 @@ export class LeitoresService {
       );
   }
 
+  getLeitor(id): Observable<any>{
+     return this._http.get(this._url + 'getLeitor/' + id)
+      .map(
+        (response: Response) => {
+          return response.json().leitor;
+        }
+      );
+  }
+
+
   validaNick(nick, id){
     return this._http.get(this._url + 'validaNick/' + nick + "/" + id).map(
       (response: Response) => {
