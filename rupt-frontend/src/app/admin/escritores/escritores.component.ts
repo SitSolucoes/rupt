@@ -12,6 +12,8 @@ import { Component, OnInit } from '@angular/core';
 
 export class EscritoresComponent implements OnInit {
 
+  mSolicitacao = 1;
+  
   filtroEscritores: string;
   filtroSolicitacoes: string;
   notificacoes;
@@ -23,6 +25,11 @@ export class EscritoresComponent implements OnInit {
     {value: 1, name: 'Nick'},
     {value: 0, name: 'Data'}
   ];
+
+  selectSolicitacao: Option[] = [
+    {value: 1, name: 'Card'},
+    {value: 0, name: 'Lista'}
+  ]
 
   constructor(
     private _notificacoesService: NotificacoesService,
