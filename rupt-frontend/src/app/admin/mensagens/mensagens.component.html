@@ -1,4 +1,4 @@
-<!-- Modal Structure -->
+<!-- Modal Mensagem não lida -->
 <div id="modal1" class="modal center-sheet" 
      materialize="modal" [materializeParams]="[{dismissible: false}]" 
      [materializeActions]="modalActions">
@@ -10,6 +10,9 @@
                         <h6><b>Mensagem de:</b> {{mensagem_selecionada?.nome}}</h6>
                     </div>
                     <div class="row">
+                        <h6><b>Data do contato:</b> {{mensagem_selecionada?.created_at | date: 'dd/MM/yy - HH:mm'}}</h6>
+                    </div>
+                    <div class="row">
                         <h6><b>Email:</b> {{mensagem_selecionada?.remetente}}</h6>
                     </div>
                     <div class="row">
@@ -18,24 +21,30 @@
                     <div class="row">
                         <h6><b>Mensagem:</b> {{mensagem_selecionada?.conteudo}}</h6><p>
                     </div>
+                    <p>
+                        <input type="checkbox" id="lida" name="lida" #lida="ngModel" [(ngModel)]="mensagem_selecionada.lida"/>
+                        <label for="lida">Marcar Como Lida</label>
+                    </p>
                     <div class="row">
                         <div class="input-field col s12">
                             <textarea id="resposta" name="resposta" class="materialize-textarea"
-                                    #resp="ngModel" [ngClass]="{'invalid': resp.errors?.required && resp.touched}" [(ngModel)]="resposta"
-                                    required ></textarea>
+                                    #resp="ngModel" [ngClass]="{'invalid': (resp.errors?.required && resp.touched) || !lida}" [(ngModel)]="resposta"
+                                    required (blur)="mostralog(resp.value.length)"></textarea>
                             <div *ngIf="resp.errors?.required && resp.touched" class="error">Escreva uma resposta antes de enviar.</div>
-                            <label for="resposta">Responder</label>
+                            <label style="color: black; font-weight: bold; font-size: 1rem;" [ngClass]="{'active': resposta_msg_selecionada?.conteudo}" for="resposta">Responder</label>
                         </div>
                     </div>
                 </div>
             </div>
+            {{resp.value.length}}
             <div class="modal-footer">
                 <a (click)="closeModal()" class="modal-action modal-close waves-effect waves-green btn-flat ">Fechar</a>
-                <button type="submit" [disabled]="!f.valid" class="modal-action modal-close waves-effect waves-green btn-flat">Enviar Resposta</button>
+                <button type="submit" [disabled]="!lida" class="modal-action modal-close waves-effect waves-green btn-flat">Enviar Resposta</button>
             </div>
         </div>
     </form>
 </div>
+<!-- Modal Mensagem lida -->
 <div id="modalLida" class="modal center-sheet" 
      materialize="modal" [materializeParams]="[{dismissible: false}]" 
      [materializeActions]="modalLida">
@@ -47,6 +56,9 @@
                         <h6><b>Mensagem de:</b> {{mensagem_selecionada?.nome}}</h6>
                     </div>
                     <div class="row">
+                        <h6><b>Data do contato:</b> {{mensagem_selecionada?.created_at | date: 'dd/MM/yy - HH:mm'}}</h6>
+                    </div>
+                    <div class="row">
                         <h6><b>Email:</b> {{mensagem_selecionada?.remetente}}</h6>
                     </div>
                     <div class="row">
@@ -55,13 +67,21 @@
                     <div class="row">
                         <h6><b>Mensagem:</b> {{mensagem_selecionada?.conteudo}}</h6><p>
                     </div>
+                    <div class="row" *ngIf="resposta_msg_selecionada">
+                        <h6><b>Respondido:</b> {{resposta_msg_selecionada?.created_at | date: 'dd/MM/yy - HH:mm'}}</h6><p>
+                    </div>
+                    <div class="row" *ngIf="resposta_msg_selecionada">
+                        <h6><b>Respondido por:</b> {{mensagem_selecionada?.Admin?.name}}</h6><p><br>
+                    </div>
+                    
                     <div class="row">
                         <div class="input-field col s12">
-                            <textarea id="resposta" name="resposta" class="materialize-textarea"
-                                    #resp="ngModel" [disabled]="resposta_msg_selecionada != null" [ngClass]="{'invalid': resp.errors?.required && resp.touched}" [(ngModel)]="resposta"
+                            <textarea id="resposta_lida" name="resposta_lida" class="materialize-textarea"
+                                    #resp_lida="ngModel" [disabled]="resposta_msg_selecionada != ''"
+                                    [ngClass]="{'invalid': resp.errors?.required && resp.touched}" [(ngModel)]="resposta_msg_selecionada.conteudo"
                                     required ></textarea>
-                            <div *ngIf="resp.errors?.required && resp.touched" class="error">Escreva uma resposta antes de enviar.</div>
-                            <label for="resposta">Responder</label>
+                            <div *ngIf="resp.errors?.required && resp.touched && !resp.disabled" class="error">Escreva uma resposta antes de enviar.</div>
+                            <label style="color: black; font-weight: bold; font-size: 1rem;" [ngClass]="{'active': resposta_msg_selecionada?.conteudo}" for="resposta">Resposta</label>
                         </div>
                     </div>
                 </div>

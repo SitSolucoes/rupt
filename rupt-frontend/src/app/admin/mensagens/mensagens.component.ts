@@ -39,8 +39,12 @@ export class MensagensComponent implements OnInit {
     this.clear();
     this.getMensagens_nLidas();
     this.getMensagens_lidas();
+    this.resposta_msg_selecionada = new Mensagem();
   }
 
+  mostralog(r){
+    console.log(r);
+  }
   getMensagens_nLidas(){
     this._mensagemService.getMensagens_nLidas().subscribe(
         (mensagens: Mensagem[]) => {
@@ -134,11 +138,11 @@ export class MensagensComponent implements OnInit {
 
   openModalLida(m: Mensagem){
     this.mensagem_selecionada = m;
-    this._mensagemService.getResposta(m.id).subscribe((resposta)=>{
-      this.resposta_msg_selecionada = resposta;
-      this.modalLida.emit({action:"modal",params:['open']});
-    });
-    
+    this._mensagemService.getResposta(m.id).subscribe(
+      (resposta)=>{
+        this.resposta_msg_selecionada = resposta;
+        this.modalLida.emit({action:"modal",params:['open']});
+      });
   }
 
   closeModal() {

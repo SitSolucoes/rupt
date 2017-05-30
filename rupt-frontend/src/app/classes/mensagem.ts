@@ -11,6 +11,8 @@ export class Mensagem {
     Admin: Admin;
     Leitor: Leitor;
     Mensagem: Mensagem;
+    created_at: Date;
+    updated_at: Date;
 
     constructor(){
         this.id = 0;
