@@ -474,7 +474,7 @@ span.badge.new:after {
 /*escritores*/
 .card-escritor{
 	background-color: transparent;
-	
+	cursor: pointer;
 }
 
 .img-escritor{
@@ -485,7 +485,6 @@ span.badge.new:after {
 
 .card-escritor .content{
 	background-color: white;
-	
 	border-radius: 2px;
 }
 

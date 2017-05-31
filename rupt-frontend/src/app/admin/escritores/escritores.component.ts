@@ -1,8 +1,12 @@
+import { LeitoresService } from './../../services/leitores.service';
+import { DateBr } from './../../shared/dateBr';
+import { NgForm } from '@angular/forms/src/directives';
+import { MaterializeAction } from 'angular2-materialize';
 import { Escritor } from './../../classes/escritor';
 import { EscritoresService } from './../../services/escritores.service';
 import { Option } from './../../shared/option';
 import { NotificacoesService } from './../../services/notificacoes.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-escritores',
@@ -13,12 +17,21 @@ import { Component, OnInit } from '@angular/core';
 export class EscritoresComponent implements OnInit {
 
   mSolicitacao = 1;
+  mEscrires = 0;
+  dataInvalida: boolean;
+  emailInvalido: boolean;
+  nickInvalido: boolean;
+  senhaValida: boolean;
   
   filtroEscritores: string;
   filtroSolicitacoes: string;
   notificacoes;
+  escritor: Escritor;
   escritores: Escritor[];
   solicitacoes: Escritor[];
+
+  modalActions = new EventEmitter<string|MaterializeAction>();
+  modalMessage = new EventEmitter<string|MaterializeAction>();
 
   selectOptions: Option[] = [
     {value: 2, name: 'Nome'},
@@ -31,14 +44,36 @@ export class EscritoresComponent implements OnInit {
     {value: 0, name: 'Lista'}
   ]
 
+  selectEscritor: Option[]= [
+    {value: 0, name: 'Lista'},
+    {value: 1, name: 'Card'}
+  ]
+
+  selectAtivo: Option[] = [
+    {value: 1, name: 'Ativo'},
+    {value: 0, name: 'Inativo'}
+  ];
+
   constructor(
     private _notificacoesService: NotificacoesService,
-    private _escritoresService: EscritoresService) { }
+    private _escritoresService: EscritoresService,
+    private _leitoresService:LeitoresService) { }
 
   ngOnInit() {
     this.notificacoes = this._notificacoesService.getNotificacoes();
     this.getEscritores();
     this.getSolicitacoes();
+    this.escritor = new Escritor();
+  }
+
+  openModalEdit(escritor: Escritor) {
+    this.emailInvalido = false;
+    this.nickInvalido = false;
+    this.senhaValida = true;
+    this.escritor = escritor;
+    if (this.escritor.nascimento.indexOf("/")<0)
+      this.escritor.nascimento = DateBr.convert(this.escritor.nascimento);
+    this.modalActions.emit({action:"modal",params:['open']});
   }
 
   getEscritores(){
@@ -87,6 +122,59 @@ export class EscritoresComponent implements OnInit {
       
       return false;
     });
+  }
+
+  closeModal() {
+    this.modalActions.emit({action:"modal",params:['close']});
+    this.nickInvalido = false;
+    this.emailInvalido = false;
+    this.dataInvalida = false;
+  }
+
+  validaNick(){
+    if (this.escritor.nick){
+      if (this.escritor.nick.length >= 3){
+        this._leitoresService.validaNick(this.escritor.nick, this.escritor.id).subscribe(
+          (nick: boolean) => {this.nickInvalido = nick}
+        );
+      }
+      else
+        this.nickInvalido = false;
+    }
+  }
+
+  validaEmail(){
+    if (this.escritor.email){
+      if (this.escritor.email.length >= 6){
+        this._leitoresService.validaEmail(this.escritor.email, this.escritor.id).subscribe(
+          (email: boolean) => {this.emailInvalido = email}
+        );
+      }
+      else
+        this.emailInvalido = false;
+    }
+  }
+
+  validaData(e){
+    if (e){
+      this.escritor.nascimento = DateBr.mask(e);
+      this.dataInvalida = !DateBr.valida(this.escritor.nascimento);
+    }
+  }
+
+  onSubmit(form){
+    this._escritoresService.updateEscritor(form, this.escritor.id).subscribe(
+        (response: any) => {
+          //this.message = response;
+          this.getEscritores();
+        }
+      );
+    
+    this.showMessage();
+  }
+
+  showMessage(){
+    this.modalMessage.emit({action:"modal",params:['open']});
   }
 
 }

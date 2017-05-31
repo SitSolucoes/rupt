@@ -42,7 +42,7 @@ export class LeitoresService {
     (response: Response)=>{
       response.json()
     });
-  } 
+  }  
 
   getLeitores(): Observable<any>{
      return this._http.get(this._url + 'getLeitores')

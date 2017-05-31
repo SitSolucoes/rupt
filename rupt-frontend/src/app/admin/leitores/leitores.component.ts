@@ -81,7 +81,8 @@ export class LeitoresComponent implements OnInit {
     this.nickInvalido = false;
     this.senhaValida = true;
     this.leitor = leitor;
-    this.leitor.nascimento = DateBr.convert(this.leitor.nascimento);
+    if (this.leitor.nascimento.indexOf("/")<0)
+      this.leitor.nascimento = DateBr.convert(this.leitor.nascimento);
     this.modalActions.emit({action:"modal",params:['open']});
   }
 

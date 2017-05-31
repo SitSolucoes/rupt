@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { Http, Response } from '@angular/http';
+import { Http, Response, Headers} from '@angular/http';
 import { Injectable } from '@angular/core';
 
 @Injectable()
@@ -33,6 +33,29 @@ export class EscritoresService {
           return response.json().solicitacoes;
         }
       )
+  }
+
+  private createBody(form){
+    return JSON.stringify(
+        {
+         nome: form.value.nome,
+         nick: form.value.nick,
+         email: form.value.email,
+         nascimento: form.value.nascimento,
+         sexo: form.value.sexo,
+         ativo: form.value.ativo,
+         src_foto: form.value.src_foto,
+         password: form.value.senha
+      });
+  }
+
+  updateEscritor(form, id){
+    const body = this.createBody(form);
+    
+    return this._http.put(this._url + 'updateEscritor/'+id, body, {headers: this.headers}).map(
+    (response: Response)=>{
+      response.json()
+    });
   }
 
 }

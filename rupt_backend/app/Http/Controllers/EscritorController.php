@@ -33,4 +33,11 @@ class EscritorController extends Controller
 
         return response()->json(['solicitacoes' => $escritores], 200);
     }
+
+    public function update(Request $request, $id){
+        $leitorController = new LeitorController();
+        $leitorController->update($request, $id);
+
+        return response()->json(['message' => "Leitor alterado com Sucesso"], 200);
+    }
 }

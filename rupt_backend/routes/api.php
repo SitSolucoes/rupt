@@ -97,6 +97,7 @@ Route::get('/validaEmailLeitor/{nick}/{id}', [
 Route::get('/getEscritores',['uses' => 'EscritorController@getEscritores']);
 Route::get('/getSolicitacoes', ['uses' => 'EscritorController@getSolicitacoes']);
 Route::get('/countSolicitacoes', ['uses' => 'EscritorController@countSolicitacoes']);
+Route::put('/updateEscritor/{id}',['uses' => 'EscritorController@update']);
 
 //sugestões
 Route::get('/getSugestoes', [
