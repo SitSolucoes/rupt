@@ -28,7 +28,7 @@ class MensagemController extends Controller
     }
 
     public function getResposta($id){
-        $resposta = Mensagem::where('mensagem_idMensagem', $id)-get()->first();
+        $resposta = Mensagem::where('mensagem_idMensagem', $id)->get()->first();
         return response()->json(['resposta' => $resposta]);
     }
 

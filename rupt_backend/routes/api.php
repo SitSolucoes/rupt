@@ -140,6 +140,10 @@ Route::get('getMensagem/{id}',[
            'uses' => 'MensagemController@getMensagem'
 ]);
 
+Route::get('getResposta/{id}',[
+           'uses' => 'MensagemController@getResposta'
+]);
+
 Route::get('/getCountMensagens_nLidas', [
           'uses' => 'MensagemController@countMensagens_nLidas'
 ]);
