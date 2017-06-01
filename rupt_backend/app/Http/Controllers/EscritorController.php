@@ -9,8 +9,7 @@ use App\Http\Controllers\LeitorController;
 class EscritorController extends Controller
 {
     public function getById($id){
-        $escritor = Escritor::where('leitor_idLeitor', $id)->get();
-
+        $escritor = Escritor::where('leitor_idLeitor', $id)->first();
         return $escritor;
     }
 
@@ -37,6 +36,19 @@ class EscritorController extends Controller
     public function update(Request $request, $id){
         $leitorController = new LeitorController();
         $leitorController->update($request, $id);
+
+        $escritor = $this->getById($id);
+        $escritor->rg = $request->rg;
+        $escritor->cpf = $request->cpf;
+        $escritor->biografia = $request->biografia;
+        $escritor->banco = $request->banco;
+        $escritor->agencia = $request->agencia;
+        $escritor->conta_corrente = $request->conta_corrente;
+        $escritor->status = $request->status;
+        
+        echo $escritor;
+        
+        $escritor->save();
 
         return response()->json(['message' => "Leitor alterado com Sucesso"], 200);
     }

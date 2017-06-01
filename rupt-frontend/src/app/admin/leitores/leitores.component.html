@@ -88,7 +88,7 @@
                         <select name="ativo" materialize="material_select" [materializeSelectOptions]="selectAtivo" [(ngModel)]="leitor.ativo">
                             <option *ngFor="let option of selectAtivo" [value]="option.value">{{option.name}}</option>
                         </select>
-                        <label for="ativo">Ativo*</label>
+                        <label for="ativo">Status*</label>
                     </div>
                 </div> 
                 <input name="src_foto" type="text" hidden [(ngModel)]="leitor.src_foto">

@@ -45,7 +45,14 @@ export class EscritoresService {
          sexo: form.value.sexo,
          ativo: form.value.ativo,
          src_foto: form.value.src_foto,
-         password: form.value.senha
+         password: form.value.senha,
+         rg: form.value.rg,
+         cpf: form.value.cpf,
+         biografia: form.value.biografia,
+         banco: form.value.banco,
+         agencia: form.value.agencia,
+         conta_corrente: form.value.contaCorrente,
+         status: form.value.status
       });
   }
 

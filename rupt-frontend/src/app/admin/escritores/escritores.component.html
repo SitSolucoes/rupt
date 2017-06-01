@@ -87,9 +87,64 @@
                         <select name="ativo" materialize="material_select" [materializeSelectOptions]="selectAtivo" [(ngModel)]="escritor.ativo">
                             <option *ngFor="let option of selectAtivo" [value]="option.value">{{option.name}}</option>
                         </select>
-                        <label for="ativo">Ativo*</label>
+                        <label for="ativo">Status como leitor*</label>
                     </div>
                 </div> 
+                <div class="row">
+                    <div class="input-field col s12 m12 l5 xl5">
+                        <input id="rg" name="rg" type="text"
+                            minlength="8" maxlength="10" required
+                            [ngClass]="{'invalid': (rg.errors?.required && rg.touched) || nickInvalido}"
+                            [(ngModel)]="escritor.rg" #rg="ngModel">
+                        
+                        <label [ngClass]="{'active': escritor?.rg}" for="nick">Rg*</label>
+
+                        <div class="error" *ngIf="rg.errors?.minlength && rg.touched">Rg inválido.</div>
+                        <div class="error" *ngIf="rg.errors?.required && rg.touched">Campo obrigatório.</div>
+                    </div>
+
+                    <div class="input-field col s12 m12 l6 xl6 right">
+                        <input id="cpf" name="cpf" type="text"
+                            minlength="6" maxlength="30"
+                            [ngClass]="{'invalid': (cpf.errors?.required && cpf.touched) || cpfInvalido}"
+                            [(ngModel)]="escritor.cpf" #cpf="ngModel" (ngModelChange)="validaCpf()">
+                        <label [ngClass]="{'active': escritor?.cpf}" for="cpf">Cpf*</label>
+
+                        <div class="error" *ngIf="cpf.errors?.cpf && cpf.touched">Cpf inválido.</div>
+                        <div class="error" *ngIf="cpfInvalido">Cpf inválido.</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 m12 l5 xl5">
+                        <input id="banco" name="banco" type="text"
+                            maxlength="15"
+                            [ngClass]="{'invalid': (banco.errors?.required && rg.touched)}"
+                            [(ngModel)]="escritor.banco" #banco="ngModel">
+                        
+                        <label [ngClass]="{'active': escritor?.banco}" for="banco">Banco</label>
+                    </div>
+
+                    <div class="input-field col s12 m12 l6 xl6 right">
+                        <input id="agencia" name="agencia" type="text"
+                            minlength="3" maxlength="12"
+                            [ngClass]="{'invalid': (agencia.errors?.required && agencia.touched)}"
+                            [(ngModel)]="escritor.agencia" #agencia="ngModel">
+                        <label [ngClass]="{'active': escritor?.agencia}" for="agencia">Agência</label>
+
+                        <div class="error" *ngIf="agencia.errors?.minlength">Agência inválida.</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 m12 l5 xl5">
+                        <input id="contaCorrente" name="contaCorrente" type="text"
+                            maxlength="15" minlength="4"
+                            [ngClass]="{'invalid': (contaCorrente.errors?.required && contaCorrente.touched)}"
+                            [(ngModel)]="escritor.conta_corrente" #contaCorrente="ngModel">
+                        <label [ngClass]="{'active': escritor?.conta_corrente}" for="contaCorrente">Conta corrente*</label>
+ 
+                        <div class="error" *ngIf="contaCorrente.errors?.minlength && contaCorrente.touched">Conta corrente inválida.</div>
+                    </div>
+                </div>
                 <input name="src_foto" type="text" hidden [(ngModel)]="escritor.src_foto">
             </div>   
         </div>

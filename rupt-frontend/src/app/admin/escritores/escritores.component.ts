@@ -18,6 +18,7 @@ export class EscritoresComponent implements OnInit {
 
   mSolicitacao = 1;
   mEscrires = 0;
+  cpfInvalido: boolean;
   dataInvalida: boolean;
   emailInvalido: boolean;
   nickInvalido: boolean;
@@ -155,6 +156,10 @@ export class EscritoresComponent implements OnInit {
     }
   }
 
+  validaCpf(){
+
+  }
+
   validaData(e){
     if (e){
       this.escritor.nascimento = DateBr.mask(e);
@@ -171,6 +176,8 @@ export class EscritoresComponent implements OnInit {
       );
     
     this.showMessage();
+    this.getEscritores();
+    this.getSolicitacoes();
   }
 
   showMessage(){
