@@ -1,3 +1,4 @@
+import { ConnectionFactory } from './../classes/connection-factory';
 import { Injectable } from '@angular/core';
 
 import { Http, Response, Headers } from '@angular/http';
@@ -7,9 +8,7 @@ export class PostsService {
 
   constructor(private _http: Http) { }
 
-  private _url: string = 
-    'http://localhost:8000/api/'; //DEV
-    //'http://api.sitsolucoes.com.br/api/';  //TESTE
+  private _url: string = ConnectionFactory.API_CONNECTION;
 
   getEscritor(id){
     

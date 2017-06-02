@@ -1,3 +1,4 @@
+import { ConnectionFactory } from './../classes/connection-factory';
 import { Admin } from './../admin/admin';
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
@@ -6,9 +7,7 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class AdministradoresService {
-  private _url: string = 
-    'http://localhost:8000/api/'; //DEV
-    //'http://api.sitsolucoes.com.br/api/';  //TESTE
+  private _url: string = ConnectionFactory.API_CONNECTION;
   private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(private _http: Http) { }

@@ -1,3 +1,4 @@
+import { ConnectionFactory } from './../classes/connection-factory';
 import { Observable } from 'rxjs';
 import { Http, Response, Headers} from '@angular/http';
 import { Injectable } from '@angular/core';
@@ -6,9 +7,7 @@ import { Injectable } from '@angular/core';
 export class EscritoresService {
 
   private headers = new Headers({'Content-Type': 'application/json'});
-  private _url: string = 
-    'http://localhost:8000/api/'; //DEV
-    //'http://api.sitsolucoes.com.br/api/';  //TESTE
+  private _url: string = ConnectionFactory.API_CONNECTION;
   constructor(private _http: Http) { }
 
   getEscritores(): Observable<any>{

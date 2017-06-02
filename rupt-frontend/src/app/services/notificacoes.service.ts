@@ -1,3 +1,4 @@
+import { ConnectionFactory } from './../classes/connection-factory';
 import { MensagensService } from './mensagens.service';
 import { EscritoresService } from './escritores.service';
 import { SugestoesService } from './sugestoes.service';
@@ -16,9 +17,7 @@ export class NotificacoesService {
     private _escritoresService: EscritoresService
   ) { }
   
-  private _url: string =  
-    'http://localhost:8000/api/'; //DEV
-    //'http://api.sitsolucoes.com.br/api/';  //TESTE
+  private _url: string = ConnectionFactory.API_CONNECTION;
 
   getNotificacoes(){
     this._sugestoesService.countSugestoes().subscribe(

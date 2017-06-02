@@ -1,3 +1,4 @@
+import { ConnectionFactory } from './../classes/connection-factory';
 import { NgForm } from '@angular/forms/src/directives';
 import { Injectable } from "@angular/core";
 import { Http, Headers, Response } from "@angular/http";
@@ -13,9 +14,7 @@ export class AuthService {
 
   }
 
-  private _url: string = 
-    'http://localhost:8000/api/'; //DEV
-    //'http://api.sitsolucoes.com.br/api/';  //TESTE
+  private _url: string = ConnectionFactory.API_CONNECTION;
 
   private token: string;
 
