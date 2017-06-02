@@ -79,6 +79,7 @@ export class LeitoresComponent implements OnInit {
   openModalEdit(leitor: Leitor){
     this.emailInvalido = false;
     this.nickInvalido = false;
+    this.dataInvalida = false;
     this.senhaValida = true;
     this.leitor = leitor;
     if (this.leitor.nascimento.indexOf("/")<0)
@@ -87,10 +88,8 @@ export class LeitoresComponent implements OnInit {
   }
 
   closeModal() {
+    this.getLeitores();
     this.modalActions.emit({action:"modal",params:['close']});
-    this.nickInvalido = false;
-    this.emailInvalido = false;
-    this.dataInvalida = false;
   }
 
   validaNick(){

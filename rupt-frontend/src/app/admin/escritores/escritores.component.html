@@ -89,15 +89,21 @@
                         </select>
                         <label for="ativo">Status como leitor*</label>
                     </div>
+                    <div class="input-field col s12 m12 l6 xl6 right">
+                        <select name="status" materialize="material_select" [materializeSelectOptions]="selectStatus" [(ngModel)]="escritor.status">
+                            <option *ngFor="let option of selectStatus" [value]="option.value">{{option.name}}</option>
+                        </select>
+                        <label for="ativo">Status como escritor*</label>
+                    </div>
                 </div> 
                 <div class="row">
                     <div class="input-field col s12 m12 l5 xl5">
                         <input id="rg" name="rg" type="text"
                             minlength="8" maxlength="10" required
-                            [ngClass]="{'invalid': (rg.errors?.required && rg.touched) || nickInvalido}"
+                            [ngClass]="{'invalid': rg.errors?.required && rg.touched}"
                             [(ngModel)]="escritor.rg" #rg="ngModel">
                         
-                        <label [ngClass]="{'active': escritor?.rg}" for="nick">Rg*</label>
+                        <label [ngClass]="{'active': escritor?.rg}" for="rg">Rg*</label>
 
                         <div class="error" *ngIf="rg.errors?.minlength && rg.touched">Rg inválido.</div>
                         <div class="error" *ngIf="rg.errors?.required && rg.touched">Campo obrigatório.</div>
@@ -143,6 +149,11 @@
                         <label [ngClass]="{'active': escritor?.conta_corrente}" for="contaCorrente">Conta corrente*</label>
  
                         <div class="error" *ngIf="contaCorrente.errors?.minlength && contaCorrente.touched">Conta corrente inválida.</div>
+                    </div>
+                    <div class="input-field col s12 m12 l6 xl6 right">
+                        <input id="created_at" name="created_at" type="text" readonly
+                        [ngModel]="escritor.created_at | date:'dd/MM/yyyy'">
+                        <label [ngClass]="{'active': escritor?.created_at}" for="created_at">Data de cadastro</label>
                     </div>
                 </div>
                 <input name="src_foto" type="text" hidden [(ngModel)]="escritor.src_foto">
@@ -426,8 +437,8 @@
                             {{e.email}}
                         </div>
                         <div class="col s2 m1 l1 xl1 item">
-                            <div *ngIf="!e.ativo">Inativo</div>
-                            <div *ngIf="e.ativo">Ativo</div>
+                            <div *ngIf="e.status == 'i'">Inativo</div>
+                            <div *ngIf="e.status == 'a'">Ativo</div>
                         </div>
                         <div class="option-icons col s2 m2 l1 xl1">
                             <i class="material-icons" (click)="openModalEdit(e)">mode_edit</i>

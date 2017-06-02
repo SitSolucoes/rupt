@@ -55,6 +55,11 @@ export class EscritoresComponent implements OnInit {
     {value: 0, name: 'Inativo'}
   ];
 
+  selectStatus: Option[] = [
+    {value: 'a', name: 'Ativo'},
+    {value: 'i', name: 'Inativo'}
+  ]
+
   constructor(
     private _notificacoesService: NotificacoesService,
     private _escritoresService: EscritoresService,
@@ -71,10 +76,17 @@ export class EscritoresComponent implements OnInit {
     this.emailInvalido = false;
     this.nickInvalido = false;
     this.senhaValida = true;
+    this.dataInvalida = false;
     this.escritor = escritor;
     if (this.escritor.nascimento.indexOf("/")<0)
       this.escritor.nascimento = DateBr.convert(this.escritor.nascimento);
     this.modalActions.emit({action:"modal",params:['open']});
+  }
+
+  closeModal() {
+    this.getEscritores();
+    this.getSolicitacoes();
+    this.modalActions.emit({action:"modal",params:['close']});
   }
 
   getEscritores(){
@@ -123,13 +135,6 @@ export class EscritoresComponent implements OnInit {
       
       return false;
     });
-  }
-
-  closeModal() {
-    this.modalActions.emit({action:"modal",params:['close']});
-    this.nickInvalido = false;
-    this.emailInvalido = false;
-    this.dataInvalida = false;
   }
 
   validaNick(){

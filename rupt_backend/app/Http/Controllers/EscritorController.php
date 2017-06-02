@@ -46,8 +46,6 @@ class EscritorController extends Controller
         $escritor->conta_corrente = $request->conta_corrente;
         $escritor->status = $request->status;
         
-        echo $escritor;
-        
         $escritor->save();
 
         return response()->json(['message' => "Leitor alterado com Sucesso"], 200);
