@@ -40,6 +40,11 @@ export class EscritoresComponent implements OnInit {
     {value: 0, name: 'Data'}
   ];
 
+  selectSexo: Option[] = [
+    {value: 'f', name: 'Feminino'},
+    {value: 'm', name: 'Masculino'}
+  ]
+
   selectSolicitacao: Option[] = [
     {value: 1, name: 'Card'},
     {value: 0, name: 'Lista'}
@@ -162,7 +167,7 @@ export class EscritoresComponent implements OnInit {
   }
 
   validaCpf(){
-
+    
   }
 
   validaData(e){

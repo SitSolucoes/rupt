@@ -1,15 +1,17 @@
 <div id="modal1" class="modal center-sheet" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions">
     <form class="col s12" #f="ngForm" (ngSubmit)="onSubmit(f)">
         <div class="modal-content">
-            <h4 *ngIf="escritor.status == 'p'">Analisar</h4>
-            <h4 *ngIf="escritor.status != 'p'">Editar</h4>
+            <h4 *ngIf="escritor.status == 'p' || escritor.status == 'r'">Analisar</h4>
+            <h4 *ngIf="escritor.status != 'p' || escritor.status != 'p'">Editar</h4>
+            
             <div class="row">
                 <div class="col s12 m12 l12 xl12">
                     <div class="input-field col s12">
                         <input id="nome" name="nome" type="text"  
                             minlength="4" maxlength="60" required
                             [ngClass]="{'invalid': nome.errors?.required && nome.touched}"
-                            [(ngModel)]="escritor.nome" #nome="ngModel">
+                            [(ngModel)]="escritor.nome" #nome="ngModel"
+                            [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
 
                         <label [ngClass]="{'active': escritor?.nome}" for="nome">Nome Completo*</label>
                         
@@ -22,7 +24,8 @@
                         <input id="nick" name="nick" type="text"
                             minlength="3" maxlength="20" required
                             [ngClass]="{'invalid': (nick.errors?.required && nick.touched) || nickInvalido}"
-                            [(ngModel)]="escritor.nick" #nick="ngModel" (ngModelChange)="validaNick()">
+                            [(ngModel)]="escritor.nick" #nick="ngModel" (ngModelChange)="validaNick()"
+                            [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
                         
                         <label [ngClass]="{'active': escritor?.nick}" for="nick">Nick*</label>
 
@@ -35,7 +38,9 @@
                         <input id="email" name="email" type="email"
                             minlength="6" maxlength="30"
                             [ngClass]="{'invalid': (email.errors?.required && email.touched) || emailInvalido}"
-                            [(ngModel)]="escritor.email" #email="ngModel" email (ngModelChange)="validaEmail()">
+                            [(ngModel)]="escritor.email" #email="ngModel" email (ngModelChange)="validaEmail()"
+                            [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
+                        
                         <label [ngClass]="{'active': escritor?.email}" for="email">Email*</label>
 
                         <div class="error" *ngIf="email.errors?.email && email.touched">Email inválido.</div>
@@ -47,24 +52,32 @@
                         <input id="nascimento" name="nascimento" type="text" maxlength="10"
                             [ngClass]="{'invalid': nascimento.touched && dataInvalida}"
                             [ngModel]="escritor.nascimento" #nascimento="ngModel" 
-                            (ngModelChange)="validaData($event)">
+                            (ngModelChange)="validaData($event)"
+                            [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
                         
                         <label [ngClass]="{'active': escritor?.nascimento}" for="nascimento">Data de Nascimento*</label>
 
                         <div class="error" *ngIf="nascimento.touched && dataInvalida">Data inválida.</div>
                     </div>
-                    <div class="input-field col s12 m12 l6 xl6 right">
-                        <select name="sexo" materialize="material_select" [materializeSelectOptions]="selectOptions" [(ngModel)]="escritor.sexo">
-                            <option *ngFor="let option of selectOptions" [value]="option.value">{{option.name}}</option>
+                    <div class="input-field col s12 m12 l6 xl6 right" *ngIf="escritor.status != 'p' && escritor.status != 'r'" >
+                        <select name="sexo" materialize="material_select" [materializeSelectOptions]="selectSexo" 
+                        [(ngModel)]="escritor.sexo">
+                            <option *ngFor="let option of selectSexo" [value]="option.value">{{option.name}}</option>
                         </select>
                         <label for="sexo">Sexo*</label>
+                    </div>
+                    <div class="input-field col s12 m12 l6 xl6 right" *ngIf="escritor.status == 'p' || escritor.status == 'r'" >
+                        <input id="sexo" name="sexo" type="text" readonly value="{{escritor.sexo == 'm' ? 'Masculino' : 'Feminino'}}">
+                        
+                        <label for="sexo" class="active">Sexo*</label>
                     </div>
                 </div>
                 <div class="row" *ngIf="escritor.id == 0">
                     <div class="input-field col s12 m12 l5 xl5">
                         <input id="password" name="password" type="password"
                         minlength="8" maxlength="20" required 
-                        [(ngModel)]="escritor.password" #senha="ngModel">
+                        [(ngModel)]="escritor.password" #senha="ngModel"
+                        [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
                         
                         <label for="senha">Senha*</label>
 
@@ -74,7 +87,8 @@
                     <div class="input-field col s12 m12 l6 xl6 right">
                         <input id="confirm-senha" name="confirm-senha" type="password" 
                         [ngClass]="{'invalid': senha.touched && confirm.value != senha.value}"
-                        ngModel #confirm="ngModel" (keypress)="comparaSenhas($event, confirm)">
+                        ngModel #confirm="ngModel" (keypress)="comparaSenhas($event, confirm)"
+                        [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
 
                         <label for="confirm-senha">Confirmar Senha*</label>
                         <div class="error" *ngIf="senha.touched && confirm.value != senha.value">
@@ -83,17 +97,29 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s12 m12 l5 xl5">
-                        <select name="ativo" materialize="material_select" [materializeSelectOptions]="selectAtivo" [(ngModel)]="escritor.ativo">
+                    <div class="input-field col s12 m12 l5 xl5" *ngIf="escritor.status != 'p' && escritor.status != 'r'">
+                        <select name="ativo" materialize="material_select" [materializeSelectOptions]="selectAtivo" 
+                        [(ngModel)]="escritor.ativo">
                             <option *ngFor="let option of selectAtivo" [value]="option.value">{{option.name}}</option>
                         </select>
                         <label for="ativo">Status como leitor*</label>
                     </div>
-                    <div class="input-field col s12 m12 l6 xl6 right">
-                        <select name="status" materialize="material_select" [materializeSelectOptions]="selectStatus" [(ngModel)]="escritor.status">
+                    <div class="input-field col s12 m12 l5 xl5" *ngIf="escritor.status == 'p' || escritor.status == 'r'" >
+                        <input id="ativo" name="ativo" type="text" readonly value="{{escritor.ativo == 1 ? 'Ativo' : 'Inativo'}}">
+                        
+                        <label for="ativo" class="active">Status como Leitor*</label>
+                    </div>
+                    <div class="input-field col s12 m12 l6 xl6 right" *ngIf="escritor.status != 'p' && escritor.status != 'r'">
+                        <select name="status" materialize="material_select" [materializeSelectOptions]="selectStatus" 
+                        [(ngModel)]="escritor.status">
                             <option *ngFor="let option of selectStatus" [value]="option.value">{{option.name}}</option>
                         </select>
                         <label for="ativo">Status como escritor*</label>
+                    </div>
+                    <div class="input-field col s12 m12 l6 xl6 right" *ngIf="escritor.status == 'p' || escritor.status == 'r'" >
+                        <input id="status" name="status" type="text" readonly value="{{escritor.status == 'p' ? 'Pendente' : 'Recusado'}}">
+                        
+                        <label for="ativo" class="active">Status como Leitor*</label>
                     </div>
                 </div> 
                 <div class="row">
@@ -101,7 +127,8 @@
                         <input id="rg" name="rg" type="text"
                             minlength="8" maxlength="10" required
                             [ngClass]="{'invalid': rg.errors?.required && rg.touched}"
-                            [(ngModel)]="escritor.rg" #rg="ngModel">
+                            [(ngModel)]="escritor.rg" #rg="ngModel"
+                            [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
                         
                         <label [ngClass]="{'active': escritor?.rg}" for="rg">Rg*</label>
 
@@ -113,7 +140,9 @@
                         <input id="cpf" name="cpf" type="text"
                             minlength="6" maxlength="30"
                             [ngClass]="{'invalid': (cpf.errors?.required && cpf.touched) || cpfInvalido}"
-                            [(ngModel)]="escritor.cpf" #cpf="ngModel" (ngModelChange)="validaCpf()">
+                            [(ngModel)]="escritor.cpf" #cpf="ngModel" (ngModelChange)="validaCpf()"
+                            [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
+
                         <label [ngClass]="{'active': escritor?.cpf}" for="cpf">Cpf*</label>
 
                         <div class="error" *ngIf="cpf.errors?.cpf && cpf.touched">Cpf inválido.</div>
@@ -125,7 +154,8 @@
                         <input id="banco" name="banco" type="text"
                             maxlength="15"
                             [ngClass]="{'invalid': (banco.errors?.required && rg.touched)}"
-                            [(ngModel)]="escritor.banco" #banco="ngModel">
+                            [(ngModel)]="escritor.banco" #banco="ngModel"
+                            [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
                         
                         <label [ngClass]="{'active': escritor?.banco}" for="banco">Banco</label>
                     </div>
@@ -134,7 +164,9 @@
                         <input id="agencia" name="agencia" type="text"
                             minlength="3" maxlength="12"
                             [ngClass]="{'invalid': (agencia.errors?.required && agencia.touched)}"
-                            [(ngModel)]="escritor.agencia" #agencia="ngModel">
+                            [(ngModel)]="escritor.agencia" #agencia="ngModel"
+                            [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
+
                         <label [ngClass]="{'active': escritor?.agencia}" for="agencia">Agência</label>
 
                         <div class="error" *ngIf="agencia.errors?.minlength">Agência inválida.</div>
@@ -145,26 +177,44 @@
                         <input id="contaCorrente" name="contaCorrente" type="text"
                             maxlength="15" minlength="4"
                             [ngClass]="{'invalid': (contaCorrente.errors?.required && contaCorrente.touched)}"
-                            [(ngModel)]="escritor.conta_corrente" #contaCorrente="ngModel">
-                        <label [ngClass]="{'active': escritor?.conta_corrente}" for="contaCorrente">Conta corrente*</label>
+                            [(ngModel)]="escritor.conta_corrente" #contaCorrente="ngModel"
+                            [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
+
+                        <label [ngClass]="{'active': escritor?.conta_corrente}" for="contaCorrente">Conta corrente</label>
  
                         <div class="error" *ngIf="contaCorrente.errors?.minlength && contaCorrente.touched">Conta corrente inválida.</div>
                     </div>
                     <div class="input-field col s12 m12 l6 xl6 right">
                         <input id="created_at" name="created_at" type="text" readonly
                         [ngModel]="escritor.created_at | date:'dd/MM/yyyy'">
+
                         <label [ngClass]="{'active': escritor?.created_at}" for="created_at">Data de cadastro</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <textarea id="biografia" name="biografia" class="materialize-textarea" data-length="180"
+                        [(ngModel)]="escritor.biografia"
+                        [readOnly]="escritor.status == 'p' || escritor.status == 'r'"
+                        ></textarea>
+                        <label [ngClass]="{'active': escritor?.biografia}" for="biografia">Biografia</label>
                     </div>
                 </div>
                 <input name="src_foto" type="text" hidden [(ngModel)]="escritor.src_foto">
             </div>   
         </div>
-        <div class="modal-footer">
+
+        <div class="modal-footer" *ngIf="escritor.status != 'p' || escritor.status != 'p'">
             <a (click)="closeModal()" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
             <button type="submit" class="modal-action modal-close waves-effect waves-green btn-flat"
                 [disabled]="!f.valid || emailInvalido || nickInvalido || dataInvalida || !senhaValida">
                 Salvar
             </button>
+        </div>
+        <div class="modal-footer" *ngIf="escritor.status == 'p' || escritor.status == 'p'">
+            <a (click)="closeModal()" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
+            <a (click)="closeModal()" class="modal-action modal-close waves-effect waves-green btn-flat ">Recusar</a>
+            <a (click)="closeModal()" class="modal-action modal-close waves-effect waves-green btn-flat ">Aceitar</a>
         </div>
     </form> 
 </div>
@@ -249,18 +299,21 @@
         </div>
 
         <div class="col s12 m12 l12 xl12" *ngIf="mSolicitacao == 1">
-            <div class="col s12 m6 l4 xl3" *ngFor="let s of listSolicitacoes() | paginate: {itemsPerPage: 10, currentPage:pageSolicitacoes, id: 'solicitacoes'}; let i = index">
-                <div class="card card-escritor">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRidqV3uhD3LVdfmtxiXqm7UuhImO1poNtPaW3qX461w0A85K2E8A" class="img-escritor row">
-                    <div class="content row">
-                        <div class="nome"> {{ s.nick }} </div>
-                        <div class="dados">
-                        nome: {{ s.nome }}<br>
-                        CPF: {{s.cpf | cpfCnpj }}  <br>
-                        Solicitado: {{ s.created_at | date:"dd/MM/yyyy" }}
+            <div class="col s12 m6 l4 xl3" *ngFor="let s of listSolicitacoes() | paginate: {itemsPerPage: 8, currentPage:pageSolicitacoes, id: 'solicitacoes'}; let i = index">
+                <a (click)="openModalEdit(s)">
+                    <div class="card card-escritor">
+                        <img src="https://pbs.twimg.com/profile_images/817091464731693057/5RSuRSGK.jpg" class="img-escritor row">
+                        <div class="content row">
+                            <div class="nome"> {{ s.nick }} </div>
+                            <div class="dados">
+                            nome: {{ s.nome }}<br>
+                            CPF: {{s.cpf | cpfCnpj }}  <br>
+                            Solicitado: {{ s.created_at | date:"dd/MM/yyyy" }} <br>
+                            Status: {{ s.status == 'r' ? 'Recusado' : 'Pendente'}}
+                            </div>
                         </div>
                     </div>
-                </div>
+                </a>
             </div> 
         </div>
 
@@ -271,7 +324,7 @@
                         <div class="col s3 m3 l2 xl2 item">
                             Usuário
                         </div>
-                        <div class="col s4 m4 l3 xl3 item">
+                        <div class="col s4 m4 l3 xl2 item">
                             Nome
                         </div>
                         <div class="col s3 m4 l2 xl2 item">
@@ -283,6 +336,9 @@
                         <div class="col s2 m2 l2 xl2 item">
                             Solicitado
                         </div>
+                        <div class="col s1 m1 l1 xl1 item">
+                            Status
+                        </div>
                         <div class="option-icons col s2 m2 l1 xl1 right-align item">
                             <div class="margin-right-1">Analisar</div>
                         </div>
@@ -293,7 +349,7 @@
                         <div class="col s3 m3 l2 xl2 item">
                             {{s.nick}}
                         </div>
-                        <div class="col s4 m4 l3 xl3 item">
+                        <div class="col s4 m4 l3 xl2 item">
                             {{s.nome}}
                         </div>
                         <div class="col s3 m4 l2 xl2 item">
@@ -305,8 +361,12 @@
                         <div class="col s2 m2 l2 xl2 item">
                             {{ s.created_at | date:"dd/MM/yyyy" }}
                         </div>
+                        <div class="col s1 m1 l1 xl1 item">
+                            <div *ngIf="s.status == 'r'">Recusado</div>
+                            <div *ngIf="s.status == 'p'">Pendente</div>   
+                        </div>
                         <div class="option-icons col s2 m2 l1 xl1">
-                            <i class="material-icons" (click)="openModalEdit(l)">visibility</i>
+                            <i class="material-icons" (click)="openModalEdit(s)">visibility</i>
                         </div>
                     </div>
                 </li>
@@ -381,19 +441,21 @@
             </div>
         </div>
         <div class="col s12 m12 l12 xl12" *ngIf="mEscritor == 1">
-            <div class="col s12 m6 l4 xl3" *ngFor="let e of listEscritores() | paginate: {itemsPerPage: 10, currentPage:pageSolicitacoes, id: 'solicitacoes'}; let i = index">
-                <div class="card card-escritor">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRidqV3uhD3LVdfmtxiXqm7UuhImO1poNtPaW3qX461w0A85K2E8A" class="img-escritor row">
-                    <div class="content row">
-                        <div class="nome"> {{ e.nick }} </div>
-                        <div class="dados">
-                        nome: {{ e.nome }}<br>
-                        CPF: {{e.cpf | cpfCnpj }}  <br>
-                        Status: <font *ngIf="!e.ativo">Inativo</font>
-                                <font *ngIf="e.ativo">Ativo</font>
+            <div class="col s12 m6 l4 xl3" *ngFor="let e of listEscritores() | paginate: {itemsPerPage: 8, currentPage:pageSolicitacoes, id: 'solicitacoes'}; let i = index">
+                <a (click)="openModalEdit(e)">
+                    <div class="card card-escritor">
+                        <img src="http://www.culturamix.com/wp-content/gallery/neymar-iguala-marca-de-romario-e-pele/neymar-iguala-marca-de-romario-e-pele-13.jpg" class="img-escritor row">
+                        <div class="content row">
+                            <div class="nome"> {{ e.nick }} </div>
+                            <div class="dados">
+                            nome: {{ e.nome }}<br>
+                            CPF: {{e.cpf | cpfCnpj }}  <br>
+                            Status: <font *ngIf="!e.ativo">Inativo</font>
+                                    <font *ngIf="e.ativo">Ativo</font>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </a>
             </div> 
         </div>
 

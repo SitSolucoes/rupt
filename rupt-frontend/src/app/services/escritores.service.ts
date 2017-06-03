@@ -51,7 +51,7 @@ export class EscritoresService {
          banco: form.value.banco,
          agencia: form.value.agencia,
          conta_corrente: form.value.contaCorrente,
-         status: form.value.status
+         status: form.value.status,
       });
   }
 
