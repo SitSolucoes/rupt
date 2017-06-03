@@ -46,11 +46,12 @@ class MensagemController extends Controller
     public function respondeMensagem(Request $request, $id){
         //pega dados para mensagem
         $mensagem = Mensagem::where('id','=', $id)->get()->first();
-        
+        $lida = $request->lida;
+        $resposta = $request->resposta;
         $admin = Admin::where('id','=', $request->admin)->get()->first();
         //echo $admin;
         //erro
-        if($mensagem == null || $admin == null)
+        if($mensagem == null || ($resposta = '' && !$lida) || $admin == null)
             return response()->json(['enviada' => false]);
         
         
@@ -61,21 +62,23 @@ class MensagemController extends Controller
         $mensagem->save();
           
         //nova mensagem de resposta
-        $n_mensagem = new Mensagem();
-        $n_mensagem->assunto = 'Resposta';
-        $n_mensagem->conteudo = $request->resposta;
-        $n_mensagem->lida = true;
-        $n_mensagem->remetente = $admin->email;
-        $n_mensagem->nome = $admin->name;
-        $n_mensagem->admin_idAdmin = $admin->id;
-        $n_mensagem->leitor_idLeitor = $mensagem->leitor_idLeitor;
-        $n_mensagem->mensagem_idMensagem = $mensagem->id;
-        $n_mensagem->save();
+        if($resposta != ''){
+            $n_mensagem = new Mensagem();
+            $n_mensagem->assunto = 'Resposta';
+            $n_mensagem->conteudo = $request->resposta;
+            $n_mensagem->lida = true;
+            $n_mensagem->remetente = $admin->email;
+            $n_mensagem->nome = $admin->name;
+            $n_mensagem->admin_idAdmin = $admin->id;
+            $n_mensagem->leitor_idLeitor = $mensagem->leitor_idLeitor;
+            $n_mensagem->mensagem_idMensagem = $mensagem->id;
+            $n_mensagem->save();
 
-        //manda mensagem
-        Mail::to($mensagem->remetente)
-             ->send(new sendRespostaEmail($mensagem->assunto, 
-                                          $request->resposta));
+            //manda mensagem
+            Mail::to($mensagem->remetente)
+                ->send(new sendRespostaEmail($mensagem->assunto, 
+                                            $request->resposta));
+        }
 
         return response()->json(['enviada' => true]);
     }

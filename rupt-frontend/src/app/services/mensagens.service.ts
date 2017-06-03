@@ -62,6 +62,7 @@ export class MensagensService {
   enviaResposta(f, id): Observable<any>{
     console.log(f);
     const body =  {
+        lida: f.value.lida,
         resposta: f.value.resposta,
         admin: localStorage.getItem('admin_id')
       };

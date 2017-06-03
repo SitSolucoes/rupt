@@ -39,12 +39,12 @@ export class MensagensComponent implements OnInit {
     this.clear();
     this.getMensagens_nLidas();
     this.getMensagens_lidas();
-    this.resposta_msg_selecionada = new Mensagem();
   }
 
   mostralog(r){
     console.log(r);
   }
+
   getMensagens_nLidas(){
     this._mensagemService.getMensagens_nLidas().subscribe(
         (mensagens: Mensagem[]) => {
@@ -84,7 +84,9 @@ export class MensagensComponent implements OnInit {
     mensagem.assunto = m.assunto;
     mensagem.conteudo = m.conteudo;
     mensagem.lida = m.lida;
-    mensagem.remetente = m.remetente
+    mensagem.remetente = m.remetente;
+    mensagem.created_at = m.created_at;
+    mensagem.updated_at = m.updated_at;
     return mensagem;
   }
 
@@ -121,25 +123,27 @@ export class MensagensComponent implements OnInit {
     
     return this._mensagemService.enviaResposta(f, this.mensagem_selecionada.id).subscribe(
           (response: any) => {
+            console.log(response);
               this.clear();
               this.getMensagens_nLidas();
               this.getMensagens_lidas();
-              this.showMessage()
+              this.showMessage();
           }
       );
   }
   
   openModal(m: Mensagem) {
-    this.clear();
     this.mensagem_selecionada = m;
     this.resposta = '';
     this.modalActions.emit({action:"modal",params:['open']});
   }
 
   openModalLida(m: Mensagem){
+    console.log(m);
     this.mensagem_selecionada = m;
     this._mensagemService.getResposta(m.id).subscribe(
       (resposta)=>{
+        console.log(this.mensagem_selecionada);
         this.resposta_msg_selecionada = resposta;
         this.modalLida.emit({action:"modal",params:['open']});
       });
@@ -155,5 +159,8 @@ export class MensagensComponent implements OnInit {
 
    clear(){
      this.mensagem_selecionada = new Mensagem();
+     this.mensagens_nLidas = [];
+     this.mensagens_lidas = [];
+     this.resposta_msg_selecionada = new Mensagem();
    }
 }
