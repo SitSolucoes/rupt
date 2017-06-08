@@ -58,7 +58,7 @@ class MensagemController extends Controller
         //atualiza mensagem
         //echo $admin->id;
         $mensagem->admin_idAdmin = $admin->id;
-        //$mensagem->lida = true;
+        $mensagem->lida = true;
         $mensagem->save();
           
         //nova mensagem de resposta
