@@ -51,14 +51,14 @@ class MensagemController extends Controller
         $admin = Admin::where('id','=', $request->admin)->get()->first();
         //echo $admin;
         //erro
-        if($mensagem == null || ($resposta = '' && !$lida) || $admin == null)
+        if($mensagem == null || ($resposta == '' && !$lida) || $admin == null)
             return response()->json(['enviada' => false]);
         
         
         //atualiza mensagem
         //echo $admin->id;
         $mensagem->admin_idAdmin = $admin->id;
-        $mensagem->lida = true;
+        //$mensagem->lida = true;
         $mensagem->save();
           
         //nova mensagem de resposta
@@ -80,6 +80,6 @@ class MensagemController extends Controller
                                             $request->resposta));
         }
 
-        return response()->json(['enviada' => true]);
+        return response()->json(['enviada' => $resposta]);
     }
 }

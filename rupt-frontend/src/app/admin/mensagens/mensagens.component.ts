@@ -41,6 +41,13 @@ export class MensagensComponent implements OnInit {
     this.getMensagens_lidas();
   }
 
+  zera(){
+    this.notificacoes = this._notificacoesService.getNotificacoes();
+    this.clear();
+    this.getMensagens_nLidas();
+    this.getMensagens_lidas();
+  }
+
   mostralog(r){
     console.log(r);
   }
@@ -49,7 +56,6 @@ export class MensagensComponent implements OnInit {
     this._mensagemService.getMensagens_nLidas().subscribe(
         (mensagens: Mensagem[]) => {
           this.mensagens_nLidas = mensagens;
-          console.log(this.mensagens_nLidas);
         }
       );
   }
@@ -139,11 +145,9 @@ export class MensagensComponent implements OnInit {
   }
 
   openModalLida(m: Mensagem){
-    console.log(m);
     this.mensagem_selecionada = m;
     this._mensagemService.getResposta(m.id).subscribe(
       (resposta)=>{
-        console.log(this.mensagem_selecionada);
         this.resposta_msg_selecionada = resposta;
         this.modalLida.emit({action:"modal",params:['open']});
       });
