@@ -51,7 +51,7 @@ class MensagemController extends Controller
         $admin = Admin::where('id','=', $request->admin)->get()->first();
         //echo $admin;
         //erro
-        if($mensagem == null || ($resposta = '' && !$lida) || $admin == null)
+        if($mensagem == null || ($resposta == '' && !$lida) || $admin == null)
             return response()->json(['enviada' => false]);
         
         
@@ -80,6 +80,6 @@ class MensagemController extends Controller
                                             $request->resposta));
         }
 
-        return response()->json(['enviada' => true]);
+        return response()->json(['enviada' => $resposta]);
     }
 }

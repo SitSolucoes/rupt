@@ -45,7 +45,7 @@
 </div>
 <!-- Modal Mensagem lida -->
 <div id="modalLida" class="modal center-sheet" 
-     materialize="modal" [materializeParams]="[{dismissible: false}]" 
+     materialize="modal"  [materializeParams]="[{dismissible: false}]" 
      [materializeActions]="modalLida">
         <div class="modal-content">
             <div class="row">
@@ -121,7 +121,7 @@
           <span *ngIf="notificacoes['mensagens'] != 0" class="notification">{{ notificacoes["mensagens"] }}</span>
         </a>
       </li>
-      <li class="tab col s6"><a href="#msg_lida">Mensagens Lidas</a></li>
+      <li class="tab col s6"><a href="#msg_lida" >Mensagens Lidas</a></li>
     </ul>
   </div>
   <!-- Tabela mensagens não lidas-->
