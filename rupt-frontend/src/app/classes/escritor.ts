@@ -11,7 +11,7 @@ export class Escritor extends Leitor{
     banco: string;
     agencia: string;
     conta_corrente: string;
-    created_at: Date;
+    created_at: string;
     updated_at: Date;
     status: string;
 

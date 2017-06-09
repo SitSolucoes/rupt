@@ -77,14 +77,20 @@ export class EscritoresComponent implements OnInit {
     this.escritor = new Escritor();
   }
 
-  openModalEdit(escritor: Escritor) {
+  openModalEdit(escritor: Escritor, f: NgForm) {
     this.emailInvalido = false;
     this.nickInvalido = false;
     this.senhaValida = true;
     this.dataInvalida = false;
     this.escritor = escritor;
+
     if (this.escritor.nascimento.indexOf("/")<0)
       this.escritor.nascimento = DateBr.convert(this.escritor.nascimento);
+    if (this.escritor.created_at.indexOf("/")<0)
+      this.escritor.created_at = DateBr.convert(this.escritor.created_at);
+
+    f.reset(this.escritor);
+
     this.modalActions.emit({action:"modal",params:['open']});
   }
 

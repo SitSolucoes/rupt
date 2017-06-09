@@ -6,7 +6,7 @@ export class DateBr{
     }
 
     static convert(date){
-        let dateBr = date.substring(8)+"/"+date.substring(5,7)+"/"+date.substring(0,4);
+        let dateBr = date.substring(8,10)+"/"+date.substring(5,7)+"/"+date.substring(0,4);
         
         return dateBr;
     }

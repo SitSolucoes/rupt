@@ -40,6 +40,8 @@ class EscritorController extends Controller
         $escritor = $this->getById($id);
         $escritor->rg = $request->rg;
         $escritor->cpf = $request->cpf;
+        $escritor->telefone = $request->telefone;
+        $escritor->celular = $request->celular;
         $escritor->biografia = $request->biografia;
         $escritor->banco = $request->banco;
         $escritor->agencia = $request->agencia;

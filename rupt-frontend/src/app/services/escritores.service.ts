@@ -47,6 +47,8 @@ export class EscritoresService {
          password: form.value.senha,
          rg: form.value.rg,
          cpf: form.value.cpf,
+         telefone: form.value.telefone,
+         celular: form.value.celular,
          biografia: form.value.biografia,
          banco: form.value.banco,
          agencia: form.value.agencia,

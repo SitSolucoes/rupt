@@ -138,12 +138,39 @@
 
                     <div class="input-field col s12 m12 l6 xl6 right">
                         <input id="cpf" name="cpf" type="text"
-                            minlength="6" maxlength="30"
+                            minlength="6" maxlength="30" required
                             [ngClass]="{'invalid': (cpf.errors?.required && cpf.touched) || cpfInvalido}"
                             [(ngModel)]="escritor.cpf" #cpf="ngModel" (ngModelChange)="validaCpf()"
                             [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
 
                         <label [ngClass]="{'active': escritor?.cpf}" for="cpf">Cpf*</label>
+
+                        <div class="error" *ngIf="cpf.errors?.cpf && cpf.touched">Cpf inválido.</div>
+                        <div class="error" *ngIf="cpf.errors?.minlength && cpf.touched">Cpf inválido.</div>
+                        <div class="error" *ngIf="cpfInvalido">Cpf inválido.</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 m12 l5 xl5">
+                        <input id="telefone" name="telefone" type="text"
+                            minlength="14" maxlength="15"
+                            [ngClass]="{'invalid': telefone.errors?.minlength && telefone.touched}"
+                            [(ngModel)]="escritor.telefone" #telefone="ngModel"
+                            [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
+                        
+                        <label [ngClass]="{'active': escritor?.telefone}" for="telefone">Telefone</label>
+
+                        <div class="error" *ngIf="telefone.errors?.minlength && telefone.touched">Telefone inválido.</div>
+                     </div>
+
+                    <div class="input-field col s12 m12 l6 xl6 right">
+                        <input id="celular" name="celular" type="text"
+                            minlength="14" maxlength="16" required
+                            [ngClass]="{'invalid': (celular.errors?.required && celular.touched)}"
+                            [(ngModel)]="escritor.celular" #celular="ngModel" 
+                            [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
+
+                        <label [ngClass]="{'active': escritor?.celular}" for="celular">Celular*</label>
 
                         <div class="error" *ngIf="cpf.errors?.cpf && cpf.touched">Cpf inválido.</div>
                         <div class="error" *ngIf="cpfInvalido">Cpf inválido.</div>
@@ -181,12 +208,12 @@
                             [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
 
                         <label [ngClass]="{'active': escritor?.conta_corrente}" for="contaCorrente">Conta corrente</label>
- 
+                        
                         <div class="error" *ngIf="contaCorrente.errors?.minlength && contaCorrente.touched">Conta corrente inválida.</div>
                     </div>
                     <div class="input-field col s12 m12 l6 xl6 right">
                         <input id="created_at" name="created_at" type="text" readonly
-                        [ngModel]="escritor.created_at | date:'dd/MM/yyyy'">
+                        [ngModel]="escritor.created_at">
 
                         <label [ngClass]="{'active': escritor?.created_at}" for="created_at">Data de cadastro</label>
                     </div>
@@ -300,7 +327,7 @@
 
         <div class="col s12 m12 l12 xl12" *ngIf="mSolicitacao == 1">
             <div class="col s12 m6 l4 xl3" *ngFor="let s of listSolicitacoes() | paginate: {itemsPerPage: 8, currentPage:pageSolicitacoes, id: 'solicitacoes'}; let i = index">
-                <a (click)="openModalEdit(s)">
+                <a (click)="openModalEdit(s, f)">
                     <div class="card card-escritor">
                         <img src="https://pbs.twimg.com/profile_images/817091464731693057/5RSuRSGK.jpg" class="img-escritor row">
                         <div class="content row">
@@ -366,7 +393,7 @@
                             <div *ngIf="s.status == 'p'">Pendente</div>   
                         </div>
                         <div class="option-icons col s2 m2 l1 xl1">
-                            <i class="material-icons" (click)="openModalEdit(s)">visibility</i>
+                            <i class="material-icons" (click)="openModalEdit(s, f)">visibility</i>
                         </div>
                     </div>
                 </li>
@@ -442,7 +469,7 @@
         </div>
         <div class="col s12 m12 l12 xl12" *ngIf="mEscritor == 1">
             <div class="col s12 m6 l4 xl3" *ngFor="let e of listEscritores() | paginate: {itemsPerPage: 8, currentPage:pageSolicitacoes, id: 'solicitacoes'}; let i = index">
-                <a (click)="openModalEdit(e)">
+                <a (click)="openModalEdit(e, f)">
                     <div class="card card-escritor">
                         <img src="http://www.culturamix.com/wp-content/gallery/neymar-iguala-marca-de-romario-e-pele/neymar-iguala-marca-de-romario-e-pele-13.jpg" class="img-escritor row">
                         <div class="content row">
@@ -503,7 +530,7 @@
                             <div *ngIf="e.status == 'a'">Ativo</div>
                         </div>
                         <div class="option-icons col s2 m2 l1 xl1">
-                            <i class="material-icons" (click)="openModalEdit(e)">mode_edit</i>
+                            <i class="material-icons" (click)="openModalEdit(e, f)">mode_edit</i>
                         </div>
                     </div>
                 </li>
