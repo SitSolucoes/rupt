@@ -277,6 +277,11 @@ span.badge.new:after {
 }
 .modal.modal-fixed-footer {
     height: 85%;
+	overflow-x: hidden;
+}
+
+.modal .modal-footer {
+	overflow-x: hidden;
 }
 
 .small-modal{

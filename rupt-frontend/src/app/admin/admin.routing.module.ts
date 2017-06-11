@@ -1,3 +1,4 @@
+import { TesteComponent } from './teste/teste.component';
 
 import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -32,6 +33,7 @@ const AdminRoutes: Routes = [
         { path : 'leitores', canActivate: [AuthGuard], component: LeitoresComponent},
         { path : 'escritores', canActivate: [AuthGuard], component: EscritoresComponent},
         { path : 'mensagens', canActivate: [AuthGuard], component: MensagensComponent},
+        { path : 'teste', canActivate: [AuthGuard], component: TesteComponent},
         
         { path : 'editar/:id', canActivate: [AuthGuard], component: AdministradoresComponent},
         { path : '', redirectTo: 'home', pathMatch: 'full'},

@@ -8,14 +8,37 @@ import { Option } from './../../shared/option';
 import { NotificacoesService } from './../../services/notificacoes.service';
 import { Component, OnInit, EventEmitter } from '@angular/core';
 
+import { 
+    trigger,
+    state,
+    style,
+    transition,
+    animate,
+    keyframes
+ } from '@angular/core';
+
+
 @Component({
   selector: 'app-escritores',
   templateUrl: './escritores.component.html',
   styleUrls: ['./escritores.component.css'],
+  animations: [
+    trigger(
+      'enterAnimation', [
+        transition(':enter', [
+          style({transform: 'translateX(10%)', opacity: 0}),
+          animate('500ms', style({transform: 'translateX(0)', opacity: 1}))
+        ]),
+        transition(':leave', [
+          style({transform: 'translateX(0)', opacity: 1}),
+          animate('500ms', style({transform: 'translateX(10%)', opacity: 0}))
+        ])
+      ]
+    )
+  ],
 })
 
 export class EscritoresComponent implements OnInit {
-
   mSolicitacao = 1;
   mEscrires = 0;
   cpfInvalido: boolean;
@@ -23,7 +46,6 @@ export class EscritoresComponent implements OnInit {
   emailInvalido: boolean;
   nickInvalido: boolean;
   senhaValida: boolean;
-  
   filtroEscritores: string;
   filtroSolicitacoes: string;
   notificacoes;

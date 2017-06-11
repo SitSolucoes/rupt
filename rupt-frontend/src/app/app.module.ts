@@ -7,11 +7,11 @@ import { AuthGuard } from './guards/auth.guard';
 import { AdminModule } from './admin/admin.module';
 import { RuptRoutingModule } from './rupt.routing.module';
 import { MaterializeModule } from 'angular2-materialize';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
     AppComponent,
-    
   ],
   imports: [
     BrowserModule,
@@ -20,6 +20,7 @@ import { MaterializeModule } from 'angular2-materialize';
     AdminModule,
     RuptRoutingModule,
     MaterializeModule,
+    BrowserAnimationsModule
   ],
   providers: [
     AuthGuard,

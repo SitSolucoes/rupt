@@ -237,11 +237,15 @@
                 [disabled]="!f.valid || emailInvalido || nickInvalido || dataInvalida || !senhaValida">
                 Salvar
             </button>
+
+            
         </div>
         <div class="modal-footer" *ngIf="escritor.status == 'p' || escritor.status == 'p'">
             <a (click)="closeModal()" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
-            <a (click)="closeModal()" class="modal-action modal-close waves-effect waves-green btn-flat ">Recusar</a>
-            <a (click)="closeModal()" class="modal-action modal-close waves-effect waves-green btn-flat ">Aceitar</a>
+            <a (click)="show = !show" class="modal-action modal-close waves-effect waves-green btn-flat ">Recusar</a>
+            
+            <a *ngIf="!show" (click)="closeModal()" class="modal-action modal-close waves-effect waves-green btn-flat left">Aceitar</a>
+            <div *ngIf="show" [@enterAnimation]="show">xxx</div>
         </div>
     </form> 
 </div>

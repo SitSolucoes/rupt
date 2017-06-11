@@ -27,6 +27,7 @@ import { EscritoresComponent } from './escritores/escritores.component';
 import { MensagensService } from './../services/mensagens.service';
 import { EscritoresService } from './../services/escritores.service';
 import { PostsService } from './../services/posts.service';
+import { TesteComponent } from './teste/teste.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { PostsService } from './../services/posts.service';
     RedefineSenhaComponent,
     MensagensComponent,
     EscritoresComponent,
-    CpfCnpjPipe
+    CpfCnpjPipe,
+    TesteComponent
   ],
 
   imports: [
