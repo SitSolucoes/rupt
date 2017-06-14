@@ -52,6 +52,7 @@ export class EscritoresComponent implements OnInit {
   escritor: Escritor;
   escritores: Escritor[];
   solicitacoes: Escritor[];
+  recusar: boolean;
 
   modalActions = new EventEmitter<string|MaterializeAction>();
   modalMessage = new EventEmitter<string|MaterializeAction>();
@@ -104,6 +105,7 @@ export class EscritoresComponent implements OnInit {
     this.nickInvalido = false;
     this.senhaValida = true;
     this.dataInvalida = false;
+    this.recusar = false;
     this.escritor = escritor;
 
     if (this.escritor.nascimento.indexOf("/")<0)

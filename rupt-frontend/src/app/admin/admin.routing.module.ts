@@ -1,5 +1,3 @@
-import { TesteComponent } from './teste/teste.component';
-
 import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
@@ -26,15 +24,12 @@ const AdminRoutes: Routes = [
         { path : 'esqueci-a-senha', component: EsqueciSenhaComponent},
         { path : 'redefineSenha/:token', component: RedefineSenhaComponent},
         { path : 'home', canActivate: [AuthGuard], component: AdminHomeComponent},
-        
         { path : 'administradores', canActivate: [AuthGuard], component: AdministradoresComponent},
         { path : 'categorias', canActivate: [AuthGuard], component: CategoriasComponent},
         { path : 'denuncias', canActivate: [AuthGuard], component: DenunciasComponent},
         { path : 'leitores', canActivate: [AuthGuard], component: LeitoresComponent},
         { path : 'escritores', canActivate: [AuthGuard], component: EscritoresComponent},
         { path : 'mensagens', canActivate: [AuthGuard], component: MensagensComponent},
-        { path : 'teste', canActivate: [AuthGuard], component: TesteComponent},
-        
         { path : 'editar/:id', canActivate: [AuthGuard], component: AdministradoresComponent},
         { path : '', redirectTo: 'home', pathMatch: 'full'},
         { path : '**', redirectTo: 'home', pathMatch: 'full'}

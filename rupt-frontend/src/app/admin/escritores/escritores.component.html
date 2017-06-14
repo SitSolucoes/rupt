@@ -242,10 +242,19 @@
         </div>
         <div class="modal-footer" *ngIf="escritor.status == 'p' || escritor.status == 'p'">
             <a (click)="closeModal()" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
-            <a (click)="show = !show" class="modal-action modal-close waves-effect waves-green btn-flat ">Recusar</a>
+            <a (click)="recusar = !recusar" class="modal-action waves-effect waves-green btn-flat ">Recusar</a>
             
-            <a *ngIf="!show" (click)="closeModal()" class="modal-action modal-close waves-effect waves-green btn-flat left">Aceitar</a>
-            <div *ngIf="show" [@enterAnimation]="show">xxx</div>
+            <a *ngIf="!recusar" (click)="closeModal()" class="modal-action modal-close waves-effect waves-green btn-flat left">Aceitar</a>
+            <div *ngIf="recusar" [@enterAnimation]="recusar">
+                <div class="row">
+                    <div class="input-field col s4">
+                        <input id="motivo_recusa" name="motivo_recusa" type="text"
+                        [ngModel]="escritor.motivo_recusa">
+
+                        <label [ngClass]="{'active': escritor?.motivo_recusa}" for="created_at">Data de cadastro</label>       
+                    </div>
+                </div>
+            </div>
         </div>
     </form> 
 </div>
