@@ -237,21 +237,23 @@
                 [disabled]="!f.valid || emailInvalido || nickInvalido || dataInvalida || !senhaValida">
                 Salvar
             </button>
-
-            
         </div>
         <div class="modal-footer" *ngIf="escritor.status == 'p' || escritor.status == 'p'">
             <a (click)="closeModal()" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
-            <a (click)="recusar = !recusar" class="modal-action waves-effect waves-green btn-flat ">Recusar</a>
-            
+            <a *ngIf="!recusar" (click)="recusar = !recusar" class="modal-action waves-effect waves-green btn-flat ">Recusar</a>
+            <button *ngIf="recusar" type="submit" class="modal-action modal-close waves-effect waves-green btn-flat"
+                [disabled]="!f.valid">
+                Recusar
+            </button>
             <a *ngIf="!recusar" (click)="closeModal()" class="modal-action modal-close waves-effect waves-green btn-flat left">Aceitar</a>
             <div *ngIf="recusar" [@enterAnimation]="recusar">
                 <div class="row">
-                    <div class="input-field col s4">
+                    <div class="input-field col s6">
                         <input id="motivo_recusa" name="motivo_recusa" type="text"
-                        [ngModel]="escritor.motivo_recusa">
+                        [ngModel]="escritor.motivo_recusa" 
+                        maxlength="80" minlength="5" required #motivoRecusa="ngModel">
 
-                        <label [ngClass]="{'active': escritor?.motivo_recusa}" for="created_at">Data de cadastro</label>       
+                        <label [ngClass]="{'active': true}" for="motivo_recusa">Motivo</label>       
                     </div>
                 </div>
             </div>

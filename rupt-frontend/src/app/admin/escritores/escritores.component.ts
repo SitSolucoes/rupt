@@ -208,12 +208,23 @@ export class EscritoresComponent implements OnInit {
   }
 
   onSubmit(form){
-    this._escritoresService.updateEscritor(form, this.escritor.id).subscribe(
+    if (this.recusar){
+      this._escritoresService.recusarEscritor(form.value.motivo_recusa, this.escritor.id).subscribe(
         (response: any) => {
           //this.message = response;
           this.getEscritores();
         }
       );
+    }
+    
+    else {
+      this._escritoresService.updateEscritor(form, this.escritor.id).subscribe(
+        (response: any) => {
+          //this.message = response;
+          this.getEscritores();
+        }
+      );
+    }
     
     this.showMessage();
     this.getEscritores();

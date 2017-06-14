@@ -43,7 +43,7 @@ import { PostsService } from './../services/posts.service';
     RedefineSenhaComponent,
     MensagensComponent,
     EscritoresComponent,
-    CpfCnpjPipe,
+    CpfCnpjPipe
   ],
 
   imports: [

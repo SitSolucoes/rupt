@@ -313,6 +313,24 @@ span.badge.new:after {
 	width: 100%;
 }
 
+.modal-footer{
+	height: 58px !important;
+	padding-top: 8px !important;
+	padding-bottom: 4px !important;
+}
+
+.modal-footer input[type="text"]{
+	margin: 0 0 0 0;
+}
+
+.modal-footer label{
+	padding-left: 24px;
+}
+
+.modal-footer .input-field{
+	padding-left: 24px;
+}
+
 /*spinner*/
 .spinner{
 	padding-bottom: 22px;

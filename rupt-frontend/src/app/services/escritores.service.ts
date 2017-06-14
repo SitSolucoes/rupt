@@ -66,4 +66,13 @@ export class EscritoresService {
     });
   }
 
+  recusarEscritor(motivo, id){
+    const motivo_recusa = JSON.stringify({motivo_recusa: motivo});
+
+    return this._http.put(this._url + 'recusaEscritor/'+id, motivo_recusa, {headers: this.headers}).map(
+    (response: Response)=>{
+      response.json()
+    });
+  }
+
 }
