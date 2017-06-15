@@ -1,24 +1,12 @@
-<div id="modal1" class="modal center-sheet" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions">
+<div id="modal1" class="modal center-sheet" [ngClass]="{'border-red': escritor.status == 'r'}"
+ materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions">
     <form class="col s12" #f="ngForm" (ngSubmit)="onSubmit(f)">
         <div class="modal-content">
-            <h4 *ngIf="!escritor.data_aceite">Analisar</h4>
+            <h4 *ngIf="!escritor.data_aceite && escritor.id != 0">Analisar</h4>
             <h4 *ngIf="escritor.data_aceite">Editar</h4>
+            <h4 *ngIf="escritor.id == 0">Cadastrar</h4>
             
             <div class="row">
-                <div class="col s12 m12 l12 xl12">
-                    <div class="input-field col s12">
-                        <input id="nome" name="nome" type="text"  
-                            minlength="4" maxlength="60" required
-                            [ngClass]="{'invalid': nome.errors?.required && nome.touched}"
-                            [(ngModel)]="escritor.nome" #nome="ngModel"
-                            [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
-
-                        <label [ngClass]="{'active': escritor?.nome}" for="nome">Nome Completo*</label>
-                        
-                        <div class="error" *ngIf="nome.errors?.minlength && nome.touched">Nome inválido.</div>
-                        <div class="error" *ngIf="nome.errors?.required && nome.touched">Campo obrigatório.</div>
-                    </div>
-                </div>
                 <div class="row col s12 m12 l12 xl12">
                     <div class="input-field col s12 m12 l5 xl5">
                         <input id="nick" name="nick" type="text"
@@ -47,6 +35,20 @@
                         <div class="error" *ngIf="!email.errors?.minlength && emailInvalido">Email já utilizado.</div>
                     </div>
                 </div>
+                <div class="col s12 m12 l12 xl12">
+                    <div class="input-field col s12">
+                        <input id="nome" name="nome" type="text"  
+                            minlength="4" maxlength="60" required
+                            [ngClass]="{'invalid': nome.errors?.required && nome.touched}"
+                            [(ngModel)]="escritor.nome" #nome="ngModel"
+                            [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
+
+                        <label [ngClass]="{'active': escritor?.nome}" for="nome">Nome Completo*</label>
+                        
+                        <div class="error" *ngIf="nome.errors?.minlength && nome.touched">Nome inválido.</div>
+                        <div class="error" *ngIf="nome.errors?.required && nome.touched">Campo obrigatório.</div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="input-field col s12 m12 l5 xl5">            
                         <input id="nascimento" name="nascimento" type="text" maxlength="10"
@@ -72,56 +74,6 @@
                         <label for="sexo" class="active">Sexo*</label>
                     </div>
                 </div>
-                <div class="row" *ngIf="escritor.id == 0">
-                    <div class="input-field col s12 m12 l5 xl5">
-                        <input id="password" name="password" type="password"
-                        minlength="8" maxlength="20" required 
-                        [(ngModel)]="escritor.password" #senha="ngModel"
-                        [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
-                        
-                        <label for="senha">Senha*</label>
-
-                        <div class="error" *ngIf="senha.errors?.minlength && senha.touched">Mínimo de 8 caracteres.</div>
-                        <div class="error" *ngIf="senha.errors?.required && senha.touched">Campo obrigatório.</div>
-                    </div>
-                    <div class="input-field col s12 m12 l6 xl6 right">
-                        <input id="confirm-senha" name="confirm-senha" type="password" 
-                        [ngClass]="{'invalid': senha.touched && confirm.value != senha.value}"
-                        ngModel #confirm="ngModel" (keypress)="comparaSenhas($event, confirm)"
-                        [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
-
-                        <label for="confirm-senha">Confirmar Senha*</label>
-                        <div class="error" *ngIf="senha.touched && confirm.value != senha.value">
-                            Senhas não coincidem.
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s12 m12 l5 xl5" *ngIf="escritor.status != 'p' && escritor.status != 'r'">
-                        <select name="ativo" materialize="material_select" [materializeSelectOptions]="selectAtivo" 
-                        [(ngModel)]="escritor.ativo">
-                            <option *ngFor="let option of selectAtivo" [value]="option.value">{{option.name}}</option>
-                        </select>
-                        <label for="ativo">Status como leitor*</label>
-                    </div>
-                    <div class="input-field col s12 m12 l5 xl5" *ngIf="escritor.status == 'p' || escritor.status == 'r'" >
-                        <input id="ativo" name="ativo" type="text" readonly value="{{escritor.ativo == 1 ? 'Ativo' : 'Inativo'}}">
-                        
-                        <label for="ativo" class="active">Status como Leitor*</label>
-                    </div>
-                    <div class="input-field col s12 m12 l6 xl6 right" *ngIf="escritor.status != 'p' && escritor.status != 'r'">
-                        <select name="status" materialize="material_select" [materializeSelectOptions]="selectStatus" 
-                        [(ngModel)]="escritor.status">
-                            <option *ngFor="let option of selectStatus" [value]="option.value">{{option.name}}</option>
-                        </select>
-                        <label for="ativo">Status como escritor*</label>
-                    </div>
-                    <div class="input-field col s12 m12 l6 xl6 right" *ngIf="escritor.status == 'p' || escritor.status == 'r'" >
-                        <input id="status" name="status" type="text" readonly value="{{escritor.status == 'p' ? 'Pendente' : 'Recusado'}}">
-                        
-                        <label for="ativo" class="active">Status como Leitor*</label>
-                    </div>
-                </div> 
                 <div class="row">
                     <div class="input-field col s12 m12 l5 xl5">
                         <input id="rg" name="rg" type="text"
@@ -227,26 +179,79 @@
                         <label [ngClass]="{'active': escritor?.biografia}" for="biografia">Biografia</label>
                     </div>
                 </div>
+                <div class="row" *ngIf="escritor.id == 0">
+                    <div class="input-field col s12 m12 l5 xl5">
+                        <input id="password" name="password" type="password"
+                        minlength="8" maxlength="20" required 
+                        [(ngModel)]="escritor.password" #senha="ngModel"
+                        [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
+                        
+                        <label for="senha">Senha*</label>
+
+                        <div class="error" *ngIf="senha.errors?.minlength && senha.touched">Mínimo de 8 caracteres.</div>
+                        <div class="error" *ngIf="senha.errors?.required && senha.touched">Campo obrigatório.</div>
+                    </div>
+                    <div class="input-field col s12 m12 l6 xl6 right">
+                        <input id="confirm-senha" name="confirm-senha" type="password" 
+                        [ngClass]="{'invalid': senha.touched && confirm.value != senha.value}"
+                        ngModel #confirm="ngModel" (keypress)="comparaSenhas($event, confirm)"
+                        [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
+
+                        <label for="confirm-senha">Confirmar Senha*</label>
+                        <div class="error" *ngIf="senha.touched && confirm.value != senha.value">
+                            Senhas não coincidem.
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 m12 l5 xl5" *ngIf="escritor.status != 'p' && escritor.status != 'r'">
+                        <select name="ativo" materialize="material_select" [materializeSelectOptions]="selectAtivo" 
+                        [(ngModel)]="escritor.ativo">
+                            <option *ngFor="let option of selectAtivo" [value]="option.value">{{option.name}}</option>
+                        </select>
+                        <label for="ativo">Status como leitor*</label>
+                    </div>
+                    <div class="input-field col s12 m12 l5 xl5" *ngIf="escritor.status == 'p' || escritor.status == 'r'" >
+                        <input id="ativo" name="ativo" type="text" readonly value="{{escritor.ativo == 1 ? 'Ativo' : 'Inativo'}}">
+                        
+                        <label for="ativo" class="active">Status como Leitor*</label>
+                    </div>
+                    <div class="input-field col s12 m12 l6 xl6 right" *ngIf="escritor.status != 'p' && escritor.status != 'r'">
+                        <select name="status" materialize="material_select" [materializeSelectOptions]="selectStatus" 
+                        [(ngModel)]="escritor.status">
+                            <option *ngFor="let option of selectStatus" [value]="option.value">{{option.name}}</option>
+                        </select>
+                        <label for="ativo">Status como escritor*</label>
+                    </div>
+                    <div class="input-field col s12 m12 l6 xl6 right" *ngIf="escritor.status == 'p' || escritor.status == 'r'" >
+                        <input id="status" name="status" type="text" readonly value="{{escritor.status == 'p' ? 'Pendente' : 'Recusado'}}">
+                        
+                        <label for="ativo" class="active">Status como Leitor*</label>
+                    </div>
+                </div>
                 <input name="src_foto" type="text" hidden [(ngModel)]="escritor.src_foto">
             </div>   
         </div>
 
-        <div class="modal-footer" *ngIf="escritor.data_aceite">
+        <div class="modal-footer" *ngIf="escritor.data_aceite || escritor.id == 0">
             <a (click)="closeModal()" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
             <button type="submit" class="modal-action modal-close waves-effect waves-green btn-flat"
                 [disabled]="!f.valid || emailInvalido || nickInvalido || dataInvalida || !senhaValida">
                 Salvar
             </button>
         </div>
-        <div class="modal-footer" *ngIf="!escritor.data_aceite">
+        <div class="modal-footer" *ngIf="!escritor.data_aceite && escritor.id != 0">
             <a (click)="closeModal()" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
-            <a *ngIf="!recusar" (click)="recusar = !recusar" class="modal-action waves-effect waves-green btn-flat ">Recusar</a>
+            <a *ngIf="!recusar && escritor.status != 'r'" (click)="recusar = !recusar" class="modal-action waves-effect waves-green btn-flat ">Recusar</a>
             <button *ngIf="recusar" type="submit" class="modal-action modal-close waves-effect waves-green btn-flat"
                 [disabled]="!f.valid">
                 Recusar
             </button>
-            <a *ngIf="!recusar" (click)="closeModal()" class="modal-action modal-close waves-effect waves-green btn-flat left">Aceitar</a>
-            <div *ngIf="recusar" [@enterAnimation]="recusar">
+
+            <a *ngIf="!recusar" (click)="closeModal()" class="modal-action modal-close waves-effect waves-green btn-flat"
+                [ngClass]="{'left': escritor.status != 'r'}" 
+            >Aceitar</a>
+            <div *ngIf="recusar || escritor.status == 'r'" [@enterAnimation]="recusar">
                 <div class="row">
                     <div class="input-field col s6">
                         <input id="motivo_recusa" name="motivo_recusa" type="text"
@@ -343,7 +348,7 @@
         <div class="col s12 m12 l12 xl12" *ngIf="mSolicitacao == 1">
             <div class="col s12 m6 l4 xl3" *ngFor="let s of listSolicitacoes() | paginate: {itemsPerPage: 8, currentPage:pageSolicitacoes, id: 'solicitacoes'}; let i = index">
                 <a (click)="openModalEdit(s, f)">
-                    <div class="card card-escritor">
+                    <div class="card card-escritor" [ngClass]="{'border-red': s.status == 'r'}">
                         <img src="https://pbs.twimg.com/profile_images/817091464731693057/5RSuRSGK.jpg" class="img-escritor row">
                         <div class="content row">
                             <div class="nome"> {{ s.nick }} </div>
