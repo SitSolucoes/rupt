@@ -14,7 +14,7 @@ class AddMotRecusa extends Migration
     public function up()
     {
         Schema::table('escritores', function (Blueprint $table) {
-            $table->string('mot_recusa', 80);
+            $table->string('motivo_recusa', 80);
         });
     }
 

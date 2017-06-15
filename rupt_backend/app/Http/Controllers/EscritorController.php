@@ -21,7 +21,7 @@ class EscritorController extends Controller
     }
 
     public function countSolicitacoes(){
-        $count = Escritor::where('status', 'p')->count();
+        $count = Escritor::where('data_aceite', null)->count();
 
         return response()->json(['countSolicitacoes' => $count], 200);
     }
@@ -50,6 +50,27 @@ class EscritorController extends Controller
         
         $escritor->save();
 
-        return response()->json(['message' => "Leitor alterado com Sucesso"], 200);
+        return response()->json(['message' => "Escritor alterado com sucesso."], 200);
+    }
+
+    public function recusar(Request $request, $id){
+        $escritor = $this->getById($id);
+        $escritor->status = "r";
+        $escritor->motivo_recusa = $request->motivo_recusa;
+
+        $escritor->save();
+
+        return response()->json(['message' => "Escritor recusado."], 200);
+    }
+
+    public function aceitar($id, $admin_idAdmin){
+        $escritor = $this->getById($id);
+        $escritor->status = "r";
+        $escritor->admin_idAdmin = $admin;
+        $escritor->data_aceite = new DateTime();
+
+        $escritor->save();
+
+        return response()->json(['message' => "Escritor aceito."], 200);
     }
 }

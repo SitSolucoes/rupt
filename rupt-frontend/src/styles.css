@@ -314,7 +314,7 @@ span.badge.new:after {
 }
 
 .modal-footer{
-	height: 58px !important;
+	height: 60px !important;
 	padding-top: 8px !important;
 	padding-bottom: 4px !important;
 }
@@ -527,4 +527,8 @@ span.badge.new:after {
 .orderby .input-field {
 	margin-left: 25px;
 	margin-top: 15px;
+}
+
+.recusado{
+	color: red;
 }

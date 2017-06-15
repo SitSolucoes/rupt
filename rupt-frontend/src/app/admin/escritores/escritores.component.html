@@ -1,8 +1,8 @@
 <div id="modal1" class="modal center-sheet" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions">
     <form class="col s12" #f="ngForm" (ngSubmit)="onSubmit(f)">
         <div class="modal-content">
-            <h4 *ngIf="escritor.status == 'p' || escritor.status == 'r'">Analisar</h4>
-            <h4 *ngIf="escritor.status != 'p' || escritor.status != 'p'">Editar</h4>
+            <h4 *ngIf="!escritor.data_aceite">Analisar</h4>
+            <h4 *ngIf="escritor.data_aceite">Editar</h4>
             
             <div class="row">
                 <div class="col s12 m12 l12 xl12">
@@ -231,14 +231,14 @@
             </div>   
         </div>
 
-        <div class="modal-footer" *ngIf="escritor.status != 'p' || escritor.status != 'p'">
+        <div class="modal-footer" *ngIf="escritor.data_aceite">
             <a (click)="closeModal()" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
             <button type="submit" class="modal-action modal-close waves-effect waves-green btn-flat"
                 [disabled]="!f.valid || emailInvalido || nickInvalido || dataInvalida || !senhaValida">
                 Salvar
             </button>
         </div>
-        <div class="modal-footer" *ngIf="escritor.status == 'p' || escritor.status == 'p'">
+        <div class="modal-footer" *ngIf="!escritor.data_aceite">
             <a (click)="closeModal()" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
             <a *ngIf="!recusar" (click)="recusar = !recusar" class="modal-action waves-effect waves-green btn-flat ">Recusar</a>
             <button *ngIf="recusar" type="submit" class="modal-action modal-close waves-effect waves-green btn-flat"
@@ -264,7 +264,7 @@
 <div id="modalMessage" class="modal center-sheet small-modal" materialize="modal" [materializeParams]="[{dismissible: true}]" [materializeActions]="modalMessage">
     <div class="modal-content">
         <h4><i class="material-icons">check_circle</i></h4>
-        <h4>Salvo com sucesso</h4>
+        <h4>{{ mensagem }}</h4>
         <div class="small-modal-footer">
             <a class="modal-action modal-close waves-effect waves-green btn-flat ">Fechar</a>
         </div>
@@ -350,6 +350,7 @@
                             <div class="dados">
                             nome: {{ s.nome }}<br>
                             CPF: {{s.cpf | cpfCnpj }}  <br>
+                            Email: {{ s.email }} <br>
                             Solicitado: {{ s.created_at | date:"dd/MM/yyyy" }} <br>
                             Status: {{ s.status == 'r' ? 'Recusado' : 'Pendente'}}
                             </div>
@@ -387,7 +388,7 @@
                     </div>
                 </li>
                 <li *ngFor="let s of listSolicitacoes() | paginate: {itemsPerPage: 10, currentPage:pageSolicitacoes, id: 'solicitacoes'}; let i = index">
-                    <div class="list-item option-icons">
+                    <div class="list-item option-icons" [ngClass]="{'recusado': s.status == 'r'}">
                         <div class="col s3 m3 l2 xl2 item">
                             {{s.nick}}
                         </div>

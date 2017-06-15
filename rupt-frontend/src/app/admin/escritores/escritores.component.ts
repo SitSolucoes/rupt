@@ -39,7 +39,7 @@ import {
 })
 
 export class EscritoresComponent implements OnInit {
-  mSolicitacao = 1;
+  mSolicitacao = 0;
   mEscrires = 0;
   cpfInvalido: boolean;
   dataInvalida: boolean;
@@ -53,6 +53,7 @@ export class EscritoresComponent implements OnInit {
   escritores: Escritor[];
   solicitacoes: Escritor[];
   recusar: boolean;
+  mensagem: string;
 
   modalActions = new EventEmitter<string|MaterializeAction>();
   modalMessage = new EventEmitter<string|MaterializeAction>();
@@ -211,24 +212,26 @@ export class EscritoresComponent implements OnInit {
     if (this.recusar){
       this._escritoresService.recusarEscritor(form.value.motivo_recusa, this.escritor.id).subscribe(
         (response: any) => {
-          //this.message = response;
+          this.mensagem = "Recusado com sucesso.";
+          this.showMessage();
           this.getEscritores();
+          this.getSolicitacoes();
         }
       );
     }
-    
     else {
       this._escritoresService.updateEscritor(form, this.escritor.id).subscribe(
         (response: any) => {
-          //this.message = response;
+          this.mensagem = "Salvo com sucesso.";
+          this.showMessage();
           this.getEscritores();
+          this.getEscritores();
+          this.getSolicitacoes();
         }
       );
     }
     
-    this.showMessage();
-    this.getEscritores();
-    this.getSolicitacoes();
+    this.closeModal();
   }
 
   showMessage(){
