@@ -65,9 +65,11 @@ class EscritorController extends Controller
 
     public function aceitar($id, $admin_idAdmin){
         $escritor = $this->getById($id);
-        $escritor->status = "r";
-        $escritor->admin_idAdmin = $admin;
-        $escritor->data_aceite = new DateTime();
+
+        $escritor->status = "a";
+        $escritor->motivo_recusa = "";
+        $escritor->admin_idAdmin = $admin_idAdmin;
+        $escritor->data_aceite = date('Y-m-d H:i:s');
 
         $escritor->save();
 

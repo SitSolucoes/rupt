@@ -221,30 +221,37 @@ export class EscritoresComponent implements OnInit {
     }
   }
 
+  private afterSubmit(mensagem: string){
+    this.closeModal();
+    this.mensagem = mensagem;
+    this.showMessage();
+    this.getEscritores();
+    this.getSolicitacoes();
+  }
+
   onSubmit(form){
     if (this.recusar){
       this._escritoresService.recusarEscritor(form.value.motivo_recusa, this.escritor.id).subscribe(
         (response: any) => {
-          this.mensagem = "Recusado com sucesso.";
-          this.showMessage();
-          this.getEscritores();
-          this.getSolicitacoes();
+          this.afterSubmit("Recusado com sucesso");
         }
       );
     }
     else {
       this._escritoresService.updateEscritor(form, this.escritor.id).subscribe(
         (response: any) => {
-          this.mensagem = "Salvo com sucesso.";
-          this.showMessage();
-          this.getEscritores();
-          this.getEscritores();
-          this.getSolicitacoes();
+          this.afterSubmit("Salvo com sucesso.");
         }
       );
     }
-    
-    this.closeModal();
+  }
+
+  aceitar(id){
+    this._escritoresService.aceitarEscritor(id).subscribe(
+      (response: any) => {
+        this.afterSubmit("Aceito com sucesso.");
+      }
+    )
   }
 
   showMessage(){

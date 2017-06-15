@@ -248,7 +248,7 @@
                 Recusar
             </button>
 
-            <a *ngIf="!recusar" (click)="closeModal()" class="modal-action modal-close waves-effect waves-green btn-flat"
+            <a *ngIf="!recusar" (click)="aceitar(escritor.id)" class="modal-action modal-close waves-effect waves-green btn-flat"
                 [ngClass]="{'left': escritor.status != 'r'}" 
             >Aceitar</a>
             <div *ngIf="recusar || escritor.status == 'r'" [@enterAnimation]="recusar">

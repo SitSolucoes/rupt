@@ -99,6 +99,7 @@ Route::get('/getSolicitacoes', ['uses' => 'EscritorController@getSolicitacoes'])
 Route::get('/countSolicitacoes', ['uses' => 'EscritorController@countSolicitacoes']);
 Route::put('/updateEscritor/{id}',['uses' => 'EscritorController@update']);
 Route::put('/recusarEscritor/{id}',['uses' => 'EscritorController@recusar']);
+Route::put('/aceitarEscritor/{id}/{admin_idAdmin}',['uses' => 'EscritorController@aceitar']);
 
 //sugestões
 Route::get('/getSugestoes', [
