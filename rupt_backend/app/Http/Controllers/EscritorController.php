@@ -33,11 +33,7 @@ class EscritorController extends Controller
         return response()->json(['solicitacoes' => $escritores], 200);
     }
 
-    public function update(Request $request, $id){
-        $leitorController = new LeitorController();
-        $leitorController->update($request, $id);
-
-        $escritor = $this->getById($id);
+    private function createEscritor(Request $request, $escritor){
         $escritor->rg = $request->rg;
         $escritor->cpf = $request->cpf;
         $escritor->telefone = $request->telefone;
@@ -47,6 +43,33 @@ class EscritorController extends Controller
         $escritor->agencia = $request->agencia;
         $escritor->conta_corrente = $request->conta_corrente;
         $escritor->status = $request->status;
+
+        return $escritor;
+    }
+
+    public function create(Request $request, $admin_idAdmin){
+        $leitorController = new LeitorController();
+        $leitor_idLeitor = $leitorController->create($request);
+
+        $escritor = new Escritor();
+        $escritor = $this->createEscritor($request, $escritor);
+
+        $escritor->leitor_idLeitor = $leitor_idLeitor;
+        $escritor->motivo_recusa = "";
+        $escritor->admin_idAdmin = $admin_idAdmin;
+        $escritor->data_aceite = date('Y-m-d H:i:s');
+
+        $escritor->save();
+
+        return response()->json(['message' => "Escritor aceito."], 200);
+    }
+
+    public function update(Request $request, $id){
+        $leitorController = new LeitorController();
+        $leitorController->update($request, $id);
+
+        $escritor = $this->getById($id);
+        $escritor = $this->createEscritor($request, $escritor);
         
         $escritor->save();
 

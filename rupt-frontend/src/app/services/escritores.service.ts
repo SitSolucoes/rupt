@@ -57,6 +57,15 @@ export class EscritoresService {
       });
   }
 
+  createEscritor(form){
+    const body = this.createBody(form);
+
+    return this._http.put(this._url + 'createEscritor/' + localStorage.getItem('admin_id'), body, {headers: this.headers}).map(
+    (response: Response)=>{
+      response.json()
+    });
+  }
+
   updateEscritor(form, id){
     const body = this.createBody(form);
     

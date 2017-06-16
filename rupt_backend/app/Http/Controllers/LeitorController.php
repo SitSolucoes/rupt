@@ -8,8 +8,8 @@ use App\Leitor;
 
 class LeitorController extends Controller
 {
-    public function store(Request $request){
-       $leitor = new Leitor(); 
+    public function create($request){
+        $leitor = new Leitor(); 
         $leitor->nome = $request->input('nome');
         $leitor->nick = $request->input('nick');
         $leitor->email = $request->input('email');
@@ -20,6 +20,12 @@ class LeitorController extends Controller
         $leitor->password = bcrypt($request->input('password'));
         $leitor->ativo = $request->input('ativo');
         $leitor->save();
+
+        return $leitor->id;
+    }
+    
+    public function store(Request $request){
+        $this->create($request);
 
         return response()->json([
                 'message'=>'Leitor criado com sucesso!'
@@ -98,5 +104,7 @@ class LeitorController extends Controller
                  ->where('data_aceite', null);
         })->get();    
     }
+
+    
 
 }

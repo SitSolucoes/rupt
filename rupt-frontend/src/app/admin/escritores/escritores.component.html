@@ -29,10 +29,10 @@
                             [(ngModel)]="escritor.email" #email="ngModel" email (ngModelChange)="validaEmail()"
                             [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
                         
-                        <label [ngClass]="{'active': escritor?.email}" for="email">Email*</label>
+                        <label [ngClass]="{'active': escritor?.email}" for="email">E-mail*</label>
 
-                        <div class="error" *ngIf="email.errors?.email && email.touched">Email inválido.</div>
-                        <div class="error" *ngIf="!email.errors?.minlength && emailInvalido">Email já utilizado.</div>
+                        <div class="error" *ngIf="email.errors?.email && email.touched">E-mail inválido.</div>
+                        <div class="error" *ngIf="!email.errors?.minlength && emailInvalido">E-mail já utilizado.</div>
                     </div>
                 </div>
                 <div class="col s12 m12 l12 xl12">
@@ -124,15 +124,15 @@
 
                         <label [ngClass]="{'active': escritor?.celular}" for="celular">Celular*</label>
 
-                        <div class="error" *ngIf="cpf.errors?.cpf && cpf.touched">Cpf inválido.</div>
-                        <div class="error" *ngIf="cpfInvalido">Cpf inválido.</div>
+                        <div class="error" *ngIf="celular.errors?.minlength && celular.touched">Celular inválido.</div>
+                        <div class="error" *ngIf="celular.errors?.required && celular.touched">Campo obrigatório.</div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m12 l5 xl5">
                         <input id="banco" name="banco" type="text"
                             maxlength="15"
-                            [ngClass]="{'invalid': (banco.errors?.required && rg.touched)}"
+                            [ngClass]="{'invalid': (banco.errors?.required && banco.touched)}"
                             [(ngModel)]="escritor.banco" #banco="ngModel"
                             [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
                         
@@ -153,15 +153,15 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m12 l5 xl5">
-                        <input id="contaCorrente" name="contaCorrente" type="text"
+                        <input id="conta_corrente" name="conta_corrente" type="text"
                             maxlength="15" minlength="4"
-                            [ngClass]="{'invalid': (contaCorrente.errors?.required && contaCorrente.touched)}"
-                            [(ngModel)]="escritor.conta_corrente" #contaCorrente="ngModel"
+                            [ngClass]="{'invalid': (conta_corrente.errors?.required && conta_corrente.touched)}"
+                            [(ngModel)]="escritor.conta_corrente" #conta_corrente="ngModel"
                             [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
-
-                        <label [ngClass]="{'active': escritor?.conta_corrente}" for="contaCorrente">Conta corrente</label>
                         
-                        <div class="error" *ngIf="contaCorrente.errors?.minlength && contaCorrente.touched">Conta corrente inválida.</div>
+                        <label [ngClass]="{'active': escritor?.conta_corrente}" for="conta_corrente">Conta corrente</label>
+
+                        <div class="error" *ngIf="conta_corrente.errors?.minlength">Conta corrente inválida.</div>
                     </div>
                     <div class="input-field col s12 m12 l6 xl6 right">
                         <input id="created_at" name="created_at" type="text" readonly
@@ -355,7 +355,7 @@
                             <div class="dados">
                             nome: {{ s.nome }}<br>
                             CPF: {{s.cpf | cpfCnpj }}  <br>
-                            Email: {{ s.email }} <br>
+                            E-mail: {{ s.email }} <br>
                             Solicitado: {{ s.created_at | date:"dd/MM/yyyy" }} <br>
                             Status: {{ s.status == 'r' ? 'Recusado' : 'Pendente'}}
                             </div>
@@ -379,7 +379,7 @@
                             Cpf / Cnpj
                         </div>
                         <div class="col s4 m4 l2 xl2 item">
-                            Email
+                            E-mail
                         </div>
                         <div class="col s2 m2 l2 xl2 item">
                             Solicitado
@@ -498,6 +498,7 @@
                             <div class="dados">
                             nome: {{ e.nome }}<br>
                             CPF: {{e.cpf | cpfCnpj }}  <br>
+                            E-mail: {{ e.email }} <br>
                             Status: <font *ngIf="!e.ativo">Inativo</font>
                                     <font *ngIf="e.ativo">Ativo</font>
                             </div>
@@ -521,7 +522,7 @@
                             Cpf / Cnpj
                         </div>
                         <div class="col s4 m4 l3 xl3 item">
-                            Email
+                            E-mail
                         </div>
                         <div class="col s2 m1 l1 xl1 item">
                             Status

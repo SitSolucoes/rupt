@@ -17,7 +17,8 @@ export class Escritor extends Leitor{
     movivo_recusa: string;
 
     constructor(){
-        super ()
+        super ();
+        this.status = 'a';
     }
     
 }

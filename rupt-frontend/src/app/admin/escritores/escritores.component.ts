@@ -119,6 +119,9 @@ export class EscritoresComponent implements OnInit {
   }
 
   openModalEdit(escritor: Escritor, f: NgForm) {
+    console.log(escritor);
+    
+    
     this.setFalse();
     this.escritor = escritor;
 
@@ -221,6 +224,14 @@ export class EscritoresComponent implements OnInit {
     }
   }
 
+  comparaSenhas(e, confirm){
+    if(confirm.value+e.key == this.escritor.password){
+      this.senhaValida = true;
+    }
+    else 
+      this.senhaValida = false;
+  }
+
   private afterSubmit(mensagem: string){
     this.closeModal();
     this.mensagem = mensagem;
@@ -230,7 +241,14 @@ export class EscritoresComponent implements OnInit {
   }
 
   onSubmit(form){
-    if (this.recusar){
+    if (this.escritor.id == 0){
+      this._escritoresService.createEscritor(form).subscribe(
+        (response: any) => {
+          this.afterSubmit("Salvo com sucesso.");
+        }
+      );
+    }
+    else if (this.recusar){
       this._escritoresService.recusarEscritor(form.value.motivo_recusa, this.escritor.id).subscribe(
         (response: any) => {
           this.afterSubmit("Recusado com sucesso");

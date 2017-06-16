@@ -37,10 +37,10 @@
                             minlength="6" maxlength="30"
                             [ngClass]="{'invalid': (email.errors?.required && email.touched) || emailInvalido}"
                             [(ngModel)]="leitor.email" #email="ngModel" email (ngModelChange)="validaEmail()">
-                        <label [ngClass]="{'active': leitor?.email}" for="email">Email*</label>
+                        <label [ngClass]="{'active': leitor?.email}" for="email">E-mail*</label>
 
-                        <div class="error" *ngIf="email.errors?.email && email.touched">Email inválido.</div>
-                        <div class="error" *ngIf="!email.errors?.minlength && emailInvalido">Email já utilizado.</div>
+                        <div class="error" *ngIf="email.errors?.email && email.touched">E-mail inválido.</div>
+                        <div class="error" *ngIf="!email.errors?.minlength && emailInvalido">E-mail já utilizado.</div>
                     </div>
                 </div>
                 <div class="row">
@@ -151,7 +151,7 @@
                 Nome
             </div>
             <div class="col s3 m3 l3 xl3 item">
-                Email
+                E-mail
             </div>
             <div class="col s2 m1 l1 xl1 item">
                 Status
