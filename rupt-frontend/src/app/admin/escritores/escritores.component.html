@@ -129,16 +129,19 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s12 m12 l5 xl5">
-                        <input id="banco" name="banco" type="text"
-                            maxlength="15"
-                            [ngClass]="{'invalid': (banco.errors?.required && banco.touched)}"
-                            [(ngModel)]="escritor.banco" #banco="ngModel"
-                            [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
-                        
-                        <label [ngClass]="{'active': escritor?.banco}" for="banco">Banco</label>
+                    <div class="input-field col s12 m12 l5 xl5" *ngIf="escritor.status != 'p' && escritor.status != 'r'">
+                        <select name="banco" materialize="material_select" [materializeSelectOptions]="selectBancos" 
+                        [(ngModel)]="escritor.banco">
+                            <option *ngFor="let option of selectBancos" [value]="option.value">{{option.name}}</option>
+                        </select>
+                        <label for="banco">Banco</label>
                     </div>
+                    <div class="input-field col s12 m12 l5 xl5" *ngIf="escritor.status == 'p' || escritor.status == 'r'" >
+                        <input id="banco" name="banco" type="text" readonly value="{{ getBanco() }}">
 
+                        <label for="banco" [ngClass]="{'active': escritor?.banco}">Banco</label>
+                    </div>        
+                    
                     <div class="input-field col s12 m12 l6 xl6 right">
                         <input id="agencia" name="agencia" type="text"
                             minlength="3" maxlength="12"

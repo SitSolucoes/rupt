@@ -1,4 +1,5 @@
 import { LeitoresService } from './../../services/leitores.service';
+import { Bancos } from './../../shared/arrayBanco';
 import { DateBr } from './../../shared/dateBr';
 import { NgForm } from '@angular/forms/src/directives';
 import { MaterializeAction } from 'angular2-materialize';
@@ -89,6 +90,8 @@ export class EscritoresComponent implements OnInit {
     {value: 'i', name: 'Inativo'}
   ]
 
+  selectBancos: Option[] = Bancos;
+
   constructor(
     private _notificacoesService: NotificacoesService,
     private _escritoresService: EscritoresService,
@@ -119,9 +122,6 @@ export class EscritoresComponent implements OnInit {
   }
 
   openModalEdit(escritor: Escritor, f: NgForm) {
-    console.log(escritor);
-    
-    
     this.setFalse();
     this.escritor = escritor;
 
@@ -139,6 +139,13 @@ export class EscritoresComponent implements OnInit {
     this.getEscritores();
     this.getSolicitacoes();
     this.modalActions.emit({action:"modal",params:['close']});
+  }
+
+  getBanco(){
+    if(this.escritor.banco) 
+      return this.selectBancos.filter(banco => banco.value == this.escritor.banco)[0].name;
+    else 
+      return "";
   }
 
   getEscritores(){
