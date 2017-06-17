@@ -1,5 +1,6 @@
 import { LeitoresService } from './../../services/leitores.service';
 import { Bancos } from './../../shared/arrayBanco';
+import { Estados } from './../../shared/arrayEstados';
 import { DateBr } from './../../shared/dateBr';
 import { NgForm } from '@angular/forms/src/directives';
 import { MaterializeAction } from 'angular2-materialize';
@@ -91,6 +92,7 @@ export class EscritoresComponent implements OnInit {
   ]
 
   selectBancos: Option[] = Bancos;
+  selectEstados: Option[] = Estados;
 
   constructor(
     private _notificacoesService: NotificacoesService,
@@ -145,6 +147,13 @@ export class EscritoresComponent implements OnInit {
     if(this.escritor.banco) 
       return this.selectBancos.filter(banco => banco.value == this.escritor.banco)[0].name;
     else 
+      return "";
+  }
+
+  getUf(){
+    if(this.escritor.uf)
+      return this.selectBancos.filter(uf => uf.value == this.escritor.uf)[0].name;
+    else
       return "";
   }
 

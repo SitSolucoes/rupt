@@ -43,6 +43,13 @@ class EscritorController extends Controller
         $escritor->agencia = $request->agencia;
         $escritor->conta_corrente = $request->conta_corrente;
         $escritor->status = $request->status;
+        $escritor->cep = $request->cep;
+        $escritor->logradouro = $request->logradouro;
+        $escritor->numero = $request->numero;
+        $escritor->complemento = $request->complemento;
+        $escritor->bairro = $request->bairro;
+        $escritor->cidade = $request->cidade;
+        $escritor->uf = $request->uf;
 
         return $escritor;
     }

@@ -129,6 +129,84 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div class="input-field col s12">
+                        <textarea id="biografia" name="biografia" class="materialize-textarea" data-length="180"
+                        [(ngModel)]="escritor.biografia"
+                        [readOnly]="escritor.status == 'p' || escritor.status == 'r'"
+                        ></textarea>
+                        <label [ngClass]="{'active': escritor?.biografia}" for="biografia">Biografia</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 m12 l5 xl5">
+                        <input id="cep" name="cep" type="text"
+                        minlength="8" maxlength="8"
+                        [ngModel]="escritor.cep" #cep="ngModel"
+                        [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
+
+                        <label [ngClass]="{'active': escritor?.cep}" for="cep">Cep</label>
+                        <div class="error" *ngIf="cep.errors?.minlength">Cep inválido.</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 m12 l8 xl8">
+                        <input id="logradouro" name="logradouro" type="text"
+                        maxlength="40"
+                        [ngModel]="escritor.logradouro"
+                        [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
+
+                        <label [ngClass]="{'active': escritor?.logradouro}" for="logradouro">Logradouro</label>
+                    </div>       
+                    <div class="input-field col s12 m12 l3 xl3 right">
+                        <input id="numero" name="numero" type="text"
+                            maxlength="15"
+                            [(ngModel)]="escritor.numero"
+                            [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
+
+                        <label [ngClass]="{'active': escritor?.numero}" for="numero">Número</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 m12 l5 xl5">
+                        <input id="complemento" name="complemento" type="text"
+                            maxlength="40"
+                            [(ngModel)]="escritor.complemento"
+                            [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
+
+                        <label [ngClass]="{'active': escritor?.complemento}" for="complemento">Complemento</label>    
+                    </div>       
+                    <div class="input-field col s12 m12 l6 xl6 right">
+                        <input id="bairro" name="bairro" type="text"
+                        maxlength="40"
+                        [ngModel]="escritor.bairro"
+                        [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
+
+                        <label [ngClass]="{'active': escritor?.bairro}" for="bairro">Bairro</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 m12 l5 xl5">
+                        <input id="cidade" name="cidade" type="text"
+                            maxlength="40"
+                            [(ngModel)]="escritor.cidade"
+                            [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
+
+                        <label [ngClass]="{'active': escritor?.cidade}" for="cidade">Cidade</label>    
+                    </div>       
+                    <div class="input-field col s12 m12 l6 xl6 right" *ngIf="escritor.status != 'p' && escritor.status != 'r'">
+                        <select name="uf" materialize="material_select" [materializeSelectOptions]="selectEstados" 
+                        [(ngModel)]="escritor.uf">
+                            <option *ngFor="let option of selectEstados" [value]="option.value">{{option.name}}</option>
+                        </select>
+                        <label for="uf">Estado</label>
+                    </div>
+                    <div class="input-field col s12 m12 l6 xl6 right" *ngIf="escritor.status == 'p' || escritor.status == 'r'" >
+                        <input id="uf" name="uf" type="text" readonly value="{{ getUf() }}">
+
+                        <label for="uf" [ngClass]="{'active': escritor?.uf}">Estado</label>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="input-field col s12 m12 l5 xl5" *ngIf="escritor.status != 'p' && escritor.status != 'r'">
                         <select name="banco" materialize="material_select" [materializeSelectOptions]="selectBancos" 
                         [(ngModel)]="escritor.banco">
@@ -166,45 +244,6 @@
 
                         <div class="error" *ngIf="conta_corrente.errors?.minlength">Conta corrente inválida.</div>
                     </div>
-                    <div class="input-field col s12 m12 l6 xl6 right">
-                        <input id="created_at" name="created_at" type="text" readonly
-                        [ngModel]="escritor.created_at">
-
-                        <label [ngClass]="{'active': escritor?.created_at}" for="created_at">Data de cadastro</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s12">
-                        <textarea id="biografia" name="biografia" class="materialize-textarea" data-length="180"
-                        [(ngModel)]="escritor.biografia"
-                        [readOnly]="escritor.status == 'p' || escritor.status == 'r'"
-                        ></textarea>
-                        <label [ngClass]="{'active': escritor?.biografia}" for="biografia">Biografia</label>
-                    </div>
-                </div>
-                <div class="row" *ngIf="escritor.id == 0">
-                    <div class="input-field col s12 m12 l5 xl5">
-                        <input id="password" name="password" type="password"
-                        minlength="8" maxlength="20" required 
-                        [(ngModel)]="escritor.password" #senha="ngModel"
-                        [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
-                        
-                        <label for="senha">Senha*</label>
-
-                        <div class="error" *ngIf="senha.errors?.minlength && senha.touched">Mínimo de 8 caracteres.</div>
-                        <div class="error" *ngIf="senha.errors?.required && senha.touched">Campo obrigatório.</div>
-                    </div>
-                    <div class="input-field col s12 m12 l6 xl6 right">
-                        <input id="confirm-senha" name="confirm-senha" type="password" 
-                        [ngClass]="{'invalid': senha.touched && confirm.value != senha.value}"
-                        ngModel #confirm="ngModel" (keypress)="comparaSenhas($event, confirm)"
-                        [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
-
-                        <label for="confirm-senha">Confirmar Senha*</label>
-                        <div class="error" *ngIf="senha.touched && confirm.value != senha.value">
-                            Senhas não coincidem.
-                        </div>
-                    </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m12 l5 xl5" *ngIf="escritor.status != 'p' && escritor.status != 'r'">
@@ -232,6 +271,39 @@
                         <label for="ativo" class="active">Status como Leitor*</label>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="input-field col s12 m12 l5 xl5">
+                        <input id="created_at" name="created_at" type="text" readonly
+                        [ngModel]="escritor.created_at">
+
+                        <label [ngClass]="{'active': escritor?.created_at}" for="created_at">Data de cadastro</label>
+                    </div>
+                </div>
+                <div class="row" *ngIf="escritor.id == 0">
+                    <div class="input-field col s12 m12 l5 xl5">
+                        <input id="password" name="password" type="password"
+                        minlength="8" maxlength="20" required 
+                        [(ngModel)]="escritor.password" #senha="ngModel"
+                        [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
+                        
+                        <label for="senha">Senha*</label>
+
+                        <div class="error" *ngIf="senha.errors?.minlength && senha.touched">Mínimo de 8 caracteres.</div>
+                        <div class="error" *ngIf="senha.errors?.required && senha.touched">Campo obrigatório.</div>
+                    </div>
+                    <div class="input-field col s12 m12 l6 xl6 right">
+                        <input id="confirm-senha" name="confirm-senha" type="password" 
+                        [ngClass]="{'invalid': senha.touched && confirm.value != senha.value}"
+                        ngModel #confirm="ngModel" (keypress)="comparaSenhas($event, confirm)"
+                        [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
+
+                        <label for="confirm-senha">Confirmar Senha*</label>
+                        <div class="error" *ngIf="senha.touched && confirm.value != senha.value">
+                            Senhas não coincidem.
+                        </div>
+                    </div>
+                </div>
+                
                 <input name="src_foto" type="text" hidden [(ngModel)]="escritor.src_foto">
             </div>   
         </div>

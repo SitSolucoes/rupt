@@ -54,6 +54,13 @@ export class EscritoresService {
          agencia: form.value.agencia,
          conta_corrente: form.value.contaCorrente,
          status: form.value.status,
+         cep: form.value.cep,
+         logradouro: form.value.logradouro,
+         numero: form.value.numero,
+         complemento: form.value.complemento,
+         bairro: form.value.bairro,
+         cidade: form.value.cidade,
+         uf: form.value.uf
       });
   }
 

@@ -15,6 +15,13 @@ export class Escritor extends Leitor{
     updated_at: Date;
     status: string;
     movivo_recusa: string;
+    cep: string;
+    logradouro: string;
+    numero: string;
+    complemento: string;
+    bairro: string;
+    cidade: string;
+    uf: string;
 
     constructor(){
         super ();
