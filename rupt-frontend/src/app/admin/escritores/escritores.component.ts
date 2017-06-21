@@ -17,8 +17,9 @@ import {
     transition,
     animate,
     keyframes
- } from '@angular/core';
-
+} from '@angular/core';
+ 
+declare var Materialize:any;
 
 @Component({
   selector: 'app-escritores',
@@ -40,7 +41,10 @@ import {
   ],
 })
 
+
+
 export class EscritoresComponent implements OnInit {
+  
   mSolicitacao = 0;
   mEscrires = 0;
   cpfInvalido: boolean;
@@ -56,6 +60,8 @@ export class EscritoresComponent implements OnInit {
   solicitacoes: Escritor[];
   recusar: boolean;
   mensagem: string;
+  newPage: number = 1;
+  namePage: string[] = ["Dados Pessoais", "Endereço", "Dados Bancários", "Senha"];
 
   modalActions = new EventEmitter<string|MaterializeAction>();
   modalMessage = new EventEmitter<string|MaterializeAction>();
@@ -124,17 +130,29 @@ export class EscritoresComponent implements OnInit {
   }
 
   openModalEdit(escritor: Escritor, f: NgForm) {
+    Materialize.updateTextFields();
+
     this.setFalse();
     this.escritor = escritor;
+
+    Materialize.updateTextFields();
 
     if (this.escritor.nascimento.indexOf("/")<0)
       this.escritor.nascimento = DateBr.convert(this.escritor.nascimento);
     if (this.escritor.created_at.indexOf("/")<0)
       this.escritor.created_at = DateBr.convert(this.escritor.created_at);
 
-    f.reset(this.escritor);
+    Materialize.updateTextFields();
 
+    f.reset(this.escritor);
+    
+    Materialize.updateTextFields();
+    
     this.modalActions.emit({action:"modal",params:['open']});
+
+    Materialize.updateTextFields();
+
+    
   }
 
   closeModal() {

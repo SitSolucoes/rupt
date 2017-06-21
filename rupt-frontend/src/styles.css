@@ -292,6 +292,24 @@ span.badge.new:after {
 	overflow-x: hidden;
 }
 
+.modal-content .nav-wrapper{
+	padding-bottom: 40px;
+}
+
+.modal-content .breadcrumb{
+	color: #424242;
+	font-size: 15px;
+}
+
+.modal-content .nomePagina{
+	color:#F97000;
+}
+
+.modal-content .breadcrumb::before {
+	color: #424242;
+	font-size: 16px;
+}
+
 .small-modal{
 	width: 400px;
 	text-align: center;
