@@ -101,6 +101,8 @@ Route::put('/createEscritor/{admin_idAdmin}',['uses' => 'EscritorController@crea
 Route::put('/updateEscritor/{id}',['uses' => 'EscritorController@update']);
 Route::put('/recusarEscritor/{id}',['uses' => 'EscritorController@recusar']);
 Route::put('/aceitarEscritor/{id}/{admin_idAdmin}',['uses' => 'EscritorController@aceitar']);
+Route::get('/existEmail/{email}', ['uses' => 'EscritoresController@existEmail']);
+Route::get('/existNick/{nick}', ['uses' => 'EscritoresController@existNick']);
 
 //sugestões
 Route::get('/getSugestoes', [

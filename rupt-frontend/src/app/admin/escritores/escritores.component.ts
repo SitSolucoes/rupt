@@ -60,11 +60,13 @@ export class EscritoresComponent implements OnInit {
   solicitacoes: Escritor[];
   recusar: boolean;
   mensagem: string;
+  mensagemConfirm: string;
   newPage: number = 1;
   namePage: string[] = ["Dados Pessoais", "Endereço", "Dados Bancários", "Senha"];
 
   modalActions = new EventEmitter<string|MaterializeAction>();
   modalMessage = new EventEmitter<string|MaterializeAction>();
+  modalConfirm = new EventEmitter<string|MaterializeAction>();
 
   selectOptions: Option[] = [
     {value: 2, name: 'Nome'},
@@ -118,12 +120,12 @@ export class EscritoresComponent implements OnInit {
     this.senhaValida = true;
     this.dataInvalida = false;
     this.recusar = false;
+    this.newPage = 1;
   }
 
   openModal(f: NgForm){
     this.setFalse();
     this.escritor = new Escritor();
-
     f.reset(this.escritor);
 
     this.modalActions.emit({action:"modal",params:['open']});
@@ -151,8 +153,6 @@ export class EscritoresComponent implements OnInit {
     this.modalActions.emit({action:"modal",params:['open']});
 
     Materialize.updateTextFields();
-
-    
   }
 
   closeModal() {
@@ -223,28 +223,64 @@ export class EscritoresComponent implements OnInit {
     });
   }
 
+  escritorCadastrado(){
+    this.mensagemConfirm = "";
+
+    let exist: boolean = false;
+
+    if (this.nickInvalido == true && this.escritor.nick){
+      this._escritoresService.existNick(this.escritor.nick).subscribe(
+        (existNick: boolean) => {
+          exist = existNick;
+          this.mensagemConfirm = "Nick já cadastrado.";
+        }
+      );
+    }
+    else if (this.emailInvalido == true){
+      this._escritoresService.existEmail(this.escritor.email).subscribe(
+        (existEmail: boolean) => {
+          exist = existEmail;
+          this.mensagemConfirm = "Email já cadastrado."; 
+        }
+      );
+    }
+      
+    if (!exist)
+      this.modalConfirm.emit({action:"modal",params:['open']});
+  }
+
   validaNick(){
     if (this.escritor.nick){
       if (this.escritor.nick.length >= 3){
         this._leitoresService.validaNick(this.escritor.nick, this.escritor.id).subscribe(
-          (nick: boolean) => {this.nickInvalido = nick}
+          (nick: boolean) => {
+            this.nickInvalido = nick;
+            this.mensagemConfirm = "Nick já cadastrado.";
+          }
         );
       }
       else
         this.nickInvalido = false;
     }
+    else
+      this.nickInvalido = false;
   }
 
   validaEmail(){
     if (this.escritor.email){
       if (this.escritor.email.length >= 6){
         this._leitoresService.validaEmail(this.escritor.email, this.escritor.id).subscribe(
-          (email: boolean) => {this.emailInvalido = email}
+          (email: boolean) => {
+            this.emailInvalido = email;
+            this.mensagemConfirm = "Email já cadastrado."; 
+          }
         );
       }
       else
         this.emailInvalido = false;
     }
+    else
+      this.emailInvalido = false;
   }
 
   validaCpf(){

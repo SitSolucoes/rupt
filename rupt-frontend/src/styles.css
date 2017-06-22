@@ -317,6 +317,10 @@ span.badge.new:after {
 	border-radius: 15px;
 }
 
+.small-modal-info{
+	color: #1565c0;
+}
+
 .small-modal h4{
 	margin-bottom: 0px;
 }
@@ -337,6 +341,16 @@ span.badge.new:after {
 
 .small-modal-footer a{
 	width: 100%;
+}
+
+.small-modal-confirm{
+	margin-top: 25px;
+	border-top: 1px solid #bdbdbd;
+	color: #e0e0e0;
+}
+
+.small-modal-confirm a{
+	width: 40%;
 }
 
 .modal-footer{

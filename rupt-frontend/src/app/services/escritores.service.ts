@@ -52,7 +52,7 @@ export class EscritoresService {
          biografia: form.value.biografia,
          banco: form.value.banco,
          agencia: form.value.agencia,
-         conta_corrente: form.value.contaCorrente,
+         conta_corrente: form.value.conta_corrente,
          status: form.value.status,
          cep: form.value.cep,
          logradouro: form.value.logradouro,
@@ -96,6 +96,22 @@ export class EscritoresService {
     (response: Response)=>{
       response.json()
     });
+  }
+
+  existEmail(email): Observable<any>{
+      return this._http.get(this._url + 'existEmail/'+email).map(
+        (response: Response) => {
+          return response.json().existEmail;
+        }
+      )
+  }
+
+  existNick(nick): Observable<any>{
+      return this._http.get(this._url + 'existNick/'+nick).map(
+        (response: Response) => {
+          return response.json().existNick;
+        }
+      )
   }
 
 }

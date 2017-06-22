@@ -102,6 +102,8 @@ export class LeitoresComponent implements OnInit {
       else
         this.nickInvalido = false;
     }
+    else
+        this.nickInvalido = false;
   }
 
   validaEmail(){
@@ -114,6 +116,8 @@ export class LeitoresComponent implements OnInit {
       else
         this.emailInvalido = false;
     }
+    else
+        this.emailInvalido = false;
   }
 
   validaData(e){

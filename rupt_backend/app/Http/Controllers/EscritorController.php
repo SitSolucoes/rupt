@@ -105,4 +105,32 @@ class EscritorController extends Controller
 
         return response()->json(['message' => "Escritor aceito."], 200);
     }
+
+    public function existEmail($email){
+        $controller = new LeitorController();
+        $id = $controller->getIdByEmail($email);
+
+        $escritor = $this->getById($id);
+
+        if ($escritor)
+            return response()->json(['existEmail' => true], 200);
+        else
+            return response()->json(['existEmail' => false], 200);
+    }
+
+    public function existNick($nick){
+        $controller = new LeitorController();
+        $id = $controller->getIdByNick($nick);
+
+        $escritor = $this->getById($id);
+
+        if ($escritor)
+            return response()->json(['existNick' => true], 200);
+        else
+            return response()->json(['existNick' => false], 200);
+    }
+
+    public function existCpf($cpf){
+
+    }
 }

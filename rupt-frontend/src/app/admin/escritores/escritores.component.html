@@ -6,7 +6,7 @@
             <h4 *ngIf="escritor.data_aceite">Editar</h4>
             <h4 *ngIf="escritor.id == 0">Cadastrar</h4>
 
-            <div class="nav-wrapper">
+            <div class="nav-wrapper" *ngIf="escritor.id == 0">
                 <div class="col s12">
                     <a (click)="newPage = newPage" class="breadcrumb" [ngClass]="{'nomePagina': newPage == 1}">{{ namePage[0] }}</a>
                     <a (click)="newPage = newPage" class="breadcrumb" [ngClass]="{'nomePagina': newPage == 2}">{{ namePage[1] }}</a>
@@ -22,7 +22,7 @@
                             <input id="nick" name="nick" type="text"
                                 minlength="3" maxlength="20" required
                                 [ngClass]="{'invalid': (nick.errors?.required && nick.touched) || nickInvalido}"
-                                [(ngModel)]="escritor.nick" #nick="ngModel" (ngModelChange)="validaNick()"
+                                [(ngModel)]="escritor.nick" #nick="ngModel" (ngModelChange)="validaNick()" (blur)="escritorCadastrado()"
                                 [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
                             
                             <label [ngClass]="{'active': escritor?.email}" for="nick">Nick*</label>
@@ -36,7 +36,7 @@
                             <input id="email" name="email" type="email"
                                 minlength="6" maxlength="30"
                                 [ngClass]="{'invalid': (email.errors?.required && email.touched) || emailInvalido}"
-                                [(ngModel)]="escritor.email" #email="ngModel" email (ngModelChange)="validaEmail()"
+                                [(ngModel)]="escritor.email" #email="ngModel" email (ngModelChange)="validaEmail()" (blur)="escritorCadastrado()"
                                 [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
                             
                             <label [ngClass]="{'active': escritor?.email}" for="email">E-mail*</label>
@@ -222,6 +222,17 @@
                 <div [hidden]="escritor.id == 0 && newPage != 3">
                     <div class="row">
                         <div class="input-field col s12 m12 l5 xl5">
+                            <input id="agencia" name="agencia" type="text"
+                                minlength="3" maxlength="12"
+                                [ngClass]="{'invalid': (agencia.errors?.required && agencia.touched)}"
+                                [(ngModel)]="escritor.agencia" #agencia="ngModel"
+                                [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
+
+                            <label [ngClass]="{'active': escritor?.agencia}" for="agencia">Agência</label>
+
+                            <div class="error" *ngIf="agencia.errors?.minlength">Agência inválida.</div>    
+                        </div>        
+                        <div class="input-field col s12 m12 l6 xl6 right">
                             <input id="conta_corrente" name="conta_corrente" type="text"
                                 maxlength="15" minlength="4"
                                 [ngClass]="{'invalid': (conta_corrente.errors?.required && conta_corrente.touched)}"
@@ -231,17 +242,6 @@
                             <label [ngClass]="{'active': escritor?.conta_corrente}" for="conta_corrente">Conta corrente</label>
 
                             <div class="error" *ngIf="conta_corrente.errors?.minlength">Conta corrente inválida.</div>
-                        </div>        
-                        <div class="input-field col s12 m12 l6 xl6 right">
-                            <input id="agencia" name="agencia" type="text"
-                                minlength="3" maxlength="12"
-                                [ngClass]="{'invalid': (agencia.errors?.required && agencia.touched)}"
-                                [(ngModel)]="escritor.agencia" #agencia="ngModel"
-                                [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
-
-                            <label [ngClass]="{'active': escritor?.agencia}" for="agencia">Agência</label>
-
-                            <div class="error" *ngIf="agencia.errors?.minlength">Agência inválida.</div>
                         </div>
                     </div>
                     <div class="row">
@@ -259,7 +259,7 @@
                         </div>
                     </div>
                 </div>
-                <div *ngIf="escritor.id != 0"> 
+                <div [hidden]="escritor.id == 0"> 
                     <div class="row">
                         <div class="input-field col s12 m12 l5 xl5" *ngIf="escritor.status != 'p' && escritor.status != 'r'">
                             <select name="ativo" materialize="material_select" [materializeSelectOptions]="selectAtivo" 
@@ -377,6 +377,20 @@
         <h4>{{ mensagem }}</h4>
         <div class="small-modal-footer">
             <a class="modal-action modal-close waves-effect waves-green btn-flat ">Fechar</a>
+        </div>
+    </div>
+</div>
+
+<!--modal para puxar leitor-->
+<div id="modalConfirm" class="modal center-sheet small-modal small-modal-info" materialize="modal" [materializeParams]="[{dismissible: true}]" [materializeActions]="modalConfirm">
+    <div class="modal-content">
+        <h4><i class="material-icons">person</i></h4>
+        <h4>{{ mensagemConfirm }}</h4>
+        <div style="margin-top:10px; color: #131313"> Deseja carregar os dados?</div>
+        <div class="small-modal-confirm">
+            
+            <a class="modal-action modal-close waves-effect waves-green btn-flat ">Sim</a>
+            <a class="modal-action modal-close waves-effect waves-red btn-flat ">Não</a>
         </div>
     </div>
 </div>
