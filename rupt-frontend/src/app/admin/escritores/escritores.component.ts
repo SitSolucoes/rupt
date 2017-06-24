@@ -223,30 +223,38 @@ export class EscritoresComponent implements OnInit {
     });
   }
 
-  escritorCadastrado(){
-    this.mensagemConfirm = "";
-
-    let exist: boolean = false;
-
-    if (this.nickInvalido == true && this.escritor.nick){
+  nickCadastrado(){
+    if (this.escritor.nick){
       this._escritoresService.existNick(this.escritor.nick).subscribe(
         (existNick: boolean) => {
-          exist = existNick;
           this.mensagemConfirm = "Nick já cadastrado.";
+          if (!existNick){
+            this.modalConfirm.emit({action:"modal",params:['open']});
+          }
+            
         }
       );
     }
-    else if (this.emailInvalido == true){
+  }
+
+  emailCadastrado(){
+    if (this.escritor.email){
       this._escritoresService.existEmail(this.escritor.email).subscribe(
         (existEmail: boolean) => {
-          exist = existEmail;
           this.mensagemConfirm = "Email já cadastrado."; 
+          if (!existEmail)
+            this.modalConfirm.emit({action:"modal",params:['open']});
         }
       );
     }
-      
-    if (!exist)
-      this.modalConfirm.emit({action:"modal",params:['open']});
+  }
+
+  noConfirm(){
+    this.modalConfirm.emit({action:"modal",params:['close']});
+  }
+
+  yesConfirm(){
+
   }
 
   validaNick(){

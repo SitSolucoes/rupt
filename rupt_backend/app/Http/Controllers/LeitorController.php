@@ -107,7 +107,10 @@ class LeitorController extends Controller
 
     public function getIdByNick($nick){
         $leitor = Leitor::where("nick", $nick)->first();
-        return $leitor->id;
+        if ($leitor)
+            return $leitor->id;     
+        else
+            return 0;
     }
 
     public function getIdByEmail($email){
