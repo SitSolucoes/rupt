@@ -14,7 +14,7 @@ class SetAdminNullablePostTable extends Migration
     public function up()
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->integer('admin_idAdmin')->unsigned()->nullable()->change();
+            $table->integer('idAdmin_deleted')->unsigned()->nullable()->change();
         }); 
     }
 

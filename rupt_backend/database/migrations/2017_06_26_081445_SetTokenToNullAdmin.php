@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class DropAdminIdColumnPostTable extends Migration
+class SetTokenToNullAdmin extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class DropAdminIdColumnPostTable extends Migration
      */
     public function up()
     {
-        Schema::table('posts', function (Blueprint $table) {
-            $table->dropColumn('admin_idAdmin');
+        Schema::table('admins', function (Blueprint $table) {
+            $table->integer('token_esqueci_senha')->unsigned()->nullable()->change();
         }); 
     }
 

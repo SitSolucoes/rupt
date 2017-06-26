@@ -22,6 +22,11 @@ export class MensagensComponent implements OnInit {
   filtroMensagens_nLidas: any;
   filtroMensagens_lidas: any;
   resposta_msg_selecionada: Mensagem;
+  vetor_ordena: string[];
+  private ordenacoes = [
+    {'remetente': false},
+    {'assunto': false}
+  ];
   private mensagem_selecionada: Mensagem;
   private resposta: string;
 
@@ -41,8 +46,8 @@ export class MensagensComponent implements OnInit {
     this.getMensagens_lidas();
   }
 
-  zera(){
-    this.notificacoes = this._notificacoesService.getNotificacoes();
+  zera(){ 
+    this.notificacoes = this._notificacoesService.getNotificacoes();  
     this.clear();
     this.getMensagens_nLidas();
     this.getMensagens_lidas();
@@ -58,6 +63,36 @@ export class MensagensComponent implements OnInit {
           this.mensagens_nLidas = mensagens;
         }
       );
+  }
+
+  ordena(por){
+    switch(por){
+      case 'nome':{
+        if(!this.ordenacoes['remetente']){
+          this.ordenacoes['remetente'] = true;
+          this.mensagens_nLidas.sort((n1,n2)=> {
+              if(n1.nome>n2.nome)
+                return 1;
+              if(n1.nome<n2.nome)
+                return -1;
+              return 0;
+            }
+          );
+        }else{
+          this.ordenacoes['remetente'] = false;
+          this.mensagens_nLidas.sort((n1,n2)=> {
+              if(n1.nome>n2.nome)
+                return -1;
+              if(n1.nome<n2.nome)
+                return 1;
+              return 0;
+            }
+          );
+        }
+          
+      }
+    }
+      
   }
 
   getMensagens_lidas(){
