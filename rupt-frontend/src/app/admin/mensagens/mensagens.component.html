@@ -154,14 +154,18 @@
       </li>
       <li *ngIf="listMensagens_nLidas().length > 0">
           <div class="list-item header">
-                <div class="col s2 m2 l2 xl2 item">
-                    <a (click)="ordena('nome')"> Nome Informado </a>
+                <div class="col s4 m4 l4 xl4 item">
+                    Nome Informado
+                        <i *ngIf="this.ordenacoes['remetente'] == null || this.ordenacoes['remetente'] == true" class="material-icons" (click)="ordena('nome')">keyboard_arrow_up</i>
+                        <i *ngIf="!this.ordenacoes['remetente'] && this.ordenacoes['remetente'] != null" class="material-icons" (click)="ordena('nome')">keyboard_arrow_down</i>
                 </div>
                 <div class="col s3 m3 l3 xl3 item left-align">
                     Assunto 
                 </div>
-                <div class="col s5 m5 l5 xl5 item left-align">
-                    Mensagem
+                <div class="col s3 m3 l3 xl3 item left-align">
+                    Data
+                    <i *ngIf="this.ordenacoes['data'] == null || this.ordenacoes['data'] == true" class="material-icons" (click)="ordena('data')">keyboard_arrow_up</i>
+                    <i *ngIf="!this.ordenacoes['data'] && this.ordenacoes['data'] != null" class="material-icons" (click)="ordena('data')">keyboard_arrow_down</i>
                 </div>
                 <div class="option-icons col s2 m2 l2 xl2 right-align item">
                     <div class="margin-right-1">Opções</div> 
@@ -172,14 +176,14 @@
     
       <li *ngFor="let m of listMensagens_nLidas() | paginate: {itemsPerPage: 10, currentPage:page, id: '1'}; let i = index">
           <div (click)="openModal(m)" class="list-item option-icons">
-              <div class="col s2 m2 l2 xl2 item">
+              <div class="col s4 m4 l4 xl4 item">
                   {{m.nome}}
               </div>
               <div class="col s3 m3 l3 xl3 item left-align">
                   {{m.assunto}}
               </div>
-              <div class="col s5 m5 l5 xl5 item left-align">
-                  {{m.conteudo}}
+              <div class="col s3 m3 l3 xl3 item left-align">
+                  {{m.created_at | date:"dd/MM/yyyy" }}
               </div>
               
               <div class="option-icons col s2 m2 l2 xl2">
@@ -230,14 +234,14 @@
       </li>
       <li *ngIf="listMensagens_lidas().length > 0">
           <div class="list-item header">
-                <div class="col s2 m2 l2 xl2 item">
+                <div class="col s4 m4 l4 xl4 item">
                     Nome Informado
                 </div>
                 <div class="col s3 m3 l3 xl3 item left-align">
                     Assunto
                 </div>
-                <div class="col s5 m5 l5 xl5 item left-align">
-                    Mensagem
+                <div class="col s3 m3 l3 xl3 item left-align">
+                    Data
                 </div>
                 <div class="option-icons col s2 m2 l2 xl2 right-align item">
                     <div class="margin-right-1">Opções</div>
@@ -248,14 +252,14 @@
     
       <li *ngFor="let ml of listMensagens_lidas() | paginate: {itemsPerPage: 10, currentPage:page, id: '1'}; let i = index">
           <div (click)="openModalLida(ml)" class="list-item option-icons">
-              <div class="col s2 m2 l2 xl2 item">
+              <div class="col s4 m4 l4 xl4 item">
                   {{ml.nome}}
               </div>
               <div class="col s3 m3 l3 xl3 item left-align">
                   {{ml.assunto}}
               </div>
-              <div class="col s5 m5 l5 xl5 item left-align">
-                  {{ml.conteudo}}
+              <div class="col s3 m3 l3 xl3 item left-align">
+                  {{ml.created_at | date:"dd/MM/yyyy" }}
               </div>
               
               <div class="option-icons col s2 m2 l2 xl2">

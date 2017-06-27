@@ -24,8 +24,8 @@ export class MensagensComponent implements OnInit {
   resposta_msg_selecionada: Mensagem;
   vetor_ordena: string[];
   private ordenacoes = [
-    {'remetente': false},
-    {'assunto': false}
+    {'remetente': null},
+    {'data': null}
   ];
   private mensagem_selecionada: Mensagem;
   private resposta: string;
@@ -68,7 +68,7 @@ export class MensagensComponent implements OnInit {
   ordena(por){
     switch(por){
       case 'nome':{
-        if(!this.ordenacoes['remetente']){
+        if(!this.ordenacoes['remetente']|| this.ordenacoes['remetente'] == null){
           this.ordenacoes['remetente'] = true;
           this.mensagens_nLidas.sort((n1,n2)=> {
               if(n1.nome>n2.nome)
@@ -78,18 +78,49 @@ export class MensagensComponent implements OnInit {
               return 0;
             }
           );
+        break;
         }else{
-          this.ordenacoes['remetente'] = false;
+          if(this.ordenacoes['remetente'] != null){
+            this.ordenacoes['remetente'] = false;
+            this.mensagens_nLidas.sort((n1,n2)=> {
+                if(n1.nome>n2.nome)
+                  return -1;
+                if(n1.nome<n2.nome)
+                  return 1;
+                return 0;
+              }
+            );
+          break;
+          }
+          
+        }
+      }
+      case 'data':{
+        if(!this.ordenacoes['data']|| this.ordenacoes['data'] == null){
+          this.ordenacoes['data'] = true;
           this.mensagens_nLidas.sort((n1,n2)=> {
-              if(n1.nome>n2.nome)
-                return -1;
-              if(n1.nome<n2.nome)
+              if(n1.created_at>n2.created_at)
                 return 1;
+              if(n1.created_at<n2.created_at)
+                return -1;
               return 0;
             }
           );
+        break;
+        }else{
+          if(this.ordenacoes['data'] != null){
+            this.ordenacoes['data'] = false;
+            this.mensagens_nLidas.sort((n1,n2)=> {
+                if(n1.created_at>n2.created_at)
+                  return -1;
+                if(n1.created_at<n2.created_at)
+                  return 1;
+                return 0;
+              }
+            );
+          break;
+          }
         }
-          
       }
     }
       
