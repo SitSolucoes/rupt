@@ -101,15 +101,15 @@
                         <div class="input-field col s12 m12 l6 xl6 right">
                             <input id="cpf" name="cpf" type="text"
                                 minlength="6" maxlength="30" required
-                                [ngClass]="{'invalid': (cpf.errors?.required && cpf.touched) || cpfInvalido}"
+                                [ngClass]="{'invalid': (cpf.errors?.required && cpf.touched) || cpfUsado}"
                                 [(ngModel)]="escritor.cpf" #cpf="ngModel" (ngModelChange)="validaCpf()"
                                 [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
 
                             <label [ngClass]="{'active': escritor?.cpf}" for="cpf">Cpf*</label>
 
-                            <div class="error" *ngIf="cpf.errors?.cpf && cpf.touched">Cpf inválido.</div>
+                            <div class="error" *ngIf="cpf.errors?.required && cpf.touched">Campo obrigatório.</div>
                             <div class="error" *ngIf="cpf.errors?.minlength && cpf.touched">Cpf inválido.</div>
-                            <div class="error" *ngIf="cpfInvalido">Cpf inválido.</div>
+                            <div class="error" *ngIf="cpfUsado">Cpf inválido.</div>
                         </div>
                     </div>
                     <div class="row">
@@ -330,14 +330,14 @@
             <a (click)="closeModal()" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
             
             <button *ngIf="newPage == 4"  type="submit" class="modal-action modal-close waves-effect waves-green btn-flat"
-                [disabled]="!f.valid || emailInvalido || nickInvalido || dataInvalida || !senhaValida">
+                [disabled]="!f.valid || cpfUsado || emailInvalido || nickInvalido || dataInvalida || !senhaValida">
                 Salvar
             </button>           
 
-            <a (click)="newPage = newPage + 1" *ngIf="newPage != 4 && f.valid && !emailInvalido && !nickInvalido && !dataInvalida" 
+            <a (click)="newPage = newPage + 1" *ngIf="newPage != 4 && f.valid && !emailInvalido && !nickInvalido && !dataInvalida && !cpfUsado" 
                 class="modal-action waves-effect waves-green btn-flat">Avançar
             </a>
-            <a (click)="newPage = newPage" *ngIf="newPage == 1 && (!f.valid || emailInvalido || nickInvalido || dataInvalida || !senhaValida)" 
+            <a (click)="newPage = newPage" *ngIf="newPage == 1 && (!f.valid || emailInvalido || nickInvalido || dataInvalida || cpfUsado || !senhaValida)" 
                 class="modal-action waves-effect waves-green btn-flat disabled">Avançar
             </a>
 

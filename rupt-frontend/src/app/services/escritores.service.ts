@@ -114,4 +114,12 @@ export class EscritoresService {
       )
   }
 
+  existCpf(cpf, id): Observable<any>{
+    return this._http.get(this._url + 'existCpf/'+cpf+"/"+id).map(
+      (response: Response) => {
+        return response.json().existCpf;
+      }
+    )
+  }
+
 }

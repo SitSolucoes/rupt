@@ -103,6 +103,7 @@ Route::put('/recusarEscritor/{id}',['uses' => 'EscritorController@recusar']);
 Route::put('/aceitarEscritor/{id}/{admin_idAdmin}',['uses' => 'EscritorController@aceitar']);
 Route::get('/existEmail/{email}', ['uses' => 'EscritorController@existEmail']);
 Route::get('/existNick/{nick}', ['uses' => 'EscritorController@existNick']);
+Route::get('/existCpf/{cpf}/{id}', ['uses' => 'EscritorController@existCpf']);
 
 //sugestões
 Route::get('/getSugestoes', [

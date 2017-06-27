@@ -47,10 +47,10 @@ export class EscritoresComponent implements OnInit {
   
   mSolicitacao = 0;
   mEscrires = 0;
-  cpfInvalido: boolean;
   dataInvalida: boolean;
   emailInvalido: boolean;
   nickInvalido: boolean;
+  cpfUsado: boolean;
   senhaValida: boolean;
   filtroEscritores: string;
   filtroSolicitacoes: string;
@@ -226,12 +226,11 @@ export class EscritoresComponent implements OnInit {
   nickCadastrado(){
     if (this.escritor.nick){
       this._escritoresService.existNick(this.escritor.nick).subscribe(
-        (existNick: boolean) => {
+        (existNick: number) => {
           this.mensagemConfirm = "Nick já cadastrado.";
-          if (!existNick){
+          if (existNick == 0){
             this.modalConfirm.emit({action:"modal",params:['open']});
           }
-            
         }
       );
     }
@@ -240,9 +239,9 @@ export class EscritoresComponent implements OnInit {
   emailCadastrado(){
     if (this.escritor.email){
       this._escritoresService.existEmail(this.escritor.email).subscribe(
-        (existEmail: boolean) => {
+        (existEmail: number) => {
           this.mensagemConfirm = "Email já cadastrado."; 
-          if (!existEmail)
+          if (existEmail == 0)
             this.modalConfirm.emit({action:"modal",params:['open']});
         }
       );
@@ -292,7 +291,19 @@ export class EscritoresComponent implements OnInit {
   }
 
   validaCpf(){
-    
+    if (this.escritor.cpf){
+      if (this.escritor.cpf.length >= 14){
+        this._escritoresService.existCpf(this.escritor.cpf, this.escritor.id).subscribe(
+          (cpf: boolean) => {
+            this.cpfUsado = cpf;
+          }
+        );
+      }
+      else
+        this.cpfUsado = false;
+    }
+    else
+      this.cpfUsado = false;
   }
 
   validaData(e){
