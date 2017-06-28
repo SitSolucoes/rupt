@@ -2,21 +2,23 @@
  materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions">
     <form class="col s12" #f="ngForm" (ngSubmit)="onSubmit(f)">
         <div class="modal-content">
-            <h4 *ngIf="!escritor.data_aceite && escritor.id != 0">Analisar</h4>
+            <h4 *ngIf="!escritor.data_aceite && escritor.id != 0 && idLeitor == 0">Analisar</h4>
             <h4 *ngIf="escritor.data_aceite">Editar</h4>
-            <h4 *ngIf="escritor.id == 0">Cadastrar</h4>
+            <div *ngIf="escritor.id == 0 || idLeitor != 0">
+                <h4 >Cadastrar</h4>
 
-            <div class="nav-wrapper" *ngIf="escritor.id == 0">
-                <div class="col s12">
-                    <a (click)="newPage = newPage" class="breadcrumb" [ngClass]="{'nomePagina': newPage == 1}">{{ namePage[0] }}</a>
-                    <a (click)="newPage = newPage" class="breadcrumb" [ngClass]="{'nomePagina': newPage == 2}">{{ namePage[1] }}</a>
-                    <a (click)="newPage = newPage" class="breadcrumb" [ngClass]="{'nomePagina': newPage == 3}">{{ namePage[2] }}</a>
-                    <a (click)="newPage = newPage" class="breadcrumb" [ngClass]="{'nomePagina': newPage == 4}">{{ namePage[3] }}</a>
+                <div class="nav-wrapper">
+                    <div class="col s12">
+                        <a (click)="newPage = newPage" class="breadcrumb" [ngClass]="{'nomePagina': newPage == 1}">{{ namePage[0] }}</a>
+                        <a (click)="newPage = newPage" class="breadcrumb" [ngClass]="{'nomePagina': newPage == 2}">{{ namePage[1] }}</a>
+                        <a (click)="newPage = newPage" class="breadcrumb" [ngClass]="{'nomePagina': newPage == 3}">{{ namePage[2] }}</a>
+                        <a (click)="newPage = newPage" class="breadcrumb" [ngClass]="{'nomePagina': newPage == 4}">{{ namePage[3] }}</a>
+                    </div>
                 </div>
             </div>
             
             <div class="row">
-                <div [hidden]="escritor.id == 0 && newPage != 1">
+                <div [hidden]="(escritor.id == 0 || idLeitor != 0) && newPage != 1">
                     <div class="row col s12 m12 l12 xl12">
                         <div class="input-field col s12 m12 l5 xl5">
                             <input id="nick" name="nick" type="text"
@@ -148,7 +150,7 @@
                         </div>
                     </div>
                 </div>
-                <div [hidden]="escritor.id == 0 && newPage != 2">
+                <div [hidden]="(escritor.id == 0 || idLeitor != 0) && newPage != 2">
                     <div class="row">
                         <div class="input-field col s12 m12 l5 xl5">
                             <input id="cep" name="cep" type="text"
@@ -219,7 +221,7 @@
                         </div>
                     </div>
                 </div>
-                <div [hidden]="escritor.id == 0 && newPage != 3">
+                <div [hidden]="(escritor.id == 0 || idLeitor != 0) && newPage != 3">
                     <div class="row">
                         <div class="input-field col s12 m12 l5 xl5">
                             <input id="agencia" name="agencia" type="text"
@@ -259,7 +261,7 @@
                         </div>
                     </div>
                 </div>
-                <div [hidden]="escritor.id == 0"> 
+                <div [hidden]="escritor.id == 0 || idLeitor != 0"> 
                     <div class="row">
                         <div class="input-field col s12 m12 l5 xl5" *ngIf="escritor.status != 'p' && escritor.status != 'r'">
                             <select name="ativo" materialize="material_select" [materializeSelectOptions]="selectAtivo" 
@@ -287,7 +289,7 @@
                         </div>
                     </div>
                 </div>    
-                <div *ngIf="escritor.id != 0"> 
+                <div *ngIf="escritor.id != 0 && idLeitor == 0"> 
                     <div class="row">
                         <div class="input-field col s12 m12 l5 xl5">
                             <input id="created_at" name="created_at" type="text" readonly
@@ -297,7 +299,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row" *ngIf="escritor.id == 0 && newPage == 4">
+                <div class="row" *ngIf="(escritor.id == 0 || idLeitor != 0) && newPage == 4">
                     <div class="input-field col s12 m12 l5 xl5">
                         <input id="password" name="password" type="password"
                         minlength="8" maxlength="20" required 
@@ -326,26 +328,24 @@
             </div>   
         </div>
 
-        <div class="modal-footer" *ngIf="escritor.data_aceite || escritor.id == 0">
+        <div class="modal-footer" *ngIf="escritor.data_aceite || escritor.id == 0 || idLeitor != 0">
             <a (click)="closeModal()" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
             
-            <button *ngIf="newPage == 4"  type="submit" class="modal-action modal-close waves-effect waves-green btn-flat"
+            <button *ngIf="newPage == 4 || (escritor.id != 0 && idLeitor == 0)"  type="submit" class="modal-action modal-close waves-effect waves-green btn-flat"
                 [disabled]="!f.valid || cpfUsado || emailInvalido || nickInvalido || dataInvalida || !senhaValida">
                 Salvar
             </button>           
 
-            <a (click)="newPage = newPage + 1" *ngIf="newPage != 4 && f.valid && !emailInvalido && !nickInvalido && !dataInvalida && !cpfUsado" 
+            <a (click)="newPage = newPage + 1" *ngIf="(escritor.id == 0 || idLeitor != 0) && newPage != 4 && f.valid && !emailInvalido && !nickInvalido && !dataInvalida && !cpfUsado" 
                 class="modal-action waves-effect waves-green btn-flat">Avançar
             </a>
-            <a (click)="newPage = newPage" *ngIf="newPage == 1 && (!f.valid || emailInvalido || nickInvalido || dataInvalida || cpfUsado || !senhaValida)" 
+            <a (click)="newPage = newPage" *ngIf="(escritor.id == 0 || idLeitor != 0) && newPage == 1 && (!f.valid || emailInvalido || nickInvalido || dataInvalida || cpfUsado || !senhaValida)" 
                 class="modal-action waves-effect waves-green btn-flat disabled">Avançar
             </a>
 
             <a (click)="newPage = newPage - 1" *ngIf="newPage != 1" class="modal-action waves-effect waves-green btn-flat ">Voltar</a>
-            
-            
         </div>
-        <div class="modal-footer" *ngIf="!escritor.data_aceite && escritor.id != 0">
+        <div class="modal-footer" *ngIf="!escritor.data_aceite && escritor.id != 0 && idLeitor == 0">
             <a (click)="closeModal()" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
             <a *ngIf="!recusar && escritor.status != 'r'" (click)="recusar = !recusar" class="modal-action waves-effect waves-green btn-flat ">Recusar</a>
             <button *ngIf="recusar" type="submit" class="modal-action modal-close waves-effect waves-green btn-flat"
@@ -389,7 +389,7 @@
         <div style="margin-top:10px; color: #131313"> Deseja carregar os dados?</div>
         <div class="small-modal-confirm">
             
-            <a (click)="yesConfirm()" class="modal-action modal-close waves-effect waves-green btn-flat ">Sim</a>
+            <a (click)="yesConfirm(f)" class="modal-action modal-close waves-effect waves-green btn-flat ">Sim</a>
             <a (click)="noConfirm()" class="modal-action waves-effect waves-red btn-flat ">Não</a>
         </div>
     </div>

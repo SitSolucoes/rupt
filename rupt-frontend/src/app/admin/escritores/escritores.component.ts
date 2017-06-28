@@ -1,3 +1,4 @@
+import { Leitor } from './../../classes/leitor';
 import { LeitoresService } from './../../services/leitores.service';
 import { Bancos } from './../../shared/arrayBanco';
 import { Estados } from './../../shared/arrayEstados';
@@ -44,7 +45,7 @@ declare var Materialize:any;
 
 
 export class EscritoresComponent implements OnInit {
-  
+  notificacoes;
   mSolicitacao = 0;
   mEscrires = 0;
   dataInvalida: boolean;
@@ -52,18 +53,21 @@ export class EscritoresComponent implements OnInit {
   nickInvalido: boolean;
   cpfUsado: boolean;
   senhaValida: boolean;
+  recusar: boolean;
+  
   filtroEscritores: string;
   filtroSolicitacoes: string;
-  notificacoes;
+  mensagem: string;
+  mensagemConfirm: string;
+  namePage: string[] = ["Dados Pessoais", "Endereço", "Dados Bancários", "Senha"];
+  
+  newPage: number = 1;
+  idLeitor: number;
+
   escritor: Escritor;
   escritores: Escritor[];
   solicitacoes: Escritor[];
-  recusar: boolean;
-  mensagem: string;
-  mensagemConfirm: string;
-  newPage: number = 1;
-  namePage: string[] = ["Dados Pessoais", "Endereço", "Dados Bancários", "Senha"];
-
+  
   modalActions = new EventEmitter<string|MaterializeAction>();
   modalMessage = new EventEmitter<string|MaterializeAction>();
   modalConfirm = new EventEmitter<string|MaterializeAction>();
@@ -121,6 +125,7 @@ export class EscritoresComponent implements OnInit {
     this.dataInvalida = false;
     this.recusar = false;
     this.newPage = 1;
+    this.idLeitor = 0;
   }
 
   openModal(f: NgForm){
@@ -132,28 +137,18 @@ export class EscritoresComponent implements OnInit {
   }
 
   openModalEdit(escritor: Escritor, f: NgForm) {
-    Materialize.updateTextFields();
-
     this.setFalse();
     this.escritor = escritor;
-
-    Materialize.updateTextFields();
 
     if (this.escritor.nascimento.indexOf("/")<0)
       this.escritor.nascimento = DateBr.convert(this.escritor.nascimento);
     if (this.escritor.created_at.indexOf("/")<0)
       this.escritor.created_at = DateBr.convert(this.escritor.created_at);
 
-    Materialize.updateTextFields();
-
     f.reset(this.escritor);
-    
-    Materialize.updateTextFields();
-    
-    this.modalActions.emit({action:"modal",params:['open']});
 
-    Materialize.updateTextFields();
-  }
+    this.modalActions.emit({action:"modal",params:['open']});
+}
 
   closeModal() {
     this.getEscritores();
@@ -226,10 +221,11 @@ export class EscritoresComponent implements OnInit {
   nickCadastrado(){
     if (this.escritor.nick){
       this._escritoresService.existNick(this.escritor.nick).subscribe(
-        (existNick: number) => {
+        (idLeitor: number) => {
           this.mensagemConfirm = "Nick já cadastrado.";
-          if (existNick == 0){
+          if (idLeitor != 0){
             this.modalConfirm.emit({action:"modal",params:['open']});
+            this.idLeitor = idLeitor;
           }
         }
       );
@@ -239,10 +235,11 @@ export class EscritoresComponent implements OnInit {
   emailCadastrado(){
     if (this.escritor.email){
       this._escritoresService.existEmail(this.escritor.email).subscribe(
-        (existEmail: number) => {
+        (idLeitor: number) => {
           this.mensagemConfirm = "Email já cadastrado."; 
-          if (existEmail == 0)
+          if (idLeitor != 0)
             this.modalConfirm.emit({action:"modal",params:['open']});
+            this.idLeitor = idLeitor;
         }
       );
     }
@@ -252,8 +249,21 @@ export class EscritoresComponent implements OnInit {
     this.modalConfirm.emit({action:"modal",params:['close']});
   }
 
-  yesConfirm(){
-
+  yesConfirm(f: NgForm){
+    this._leitoresService.getLeitor(this.idLeitor).subscribe(
+        (leitor: Leitor) => {
+          this.escritor = new Escritor();
+          this.escritor.setLeitor(leitor);
+          
+          if (this.escritor.nascimento.indexOf("/")<0)
+            this.escritor.nascimento = DateBr.convert(this.escritor.nascimento);
+          
+          this.nickInvalido = false;
+          this.emailInvalido = false;
+          
+          f.reset(this.escritor);
+        }
+      );
   }
 
   validaNick(){

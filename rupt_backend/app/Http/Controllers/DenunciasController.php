@@ -32,7 +32,7 @@ class DenunciasController extends Controller
     public function getLeitor($id){
         $c = new LeitorController();
         $response = [
-            'leitor' => $c->getById($id)
+            'leitor' => $c->getLeitor($id)
         ];
         return response()->json($response, 200);
     }

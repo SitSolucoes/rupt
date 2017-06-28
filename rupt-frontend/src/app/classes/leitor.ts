@@ -15,4 +15,15 @@ export class Leitor {
         this.sexo = "m";
         this.ativo = true;
     }
+
+    setLeitor(leitor: Leitor){
+        this.id = leitor.id;
+        this.nome = leitor.nome;
+        this.nick = leitor.nick;
+        this.sexo = leitor.sexo;
+        this.nascimento = leitor.nascimento;
+        this.src_foto = leitor.src_foto;
+        this.email = leitor.email;
+        this.ativo = leitor.ativo;
+    }
 }

@@ -78,7 +78,7 @@ Route::get('/getLeitores',[
 ]);
 
 Route::get('/getLeitor/{id}',[
-            'uses' => 'LeitorController@getById'
+            'uses' => 'LeitorController@getLeitor'
 ]);
 
 Route::put('/updateLeitor/{id}',[
@@ -105,6 +105,7 @@ Route::get('/existEmail/{email}', ['uses' => 'EscritorController@existEmail']);
 Route::get('/existNick/{nick}', ['uses' => 'EscritorController@existNick']);
 Route::get('/existCpf/{cpf}/{id}', ['uses' => 'EscritorController@existCpf']);
 
+
 //sugestões
 Route::get('/getSugestoes', [
     'uses' => 'SugestaoController@getSugestoes'
@@ -120,15 +121,15 @@ Route::get('/getDenuncias', [
 ]);
 
 
-Route::get('/getPost/{id}', [
+Route::get('/denuncia/getPost/{id}', [
           'uses' => 'DenunciasController@getPost'
 ]);
 
-Route::get('/getLeitor/{id}',[
+Route::get('/denuncia/getLeitor/{id}',[
            'uses' => 'DenunciasController@getLeitor'
 ]);
 //Posts
-Route::get('/getEscritor/{id}', [
+Route::get('/denuncia/getEscritor/{id}', [
           'uses' => 'PostController@getEscritor'
 ]);
 

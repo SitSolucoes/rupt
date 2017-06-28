@@ -101,7 +101,7 @@ export class EscritoresService {
   existEmail(email): Observable<any>{
       return this._http.get(this._url + 'existEmail/'+email).map(
         (response: Response) => {
-          return response.json().existEmail;
+          return response.json().idLeitor;
         }
       )
   }
@@ -109,7 +109,7 @@ export class EscritoresService {
   existNick(nick): Observable<any>{
       return this._http.get(this._url + 'existNick/'+nick).map(
         (response: Response) => {
-          return response.json().existNick;
+          return response.json().idLeitor;
         }
       )
   }

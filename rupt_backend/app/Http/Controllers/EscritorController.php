@@ -56,7 +56,13 @@ class EscritorController extends Controller
 
     public function create(Request $request, $admin_idAdmin){
         $leitorController = new LeitorController();
-        $leitor_idLeitor = $leitorController->create($request);
+
+        if ($request->id == 0)
+            $leitor_idLeitor = $leitorController->create($request);
+        else {
+            $leitor_idLeitor = $request->id;
+            $leitorController->update($request, $request->id);
+        }
 
         $escritor = new Escritor();
         $escritor = $this->createEscritor($request, $escritor);
@@ -112,12 +118,10 @@ class EscritorController extends Controller
 
         $escritor = $this->getById($id);
 
-        if ($escritor) //achou o escritor
-            return response()->json(['existEmail' => 1], 200);
-        else if ($id != -1) //achou o leitor
-            return response()->json(['existEmail' => 0], 200);
-        else //não achou
-            return response()->json(['existEmail' => -1], 200);
+        if ($escritor || $id == -1) //achou o leitor ou é escritor
+            return response()->json(['idLeitor' => 0], 200);
+        else //achou apenas leitor
+            return response()->json(['idLeitor' => $id], 200);
     }
 
     public function existNick($nick){
@@ -126,12 +130,10 @@ class EscritorController extends Controller
 
         $escritor = $this->getById($id);
 
-        if ($escritor) //achou o escritor
-            return response()->json(['existNick' => 1], 200);
-        else if ($id != -1) //achou o leitor
-            return response()->json(['existNick' => 0], 200);
-        else //não achou
-            return response()->json(['existNick' => -1], 200);
+        if ($escritor || $id == -1) //achou o leitor ou é escritor
+            return response()->json(['idLeitor' => 0], 200);
+        else //achou apenas leitor
+            return response()->json(['idLeitor' => $id], 200);
     }
 
     public function existCpf($cpf, $id){
