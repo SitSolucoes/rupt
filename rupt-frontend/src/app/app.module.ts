@@ -8,10 +8,11 @@ import { AdminModule } from './admin/admin.module';
 import { RuptRoutingModule } from './rupt.routing.module';
 import { MaterializeModule } from 'angular2-materialize';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TextMaskModule } from 'angular2-text-mask';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -20,7 +21,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AdminModule,
     RuptRoutingModule,
     MaterializeModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    TextMaskModule
   ],
   providers: [
     AuthGuard,

@@ -15,7 +15,7 @@ class AddColumnStatusToSugestoes extends Migration
     {
         Schema::table('sugestoes', function (Blueprint $table) {
             $table->boolean('status');
-        });
+        }); 
     }
 
     /**

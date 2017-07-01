@@ -27,6 +27,7 @@ export class MensagensComponent implements OnInit {
     {'remetente': null},
     {'data': null}
   ];
+  spinner: boolean = false;
   private mensagem_selecionada: Mensagem;
   private resposta: string;
 
@@ -58,9 +59,11 @@ export class MensagensComponent implements OnInit {
   }
 
   getMensagens_nLidas(){
+    this.spinner = true;
     this._mensagemService.getMensagens_nLidas().subscribe(
         (mensagens: Mensagem[]) => {
           this.mensagens_nLidas = mensagens;
+          this.spinner = false;
         }
       );
   }
@@ -127,6 +130,7 @@ export class MensagensComponent implements OnInit {
   }
 
   getMensagens_lidas(){
+    this.spinner = true;
     this._mensagemService.getMensagens_lidas().subscribe(
         (mensagens: any) => {
           for(let l of mensagens){
@@ -145,6 +149,7 @@ export class MensagensComponent implements OnInit {
                      });
               
           }
+          this.spinner = false;
         }
       );
   }

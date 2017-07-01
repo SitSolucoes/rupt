@@ -114,14 +114,14 @@
 <div class="row">
   <!-- Mensagens não lidas-->
   <div class="col s12">
-    <ul class="tabs" materialize="tabs">
+    <ul class="tabs" materialize="tabs">    
       <li class="tab col s6">
-        <a class="active" href="#msg_nao_lida">
+        <a class="active" (click)="zera()" href="#msg_nao_lida">
           Mensagens Não Lidas
           <span *ngIf="notificacoes['mensagens'] != 0" class="notification">{{ notificacoes["mensagens"] }}</span>
         </a>
       </li>
-      <li class="tab col s6"><a href="#msg_lida" >Mensagens Lidas</a></li>
+      <li class="tab col s6"><a (click)="zera()" href="#msg_lida" >Mensagens Lidas</a></li>
     </ul>
   </div>
   <!-- Tabela mensagens não lidas-->
@@ -147,8 +147,23 @@
     <ul class="collapsible list">
       <li *ngIf="listMensagens_nLidas().length === 0">
         <div class="list-item option-icons">
-            <div class="col s12 m12 l12 xl12 item center-align">
+            <div class="col s12 m12 l12 xl12 item center-align" *ngIf="!spinner">
                 Não há mensagens não lidas.
+            </div>
+            <div class="spinner" *ngIf="spinner">
+                <div class="preloader-wrapper big active" >
+                    <div class="spinner-layer spinner-rupt">
+                        <div class="circle-clipper left">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="gap-patch">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="circle-clipper right">
+                            <div class="circle"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
       </li>
@@ -227,8 +242,23 @@
     <ul class="collapsible list">
       <li *ngIf="listMensagens_lidas().length === 0">
         <div class="list-item option-icons">
-            <div class="col s12 m12 l12 xl12 item center-align">
+            <div class="col s12 m12 l12 xl12 item center-align" *ngIf="!spinner">
                 Não há mensagens lidas.
+            </div>
+            <div class="spinner" *ngIf="spinner">
+                <div class="preloader-wrapper big active" >
+                    <div class="spinner-layer spinner-rupt">
+                        <div class="circle-clipper left">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="gap-patch">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="circle-clipper right">
+                            <div class="circle"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
       </li>

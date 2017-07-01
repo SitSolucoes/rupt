@@ -47,7 +47,9 @@ export class RedefineSenhaComponent implements OnInit {
       );
   }
   validaSenhas(e, f){
-    if((f.value.confirma+e.key == f.value.nova_senha) || (f.value.confirma+e.key == '' && f.value.nova_senha == '')){
+    if((f.value.confirma+e.key == f.value.nova_senha) || 
+        (f.value.confirma+e.key == '' && 
+        f.value.nova_senha == '')){
       this.senhaValida = true;
       return;
     }
