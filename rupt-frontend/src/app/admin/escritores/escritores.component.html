@@ -93,7 +93,7 @@
                                 [ngClass]="{'invalid': rg.errors?.required && rg.touched}"
                                 [(ngModel)]="escritor.rg" #rg="ngModel"
                                 [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
-                            
+                                
                             <label [ngClass]="{'active': escritor?.rg}" for="rg">Rg*</label>
 
                             <div class="error" *ngIf="rg.errors?.minlength && rg.touched">Rg inválido.</div>

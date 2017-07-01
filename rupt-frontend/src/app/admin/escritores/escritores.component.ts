@@ -54,6 +54,9 @@ export class EscritoresComponent implements OnInit {
   cpfUsado: boolean;
   senhaValida: boolean;
   recusar: boolean;
+
+  //masks
+  dateMask = [/[1-9]/, /\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/];
   
   filtroEscritores: string;
   filtroSolicitacoes: string;
