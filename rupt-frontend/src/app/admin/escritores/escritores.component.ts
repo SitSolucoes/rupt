@@ -340,8 +340,8 @@ export class EscritoresComponent implements OnInit {
   }
 
   onSubmit(form){
-    if (this.escritor.id == 0){
-      this._escritoresService.createEscritor(form).subscribe(
+    if (this.escritor.id == 0 || this.idLeitor != 0){
+      this._escritoresService.createEscritor(form, this.escritor.id).subscribe(
         (response: any) => {
           this.afterSubmit("Salvo com sucesso.");
         }

@@ -54,16 +54,16 @@ class EscritorController extends Controller
         return $escritor;
     }
 
-    public function create(Request $request, $admin_idAdmin){
+    public function create(Request $request, $id, $admin_idAdmin){
         $leitorController = new LeitorController();
 
-        if ($request->id == 0)
+        if ($id == 0)
             $leitor_idLeitor = $leitorController->create($request);
         else {
-            $leitor_idLeitor = $request->id;
-            $leitorController->update($request, $request->id);
+            $leitor_idLeitor = $id;
+            $leitorController->update($request, $id);
         }
-
+        
         $escritor = new Escritor();
         $escritor = $this->createEscritor($request, $escritor);
 

@@ -37,6 +37,7 @@ export class EscritoresService {
   private createBody(form){
     return JSON.stringify(
         {
+         id: form.value.id,
          nome: form.value.nome,
          nick: form.value.nick,
          email: form.value.email,
@@ -64,10 +65,10 @@ export class EscritoresService {
       });
   }
 
-  createEscritor(form){
+  createEscritor(form, id){
     const body = this.createBody(form);
 
-    return this._http.put(this._url + 'createEscritor/' + localStorage.getItem('admin_id'), body, {headers: this.headers}).map(
+    return this._http.put(this._url + 'createEscritor/' + id + "/" + localStorage.getItem('admin_id'), body, {headers: this.headers}).map(
     (response: Response)=>{
       response.json()
     });
