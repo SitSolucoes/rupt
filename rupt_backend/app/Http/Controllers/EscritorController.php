@@ -34,8 +34,8 @@ class EscritorController extends Controller
     }
 
     private function createEscritor(Request $request, $escritor){
-        $escritor->rg = $request->rg;
-        $escritor->cpf = $request->cpf;
+        $escritor->rg = preg_replace("/[^0-9]/","", $request->rg);
+        $escritor->cpf = preg_replace("/[^0-9]/","",$request->cpf);
         $escritor->telefone = $request->telefone;
         $escritor->celular = $request->celular;
         $escritor->biografia = $request->biografia;
@@ -56,7 +56,13 @@ class EscritorController extends Controller
 
     public function create(Request $request, $admin_idAdmin){
         $leitorController = new LeitorController();
-        $leitor_idLeitor = $leitorController->create($request);
+
+        if ($request->id == 0)
+            $leitor_idLeitor = $leitorController->create($request);
+        else {
+            $leitor_idLeitor = $request->id;
+            $leitorController->update($request, $request->id);
+        }
 
         $escritor = new Escritor();
         $escritor = $this->createEscritor($request, $escritor);
@@ -112,10 +118,10 @@ class EscritorController extends Controller
 
         $escritor = $this->getById($id);
 
-        if ($escritor)
-            return response()->json(['existEmail' => true], 200);
-        else
-            return response()->json(['existEmail' => false], 200);
+        if ($escritor || $id == -1) //achou o leitor ou é escritor
+            return response()->json(['idLeitor' => 0], 200);
+        else //achou apenas leitor
+            return response()->json(['idLeitor' => $id], 200);
     }
 
     public function existNick($nick){
@@ -124,13 +130,21 @@ class EscritorController extends Controller
 
         $escritor = $this->getById($id);
 
-        if ($escritor)
-            return response()->json(['existNick' => true], 200);
-        else
-            return response()->json(['existNick' => false], 200);
+        if ($escritor || $id == -1) //achou o leitor ou é escritor
+            return response()->json(['idLeitor' => 0], 200);
+        else //achou apenas leitor
+            return response()->json(['idLeitor' => $id], 200);
     }
 
-    public function existCpf($cpf){
+    public function existCpf($cpf, $id){
+        $cpfFormatado = preg_replace("/[^0-9]/","", $cpf);
+        $escritor = Escritor::where('cpf', $cpfFormatado)
+                            ->where('leitor_idLeitor', "<>", $id)
+                            ->first();
 
+        if ($escritor)
+            return response()->json(['existCpf' => true], 200);
+        else
+            return response()->json(['existCpf' => false], 200);
     }
 }

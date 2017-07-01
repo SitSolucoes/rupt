@@ -8,6 +8,12 @@ use App\Leitor;
 
 class LeitorController extends Controller
 {
+    
+    private function getById($id){
+        $leitor = Leitor::where('id', $id)->get();
+        return $leitor;
+    }
+
     public function create($request){
         $leitor = new Leitor(); 
         $leitor->nome = $request->input('nome');
@@ -32,9 +38,10 @@ class LeitorController extends Controller
             ],201);
     }
 
-    public function getById($id){
-        $leitor = Leitor::where('id', $id)->get();
-        return $leitor;
+    public function getLeitor($id){
+        $leitor = $this->getById($id)->first();
+
+        return response()->json(['leitor' => $leitor], 200);
     }
 
     public function getLeitores(){
@@ -107,15 +114,20 @@ class LeitorController extends Controller
 
     public function getIdByNick($nick){
         $leitor = Leitor::where("nick", $nick)->first();
+        
         if ($leitor)
             return $leitor->id;     
         else
-            return 0;
+            return -1;
     }
 
     public function getIdByEmail($email){
         $leitor = Leitor::where("email", $email)->first();
-        return $leitor->id;
+
+        if ($leitor)
+            return $leitor->id;     
+        else
+            return -1;
     }
 
 }

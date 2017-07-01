@@ -27,5 +27,10 @@ export class Escritor extends Leitor{
         super ();
         this.status = 'a';
     }
+
+    setLeitor(leitor: Leitor){
+        super.setLeitor(leitor);
+        this.status = 'a';
+    }
     
 }
