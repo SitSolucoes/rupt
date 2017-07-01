@@ -8,7 +8,6 @@ import { AdminModule } from './admin/admin.module';
 import { RuptRoutingModule } from './rupt.routing.module';
 import { MaterializeModule } from 'angular2-materialize';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TextMaskModule } from 'angular2-text-mask';
 
 @NgModule({
   declarations: [
@@ -21,8 +20,7 @@ import { TextMaskModule } from 'angular2-text-mask';
     AdminModule,
     RuptRoutingModule,
     MaterializeModule,
-    BrowserAnimationsModule,
-    TextMaskModule
+    BrowserAnimationsModule
   ],
   providers: [
     AuthGuard,
