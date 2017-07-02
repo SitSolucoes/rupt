@@ -154,7 +154,7 @@ export class EscritoresComponent implements OnInit {
     f.reset(this.escritor);
 
     this.modalActions.emit({action:"modal",params:['open']});
-}
+  }
 
   closeModal() {
     this.getEscritores();

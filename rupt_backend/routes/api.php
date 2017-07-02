@@ -107,16 +107,12 @@ Route::get('/existCpf/{cpf}/{id}', ['uses' => 'EscritorController@existCpf']);
 
 
 //sugestões
-Route::get('/getSugestoes', [
-    'uses' => 'SugestaoController@getSugestoes'
-]);
-
-Route::get('/countSugestoes',[
-    'uses' => 'SugestaoController@countSugestoes'
-]);
+Route::get('/sugestao/getSugestoes', ['uses' => 'SugestaoController@getSugestoes']);
+Route::get('/sugestao/countSugestoes',['uses' => 'SugestaoController@countSugestoes']);
+Route::put('/sugestao/alteraStatus/{id}/{status}', ['uses' => 'SugestaoController@alteraStatus']);
 
 //denuncias
-Route::get('/getDenuncias', [
+Route::get('/sugestao/getDenuncias', [
            'uses' => 'DenunciasController@getDenuncias'
 ]);
 

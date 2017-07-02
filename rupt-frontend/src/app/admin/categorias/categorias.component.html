@@ -1,3 +1,16 @@
+<div id="modalRecusa" class="modal center-sheet small-modal small-modal-red" materialize="modal" [materializeParams]="[{dismissible: true}]" [materializeActions]="modalRecusa">
+    <div class="modal-content">
+        <h4><i class="material-icons">delete_forever</i></h4>
+        <h4> {{ sugestao.categoria }} </h4>
+        <div style="margin-top:10px; color: #131313"> Deseja recusar a categoria?</div>
+        <div class="small-modal-confirm">
+            
+            <a (click)="recusa(f)" class="modal-action modal-close waves-effect waves-green btn-flat ">Sim</a>
+            <a (click)="closeModalRecusa()" class="modal-action waves-effect waves-red btn-flat ">Não</a>
+        </div>
+    </div>
+</div>
+
 <div class="title">
     <i class="material-icons">view_list</i> Categorias
 </div>
@@ -61,7 +74,7 @@
                   {{s.sugestoes}}
               </div>
               <div class="option-icons col s4 m3 l3 xl2">
-                  <i class="material-icons" (click)="openModalDeleteSugestao(s)">delete</i>
+                  <i class="material-icons" (click)="openModalRecusa(s)">delete</i>
                   <i class="material-icons" (click)="openModalEdit(a)">done</i>
               </div>
           </div>

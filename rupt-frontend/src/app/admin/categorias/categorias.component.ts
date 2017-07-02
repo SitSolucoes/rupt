@@ -15,9 +15,10 @@ export class CategoriasComponent implements OnInit {
   notificacoes;
   sugestoes;
   filtroSugestoes;
-  sugestao: Sugestao;
-
+  sugestao: Sugestao = new Sugestao();
+  
   modalActions = new EventEmitter<string|MaterializeAction>();
+  modalRecusa = new EventEmitter<string|MaterializeAction>();
 
   constructor(
     private _notificacoesService: NotificacoesService,
@@ -49,6 +50,23 @@ export class CategoriasComponent implements OnInit {
   openModalDeleteSugestao(sugestao: Sugestao){
     this.sugestao = sugestao;
     this.modalActions.emit({action:"modalDelete", params:['open']});
+  }
+
+  openModalRecusa(sugestao: Sugestao) {
+    this.sugestao = sugestao;
+
+    
+
+    this.modalRecusa.emit({action:"modal",params:['open']});
+  }
+
+  closeModalRecusa() {
+    this.modalRecusa.emit({action:"modal",params:['close']});
+  }
+
+  recusa(){
+    console.log('recusa');
+    this.closeModalRecusa();
   }
   
 }

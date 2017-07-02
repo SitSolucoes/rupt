@@ -343,6 +343,10 @@ span.badge.new:after {
 	width: 100%;
 }
 
+.small-modal-red{
+	color: #e53935;
+}
+
 .small-modal-confirm{
 	margin-top: 25px;
 	border-top: 1px solid #bdbdbd;

@@ -13,12 +13,21 @@ class SugestaoController extends Controller
     }
     
     public function getSugestoes(){
-        $sugestao = Sugestao::orderBy("sugestoes")->where("status", null);
+        $sugestao = Sugestao::orderBy("sugestoes")->where("status", 0);
 
         $response = [
             'sugestoes' => $sugestao->get()
         ];
 
         return response()->json($response, 200);
+    }
+
+    public function alteraStatus($id, $status){
+        $sugestao = Sugestao::findOrFail($id);
+
+        $sugestao->status = $status;
+        $sugestao->save();
+
+        return response()->json(['message' => "Sugestao alterada."], 200);
     }
 }
