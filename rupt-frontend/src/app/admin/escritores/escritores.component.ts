@@ -1,3 +1,4 @@
+import { Http } from '@angular/http';
 import { Leitor } from './../../classes/leitor';
 import { LeitoresService } from './../../services/leitores.service';
 import { Bancos } from './../../shared/arrayBanco';
@@ -112,7 +113,9 @@ export class EscritoresComponent implements OnInit {
   constructor(
     private _notificacoesService: NotificacoesService,
     private _escritoresService: EscritoresService,
-    private _leitoresService:LeitoresService) { }
+    private _leitoresService:LeitoresService,
+    private _http: Http
+    ) { }
 
   ngOnInit() {
     this.notificacoes = this._notificacoesService.getNotificacoes();
@@ -332,6 +335,27 @@ export class EscritoresComponent implements OnInit {
     }
     else 
       this.senhaValida = false;
+  }
+
+  consultaCep(cep){
+    console.log(cep);
+
+    cep = cep.replace(/\D/g, '');
+
+    if (cep != ''){
+      let validaCep = /^[0-9]{8}$/;
+
+      if (validaCep.test(cep)){
+        this._http.get("//viacep.com.br/ws/"+cep+"/json")
+          .map(dados => dados.json())
+          .subscribe(dados => {
+            this.escritor.logradouro = dados.logradouro;
+            this.escritor.bairro = dados.bairro;  
+            this.escritor.cidade = dados.localidade;
+            this.escritor.uf = dados.uf;
+          });
+      }
+    }
   }
 
   private afterSubmit(mensagem: string){

@@ -155,7 +155,7 @@
                         <div class="input-field col s12 m12 l5 xl5">
                             <input id="cep" name="cep" type="text"
                             minlength="8" maxlength="8"
-                            [ngModel]="escritor.cep" #cep="ngModel"
+                            [ngModel]="escritor.cep" #cep="ngModel" (blur)="consultaCep(cep.value)"
                             [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
 
                             <label [ngClass]="{'active': escritor?.cep}" for="cep">Cep</label>
