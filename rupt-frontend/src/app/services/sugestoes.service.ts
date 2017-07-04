@@ -12,7 +12,7 @@ export class SugestoesService {
   constructor(private _http: Http) { }
 
   getSugestoes(): Observable<any>{
-     return this._http.get(this._url + 'getSugestoes')
+     return this._http.get(this._url + 'sugestao/getSugestoes')
       .map(
         (response: Response) => {
           return response.json().sugestoes;
@@ -21,11 +21,18 @@ export class SugestoesService {
   }
 
   countSugestoes(): Observable<any>{
-    return this._http.get(this._url + 'countSugestoes').map(
+    return this._http.get(this._url + 'sugestao/countSugestoes').map(
       (response: Response) => {
         return response.json().countSugestoes;
       }
     )
+  }
+
+  alteraStatus(id, status): Observable<any>{
+    return this._http.put(this._url + 'sugestao/alteraStatus/'+id+'/'+status, {headers: this.headers}).map(
+    (response: Response)=>{
+      response.json()
+    });
   }
 
 }

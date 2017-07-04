@@ -54,9 +54,6 @@ export class CategoriasComponent implements OnInit {
 
   openModalRecusa(sugestao: Sugestao) {
     this.sugestao = sugestao;
-
-    
-
     this.modalRecusa.emit({action:"modal",params:['open']});
   }
 
@@ -65,8 +62,12 @@ export class CategoriasComponent implements OnInit {
   }
 
   recusa(){
-    console.log('recusa');
+    this._sugestoesService.alteraStatus(this.sugestao.id, "r").subscribe(
+      (respose: any) => {
+        this.getListSugestoes();
+      }
+    )
     this.closeModalRecusa();
   }
-  
+
 }

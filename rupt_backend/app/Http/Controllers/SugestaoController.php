@@ -13,7 +13,7 @@ class SugestaoController extends Controller
     }
     
     public function getSugestoes(){
-        $sugestao = Sugestao::orderBy("sugestoes")->where("status", 0);
+        $sugestao = Sugestao::orderBy("sugestoes")->where("status", null);
 
         $response = [
             'sugestoes' => $sugestao->get()
