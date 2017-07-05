@@ -66,10 +66,9 @@
                             <input id="nascimento" name="nascimento" type="text" maxlength="10"
                                 [ngClass]="{'invalid': nascimento.touched && dataInvalida}"
                                 [ngModel]="escritor.nascimento" #nascimento="ngModel" 
-                                (ngModelChange)="validaData($event)"
+                                (ngModelChange)="validaData($event)" mask="00/00/0000"
                                 [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
-                            
-                            <label [ngClass]="{'active': escritor?.nascimento}" for="nascimento">Data de Nascimento*</label>
+                            <label [ngClass]="{'active': escritor?.nascimento}"  for="nascimento">Data de Nascimento*</label>
 
                             <div class="error" *ngIf="nascimento.touched && dataInvalida">Data inválida.</div>
                         </div>
@@ -104,7 +103,7 @@
                             <input id="cpf" name="cpf" type="text"
                                 minlength="6" maxlength="30" required
                                 [ngClass]="{'invalid': (cpf.errors?.required && cpf.touched) || cpfUsado}"
-                                [(ngModel)]="escritor.cpf" #cpf="ngModel" (ngModelChange)="validaCpf()"
+                                [(ngModel)]="escritor.cpf" #cpf="ngModel" mask="000.000.000-77" (ngModelChange)="validaCpf()"
                                 [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
 
                             <label [ngClass]="{'active': escritor?.cpf}" for="cpf">Cpf*</label>
@@ -119,7 +118,7 @@
                             <input id="telefone" name="telefone" type="text"
                                 minlength="14" maxlength="15"
                                 [ngClass]="{'invalid': telefone.errors?.minlength && telefone.touched}"
-                                [(ngModel)]="escritor.telefone" #telefone="ngModel"
+                                [(ngModel)]="escritor.telefone" #telefone="ngModel" mask="(00) 0000-0000"
                                 [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
                             
                             <label [ngClass]="{'active': escritor?.telefone}" for="telefone">Telefone</label>
@@ -129,7 +128,7 @@
 
                         <div class="input-field col s12 m12 l6 xl6 right">
                             <input id="celular" name="celular" type="text"
-                                minlength="14" maxlength="16" required
+                                minlength="14" maxlength="16" required mask="(00)00000-0000"
                                 [ngClass]="{'invalid': (celular.errors?.required && celular.touched)}"
                                 [(ngModel)]="escritor.celular" #celular="ngModel" 
                                 [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
@@ -154,7 +153,7 @@
                     <div class="row">
                         <div class="input-field col s12 m12 l5 xl5">
                             <input id="cep" name="cep" type="text"
-                            minlength="8" maxlength="8"
+                            minlength="8" maxlength="8" mask="00.000-000"
                             [ngModel]="escritor.cep" #cep="ngModel" (blur)="consultaCep(cep.value)"
                             [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
 
