@@ -26,10 +26,12 @@
                         <label for="lida">Marcar Como Lida</label>
                     </p>
                     <div class="row">
+                        <input type="text" mask="0000:0000"/>  
                         <div class="input-field col s12">
                             <textarea id="resposta" name="resposta" class="materialize-textarea"
                                     #resp="ngModel" [ngClass]="{'invalid': resp.errors?.required && resp.touched}" [(ngModel)]="resposta"
                                     required></textarea>
+                            
                             <div *ngIf="resp.errors?.required && resp.touched" class="error">Escreva uma resposta antes de enviar.</div>
                             <label style="color: black; font-weight: bold; font-size: 1rem;" [ngClass]="{'active': resposta_msg_selecionada?.conteudo}" for="resposta">Responder</label>
                         </div>
