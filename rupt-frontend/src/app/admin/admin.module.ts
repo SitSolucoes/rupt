@@ -1,3 +1,4 @@
+import { CategoriasService } from './../services/categorias.service';
 import { CpfCnpjPipe } from './../shared/cpf-cnpj.pipe';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
@@ -68,7 +69,8 @@ import { InputMaskModule } from 'ng2-inputmask';
     AuthService,
     DenunciasService,
     PostsService,
-    MensagensService
+    MensagensService,
+    CategoriasService
   ]
 })
 export class AdminModule { }
