@@ -103,7 +103,7 @@
                             <input id="cpf" name="cpf" type="text"
                                 minlength="6" maxlength="30" required
                                 [ngClass]="{'invalid': (cpf.errors?.required && cpf.touched) || cpfUsado}"
-                                [(ngModel)]="escritor.cpf" #cpf="ngModel" mask="000.000.000-77" (ngModelChange)="validaCpf()"
+                                [(ngModel)]="escritor.cpf" #cpf="ngModel" mask="000.000.000-00" (ngModelChange)="validaCpf()"
                                 [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
 
                             <label [ngClass]="{'active': escritor?.cpf}" for="cpf">Cpf*</label>
