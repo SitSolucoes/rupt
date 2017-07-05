@@ -1,3 +1,5 @@
+import { CategoriasService } from './../../services/categorias.service';
+import { Categoria } from './../../classes/categoria';
 import { MaterializeAction } from 'angular2-materialize';
 import { Component, OnInit, EventEmitter } from '@angular/core';
 
@@ -13,8 +15,10 @@ import { Sugestao } from './../../classes/sugestao';
 export class CategoriasComponent implements OnInit {
 
   notificacoes;
-  sugestoes;
-  filtroSugestoes;
+  sugestoes: Sugestao[];
+  categorias: Categoria[];
+  filtroSugestoes: string;
+  filtroCategorias: string;
   sugestao: Sugestao = new Sugestao();
   
   modalActions = new EventEmitter<string|MaterializeAction>();
@@ -22,11 +26,13 @@ export class CategoriasComponent implements OnInit {
 
   constructor(
     private _notificacoesService: NotificacoesService,
-    private _sugestoesService: SugestoesService) { }
+    private _sugestoesService: SugestoesService,
+    private _categoriasService: CategoriasService) { }
 
   ngOnInit() {
     this.notificacoes = this._notificacoesService.getNotificacoes();
     this.getListSugestoes();
+    this.getLisCategorias();
   }
 
   getListSugestoes(){
@@ -46,6 +52,23 @@ export class CategoriasComponent implements OnInit {
       return false;
     });
   }
+
+  getLisCategorias(){
+    this._categoriasService.getCategorias().subscribe(
+      (categorias: Categoria[]) => {this.categorias = categorias}
+    )
+  }
+
+  listCategorias(){
+    if (this.filtroCategorias === undefined || this.categorias.length === 0 || this.filtroCategorias.trim() === '')
+      return this.categorias;
+    return this.categorias.filter((v) => {
+      if (v.categoria.toLowerCase().indexOf(this.filtroCategorias.toLowerCase()) >= 0) 
+        return true;
+      
+      return false;
+    });
+}
 
   openModalDeleteSugestao(sugestao: Sugestao){
     this.sugestao = sugestao;

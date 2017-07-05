@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Categoria;
+
 class CategoriaController extends Controller
 {
     public function getCategorias(){
-        $categoria = Sugestao::orderBy("categoria")
+        $categoria = Categoria::orderBy("categoria")
             ->where("categoria_idCategoria", null);
 
         return response()->json(['categorias' => $categoria->get()], 200);

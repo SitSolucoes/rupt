@@ -111,6 +111,9 @@ Route::get('/sugestao/getSugestoes', ['uses' => 'SugestaoController@getSugestoes
 Route::get('/sugestao/countSugestoes',['uses' => 'SugestaoController@countSugestoes']);
 Route::put('/sugestao/alteraStatus/{id}/{status}', ['uses' => 'SugestaoController@alteraStatus']);
 
+//categorias
+Route::get('/categoria/getCategorias', ['uses' => 'CategoriaController@getCategorias']);
+
 //denuncias
 Route::get('/sugestao/getDenuncias', [
            'uses' => 'DenunciasController@getDenuncias'

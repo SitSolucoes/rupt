@@ -1,3 +1,4 @@
+import { CategoriasService } from './../services/categorias.service';
 import { CpfCnpjPipe } from './../shared/cpf-cnpj.pipe';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
@@ -65,7 +66,8 @@ import { PostsService } from './../services/posts.service';
     AuthService,
     DenunciasService,
     PostsService,
-    MensagensService
+    MensagensService,
+    CategoriasService
   ]
 })
 export class AdminModule { }
