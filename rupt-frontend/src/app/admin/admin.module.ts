@@ -27,6 +27,8 @@ import { EscritoresComponent } from './escritores/escritores.component';
 import { MensagensService } from './../services/mensagens.service';
 import { EscritoresService } from './../services/escritores.service';
 import { PostsService } from './../services/posts.service';
+import { InputMaskModule } from 'ng2-inputmask';
+
 
 @NgModule({
   declarations: [
@@ -52,6 +54,7 @@ import { PostsService } from './../services/posts.service';
     MaterializeModule,
     FormsModule,
     AdminRoutingModule,
+    InputMaskModule
   ],
   exports: [
     LoginComponent

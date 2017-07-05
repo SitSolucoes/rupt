@@ -8,10 +8,13 @@ import { AdminModule } from './admin/admin.module';
 import { RuptRoutingModule } from './rupt.routing.module';
 import { MaterializeModule } from 'angular2-materialize';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaskDirective } from './shared/mask.directive';
+import { InputMaskModule } from 'ng2-inputmask';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MaskDirective
   ],
   imports: [
     BrowserModule,
@@ -20,7 +23,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AdminModule,
     RuptRoutingModule,
     MaterializeModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    InputMaskModule
   ],
   providers: [
     AuthGuard,
