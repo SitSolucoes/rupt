@@ -21,4 +21,22 @@ class CategoriaController extends Controller
 
         return response()->json(['subCategorias' => $categoria->get()], 200);
     }
+
+    public function create(Request $request){
+        $categoria = new Categoria();
+        $categoria->categoria = $request->categoria;
+        $categoria->status = $request->status;
+        $categoria->save();
+
+        return response()->json(['mensagem' => "Salvo com sucesso."], 200);
+    }
+
+    public function update(Request $request, $id){
+        $categoria = Categoria::findOrFail($id);
+        $categoria->categoria = $request->categoria;
+        $categoria->status = $request->status;
+        $categoria->save();
+
+        return response()->json(['mensagem' => "Salvo com sucesso."], 200);
+    }
 }
