@@ -27,6 +27,14 @@ export class CategoriasService {
     )
   };
 
+  getSubCategorias(id): Observable<any>{
+    return this._http.get(this._url + 'categoria/getSubCategorias/'+id).map(
+      (response: Response) => {
+        return response.json().subCategorias;
+      }
+    )
+  };
+
   createCategoria(form){
     const body = this.createBody(form);
     
@@ -44,5 +52,14 @@ export class CategoriasService {
       response.json()
     });
   } 
+
+  createSubCategoria(form, id){
+    const body = this.createBody(form);
+    
+    return this._http.post(this._url + 'categoria/createSubCategoria/'+id, body, {headers: this.headers}).map(
+    (response: Response)=>{
+      response.json()
+    });
+  }
 
 }

@@ -46,6 +46,17 @@
     </div>
 </div>
 
+<!--modal de mensagem-->
+<div id="modalMessage" class="modal center-sheet small-modal" materialize="modal" [materializeParams]="[{dismissible: true}]" [materializeActions]="modalMessage">
+    <div class="modal-content">
+        <h4><i class="material-icons">check_circle</i></h4>
+        <h4>Salvo com sucesso.</h4>
+        <div class="small-modal-footer">
+            <a class="modal-action modal-close waves-effect waves-green btn-flat ">Fechar</a>
+        </div>
+    </div>
+</div>
+
 <div class="title">
     <i class="material-icons">view_list</i> Categorias
 </div>
@@ -173,7 +184,7 @@
         </div>
     </li>
       <li *ngFor="let c of listCategorias() | paginate: {itemsPerPage: 10, currentPage:page, id: 'cat'}; let i = index">
-          <div class="list-item option-icons">
+            <div class="collapsible-header option-icons">
                 <div class="col s8 m8 l8 xl8 item">
                     {{c.categoria}}
                 </div>
@@ -185,7 +196,10 @@
                   <i class="material-icons" (click)="openModalRecusa(s)">add</i>
                   <i class="material-icons" (click)="openModalEdit(c)">edit</i>
               </div>
-          </div>
+            </div>
+            <div *ngIf="c.subCategorias.length > 0" class="collapsible-body"> 
+                <app-lista-categorias [categoria]="c"></app-lista-categorias>
+            </div> 
       </li>
     </ul>
     <ul class="pages" *ngIf="listCategorias() != false">
@@ -198,6 +212,29 @@
                 nextLabel="">
             </pagination-controls>
         </li>
-    </ul>      
+    </ul>
+
+    <ul class="collapsible" data-collapsible="accordion">
+        <li>
+        <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>
+        <div class="collapsible-body">
+            <ul class="collapsible" data-collapsible="accordion">
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>
+                    <div class="collapsible-body">
+                        <ul class="collapsible" data-collapsible="accordion">
+                            <li>
+                                <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>
+                                <div class="collapsible-body">
+                                    
+                                </div>
+                            </li>
+                        </ul>            
+                    </div>
+                </li>
+            </ul>
+        </div>
+        </li>
+    </ul> 
   </div>
 </div>

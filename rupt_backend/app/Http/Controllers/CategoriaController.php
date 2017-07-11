@@ -24,9 +24,7 @@ class CategoriaController extends Controller
 
         $listCategorias = $this->recursiveSubCategorias($categorias->get());
         
-        echo $listCategorias;
-
-        //return response()->json(['categorias' => $listCategoria], 200);
+        return response()->json(['categorias' => $listCategorias], 200);
     }
 
     private function recursiveSubCategorias($categorias){

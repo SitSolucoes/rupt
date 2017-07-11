@@ -28,6 +28,7 @@ export class CategoriasComponent implements OnInit {
   
   modalActions = new EventEmitter<string|MaterializeAction>();
   modalRecusa = new EventEmitter<string|MaterializeAction>();
+  modalMessage = new EventEmitter<string|MaterializeAction>();
 
   selectStatus: Option[] = [
     {value: 1, name: 'Ativo'},
@@ -134,7 +135,11 @@ export class CategoriasComponent implements OnInit {
         );
     }
 
-    /*this.showMessage();*/
+    this.showMessage();
+  }
+
+  showMessage(){
+    this.modalMessage.emit({action:"modal",params:['open']});
   }
 
 }
