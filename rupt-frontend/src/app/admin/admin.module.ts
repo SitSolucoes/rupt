@@ -29,6 +29,7 @@ import { MensagensService } from './../services/mensagens.service';
 import { EscritoresService } from './../services/escritores.service';
 import { PostsService } from './../services/posts.service';
 import { InputMaskModule } from 'ng2-inputmask';
+import { MasksDirective } from '../shared/masks.directive';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { InputMaskModule } from 'ng2-inputmask';
     RedefineSenhaComponent,
     MensagensComponent,
     EscritoresComponent,
-    CpfCnpjPipe
+    CpfCnpjPipe,
+    MasksDirective
   ],
 
   imports: [
