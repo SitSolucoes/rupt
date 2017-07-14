@@ -114,27 +114,13 @@ export class CategoriasComponent implements OnInit {
     this.modalActions.emit({action:"modal",params:['open']});
   }
 
-  openModalEdit(categoria: Categoria){
-    this.categoria = categoria;
-    this.modalActions.emit({action:"modal",params:['open']});
-  }
-
   onSubmit(form){
-    if (this.categoria.id == 0){
-      this._categoriasService.createCategoria(form).subscribe(
+    this._categoriasService.createCategoria(form).subscribe(
         (response: any) => {
           this.getCategorias();
         }
-      );
-    }
-    else {
-      this._categoriasService.updateCategoria(form, this.categoria.id).subscribe(
-          (response: any) => {
-            this.getCategorias();
-          }
-        );
-    }
-
+    );
+    
     this.showMessage();
   }
 

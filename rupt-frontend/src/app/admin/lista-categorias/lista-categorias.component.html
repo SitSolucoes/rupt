@@ -1,27 +1,94 @@
+<!--modal de editar-->
+<div id="modal1" class="modal center-sheet" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions">
+    <form class="col s12" #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <div class="modal-content">
+            <h4 *ngIf="categoria.id != 0">Editar</h4>
+            <h4 *ngIf="categoria.id == 0">Cadastrar</h4>
 
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="categoria" name="categoria" type="text" #cat="ngModel"
+                            maxlength="60" required="required"
+                            [ngClass]="{'invalid': cat.errors?.required && cat.touched}"
+                            [(ngModel)]="categoria.categoria">
+                    
+                    <label [ngClass]="{'active': categoria?.categoria}" for="categoria">Categoria*</label>
+                    
+                    <div *ngIf="cat.errors?.required && cat.touched" class="error">Campo obrigatório.</div>
+                </div>
+            </div>
+            <div class="row" [hidden]="categoria.id == 0 ">
+                <div class="input-field col s12 m12 l6 xl6">
+                    <select name="status" materialize="material_select" [materializeSelectOptions]="selectStatus" 
+                    [(ngModel)]="categoria.status">
+                        <option *ngFor="let option of selectStatus" [value]="option.value">{{option.name}}</option>
+                    </select>
+                    <label for="ativo">Status*</label>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
+            <button type="submit" [disabled]="!f.valid" class="modal-action modal-close waves-effect waves-green btn-flat">Salvar</button>
+        </div>
+    </form> 
+</div>
 
-<ul class="collapsible" data-collapsible="accordion">
-    <li *ngFor="let c of categoria.subCategorias">
-      <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>
-      <div *ngIf="c.subCategorias.length > 0">
-        
-        <ul class="collapsible" data-collapsible="accordion">
-          <li>
-            <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>
-            <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-          </li>
-          <li>
-            <div class="collapsible-header"><i class="material-icons">place</i>Second</div>
-            <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-          </li>
-          <li>
-            <div class="collapsible-header"><i class="material-icons">whatshot</i>Third</div>
-            <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-          </li>
-        </ul>
-      
-      </div>
+<!--modal de cadastrar subCategoria-->
+<div id="modal2" class="modal center-sheet" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalSub">
+    <form class="col s12" #fSub="ngForm" (ngSubmit)="onSubmitSub(fSub)">
+        <div class="modal-content">
+            <h4>Cadastrar subcategoria: </h4>
+            <h4>{{ categoria.categoria }}</h4>
+            
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="categoria" name="categoria" type="text" #cat="ngModel"
+                            maxlength="60" required="required"
+                            [ngClass]="{'invalid': cat.errors?.required && cat.touched}"
+                            [(ngModel)]="subCategoria.categoria">
+                    
+                    <label [ngClass]="{'active': subCategoria?.categoria}" for="categoria">Subcategoria*</label>
+                    
+                    <div *ngIf="cat.errors?.required && cat.touched" class="error">Campo obrigatório.</div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
+            <button type="submit" [disabled]="!f.valid" class="modal-action modal-close waves-effect waves-green btn-flat">Salvar</button>
+        </div>
+    </form> 
+</div>
+
+<!--modal de mensagem-->
+<div id="modalMessage" class="modal center-sheet small-modal" materialize="modal" [materializeParams]="[{dismissible: true}]" [materializeActions]="modalMessage">
+    <div class="modal-content">
+        <h4><i class="material-icons">check_circle</i></h4>
+        <h4>Salvo com sucesso.</h4>
+        <div class="small-modal-footer">
+            <a class="modal-action modal-close waves-effect waves-green btn-flat ">Fechar</a>
+        </div>
+    </div>
+</div>
+
+<ul materialize="collapsible" class="collapsible" data-collapsible="accordion">
+    <li *ngFor="let c of categorias">
+        <div class="collapsible-header option-icons">
+            <div class="col s8 m8 l8 xl8 item">
+                {{c.categoria}}
+            </div>
+            <div class="col s2 m2 l2 xl2 item">
+                <font *ngIf="!c.status">Inativo</font>
+                <font *ngIf="c.status">Ativo</font>
+            </div>
+          <div class="option-icons col s2 m2 l2 xl2">
+              <i class="material-icons" (click)="openModalSub(fSub, c)">add</i>
+              <i class="material-icons" (click)="openModalEdit(c)">edit</i>
+          </div>
+        </div>
+        <div *ngIf="c.subCategorias.length > 0" class="collapsible-body"> 
+            <app-lista-categorias [categorias]="c.subCategorias"></app-lista-categorias>
+        </div>
     </li>
-  </ul>
-
-
+</ul>

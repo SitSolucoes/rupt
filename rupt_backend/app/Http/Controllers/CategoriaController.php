@@ -71,7 +71,7 @@ class CategoriaController extends Controller
     public function createSubCategoria(Request $request, $id){
         $categoria = new Categoria();
         $categoria->categoria = $request->categoria;
-        $categoria->status = $request->status;
+        $categoria->status = true;
         $categoria->categoria_idCategoria = $id;
         $categoria->save();
 

@@ -162,9 +162,9 @@
         </div>
     </div>
     
-    <ul class="collapsible list">
-      <li *ngIf="listCategorias() != false">
-          <div class="list-item header">
+    <ul materialize="collapsible" class="collapsible" data-collapsible="accordion">
+        <li *ngIf="listCategorias() != false">
+            <div class="list-item header">
                 <div class="col s8 m8 l8 xl8 item">
                     Categoria
                 </div>
@@ -174,16 +174,17 @@
                 <div class="option-icons col s2 m2 l2 xl2 right-align item">
                     <div class="margin-right-1">Opções</div>
                 </div>
-          </div>
-      </li>
-      <li *ngIf="listCategorias() == false">
-        <div class="list-item option-icons">
-            <div class="col s12 m12 l12 xl12 item center-align">
-                Nenhuma categoria encontrada.
             </div>
-        </div>
-    </li>
-      <li *ngFor="let c of listCategorias() | paginate: {itemsPerPage: 10, currentPage:page, id: 'cat'}; let i = index">
+        </li>
+        <li *ngIf="listCategorias() == false">
+            <div class="list-item option-icons">
+                <div class="col s12 m12 l12 xl12 item center-align">
+                    Nenhuma categoria encontrada.
+                </div>
+            </div>
+        </li>
+        
+        <!--<li *ngFor="let c of listCategorias() | paginate: {itemsPerPage: 10, currentPage:page, id: 'cat'}; let i = index">
             <div class="collapsible-header option-icons">
                 <div class="col s8 m8 l8 xl8 item">
                     {{c.categoria}}
@@ -199,9 +200,11 @@
             </div>
             <div *ngIf="c.subCategorias.length > 0" class="collapsible-body"> 
                 <app-lista-categorias [categoria]="c"></app-lista-categorias>
-            </div> 
-      </li>
+            </div>
+        </li>-->
+        <app-lista-categorias [categorias]="listCategorias()"></app-lista-categorias>
     </ul>
+
     <ul class="pages" *ngIf="listCategorias() != false">
         <li>
             <pagination-controls (pageChange)="page = $event" id="cat"
@@ -213,28 +216,6 @@
             </pagination-controls>
         </li>
     </ul>
-
-    <ul class="collapsible" data-collapsible="accordion">
-        <li>
-        <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>
-        <div class="collapsible-body">
-            <ul class="collapsible" data-collapsible="accordion">
-                <li>
-                    <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>
-                    <div class="collapsible-body">
-                        <ul class="collapsible" data-collapsible="accordion">
-                            <li>
-                                <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>
-                                <div class="collapsible-body">
-                                    
-                                </div>
-                            </li>
-                        </ul>            
-                    </div>
-                </li>
-            </ul>
-        </div>
-        </li>
-    </ul> 
+ 
   </div>
 </div>
