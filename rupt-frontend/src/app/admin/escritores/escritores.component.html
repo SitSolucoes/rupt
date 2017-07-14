@@ -66,7 +66,7 @@
                             <input id="nascimento" name="nascimento" type="text" maxlength="10"
                                 [ngClass]="{'invalid': nascimento.touched && dataInvalida}"
                                 [ngModel]="escritor.nascimento" #nascimento="ngModel" 
-                                (ngModelChange)="validaData($event)" mask="00/00/0000"
+                                (ngModelChange)="validaData($event)" Masks="99/99/9999"
                                 [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
                             <label [ngClass]="{'active': escritor?.nascimento}"  for="nascimento">Data de Nascimento*</label>
 
@@ -103,7 +103,7 @@
                             <input id="cpf" name="cpf" type="text"
                                 minlength="6" maxlength="30" required
                                 [ngClass]="{'invalid': (cpf.errors?.required && cpf.touched) || cpfUsado}"
-                                [(ngModel)]="escritor.cpf" #cpf="ngModel" mask="000.000.000-00" (ngModelChange)="validaCpf()"
+                                [(ngModel)]="escritor.cpf" #cpf="ngModel" Masks="999.999.999-99" (ngModelChange)="validaCpf()"
                                 [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
 
                             <label [ngClass]="{'active': escritor?.cpf}" for="cpf">Cpf*</label>
@@ -118,7 +118,7 @@
                             <input id="telefone" name="telefone" type="text"
                                 minlength="14" maxlength="15"
                                 [ngClass]="{'invalid': telefone.errors?.minlength && telefone.touched}"
-                                [(ngModel)]="escritor.telefone" #telefone="ngModel" mask="(00) 0000-0000"
+                                [(ngModel)]="escritor.telefone" #telefone="ngModel" Masks="(99) 9999-9999"
                                 [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
                             
                             <label [ngClass]="{'active': escritor?.telefone}" for="telefone">Telefone</label>
