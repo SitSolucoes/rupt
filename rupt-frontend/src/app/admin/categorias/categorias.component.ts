@@ -1,3 +1,5 @@
+import { Option } from './../../shared/option';
+import { NgForm } from '@angular/forms/src/directives';
 import { CategoriasService } from './../../services/categorias.service';
 import { Categoria } from './../../classes/categoria';
 import { MaterializeAction } from 'angular2-materialize';
@@ -15,14 +17,23 @@ import { Sugestao } from './../../classes/sugestao';
 export class CategoriasComponent implements OnInit {
 
   notificacoes;
-  sugestoes: Sugestao[];
   categorias: Categoria[];
+  sugestoes: Sugestao[];
+  
   filtroSugestoes: string;
   filtroCategorias: string;
-  sugestao: Sugestao = new Sugestao();
+  
+  categoria: Categoria;
+  sugestao: Sugestao;
   
   modalActions = new EventEmitter<string|MaterializeAction>();
   modalRecusa = new EventEmitter<string|MaterializeAction>();
+  modalMessage = new EventEmitter<string|MaterializeAction>();
+
+  selectStatus: Option[] = [
+    {value: 1, name: 'Ativo'},
+    {value: 0, name: 'Inativo'}
+  ]
 
   constructor(
     private _notificacoesService: NotificacoesService,
@@ -31,8 +42,10 @@ export class CategoriasComponent implements OnInit {
 
   ngOnInit() {
     this.notificacoes = this._notificacoesService.getNotificacoes();
+    this.categoria = new Categoria();
+    this.sugestao = new Sugestao();
     this.getListSugestoes();
-    this.getLisCategorias();
+    this.getCategorias();
   }
 
   getListSugestoes(){
@@ -53,7 +66,7 @@ export class CategoriasComponent implements OnInit {
     });
   }
 
-  getLisCategorias(){
+  getCategorias(){
     this._categoriasService.getCategorias().subscribe(
       (categorias: Categoria[]) => {this.categorias = categorias}
     )
@@ -91,6 +104,42 @@ export class CategoriasComponent implements OnInit {
       }
     )
     this.closeModalRecusa();
+  }
+
+  openModal(f: NgForm){
+    this.categoria = new Categoria();
+
+    f.reset(this.categoria);
+
+    this.modalActions.emit({action:"modal",params:['open']});
+  }
+
+  openModalEdit(categoria: Categoria){
+    this.categoria = categoria;
+    this.modalActions.emit({action:"modal",params:['open']});
+  }
+
+  onSubmit(form){
+    if (this.categoria.id == 0){
+      this._categoriasService.createCategoria(form).subscribe(
+        (response: any) => {
+          this.getCategorias();
+        }
+      );
+    }
+    else {
+      this._categoriasService.updateCategoria(form, this.categoria.id).subscribe(
+          (response: any) => {
+            this.getCategorias();
+          }
+        );
+    }
+
+    this.showMessage();
+  }
+
+  showMessage(){
+    this.modalMessage.emit({action:"modal",params:['open']});
   }
 
 }

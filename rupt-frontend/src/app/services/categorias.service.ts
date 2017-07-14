@@ -11,6 +11,14 @@ export class CategoriasService {
   
   constructor(private _http: Http) { }
 
+  private createBody(form){
+    return JSON.stringify(
+      {
+        categoria: form.value.categoria,
+        status: form.value.status
+      });
+  }
+
   getCategorias(): Observable<any>{
     return this._http.get(this._url + 'categoria/getCategorias').map(
       (response: Response) => {
@@ -19,6 +27,39 @@ export class CategoriasService {
     )
   };
 
+  getSubCategorias(id): Observable<any>{
+    return this._http.get(this._url + 'categoria/getSubCategorias/'+id).map(
+      (response: Response) => {
+        return response.json().subCategorias;
+      }
+    )
+  };
 
+  createCategoria(form){
+    const body = this.createBody(form);
+    
+    return this._http.post(this._url + 'categoria/create', body, {headers: this.headers}).map(
+    (response: Response)=>{
+      response.json()
+    });
+  }
+
+  updateCategoria(form, id){
+    const body = this.createBody(form);
+    
+    return this._http.post(this._url + 'categoria/update/' + id, body, {headers: this.headers}).map(
+    (response: Response)=>{
+      response.json()
+    });
+  } 
+
+  createSubCategoria(form, id){
+    const body = this.createBody(form);
+    
+    return this._http.post(this._url + 'categoria/createSubCategoria/'+id, body, {headers: this.headers}).map(
+    (response: Response)=>{
+      response.json()
+    });
+  }
 
 }

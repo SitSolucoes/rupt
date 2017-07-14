@@ -137,6 +137,7 @@ export class EscritoresComponent implements OnInit {
   openModal(f: NgForm){
     this.setFalse();
     this.escritor = new Escritor();
+
     f.reset(this.escritor);
 
     this.modalActions.emit({action:"modal",params:['open']});
