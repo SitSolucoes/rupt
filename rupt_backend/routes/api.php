@@ -113,6 +113,9 @@ Route::put('/sugestao/alteraStatus/{id}/{status}', ['uses' => 'SugestaoControlle
 
 //categorias
 Route::get('/categoria/getCategorias', ['uses' => 'CategoriaController@getCategorias']);
+Route::post('/categoria/create', ['uses' => 'CategoriaController@create']);
+Route::post('/categoria/update/{id}', ['uses' => 'CategoriaController@update']);
+Route::post('/categoria/createSubCategoria/{id}', ['uses' => 'CategoriaController@createSubCategoria']);
 
 //denuncias
 Route::get('/sugestao/getDenuncias', [
