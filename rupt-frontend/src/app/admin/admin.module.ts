@@ -1,3 +1,4 @@
+import { MasksDirective } from './../shared/masks.directive';
 import { CategoriasService } from './../services/categorias.service';
 import { CpfCnpjPipe } from './../shared/cpf-cnpj.pipe';
 import { FormsModule } from '@angular/forms';
@@ -48,7 +49,8 @@ import { ListaCategoriasComponent } from './lista-categorias/lista-categorias.co
     MensagensComponent,
     EscritoresComponent,
     CpfCnpjPipe,
-    ListaCategoriasComponent
+    ListaCategoriasComponent,
+    MasksDirective
   ],
 
   imports: [
