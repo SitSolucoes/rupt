@@ -204,18 +204,5 @@
         </li>-->
         <app-lista-categorias [categorias]="listCategorias()"></app-lista-categorias>
     </ul>
-
-    <ul class="pages" *ngIf="listCategorias() != false">
-        <li>
-            <pagination-controls (pageChange)="page = $event" id="cat"
-                maxSize="5"
-                directionLinks="true"
-                autoHide="false"
-                previousLabel=""
-                nextLabel="">
-            </pagination-controls>
-        </li>
-    </ul>
- 
   </div>
 </div>

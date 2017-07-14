@@ -47,16 +47,16 @@ export class ListaCategoriasComponent implements OnInit {
     this._categoriasService.updateCategoria(form, this.categoria.id).subscribe(
       (response: any) => {
         //this.getCategorias();
+        this.showMessage();
       }
     );
-    
-    this.showMessage();
   }
 
   onSubmitSub(form){
     this._categoriasService.createSubCategoria(form, this.categoria.id).subscribe(
       (response: any) => {
         //this.getCategorias();
+        this.showMessage();
       }
     );
   }
