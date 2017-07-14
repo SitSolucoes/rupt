@@ -53,12 +53,12 @@ export class CategoriasService {
     });
   } 
 
-  createSubCategoria(form, id){
+  createSubCategoria(form, id): Observable<any>{
     const body = this.createBody(form);
     
     return this._http.post(this._url + 'categoria/createSubCategoria/'+id, body, {headers: this.headers}).map(
     (response: Response)=>{
-      response.json()
+      return response.json().categoria;
     });
   }
 

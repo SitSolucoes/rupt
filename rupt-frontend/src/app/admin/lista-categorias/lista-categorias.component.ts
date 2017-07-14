@@ -3,7 +3,7 @@ import { CategoriasService } from './../../services/categorias.service';
 import { Option } from './../../shared/option';
 import { MaterializeAction } from 'angular2-materialize';
 import { Categoria } from './../../classes/categoria';
-import { Component, OnInit, Input, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-lista-categorias',
@@ -12,8 +12,11 @@ import { Component, OnInit, Input, EventEmitter } from '@angular/core';
 })
 export class ListaCategoriasComponent implements OnInit {
 
-  @Input() categorias: Categoria[];
-  categoria: Categoria;
+  @Input() listCategorias: Categoria[];
+  @Output() categorias = new EventEmitter();
+  @Output() cu = new EventEmitter();
+  
+  categoria;
   subCategoria: Categoria;
   modalActions = new EventEmitter<string|MaterializeAction>();
   modalSub = new EventEmitter<string|MaterializeAction>();
@@ -54,15 +57,21 @@ export class ListaCategoriasComponent implements OnInit {
 
   onSubmitSub(form){
     this._categoriasService.createSubCategoria(form, this.categoria.id).subscribe(
-      (response: any) => {
-        //this.getCategorias();
+      (categoria: any) => {
+        categoria.subCategorias = new Array;
+        
+        if (!this.categoria.subCategoria)
+          this.categoria.subCategoria = new Array;
+        
+        this.categoria.subCategorias.push(categoria);
+
         this.showMessage();
       }
     );
+    
   }
 
   showMessage(){
     this.modalMessage.emit({action:"modal",params:['open']});
   }
-
 }

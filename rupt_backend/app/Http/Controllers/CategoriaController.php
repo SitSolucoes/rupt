@@ -75,6 +75,6 @@ class CategoriaController extends Controller
         $categoria->categoria_idCategoria = $id;
         $categoria->save();
 
-        return response()->json(['mensagem' => "Salvo com sucesso."], 200);   
+        return response()->json(['categoria' => $categoria], 200);   
     }
 }

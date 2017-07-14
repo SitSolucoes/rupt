@@ -73,7 +73,7 @@
 </div>
 
 <ul materialize="collapsible" class="collapsible" data-collapsible="accordion">
-    <li *ngFor="let c of categorias">
+    <li *ngFor="let c of listCategorias">
         <div class="collapsible-header option-icons">
             <div class="col s8 m8 l8 xl8 item">
                 {{c.categoria}}
@@ -88,7 +88,7 @@
           </div>
         </div>
         <div *ngIf="c.subCategorias.length > 0" class="collapsible-body"> 
-            <app-lista-categorias [categorias]="c.subCategorias"></app-lista-categorias>
+            <app-lista-categorias [listCategorias]="c.subCategorias"></app-lista-categorias>
         </div>
     </li>
 </ul>
