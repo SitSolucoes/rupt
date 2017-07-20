@@ -27,6 +27,7 @@ export class CategoriasComponent implements OnInit {
   sugestao: Sugestao;
   
   modalActions = new EventEmitter<string|MaterializeAction>();
+  modalAceitar = new EventEmitter<string|MaterializeAction>();
   modalRecusa = new EventEmitter<string|MaterializeAction>();
   modalMessage = new EventEmitter<string|MaterializeAction>();
 
@@ -81,11 +82,11 @@ export class CategoriasComponent implements OnInit {
       
       return false;
     });
-}
+  }
 
-  openModalDeleteSugestao(sugestao: Sugestao){
+  openModalAceitar(sugestao: Sugestao){
     this.sugestao = sugestao;
-    this.modalActions.emit({action:"modalDelete", params:['open']});
+    this.modalAceitar.emit({action:"modal",params:['open']});
   }
 
   openModalRecusa(sugestao: Sugestao) {
@@ -112,6 +113,20 @@ export class CategoriasComponent implements OnInit {
     f.reset(this.categoria);
 
     this.modalActions.emit({action:"modal",params:['open']});
+  }
+
+  criar(){
+    let form: NgForm;
+    form.setValue(['categoria', this.sugestao.categoria]);
+
+    this._categoriasService.createCategoria(form).subscribe(
+        (response: any) => {
+          this.getCategorias();
+        }
+    );
+    
+    this.modalAceitar.emit({action:"modal",params:['close']});
+    this.showMessage();
   }
 
   onSubmit(form){

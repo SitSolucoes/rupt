@@ -424,6 +424,10 @@ span.badge.new:after {
     margin-right: 1rem;
 }
 
+.sub-collapsible {
+	margin: 0 0 0 0; 
+}
+
 /* pagination */
 .pages{
 	text-align: center;
