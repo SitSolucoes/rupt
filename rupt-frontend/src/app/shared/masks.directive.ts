@@ -1,4 +1,4 @@
-import { Directive, HostListener, Input } from '@angular/core';
+import { Directive, HostListener, Input, ElementRef } from '@angular/core';
 import {NG_VALUE_ACCESSOR, ControlValueAccessor} from '@angular/forms';
 
 @Directive({
@@ -16,6 +16,9 @@ export class MasksDirective implements ControlValueAccessor{
   @Input('Masks') mask: string;
   
   writeValue(value: any): void {
+    if (value) {
+      this.el.nativeElement.value = this.aplicarMascara(value);
+    }
   }
  
   registerOnChange(fn: any): void {
@@ -25,25 +28,51 @@ export class MasksDirective implements ControlValueAccessor{
   registerOnTouched(fn: any): void {
     this.onTouched = fn;
   }
+
+  ngOnInit(){
+    console.log("OnInit");
+  }
+
   @HostListener('keyup', ['$event'])
   onKeyUp($event: any){
-    var valor = $event.target.value.replace(/\D/g, '');
-    var pad = this.mask.replace(/\D/g, '').replace(/9/g, '_');
-    var valorMask = valor + pad.substring(0, pad.length - valor.length);
- 
+    let valor = $event.target.value.replace(/\D/g, '');
+
     // retorna caso pressionado backspace
     if ($event.keyCode === 8) {
       this.onChange(valor);
       return;
     }
- 
+
+    let pad = this.mask.replace(/\D/g, '').replace(/9/g, '_');
     if (valor.length <= pad.length) {
       this.onChange(valor);
     }
- 
-    var valorMaskPos = 0;
+
+    $event.target.value = this.aplicarMascara(valor);
+  }
+  @HostListener('blur', ['$event'])
+  onBlur($event: any){
+    if ($event.target.value.length === this.mask.length) {
+      return;
+    }
+    this.onChange('');
+    $event.target.value = '';
+  }
+
+  /**
+   * Aplica a máscara a determinado valor.
+   *
+   * @param string valor
+   * @return string
+   */
+  aplicarMascara(valor: string): string {
+    valor = valor.replace(/\D/g, '');
+    let pad = this.mask.replace(/\D/g, '').replace(/9/g, '_');
+    let valorMask = valor + pad.substring(0, pad.length - valor.length);
+    let valorMaskPos = 0;
+    
     valor = '';
-    for (var i = 0; i < this.mask.length; i++) {
+    for (let i = 0; i < this.mask.length; i++) {
       if (isNaN(parseInt(this.mask.charAt(i)))) {
         valor += this.mask.charAt(i);
       } else {
@@ -54,16 +83,9 @@ export class MasksDirective implements ControlValueAccessor{
     if (valor.indexOf('_') > -1) {
       valor = valor.substr(0, valor.indexOf('_'));
     }
- 
-    $event.target.value = valor;
+
+    return valor;
   }
-  @HostListener('blur', ['$event'])
-  onBlur($event: any){
-    if ($event.target.value.length === this.mask.length) {
-        return;
-      }
-      this.onChange('');
-      $event.target.value = '';   
-  }
-  constructor() { }
+
+  constructor(private el: ElementRef) { }
 }

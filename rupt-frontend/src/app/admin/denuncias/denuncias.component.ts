@@ -1,6 +1,6 @@
 import { race } from 'rxjs/operator/race';
 import { Escritor } from './../../classes/escritor';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 
 import { DenunciasService } from './../../services/denuncias.service';
 import { PostsService } from './../../services/posts.service';
@@ -25,8 +25,7 @@ export class DenunciasComponent implements OnInit {
     this.getList();
   }
   selectOptions: Option[] = [
-    {value: "f", name: 'Feminino'},
-    {value: "m", name: 'Masculino'}
+    {value: "-1", name: 'Sem Motivo'},
   ];
 
   denuncias: Denuncia[] = [];
@@ -111,6 +110,8 @@ export class DenunciasComponent implements OnInit {
     return {id: 0, name: '', email: '', password: '', 
             createdAt: null, UpdatedAt: null, rememberToken: null, ativo: true};
   }
+
+  
 
 
 }

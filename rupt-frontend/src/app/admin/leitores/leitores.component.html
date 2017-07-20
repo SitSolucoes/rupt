@@ -34,7 +34,7 @@
 
                     <div class="input-field col s12 m12 l6 xl6 right">
                         <input id="email" name="email" type="email"
-                            minlength="6" maxlength="30"
+                            minlength="6" maxlength="30"-
                             [ngClass]="{'invalid': (email.errors?.required && email.touched) || emailInvalido}"
                             [(ngModel)]="leitor.email" #email="ngModel" email (ngModelChange)="validaEmail()">
                         <label [ngClass]="{'active': leitor?.email}" for="email">E-mail*</label>
@@ -48,8 +48,8 @@
                         <input id="nascimento" name="nascimento" type="text" maxlength="10"
                             [ngClass]="{'invalid': nascimento.touched && dataInvalida}"
                             [ngModel]="leitor.nascimento" #nascimento="ngModel" 
-                            (ngModelChange)="validaData($event)">
-                        
+                            (ngModelChange)="validaData($event)" Masks="99/99/9999">
+                            
                         <label [ngClass]="{'active': leitor?.nascimento}" for="nascimento">Data de Nascimento*</label>
 
                         <div class="error" *ngIf="nascimento.touched && dataInvalida">Data inválida.</div>
@@ -168,7 +168,7 @@
             </div>
         </div>
     </li>
-    <li *ngFor="let l of listLeitores() | paginate: {itemsPerPage: 10, currentPage:page, id: '1'}; let i = index">
+    <li *ngFor="let l of listLeitores() | paginate: {itemsPerPage: 10, currentPage:page, id: '1'}; let i = index" (click)="openModalEdit(l)">
         <div class="list-item option-icons">
             <div class="col s2 m2 l2 xl2 item">
                 {{l.nick}}

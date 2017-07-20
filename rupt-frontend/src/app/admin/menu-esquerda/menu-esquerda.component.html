@@ -19,13 +19,19 @@
                         </a>
                     </li>
                     <li>
-                        <div class="collapsible-header">
-                            <i class="material-icons">keyboard_arrow_right</i>
-                            <a routerLink="escritores">Escritores<span *ngIf="notificacoes['escritores'] != 0" class="new badge">{{ notificacoes["escritores"] }}</span></a>
-                        </div>
+                        <a routerLink="escritores">
+                            <div class="collapsible-header">
+                                <i class="material-icons">keyboard_arrow_right</i>
+                                Escritores<span *ngIf="notificacoes['escritores'] != 0" class="new badge">{{ notificacoes["escritores"] }}</span>
+                            </div>
+                        </a>
                     </li>
                     <li>
-                        <div class="collapsible-header"><i class="material-icons">keyboard_arrow_right</i><a routerLink="leitores">Leitores</a></div>
+                        <a routerLink="leitores">
+                            <div class="collapsible-header">
+                                <i class="material-icons">keyboard_arrow_right</i>Leitores
+                            </div>
+                        </a>
                     </li>
                 </ul>
             </div>

@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms/src/directives';
 import { CategoriasService } from './../../services/categorias.service';
 import { Categoria } from './../../classes/categoria';
 import { MaterializeAction } from 'angular2-materialize';
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, HostListener } from '@angular/core';
 
 import { NotificacoesService } from './../../services/notificacoes.service';
 import { SugestoesService } from './../../services/sugestoes.service';
@@ -114,6 +114,10 @@ export class CategoriasComponent implements OnInit {
     this.modalActions.emit({action:"modal",params:['open']});
   }
 
+  closeModal(){
+    this.modalActions.emit({action:"modal",params:['close']});
+  }
+
   onSubmit(form){
     this._categoriasService.createCategoria(form).subscribe(
         (response: any) => {
@@ -126,6 +130,16 @@ export class CategoriasComponent implements OnInit {
 
   showMessage(){
     this.modalMessage.emit({action:"modal",params:['open']});
+  }
+
+  closeMessage(){
+    this.modalMessage.emit({action:"modal",params:['close']});
+  }
+  @HostListener('window:popstate', ['$event'])
+  onPopState(event) {
+    this.closeMessage();
+    this.closeModal();
+    this.closeModalRecusa();
   }
 
 }

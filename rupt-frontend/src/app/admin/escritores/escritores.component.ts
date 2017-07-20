@@ -10,7 +10,7 @@ import { Escritor } from './../../classes/escritor';
 import { EscritoresService } from './../../services/escritores.service';
 import { Option } from './../../shared/option';
 import { NotificacoesService } from './../../services/notificacoes.service';
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, HostListener } from '@angular/core';
 
 import { 
     trigger,
@@ -84,7 +84,8 @@ export class EscritoresComponent implements OnInit {
 
   selectSexo: Option[] = [
     {value: 'f', name: 'Feminino'},
-    {value: 'm', name: 'Masculino'}
+    {value: 'm', name: 'Masculino'},
+    {value: 'o', name: 'Outros'}
   ]
 
   selectSolicitacao: Option[] = [
@@ -401,6 +402,16 @@ export class EscritoresComponent implements OnInit {
 
   showMessage(){
     this.modalMessage.emit({action:"modal",params:['open']});
+  }
+  closeMessage(){
+    this.modalMessage.emit({action:"modal",params:['close']});
+  }
+
+
+  @HostListener('window:popstate', ['$event'])
+  onPopState(event) {
+    this.closeMessage();
+    this.closeModal();
   }
 
 }

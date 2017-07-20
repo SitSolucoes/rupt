@@ -1,3 +1,4 @@
+
 import { MasksDirective } from './../shared/masks.directive';
 import { CategoriasService } from './../services/categorias.service';
 import { CpfCnpjPipe } from './../shared/cpf-cnpj.pipe';
@@ -59,7 +60,8 @@ import { ListaCategoriasComponent } from './lista-categorias/lista-categorias.co
     MaterializeModule,
     FormsModule,
     AdminRoutingModule,
-    InputMaskModule
+    InputMaskModule,
+    
   ],
   exports: [
     LoginComponent

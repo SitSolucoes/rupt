@@ -66,7 +66,7 @@ export class LeitoresComponent implements OnInit {
   openModal(f: NgForm) {
     this.senhaValida = false;
     this.leitor = new Leitor();
-
+    this.leitor.nascimento = null;
     f.resetForm(this.leitor);
 
     this.modalActions.emit({action:"modal",params:['open']});

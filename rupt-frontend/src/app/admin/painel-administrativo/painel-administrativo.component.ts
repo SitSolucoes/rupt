@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnInit, HostListener } from '@angular/core';
+import { PlatformLocation } from '@angular/common'
 import { NotificacoesService } from './../../services/notificacoes.service';
 @Component({
   selector: 'app-painel-administrativo',
@@ -15,5 +15,7 @@ export class PainelAdministrativoComponent implements OnInit {
   ngOnInit() {
     this.notificacoes = this._notificacoesService.getNotificacoes();
   }
+
+ 
 
 }

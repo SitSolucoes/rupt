@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, HostListener } from '@angular/core';
 import { NgForm } from '@angular/forms/src/directives';
 
 import {MaterializeAction} from 'angular2-materialize';
@@ -92,17 +92,22 @@ export class AdministradoresComponent implements OnInit {
       this._adminService.updateAdmin(form, this.admin_selecionado.id).subscribe(
         (response: any) => {
           this.message = response;
-          localStorage.setItem('adminLogado', this.admin_selecionado.name);
           this.getList();
           this.clear();
-          if(this._route.snapshot.params['id'])
+          this.closeModal();
+          //console.log("primeiro mostra");
+          this.showMessage();
+          this.closeMessage();
+          if(this._route.snapshot.params['id']){
+            //console.log("depois redireciona")
+            localStorage.setItem('adminLogado', this.admin_selecionado.name);
             this._location.back();
-          //this._router.navigate(['/admin/administradores']);
-          //console.log(this.message)
+          }
         }
       );
     }
-    this.showMessage();
+    
+    
   }
 
   validaEmail(){
@@ -157,7 +162,17 @@ export class AdministradoresComponent implements OnInit {
       this._location.back();
   }
 
+  closeMessage(){
+    this.modalMessage.emit({action:"modal",params:['close']});
+  }
+
    showMessage(){
       this.modalMessage.emit({action:"modal",params:['open']});
    }
+
+  @HostListener('window:popstate', ['$event'])
+  onPopState(event) {
+    this.closeMessage();
+    this.closeModal();
+  }
 }

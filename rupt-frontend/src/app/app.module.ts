@@ -8,12 +8,12 @@ import { AdminModule } from './admin/admin.module';
 import { RuptRoutingModule } from './rupt.routing.module';
 import { MaterializeModule } from 'angular2-materialize';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { InputMaskModule } from 'ng2-inputmask';
+
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
     
   ],
   imports: [
