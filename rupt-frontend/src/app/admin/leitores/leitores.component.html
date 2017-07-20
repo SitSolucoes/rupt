@@ -34,7 +34,7 @@
 
                     <div class="input-field col s12 m12 l6 xl6 right">
                         <input id="email" name="email" type="email"
-                            minlength="6" maxlength="30"-
+                            minlength="6" maxlength="30"
                             [ngClass]="{'invalid': (email.errors?.required && email.touched) || emailInvalido}"
                             [(ngModel)]="leitor.email" #email="ngModel" email (ngModelChange)="validaEmail()">
                         <label [ngClass]="{'active': leitor?.email}" for="email">E-mail*</label>

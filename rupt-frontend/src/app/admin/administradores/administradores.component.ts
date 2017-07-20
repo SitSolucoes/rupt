@@ -155,11 +155,13 @@ export class AdministradoresComponent implements OnInit {
   }
 
   closeModal() {
-    this.clear();
     this.getList();
     this.modalActions.emit({action:"modal",params:['close']});
-    if(this._route.snapshot.params['id'])
+    if(this._route.snapshot.params['id']){
+      //this.closeMessage();
       this._location.back();
+    }
+    this.clear();
   }
 
   closeMessage(){

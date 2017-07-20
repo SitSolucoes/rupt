@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, HostListener } from '@angular/core';
 
 
 import { MaterializeAction } from 'angular2-materialize';
@@ -224,12 +224,19 @@ export class MensagensComponent implements OnInit {
       });
   }
 
+  closeModalLida(){
+    this.modalLida.emit({action:"modal",params:['close']});
+  }
+
   closeModal() {
     this.modalActions.emit({action:"modal",params:['close']});
   }
 
    showMessage(){
       this.modalMessage.emit({action:"modal",params:['open']});
+   }
+    closeMessage(){
+      this.modalMessage.emit({action:"modal",params:['close']});
    }
 
    clear(){
@@ -238,4 +245,11 @@ export class MensagensComponent implements OnInit {
      this.mensagens_lidas = [];
      this.resposta_msg_selecionada = new Mensagem();
    }
+
+   @HostListener('window:popstate', ['$event'])
+  onPopState(event) {
+    this.closeMessage();
+    this.closeModal();
+    this.closeModalLida();
+  }
 }

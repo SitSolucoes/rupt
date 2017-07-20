@@ -1,5 +1,5 @@
 import { NgForm } from '@angular/forms/src/directives';
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, HostListener } from '@angular/core';
 
 import {MaterializeAction} from 'angular2-materialize';
 import { Option } from './../../shared/option';
@@ -74,6 +74,10 @@ export class LeitoresComponent implements OnInit {
 
   showMessage(){
     this.modalMessage.emit({action:"modal",params:['open']});
+  }
+
+  closeMessage(){
+    this.modalMessage.emit({action:"modal",params:['close']});
   }
 
   openModalEdit(leitor: Leitor){
@@ -156,6 +160,11 @@ export class LeitoresComponent implements OnInit {
     this.showMessage();
 }
 
-  
+ @HostListener('window:popstate', ['$event'])
+  onPopState(event) {
+    this.closeMessage();
+    this.closeModal();
+    //this.closeModalRecusa();
+  }
 
 }
