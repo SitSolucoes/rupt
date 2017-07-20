@@ -13,6 +13,7 @@ import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 export class ListaCategoriasComponent implements OnInit {
 
   @Input() listCategorias: Categoria[];
+  @Input() show: number;
   @Output() categorias = new EventEmitter();
   @Output() cu = new EventEmitter();
   

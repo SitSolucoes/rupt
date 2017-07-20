@@ -33,6 +33,44 @@
     </form> 
 </div>
 
+<div id="modalAceitar" class="modal center-sheet" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalAceitar">
+    <form class="col s12" #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <div class="modal-content">
+            <h4>{{ sugestao.categoria }}</h4>
+            
+            <div class="row">
+                <div class="col s3">
+                    <a class="modal-trigger" (click)="openModal(f);">
+                        <div class="btn new">
+                            Nova
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <ul materialize="collapsible" class="collapsible" data-collapsible="accordion">
+                <li *ngIf="listCategorias() != false">
+                    <div class="list-item header">
+                        <div class="col s8 m8 l8 xl8 item">
+                            Categoria
+                        </div>
+                        <div class="col s2 m2 l2 xl2 item">
+                            Status
+                        </div>
+                        <div class="option-icons col s2 m2 l2 xl2 right-align item">
+                            <div class="margin-right-1">Criar</div>
+                        </div>
+                    </div>
+                </li>
+                <app-lista-categorias [listCategorias]="listCategorias()" [show]="1"></app-lista-categorias>
+            </ul>
+        </div>
+        <div class="modal-footer">
+            <a class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
+        </div>
+    </form> 
+</div>
+
 <div id="modalRecusa" class="modal center-sheet small-modal small-modal-red" materialize="modal" [materializeParams]="[{dismissible: true}]" [materializeActions]="modalRecusa">
     <div class="modal-content">
         <h4><i class="material-icons">delete_forever</i></h4>
@@ -123,7 +161,7 @@
               </div>
               <div class="option-icons col s4 m3 l3 xl2">
                   <i class="material-icons" (click)="openModalRecusa(s)">delete</i>
-                  <i class="material-icons" (click)="openModalEdit(a)">done</i>
+                  <i class="material-icons" (click)="openModalAceitar(s)">done</i>
               </div>
           </div>
       </li>
@@ -186,25 +224,7 @@
             </div>
         </li>
         
-        <!--<li *ngFor="let c of listCategorias() | paginate: {itemsPerPage: 10, currentPage:page, id: 'cat'}; let i = index">
-            <div class="collapsible-header option-icons">
-                <div class="col s8 m8 l8 xl8 item">
-                    {{c.categoria}}
-                </div>
-                <div class="col s2 m2 l2 xl2 item">
-                    <font *ngIf="!c.status">Inativo</font>
-                    <font *ngIf="c.status">Ativo</font>
-                </div>
-              <div class="option-icons col s2 m2 l2 xl2">
-                  <i class="material-icons" (click)="openModalRecusa(s)">add</i>
-                  <i class="material-icons" (click)="openModalEdit(c)">edit</i>
-              </div>
-            </div>
-            <div *ngIf="c.subCategorias.length > 0" class="collapsible-body"> 
-                <app-lista-categorias [categoria]="c"></app-lista-categorias>
-            </div>
-        </li>-->
-        <app-lista-categorias [listCategorias]="listCategorias()"></app-lista-categorias>
+        <app-lista-categorias [listCategorias]="listCategorias()" [show]="2"></app-lista-categorias>
     </ul>
   </div>
 </div>
