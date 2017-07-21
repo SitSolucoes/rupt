@@ -60,7 +60,6 @@ export class MasksDirective implements ControlValueAccessor{
     $event.target.value = valorMascara;
     
     if (final){
-      console.log('no final');
       mouse1 = valorMascara.length;
       mouse2 = mouse1;
     }
