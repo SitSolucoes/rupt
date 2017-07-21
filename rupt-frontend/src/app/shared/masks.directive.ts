@@ -41,7 +41,7 @@ export class MasksDirective implements ControlValueAccessor{
     
     //verifica se o mouse ta no final do campo
     let final: boolean = false;
-    if (valor.length == mouse1)
+    if (valor.length <= mouse1)
       final = true;
 
     // retorna caso pressionado backspace
@@ -59,11 +59,10 @@ export class MasksDirective implements ControlValueAccessor{
 
     $event.target.value = valorMascara;
     
-    valorMascara = valorMascara;
-
     if (final){
-      mouse1++;
-      mouse2++;
+      console.log('no final');
+      mouse1 = valorMascara.length;
+      mouse2 = mouse1;
     }
 
     $event.target.setSelectionRange(mouse1, mouse2);
