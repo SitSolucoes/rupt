@@ -29,13 +29,20 @@ export class MasksDirective implements ControlValueAccessor{
     this.onTouched = fn;
   }
 
-  ngOnInit(){
-    console.log("OnInit");
-  }
+  ngOnInit(){}
 
   @HostListener('keyup', ['$event'])
   onKeyUp($event: any){
     let valor = $event.target.value.replace(/\D/g, '');
+    
+    //pega a posição atual do mouse
+    let mouse1 = $event.target.selectionStart;
+    let mouse2 = $event.target.selectionEnd;
+    
+    //verifica se o mouse ta no final do campo
+    let final: boolean = false;
+    if (valor.length == mouse1)
+      final = true;
 
     // retorna caso pressionado backspace
     if ($event.keyCode === 8) {
@@ -48,15 +55,30 @@ export class MasksDirective implements ControlValueAccessor{
       this.onChange(valor);
     }
 
-    $event.target.value = this.aplicarMascara(valor);
+    let valorMascara = this.aplicarMascara(valor);
+
+    $event.target.value = valorMascara;
+    
+    valorMascara = valorMascara;
+
+    if (final){
+      mouse1++;
+      mouse2++;
+    }
+
+    $event.target.setSelectionRange(mouse1, mouse2);
   }
+  
   @HostListener('blur', ['$event'])
   onBlur($event: any){
-    if ($event.target.value.length === this.mask.length) {
+    return;
+
+    /*if ($event.target.value.length === this.mask.length) {
       return;
     }
+    
     this.onChange('');
-    $event.target.value = '';
+    $event.target.value = '';*/
   }
 
   /**
@@ -79,7 +101,7 @@ export class MasksDirective implements ControlValueAccessor{
         valor += valorMask[valorMaskPos++];
       }
     }
-    
+
     if (valor.indexOf('_') > -1) {
       valor = valor.substr(0, valor.indexOf('_'));
     }
