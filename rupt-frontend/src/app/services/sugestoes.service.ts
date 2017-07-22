@@ -1,3 +1,4 @@
+import { Sugestao } from './../classes/sugestao';
 import { ConnectionFactory } from './../classes/connection-factory';
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
@@ -34,5 +35,17 @@ export class SugestoesService {
       response.json()
     });
   }
+
+  aceitar(sugestao: Sugestao, idCategoria){
+    const body = JSON.stringify({
+      id: sugestao.id,
+      categoria: sugestao.categoria
+    });
+    
+    return this._http.post(this._url + 'sugestao/aceitar/'+idCategoria, body, {headers: this.headers}).map(
+    (response: Response)=>{
+      response.json()
+    });
+  } 
 
 }

@@ -14,8 +14,7 @@ export class ListaCategoriasComponent implements OnInit {
 
   @Input() listCategorias: Categoria[];
   @Input() show: number;
-  @Output() categorias = new EventEmitter();
-  @Output() cu = new EventEmitter();
+  @Output() created = new EventEmitter();
   
   categoria;
   subCategoria: Categoria;
@@ -70,6 +69,10 @@ export class ListaCategoriasComponent implements OnInit {
       }
     );
     
+  }
+
+  criar(categoria: Categoria){
+    this.created.emit(categoria);
   }
 
   showMessage(){

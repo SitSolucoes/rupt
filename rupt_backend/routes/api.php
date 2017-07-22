@@ -110,6 +110,7 @@ Route::get('/existCpf/{cpf}/{id}', ['uses' => 'EscritorController@existCpf']);
 Route::get('/sugestao/getSugestoes', ['uses' => 'SugestaoController@getSugestoes']);
 Route::get('/sugestao/countSugestoes',['uses' => 'SugestaoController@countSugestoes']);
 Route::put('/sugestao/alteraStatus/{id}/{status}', ['uses' => 'SugestaoController@alteraStatus']);
+Route::post('sugestao/aceitar/{idCategoria}', ['uses' => 'SugestaoController@aceitar']);
 
 //categorias
 Route::get('/categoria/getCategorias', ['uses' => 'CategoriaController@getCategorias']);

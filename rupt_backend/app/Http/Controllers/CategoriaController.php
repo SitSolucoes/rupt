@@ -13,15 +13,6 @@ class CategoriaController extends Controller
         $categorias = Categoria::orderBy("categoria")
             ->where("categoria_idCategoria", null);
 
-        /*$listCategoria = new Collection();
-
-        foreach($categorias->get() as $categoria){
-            $categoria->subCategorias = $this->getSubCategorias($categoria->id);
-            $listCategoria->push($categoria);
-        }
-
-        echo $listCategoria;*/
-
         $listCategorias = $this->recursiveSubCategorias($categorias->get());
         
         return response()->json(['categorias' => $listCategorias], 200);
@@ -53,7 +44,7 @@ class CategoriaController extends Controller
     public function create(Request $request){
         $categoria = new Categoria();
         $categoria->categoria = $request->categoria;
-        $categoria->status = $request->status;
+        $categoria->status = true;
         $categoria->save();
 
         return response()->json(['mensagem' => "Salvo com sucesso."], 200);

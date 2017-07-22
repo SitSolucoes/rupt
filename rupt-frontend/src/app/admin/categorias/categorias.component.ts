@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms/src/directives';
 import { CategoriasService } from './../../services/categorias.service';
 import { Categoria } from './../../classes/categoria';
 import { MaterializeAction } from 'angular2-materialize';
-import { Component, OnInit, EventEmitter, HostListener } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 
 import { NotificacoesService } from './../../services/notificacoes.service';
 import { SugestoesService } from './../../services/sugestoes.service';
@@ -115,15 +115,22 @@ export class CategoriasComponent implements OnInit {
     this.modalActions.emit({action:"modal",params:['open']});
   }
 
-  closeModal(){
-    this.modalActions.emit({action:"modal",params:['close']});
-  }
   criar(){
-    let form: NgForm;
-    form.setValue(['categoria', this.sugestao.categoria]);
-
-    this._categoriasService.createCategoria(form).subscribe(
+    this._sugestoesService.aceitar(this.sugestao, 0).subscribe(
         (response: any) => {
+          this.getListSugestoes();
+          this.getCategorias();
+        }
+    );
+    
+    this.modalAceitar.emit({action:"modal",params:['close']});
+    this.showMessage();
+  }
+  
+  criarSubCategoria($categoria: Categoria){
+    this._sugestoesService.aceitar(this.sugestao, $categoria.id).subscribe(
+        (response: any) => {
+          this.getListSugestoes();
           this.getCategorias();
         }
     );
@@ -144,16 +151,6 @@ export class CategoriasComponent implements OnInit {
 
   showMessage(){
     this.modalMessage.emit({action:"modal",params:['open']});
-  }
-
-  closeMessage(){
-    this.modalMessage.emit({action:"modal",params:['close']});
-  }
-  @HostListener('window:popstate', ['$event'])
-  onPopState(event) {
-    this.closeMessage();
-    this.closeModal();
-    this.closeModalRecusa();
   }
 
 }

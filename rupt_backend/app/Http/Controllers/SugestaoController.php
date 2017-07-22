@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Sugestao;
+use App\Http\Controllers\CategoriaController;
 
 class SugestaoController extends Controller
 {
@@ -29,5 +30,18 @@ class SugestaoController extends Controller
         $sugestao->save();
 
         return response()->json(['message' => "Sugestao alterada."], 200);
+    }
+
+    public function aceitar(Request $request, $idCategoria){
+        $this->alteraStatus($request->id, 'a');
+
+        $c = new CategoriaController();
+        
+        if ($idCategoria == 0)
+            $c->create($request);
+        else
+            $c->createSubCategoria($request, $idCategoria);
+
+        return response()->json(['message' => "Sugestao aceita."], 200);
     }
 }
