@@ -118,7 +118,7 @@
                             <input id="telefone" name="telefone" type="text"
                                 minlength="14" maxlength="15"
                                 [ngClass]="{'invalid': telefone.errors?.minlength && telefone.touched}"
-                                [(ngModel)]="escritor.telefone" #telefone="ngModel" Masks="(99) 99999-9999"
+                                [(ngModel)]="escritor.telefone" #telefone="ngModel" Masks="(99)99999-9999"
                                 [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
                             
                             <label [ngClass]="{'active': escritor?.telefone}" for="telefone">Telefone</label>
@@ -128,7 +128,7 @@
 
                         <div class="input-field col s12 m12 l6 xl6 right">
                             <input id="celular" name="celular" type="text"
-                                minlength="13" maxlength="16" required Masks="(99) 99999-9999"
+                                minlength="13" maxlength="16" required Masks="(99)99999-9999"
                                 [ngClass]="{'invalid': (celular.errors?.required && celular.touched)}"
                                 [(ngModel)]="escritor.celular" #celular="ngModel" 
                                 [readOnly]="escritor.status == 'p' || escritor.status == 'r'">

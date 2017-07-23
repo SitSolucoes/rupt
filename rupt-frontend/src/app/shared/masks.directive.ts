@@ -1,4 +1,228 @@
-import { Directive, HostListener, Input, ElementRef } from '@angular/core';
+import { Directive, HostListener, Input, ElementRef, OnInit, EventEmitter, Output } from '@angular/core';
+
+
+const placeholders = {
+  'A': '^[a-zA-ZA-zА-яЁё]',
+  '9': '\\d'
+};
+
+
+interface IState {
+  value: string;
+}
+
+@Directive({
+  selector: '[Masks]'
+})
+export class MasksDirective implements OnInit {
+
+  private state: IState;
+
+  @Input() mask: any;
+  @Output() ngModelChange = new EventEmitter();
+
+  /**
+   *
+   * @param element
+   * @param model
+   */
+  constructor(private element: ElementRef) {
+    this.state = {
+      value: this.getValue()
+    };
+  }
+
+
+  /**
+   *
+   */
+  @HostListener('ngModelChange')
+  public onChange(): void {
+    this.applyMask(this.getClearValue(this.getValue()));
+  }
+
+  /**
+   *
+   * @param event
+   */
+  @HostListener('keypress', ['$event'])
+  public onKeyPress(event): void {
+    const cursorPosition = this.getCursorPosition();
+    let regexp = this.createRegExp(cursorPosition);
+    if(regexp != null && !regexp.test(event.key) || this.getValue().length >= this.mask.length) {
+      event.preventDefault();
+    }
+  }
+
+  /**
+   *
+   * @param event
+   */
+  @HostListener('keydown', ['$event'])
+  public onKeyDown(event): void {
+    const key = event.keyCode || event.charCode;
+    if((key == 8 || key == 46) && this.getClearValue(this.getValue()).length === 1) {
+      this.setValue('');
+      this.state.value = '';
+      this.ngModelChange.emit('');
+    }
+  }
+
+  /**
+   *
+   */
+  public ngOnInit(): void {
+    this.applyMask(this.getClearValue(this.getValue()));
+  }
+
+  /**
+   *
+   * @param value
+   */
+  private applyMask(value): void {
+    let newValue = '';
+    let maskPosition = 0;
+    if(value){
+      if (this.getClearValue(value).length > this.getClearValue(this.mask).length) {
+        this.setValue(this.state.value);
+        return;
+      }
+      for (let i = 0; i < value.length; i++) {
+        let current = value[i];
+
+        let regexp = this.createRegExp(maskPosition);
+        if (regexp != null) {
+          if (!regexp.test(current)) {
+            this.setValue(this.state.value);
+            break;
+          }
+          newValue += current;
+        } else if (this.mask[maskPosition] === current) {
+          newValue += current;
+        } else {
+          newValue += this.mask[maskPosition];
+          i--;
+        }
+
+        maskPosition++;
+      }
+      const nextMaskElement = this.mask[maskPosition];
+      if (value.length && nextMaskElement != null && /^[-\/\\^$#&@№:<>_\^!*+?.()|\[\]{}]/.test(nextMaskElement)) {
+        newValue += nextMaskElement;
+      }
+
+      const oldValue = this.state.value;
+      const cursorPosition = this.getCursorPosition();
+      this.setValue(newValue);
+      this.state.value = newValue;
+
+      if (oldValue.length >= cursorPosition) {
+        this.setCursorPosition(cursorPosition);
+      }
+    }
+  }
+
+  /**
+   *
+   * @param position
+   * @returns {any}
+   */
+  private createRegExp(position): RegExp | null {
+    if (this.mask[position] == null) {
+      return null;
+    }
+
+    const currentSymbol = this.mask[position].toUpperCase();
+    const keys = Object.keys(placeholders);
+    const searchPosition = keys.indexOf(currentSymbol);
+    if (searchPosition >= 0) {
+      return new RegExp(placeholders[keys[searchPosition]], 'gi');
+    }
+    return null;
+  }
+
+
+  /**
+   *
+   * @returns {any}
+   */
+  private getValue(): string {
+    return this.element.nativeElement.value;
+  }
+
+  /**
+   *
+   * @param value
+   * @returns {string}
+   */
+  private getClearValue(value): string {
+    if(value)
+      return value.trim().replace(/[-\/\\^$#&@№:<>_\^!*+?.()|\[\]{}]/gi, '');
+  }
+
+  /**
+   *
+   * @param value
+   */
+  private setValue(value: string): void {
+    this.element.nativeElement.value = value;
+  }
+
+  /**
+   *
+   * @returns {number}
+   */
+  private getCursorPosition(): number {
+    return this.element.nativeElement.selectionStart;
+  }
+
+  /**
+   *
+   * @param start
+   * @param end
+   */
+  private setCursorPosition(start: number, end: number = start): void {
+    this.element.nativeElement.setSelectionRange(start, end);
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*import { Directive, HostListener, Input, ElementRef } from '@angular/core';
 import {NG_VALUE_ACCESSOR, ControlValueAccessor} from '@angular/forms';
 
 @Directive({
@@ -76,15 +300,15 @@ export class MasksDirective implements ControlValueAccessor{
     }
     
     this.onChange('');
-    $event.target.value = '';*/
+    $event.target.value = '';
   }
 
   /**
    * Aplica a máscara a determinado valor.
-   *
-   * @param string valor
-   * @return string
-   */
+   
+    @param string valor
+    @return string
+   
   aplicarMascara(valor: string): string {
     valor = valor.replace(/\D/g, '');
     let pad = this.mask.replace(/\D/g, '').replace(/9/g, '_');
@@ -109,3 +333,4 @@ export class MasksDirective implements ControlValueAccessor{
 
   constructor(private el: ElementRef) { }
 }
+*/
