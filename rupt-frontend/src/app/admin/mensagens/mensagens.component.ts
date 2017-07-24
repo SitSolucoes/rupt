@@ -197,14 +197,13 @@ export class MensagensComponent implements OnInit {
   }
 
   enviaResposta(f){
-    
     return this._mensagemService.enviaResposta(f, this.mensagem_selecionada.id).subscribe(
           (response: any) => {
-            console.log(response);
               this.clear();
               this.getMensagens_nLidas();
               this.getMensagens_lidas();
               this.showMessage();
+              this.notificacoes = this._notificacoesService.getNotificacoes();
           }
       );
   }

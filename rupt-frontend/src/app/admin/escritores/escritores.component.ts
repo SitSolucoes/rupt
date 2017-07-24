@@ -366,6 +366,7 @@ export class EscritoresComponent implements OnInit {
     this.showMessage();
     this.getEscritores();
     this.getSolicitacoes();
+    this.notificacoes = this._notificacoesService.getNotificacoes();
   }
 
   onSubmit(form){

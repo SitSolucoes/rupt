@@ -102,6 +102,7 @@ export class CategoriasComponent implements OnInit {
     this._sugestoesService.alteraStatus(this.sugestao.id, "r").subscribe(
       (respose: any) => {
         this.getListSugestoes();
+        this.notificacoes = this._notificacoesService.getNotificacoes();
       }
     )
     this.closeModalRecusa();
@@ -120,6 +121,7 @@ export class CategoriasComponent implements OnInit {
         (response: any) => {
           this.getListSugestoes();
           this.getCategorias();
+          this.notificacoes = this._notificacoesService.getNotificacoes();
         }
     );
     
