@@ -463,7 +463,7 @@ span.badge.new:after {
 /* card */
 .card {
 	margin-right: 25px;
-	min-height: 150px;
+	height: 180px;
 	padding: 0px;
 	text-align: center;
 }
@@ -550,31 +550,99 @@ span.badge.new:after {
 
 /*escritores*/
 .card-escritor{
-	background-color: transparent;
-	cursor: pointer;
-}
-
-.img-escritor{
-	margin-top: 5px;
 	width: 200px;
-	height: 200px;
+	height: 360px;
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+	font-family: arial;
+	background-color: white;
+	cursor: pointer;
+	margin-bottom: 15px;
 }
 
-.card-escritor .content{
+.card-escritor .editar{
+	position: absolute;
+	width: 200px;
+	height: 360px;
+	text-align: center;
+	display:none;
+	color: white;
+	font-size: 30px;
+	font-family: "Nexa Light"
+}
+
+.card-escritor .editar .material-icons{
+	font-size: 30px;
+    border: 1px solid white;
+    border-radius: 50%;
+    padding: 10px;
+}
+
+.card-escritor:hover .editar{
+	display:table;
+}
+
+.card-escritor:hover .nome .losango{
+	background-color: rgba(0,0,0,0);
+	border-bottom: 1px solid transparent;
+	border-left: 1px solid transparent;
+}
+
+.card-escritor .option{
+	text-align: left; 
+	display:table-cell;
+	vertical-align: middle;
+	background-color: rgba(0,0,0,.9);
+	text-align: center;
+}
+
+.card-escritor .img-content{
+	height: 100px;
+	background-color: #F97000;
+	margin-bottom: 45%;
+	padding-top: 10px;
+}
+
+.card-escritor .img-content img{
+	width: 180px;
+	border-radius: 50%;
+	display: block;
+	margin: auto;
+	border: 1px solid #F97000;
+}
+
+.card-escritor .container{
+	text-align: center;
+	height: 100px;
+	width: 100%;
 	background-color: white;
-	border-radius: 2px;
 }
 
 .card-escritor .nome{
-	background-color: #F97000;
-	height: 30px;
-	padding-top: 5px;
-	color: white;
+	font-size: 25px;
+	margin-bottom: -10px;
+	border-bottom: 1px solid #F97000;
 }
 
-.card-escritor .dados{
-	padding-left: 5px;
-	text-align: left;
+.card-escritor .nick{
+	overflow: hidden;
+	height: 35px;
+}
+
+.card-escritor .container .dados{
+	background-color: #f4f2f2;
+	height: 130px;	
+	border-top: 1px solid #F97000;
+	padding-top: 10px;
+}
+
+.card-escritor .nome .losango{
+	width: 15px;
+	height: 15px;
+	background-color: white;
+	margin: auto;
+	transform: rotate(-45deg);
+	border-bottom: 1px solid #F97000;
+	border-left: 1px solid #F97000;
 }
 
 .orderby .input-field {
@@ -585,3 +653,6 @@ span.badge.new:after {
 .recusado{
 	color: red;
 }
+
+
+

@@ -47,8 +47,8 @@ declare var Materialize:any;
 
 export class EscritoresComponent implements OnInit {
   notificacoes;
-  mSolicitacao = 0;
-  mEscrires = 0;
+  mSolicitacao = 1;
+  mEscritor = 1;
   dataInvalida: boolean;
   emailInvalido: boolean;
   nickInvalido: boolean;

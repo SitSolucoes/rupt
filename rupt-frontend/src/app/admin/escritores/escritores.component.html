@@ -159,6 +159,8 @@
 
                             <label [ngClass]="{'active': escritor?.cep}" for="cep">Cep</label>
                             <div class="error" *ngIf="cep.errors?.minlength">Cep inválido.</div>
+
+                            {{ cep.value?.length }}
                         </div>
                     </div>
                     <div class="row">
@@ -466,16 +468,32 @@
         <div class="col s12 m12 l12 xl12" *ngIf="mSolicitacao == 1">
             <div class="col s12 m6 l4 xl3" *ngFor="let s of listSolicitacoes() | paginate: {itemsPerPage: 8, currentPage:pageSolicitacoes, id: 'solicitacoes'}; let i = index">
                 <a (click)="openModalEdit(s, f)">
-                    <div class="card card-escritor" [ngClass]="{'border-red': s.status == 'r'}">
-                        <img src="https://pbs.twimg.com/profile_images/817091464731693057/5RSuRSGK.jpg" class="img-escritor row">
-                        <div class="content row">
-                            <div class="nome"> {{ s.nick }} </div>
-                            <div class="dados">
-                            nome: {{ s.nome }}<br>
-                            CPF: {{s.cpf | cpfCnpj }}  <br>
-                            E-mail: {{ s.email }} <br>
-                            Solicitado: {{ s.created_at | date:"dd/MM/yyyy" }} <br>
-                            Status: {{ s.status == 'r' ? 'Recusado' : 'Pendente'}}
+                    <div class="card-escritor">
+                        <div class="editar">
+                            <div class="option">
+                                <div class="row">
+                                    Analisar
+                                </div>
+                                <div class="row">
+                                    <i class="material-icons">visibility</i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="img-content">
+                            <img src="https://s-media-cache-ak0.pinimg.com/736x/a2/e1/8c/a2e18cbfbcaa8756fe5b40f472eeff45--profile-picture-profile-pics.jpg">
+                        </div>
+                        <div class="container">
+                            <div class="nome"> 
+                                {{ s.nick }}
+                                <div class="losango"></div>
+                                
+                            </div>
+                            <div class="dados" [ngClass]="{'recusado': s.status == 'r'}">
+                                {{ s.nome }}<br>
+                                {{s.cpf | cpfCnpj }}  <br>
+                                {{ s.email }} <br>
+                                {{ s.created_at | date:"dd/MM/yyyy" }} <br>
+                                {{ s.status == 'r' ? 'Recusado' : 'Pendente'}}
                             </div>
                         </div>
                     </div>
@@ -607,17 +625,34 @@
             </div>
         </div>
         <div class="col s12 m12 l12 xl12" *ngIf="mEscritor == 1">
-            <div class="col s12 m6 l4 xl3" *ngFor="let e of listEscritores() | paginate: {itemsPerPage: 8, currentPage:pageSolicitacoes, id: 'solicitacoes'}; let i = index">
+            <div class="col s12 m6 l4 xl3" *ngFor="let e of listEscritores() | paginate: {itemsPerPage: 8, currentPage:pageEscritor, id: 'escritores'}; let i = index">
                 <a (click)="openModalEdit(e, f)">
-                    <div class="card card-escritor">
-                        <img src="http://www.culturamix.com/wp-content/gallery/neymar-iguala-marca-de-romario-e-pele/neymar-iguala-marca-de-romario-e-pele-13.jpg" class="img-escritor row">
-                        <div class="content row">
-                            <div class="nome"> {{ e.nick }} </div>
-                            <div class="dados">
-                            nome: {{ e.nome }}<br>
-                            CPF: {{e.cpf | cpfCnpj }}  <br>
-                            E-mail: {{ e.email }} <br>
-                            Status: <font *ngIf="!e.ativo">Inativo</font>
+                    <div class="card-escritor">
+                        <div class="editar">
+                            <div class="option">
+                                <div class="row">
+                                    Editar
+                                </div>
+                                <div class="row">
+                                    <i class="material-icons">mode_edit</i>
+                                </div>
+                            </div>
+                        </div>  
+                        <div class="img-content">
+                            <img src="https://s-media-cache-ak0.pinimg.com/736x/a2/e1/8c/a2e18cbfbcaa8756fe5b40f472eeff45--profile-picture-profile-pics.jpg">
+                        </div>
+                        <div class="container">
+                            <div class="nome"> 
+                                <div class="nick">
+                                    {{ e.nick }}
+                                </div>
+                                <div class="losango"></div>
+                            </div>
+                            <div class="dados" [ngClass]="{'recusado': e.status == 'i'}">
+                                    {{ e.nome }}<br>
+                                    {{ e.cpf | cpfCnpj }}  <br>
+                                    {{ e.email }} <br>
+                                    <font *ngIf="!e.ativo">Inativo</font>
                                     <font *ngIf="e.ativo">Ativo</font>
                             </div>
                         </div>
@@ -690,4 +725,6 @@
         </div>
     </div>
 </div>
+
+
 
