@@ -11,7 +11,7 @@ use App\Mail\sendRespostaEmail;
 class MensagemController extends Controller
 {
     public function getMensagens_nLidas(){
-        $mensagens = Mensagem::where('lida', false)
+        $mensagens = Mensagem::where('lida', 0)
                              ->where('mensagem_idMensagem', null)
                              ->orderBy('created_At', 'desc')
                              ->get();

@@ -408,12 +408,6 @@ span.badge.new:after {
 	margin-bottom: 15px;
 }
 
-.header{
-	background-color: #131313;
-	color: white;
-	margin-right: 10px;
-}
-
 .list-item i {
     width: 2rem;
     font-size: 1.6rem;
@@ -422,6 +416,19 @@ span.badge.new:after {
     float: left;
     text-align: center;
     margin-right: 1rem;
+}
+
+.header{
+	background-color: #131313;
+	color: white;
+	margin-right: 10px;
+}
+
+.header .item i{
+	float: none;
+	display: inline-flex;
+	vertical-align: middle;
+	line-height: 1rem;
 }
 
 .sub-collapsible {
