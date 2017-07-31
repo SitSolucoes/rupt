@@ -565,7 +565,6 @@ span.badge.new:after {
 	width: 200px;
 	height: 360px;
 	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-	font-family: arial;
 	background-color: white;
 	cursor: pointer;
 	margin-bottom: 15px;
@@ -642,14 +641,14 @@ span.badge.new:after {
 
 .card-escritor .container .dados{
 	background-color: #f4f2f2;
-	height: 130px;	
+	height: 127px;	
 	border-top: 1px solid #F97000;
 	padding-top: 10px;
 }
 
 .card-escritor .nome .losango{
-	width: 15px;
-	height: 15px;
+	width: 16px;
+	height: 16px;
 	background-color: white;
 	margin: auto;
 	transform: rotate(-45deg);

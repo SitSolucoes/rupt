@@ -1,5 +1,13 @@
 <div id="modal1" class="modal center-sheet" [ngClass]="{'border-red': escritor.status == 'r'}"
  materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions">
+    
+    <form class="col s12" #f1="ngForm" (ngSubmit)="test(f1)">
+        <input type="file" name="file" id="file"> 
+        <button  type="submit" class="modal-action modal-close waves-effect waves-green btn-flat">
+            Salvar
+        </button> 
+    </form>
+ 
     <form class="col s12" #f="ngForm" (ngSubmit)="onSubmit(f)">
         <div class="modal-content">
             <h4 *ngIf="!escritor.data_aceite && escritor.id != 0 && idLeitor == 0">Analisar</h4>
@@ -639,7 +647,7 @@
                             </div>
                         </div>  
                         <div class="img-content">
-                            <img src="https://s-media-cache-ak0.pinimg.com/736x/a2/e1/8c/a2e18cbfbcaa8756fe5b40f472eeff45--profile-picture-profile-pics.jpg">
+                            <img src="http://www.musica-brasileira.com/images/rihanna_33.jpg">
                         </div>
                         <div class="container">
                             <div class="nome"> 

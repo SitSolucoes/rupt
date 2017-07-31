@@ -89,6 +89,17 @@ class EscritorController extends Controller
         return response()->json(['message' => "Escritor alterado com sucesso."], 200);
     }
 
+    public function uploadDocs (Request $request, $id){
+        $originalName = $_FILES['file']['name'];
+
+        $ext = '.'.pathinfo($originalName, PATHINFO_EXTENSION);
+        $generatedName = "e1".$ext;
+        
+        $request->file('file')->move("docs", $generatedName);
+
+        return response()->json(['message' => "Escritor alterado com sucesso."], 400);
+    }
+
     public function recusar(Request $request, $id){
         $escritor = $this->getById($id);
         $escritor->status = "r";

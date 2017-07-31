@@ -104,7 +104,7 @@ Route::put('/aceitarEscritor/{id}/{admin_idAdmin}',['uses' => 'EscritorControlle
 Route::get('/existEmail/{email}', ['uses' => 'EscritorController@existEmail']);
 Route::get('/existNick/{nick}', ['uses' => 'EscritorController@existNick']);
 Route::get('/existCpf/{cpf}/{id}', ['uses' => 'EscritorController@existCpf']);
-
+Route::post('/escritor/uploadDocs/{id}', ['uses' => 'EscritorController@uploadDocs']);
 
 //sugestões
 Route::get('/sugestao/getSugestoes', ['uses' => 'SugestaoController@getSugestoes']);

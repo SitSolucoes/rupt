@@ -20,7 +20,9 @@ import {
     animate,
     keyframes
 } from '@angular/core';
- 
+import { UploadFileService } from "app/services/upload-file.service";
+import { UploadItem } from "app/classes/upload-item";
+
 declare var Materialize:any;
 
 @Component({
@@ -115,7 +117,8 @@ export class EscritoresComponent implements OnInit {
     private _notificacoesService: NotificacoesService,
     private _escritoresService: EscritoresService,
     private _leitoresService:LeitoresService,
-    private _http: Http
+    private _http: Http,
+    private _uploadFileService: UploadFileService
     ) { }
 
   ngOnInit() {
@@ -413,6 +416,25 @@ export class EscritoresComponent implements OnInit {
   onPopState(event) {
     this.closeMessage();
     this.closeModal();
+  }
+
+  test(form){
+    let file = (<HTMLInputElement>window.document.getElementById('file')).files[0];
+
+    let myUploadItem = new UploadItem(file, "escritor/uploadDocs/"+5);
+    
+    myUploadItem.formData = { FormDataKey: 'Form Data Value' };  // (optional) form data can be sent with file
+
+    this._uploadFileService.onSuccessUpload = (item, response, status, headers) => {
+          // success callback
+    };
+    this._uploadFileService.onErrorUpload = (item, response, status, headers) => {
+          // error callback
+    };
+    this._uploadFileService.onCompleteUpload = (item, response, status, headers) => {
+          // complete callback, called regardless of success or failure
+    };
+    this._uploadFileService.upload(myUploadItem);
   }
 
 }
