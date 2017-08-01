@@ -161,3 +161,8 @@ Route::get('/getCountMensagens_nLidas', [
 Route::post('respondeMensagem/{id}', [
             'uses' => 'MensagemController@respondeMensagem'
 ]);
+
+//pagamentos
+Route::post('pagamento/update', ['uses' => 'PagamentoController@update']);
+Route::get('pagamento/getPagamentos', ['uses' => 'PagamentoContoller@getPagamentos']);
+Route::get('pagamento/getPagamentosPendentes', ['uses' => 'PagamentoController@getPagamentosPendentes']);
