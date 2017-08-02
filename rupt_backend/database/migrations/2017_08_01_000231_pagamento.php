@@ -16,8 +16,8 @@ class Pagamento extends Migration
         Schema::create('pagamentos', function (Blueprint $table) {
             $table->increments('id');
             $table->float('valor', 10,2);
-            $table->integer('escritor_idEscritor')->unsigned()->nullable();
-            $table->foreign('escritor_idEscritor')->references('id')->on('escritores');                                
+            $table->integer('leitor_idLeitor')->unsigned()->nullable();
+            $table->foreign('leitor_idLeitor')->references('id')->on('leitores');                                
             $table->integer('admin_idAdmin')->unsigned()->nullable();
             $table->foreign('admin_idAdmin')->references('id')->on('admins');                                
             $table->string('src_comprovante')->nullable();

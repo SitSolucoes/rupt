@@ -5,7 +5,7 @@
             <a routerLink="home"><div class="collapsible-header"><i class="material-icons">home</i>Início</div></a>
         </li>
         <li>
-            <div class="collapsible-header"><i class="material-icons">create</i>Cadastros<span *ngIf="notificacoes['escritores'] + notificacoes['categorias'] != 0" class="new badge">{{ notificacoes["escritores"] + notificacoes["categorias"] }}</span></div>
+            <div class="collapsible-header"><i class="material-icons">create</i>Cadastros<span *ngIf="notificacoes['categorias'] != 0" class="new badge">{{ notificacoes["categorias"] }}</span></div>
             <div class="collapsible-body">
                 <ul class="collapsible" data-collapsible="accordion">
                     <li routerLinkActive="active">
@@ -19,17 +19,32 @@
                         </a>
                     </li>
                     <li>
-                        <a routerLink="escritores">
-                            <div class="collapsible-header">
-                                <i class="material-icons">keyboard_arrow_right</i>
-                                Escritores<span *ngIf="notificacoes['escritores'] != 0" class="new badge">{{ notificacoes["escritores"] }}</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
                         <a routerLink="leitores">
                             <div class="collapsible-header">
                                 <i class="material-icons">keyboard_arrow_right</i>Leitores
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li>
+            <div class="collapsible-header"><i class="material-icons">create</i>Colaboradores<span *ngIf="notificacoes['escritores'] + notificacoes['pagamentos'] != 0" class="new badge">{{ notificacoes["escritores"] + notificacoes["pagamentos"] }}</span></div>
+            <div class="collapsible-body">
+                <ul class="collapsible" data-collapsible="accordion">
+                    <li routerLinkActive="active">
+                      <a routerLink="escritores">
+                            <div class="collapsible-header">
+                                <i class="material-icons">keyboard_arrow_right</i>
+                                Colaboradores<span *ngIf="notificacoes['escritores'] != 0" class="new badge">{{ notificacoes["escritores"] }}</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li routerLinkActive="active">
+                      <a routerLink="pagamentos">
+                            <div class="collapsible-header">
+                                <i class="material-icons">keyboard_arrow_right</i>
+                                Pagamentos<span *ngIf="notificacoes['pagamentos'] != 0" class="new badge">{{ notificacoes["pagamentos"] }}</span>
                             </div>
                         </a>
                     </li>

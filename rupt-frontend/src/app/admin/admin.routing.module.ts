@@ -1,3 +1,4 @@
+import { PagamentoComponent } from './pagamento/pagamento.component';
 import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
@@ -29,6 +30,7 @@ const AdminRoutes: Routes = [
         { path : 'denuncias', canActivate: [AuthGuard], component: DenunciasComponent},
         { path : 'leitores', canActivate: [AuthGuard], component: LeitoresComponent},
         { path : 'escritores', canActivate: [AuthGuard], component: EscritoresComponent},
+        { path : 'pagamentos', canActivate: [AuthGuard], component: PagamentoComponent},
         { path : 'mensagens', canActivate: [AuthGuard], component: MensagensComponent},
         { path : 'editar/:id', canActivate: [AuthGuard], component: AdministradoresComponent},
         { path : '', redirectTo: 'home', pathMatch: 'full'},

@@ -7,6 +7,15 @@ use App\Pagamento;
 
 class PagamentoController extends Controller
 {
+    public function create(Request $request){
+        $pagamento = new Pagamento();
+        
+        //tem que ter isso aqui
+        $pagamento->pago = false;
+        
+        //terminar o método
+    }
+
     public function update (Request $request, $id){
         $pagamento = Pagamento::find($id);
         $pagamento->admin_idAdmin = $request->admin;
@@ -18,7 +27,9 @@ class PagamentoController extends Controller
     }
 
     public function getPagamentosPendentes(Request $request){
-        $pagamentos = Pagamento::where('pago', '<>', 1)->get();
+        $pagamentos = Pagamento::where('pago', '<>', 1)
+                      ->join('leitores', 'pagamentos.leitor_idLeitor', 'leitores.id')
+                      ->get('pagamentos.*, campos do leitor');
 
         return response()->json(['pagametos' => $pagamentos], 200);
     }

@@ -436,5 +436,4 @@ export class EscritoresComponent implements OnInit {
     };
     this._uploadFileService.upload(myUploadItem);
   }
-
 }

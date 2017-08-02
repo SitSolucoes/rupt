@@ -1,3 +1,4 @@
+import { PagamentoService } from './services/pagamento.service';
 import { UploadFileService } from './services/upload-file.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
@@ -34,7 +35,8 @@ import { InternetModule } from "app/internet/internet.module";
       provide: LOCALE_ID,
       useValue: 'pt-BR'
     },
-    UploadFileService
+    UploadFileService,
+    PagamentoService
   ],
   bootstrap: [AppComponent],
 })

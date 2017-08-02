@@ -1,3 +1,4 @@
+import { PagamentoService } from './pagamento.service';
 import { ConnectionFactory } from './../classes/connection-factory';
 import { MensagensService } from './mensagens.service';
 import { EscritoresService } from './escritores.service';
@@ -8,13 +9,14 @@ import { Http, Response, Headers } from '@angular/http';
 @Injectable()
 export class NotificacoesService {
 
-  notificacoes = [{"escritores":0},{"mensagens":0},{"denuncias":0},{"categorias":0}];
+  notificacoes = [{"escritores":0},{"mensagens":0},{"denuncias":0},{"categorias":0},{"pagamentos":0}];
   //private _notificacoesService: NotificacoesService
   constructor(
     private _http: Http, 
     private _sugestoesService: SugestoesService,
     private _mensagensService: MensagensService,
-    private _escritoresService: EscritoresService
+    private _escritoresService: EscritoresService,
+    private _pagamentoService: PagamentoService
   ) { }
   
   private _url: string = ConnectionFactory.API_CONNECTION;
@@ -34,7 +36,10 @@ export class NotificacoesService {
       (countSolicitacoes: number) => {this.notificacoes["escritores"] = countSolicitacoes}
     );
 
-    this.notificacoes["mensagens"] = 0;
+    this._pagamentoService.countPagamentosPendentes().subscribe(
+      (countPagamentos: number) => {this.notificacoes["pagamentos"] = countPagamentos}
+    )
+
     this.notificacoes["denuncias"]  = 8;
      
     return this.notificacoes;

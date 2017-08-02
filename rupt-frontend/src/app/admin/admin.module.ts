@@ -32,6 +32,7 @@ import { EscritoresService } from './../services/escritores.service';
 import { PostsService } from './../services/posts.service';
 import { InputMaskModule } from 'ng2-inputmask';
 import { ListaCategoriasComponent } from './lista-categorias/lista-categorias.component';
+import { PagamentoComponent } from './pagamento/pagamento.component';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { ListaCategoriasComponent } from './lista-categorias/lista-categorias.co
     EscritoresComponent,
     CpfCnpjPipe,
     ListaCategoriasComponent,
-    MasksDirective
+    MasksDirective,
+    PagamentoComponent
   ],
 
   imports: [

@@ -1,0 +1,17 @@
+<div class="title">
+    <i class="material-icons">view_list</i> Pagamentos
+</div>
+
+<div class="row">
+    <div class="col s12">
+        <ul class="tabs" materialize="tabs">
+            <li class="tab col s6">
+                <a class="active" href="#solicitacao">
+                    Solicitados
+                    <span *ngIf="notificacoes['pagamentos'] != 0" class="notification">{{ notificacoes["pagamentos"] }}</span>
+                </a>
+            </li>
+            <li class="tab col s6"><a href="#escritores">Efetuados</a></li>
+        </ul>
+    </div>
+</div>

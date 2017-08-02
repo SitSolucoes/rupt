@@ -156,6 +156,21 @@
                             <label [ngClass]="{'active': escritor?.biografia}" for="biografia">Biografia</label>
                         </div>
                     </div>
+                    <div class="file-field input-field">
+                        <div class="btn">
+                            <span>File</span>
+                            <input type="file">
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text">
+                        </div>
+                    </div>
+
+                    <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+
+<img id="drag1" src="img_logo.gif" draggable="true"
+ondragstart="drag(event)" width="336" height="69">
+
                 </div>
                 <div [hidden]="(escritor.id == 0 || idLeitor != 0) && newPage != 2">
                     <div class="row">

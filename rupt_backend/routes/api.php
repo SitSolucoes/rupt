@@ -166,3 +166,4 @@ Route::post('respondeMensagem/{id}', [
 Route::post('pagamento/update', ['uses' => 'PagamentoController@update']);
 Route::get('pagamento/getPagamentos', ['uses' => 'PagamentoContoller@getPagamentos']);
 Route::get('pagamento/getPagamentosPendentes', ['uses' => 'PagamentoController@getPagamentosPendentes']);
+Route::get('pagamento/countPagamentosPendentes', ['uses' => 'PagamentoController@countPagamentosPendentes']);
