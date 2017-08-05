@@ -108,16 +108,15 @@
                         </div>
 
                         <div class="input-field col s12 m12 l6 xl6 right">
-                            <input id="cpf" name="cpf" type="text"
-                                minlength="6" maxlength="30" required
-                                [ngClass]="{'invalid': (cpf.errors?.required && cpf.touched) || cpfUsado}"
-                                [(ngModel)]="escritor.cpf" #cpf="ngModel"  (ngModelChange)="validaCpf()"
+                            <input id="cpf" name="cpf" type="text" maxlength="14" required
+                                [ngClass]="{'invalid': ((cpf.errors?.required || cpfInvalido) && cpf.touched) || cpfUsado}"
+                                [(ngModel)]="escritor.cpf" #cpf="ngModel" (blur)="validaCpf()"
                                 [readOnly]="escritor.status == 'p' || escritor.status == 'r'" mask="000.000.000-00">
 
                             <label [ngClass]="{'active': escritor?.cpf}" for="cpf">Cpf*</label>
 
                             <div class="error" *ngIf="cpf.errors?.required && cpf.touched">Campo obrigatório.</div>
-                            <div class="error" *ngIf="cpf.errors?.minlength && cpf.touched">Cpf inválido.</div>
+                            <div class="error" *ngIf="cpfInvalido && cpf.touched">Cpf inválido.</div>
                             <div class="error" *ngIf="cpfUsado">Cpf ja cadastrado.</div>
                         </div>
                     </div>
@@ -126,7 +125,7 @@
                             <input id="telefone" name="telefone" type="text"
                                 minlength="14" maxlength="15"
                                 [ngClass]="{'invalid': telefone.errors?.minlength && telefone.touched}"
-                                [(ngModel)]="escritor.telefone" #telefone="ngModel" mask="(00) 0000-0000"
+                                [(ngModel)]="escritor.telefone" #telefone="ngModel" mask="(00) 0000-00000"
                                 [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
                             
                             <label [ngClass]="{'active': escritor?.telefone}" for="telefone">Telefone</label>
@@ -136,7 +135,7 @@
 
                         <div class="input-field col s12 m12 l6 xl6 right">
                             <input id="celular" name="celular" type="text"
-                                minlength="13" maxlength="16" required mask="(00) 00000-0000"
+                                minlength="14" maxlength="15" required mask="(00) 00000-00000"
                                 [ngClass]="{'invalid': (celular.errors?.required && celular.touched)}"
                                 [(ngModel)]="escritor.celular" #celular="ngModel" 
                                 [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
@@ -156,7 +155,7 @@
                             <label [ngClass]="{'active': escritor?.biografia}" for="biografia">Biografia</label>
                         </div>
                     </div>
-                    <div class="file-field input-field">
+                    <!--<div class="file-field input-field">
                         <div class="btn">
                             <span>File</span>
                             <input type="file">
@@ -166,11 +165,7 @@
                         </div>
                     </div>
 
-                    <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-
-<img id="drag1" src="img_logo.gif" draggable="true"
-ondragstart="drag(event)" width="336" height="69">
-
+                    <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>-->
                 </div>
                 <div [hidden]="(escritor.id == 0 || idLeitor != 0) && newPage != 2">
                     <div class="row">
@@ -182,8 +177,6 @@ ondragstart="drag(event)" width="336" height="69">
 
                             <label [ngClass]="{'active': escritor?.cep}" for="cep">Cep</label>
                             <div class="error" *ngIf="cep.errors?.minlength">Cep inválido.</div>
-
-                            {{ cep.value?.length }}
                         </div>
                     </div>
                     <div class="row">
@@ -356,14 +349,14 @@ ondragstart="drag(event)" width="336" height="69">
             <a (click)="closeModal()" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
             
             <button *ngIf="newPage == 4 || (escritor.id != 0 && idLeitor == 0)"  type="submit" class="modal-action modal-close waves-effect waves-green btn-flat"
-                [disabled]="!f.valid || cpfUsado || emailInvalido || nickInvalido || dataInvalida || !senhaValida">
+                [disabled]="!f.valid || cpfUsado || cpfInvalido || emailInvalido || nickInvalido || dataInvalida || !senhaValida">
                 Salvar
             </button>           
 
-            <a (click)="newPage = newPage + 1" *ngIf="(escritor.id == 0 || idLeitor != 0) && newPage != 4 && f.valid && !emailInvalido && !nickInvalido && !dataInvalida && !cpfUsado" 
+            <a (click)="newPage = newPage + 1" *ngIf="(escritor.id == 0 || idLeitor != 0) && newPage != 4 && f.valid && !emailInvalido && !nickInvalido && !dataInvalida && !cpfUsado && !cpfInvalido" 
                 class="modal-action waves-effect waves-green btn-flat">Avançar
             </a>
-            <a (click)="newPage = newPage" *ngIf="(escritor.id == 0 || idLeitor != 0) && newPage == 1 && (!f.valid || emailInvalido || nickInvalido || dataInvalida || cpfUsado || !senhaValida)" 
+            <a (click)="newPage = newPage" *ngIf="(escritor.id == 0 || idLeitor != 0) && newPage == 1 && (!f.valid || emailInvalido || nickInvalido || dataInvalida || cpfUsado || cpfInvalido || !senhaValida)" 
                 class="modal-action waves-effect waves-green btn-flat disabled">Avançar
             </a>
 
@@ -513,7 +506,7 @@ ondragstart="drag(event)" width="336" height="69">
                             </div>
                             <div class="dados" [ngClass]="{'recusado': s.status == 'r'}">
                                 {{ s.nome }}<br>
-                                {{s.cpf | cpfCnpj }}  <br>
+                                {{s.cpf }}  <br>
                                 {{ s.email }} <br>
                                 {{ s.created_at | date:"dd/MM/yyyy" }} <br>
                                 {{ s.status == 'r' ? 'Recusado' : 'Pendente'}}
@@ -535,7 +528,7 @@ ondragstart="drag(event)" width="336" height="69">
                             Nome
                         </div>
                         <div class="col s3 m4 l2 xl2 item">
-                            Cpf / Cnpj
+                            Cpf
                         </div>
                         <div class="col s4 m4 l2 xl2 item">
                             E-mail
@@ -560,7 +553,7 @@ ondragstart="drag(event)" width="336" height="69">
                             {{s.nome}}
                         </div>
                         <div class="col s3 m4 l2 xl2 item">
-                            {{s.cpf | cpfCnpj }}
+                            {{s.cpf }}
                         </div>
                         <div class="col s4 m4 l2 xl2 item">
                             {{s.email}}
@@ -673,7 +666,7 @@ ondragstart="drag(event)" width="336" height="69">
                             </div>
                             <div class="dados" [ngClass]="{'recusado': e.status == 'i'}">
                                     {{ e.nome }}<br>
-                                    {{ e.cpf | cpfCnpj }}  <br>
+                                    {{ e.cpf }}  <br>
                                     {{ e.email }} <br>
                                     <font *ngIf="!e.ativo">Inativo</font>
                                     <font *ngIf="e.ativo">Ativo</font>
@@ -695,7 +688,7 @@ ondragstart="drag(event)" width="336" height="69">
                             Nome
                         </div>
                         <div class="col s3 m4 l2 xl2 item">
-                            Cpf / Cnpj
+                            Cpf
                         </div>
                         <div class="col s4 m4 l3 xl3 item">
                             E-mail
@@ -718,7 +711,7 @@ ondragstart="drag(event)" width="336" height="69">
                             {{e.nome}}
                         </div>
                         <div class="col s3 m4 l2 xl2 item">
-                            {{e.cpf | cpfCnpj }}
+                            {{e.cpf }}
                         </div>
                         <div class="col s4 m4 l3 xl3 item">
                             {{e.email}}

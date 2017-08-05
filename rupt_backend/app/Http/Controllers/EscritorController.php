@@ -35,7 +35,7 @@ class EscritorController extends Controller
 
     private function createEscritor(Request $request, $escritor){
         $escritor->rg = preg_replace("/[^0-9]/","", $request->rg);
-        $escritor->cpf = preg_replace("/[^0-9]/","",$request->cpf);
+        $escritor->cpf = $this->Mask("###.###.###-##", $request->cpf);
         $escritor->telefone = $request->telefone;
         $escritor->celular = $request->celular;
         $escritor->biografia = $request->biografia;
@@ -147,8 +147,20 @@ class EscritorController extends Controller
             return response()->json(['idLeitor' => $id], 200);
     }
 
+    private function Mask($mask,$str){
+        $str = preg_replace("/[^0-9]/","", $str);
+
+        for($i=0;$i<strlen($str);$i++){
+            $mask[strpos($mask,"#")] = $str[$i];
+        }
+
+        return $mask;
+    }
+
     public function existCpf($cpf, $id){
-        $cpfFormatado = preg_replace("/[^0-9]/","", $cpf);
+        //refaz a máscara porque no bd ta salvo com a máscara
+        $cpfFormatado = $this->Mask("###.###.###-##", $cpf);
+        
         $escritor = Escritor::where('cpf', $cpfFormatado)
                             ->where('leitor_idLeitor', "<>", $id)
                             ->first();

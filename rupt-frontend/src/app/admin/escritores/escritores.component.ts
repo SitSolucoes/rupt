@@ -22,6 +22,7 @@ import {
 } from '@angular/core';
 import { UploadFileService } from "app/services/upload-file.service";
 import { UploadItem } from "app/classes/upload-item";
+import { validarCpf } from "app/shared/valida-cpf";
 
 declare var Materialize:any;
 
@@ -55,6 +56,7 @@ export class EscritoresComponent implements OnInit {
   emailInvalido: boolean;
   nickInvalido: boolean;
   cpfUsado: boolean;
+  cpfInvalido: boolean;
   senhaValida: boolean;
   recusar: boolean;
 
@@ -131,6 +133,8 @@ export class EscritoresComponent implements OnInit {
   private setFalse(){
     this.emailInvalido = false;
     this.nickInvalido = false;
+    this.cpfUsado = false;
+    this.cpfInvalido = false;
     this.senhaValida = true;
     this.dataInvalida = false;
     this.recusar = false;
@@ -200,7 +204,7 @@ export class EscritoresComponent implements OnInit {
 
       return this.escritores.filter((v) => {
       if (
-        v.cpf.toLocaleLowerCase().indexOf(this.filtroEscritores.toLowerCase()) >= 0 ||
+        v.cpf.toLocaleLowerCase().replace(/\D/g,'').indexOf(this.filtroEscritores.replace(/\D/g,'').toLowerCase()) >= 0 ||
         v.nome.toLowerCase().indexOf(this.filtroEscritores.toLowerCase()) >= 0 ||
         v.nick.toLowerCase().indexOf(this.filtroEscritores.toLowerCase()) >= 0 ||
         v.email.toLowerCase().indexOf(this.filtroEscritores.toLowerCase()) >= 0
@@ -313,15 +317,23 @@ export class EscritoresComponent implements OnInit {
 
   validaCpf(){
     if (this.escritor.cpf){
-      if (this.escritor.cpf.length >= 14){
-        this._escritoresService.existCpf(this.escritor.cpf, this.escritor.id).subscribe(
-          (cpf: boolean) => {
-            this.cpfUsado = cpf;
-          }
-        );
+      let cpf = this.escritor.cpf.replace(/\D/g,'');
+
+      if (cpf.length == 11){
+        this.cpfInvalido = !validarCpf(cpf);
+
+        if (!this.cpfInvalido){
+          this._escritoresService.existCpf(cpf, this.escritor.id).subscribe(
+            (cpfUsado: boolean) => {
+              this.cpfUsado = cpfUsado;
+            }
+          );
+        }
       }
-      else
+      else {
         this.cpfUsado = false;
+        this.cpfInvalido = true;
+      }
     }
     else
       this.cpfUsado = false;

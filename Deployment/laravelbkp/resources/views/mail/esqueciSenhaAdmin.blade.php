@@ -1,1 +1,0 @@
-Sua nova senha é: {{$senha}}

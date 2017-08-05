@@ -1,8 +1,0 @@
-drop table admins;
-drop table denuncias;
-drop table escritores;
-drop table leitores;
-drop table migrations;
-drop table motivos_denuncia;
-drop table posts;
-drop table sugestoes;
