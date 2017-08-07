@@ -388,7 +388,7 @@ export class EscritoresComponent implements OnInit {
     if (this.escritor.id == 0 || this.idLeitor != 0){
       this._escritoresService.createEscritor(form, this.escritor.id).subscribe(
         (response: any) => {
-          this.afterSubmit("Salvo com sucesso.");
+          this.uploadFiles(form, response);
         }
       );
     }
@@ -402,7 +402,7 @@ export class EscritoresComponent implements OnInit {
     else {
       this._escritoresService.updateEscritor(form, this.escritor.id).subscribe(
         (response: any) => {
-          this.afterSubmit("Salvo com sucesso.");
+          this.uploadFiles(form, this.escritor.id);
         }
       );
     }
@@ -430,7 +430,7 @@ export class EscritoresComponent implements OnInit {
     this.closeModal();
   }
 
-  test(form){
+  uploadFiles(form, id){
     let file = (<HTMLInputElement>window.document.getElementById('file')).files[0];
 
     let myUploadItem = new UploadItem(file, "escritor/uploadDocs/"+5);
@@ -447,5 +447,7 @@ export class EscritoresComponent implements OnInit {
           // complete callback, called regardless of success or failure
     };
     this._uploadFileService.upload(myUploadItem);
+
+    this.afterSubmit("Salvo com sucesso.");
   }
 }

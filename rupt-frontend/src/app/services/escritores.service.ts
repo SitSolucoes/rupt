@@ -70,7 +70,7 @@ export class EscritoresService {
 
     return this._http.put(this._url + 'createEscritor/' + id + "/" + localStorage.getItem('admin_id'), body, {headers: this.headers}).map(
     (response: Response)=>{
-      response.json()
+      response.json().escritor_id;
     });
   }
 

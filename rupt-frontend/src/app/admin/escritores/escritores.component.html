@@ -1,12 +1,12 @@
 <div id="modal1" class="modal center-sheet" [ngClass]="{'border-red': escritor.status == 'r'}"
  materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions">
     
-    <form class="col s12" #f1="ngForm" (ngSubmit)="test(f1)">
+    <!--<form class="col s12" #f1="ngForm" (ngSubmit)="test(f1)">
         <input type="file" name="file" id="file"> 
         <button  type="submit" class="modal-action modal-close waves-effect waves-green btn-flat">
             Salvar
         </button> 
-    </form>
+    </form>-->
  
     <form class="col s12" #f="ngForm" (ngSubmit)="onSubmit(f)">
         <div class="modal-content">
@@ -155,17 +155,33 @@
                             <label [ngClass]="{'active': escritor?.biografia}" for="biografia">Biografia</label>
                         </div>
                     </div>
-                    <!--<div class="file-field input-field">
-                        <div class="btn">
-                            <span>File</span>
-                            <input type="file">
+                    <div class="file-field input-field">
+                        <div class="btn col s5">
+                            <span>Frente do documento</span>
+                            <input type="file" accept="image/*">
                         </div>
                         <div class="file-path-wrapper">
-                            <input class="file-path validate" type="text">
+                            <input class="file-path" type="text" >
                         </div>
                     </div>
-
-                    <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>-->
+                    <div class="file-field input-field">
+                        <div class="btn col s5">
+                            <span>Verso do documento</span>
+                            <input type="file" accept="image/*">
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path" type="text" >
+                        </div>
+                    </div>
+                    <div class="file-field input-field">
+                        <div class="btn col s5">
+                            <span>Selfie</span>
+                            <input type="file" accept="image/*">
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path" type="text" >
+                        </div>
+                    </div>
                 </div>
                 <div [hidden]="(escritor.id == 0 || idLeitor != 0) && newPage != 2">
                     <div class="row">
