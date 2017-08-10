@@ -306,12 +306,16 @@
           <div class="list-item header">
                 <div class="col s4 m4 l4 xl4 item">
                     Nome Informado
+                    <i *ngIf="this.ordenacoes['remetente'] == null || this.ordenacoes['remetente'] == true" class="material-icons" (click)="ordena_lidas('nome')">keyboard_arrow_up</i>
+                        <i *ngIf="!this.ordenacoes['remetente'] && this.ordenacoes['remetente'] != null" class="material-icons" (click)="ordena_lidas('nome')">keyboard_arrow_down</i>
                 </div>
                 <div class="col s3 m3 l3 xl3 item left-align">
                     Assunto
                 </div>
                 <div class="col s3 m3 l3 xl3 item left-align">
                     Data
+                    <i *ngIf="this.ordenacoes['data'] == null || this.ordenacoes['data'] == true" class="material-icons" (click)="ordena_lidas('data')">keyboard_arrow_up</i>
+                    <i *ngIf="!this.ordenacoes['data'] && this.ordenacoes['data'] != null" class="material-icons" (click)="ordena_lidas('data')">keyboard_arrow_down</i>
                 </div>
                 <div class="option-icons col s2 m2 l2 xl2 right-align item">
                     <div class="margin-right-1">Opções</div>

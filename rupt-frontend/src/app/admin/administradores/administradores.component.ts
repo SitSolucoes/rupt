@@ -32,6 +32,12 @@ export class AdministradoresComponent implements OnInit {
   email_valido: boolean = false;
   senhaValida: boolean = true;
   admin_original: Admin;
+
+  vetor_ordena: string[];
+  private ordenacoes = [
+    {'nome': null},
+    {'data': null}
+  ];
   
 
   constructor(private _adminService: AdministradoresService,
@@ -144,6 +150,40 @@ export class AdministradoresComponent implements OnInit {
     //pega o admin selecionado
     this.modalActions.emit({action:"modal",params:['open']});
     
+  }
+
+  ordena(por){
+    switch(por){
+      case 'nome':{
+        if(!this.ordenacoes['nome']|| this.ordenacoes['nome'] == null){
+          this.ordenacoes['nome'] = true;
+          this.admins.sort((n1,n2)=> {
+              if(n1.name>n2.name)
+                return 1;
+              if(n1.name<n2.name)
+                return -1;
+              return 0;
+            }
+          );
+        break;
+        }else{
+          if(this.ordenacoes['nome'] != null){
+            this.ordenacoes['nome'] = false;
+            this.admins.sort((n1,n2)=> {
+                if(n1.name>n2.name)
+                  return -1;
+                if(n1.name<n2.name)
+                  return 1;
+                return 0;
+              }
+            );
+          break;
+          }
+          
+        }
+      }
+    }
+      
   }
 
   clear(){

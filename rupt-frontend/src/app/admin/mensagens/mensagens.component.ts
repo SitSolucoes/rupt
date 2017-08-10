@@ -129,6 +129,67 @@ export class MensagensComponent implements OnInit {
       
   }
 
+ordena_lidas(por){
+    switch(por){
+      case 'nome':{
+        if(!this.ordenacoes['remetente']|| this.ordenacoes['remetente'] == null){
+          this.ordenacoes['remetente'] = true;
+          this.mensagens_lidas.sort((n1,n2)=> {
+              if(n1.nome>n2.nome)
+                return 1;
+              if(n1.nome<n2.nome)
+                return -1;
+              return 0;
+            }
+          );
+        break;
+        }else{
+          if(this.ordenacoes['remetente'] != null){
+            this.ordenacoes['remetente'] = false;
+            this.mensagens_lidas.sort((n1,n2)=> {
+                if(n1.nome>n2.nome)
+                  return -1;
+                if(n1.nome<n2.nome)
+                  return 1;
+                return 0;
+              }
+            );
+          break;
+          }
+          
+        }
+      }
+      case 'data':{
+        if(!this.ordenacoes['data']|| this.ordenacoes['data'] == null){
+          this.ordenacoes['data'] = true;
+          this.mensagens_lidas.sort((n1,n2)=> {
+              if(n1.created_at>n2.created_at)
+                return 1;
+              if(n1.created_at<n2.created_at)
+                return -1;
+              return 0;
+            }
+          );
+        break;
+        }else{
+          if(this.ordenacoes['data'] != null){
+            this.ordenacoes['data'] = false;
+            this.mensagens_lidas.sort((n1,n2)=> {
+                if(n1.created_at>n2.created_at)
+                  return -1;
+                if(n1.created_at<n2.created_at)
+                  return 1;
+                return 0;
+              }
+            );
+          break;
+          }
+        }
+      }
+    }
+      
+  }
+
   getMensagens_lidas(){
     this.spinner = true;
     this._mensagemService.getMensagens_lidas().subscribe(
