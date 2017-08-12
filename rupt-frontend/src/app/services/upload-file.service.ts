@@ -30,7 +30,14 @@ export class UploadFileService {
         form.append(key, value);
     });
 
-    form.append(item.alias, item.file, item.file.name);
+    //form.append(item.alias, item.file, item.file.name);
+
+    item.file.forEach(file => {
+        console.log(item.alias);
+        form.append(item.alias, file, file.name);
+    });
+
+    console.log(form);
 
     xhr.upload.onprogress = (event: any) => {
         let progress = Math.round(event.lengthComputable ? event.loaded * 100 / event.total : 0);

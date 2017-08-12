@@ -28,16 +28,15 @@ class PagamentoController extends Controller
 
     public function getPagamentosPendentes(Request $request){
         $pagamentos = Pagamento::where('pago', '<>', 1)
-                      ->join('leitores', 'pagamentos.leitor_idLeitor', 'leitores.id')
-                      ->get('pagamentos.*, campos do leitor');
-
-        return response()->json(['pagametos' => $pagamentos], 200);
+                      ->with('leitor')->get();
+                      
+        return response()->json(['pagamentos' => $pagamentos], 200);
     }
 
     public function getPagamentos(Request $request){
         $pagamentos = Pagamento::where('pago', 1)->get();
 
-        return response()->json(['pagametos' => $pagamentos], 200);
+        return response()->json(['pagamentos' => $pagamentos], 200);
     }
 
     public function countPagamentosPendentes(){

@@ -13,7 +13,7 @@ export class PagamentoComponent implements OnInit {
   filtroPendente: string;
   notificacoes;
   pagamentos: Pagamento[];
-  pendentes: Pagamento[];
+  pendentes: any[];
 
   constructor(private _notificacoesService: NotificacoesService, 
               private _pagamentoService: PagamentoService) { }
@@ -25,26 +25,25 @@ export class PagamentoComponent implements OnInit {
 
   getPendentes(){
     this._pagamentoService.getPagamentosPendentes().subscribe(
-      (pendentes: Pagamento[]) => {this.pendentes = pendentes}
+      (pagamentos: Pagamento[]) => {this.pendentes = pagamentos; console.log(pagamentos)}
     )
   }
 
-  /*listPendentes(){
+  listPendentes(){
     if ( this.filtroPendente === undefined || this.pendentes.length === 0 || this.filtroPendente.trim() === ''){
       return this.pendentes;
     }
 
       return this.pendentes.filter((v) => {
-      if (
-        v.cpf.toLocaleLowerCase().indexOf(this.filtroEscritores.toLowerCase()) >= 0 ||
-        v.nome.toLowerCase().indexOf(this.filtroEscritores.toLowerCase()) >= 0 ||
-        v.nick.toLowerCase().indexOf(this.filtroEscritores.toLowerCase()) >= 0 ||
-        v.email.toLowerCase().indexOf(this.filtroEscritores.toLowerCase()) >= 0
+      if (v.leitor.escritor.cpf.toLocaleLowerCase().indexOf(this.filtroPendente.toLowerCase()) >= 0 ||
+          v.leitor.nome.toLowerCase().indexOf(this.filtroPendente.toLowerCase()) >= 0 ||
+          v.leitor.nick.toLowerCase().indexOf(this.filtroPendente.toLowerCase()) >= 0 ||
+          v.leitor.email.toLowerCase().indexOf(this.filtroPendente.toLowerCase()) >= 0 
       ) 
         return true;
       
       return false;
     });
-  }*/
+  }
 
 }

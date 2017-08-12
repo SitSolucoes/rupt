@@ -92,10 +92,12 @@ class EscritorController extends Controller
     public function uploadDocs (Request $request, $id){
         $originalName = $_FILES['file']['name'];
 
-        $ext = '.'.pathinfo($originalName, PATHINFO_EXTENSION);
+        echo json_encode($_FILES);
+
+        /*$ext = '.'.pathinfo($originalName, PATHINFO_EXTENSION);
         $generatedName = "e1".$ext;
         
-        $request->file('file')->move("docs", $generatedName);
+        $request->file('file')->move("docs", $generatedName);*/
 
         return response()->json(['message' => "Escritor alterado com sucesso."], 400);
     }
