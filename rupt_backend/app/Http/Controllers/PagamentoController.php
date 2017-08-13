@@ -20,7 +20,15 @@ class PagamentoController extends Controller
         $pagamento = Pagamento::find($id);
         $pagamento->admin_idAdmin = $request->admin;
         $pagamento->src_comprovante = $request->src_comprovante;
-        $pagamento->pago = true;
+
+        if ($request->data_pagamento){
+            $pagamento->pago = true;
+        }
+        else {
+            $pagamento->pago = true;
+        }
+
+        
         $pagamento->save();
 
         return response()->json(['message' => "salvo."], 200);
@@ -28,13 +36,14 @@ class PagamentoController extends Controller
 
     public function getPagamentosPendentes(Request $request){
         $pagamentos = Pagamento::where('pago', '<>', 1)
-                      ->with('leitor')->get();
+                                ->with('leitor')->get();
                       
         return response()->json(['pagamentos' => $pagamentos], 200);
     }
 
     public function getPagamentos(Request $request){
-        $pagamentos = Pagamento::where('pago', 1)->get();
+        $pagamentos = Pagamento::where('pago', 1)
+                                ->with('leitor')->get();
 
         return response()->json(['pagamentos' => $pagamentos], 200);
     }

@@ -204,7 +204,8 @@ export class EscritoresComponent implements OnInit {
 
       return this.escritores.filter((v) => {
       if (
-        v.cpf.toLocaleLowerCase().replace(/\D/g,'').indexOf(this.filtroEscritores.replace(/\D/g,'').toLowerCase()) >= 0 ||
+        (v.cpf.toLocaleLowerCase().replace(/\D/g,'').indexOf(this.filtroSolicitacoes.toLowerCase().replace(/\D/g,'')) >= 0
+          && this.filtroSolicitacoes.toLowerCase().replace(/\D/g,'').length > 0 ) ||
         v.nome.toLowerCase().indexOf(this.filtroEscritores.toLowerCase()) >= 0 ||
         v.nick.toLowerCase().indexOf(this.filtroEscritores.toLowerCase()) >= 0 ||
         v.email.toLowerCase().indexOf(this.filtroEscritores.toLowerCase()) >= 0
@@ -222,7 +223,8 @@ export class EscritoresComponent implements OnInit {
 
       return this.solicitacoes.filter((v) => {
       if (
-        v.cpf.toLocaleLowerCase().indexOf(this.filtroSolicitacoes.toLowerCase()) >= 0 ||
+        (v.cpf.toLocaleLowerCase().replace(/\D/g,'').indexOf(this.filtroSolicitacoes.toLowerCase().replace(/\D/g,'')) >= 0
+          && this.filtroSolicitacoes.toLowerCase().replace(/\D/g,'').length > 0 ) ||
         v.nome.toLowerCase().indexOf(this.filtroSolicitacoes.toLowerCase()) >= 0 ||
         v.nick.toLowerCase().indexOf(this.filtroSolicitacoes.toLowerCase()) >= 0 ||
         v.email.toLowerCase().indexOf(this.filtroSolicitacoes.toLowerCase()) >= 0
