@@ -16,19 +16,19 @@ class PagamentoController extends Controller
         //terminar o método
     }
 
-    public function update (Request $request, $id){
-        $pagamento = Pagamento::find($id);
-        $pagamento->admin_idAdmin = $request->admin;
-        $pagamento->src_comprovante = $request->src_comprovante;
-
+    public function update (Request $request){
+        $pagamento = Pagamento::find($request->id);
+        $pagamento->admin_idAdmin = $request->admin_idAdmin;
+        
         if ($request->data_pagamento){
             $pagamento->pago = true;
+            $date = str_replace('/', '-', $request->data_pagamento);
+            $pagamento->data_pagamento = date('Y-m-d', strtotime($date));
         }
         else {
-            $pagamento->pago = true;
+            $pagamento->pago = false;
         }
 
-        
         $pagamento->save();
 
         return response()->json(['message' => "salvo."], 200);

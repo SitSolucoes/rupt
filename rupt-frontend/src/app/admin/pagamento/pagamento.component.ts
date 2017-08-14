@@ -1,9 +1,12 @@
+import { UploadFileService } from 'app/services/upload-file.service';
 import { MaterializeAction } from 'angular2-materialize';
 import { PagamentoService } from './../../services/pagamento.service';
 import { Pagamento } from './../../classes/pagamento';
 import { NotificacoesService } from './../../services/notificacoes.service';
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, HostListener } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from "@angular/forms";
+import { UploadItem } from "app/classes/upload-item";
+import { DateBr } from "app/shared/dateBr";
 
 @Component({
   selector: 'app-pagamento',
@@ -25,6 +28,7 @@ export class PagamentoComponent implements OnInit {
 
   constructor(private _notificacoesService: NotificacoesService, 
               private _pagamentoService: PagamentoService,
+              private _uploadFileService: UploadFileService,
               private formBuilder: FormBuilder) { }
 
   ngOnInit() {
@@ -32,6 +36,12 @@ export class PagamentoComponent implements OnInit {
     this.notificacoes = this._notificacoesService.getNotificacoes();
     this.getPendentes();
     this.getPagamentos();
+  }
+
+  @HostListener('window:popstate', ['$event'])
+  onPopState(event) {
+    this.closeMessage();
+    this.closeModal();
   }
 
   createForm(){
@@ -95,10 +105,53 @@ export class PagamentoComponent implements OnInit {
 
       this.formulario.patchValue({
         id: this.pagamento.id,
-        data_pagamento: this.pagamento.data_pagamento
+        data_pagamento: DateBr.convert(this.pagamento.data_pagamento)
       })
 
       this.modalActions.emit({action:"modal",params:['open']});
+  }
+
+  closeModal() {
+    this.modalActions.emit({action:"modal",params:['close']});
+  }
+
+  showMessage(){
+    this.modalMessage.emit({action:"modal",params:['open']});
+  }
+  closeMessage(){
+    this.modalMessage.emit({action:"modal",params:['close']});
+  }
+
+  onSubmit(){
+    this._pagamentoService.update(this.formulario).subscribe(
+        (response: any) => {
+          this.closeModal();
+          this.getPagamentos();
+          this.getPendentes();
+        }
+      );
+
+    //this.uploadFiles();
+  }
+
+  uploadFiles(){
+    let files = new Array();
+    files.push((<HTMLInputElement>window.document.getElementById('doc')).files[0]);
+    
+    let myUploadItem = new UploadItem(files, "pagamento/uploadDoc/"+this.pagamento.id);
+    
+    myUploadItem.formData = { FormDataKey: 'Form Data Value' };  // (optional) form data can be sent with file
+
+    this._uploadFileService.onSuccessUpload = (item, response, status, headers) => {
+          // success callback
+    };
+    this._uploadFileService.onErrorUpload = (item, response, status, headers) => {
+          // error callback
+    };
+    this._uploadFileService.onCompleteUpload = (item, response, status, headers) => {
+          // complete callback, called regardless of success or failure
+    };
+    this._uploadFileService.upload(myUploadItem);
   }
 
 }

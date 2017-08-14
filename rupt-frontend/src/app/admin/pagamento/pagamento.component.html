@@ -1,6 +1,7 @@
 <div id="modal1" class="modal center-sheet" 
      materialize="modal" [materializeParams]="[{dismissible: false}]" 
      [materializeActions]="modalActions">
+    
     <form class="col s12" [formGroup]="formulario" (ngSubmit)="onSubmit()">
         <div class="modal-content">
             <h4 *ngIf="pagamento?.pago == 1">Pagamento</h4>
@@ -29,6 +30,25 @@
                     </div>
                     <div class="row">
                         <div class="input-field col s5">
+                            <input type="text" name="banco" readonly
+                                value="{{ pagamento?.leitor.escritor.banco }}">
+                            <label [ngClass]="{'active': pagamento?.leitor.escritor.banco}" for="banco">Banco</label>
+                        </div>
+                        <div class="input-field col s5 offset-s1">
+                            <input type="text" name="agencia" readonly
+                                value="{{ pagamento?.leitor.escritor.agencia }}">
+                            <label [ngClass]="{'active': pagamento?.leitor.escritor.agencia }" for="agencia">Agência</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s5">
+                            <input type="text" name="conta_corrente" readonly
+                                value="{{ pagamento?.leitor.escritor.conta_corrente }}">
+                            <label [ngClass]="{'active': pagamento?.leitor.escritor.conta_corrente}" for="v">Conta corrente</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s5">
                             <input type="text" name="created_at" readonly
                                 value="{{pagamento?.created_at | date: 'dd/MM/yy'}}">
                             <label [ngClass]="{'active': pagamento?.created_at}" for="created_at">Data de Soliciação</label>
@@ -44,14 +64,16 @@
                         <div class="input-field col s5">
                             <input type="text" name="data_pagamento" formControlName="data_pagamento" mask="00/00/0000">
                             
-                            <label [ngClass]="{'active': pagamento?.data_pagamento}" for="data_pagamento">Data de Pagamento*</label>
+                            <label [ngClass]="{'active': pagamento?.data_pagamento}" for="data_pagamento">
+                                Data de Pagamento<span *ngIf="pagamento?.pago == 0" >*</span>
+                            </label>
                         </div>
                         
                     </div>
                     <div class="file-field input-field col s11">
                         <div class="btn">
                             <span>Comprovante de pagamento</span>
-                            <input type="file" accept="image/*" id="doc0">
+                            <input type="file" accept="image/*" id="doc">
                         </div>
                         <div class="file-path-wrapper">
                             <input class="file-path" type="text" >
@@ -61,10 +83,24 @@
             </div>
         </div>
         <div class="modal-footer">
-                <button type="submit" [disabled]="!formulario.valid" class="modal-action modal-close waves-effect waves-green btn-flat">Salvar</button>
-                <a (click)="closeModal()" class="modal-action modal-close waves-effect waves-green btn-flat ">Fechar</a>
+            <a (click)="closeModal()" class="modal-action modal-close waves-effect waves-green btn-flat ">Fechar</a>    
+            <button type="submit" class="modal-action modal-close waves-effect waves-green btn-flat"
+                    [disabled]="!formulario.valid" *ngIf="pagamento?.pago == 0" >
+                    Salvar
+                </button>
+                
         </div>
     </form>
+</div>
+
+<div id="modalMessage" class="modal center-sheet small-modal" materialize="modal" [materializeParams]="[{dismissible: true}]" [materializeActions]="modalMessage">
+    <div class="modal-content">
+        <h4><i class="material-icons">check_circle</i></h4>
+        <h4>Salvo com sucesso.</h4>
+        <div class="small-modal-footer">
+            <a class="modal-action modal-close waves-effect waves-green btn-flat ">Fechar</a>
+        </div>
+    </div>
 </div>
 
 <div class="title">
@@ -218,7 +254,7 @@
                     Pago
                 </div>
                 <div class="option-icons col s2 m2 l1 xl1 right-align item">
-                    <div class="margin-right-1">Editar</div>
+                    <div class="margin-right-1">Ver</div>
                 </div>
             </div>
         </li>
@@ -240,7 +276,7 @@
                     {{ pagamento.created_at | date:"dd/MM/yyyy" }}
                 </div>
                 <div class="option-icons col s2 m2 l1 xl1">
-                    <i class="material-icons" (click)="openModalEdit(pagamento)">edit</i>
+                    <i class="material-icons" (click)="openModalEdit(pagamento)">visibility</i>
                 </div>
             </div>
         </li>
@@ -248,7 +284,7 @@
 
     <ul class="pages" *ngIf="listPagamentos() != false">
         <li>
-            <pagination-controls (pageChange)="page = $event" id="pagamento"
+            <pagination-controls (pageChange)="page = $event" id="pagamentos"
                 maxSize="5"
                 directionLinks="true"
                 autoHide="false"
