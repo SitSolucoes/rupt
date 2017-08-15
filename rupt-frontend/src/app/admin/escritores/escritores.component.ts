@@ -204,7 +204,8 @@ export class EscritoresComponent implements OnInit {
 
       return this.escritores.filter((v) => {
       if (
-        v.cpf.toLocaleLowerCase().replace(/\D/g,'').indexOf(this.filtroEscritores.replace(/\D/g,'').toLowerCase()) >= 0 ||
+        (v.cpf.toLocaleLowerCase().replace(/\D/g,'').indexOf(this.filtroSolicitacoes.toLowerCase().replace(/\D/g,'')) >= 0
+          && this.filtroSolicitacoes.toLowerCase().replace(/\D/g,'').length > 0 ) ||
         v.nome.toLowerCase().indexOf(this.filtroEscritores.toLowerCase()) >= 0 ||
         v.nick.toLowerCase().indexOf(this.filtroEscritores.toLowerCase()) >= 0 ||
         v.email.toLowerCase().indexOf(this.filtroEscritores.toLowerCase()) >= 0
@@ -222,7 +223,8 @@ export class EscritoresComponent implements OnInit {
 
       return this.solicitacoes.filter((v) => {
       if (
-        v.cpf.toLocaleLowerCase().indexOf(this.filtroSolicitacoes.toLowerCase()) >= 0 ||
+        (v.cpf.toLocaleLowerCase().replace(/\D/g,'').indexOf(this.filtroSolicitacoes.toLowerCase().replace(/\D/g,'')) >= 0
+          && this.filtroSolicitacoes.toLowerCase().replace(/\D/g,'').length > 0 ) ||
         v.nome.toLowerCase().indexOf(this.filtroSolicitacoes.toLowerCase()) >= 0 ||
         v.nick.toLowerCase().indexOf(this.filtroSolicitacoes.toLowerCase()) >= 0 ||
         v.email.toLowerCase().indexOf(this.filtroSolicitacoes.toLowerCase()) >= 0
@@ -431,9 +433,12 @@ export class EscritoresComponent implements OnInit {
   }
 
   uploadFiles(form, id){
-    let file = (<HTMLInputElement>window.document.getElementById('file')).files[0];
+    let files = new Array();
+    files.push((<HTMLInputElement>window.document.getElementById('doc0')).files[0]);
+    files.push((<HTMLInputElement>window.document.getElementById('doc1')).files[0]);
+    files.push((<HTMLInputElement>window.document.getElementById('doc2')).files[0]);
 
-    let myUploadItem = new UploadItem(file, "escritor/uploadDocs/"+5);
+    let myUploadItem = new UploadItem(files, "escritor/uploadDocs/"+id);
     
     myUploadItem.formData = { FormDataKey: 'Form Data Value' };  // (optional) form data can be sent with file
 

@@ -35,13 +35,14 @@ export class PagamentoService {
     );
   }
 
-  update(form, id){
+  update(form){
     const body = JSON.stringify({
       admin_idAdmin: localStorage.getItem("admin_id"),
-      src_comprovante: form.value.src_comprovante,	
+      id: form.value.id,	
+      data_pagamento: form.value.data_pagamento,
     });
 
-    return this._http.post(this._url + 'updateLeitor/'+id, body, {headers: this.headers}).map(
+    return this._http.post(this._url + 'pagamento/update', body, {headers: this.headers}).map(
     (response: Response)=>{
       response.json()
     });

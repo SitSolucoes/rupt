@@ -36,14 +36,14 @@
       <div class="col s12 m6 l4 xl3">
         <div class="card"
           [ngClass]="{
-          'green': notificacoes['escritores'] > 0,
+          'purple darken-1': notificacoes['escritores'] > 0,
           'grey darken-1': notificacoes['escritores'] == 0
           }"
         >
           <div class="card-content white-text">
             <i class="material-icons">person_add</i>
             <span class="card-title">
-              Solicitações
+              Colaboradores
             </span>
             
             <p *ngIf="notificacoes['escritores'] > 1">
@@ -60,6 +60,35 @@
         </div>
       </div>
     </a>
+    
+    <a routerLink="../pagamentos">
+      <div class="col s12 m6 l4 xl3">
+        <div class="card"
+          [ngClass]="{
+          'green': notificacoes['pagamentos'] > 0,
+          'grey darken-1': notificacoes['pagamentos'] == 0
+          }"
+        >
+          <div class="card-content white-text">
+            <i class="material-icons">attach_money</i>
+            <span class="card-title">
+              Pagamentos
+            </span>
+            
+            <p *ngIf="notificacoes['pagamentos'] > 1">
+              Existem {{ notificacoes["pagamentos"] }} solicitações de pagamentos
+            </p>
+            <p *ngIf="notificacoes['pagamentos'] == 1">
+              Existe 1 solicitação de pagamentos
+            </p>
+            <p *ngIf="notificacoes['pagamentos'] == 0">
+              Não existem solicitações de pagamentos
+            </p>
+          </div>
+        </div>
+      </div>
+    </a>
+
     <a routerLink="../mensagens" >
       <div class="col s12 m6 l4 xl3">
         <div class="card"

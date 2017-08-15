@@ -76,7 +76,7 @@ export class EscritoresService {
 
   updateEscritor(form, id){
     const body = this.createBody(form);
-    
+
     return this._http.put(this._url + 'updateEscritor/'+id, body, {headers: this.headers}).map(
     (response: Response)=>{
       response.json()

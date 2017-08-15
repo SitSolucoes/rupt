@@ -1,3 +1,4 @@
+import { CurrencyFormatPipe } from './shared/currency-format-pipe.pipe';
 import { PagamentoService } from './services/pagamento.service';
 import { UploadFileService } from './services/upload-file.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -17,6 +18,7 @@ import { InternetModule } from "app/internet/internet.module";
 @NgModule({
   declarations: [
     AppComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -27,7 +29,8 @@ import { InternetModule } from "app/internet/internet.module";
     RuptRoutingModule,
     MaterializeModule,
     BrowserAnimationsModule,
-    InputMaskModule
+    InputMaskModule,
+    
   ],
   providers: [
     AuthGuard,

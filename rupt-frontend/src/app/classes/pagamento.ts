@@ -1,3 +1,4 @@
+import { Escritor } from './escritor';
 export class Pagamento {
     id: number;	
     valor: number;	
@@ -5,4 +6,6 @@ export class Pagamento {
     admin_idAdmin: number;	
     src_comprovante: string;	
     pago: boolean;
+
+    escritor: Escritor;
 }

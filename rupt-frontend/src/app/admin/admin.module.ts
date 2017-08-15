@@ -1,8 +1,9 @@
+import { CurrencyFormatPipe } from './../shared/currency-format-pipe.pipe';
 
 import { MasksDirective } from './../shared/masks.directive';
 import { CategoriasService } from './../services/categorias.service';
 import { CpfCnpjPipe } from './../shared/cpf-cnpj.pipe';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login/login.component';
@@ -53,7 +54,8 @@ import { PagamentoComponent } from './pagamento/pagamento.component';
     CpfCnpjPipe,
     ListaCategoriasComponent,
     MasksDirective,
-    PagamentoComponent
+    PagamentoComponent,
+    CurrencyFormatPipe
   ],
 
   imports: [
@@ -63,7 +65,7 @@ import { PagamentoComponent } from './pagamento/pagamento.component';
     FormsModule,
     AdminRoutingModule,
     InputMaskModule,
-    
+    ReactiveFormsModule,
   ],
   exports: [
     LoginComponent
