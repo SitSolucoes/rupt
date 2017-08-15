@@ -52,4 +52,19 @@ class PagamentoController extends Controller
         $count = Pagamento::where('pago', '<>', 1)->count();
         return response()->json(['countPagamentos' => $count]);
     }
+
+    public function uploadDoc (Request $request, $id){
+        $originalName = $_FILES['file']['name'];
+
+        $ext = '.'.pathinfo($originalName, PATHINFO_EXTENSION);
+        $generatedName = "comprovante_".$id.$ext;
+        
+        $request->file('file')->move("docs", $generatedName);
+
+        $pagamento = Pagamento::find($id);
+        $pagamento->src_comprovante = $generatedName;
+        $pagamento->save();
+
+        return response()->json(['message' => "Upload."], 201);
+    }
 }

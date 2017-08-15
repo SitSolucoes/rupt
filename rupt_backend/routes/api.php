@@ -167,3 +167,4 @@ Route::post('pagamento/update', ['uses' => 'PagamentoController@update']);
 Route::get('pagamento/getPagamentos', ['uses' => 'PagamentoController@getPagamentos']);
 Route::get('pagamento/getPagamentosPendentes', ['uses' => 'PagamentoController@getPagamentosPendentes']);
 Route::get('pagamento/countPagamentosPendentes', ['uses' => 'PagamentoController@countPagamentosPendentes']);
+Route::post('pagamento/uploadDoc/{id}', ['uses' => 'PagamentoController@uploadDoc']);
