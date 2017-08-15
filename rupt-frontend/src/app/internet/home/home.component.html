@@ -1,23 +1,8 @@
-<html>
-    <head>
-     <title> Rupt </title>
-        <meta charset="UTF-8">
-        <link type="text/css" rel="stylesheet" href="materialize.min.css"  media="screen,projection"/>
-        <script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
-        <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
-        <link rel="stylesheet" type="text/css" href="slick/slick.css">
-        <link rel="stylesheet" type="text/css" href="slick/slick-theme.css">
-        <link href="home.component.css" rel="stylesheet" type="text/css" />
-
-        <link rel="icon" href="../../../assets/img/favicon.png" type="image/gif" sizes="50x50">
-    </head>
-    <body>
-
-    <div class="headbar">
+<div class="headbar">
 
         <img src="../../../assets/img/logo.png" class="img2">
 
-        <div class="title"> preferências </div>
+        <div class="title" (click)="metodo()"> preferências </div>
 
         <div class="title"> categorias </div>
 
@@ -38,7 +23,7 @@
         </div>
 
     </div>
-
+</div>
     <div id="modal1" class="modal">
         <div class="modal-content">
             <div class="title"> Cadastre-se  <a href="#" class=" modal-action modal-close close">x</a> </div>
@@ -117,8 +102,6 @@
             <a href="#"><div class="button"> cancelar </div></a>
         </div>
         </div>
-
-    </div>
 
     <div id="modal2" class="modal">
         <div class="modal-content">
@@ -199,7 +182,7 @@
         <div class="modal-footer">
 
             <a href="#"><div class="button color"> salvar </div></a>
-            <a href="#"<div class="button"> limpar </div></div>
+            <a href="#"><div class="button"> limpar </div></a>
 
     </div>
 
@@ -870,7 +853,7 @@
 
         <div class="container">
 
-        <div class="categoria"> Sobre </div>
+        <div class="categoria" > Sobre </div>
 
         <div class="info"> Automoveis </div>
 
@@ -888,13 +871,13 @@
 
     <script src="./slick/slick.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
-    <script type="text/javascript" src="js/materialize.min.js"></script>
-				  <script type="text/javascript">
+    
+    <script type="text/javascript">
     $(document).on('ready', function() {
       $(".regular").slick({
         dots: false,
         infinite: false,
-                slidesToShow: 3,
+        slidesToShow: 3,
         slidesToScroll: 3
       });
       $(".center").slick({
@@ -912,17 +895,4 @@
   </script>
 
 
-    </body>
 
-    <script>
-
-        $(document).ready(function(){
-
-            // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
-            $('.modal').modal({
-                opacity: .8, // Opacity of modal background
-            });
-        });
-    </script>
-
-</html>

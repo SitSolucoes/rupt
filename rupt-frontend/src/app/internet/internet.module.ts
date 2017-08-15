@@ -3,12 +3,16 @@ import { CommonModule } from '@angular/common';
 
 import { InternetRoutingModule } from './internet-routing.module';
 import { HomeComponent } from './home/home.component';
+import { ContatoComponent } from './contato/contato.component';
 
-@NgModule({
+@NgModule({ 
   imports: [
     CommonModule,
     InternetRoutingModule
   ],
-  declarations: [HomeComponent]
+  declarations: [
+    HomeComponent,
+    ContatoComponent
+  ]
 })
 export class InternetModule { }
