@@ -1,0 +1,34 @@
+<div id="ModalCadastro" class="modal" 
+     materialize="modal" [materializeParams]="[{dismissible: false}]" 
+     [materializeActions]="modalActions">
+    <modal-cadastro-leitor></modal-cadastro-leitor>
+</div>
+<div class="headbar">
+  
+          <img src="../../../assets/img/logo.png" class="img2">
+  
+          <div class="title"> preferências </div>
+  
+          <div class="title"> categorias </div>
+  
+          <div class="title"> contato </div>
+  
+          <div class="headbar-right">
+  
+              <a href="#modal2">  <div class="login login-border"> Entrar </div> </a>
+  
+            <a (click)="openModal()">  
+                <div class="login login-border"> 
+                      Cadastre-se 
+                </div> 
+            </a>
+  
+              <img src="../../../assets/img/search.png" class="img3">
+  
+              <div class="login"> | </div>
+  
+              <img src="../../../assets/img/toggle.png" class="img">
+  
+          </div>
+  
+      </div>
