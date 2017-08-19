@@ -1,3 +1,4 @@
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterializeModule } from 'angular2-materialize';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -12,7 +13,9 @@ import { ModalCadastroLeitorComponent } from './modal-cadastro-leitor/modal-cada
   imports: [
     CommonModule,
     InternetRoutingModule,
-    MaterializeModule
+    MaterializeModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   declarations: [
     HomeComponent,
