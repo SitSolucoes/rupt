@@ -1,4 +1,4 @@
-<form [formGroup]='form'>
+<form [formGroup]='form' (ngSubmit)="onSubmit()">
     <div class="modal-content">
         <div class="title"> 
         Cadastre-se 
@@ -24,50 +24,36 @@
             <p> ou crie uma conta </p>
 
             <div class="register">
-                
                 <div class="box">
+                    <div class="title2 clear"> Foto: </div>
+                    <input type="file" accept="image/*" id="src_foto" formControlName="src_foto">
+
+                    <div class="title2">Email:</div>
+                    <input class="button" type="text" formControlName="email"/>
 
                     <div class="title2">Nome:</div>
-
                     <input class="button" type="text" formControlName="nome"/>
 
                     <div class="title2"> Nick: </div>
-
                     <input class="button" type="text" formControlName="nick"/>
 
                     <div class="title2"> Sexo: </div>
-
-                    <select class="button button2">
+                    <select class="button button2" formControlName="sexo">
                             <option *ngFor="let option of selectOptions" [value]="option.value">{{option.name}}</option>
                     </select>
                 </div>
-
                 <div class="box">
-
-                    <div class="title2"> Idade: </div>
-
-                    <select class="button button2">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select>
-
-                    <div class="title2 clear"> Apelido: </div>
-
-                    <input class="button" type="text"/>
-
+                    <div class="title2"> Data de Nascimento: </div>  
+                    <input class="button" type="text" formControlName="nascimento"/>
                     <div class="title2"> Senha: </div> 
-
-                    <input class="button" type="password"/>
+                    <input class="button" type="password" formControlName="senha"/>
                 </div>
                 
             </div>
         </div>
-
     </div>
     <div class="modal-footer">
-    <a href="#"><div class="button color"> cadastrar </div></a>
-    <a href="#"><div class="button"> cancelar </div></a>
+        <button type="submit" class="button color"> cadastrar </button>
+        <a href="#"><div class="button"> cancelar </div></a>
     </div>
 </form>
