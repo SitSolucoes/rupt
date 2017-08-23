@@ -1,0 +1,73 @@
+<form [formGroup]='form'>
+    <div class="modal-content">
+        <div class="title"> 
+        Cadastre-se 
+        <a href="" class=" modal-action modal-close close">x</a> 
+        </div>
+
+        <div class="info">
+    
+            <p> Cadastrado na RUPT, você só tem a ganhar! </p>
+
+            <div class="subtitle">
+                Estando cadastrado, você consegue visualizar todas as notícias publicadas pelos Escritores e mais, caso você tenha interesse, poderá se tornar um Escritor e ganhar dinheiro com as suas publicaçõe! Leia o <a href="#">Contrato</a> e a <a href="#">Política de Privacidade</a> ou para maiores informações <a href="#">clique aqui </a>
+            </div>
+
+            <p> Cadastre-se utilizando as redes sociais </p>
+
+            <img src="../../../assets/img/face2.png" class="img">
+
+            <img src="../../../assets/img/google2.png" class="img">
+
+            <img src="../../../assets/img/twitter2.png" class="img">
+
+            <p> ou crie uma conta </p>
+
+            <div class="register">
+                
+                <div class="box">
+
+                    <div class="title2">Nome:</div>
+
+                    <input class="button" type="text" formControlName="nome"/>
+
+                    <div class="title2"> Nick: </div>
+
+                    <input class="button" type="text" formControlName="nick"/>
+
+                    <div class="title2"> Sexo: </div>
+
+                    <select class="button button2">
+                            <option *ngFor="let option of selectOptions" [value]="option.value">{{option.name}}</option>
+                    </select>
+                </div>
+
+                <div class="box">
+
+                    <div class="title2"> Idade: </div>
+
+                    <select class="button button2">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+
+                    <div class="title2 clear"> Apelido: </div>
+
+                    <input class="button" type="text"/>
+
+                    <div class="title2"> Senha: </div> 
+
+                    <input class="button" type="password"/>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+    <a href="#"><div class="button color"> cadastrar </div></a>
+    <a href="#"><div class="button"> cancelar </div></a>
+    </div>
+</form>
