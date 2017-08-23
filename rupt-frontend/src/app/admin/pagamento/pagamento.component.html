@@ -70,7 +70,7 @@
                         </div>
                         
                     </div>
-                    <div class="file-field input-field col s11">
+                    <div class="file-field input-field col s11" *ngIf="pagamento?.pago != 1">
                         <div class="btn">
                             <span>Comprovante de pagamento</span>
                             <input type="file" accept="image/*" id="doc">
@@ -79,6 +79,7 @@
                             <input class="file-path" type="text" >
                         </div>
                     </div>
+                    <img materialize="materialbox" class="responsive-img" width="250" src="http://localhost/rupt/rupt_backend/public/docs/comprovante_1.jpg" *ngIf="pagamento?.pago == 1">
                 </div>
             </div>
         </div>

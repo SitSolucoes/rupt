@@ -67,6 +67,7 @@ export class EscritoresComponent implements OnInit {
   filtroSolicitacoes: string;
   mensagem: string;
   mensagemConfirm: string;
+  mensagemErro: string = '';
   namePage: string[] = ["Dados Pessoais", "Endereço", "Dados Bancários", "Senha"];
   
   newPage: number = 1;
@@ -140,6 +141,7 @@ export class EscritoresComponent implements OnInit {
     this.recusar = false;
     this.newPage = 1;
     this.idLeitor = 0;
+    this.mensagemErro = '';
   }
 
   openModal(f: NgForm){
@@ -180,7 +182,7 @@ export class EscritoresComponent implements OnInit {
 
   getUf(){
     if(this.escritor.uf)
-      return this.selectBancos.filter(uf => uf.value == this.escritor.uf)[0].name;
+      return this.selectEstados.filter(uf => uf.value == this.escritor.uf)[0].name;
     else
       return "";
   }
@@ -387,26 +389,35 @@ export class EscritoresComponent implements OnInit {
   }
 
   onSubmit(form){
-    if (this.escritor.id == 0 || this.idLeitor != 0){
-      this._escritoresService.createEscritor(form, this.escritor.id).subscribe(
-        (response: any) => {
-          this.uploadFiles(form, response);
-        }
-      );
-    }
-    else if (this.recusar){
-      this._escritoresService.recusarEscritor(form.value.motivo_recusa, this.escritor.id).subscribe(
-        (response: any) => {
-          this.afterSubmit("Recusado com sucesso");
-        }
-      );
-    }
+    this.mensagemErro = "";
+
+    if (!(<HTMLInputElement>window.document.getElementById('doc0')).files[0] ||
+        !(<HTMLInputElement>window.document.getElementById('doc1')).files[0] ||
+        !(<HTMLInputElement>window.document.getElementById('doc2')).files[0])
+          this.mensagemErro = "Inclua as imagens dos documentos.";
+
     else {
-      this._escritoresService.updateEscritor(form, this.escritor.id).subscribe(
-        (response: any) => {
-          this.uploadFiles(form, this.escritor.id);
-        }
-      );
+      if (this.escritor.id == 0 || this.idLeitor != 0){
+        this._escritoresService.createEscritor(form, this.escritor.id).subscribe(
+          (response: any) => {
+            this.uploadFiles(form, response);
+          }
+        );
+      }
+      else if (this.recusar){
+        this._escritoresService.recusarEscritor(form.value.motivo_recusa, this.escritor.id).subscribe(
+          (response: any) => {
+            this.afterSubmit("Recusado com sucesso");
+          }
+        );
+      }
+      else {
+        this._escritoresService.updateEscritor(form, this.escritor.id).subscribe(
+          (response: any) => {
+            this.uploadFiles(form, this.escritor.id);
+          }
+        );
+      }
     }
   }
 
