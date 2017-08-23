@@ -1,3 +1,4 @@
+import { ConnectionFactory } from 'app/classes/connection-factory';
 import { UploadFileService } from 'app/services/upload-file.service';
 import { MaterializeAction } from 'angular2-materialize';
 import { PagamentoService } from './../../services/pagamento.service';
@@ -8,6 +9,9 @@ import { FormGroup, Validators, FormBuilder } from "@angular/forms";
 import { UploadItem } from "app/classes/upload-item";
 import { DateBr } from "app/shared/dateBr";
 
+
+import * as $ from 'jquery';
+
 @Component({
   selector: 'app-pagamento',
   templateUrl: './pagamento.component.html',
@@ -17,12 +21,15 @@ export class PagamentoComponent implements OnInit {
   filtroPagamento: string;
   filtroPendente: string;
   notificacoes;
+  formulario: FormGroup;
+  url = ConnectionFactory.API_IMAGEM;
+
+  //classes
   pagamento;
   pagamentos: any[];
   pendentes: any[];
 
-  formulario: FormGroup;
-
+  //modal
   modalMessage = new EventEmitter<string|MaterializeAction>();
   modalActions = new EventEmitter<string|MaterializeAction>();
 
@@ -32,11 +39,15 @@ export class PagamentoComponent implements OnInit {
               private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    //(<any>$(".materialboxed")).materialbox();
+
     this.createForm();
     this.notificacoes = this._notificacoesService.getNotificacoes();
     this.getPendentes();
     this.getPagamentos();
   }
+
+  
 
   @HostListener('window:popstate', ['$event'])
   onPopState(event) {
@@ -118,6 +129,7 @@ export class PagamentoComponent implements OnInit {
   showMessage(){
     this.modalMessage.emit({action:"modal",params:['open']});
   }
+
   closeMessage(){
     this.modalMessage.emit({action:"modal",params:['close']});
   }
@@ -128,10 +140,11 @@ export class PagamentoComponent implements OnInit {
           this.closeModal();
           this.getPagamentos();
           this.getPendentes();
+          this.notificacoes = this._notificacoesService.getNotificacoes();
         }
       );
 
-    //this.uploadFiles();
+    this.uploadFiles();
   }
 
   uploadFiles(){
@@ -139,7 +152,7 @@ export class PagamentoComponent implements OnInit {
     files.push((<HTMLInputElement>window.document.getElementById('doc')).files[0]);
     
     let myUploadItem = new UploadItem(files, "pagamento/uploadDoc/"+this.pagamento.id);
-    
+
     myUploadItem.formData = { FormDataKey: 'Form Data Value' };  // (optional) form data can be sent with file
 
     this._uploadFileService.onSuccessUpload = (item, response, status, headers) => {
@@ -152,6 +165,8 @@ export class PagamentoComponent implements OnInit {
           // complete callback, called regardless of success or failure
     };
     this._uploadFileService.upload(myUploadItem);
+
+    this.showMessage();
   }
 
 }

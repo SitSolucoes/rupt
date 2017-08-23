@@ -158,16 +158,16 @@
                     <div class="file-field input-field">
                         <div class="btn col s5">
                             <span>Frente do documento</span>
-                            <input type="file" accept="image/*" id="doc0">
+                            <input type="file" accept="image/*" id="doc0" required>
                         </div>
                         <div class="file-path-wrapper">
-                            <input class="file-path" type="text" >
+                            <input class="file-path" type="text" required>
                         </div>
                     </div>
                     <div class="file-field input-field">
                         <div class="btn col s5">
                             <span>Verso do documento</span>
-                            <input type="file" accept="image/*" id="doc1">
+                            <input type="file" accept="image/*" id="doc1" required>
                         </div>
                         <div class="file-path-wrapper">
                             <input class="file-path" type="text">
@@ -176,7 +176,7 @@
                     <div class="file-field input-field">
                         <div class="btn col s5">
                             <span>Selfie</span>
-                            <input type="file" accept="image/*" id="doc2">
+                            <input type="file" accept="image/*" id="doc2" required>
                         </div>
                         <div class="file-path-wrapper">
                             <input class="file-path" type="text" >
@@ -361,10 +361,20 @@
             </div>   
         </div>
 
+        <div class="mensagem-area" *ngIf="mensagemErro != ''">
+            <div class="input-field col s12 ">
+                <div class="card red" role="alert">
+                    <div class="card-content white-text">
+                        {{ mensagemErro }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="modal-footer" *ngIf="escritor.data_aceite || escritor.id == 0 || idLeitor != 0">
             <a (click)="closeModal()" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
             
-            <button *ngIf="newPage == 4 || (escritor.id != 0 && idLeitor == 0)"  type="submit" class="modal-action modal-close waves-effect waves-green btn-flat"
+            <button *ngIf="newPage == 4 || (escritor.id != 0 && idLeitor == 0)"  type="submit" class="modal-action waves-effect waves-green btn-flat"
                 [disabled]="!f.valid || cpfUsado || cpfInvalido || emailInvalido || nickInvalido || dataInvalida || !senhaValida">
                 Salvar
             </button>           

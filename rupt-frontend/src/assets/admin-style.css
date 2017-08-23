@@ -91,6 +91,10 @@ h4{
 	border: 1px solid red;
 }
 
+.responsive-img{
+	cursor: pointer;
+}
+
 /* alertas */
 .card .card-content {
 	padding: 5px;
@@ -392,6 +396,10 @@ span.badge.new:after {
 	padding-left: 24px;
 }
 
+.modal .card{
+	height: auto;
+}
+
 /*spinner*/
 .spinner{
 	padding-bottom: 22px;
@@ -667,6 +675,11 @@ span.badge.new:after {
 }
 
 .recusado{
+	color: red;
+}
+
+.mensagem-area{
+	padding-left: 24px;
 	color: red;
 }
 
