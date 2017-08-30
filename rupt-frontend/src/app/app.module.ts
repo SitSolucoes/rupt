@@ -13,6 +13,20 @@ import { MaterializeModule } from 'angular2-materialize';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InputMaskModule } from 'ng2-inputmask';
 import { InternetModule } from "app/internet/internet.module";
+import { Angular2SocialLoginModule } from "angular2-social-login";
+
+let providers = {
+   "google": {
+     "clientId": "GOOGLE_CLIENT_ID"
+   },
+   "linkedin": {
+     "clientId": "LINKEDIN_CLIENT_ID"
+   },
+   "facebook": {
+     "clientId": "FACEBOOK_CLIENT_ID",
+     "apiVersion": "<version>" //like v2.4 
+   }
+ };
 
 
 @NgModule({
@@ -30,7 +44,7 @@ import { InternetModule } from "app/internet/internet.module";
     MaterializeModule,
     BrowserAnimationsModule,
     InputMaskModule,
-    
+    Angular2SocialLoginModule
   ],
   providers: [
     AuthGuard,
@@ -44,3 +58,4 @@ import { InternetModule } from "app/internet/internet.module";
   bootstrap: [AppComponent],
 })
 export class AppModule { }
+Angular2SocialLoginModule.loadProvidersScripts(providers);
