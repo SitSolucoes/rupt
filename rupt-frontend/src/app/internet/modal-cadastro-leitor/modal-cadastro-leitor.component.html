@@ -2,7 +2,7 @@
     <div class="modal-content">
         <div class="title"> 
         Cadastre-se 
-        <a href="" class=" modal-action modal-close close">x</a> 
+        <a click="#" class=" modal-action modal-close close">x</a> 
         </div>
 
         <div class="info">
@@ -25,28 +25,34 @@
 
             <div class="register">
                 <div class="box">
-                    <div class="title2 clear"> Foto: </div>
-                    <input type="file" accept="image/*" id="src_foto" formControlName="src_foto">
-
-                    <div class="title2">Email:</div>
-                    <input class="button" type="text" formControlName="email"/>
-
+                    
                     <div class="title2">Nome:</div>
                     <input class="button" type="text" formControlName="nome"/>
 
-                    <div class="title2"> Nick: </div>
-                    <input class="button" type="text" formControlName="nick"/>
+                    <div class="title2">Email:</div>
+                    <input class="button" type="text" formControlName="email"/>
 
                     <div class="title2"> Sexo: </div>
                     <select class="button button2" formControlName="sexo">
                             <option *ngFor="let option of selectOptions" [value]="option.value">{{option.name}}</option>
                     </select>
+
+                    <div class="title2 clear"> Foto: </div>
+                    <input type="file" accept="image/*" id="src_foto" formControlName="src_foto">
+
                 </div>
                 <div class="box">
-                    <div class="title2"> Data de Nascimento: </div>  
-                    <input class="button" type="text" formControlName="nascimento"/>
+
+                    <div class="title2"> Nick: </div>
+                    <input class="button" type="text" formControlName="nick"/>    
+
                     <div class="title2"> Senha: </div> 
                     <input class="button" type="password" formControlName="senha"/>
+
+                    <div class="title2"> Data de Nascimento: </div>  
+                    <input class="button" type="text" formControlName="nascimento"/>
+
+
                 </div>
                 
             </div>
