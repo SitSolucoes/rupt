@@ -372,7 +372,7 @@ body{
 
 .container-categoria .img-container{
     position: relative;
-    left: 190px;
+    left: 170px;
     bottom: 290px;
     width: 200px;
 }
@@ -803,6 +803,7 @@ body{
     width: 200px !important;
     height: 20px !important;
     font-family: 'gilroy';
+    background: transparent;
     font-weight: bold;
     color: #363636;
     font-size: 17px !important;
@@ -857,6 +858,59 @@ body{
     border: 1px solid #f97000;
     color: #ffffff;
 }
+
+.faq{
+    float: left;
+    width: 100%;
+}
+
+.faq .title{
+    display: block;
+    float: left;
+    width: 30%;
+    margin-bottom: 120px;
+    font-family: 'nexa-bold';
+    text-transform: uppercase;
+    font-size:30px;
+    color: #4B4949;
+    position: relative;
+    left: 70px;
+    top: 60px;
+}
+
+.faq .underline{
+    background: #f97000;
+    height: 3px;
+    width: 50px;
+}
+
+.faq .img-logo{
+  display: block;
+  float: right;
+  margin-right: 70px;
+  height: 150px;
+  margin-top: 50px;
+}
+
+.faq .collapsible{
+   display: block;
+   float: left;
+   width: 90%;
+   position: relative;
+   left: 70px;
+   clear: both;
+}
+
+.faq .collapsible .img{
+  height: 15px;
+  margin-right: 10px;
+}
+
+.faq .collapsible-header{
+  font-size: 20px;
+}
+
+/*---------------- materialize ---------- */
 
 [type="radio"]:not(:checked), [type="radio"]:checked{
     opacity: .9;

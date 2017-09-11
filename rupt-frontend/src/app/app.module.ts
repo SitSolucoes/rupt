@@ -31,7 +31,7 @@ let providers = {
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
     
   ],
   imports: [
