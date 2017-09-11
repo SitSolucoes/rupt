@@ -161,15 +161,16 @@ body{
 .banner-promo .container{
     width: 90%;
     margin-left: 5%;
+    margin-top: 15px;
     height: 100%;
     background: url('/assets/img/banner-pat.png');
     background-repeat:repeat;
+    overflow: hidden;
 }
 
 .banner-promo .img{
     display: block;
     margin: 0 auto;
-    margin-top: 15px;
     height: auto;
 }
 
@@ -725,7 +726,7 @@ body{
 .modal-content .info p{
     text-align: center;
     font-weight: bold;
-    font-size: 17px;
+    font-size: 19px;
     color: #4f4f4f;
     margin-bottom: 15px;
     clear: both;
@@ -739,9 +740,9 @@ body{
     margin-right: 40px;
     margin-left: 40px;
     margin-bottom: 15px;
-    font-size: 15px;
+    font-size: 16px;
     font-family: 'gilroy';
-    line-height: 22px;
+    line-height: 25px;
     font-weight: bold;
     color: #696969;
     text-align: center;
@@ -776,9 +777,6 @@ body{
     text-align: left;
     font-weight: bold;
     font-size: 16px;
-    margin-bottom: 20px;
-    width: 100px;
-    text-align: right;
     margin-right: 10px;
     color: #4d4d4d;
 }
@@ -788,6 +786,7 @@ body{
     width: 46%;
     float: left;
     padding-left: 50px;
+    padding-right: 10px;
 }
 
 .clear{
@@ -797,16 +796,16 @@ body{
 .modal-content .button{
     display: block;
     float: left;
-    padding: 8px;
-    border-bottom: 1px solid #ccc;
-    border: none;
+    padding: 8px !important;
+    padding-left: 2px !important;
+    border-bottom: 1px solid #ccc !important;
     width: 200px !important;
     height: 20px !important;
     font-family: 'gilroy';
     background: transparent;
     font-weight: bold;
     color: #363636;
-    font-size: 17px !important;
+    font-size: 19px !important;
 }
 
 .modal-content .button2{
@@ -862,6 +861,7 @@ body{
 .faq{
     float: left;
     width: 100%;
+    margin-bottom: 60px;
 }
 
 .faq .title{
