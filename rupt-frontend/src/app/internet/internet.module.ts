@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { InternetRoutingModule } from './internet-routing.module';
 import { HomeComponent } from './home/home.component';
 import { FaqComponent } from './faq/faq.component';
+import { UserComponent } from './user/user.component';
 import { ContatoComponent } from './contato/contato.component';
 import { HeaderComponent } from './header/header.component';
 import { ModalCadastroLeitorComponent } from './modal-cadastro-leitor/modal-cadastro-leitor.component';
@@ -21,6 +22,7 @@ import { ModalCadastroLeitorComponent } from './modal-cadastro-leitor/modal-cada
   declarations: [
     FaqComponent,
     HomeComponent,
+    UserComponent,
     ContatoComponent,
     HeaderComponent,
     ModalCadastroLeitorComponent

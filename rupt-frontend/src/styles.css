@@ -26,7 +26,7 @@ body{
     width: 100%;
     padding: 0px;
     margin: 0px;
-    background: #f4f4f4;
+    background: #E8E8E8;
 }
 
 
@@ -39,19 +39,20 @@ body{
 }
 
 .headbar{
-    height: 80px;
+    height: 60px;
     width: 100%;
     background: #f97000;
     float: left;
+    box-shadow: 1px 2px 1px #B9B7B7;
     padding-top: 10px;
 }
 
 .headbar .img2{
     width: auto;
-    height: 45px;
+    height: 40px;
     display: block;
     margin-left: 10px;
-    margin-top: 12px;
+    margin-top: 3px;
     float: left;
     margin-left: 70px;
 }
@@ -66,11 +67,11 @@ body{
     width: auto;
     position: relative;
     left: 30px;
-    top: 10px;
+    top: 6px;
     padding-left: 20px;
     padding-right: 20px;
     padding-bottom: 10px;
-    padding-top: 10px;
+    padding-top: 2px;
     font-weight: 500;
     text-transform: uppercase;
 }
@@ -89,7 +90,7 @@ body{
     font-family: 'nexa';
     color: #ffffff;
     margin-right: 20px;
-    margin-top: 17px;
+    margin-top: 6px;
     font-size: 22px;
     text-transform: uppercase;
     outline: none;
@@ -97,8 +98,8 @@ body{
 
 .headbar .login-border{
     border: solid 1px #ffffff;
-    padding: 8px 10px;
-    margin-top: 12px;
+    padding: 7px 10px;
+    margin-top: 2px;
     font-size: 15px;
     font-family: 'nexa-bold';
     border-radius: 5px;
@@ -119,7 +120,7 @@ body{
     display: block;
     float: left;
     height: 35px;
-    margin-top: 12px;
+    margin-top: 4px;
     margin-right: 70px;
 }
 
@@ -127,17 +128,18 @@ body{
     display: block;
     float: left;
     height: 23px;
-    margin-top: 18px;
+    margin-top: 9px;
     margin-right: 20px;
 }
 
 .banner-promo{
-    height: 100px;
+    height: 120px;
     width: 100%;
     display: block;
     float: left;
-    margin-top: 30px;
+    padding-top: 30px;
     overflow: hidden;
+    background: #f4f4f4;
 }
 
 .banner-promo .area{
@@ -274,11 +276,10 @@ body{
     width: 100%;
     display: block;
     float: left;
-    padding-top: 50px;
-    padding-bottom: 60px;
+    padding-top: 30px;
+    padding-bottom: 40px;
     padding-left: 4%;
     padding-right: 4%;
-    background: #D7D7D7;
 }
 
 
@@ -839,7 +840,7 @@ body{
     margin-top: 10px;
     margin-bottom: 20px;
     padding: 10px;
-    border: 1px solid #9C9C9C;
+    border: 1px solid #B5B5B5;
     text-transform: uppercase;
     font-family: 'nexa-bold';
     font-size: 13px;
@@ -857,6 +858,258 @@ body{
     border: 1px solid #f97000;
     color: #ffffff;
 }
+
+/*---------------- user ---------- */
+
+.user{
+    float: left;
+    width: 100%;
+}
+
+.user .capa{
+    display: block;
+    float: left;
+    width: 100%;
+    height: 150px;
+    overflow: hidden;
+}
+
+.capa .img{
+    height: auto;
+    width: 100%;
+}
+
+.user .profile{
+    display: block;
+    float: left;
+    height: 250px;
+    width: 20%;
+    padding: 10px;
+    border-radius: 300px;
+    box-shadow: 1px 3px 1px #B9B7B7;
+    position: relative;
+    left: 2%;
+    bottom: 100px;
+    margin-left: 3%;
+    background: #fff;
+}
+
+.profile .img{
+    height: 100%;
+    width: 100%;
+    border-radius: 300px;
+}
+
+.user .area{
+    display: block;
+    float: left;
+    height: 70px;
+    width: 77%;
+    box-shadow: 1px 1px 1px #B9B7B7;
+    background: #fff;
+    padding-left: 65px;
+    padding-top: 13px;
+}
+
+.user .area .info{
+  display: block;
+  float: left;
+  width:400px;
+}
+
+.user .area .title{
+  display: block;
+  float: left;
+  font-family: 'nexa-bold';
+  font-size: 19px;
+}
+
+.user .area .subtitle{
+  font-family: 'nexa';
+  font-size: 16px;
+  clear: both;
+  color: #696969;
+  position: relative;
+  bottom: 5px;
+}
+
+.user .area .img{
+  display: block;
+  float: left;
+  height: 30px;
+  position: relative;
+  bottom: 2px;
+}
+
+.user .button{
+    display: block;
+    float: right; 
+    margin-right: 60px;
+    padding: 12px;
+    padding-left: 15px;
+    padding-right: 15px;
+    color: #ffffff;
+    font-family: 'nexa-bold';
+    background: #00689B;
+    border-radius: 30%;
+}
+
+.user .bio{
+    display: block;
+    float: left;
+    clear: both;
+    height: 300px;
+    width: 20%;
+    position: relative;
+    bottom : 100px;
+    margin-left: 70px;
+    padding-top: 20px;
+}
+
+.user .bio .info{
+    clear: both;
+    display: block;
+    float: left;
+    height: 30px;
+    width: 100%;
+    margin-top: 10px;
+    line-height: 22px;
+}
+
+.user .bio .info .img{
+    height: 15px;
+    top: 3px;
+    margin-right: 3px;
+}
+
+.user .bio .info .gray{
+    color: #696969;
+    font-size: 14px;
+}
+
+.user .feed{
+    display: block;
+    float: left;
+    width: 48%;
+    background: #fff;
+    position: relative;
+    bottom: 170px;
+    box-shadow: 1px 1px 1px #B9B7B7;
+}
+
+.user .feed .status{
+  display: block;
+  float: left;
+  height: 70px;
+  width: 100%;
+  border-bottom: 1px solid #E8E8E8;
+  background: #fff;
+}
+
+.user .feed .status .menu{
+  height: 100%;
+  display: block;
+  float: left;
+  position: relative;
+  left: 5%;
+  margin-right: 45px;
+  padding-top: 14px;
+  font-family: 'nexa-bold';
+  text-align: center;
+  font-size: 15px;
+  color: #4f4f4f; 
+}
+
+.user .feed .status .active{
+  color: #00689B;
+  border-bottom: 3px solid #00689B;
+}
+
+.user .feed .status .menu .title{
+  font-size: 16px;
+  font-family: 'gilroy-bold';
+}
+
+.user .feed .post{
+    display: block;
+    float: left;
+    width: 100%;
+    border-bottom: 1px solid #E8E8E8;
+    padding-bottom: 20px;
+}
+
+.user .feed .post .img{
+    display: block;
+    float: left;
+    height: 50px;
+    border-radius: 100%;
+    margin-left: 30px;
+    margin-top: 10px;
+}
+
+.user .feed .post .img2{
+   height: 10px;
+   margin-left: 5px;
+   margin-top: 25px;
+}
+
+.user .feed .post .title{
+    display: block;
+    float: left;
+    font-size: 15px;
+    font-family: 'gilroy-bold';
+    margin-top: 20px;
+    margin-left: 15px;
+    color: #4F4F4F;
+}
+
+.user .feed .post .title2{
+  font-family: 'gilroy';
+  color: #696969;
+  margin-left: 5px;
+}
+
+.user .feed .post .info{
+  display: block;
+  float: left;
+  width: 85%;
+  padding-left: 15px;
+  margin-top: 5px;
+  overflow: hidden;
+}
+
+.user .feed .post .info .img3{
+  width: auto;
+  max-height: 250px;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.user .patrocinio{
+  display: block;
+  float: left;
+  background: #ffffff;
+  width: 20%;
+  position: relative;
+  bottom: 170px;
+  margin-left: 2%;
+  box-shadow: 1px 1px 1px #B9B7B7;
+  overflow: hidden;
+  padding: 5px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin-bottom: 40px;
+  border-radius: 5px;
+}
+
+.user .patrocinio .img{
+  width: auto;
+  height: 300px;
+  display: block;
+  margin: 0 auto;
+}
+
+/*---------------- faq ---------- */
 
 .faq{
     float: left;
@@ -907,7 +1160,7 @@ body{
 }
 
 .faq .collapsible-header{
-  font-size: 20px;
+  font-size: 19px;
 }
 
 /*---------------- materialize ---------- */
