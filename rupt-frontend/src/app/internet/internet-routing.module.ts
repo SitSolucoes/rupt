@@ -1,4 +1,5 @@
 
+
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from "app/internet/home/home.component";
@@ -6,17 +7,24 @@ import { FaqComponent } from "app/internet/faq/faq.component";
 import { UserComponent } from 'app/internet/user/user.component';
 import { FooterComponent } from 'app/internet/footer/footer.component';
 import { NewsComponent } from 'app/internet/news/news.component';
+import { InternetInicioComponent } from 'app/internet/internet-inicio/internet-inicio.component';
+import { ContatoComponent } from './contato/contato.component';
 
 const routes: Routes = [
-  {path : '', redirectTo: 'home', pathMatch: 'full'},
-  { path : 'home', component: HomeComponent,
+  { path : '', redirectTo: 'rupt', pathMatch: 'full'},
+  { path : 'rupt', component: InternetInicioComponent,
     children: [
-      {path : '**', redirectTo: 'home', pathMatch: 'full'}
+      { path : 'user', component: UserComponent},
+      { path : 'noticias', component: HomeComponent},  
+      { path : 'faq', component: FaqComponent},
+      { path : 'user', component: UserComponent },
+      { path : 'footer', component: FooterComponent },
+      { path : 'news', component: NewsComponent },
+      { path : 'contato', component: ContatoComponent},
+      { path : '', redirectTo: 'noticias', pathMatch: 'full'},
+      { path : '**', redirectTo: 'noticias', pathMatch: 'full'},
     ]},
-    { path : 'faq', component: FaqComponent},
-    { path : 'user', component: UserComponent },
-    { path : 'footer', component: FooterComponent },
-    { path : 'news', component: NewsComponent }
+    
 ];
 
 @NgModule({

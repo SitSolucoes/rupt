@@ -1,3 +1,4 @@
+import { MensagensService } from './../../services/mensagens.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContatoComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _mensagemService: MensagensService) { }
 
   ngOnInit() {
+  }
+
+  f;
+
+  enviaMensagemTeste(){
+    return this._mensagemService.enviaMensagem(this.f).subscribe(
+      (data: any) => {
+          console.log("sucesso!");
+      }
+  );
   }
 
 }
