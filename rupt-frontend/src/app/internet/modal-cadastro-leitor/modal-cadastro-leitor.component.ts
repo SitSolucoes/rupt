@@ -39,9 +39,14 @@ export class ModalCadastroLeitorComponent implements OnInit {
 
   onSubmit(){
       this._leitoresService.createLeitor(this.form).subscribe(
-        (response: any) => {
-          this.message = response;
-          this.uploadFiles(response);
+        (data: any) => {
+          //this.message = response;
+          
+          this.uploadFiles(data);
+
+        },
+        (error) =>{
+          console.log(error);
         }
       );
   }
