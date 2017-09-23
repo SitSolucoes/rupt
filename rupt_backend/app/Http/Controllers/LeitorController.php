@@ -8,6 +8,34 @@ use App\Leitor;
 
 class LeitorController extends Controller
 {
+    public function signin(Request $request){
+        $credentials = $request->only('email', 'password');
+        $email = $request->email;
+        $senha = $request->senha;
+        try{
+            $leitor = Leitor::where('email', $request->input('email'))
+            ->where('ativo', 1)
+            ->first();
+            if($admin != null){
+                if($leitor->password == bcrypt($senha) || $leitor->password = $senha){
+                    return response()->json([
+                        'token' => $token,
+                        'user_name' => $leitor->nome,
+                        'user_id' => $leitor->id
+                    ],200);       
+                }else
+                    return response()->json([
+                        'erro' => 'Senha incorreta'
+                    ],500);
+            }else
+                return response()->json([
+                    'erro' => 'Email não localizado'
+                ],500);
+            
+        }catch(JWTException $e){
+            return response()->json(['error' => 'Erro JWT'],401);
+        }
+    }
     
     private function getById($id){
         $leitor = Leitor::where('id', $id)->get();
@@ -16,26 +44,42 @@ class LeitorController extends Controller
 
     public function create($request){
         $leitor = new Leitor(); 
-        $leitor->nome = $request->input('nome');
-        $leitor->nick = $request->input('nick');
-        $leitor->email = $request->input('email');
-        $date = str_replace('/', '-', $request->input("nascimento"));
-        $leitor->nascimento = date('Y-m-d', strtotime($date));
-        $leitor->sexo = $request->input('sexo');
-        $leitor->src_foto = $request->input('src_foto');
-        $leitor->password = bcrypt($request->input('password'));
-        $leitor->ativo = $request->input('ativo');
-        $leitor->save();
-
+        try{
+            $leitor->nome = $request->input('nome');
+            $leitor->nick = $request->input('nick');
+            $leitor->email = $request->input('email');
+            $date = str_replace('/', '-', $request->input("nascimento"));
+            $leitor->nascimento = date('Y-m-d', strtotime($date));
+            $leitor->sexo = $request->input('sexo');
+            $leitor->src_foto = $request->input('src_foto');
+            $leitor->password = bcrypt($request->input('password'));
+            $leitor->ativo = $request->input('ativo');
+            $leitor->save();
+        }catch(Exception $exception){
+            return null;
+        }
         return $leitor->id;
+        
     }
     
     public function store(Request $request){
-        $this->create($request);
+        $leitor = new Leitor();
+        try{
+            $leitor_id = $this->create($request);
+            if($leitor_id != null){
+                $leitor = $this->getById($leitor_id)->first();
+                return response()->json([
+                    'message'=>'Leitor criado com sucesso!',
+                    'id_leitor'=>$leitor->id,
+                    'nome_leitor'=>$leitor->nome
+                ],201);        
+            }
+        }catch(Exception $e){
 
-        return response()->json([
-                'message'=>'Leitor criado com sucesso!'
-            ],201);
+        }
+        
+
+        
     }
 
     public function getLeitor($id){

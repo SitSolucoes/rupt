@@ -5,19 +5,15 @@
     </div>
   
     <div class="menu">
-
-      <div class="label"> Nome </div>
-      
-      <input type="text" class="input">
-
-      <div class="label"> E-mail </div>
-      
-      <input type="text" class="input">
-
-      <div class="label"> Mensagem </div>
-      
-      <textarea class="input-area">    </textarea>
-    
+      <form name="form" [formGroup]="msg_form" (ngSubmit)="enviaMensagem()">
+        <div class="label"> Nome </div>
+        <input type="text" formControlName="nome" class="input">
+        <div class="label"> E-mail </div>
+        <input type="text" formControlName="email" class="input">
+        <div class="label"> Mensagem </div>
+        <textarea formControlName="conteudo" class="input-area"></textarea>
+        <button type="submit" class="button color"> Enviar </button>
+      </form>
     </div>
 
     <img src="../assets/img/robot.png" class="img">

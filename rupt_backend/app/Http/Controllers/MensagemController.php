@@ -18,6 +18,31 @@ class MensagemController extends Controller
         return response()->json(['mensagens' => $mensagens], 200);
     }
     
+    public function enviaMensagem(Request $request){
+        //pega dados para mensagem
+        $mensagem = $request->input('conteudo');
+        $remetente = $request->nome;
+        $remetente_email = $request->email;
+        $assunto = $request->assunto;
+        $leitor = $request->leitorId;
+          
+        $n_mensagem = new Mensagem();
+        //echo $request;
+        //nova mensagem de resposta
+        if($mensagem != ''){
+            $n_mensagem->assunto = $assunto;
+            $n_mensagem->conteudo = $mensagem;
+            $n_mensagem->lida = false;
+            $n_mensagem->remetente = $remetente_email;
+            $n_mensagem->nome = $remetente;
+            $n_mensagem->admin_idAdmin = null;
+            $n_mensagem->leitor_idLeitor = $leitor;
+            $n_mensagem->mensagem_idMensagem = null;
+            $n_mensagem->save();
+        }
+
+        return response()->json(['Enviada' => $n_mensagem]);
+    }
 
     public function getMensagens_lidas(){
         $mensagens = Mensagem::where('lida', true)

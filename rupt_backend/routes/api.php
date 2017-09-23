@@ -142,6 +142,10 @@ Route::get('/getMensagens/naoLidas', [
           'uses' => 'MensagemController@getMensagens_nLidas'
 ]);
 
+Route::post('/enviaMensagem', [
+    'uses' => 'MensagemController@enviaMensagem'
+]);
+
 Route::get('/getMensagens/lidas', [
           'uses' => 'MensagemController@getMensagens_lidas'
 ]);

@@ -30,7 +30,7 @@ export class LeitoresService {
     
     return this._http.post(this._url + 'storeLeitor', body, {headers: this.headers}).map(
     (response: Response)=>{
-      response.json()
+      console.log(response.json());
     });
   } 
 
@@ -42,6 +42,10 @@ export class LeitoresService {
       response.json()
     });
   }  
+
+  doLogin(data){
+    return data;
+  }
 
   getLeitores(): Observable<any>{
      return this._http.get(this._url + 'getLeitores')

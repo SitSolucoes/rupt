@@ -38,17 +38,30 @@ export class ModalCadastroLeitorComponent implements OnInit {
   }
 
   onSubmit(){
+    console.log(this.form);
+    //console.log(window.document.getElementById('src_foto'));
       this._leitoresService.createLeitor(this.form).subscribe(
         (data: any) => {
           //this.message = response;
-          
+          console.log(data);
           this.uploadFiles(data);
-
+          this.doLogin(data);
         },
         (error) =>{
           console.log(error);
         }
       );
+  }
+
+  doLogin(data){
+    this._leitoresService.doLogin(data).subscribe(
+      (ret: any) => {
+        console.log(data);
+      },  
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   uploadFiles(id){
