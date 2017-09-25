@@ -73,6 +73,10 @@ Route::post('/storeLeitor',[
             'uses' => 'LeitorController@store'
 ]);
 
+Route::put('/leitor/signin',[
+            'uses' => 'LeitorController@signin'
+]);
+
 Route::get('/getLeitores',[
             'uses' => 'LeitorController@getLeitores'
 ]);

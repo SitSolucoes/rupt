@@ -1,3 +1,4 @@
+import { SliderComponent } from './slider/slider.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterializeModule } from 'angular2-materialize';
 import { NgModule } from '@angular/core';
@@ -31,7 +32,8 @@ import { InternetInicioComponent } from './internet-inicio/internet-inicio.compo
     ModalCadastroLeitorComponent,
     FooterComponent,
     NewsComponent,
-    InternetInicioComponent
+    InternetInicioComponent,
+    SliderComponent
   ]
 })
 export class InternetModule { }

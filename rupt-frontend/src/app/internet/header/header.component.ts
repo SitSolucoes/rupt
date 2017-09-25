@@ -25,4 +25,11 @@ export class HeaderComponent implements OnInit {
       params: ['open']});
   }
 
+  closeModal(e){
+    console.log("evento: " + e);
+    if(e){
+      this.modalActions.emit({action:"modal",params:['close']});
+    }
+  }
+
 }

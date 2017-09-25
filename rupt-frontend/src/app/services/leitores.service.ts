@@ -43,8 +43,23 @@ export class LeitoresService {
     });
   }  
 
-  doLogin(data){
-    return data;
+  doLogin(f){
+    const body = JSON.stringify({
+        email: f.value.email,
+        password: f.value.senha
+    });
+    //console.log("senha: " +f.value.password);
+    return this._http.put(this._url + 'leitor/signin', body, {headers: this.headers})
+    .map(
+      (response: Response) => {
+        let data = response.json();
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('user_id', data.user_id);
+        localStorage.setItem('user_name', data.user_name);
+
+        return true;
+      }
+    );
   }
 
   getLeitores(): Observable<any>{

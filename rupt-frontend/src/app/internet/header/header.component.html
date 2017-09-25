@@ -1,7 +1,7 @@
 <div id="ModalCadastro" class="modal" 
      materialize="modal" [materializeParams]="[{dismissible: false}]" 
      [materializeActions]="modalActions">
-    <modal-cadastro-leitor></modal-cadastro-leitor>
+    <modal-cadastro-leitor (fechaModal)="closeModal($event)"></modal-cadastro-leitor>
 </div>
 <div class="headbar">
   

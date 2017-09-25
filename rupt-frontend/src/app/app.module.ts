@@ -14,6 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InputMaskModule } from 'ng2-inputmask';
 import { InternetModule } from "app/internet/internet.module";
 import { Angular2SocialLoginModule } from "angular2-social-login";
+import { SliderComponent } from './slider/slider.component';
 
 let providers = {
    "google": {
@@ -32,7 +33,6 @@ let providers = {
 @NgModule({
   declarations: [
     AppComponent,
-    
   ],
   imports: [
     BrowserModule,

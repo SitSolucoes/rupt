@@ -10,16 +10,20 @@ class LeitorController extends Controller
 {
     public function signin(Request $request){
         $credentials = $request->only('email', 'password');
-        $email = $request->email;
-        $senha = $request->senha;
+        $email = $request->input('email');
+        $senha = $request->input('password');
         try{
             $leitor = Leitor::where('email', $request->input('email'))
             ->where('ativo', 1)
             ->first();
-            if($admin != null){
+            if($leitor != null){
                 if($leitor->password == bcrypt($senha) || $leitor->password = $senha){
+                    $leitor->tokenLogin = $this->generateRandomString($email);//token gerado;
+                    $leitor->tokenExpira = date_default_timezone_get();
+                    $leitor->save();
+
                     return response()->json([
-                        'token' => $token,
+                        'token' => $leitor->tokenLogin,
                         'user_name' => $leitor->nome,
                         'user_id' => $leitor->id
                     ],200);       
@@ -37,6 +41,16 @@ class LeitorController extends Controller
         }
     }
     
+    private function generateRandomString($email){
+        $characters = $email . 'segurancapesada';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        $length = 45;
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
     private function getById($id){
         $leitor = Leitor::where('id', $id)->get();
         return $leitor;
