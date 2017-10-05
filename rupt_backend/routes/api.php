@@ -140,6 +140,10 @@ Route::get('/denuncia/getEscritor/{id}', [
           'uses' => 'PostController@getEscritor'
 ]);
 
+Route::get('posts/getSliderPosts/', [
+    'uses' => 'PostController@getSliderPosts'
+]);
+
 
 //Mensagens
 Route::get('/getMensagens/naoLidas', [

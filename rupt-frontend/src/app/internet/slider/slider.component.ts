@@ -1,3 +1,4 @@
+import { PostsService } from './../../services/posts.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SliderComponent implements OnInit {
 
-  constructor() { }
+  sliderPosts: any[];
+
+  constructor(private _postServices: PostsService) {   
+
+    this.getSliderPosts();
+  }
 
   ngOnInit() {
+  }
+
+  getSliderPosts(){
+    this._postServices.getSliderPosts().subscribe(
+      (retorno: any) => {
+        this.sliderPosts = retorno.posts;
+      });
   }
 
 }

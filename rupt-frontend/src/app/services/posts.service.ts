@@ -23,4 +23,13 @@ export class PostsService {
         );
   }
 
+  getSliderPosts(){
+    return this._http.get(this._url + 'posts/getSliderPosts')
+      .map((retorno: Response) => {
+        return{
+          'posts': retorno.json().posts
+        };
+      }); 
+  }
+
 }

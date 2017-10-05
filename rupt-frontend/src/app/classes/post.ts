@@ -4,13 +4,17 @@ export class Post {
     id: number;
     titulo: string;
     conteudo: string;
+    autor_idLeitor
     //escritor: Escritor;
-    admin_del: Admin;
-    subtitulo: string;
+    idAdmin_deleted: number;
+    src_imagem: string;
     visualizacoes: number;
+    publishedAt: Date;
+    subtitulo: string;
     created_at: Date;
     updated_at: Date;
-    deleted_at: Date
+    deleted_at: Date;
+    tipo_post: string;
 
      /*constructor(id: number, titulo: string, admin: Admin, 
                  escritor: Escritor, conteudo: string,
