@@ -26,7 +26,7 @@ body{
     width: 100%;
     padding: 0px;
     margin: 0px;
-    background: #E8E8E8;
+    background: #ededed;
 }
 
 
@@ -43,7 +43,6 @@ body{
     width: 100%;
     background: #f97000;
     float: left;
-    box-shadow: 1px 2px 1px #B9B7B7;
     padding-top: 10px;
 }
 
@@ -54,7 +53,7 @@ body{
     margin-left: 10px;
     margin-top: 3px;
     float: left;
-    margin-left: 70px;
+    margin-left: 60px;
 }
 
 
@@ -139,7 +138,6 @@ body{
     float: left;
     padding-top: 30px;
     overflow: hidden;
-    background: #f4f4f4;
 }
 
 .banner-promo .area{
@@ -147,7 +145,6 @@ body{
     width: 100%;
     display: block;
     float: left;
-    background: #f4f4f4;
 }
 
 .banner-promo .title{
@@ -157,8 +154,10 @@ body{
     text-transform: uppercase;
     font-size: 10px;
     font-family: 'nexa';
-    color: #828282;
+    color: #666666;
+    font-weight: bold;
 }
+
 
 .banner-promo .container{
     width: 90%;
@@ -178,7 +177,6 @@ body{
 
 .menu-top{
     float: left;
-    background: #E1E1E1;
 }
 
 .banner{
@@ -313,7 +311,6 @@ body{
     float: left;
     background: #ffffff;
     overflow: hidden;
-    box-shadow: 1px 3px 1px #B9B7B7;
 }
 
 .container-categoria .content-img-text{
@@ -329,7 +326,6 @@ body{
     background: #ffffff;
     display: block;
     float: left;
-    box-shadow: 1px 3px 1px #B9B7B7;
 }
 
 .container-categoria .info-text{
@@ -338,7 +334,6 @@ body{
     background: #ffffff;
     display: block;
     float: left;
-    box-shadow: 1px 3px 1px #B9B7B7;
 }
 
 .info-text .title{
@@ -367,7 +362,6 @@ body{
     height: 250px;
     overflow: hidden;
     margin-right: 10px;
-    box-shadow: 1px 3px 1px #B9B7B7;
 }
 
 .container-categoria .banner-solo{
@@ -534,12 +528,11 @@ body{
 
 .container-slider{
     width: 100%;
-    height: 480px;
     display: block;
     float: left;
     padding-top: 40px;
-    padding-bottom: 40px;
-    background: #f4f4f4;
+    padding-bottom: 80px;
+    background: #ededed;
     padding-left: 5%;
     padding-right: 5%;
 }
@@ -741,9 +734,9 @@ body{
     font-weight: bold;
     font-size: 19px;
     font-family: 'nexa-bold';
-    color: #7E7C7C;
-    margin-bottom: 25px;
+    color: #595858;
     clear: both;
+    margin-bottom: 5px;
     padding-left: 30px;
     padding-right: 30px;
     margin-top: 10px;
@@ -754,12 +747,15 @@ body{
     float: left;
     margin-right: 10%;
     margin-left: 10%;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     font-size: 15px;
-    font-family: 'gilroy';
     line-height: 28px;
     font-weight: bold;
     color: #8A8A8A;
+}
+
+.modal-content .info .subtitle a{
+  text-decoration: underline;
 }
 
 .modal-content .info .align{
@@ -767,20 +763,19 @@ body{
 }
 
 .modal-content .info .img-area{
-  width: 220px;
+  width: 240px;
   height: 50px;
   display: block;
   margin: 0 auto;
-  border: 1px solid #E7E7E7;
   padding-top: 10px;
   border-radius: 5px;
 }
 
 .modal-content .info .img{
-    height: 30px;
+    height: 60px;
     display: block;
     float: left;
-    margin-left: 30px;
+    margin-right: 20px;
     margin-bottom: 20px;
     position: relative;
 }
@@ -853,9 +848,6 @@ body{
     width: 100%;
     height: auto !important;
     display: block;
-    margin-top: 40px;
-    float: left;
-    border-top: 1px solid #ccc;
 }
 
 .modal-footer .button{
@@ -865,9 +857,10 @@ body{
     position: relative;
     margin-right: 20px;
     margin-top: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     padding: 10px;
-    border: 1px solid #B5B5B5;
+    border: 1px solid #d9d9d9;
+    background: #d9d9d9;
     text-transform: uppercase;
     font-family: 'nexa-bold';
     font-size: 13px;
@@ -1174,7 +1167,7 @@ body{
 }
 
 .news .area-top{
-  height: 200px;
+  height: 150px;
   width: 70%;
   margin-left: 70px;
   background: #fff;
@@ -1186,7 +1179,7 @@ body{
   display: block;
   margin: 0 auto;
   width: 220px;
-  height: 70px;
+  height: 50px;
 }
 
 .news .area-top .tag{
@@ -1221,7 +1214,7 @@ body{
 .news .area-top .title{
   display: block;
   margin: 0 auto;
-  width: 95%;
+  width: 85%;
   font-size: 37px;
   line-height: 50px;
   color: #4A4A4A;
@@ -1232,7 +1225,7 @@ body{
 .news .container{
   display: block;
   float: left;
-  margin-top: 30px;
+  margin-top: 50px;
   width: 70%;
   background: #fff;
   padding-left: 10px;
@@ -1323,8 +1316,8 @@ body{
   background: #fff;
   width: 18%;
   margin-left: 30px;
-  margin-top: 30px;
-  border: 1px solid #E8E8E8;
+  margin-top: 50px;
+  border: 2px solid #E8E8E8;
   border-radius: 5px;
 }
 
@@ -7191,10 +7184,11 @@ button.btn-floating {
   right: 0;
   background-color: #fafafa;
   padding: 0;
-  max-height: 70%;
+  max-height: 85%;
+  top: 12% !important;
   width: 60%;
   margin: auto;
-  overflow-y: auto;
+  overflow: hidden;
   border-radius: 2px;
   will-change: top, opacity;
 }
@@ -7219,10 +7213,11 @@ button.btn-floating {
 
 .modal .modal-footer {
   border-radius: 0 0 2px 2px;
-  background-color: #fafafa;
   padding: 4px 6px;
   height: 56px;
-  width: 100%;
+  width: 35%;
+  display: block;
+  margin: 0 auto;
   text-align: right;
 }
 

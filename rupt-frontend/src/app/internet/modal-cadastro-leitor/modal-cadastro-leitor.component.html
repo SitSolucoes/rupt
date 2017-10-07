@@ -10,7 +10,7 @@
             <p> Cadastrado na RUPT, você só tem a ganhar! </p>
 
             <div class="subtitle">
-                Estando cadastrado, você consegue visualizar todas as notícias publicadas pelos Escritores e mais, caso você tenha interesse, poderá se tornar um Escritor e ganhar dinheiro com as suas publicaçõe! Leia o <a href="#">Contrato</a> e a <a href="#">Política de Privacidade</a> ou para maiores informações <a href="#">clique aqui </a>
+                Estando cadastrado, você consegue visualizar todas as notícias publicadas pelos Escritores e mais, caso você tenha interesse, poderá se tornar um Escritor e ganhar dinheiro com as suas publicaçõe! Leia o <a href="#">Contrato</a> e a <a href="#">Política de Privacidade</a> ou para maiores informações: <a href="#">clique aqui </a>
             </div>
 
             <p> Cadastre-se utilizando as redes sociais </p>
@@ -27,43 +27,11 @@
 
             <p> ou  </p>
 
-            <div class="register">
-                <div class="box">
-                    
-                    <div class="title2">Nome:</div>
-                    <input class="button" type="text" formControlName="nome"/>
-
-                    <div class="title2">Email:</div>
-                    <input class="button" type="text" formControlName="email"/>
-
-                    <div class="title2"> Sexo: </div>
-                    <select class="button button2" formControlName="sexo">
-                            <option *ngFor="let option of selectOptions" [value]="option.value">{{option.name}}</option>
-                    </select>
-
-                    <div class="title2 clear"> Foto: </div>
-                    <input type="file" accept="image/*" id="src_foto" formControlName="src_foto">
-
-                </div>
-                <div class="box">
-
-                    <div class="title2"> Nick: </div>
-                    <input class="button" type="text" formControlName="nick"/>    
-
-                    <div class="title2"> Senha: </div> 
-                    <input class="button" type="password" formControlName="senha"/>
-
-                    <div class="title2"> Data de Nascimento: </div>  
-                    <input class="button" type="text" formControlName="nascimento"/>
-
-
-                </div>
-                
-            </div>
+       
         </div>
     </div>
     <div class="modal-footer">
-        <button type="submit" class="button color"> cadastrar </button>
+        <a click="#"><button type="submit" class="button color"> cadastrar </button></a>
         <a click="#" class="modal-action modal-close"><div class="button"> cancelar </div></a>
     </div>
 </form>
