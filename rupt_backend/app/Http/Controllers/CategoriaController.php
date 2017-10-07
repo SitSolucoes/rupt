@@ -18,6 +18,13 @@ class CategoriaController extends Controller
         return response()->json(['categorias' => $listCategorias], 200);
     }
 
+    public function getCategoriasAtivas(){
+        $categorias = Categoria::where('status', 1)->orderBy("categoria")
+        ->where("categoria_idCategoria", null)->get();
+
+        return response()->json(['categorias' => $categorias], 200);
+    }
+
     private function recursiveSubCategorias($categorias){
          $listCategoria = new Collection();
 

@@ -18,10 +18,12 @@ export class CategoriasComponent implements OnInit {
 
   notificacoes;
   categorias: Categoria[];
+  categoriasAtivas: Categoria[];
   sugestoes: Sugestao[];
   
   filtroSugestoes: string;
   filtroCategorias: string;
+  filtroCategoriasAtivas: string;
   
   categoria: Categoria;
   sugestao: Sugestao;
@@ -47,6 +49,7 @@ export class CategoriasComponent implements OnInit {
     this.sugestao = new Sugestao();
     this.getListSugestoes();
     this.getCategorias();
+    this.getCategoriasAtivas();
   }
 
   getListSugestoes(){
@@ -78,6 +81,24 @@ export class CategoriasComponent implements OnInit {
       return this.categorias;
     return this.categorias.filter((v) => {
       if (v.categoria.toLowerCase().indexOf(this.filtroCategorias.toLowerCase()) >= 0) 
+        return true;
+      
+      return false;
+    });
+  }
+  
+  getCategoriasAtivas(){
+    this._categoriasService.getCategoriasAtivas().subscribe(
+      (categorias: Categoria[]) => {this.categoriasAtivas = categorias}
+    )
+  }
+
+  listCategoriasAtivas(){
+    if (this.filtroCategoriasAtivas === undefined || this.categoriasAtivas.length === 0 || this.filtroCategoriasAtivas.trim() === '')
+      return this.categoriasAtivas;
+    
+    return this.categoriasAtivas.filter((v) => {
+      if (v.categoria.toLowerCase().indexOf(this.filtroCategoriasAtivas.toLowerCase()) >= 0) 
         return true;
       
       return false;
