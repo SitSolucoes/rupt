@@ -14,6 +14,7 @@ import { ModalCadastroLeitorComponent } from './modal-cadastro-leitor/modal-cada
 import { FooterComponent } from './footer/footer.component';
 import { NewsComponent } from './news/news.component';
 import { InternetInicioComponent } from './internet-inicio/internet-inicio.component';
+import { CadastroLeitorComponent } from './cadastro-leitor/cadastro-leitor.component';
 
 @NgModule({ 
   imports: [
@@ -33,7 +34,8 @@ import { InternetInicioComponent } from './internet-inicio/internet-inicio.compo
     FooterComponent,
     NewsComponent,
     InternetInicioComponent,
-    SliderComponent
+    SliderComponent,
+    CadastroLeitorComponent
   ]
 })
 export class InternetModule { }

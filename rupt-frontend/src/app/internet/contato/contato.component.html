@@ -7,11 +7,11 @@
     <div class="menu">
       <form name="form" [formGroup]="msg_form" (ngSubmit)="enviaMensagem()">
         <div class="label"> Nome </div>
-        <input type="text" formControlName="nome" class="input">
+        <input type="text" formControlName="nome" class="input" placeholder="Insira seu nome">
         <div class="label"> E-mail </div>
-        <input type="text" formControlName="email" class="input">
+        <input type="text" formControlName="email" class="input" placeholder="Digite seu email">
         <div class="label"> Mensagem </div>
-        <textarea formControlName="conteudo" class="input-area"></textarea>
+        <textarea formControlName="conteudo" class="input-area" placeholder="Insira sua mensagem"></textarea>
         <button type="submit" class="button color"> Enviar </button>
       </form>
     </div>

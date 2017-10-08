@@ -91,5 +91,10 @@ export class ModalCadastroLeitorComponent implements OnInit {
 
     //this.afterSubmit("Salvo com sucesso.");
   }
+
+  redirectCadastro(){
+    this.fechaModal.emit(true);
+    this._router.navigate(['rupt/cadastro']);
+  }
   
 }
