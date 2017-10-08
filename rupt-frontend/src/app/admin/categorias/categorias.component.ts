@@ -1,10 +1,11 @@
+import { CategoriaFiltroService } from './../../services/categoria-filtro.service';
+import { CategoriaFiltro } from './../../classes/categoria-filtro';
 import { Option } from './../../shared/option';
 import { NgForm } from '@angular/forms/src/directives';
 import { CategoriasService } from './../../services/categorias.service';
 import { Categoria } from './../../classes/categoria';
 import { MaterializeAction } from 'angular2-materialize';
 import { Component, OnInit, EventEmitter } from '@angular/core';
-
 import { NotificacoesService } from './../../services/notificacoes.service';
 import { SugestoesService } from './../../services/sugestoes.service';
 import { Sugestao } from './../../classes/sugestao';
@@ -15,10 +16,12 @@ import { Sugestao } from './../../classes/sugestao';
   styleUrls: ['./categorias.component.css']
 })
 export class CategoriasComponent implements OnInit {
-
   notificacoes;
+  countCategoriasFiltro: number = 0;
+
   categorias: Categoria[];
   categoriasAtivas: Categoria[];
+  categoriasFiltro: CategoriaFiltro[] = new Array;
   sugestoes: Sugestao[];
   
   filtroSugestoes: string;
@@ -33,6 +36,8 @@ export class CategoriasComponent implements OnInit {
   modalRecusa = new EventEmitter<string|MaterializeAction>();
   modalMessage = new EventEmitter<string|MaterializeAction>();
 
+  listOne: Array<string> = ['Coffee', 'Orange Juice', 'Red Wine', 'Unhealty drink!', 'Water'];
+
   selectStatus: Option[] = [
     {value: 1, name: 'Ativo'},
     {value: 0, name: 'Inativo'}
@@ -41,7 +46,9 @@ export class CategoriasComponent implements OnInit {
   constructor(
     private _notificacoesService: NotificacoesService,
     private _sugestoesService: SugestoesService,
-    private _categoriasService: CategoriasService) { }
+    private _categoriasService: CategoriasService,
+    private _categoriaFiltroService: CategoriaFiltroService
+  ) { }
 
   ngOnInit() {
     this.notificacoes = this._notificacoesService.getNotificacoes();
@@ -103,6 +110,36 @@ export class CategoriasComponent implements OnInit {
       
       return false;
     });
+  }
+
+  checkExist(categoria: Categoria){
+    let i;
+
+    for (i = 0; i < this.categoriasFiltro.length; i++){
+      if (this.categoriasFiltro[i].categoria.id == categoria.id)
+        return i;
+    }
+
+    return -1;
+  }
+  
+  addCategoriaFiltro(categoria: Categoria){
+      if (this.checkExist(categoria) == -1){
+          this.countCategoriasFiltro++;
+          
+          let categoriaFiltro = new CategoriaFiltro();
+          /*categoriaFiltro.ordem = this.countCategoriasFiltro;*/
+          categoriaFiltro.categoria = categoria;
+
+          this.categoriasFiltro.push(categoriaFiltro);
+      }
+  }
+
+  removeCategoriaFiltro(categoriaFiltro: CategoriaFiltro){
+    this.countCategoriasFiltro--;
+
+    let index = this.checkExist(categoriaFiltro.categoria);
+    this.categoriasFiltro.splice(index,1);
   }
 
   openModalAceitar(sugestao: Sugestao){
@@ -174,6 +211,12 @@ export class CategoriasComponent implements OnInit {
 
   showMessage(){
     this.modalMessage.emit({action:"modal",params:['open']});
+  }
+
+  saveOrdenacao(){
+    this._categoriaFiltroService.save(this.categoriasFiltro, this.countCategoriasFiltro).subscribe(
+      (response) => {}
+    )
   }
 
 }

@@ -123,6 +123,9 @@ Route::post('/categoria/create', ['uses' => 'CategoriaController@create']);
 Route::post('/categoria/update/{id}', ['uses' => 'CategoriaController@update']);
 Route::post('/categoria/createSubCategoria/{id}', ['uses' => 'CategoriaController@createSubCategoria']);
 
+//categoria filtro
+Route::post('categoriaFiltro/save', ['uses' => 'CategoriaFiltroController@save']);
+
 //denuncias
 Route::get('/sugestao/getDenuncias', [
            'uses' => 'DenunciasController@getDenuncias'
