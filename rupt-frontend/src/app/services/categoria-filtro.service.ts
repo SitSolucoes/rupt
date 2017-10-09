@@ -21,4 +21,12 @@ export class CategoriaFiltroService {
       )
   }
 
+  getCategoriasFiltro(): Observable<any>{
+    return this._http.get(this._url + 'categoriaFiltro/getCategoriasFiltro').map(
+      (response: Response) => {
+        return response.json().categoriasFiltro;
+      }
+    )
+  };
+
 }

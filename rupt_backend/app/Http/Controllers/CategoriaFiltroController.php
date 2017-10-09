@@ -15,7 +15,6 @@ class CategoriaFiltroController extends Controller
             $categoriaFiltro = CategoriaFiltro::where('ordem', $i)->first();
 
             if (!$categoriaFiltro){
-                echo 'entrou';
                 $categoriaFiltro = new CategoriaFiltro();
                 $categoriaFiltro->ordem = $i;
             }
@@ -24,6 +23,12 @@ class CategoriaFiltroController extends Controller
             $categoriaFiltro->save();
         }
 
-        //echo count($request->categoriasFiltro);
+        return response()->json(['mensagem', 'Salvo com sucesso'], 200);
+    }
+
+    public function getCategoriasFiltro(){
+        $categoriasFiltro = CategoriaFiltro::orderBy('ordem')->with('categoria')->get();
+
+        return response()->json(['categoriasFiltro' => $categoriasFiltro], 200);
     }
 }

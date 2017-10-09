@@ -57,6 +57,7 @@ export class CategoriasComponent implements OnInit {
     this.getListSugestoes();
     this.getCategorias();
     this.getCategoriasAtivas();
+    this.getCategoriasFiltro();
   }
 
   getListSugestoes(){
@@ -110,6 +111,15 @@ export class CategoriasComponent implements OnInit {
       
       return false;
     });
+  }
+
+  getCategoriasFiltro(){
+      this._categoriaFiltroService.getCategoriasFiltro().subscribe(
+        (categoriasFiltro: CategoriaFiltro[]) => { 
+          this.categoriasFiltro = categoriasFiltro;
+          this.countCategoriasFiltro = this.categoriasFiltro.length;
+        }
+      )
   }
 
   checkExist(categoria: Categoria){
@@ -215,7 +225,9 @@ export class CategoriasComponent implements OnInit {
 
   saveOrdenacao(){
     this._categoriaFiltroService.save(this.categoriasFiltro, this.countCategoriasFiltro).subscribe(
-      (response) => {}
+      (response) => {
+        this.showMessage();
+      }
     )
   }
 

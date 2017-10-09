@@ -125,6 +125,7 @@ Route::post('/categoria/createSubCategoria/{id}', ['uses' => 'CategoriaControlle
 
 //categoria filtro
 Route::post('categoriaFiltro/save', ['uses' => 'CategoriaFiltroController@save']);
+Route::get('categoriaFiltro/getCategoriasFiltro', ['uses' => 'CategoriaFiltroController@getCategoriasFiltro']);
 
 //denuncias
 Route::get('/sugestao/getDenuncias', [
