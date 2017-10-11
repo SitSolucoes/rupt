@@ -95,6 +95,14 @@ h4{
 	cursor: pointer;
 }
 
+.text-right{
+	text-align: right;
+}
+
+.btn-save, .btn-save:hover{
+	background-color: #F97000;
+}
+
 /* alertas */
 .card .card-content {
 	padding: 5px;
@@ -682,6 +690,3 @@ span.badge.new:after {
 	padding-left: 24px;
 	color: red;
 }
-
-
-

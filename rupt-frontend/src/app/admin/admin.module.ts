@@ -1,5 +1,6 @@
+import { CategoriaFiltroService } from './../services/categoria-filtro.service';
 import { CurrencyFormatPipe } from './../shared/currency-format-pipe.pipe';
-
+import { DndModule, DragDropService, DragDropConfig, DragDropSortableService} from 'ng2-dnd';
 import { MasksDirective } from './../shared/masks.directive';
 import { CategoriasService } from './../services/categorias.service';
 import { CpfCnpjPipe } from './../shared/cpf-cnpj.pipe';
@@ -66,6 +67,7 @@ import { PagamentoComponent } from './pagamento/pagamento.component';
     AdminRoutingModule,
     InputMaskModule,
     ReactiveFormsModule,
+    DndModule
   ],
   exports: [
     LoginComponent
@@ -80,7 +82,11 @@ import { PagamentoComponent } from './pagamento/pagamento.component';
     DenunciasService,
     PostsService,
     MensagensService,
-    CategoriasService
+    CategoriasService,
+    DragDropService,
+    DragDropConfig,
+    DragDropSortableService,
+    CategoriaFiltroService
   ]
 })
 export class AdminModule { }

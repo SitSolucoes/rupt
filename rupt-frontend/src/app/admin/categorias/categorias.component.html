@@ -104,13 +104,14 @@
 <div class="row">
   <div class="col s12">
     <ul class="tabs" materialize="tabs">
-      <li class="tab col s6">
+      <li class="tab col s4">
         <a class="active" href="#sugestao">
           Sugestões
           <span *ngIf="notificacoes['categorias'] != 0" class="notification">{{ notificacoes["categorias"] }}</span>
         </a>
       </li>
-      <li class="tab col s6"><a href="#categorias">Categorias</a></li>
+      <li class="tab col s4"><a href="#categorias">Categorias</a></li>
+      <li class="tab col s4"><a href="#ordenacao">Ordenação</a></li>
     </ul>
   </div>
 
@@ -227,4 +228,92 @@
         <app-lista-categorias [listCategorias]="listCategorias()" [show]="2"></app-lista-categorias>
     </ul>
   </div>
+</div>
+
+<div id="ordenacao">
+    <div class="row">
+        <div class="col m5">
+            <div class="row">
+                <div class="col s12 m12 l12 xl12">
+                    <nav>
+                        <div class="nav-wrapper">
+                            <form>
+                                <div class="input-field">
+                                    <input id="search" name="filtro" type="search" [(ngModel)]="filtroCategoriasAtivas">
+                                    <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                                    <i class="material-icons">close</i>
+                                </div>
+                            </form>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <ul class="collapsible list">
+                <li *ngIf="listCategoriasAtivas() != false">
+                    <div class="list-item header">
+                        <div class="col s4 m6 l6 xl8 item">
+                            Categoria
+                        </div>
+                    </div>
+                </li>
+                <li *ngIf="listCategoriasAtivas() == false">
+                    <div class="list-item option-icons">
+                        <div class="col s12 m12 l12 xl12 item center-align">
+                            Nenhuma categoria encontrada.
+                        </div>
+                    </div>
+                </li>
+                <li *ngFor="let ca of listCategoriasAtivas() let i = index">
+                    <div class="list-item option-icons">
+                        <div class="col m10 item">
+                            {{ca.categoria}}
+                        </div>
+                        <div class="col m2">
+                            <a (click)='addCategoriaFiltro(ca)'>
+                                <i class="material-icons">add</i>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="col m5 offset-m2">
+            <div class="row">
+                <div class="col s12 m12 l12 xl12">
+                    Categorias ordenadas
+                </div>
+            </div>
+            <ul class="collapsible list" dnd-sortable-container [sortableData]="categoriasFiltro">
+                <li *ngIf="listCategoriasAtivas() != false">
+                    <div class="list-item header">
+                        <div class="col s4 m6 l6 xl8 item">
+                            Categoria
+                        </div>
+                    </div>
+                </li>
+                <li *ngIf="listCategoriasAtivas() == false">
+                    <div class="list-item option-icons">
+                        <div class="col s12 m12 l12 xl12 item center-align">
+                            Nenhuma categoria encontrada.
+                        </div>
+                    </div>
+                </li>
+                <li *ngFor="let cf of categoriasFiltro let i = index" dnd-sortable [sortableIndex]="i">
+                    <div class="list-item option-icons">
+                        <div class="col m10 item">
+                            {{cf.categoria.categoria}}
+                        </div>
+                        <div class="col m2">
+                            <a (click)='removeCategoriaFiltro(cf)'>
+                                <i class="material-icons">delete</i>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row text-right">
+        <button [disabled]="countCategoriasFiltro == 0" class="btn btn-save waves-effect" (click)="saveOrdenacao()">Salvar</button>
+    </div>
 </div>
