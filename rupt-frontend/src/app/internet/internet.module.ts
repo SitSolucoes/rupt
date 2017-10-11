@@ -15,6 +15,7 @@ import { FooterComponent } from './footer/footer.component';
 import { NewsComponent } from './news/news.component';
 import { InternetInicioComponent } from './internet-inicio/internet-inicio.component';
 import { CadastroLeitorComponent } from './cadastro-leitor/cadastro-leitor.component';
+import { SlickSliderComponent } from './slider/slick-slider/slick-slider.component';
 
 @NgModule({ 
   imports: [
@@ -35,7 +36,8 @@ import { CadastroLeitorComponent } from './cadastro-leitor/cadastro-leitor.compo
     NewsComponent,
     InternetInicioComponent,
     SliderComponent,
-    CadastroLeitorComponent
+    CadastroLeitorComponent,
+    SlickSliderComponent
   ]
 })
 export class InternetModule { }

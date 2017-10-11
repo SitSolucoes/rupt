@@ -32,7 +32,7 @@ class PostController extends Controller
         
         $idPosts_q = Visualizacao::select(DB::raw('post_idPost as id, count(*) as q'))
                         ->whereIn('post_idPost', Post::select('id')
-                                                     ->whereDate('publishedAt', '>=', DB::raw('DATE(DATE_ADD(NOW(), INTERVAL -1 DAY))'))->get())
+                                                     ->whereDate('publishedAt', '>=', DB::raw('DATE(DATE_ADD(NOW(), INTERVAL - 10 DAY))'))->get())
                         ->groupBy('post_idPost')
                         ->orderBy('q', 'desc')
                         ->limit(10)
@@ -41,7 +41,9 @@ class PostController extends Controller
         foreach($idPosts_q as $post){
             $idsPosts[] = $post->id;
         }
-        //  print_r( $idsPosts);
+        
+        //print_r( $idsPosts);
+        
         $posts = Post::whereIn('id', $idsPosts)->get();
         $retorno = [
             'posts' => $posts
