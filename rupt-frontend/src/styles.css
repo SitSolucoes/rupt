@@ -1066,7 +1066,7 @@ input[type=text]:not(.browser-default):focus:not([readonly]){
     width: 50%;
     background: #fff;
     margin-top: 10px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .user .feed .status{
@@ -1129,15 +1129,17 @@ input[type=text]:not(.browser-default):focus:not([readonly]){
     display: block;
     float: left;
     font-size: 15px;
-    font-family: 'gilroy-bold';
+    font-family: 'nexa-bold';
     margin-top: 20px;
     margin-left: 15px;
     color: #4F4F4F;
 }
 
 .user .feed .post .title2{
-  font-family: 'gilroy';
+  font-family: 'lato';
   color: #696969;
+  font-size: 13px;
+  font-weight: bold;
   margin-left: 5px;
 }
 
@@ -1151,16 +1153,34 @@ input[type=text]:not(.browser-default):focus:not([readonly]){
 }
 
 .user .feed .post .info .border{
-  border-radius: 10px;
+  border-radius: 6px;
   margin-top: 10px;
   overflow: hidden;
+  max-height: 260px;
 }
 
 .user .feed .post .info .img3{
   width: auto;
   max-height: 250px;
-  border-radius: 10px;
+  border-radius: 6px;
   padding: 1px;
+  filter: brightness(70%);
+}
+
+.user .feed .post .info .new{
+    display: block;
+    float: left;
+    position: relative;
+    bottom: 110px;
+    color: #fff;
+    width: 90%;
+    max-height: 95px;
+    overflow: hidden;
+    font-size: 26px;
+    line-height: 30px;
+    font-family: 'nexa-bold';
+    padding-left: 20px;
+    padding-right: 100px;
 }
 
 .user .feed .post .status{
@@ -1169,11 +1189,10 @@ input[type=text]:not(.browser-default):focus:not([readonly]){
   width: 40%;
   height: 40px;
   border-bottom: 0px;
-  margin-top: 5px;
   padding-top: 5px;
   font-size: 12px;
   color: #696969;
-  font-family: 'gilroy-bold';
+  font-weight: bold;
 
 }
 
@@ -1181,7 +1200,6 @@ input[type=text]:not(.browser-default):focus:not([readonly]){
 .user .feed .post .status .img4{
   height: 20px;
   margin-left: 10px;
-  margin-right: 5px;
   position: relative;
   top: 5px;
 }
@@ -1195,7 +1213,7 @@ input[type=text]:not(.browser-default):focus:not([readonly]){
   overflow: hidden;
   padding: 5px;
   padding-bottom: 20px;
-  margin-bottom: 40px;
+  margin-bottom: 15px;
   border-radius: 3px;
 }
 
