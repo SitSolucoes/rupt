@@ -1,5 +1,6 @@
 import { CurrencyFormatPipe } from './shared/currency-format-pipe.pipe';
 import { PagamentoService } from './services/pagamento.service';
+import { Ng2CarouselamosModule } from 'ng2-carouselamos';
 import { UploadFileService } from './services/upload-file.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
@@ -37,6 +38,7 @@ let providers = {
   imports: [
     BrowserModule,
     FormsModule,
+    Ng2CarouselamosModule,
     HttpModule,
     AdminModule,
     InternetModule,
