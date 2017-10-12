@@ -44,19 +44,68 @@ a{
 
 .input-field.col label {
 	left: 0px;
+	height: auto;
+	-webkit-transform: translateY(-14px) scale(0.8);
+    transform: translateY(-14px) scale(0.8);
 }
+
 
 .input-field label:not(.label-icon){
     font-size: 0.8rem;
-    -webkit-transform: translateY(-140%);
-    transform: translateY(-140%);
+    -webkit-transform: translateY(-80%);
+    transform: translateY(-80%);
+}
+
+.input-field label:not(.label-icon).active {
+    -webkit-transform: translateY(-14px) scale(1);
+    transform: translateY(-14px) scale(1);
+    -webkit-transform-origin: 0 0;
+	transform-origin: 0 0;
+	color: #9e9e9e;
 }
 
 .select-wrapper + label {
     position: absolute;
-    top: 0.8rem;
-    font-size: 0.8rem;
+    top: 0.1rem;
+	font-size: 0.8rem;
 }
+
+.select-wrapper{
+	padding-top: 5px;
+}
+
+input:not([type]):focus:not([readonly]) + label, input[type=text]:not(.browser-default):focus:not([readonly]) + label, input[type=password]:not(.browser-default):focus:not([readonly]) + label, input[type=email]:not(.browser-default):focus:not([readonly]) + label, input[type=url]:not(.browser-default):focus:not([readonly]) + label, input[type=time]:not(.browser-default):focus:not([readonly]) + label, input[type=date]:not(.browser-default):focus:not([readonly]) + label, input[type=datetime]:not(.browser-default):focus:not([readonly]) + label, input[type=datetime-local]:not(.browser-default):focus:not([readonly]) + label, input[type=tel]:not(.browser-default):focus:not([readonly]) + label, input[type=number]:not(.browser-default):focus:not([readonly]) + label, input[type=search]:not(.browser-default):focus:not([readonly]) + label, textarea.materialize-textarea:focus:not([readonly]) + label
+{
+	color: #9e9e9e;
+}
+
+input[type=text]:not(.browser-default), input[type=text]:not(.browser-default):focus:not([readonly]),
+input[type=email]:not(.browser-default), input[type=email]:not(.browser-default):focus:not([readonly]),
+input[type=password]:not(.browser-default), input[type=password]:not(.browser-default):focus:not([readonly]),
+input[type=number]:not(.browser-default), input[type=number]:not(.browser-default):focus:not([readonly]) {
+    background: transparent;
+    border-radius: 0px;
+	border: 0!important;
+	border-bottom: 1px solid #9e9e9e!important;
+	width: 100%;
+	padding-left: 0;
+}
+
+
+.input-field input[type=search] ~ .mdi-navigation-close, .input-field input[type=search] ~ .material-icons {
+	color: #131313;
+}
+
+.input-field input[type=search] ~ .mdi-navigation-close, .input-field input[type=search] ~ .material-icons {
+	top: 10px;
+}
+
+input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):focus:not([readonly]), input[type=password]:not(.browser-default):focus:not([readonly]), input[type=email]:not(.browser-default):focus:not([readonly]), input[type=url]:not(.browser-default):focus:not([readonly]), input[type=time]:not(.browser-default):focus:not([readonly]), input[type=date]:not(.browser-default):focus:not([readonly]), input[type=datetime]:not(.browser-default):focus:not([readonly]), input[type=datetime-local]:not(.browser-default):focus:not([readonly]), input[type=tel]:not(.browser-default):focus:not([readonly]), input[type=number]:not(.browser-default):focus:not([readonly]), input[type=search]:not(.browser-default):focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]) {
+    border-bottom: 0;
+    box-shadow: none;
+}
+
+
 
 .character-counter{
 	margin-top: -25px;
@@ -185,6 +234,10 @@ h4{
 	padding: 0px;
 }
 
+.admin-menu-left .collapsible-header{
+	padding: 0.6rem;
+}
+
 .admin-menu-left .collapsible-body{
 	padding: 0px;
 	font-size: 16px;
@@ -303,10 +356,10 @@ span.badge.new:after {
 }
 
 .content nav .material-icons{
-	padding-top: -5px;
-	margin-top: -7px;
+	margin-top: -20px;
 	color: #131313;
 }
+
 
 /*modal*/
 .modal{
@@ -319,6 +372,11 @@ span.badge.new:after {
 
 .modal .modal-footer {
 	overflow-x: hidden;
+	text-align: center;
+}
+
+.modal .modal-content{
+    padding: 20px !important;
 }
 
 .modal-content .nav-wrapper{
@@ -355,7 +413,7 @@ span.badge.new:after {
 }
 
 .small-modal .modal-content{
-	padding: 25px 0 0 0;
+	padding: 20px 0 0 0!important;
 }
 
 .small-modal i{
@@ -430,9 +488,8 @@ span.badge.new:after {
     line-height: 1rem; 
     padding-left: 15px;
     background-color: #fff; 
-    border-bottom: 1px solid #ddd; 
-	min-height: 40px;
-	margin-bottom: -5.8px;
+    min-height: 40px;
+	margin-bottom: -4px;
 	width: 100%;
 }
 

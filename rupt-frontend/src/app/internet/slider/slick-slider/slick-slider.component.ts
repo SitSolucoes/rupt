@@ -28,6 +28,6 @@ export class SlickSliderComponent implements AfterContentInit{
 
 
 
-        this.$element = jQuery(this.el.nativeElement).slick(this.defaultOptions);
+        this.$element = jQuery(this.el.nativeElement).slick(this.defaultOptions); 
     }
 }

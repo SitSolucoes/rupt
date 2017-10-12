@@ -34,7 +34,7 @@
 </div>
 
 <div id="modalAceitar" class="modal center-sheet" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalAceitar">
-    <form class="col s12" #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <form class="col s12">
         <div class="modal-content">
             <h4>{{ sugestao.categoria }}</h4>
             
@@ -47,8 +47,17 @@
                     </a>
                 </div>
             </div>
-
-            <ul materialize="collapsible" class="collapsible" data-collapsible="accordion">
+            
+            <ul *ngIf="listCategorias() == false">
+                <li>
+                    <div class="list-item option-icons">
+                        <div class="col s12 m12 l12 xl12 item center-align">
+                            Nenhuma categoria encontrada.
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <ul materialize="collapsible" class="collapsible" data-collapsible="accordion" *ngIf="listCategorias() != false">
                 <li *ngIf="listCategorias() != false">
                     <div class="list-item header">
                         <div class="col s8 m8 l8 xl8 item">
@@ -86,19 +95,11 @@
 
 <!--modal de mensagem-->
 <div id="modalMessage" class="modal center-sheet small-modal" materialize="modal" [materializeParams]="[{dismissible: true}]" [materializeActions]="modalMessage">
-    <div class="modal-content">
-        <h4><i class="material-icons">check_circle</i></h4>
-        <h4>Salvo com sucesso.</h4>
-        <div class="small-modal-footer">
-            <a class="modal-action modal-close waves-effect waves-green btn-flat ">Fechar</a>
-        </div>
-    </div>
+    <app-modal-save></app-modal-save>
 </div>
 
-
-
 <div class="title">
-    <i class="material-icons">view_list</i> Categorias
+    Categorias
 </div>
 
 <div class="row">
@@ -124,7 +125,7 @@
                       <div class="input-field">
                           <input id="search" name="filtro" type="search" [(ngModel)]="filtroSugestoes">
                           <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                          <i class="material-icons">close</i>
+                          <i class="material-icons" (click)="filtroSugestoes = ''">close</i>
                       </div>
                   </form>
               </div>
@@ -182,12 +183,13 @@
   <div id="categorias" class="col s12">
     <div class="row">
         <div class="col s12 m12 l4 xl2">
-            <a class="modal-trigger" (click)="openModal(f);">
+            <a (click)="openModal(f);">
                 <div class="btn new">
                     Nova
                 </div>
             </a>
         </div>
+
         <div class="col s12 m12 l8 xl10 search">
             <nav>
                 <div class="nav-wrapper">
@@ -195,7 +197,7 @@
                         <div class="input-field">
                             <input name="filtroCategoria" type="search" [(ngModel)]="filtroCategorias">
                             <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                            <i class="material-icons">close</i>
+                            <i class="material-icons" (click)="filtroCategorias = ''">close</i>
                         </div>
                     </form>
                 </div>

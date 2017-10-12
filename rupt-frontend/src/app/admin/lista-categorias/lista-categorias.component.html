@@ -79,8 +79,8 @@
                 {{c.categoria}}
             </div>
             <div class="col s2 m2 l2 xl2 item">
-                <font *ngIf="!c.status">Inativo</font>
-                <font *ngIf="c.status">Ativo</font>
+                <font *ngIf="c.status == 0">Inativo</font>
+                <font *ngIf="c.status == 1">Ativo</font>
             </div>
             <div class="option-icons col s2 m2 l2 xl2" *ngIf="show == 1">
               <i class="material-icons" (click)="criar(c)">done</i>

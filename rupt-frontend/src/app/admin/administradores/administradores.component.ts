@@ -90,22 +90,20 @@ export class AdministradoresComponent implements OnInit {
       this._adminService.createAdmin(form).subscribe(
           (response: any) => {
               this.clear();
+              this.showMessage();
               this.getList();
           }
       );
     }else{
-      //console.log('entra no editando');
       this._adminService.updateAdmin(form, this.admin_selecionado.id).subscribe(
         (response: any) => {
           this.message = response;
           this.getList();
           this.clear();
           this.closeModal();
-          //console.log("primeiro mostra");
           this.showMessage();
-          this.closeMessage();
           if(this._route.snapshot.params['id']){
-            //console.log("depois redireciona")
+            this.closeMessage();
             localStorage.setItem('adminLogado', this.admin_selecionado.name);
             this._location.back();
           }

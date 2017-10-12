@@ -210,9 +210,12 @@ export class CategoriasComponent implements OnInit {
   }
 
   onSubmit(form){
+    console.log(form);
+    
     this._categoriasService.createCategoria(form).subscribe(
         (response: any) => {
           this.getCategorias();
+          this.getCategoriasAtivas();
         }
     );
     

@@ -35,6 +35,7 @@ import { PostsService } from './../services/posts.service';
 import { InputMaskModule } from 'ng2-inputmask';
 import { ListaCategoriasComponent } from './lista-categorias/lista-categorias.component';
 import { PagamentoComponent } from './pagamento/pagamento.component';
+import { ModalSaveComponent } from './modal-save/modal-save.component';
 
 
 @NgModule({
@@ -56,7 +57,8 @@ import { PagamentoComponent } from './pagamento/pagamento.component';
     ListaCategoriasComponent,
     MasksDirective,
     PagamentoComponent,
-    CurrencyFormatPipe
+    CurrencyFormatPipe,
+    ModalSaveComponent
   ],
 
   imports: [
