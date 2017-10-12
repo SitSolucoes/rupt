@@ -13,21 +13,15 @@ export class SlickSliderComponent implements AfterContentInit{
     $element: any;
 
     defaultOptions: any = {
-      infinite: true,
-      slidesToShow: 3,
-      slidesToScroll: 3
+        infinite: true,
+        slidesToShow: 3,
+        slidesToScroll: 3
     };
 
     constructor(private el: ElementRef) {
     }
 
     ngAfterContentInit() {
-        /*for (var key in this.options) {
-            this.defaultOptions[key] = this.options[key];
-        }*/
-
-
-
-        this.$element = jQuery(this.el.nativeElement).slick(this.defaultOptions); 
+        this.$element = jQuery(this.el.nativeElement).slick(this.defaultOptions);
     }
 }

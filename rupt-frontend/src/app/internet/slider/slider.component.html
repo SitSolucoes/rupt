@@ -1,6 +1,7 @@
 <!--
 <div *ngIf="sliderPosts">
     <div class="container-slider">
+    <section class="regular slider" *ngIf="sliderPosts">
         <section class="regular slider">
             <div class="banner" *ngFor="let s of sliderPosts">
                 <img src="../../../assets/img/banner4.png" class="img">
@@ -14,21 +15,13 @@
 <div class="container-slider">
     <section class="regular slider">
         <slick-slider *ngIf="sliderPosts">
-    <!--
-    <div><img src="../../../assets/img/banner4.png" class="img"></div>
-    <div><img src="../../../assets/img/banner4.png" class="img"></div>
-    <div><img src="../../../assets/img/banner4.png" class="img"></div>
-    <div><img src="../../../assets/img/banner4.png" class="img"></div>
-    <div><img src="../../../assets/img/banner4.png" class="img"></div>
-    -->
-    
-                <div class="banner" *ngFor="let s of sliderPosts">
-                    <img src="../../../assets/img/banner4.png" class="img">
-                    <div class="section"> entreterimento </div>
-                    <div class="banner-title"> Chega nova temporada de House of Cards</div>
-                </div>        
-                      
-             
+            <div class="banner" *ngFor="let s of sliderPosts">
+                <img src="../../../assets/img/banner4.png" class="img">
+                <div class="section"> entreterimento </div>
+                <div class="banner-title"> Chega nova temporada de House of Cards</div>
+            </div>
+                        
+            
     
         </slick-slider>
     </section>

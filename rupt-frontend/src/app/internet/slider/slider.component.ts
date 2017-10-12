@@ -7,7 +7,7 @@ import { Component, OnInit, Renderer, ElementRef, ViewChild} from '@angular/core
   styleUrls: ['./slider.component.css']
 })
 export class SliderComponent implements OnInit {
-  sliderPosts: any = [];
+  sliderPosts: any;
   sliderPostsHTML:string = '';
 
   constructor(private _postServices: PostsService,
@@ -23,14 +23,13 @@ export class SliderComponent implements OnInit {
 
 
   getSliderPostsHTML(){
+    console.log(this.sliderPosts);
+
     this._postServices.getSliderPosts().subscribe(
       (retorno: any) => {
         //console.log(retorno);
         this.sliderPosts = retorno.posts;
-        for(let p = 0; p < this.sliderPosts.length ; p++){
-          this.sliderPostsHTML = this.sliderPostsHTML + ' <div class="banner"><img src="../../../assets/img/banner4.png" class="img"><div class="section"> entreterimento </div><div class="banner-title"> Chega nova temporada de House of Cards</div></div>';
-        }
-      });
+    });
   }
 
 }
