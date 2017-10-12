@@ -14,7 +14,7 @@ import { UploadItem } from "./../../classes/upload-item";
 })
 export class ModalCadastroLeitorComponent implements OnInit {
   @Output() fechaModal = new EventEmitter();
-  ;
+  
   form: FormGroup;
   selectOptions: Option[] = [
     {value: 'M', name: 'Masculino'},

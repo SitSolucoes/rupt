@@ -13,6 +13,7 @@ export class HeaderComponent implements OnInit {
 
   usuarioLogado: any;
   modalActions = new EventEmitter<string|MaterializeAction>();
+  modalLogin = new EventEmitter<string|MaterializeAction>();
 
   constructor() { }
 
@@ -26,15 +27,20 @@ export class HeaderComponent implements OnInit {
   }
 
   openModalLogin() {
-    this.modalActions.emit({
+    this.modalLogin.emit({
       action: 'modal',
       params: ['open']});
   }
 
   closeModal(e){
-    console.log("evento: " + e);
     if(e){
       this.modalActions.emit({action:"modal",params:['close']});
+    }
+  }
+
+  closeModalLogin(e){
+    if(e){
+      this.modalLogin.emit({action:"modal",params:['close']});
     }
   }
 

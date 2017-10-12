@@ -3,6 +3,11 @@
      [materializeActions]="modalActions">
     <modal-cadastro-leitor (fechaModal)="closeModal($event)"></modal-cadastro-leitor>
 </div>
+<div id="ModalLogin" class="modal" 
+     materialize="modal" [materializeParams]="[{dismissible: false}]" 
+     [materializeActions]="modalLogin">
+    <modal-login (fechaModalLogin)="closeModal($event)"></modal-login>
+</div>
 
 <div class="headbar">
   
