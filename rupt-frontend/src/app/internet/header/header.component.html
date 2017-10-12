@@ -3,6 +3,7 @@
      [materializeActions]="modalActions">
     <modal-cadastro-leitor (fechaModal)="closeModal($event)"></modal-cadastro-leitor>
 </div>
+
 <div class="headbar">
   
         <a routerLink="noticias"><img src="../../../assets/img/logo.png" class="img2"></a>
@@ -15,7 +16,11 @@
   
           <div class="headbar-right">
   
-              <a href="#modal2">  <div class="login login-border"> Entrar </div> </a>
+            <a (click)="openModalLogin()">  
+                <div class="login login-border"> 
+                    Entrar 
+                </div>
+            </a>
   
             <a (click)="openModal()">  
                 <div class="login login-border"> 

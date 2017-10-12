@@ -10,6 +10,7 @@ import { NewsComponent } from 'app/internet/news/news.component';
 import { InternetInicioComponent } from 'app/internet/internet-inicio/internet-inicio.component';
 import { ContatoComponent } from './contato/contato.component';
 import { CadastroLeitorComponent} from './cadastro-leitor/cadastro-leitor.component';
+import { CadastroEscritorComponent } from './cadastro-escritor/cadastro-escritor.component';
 
 const routes: Routes = [
   { path : '', redirectTo: 'rupt', pathMatch: 'full'},
@@ -22,6 +23,7 @@ const routes: Routes = [
       { path : 'footer', component: FooterComponent },
       { path : 'news', component: NewsComponent },
       { path : 'cadastro', component: CadastroLeitorComponent },
+      { path : 'cadastro-escritor', component: CadastroEscritorComponent },
       { path : 'contato', component: ContatoComponent},
       { path : '', redirectTo: 'noticias', pathMatch: 'full'},
       { path : '**', redirectTo: 'noticias', pathMatch: 'full'},
