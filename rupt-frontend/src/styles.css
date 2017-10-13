@@ -30,7 +30,9 @@ body{
     font-family: lato;
 }
 
-input[type=text]:not(.browser-default){
+input[type=text]:not(.browser-default),
+input[type=password]:not(.browser-default) 
+{
   width: auto;
   border-bottom: 0px !important;
   background: #fff;
@@ -1667,6 +1669,24 @@ input[type=text]:not(.browser-default):focus:not([readonly]){
   margin-bottom: 5px;
   font-weight: bold;
 }
+
+.cadastro .container .area .menu-radio label{
+    display: inline;
+    margin-right: 25px;
+}
+
+[type="radio"]:not(:checked), [type="radio"]:checked {
+    display: none;
+}
+
+[type="radio"]:checked + label:after, [type="radio"].with-gap:checked + label:after {
+    background-color: #f97000;
+}
+
+[type="radio"]:checked + label:after, [type="radio"].with-gap:checked + label:before, [type="radio"].with-gap:checked + label:after {
+    border: 2px solid #f97000;
+}
+
 
 .cadastro .container .area .input{
     width: 100%;

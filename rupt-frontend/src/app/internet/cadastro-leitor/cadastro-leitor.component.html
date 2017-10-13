@@ -1,6 +1,6 @@
 <div class="cadastro">
   <div class="container">
-    <p> Detalhes pessoais </p>
+    <p> Dados pessoais </p>
     
     <div class="area"> 
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -41,17 +41,20 @@
         <label> Confirmar Senha </label> 
         <input type="password" class="input" maxlength="30" name="marca" placeholder="Crie sua senha">
       </div>
-
+      <div class="menu">
+          <div class="row menu-radio">
+                  <input name="sexo" type="radio" id="f" value="F"/>
+                  <label for="f">Feminino</label>
+                  <input name="sexo" type="radio" id="m" value="M"/>
+                  <label for="m">Masculino</label>
+                  <input name="sexo" type="radio" id="o" value="O" />
+                  <label for="o">Outro</label>
+          </div>
+      </div>
       
       <button type="submit" class="button" id="submit-contato">Cadastrar</button>
     </form>
-    <div class="menu">
-     <label> 
-       <input type="radio" name="sexo" value="F" > <b style="margin-right:20px;">Feminino</b> <font ></font>
-       <input type="radio" name="sexo" value="M" > <b style="margin-right:20px;"> Masculino</b>
-       <input type="radio" name="sexo" value="O" > <b>Outros</b>
-       Sexo </label>
-    </div>
+      
     </div>
     
   </div>
