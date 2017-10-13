@@ -105,17 +105,11 @@
 </div>
 <!--modal de mensagem-->
 <div id="modalMessage" class="modal center-sheet small-modal" materialize="modal" [materializeParams]="[{dismissible: true}]" [materializeActions]="modalMessage">
-    <div class="modal-content">
-        <h4><i class="material-icons">check_circle</i></h4>
-        <h4>Salvo com sucesso</h4>
-        <div class="small-modal-footer">
-            <a class="modal-action modal-close waves-effect waves-green btn-flat ">Fechar</a>
-        </div>
-    </div>
+    <app-modal-save></app-modal-save>
 </div>
 
 <div class="title">
-    <i class="material-icons">view_list</i> Leitores
+    Leitores
 </div> 
 
 <div class="row">
@@ -133,7 +127,7 @@
                     <div class="input-field">
                         <input id="search" name="filtro" type="search" [(ngModel)]="filtro">
                         <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                        <i class="material-icons">close</i>
+                        <i class="material-icons" (click)="filtro = ''">close</i>
                     </div>
                 </form>
             </div>
@@ -168,7 +162,9 @@
             </div>
         </div>
     </li>
-    <li *ngFor="let l of listLeitores() | paginate: {itemsPerPage: 10, currentPage:page, id: '1'}; let i = index" (click)="openModalEdit(l)">
+    <li *ngFor="let l of listLeitores() | paginate: {itemsPerPage: 10, currentPage:page, id: '1'}; let i = index" (click)="openModalEdit(l)"
+    [ngClass]="{ 'recusado' : !l.ativo }"
+    >
         <div class="list-item option-icons">
             <div class="col s2 m2 l2 xl2 item">
                 {{l.nick}}

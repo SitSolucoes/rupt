@@ -356,6 +356,16 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="row" *ngIf="recusar || escritor.status == 'r'">
+                    <div class="input-field col s12">
+                        <input id="motivo_recusa" name="motivo_recusa" type="text"
+                        [ngModel]="escritor.motivo_recusa" 
+                        maxlength="80" minlength="5" required #motivoRecusa="ngModel">
+
+                        <label [ngClass]="{'active': true}" for="motivo_recusa">Motivo</label>       
+                    </div>
+                </div>
                 
                 <input name="src_foto" type="text" hidden [(ngModel)]="escritor.src_foto">
             </div>   
@@ -389,39 +399,25 @@
             <a (click)="newPage = newPage - 1" *ngIf="newPage != 1" class="modal-action waves-effect waves-green btn-flat ">Voltar</a>
         </div>
         <div class="modal-footer" *ngIf="!escritor.data_aceite && escritor.id != 0 && idLeitor == 0">
-            <a (click)="closeModal()" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
-            <a *ngIf="!recusar && escritor.status != 'r'" (click)="recusar = !recusar" class="modal-action waves-effect waves-green btn-flat ">Recusar</a>
-            <button *ngIf="recusar" type="submit" class="modal-action modal-close waves-effect waves-green btn-flat"
-                [disabled]="!f.valid">
-                Recusar
-            </button>
+            <div class="row">
+                
+                    <a (click)="closeModal()" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
+                    <a *ngIf="!recusar && escritor.status != 'r'" (click)="recusar = !recusar" class="modal-action waves-effect waves-green btn-flat ">Recusar</a>
+                    <button *ngIf="recusar" type="submit" class="modal-action modal-close waves-effect waves-green btn-flat"
+                        [disabled]="!f.valid">
+                        Recusar
+                    </button>
 
-            <a *ngIf="!recusar" (click)="aceitar(escritor.id)" class="modal-action modal-close waves-effect waves-green btn-flat"
-                [ngClass]="{'left': escritor.status != 'r'}" 
-            >Aceitar</a>
-            <div *ngIf="recusar || escritor.status == 'r'" [@enterAnimation]="recusar">
-                <div class="row">
-                    <div class="input-field col s6">
-                        <input id="motivo_recusa" name="motivo_recusa" type="text"
-                        [ngModel]="escritor.motivo_recusa" 
-                        maxlength="80" minlength="5" required #motivoRecusa="ngModel">
-
-                        <label [ngClass]="{'active': true}" for="motivo_recusa">Motivo</label>       
-                    </div>
-                </div>
+                    <a *ngIf="!recusar" (click)="aceitar(escritor.id)" class="modal-action modal-close waves-effect waves-green btn-flat"
+                        [ngClass]="{'left': escritor.status != 'r'}" 
+                    >Aceitar</a>
             </div>
         </div>
     </form> 
 </div>
 <!--modal de mensagem-->
 <div id="modalMessage" class="modal center-sheet small-modal" materialize="modal" [materializeParams]="[{dismissible: true}]" [materializeActions]="modalMessage">
-    <div class="modal-content">
-        <h4><i class="material-icons">check_circle</i></h4>
-        <h4>{{ mensagem }}</h4>
-        <div class="small-modal-footer">
-            <a class="modal-action modal-close waves-effect waves-green btn-flat ">Fechar</a>
-        </div>
-    </div>
+    <app-modal-save></app-modal-save>
 </div>
 
 <!--modal para puxar leitor-->
@@ -438,9 +434,8 @@
     </div>
 </div>
 
-
 <div class="title">
-    <i class="material-icons">view_list</i> Escritores
+    Colaboradores
 </div>
 
 <div class="row">
@@ -465,7 +460,7 @@
                             <div class="input-field">
                                 <input id="search" name="filtro" type="search" [(ngModel)]="filtroSolicitacoes">
                                 <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                                <i class="material-icons">close</i>
+                                <i class="material-icons" (click)="filtroSolicitacoes = ''">close</i>
                             </div>
                         </form>
                     </div>
@@ -627,7 +622,7 @@
                             <div class="input-field">
                                 <input id="search" name="filtro" type="search" [(ngModel)]="filtroEscritores">
                                 <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                                <i class="material-icons">close</i>
+                                <i class="material-icons" (click)="filtroEscritores = ''">close</i>
                             </div>
                         </form>
                     </div>

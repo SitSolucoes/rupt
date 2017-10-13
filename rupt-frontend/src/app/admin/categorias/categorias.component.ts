@@ -210,19 +210,16 @@ export class CategoriasComponent implements OnInit {
   }
 
   onSubmit(form){
-    console.log(form);
-    
     this._categoriasService.createCategoria(form).subscribe(
         (response: any) => {
-          this.getCategorias();
-          this.getCategoriasAtivas();
+          this.showMessage();
         }
     );
-    
-    this.showMessage();
   }
 
   showMessage(){
+    this.getCategorias();
+    this.getCategoriasAtivas();
     this.modalMessage.emit({action:"modal",params:['open']});
   }
 

@@ -66,12 +66,12 @@ a{
 
 .select-wrapper + label {
     position: absolute;
-    top: 0.1rem;
+    top: 0px;
 	font-size: 0.8rem;
 }
 
 .select-wrapper{
-	padding-top: 5px;
+	/*height: 46px;*/
 }
 
 input:not([type]):focus:not([readonly]) + label, input[type=text]:not(.browser-default):focus:not([readonly]) + label, input[type=password]:not(.browser-default):focus:not([readonly]) + label, input[type=email]:not(.browser-default):focus:not([readonly]) + label, input[type=url]:not(.browser-default):focus:not([readonly]) + label, input[type=time]:not(.browser-default):focus:not([readonly]) + label, input[type=date]:not(.browser-default):focus:not([readonly]) + label, input[type=datetime]:not(.browser-default):focus:not([readonly]) + label, input[type=datetime-local]:not(.browser-default):focus:not([readonly]) + label, input[type=tel]:not(.browser-default):focus:not([readonly]) + label, input[type=number]:not(.browser-default):focus:not([readonly]) + label, input[type=search]:not(.browser-default):focus:not([readonly]) + label, textarea.materialize-textarea:focus:not([readonly]) + label
@@ -89,6 +89,7 @@ input[type=number]:not(.browser-default), input[type=number]:not(.browser-defaul
 	border-bottom: 1px solid #9e9e9e!important;
 	width: 100%;
 	padding-left: 0;
+	height: 46px;
 }
 
 
@@ -308,6 +309,13 @@ span.badge.new:after {
 	padding-bottom: 5px;
 }
 
+.content .sub-title{
+	font-size: 24px;
+	padding-top: 10px;
+	font-family: "Nexa Light";
+}
+
+
 .option-icons .material-icons{
 	font-size: 30px;
 	float: right;
@@ -364,6 +372,7 @@ span.badge.new:after {
 /*modal*/
 .modal{
 	max-height: 85%;
+	overflow-y: auto;
 }
 .modal.modal-fixed-footer {
     height: 100%;
@@ -372,7 +381,7 @@ span.badge.new:after {
 
 .modal .modal-footer {
 	overflow-x: hidden;
-	text-align: center;
+	width: 100%!important;
 }
 
 .modal .modal-content{
@@ -477,6 +486,10 @@ span.badge.new:after {
 }
 
 /* lista */
+.collapsible-header{
+	padding: 0.6rem;
+}
+
 .list{
 	margin-top: 20px;
 }
@@ -734,9 +747,13 @@ span.badge.new:after {
 	border-left: 1px solid #F97000;
 }
 
+.orderby{
+	margin-bottom: 15px;
+	margin-top: 15px;
+}
+
 .orderby .input-field {
 	margin-left: 25px;
-	margin-top: 15px;
 }
 
 .recusado{

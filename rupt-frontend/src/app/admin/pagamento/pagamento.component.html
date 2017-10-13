@@ -95,17 +95,11 @@
 </div>
 
 <div id="modalMessage" class="modal center-sheet small-modal" materialize="modal" [materializeParams]="[{dismissible: true}]" [materializeActions]="modalMessage">
-    <div class="modal-content">
-        <h4><i class="material-icons">check_circle</i></h4>
-        <h4>Salvo com sucesso.</h4>
-        <div class="small-modal-footer">
-            <a class="modal-action modal-close waves-effect waves-green btn-flat ">Fechar</a>
-        </div>
-    </div>
+    <app-modal-save></app-modal-save>
 </div>
 
 <div class="title">
-    <i class="material-icons">view_list</i> Pagamentos
+    Pagamentos
 </div>
 
 <div class="row">
@@ -131,7 +125,7 @@
                         <div class="input-field">
                             <input id="search" name="filtro" type="search" [(ngModel)]="filtroPendente">
                             <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                            <i class="material-icons">close</i>
+                            <i class="material-icons" (click)="filtroPendente = ''">close</i>
                         </div>
                     </form>
                 </div>
@@ -221,7 +215,7 @@
                         <div class="input-field">
                             <input id="search" name="filtro" type="search" [(ngModel)]="filtroPagamento">
                             <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                            <i class="material-icons">close</i>
+                            <i class="material-icons" (click)="filtroPagmento = ''">close</i>
                         </div>
                     </form>
                 </div>
