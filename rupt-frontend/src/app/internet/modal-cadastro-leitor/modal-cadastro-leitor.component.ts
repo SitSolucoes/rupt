@@ -33,6 +33,7 @@ export class ModalCadastroLeitorComponent implements OnInit {
       nick: [null, [Validators.required]],
       sexo: [null, Validators.required],
       nascimento: [null, Validators.required],
+      endereco: [null],
       src_foto: [null],
       email: [null, [Validators.required, Validators.email]],
       senha: [null],
@@ -41,8 +42,9 @@ export class ModalCadastroLeitorComponent implements OnInit {
   }
 
   onSubmit(){
+    console.log('form');
     console.log(this.form);
-    //console.log(window.document.getElementById('src_foto'));
+    /*console.log(window.document.getElementById('src_foto'));
       this._leitoresService.createLeitor(this.form).subscribe(
         (data: any) => {
           //this.message = response;
@@ -53,7 +55,7 @@ export class ModalCadastroLeitorComponent implements OnInit {
         (error) =>{
           console.log(error);
         }
-      );
+      );*/
   }
 
   doLogin(){
