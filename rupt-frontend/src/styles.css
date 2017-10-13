@@ -45,7 +45,8 @@ input[type=password]:not(.browser-default)
   box-sizing: border-box !important;
 }
 
-input[type=text]:not(.browser-default):focus:not([readonly]){
+input[type=text]:not(.browser-default):focus:not([readonly]),
+input[type=password]:not(.browser-default):focus:not([readonly]) {
   border: 1px solid #dedede !important;
   box-shadow: none;
   transition: 0px;

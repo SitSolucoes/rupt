@@ -14,31 +14,63 @@ import { UploadItem } from "./../../classes/upload-item";
 })
 export class CadastroLeitorComponent implements OnInit {
 
+  message: any;
+  form: FormGroup;
+  selectOptions: Option[] = [
+    {value: 'M', name: 'Masculino'},
+    {value: 'F', name: 'Feminino'},
+    {value: 'O', name: 'Outros'}
+  ];
+
   constructor(private _formBuilder: FormBuilder,
     private _uploadFileService: UploadFileService,
     private _leitoresService: LeitoresService,
     private _router: Router) { }
 
-    form: FormGroup;
-    selectOptions: Option[] = [
-      {value: 'M', name: 'Masculino'},
-      {value: 'F', name: 'Feminino'},
-      {value: 'O', name: 'Outros'}
-    ];
+    
 
   ngOnInit() {
     this.form = this._formBuilder.group({
-      nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(60)]],
+      nome: [null, [Validators.required, Validators.minLength(3)]],
       nick: [null, [Validators.required]],
       sexo: [null, Validators.required],
       nascimento: [null, Validators.required],
       src_foto: [null],
       email: [null, [Validators.required, Validators.email]],
       senha: [null],
+      confirma_senha: [null],
       ativo: true
     });
   }
-  message: any;
+  
+
+  /*validaNick(){
+    if (this.leitor.nick){
+      if (this.leitor.nick.length >= 3){
+        this._leitorService.validaNick(this.leitor.nick, this.leitor.id).subscribe(
+          (nick: boolean) => {this.nickInvalido = nick}
+        );
+      }
+      else
+        this.nickInvalido = false;
+    }
+    else
+        this.nickInvalido = false;
+  }
+
+  validaEmail(){
+    if (this.leitor.email){
+      if (this.leitor.email.length >= 6){
+        this._leitorService.validaEmail(this.leitor.email, this.leitor.id).subscribe(
+          (email: boolean) => {this.emailInvalido = email}
+        );
+      }
+      else
+        this.emailInvalido = false;
+    }
+    else
+        this.emailInvalido = false;
+  }*/
 
   onSubmit(){
       this._leitoresService.createLeitor(this.form).subscribe(
