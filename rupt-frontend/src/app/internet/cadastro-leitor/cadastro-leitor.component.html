@@ -1,77 +1,59 @@
 <div class="cadastro">
-
-    <div class="container">
-
+  <div class="container">
     <p> Detalhes pessoais </p>
-
+    
     <div class="area"> 
-      
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="menu">
-
         <label> Nome </label> 
         
-        <input type="text" class="input" maxlength="30" name="marca" placeholder="Seu primeiro nome">
+        <input type="text" class="input" maxlength="30" name="marca" placeholder="Seu primeiro nome" formControlName="nome">
 
       </div>
-      
       <div class="menu marginless">
 
         <label> Nick </label> 
         
-        <input type="text" class="input" maxlength="30" name="marca" placeholder="A sua marca na Rupt">
+        <input type="text" class="input" maxlength="30" name="marca" placeholder="A sua marca na Rupt" formControlName="nick">
 
       </div>
 
       <div class="menu">
 
-        <label> Idade </label> 
+        <label> Nascimento </label> 
         
-        <input type="text" class="input" maxlength="30" name="marca" placeholder="Qual sua idade">
+        <input type="text" class="input" maxlength="30" name="marca" placeholder="Qual sua idade" formControlName="nascimento">
 
       </div>
-
       <div class="menu marginless">
 
         <label> Email </label> 
         
-        <input type="text" class="input" maxlength="30" name="marca" placeholder="Insira seu email">
+        <input type="text" class="input" maxlength="30" name="marca" placeholder="Insira seu email" formControlName="email">
 
       </div>
 
-        <div class="menu">
-
-        <label> Endereço </label> 
-        
-        <input type="text" class="input" maxlength="30" name="marca" placeholder="Seu endereço atual">
-
-        </div>
-
-        <div class="menu marginless">
-
+      <div class="menu">
         <label> Senha </label> 
-        
-        <input type="text" class="input" maxlength="30" name="marca" placeholder="Crie sua senha">
-
+        <input type="password" class="input" maxlength="30" name="marca" placeholder="Crie sua senha" formControlName="senha">
+      </div>
+      <div class="menu marginless">
+        <label> Confirmar Senha </label> 
+        <input type="password" class="input" maxlength="30" name="marca" placeholder="Crie sua senha">
       </div>
 
-        <div class="menu">
-
-        <label> Sexo </label> 
-        
-        <input type="radio" name="gender" value="female"> <b>Feminino</b> <font style="margin-right:20px;"></font>
-        
-        <input type="radio" name="gender" value="male"> <b>Masculino</b>
-       
-
-      </div>
-
+      
       <button type="submit" class="button" id="submit-contato">Cadastrar</button>
-
-
-
+    </form>
+    <div class="menu">
+     <label> 
+       <input type="radio" name="sexo" value="F" > <b style="margin-right:20px;">Feminino</b> <font ></font>
+       <input type="radio" name="sexo" value="M" > <b style="margin-right:20px;"> Masculino</b>
+       <input type="radio" name="sexo" value="O" > <b>Outros</b>
+       Sexo </label>
     </div>
-
-</div>
-
-
+    </div>
+    
+  </div>
+  
 </div>
