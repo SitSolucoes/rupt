@@ -131,10 +131,10 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     display: block;
     float: left;
     color: #fff;
-    font-family: 'Gilroy';
+    font-family: 'nexa-bold';
     font-weight: bolder;
     margin-left: 5px;
-    margin-top: 10px;
+    margin-top: 12px;
 }
 
 .headbar .headbar-right .btn{
@@ -142,6 +142,22 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     box-shadow: none;
     padding-left: 15px;
     padding-right: 0px;
+}
+
+.headbar .headbar-right .notificacao{
+    display: block;
+    float: left;
+    position: absolute;
+    right: 90px;
+    color: #fff;
+    width: 15px;
+    font-size: 10px;
+    font-weight: bolder;
+    text-align: center;
+    height: 15px;
+    border-radius: 100%;
+    background: red;
+    color: #fff;
 }
 
 .headbar .headbar-right .dropdown-content li > a{
@@ -1702,10 +1718,24 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
   padding-bottom: 80px;
 }
 
+.cadastro .button{
+    margin-top: 40px;
+    height: 30px;
+    text-align: center;
+    font-weight: bolder;
+    padding-top: 3px;
+    width: 15%;
+    border-radius: 4px;
+    display: block;
+    float: right;
+    background: #f97000;
+    color: #fff;
+}
+
 .cadastro .container{
   display: block;
   float: left;
-  width: 100%;
+  width: 90%;
   margin-left: 60px;
   padding-top: 40px;
 }
@@ -1713,7 +1743,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .cadastro .container p{
   display: block;
   float: left;
-  width: 100%;
+  width: 80%;
   margin-bottom: 20px;
   font-family: 'nexa-bold';
   font-size: 30px;
@@ -1724,7 +1754,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .cadastro .container .area{
   display: block;
   float: left;
-  width: 90%;
+  width: 100%;
   border-top: 1px solid #e8dddd;
   padding-top: 40px;
   color: #4f4f4f;
@@ -1926,6 +1956,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .cadastro-escritor .container .background-green{
     background: green;
     border: 1px solid green;
+    opacity: .8;
 }
 
 .cadastro-escritor  .img-area{

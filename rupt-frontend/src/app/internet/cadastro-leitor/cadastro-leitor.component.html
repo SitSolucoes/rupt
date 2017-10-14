@@ -1,11 +1,15 @@
 <div class="cadastro">
   <div class="container">
     <p> Dados pessoais </p>
-    
+
+    <!-- Caso esteja logado -->
+    <a routerLink="../cadastro-escritor"> <div class="button"> Tornar-se escritor </div> </a>
+    <!-- É SÓ ESSE LINK MESMO-->
+
     <div class="area"> 
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="menu">
-        <label> Nome </label> 
+        <label> Nome </label>
         
         <input type="text" class="input" maxlength="60" name="nome" placeholder="Seu primeiro nome" formControlName="nome"
         [ngClass]="{'invalid': verificaValidTouched('nome')}"
@@ -68,7 +72,10 @@
                   <label for="o" (click)="selectSexo('O')">Outro</label>
           </div>
       </div>
-      
+
+        <!-- Caso esteja logado
+        <button type="submit" class="button" id="submit-contato">Salvar</button>
+        -->
       <button type="submit" class="button" id="submit-contato">Cadastrar</button>
     </form>
       
