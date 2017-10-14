@@ -12,15 +12,39 @@
 <div class="headbar">
   
         <a routerLink="noticias"><img src="../../../assets/img/logo.png" class="img2"></a>
-              
-          <a routerLink="perfil"><div class="title"> perfil </div> </a>
+
+            <input type="text" class="search" maxlength="30" name="marca" placeholder="Pesquisar">
+
+        <img src="../../../assets/img/search2.png" class="img5">
+
+        <!--
 
           <a routerLink="faq"><div class="title"> Faq </div></a>
   
           <a routerLink="contato"><div class="title"> contato </div></a>
+
+          -->
   
           <div class="headbar-right">
-  
+
+              <a routerLink="perfil"><img src="../../../assets/img/profile.png" class="img4"> <p>Nátaly</p> </a>
+
+              <div class="login"> | </div>
+
+              <img src="../../../assets/img/bell.png" class="img">
+
+              <a class='dropdown-button btn' data-activates='dropdown1'><img src="../../../assets/img/arrow.png" class="img img6"></a>
+
+              <!-- Dropdown Structure -->
+              <ul id='dropdown1' class='dropdown-content' style="top: 60px !important;">
+                  <li><a routerLink="cadastro">Editar Perfil</a></li>
+                  <li><a href="#!">Mudar Senha</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#!">Logout</a></li>
+              </ul>
+
+              <!--
+
             <a (click)="openModalLogin()">  
                 <div class="login login-border"> 
                     Entrar 
@@ -32,13 +56,12 @@
                       Cadastre-se 
                 </div> 
             </a>
-  
-              <img src="../../../assets/img/search.png" class="img3">
-  
-              <div class="login"> | </div>
-  
-              <img src="../../../assets/img/toggle.png" class="img">
-  
+
+            -->
+
+
+
+
           </div>
   
       </div>
