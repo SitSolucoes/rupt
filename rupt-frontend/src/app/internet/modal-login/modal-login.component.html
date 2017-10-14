@@ -1,6 +1,23 @@
-<form [formGroup]="formulario" (ngSubmit)="onSubmit()">
-    <input type="text" class="input" maxlength="30" name="email" formControlName="email">
-    <input type="password" class="input" maxlength="20" name="senha" formControlName="senha">
+    <div class="modal-content">
+    <div class="title">
+        Login
+        <a click="#" class=" modal-action modal-close close">x</a>
+    </div>
 
-    <button type="submit" class="button" id="submit-contato">Login</button>
-</form>
+        <div class="login-modal">
+            <div class="container">
+            <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+
+                <img src="../../../assets/img/profile2.png" class="img">
+                <input type="text" class="input" maxlength="30" name="email" formControlName="email" placeholder="Nome do usuário">
+
+                <img src="../../../assets/img/lock.png" class="img">
+                <input type="password" class="input" maxlength="20" name="senha" formControlName="senha" placeholder="Password">
+
+                <button type="submit" class="button" id="submit-contato">Login</button>
+
+                <div class="text">Esqueceu a Senha?</div>
+            </form>
+            </div>
+        </div>
+</div>

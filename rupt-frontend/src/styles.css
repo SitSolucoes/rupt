@@ -772,8 +772,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     text-align: center;
     padding-top: 8px;
     padding-bottom: 8px;
-    font-family: 'nexa';
-    font-weight: bold;
+    font-family: 'nexa-bold';
 }
 
 .modal-content .info{
@@ -1853,9 +1852,9 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
      border: 1px solid #f97000;
  }
 
-.cadastro-escritor .container .background-blue{
-    background: #0000ff;
-    border: 1px solid #0000ff;
+.cadastro-escritor .container .background-green{
+    background: green;
+    border: 1px solid green;
 }
 
 .cadastro-escritor  .img-area{
@@ -1888,4 +1887,54 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     height: 40px;
     margin-bottom: 20px;
     border: 1px solid #dedede !important;
+}
+
+.login-modal{
+    display: block;
+    float: left;
+    width: 100%;
+    height: 200px;
+    margin-top: 40px;
+}
+
+.login-modal .container{
+    display: block;
+    margin: 0 auto;
+    width: 70%;
+}
+
+.login-modal .container .input{
+    width: 100% !important;
+}
+
+.login-modal .container .button{
+    width: 60% !important;
+    height: 35px !important;
+    border: 1px solid #f97000 !important;
+    color: #fff;
+    padding-top: 2px !important;
+    border-radius: 4px;
+    background: #f97000 !important;
+    font-weight: bold;
+    opacity: .9;
+}
+
+.login-modal .container .img{
+    height: 25px;
+    position: absolute;
+    left: 79%;
+    margin-top: 7px;
+}
+
+.modal2{
+    top: 15% !important;
+    width: 50%;
+}
+
+.login-modal .container .text{
+    display: block;
+    float: left;
+    margin-top: 10px;
+    color: #969696;
+    margin-left: 50px;
 }
