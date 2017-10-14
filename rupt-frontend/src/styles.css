@@ -1907,6 +1907,11 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     width: 100% !important;
 }
 
+.login-modal .container .error{
+    padding-top: 10px;
+    margin-bottom: 10px;
+}
+
 .login-modal .container .button{
     width: 60% !important;
     height: 35px !important;

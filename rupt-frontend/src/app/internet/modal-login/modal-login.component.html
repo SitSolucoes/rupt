@@ -14,9 +14,14 @@
                 <img src="../../../assets/img/lock.png" class="img">
                 <input type="password" class="input" maxlength="20" name="senha" formControlName="senha" placeholder="Password">
 
+                <div *ngIf="erro">
+                    <div class="error col s12">{{ mensagemErro }}</div>
+                </div>
+
                 <button type="submit" class="button" id="submit-contato">Login</button>
 
                 <div class="text">Esqueceu a Senha?</div>
+
             </form>
             </div>
         </div>

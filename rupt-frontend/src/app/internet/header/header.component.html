@@ -1,12 +1,12 @@
 <div id="ModalCadastro" class="modal"
      materialize="modal" [materializeParams]="[{dismissible: false}]" 
      [materializeActions]="modalActions">
-    <modal-cadastro-leitor (fechaModal)="closeModal($event)"></modal-cadastro-leitor>
+    <modal-cadastro-leitor (closeModal)="closeModal($event)"></modal-cadastro-leitor>
 </div>
 <div id="ModalLogin" class="modal modal2"
      materialize="modal" [materializeParams]="[{dismissible: false}]" 
      [materializeActions]="modalLogin">
-    <modal-login (fechaModalLogin)="closeModal($event)"></modal-login>
+    <modal-login (closeModalLogin)="closeModalLogin($event)"></modal-login>
 </div>
 
 <div class="headbar">
