@@ -19,6 +19,8 @@ import { CadastroLeitorComponent } from './cadastro-leitor/cadastro-leitor.compo
 import { SlickSliderComponent } from './slider/slick-slider/slick-slider.component';
 import { ModalLoginComponent } from './modal-login/modal-login.component';
 import { CadastroEscritorComponent } from './cadastro-escritor/cadastro-escritor.component';
+import { CategoriaSliderComponent } from './categoria-slider/categoria-slider.component';
+import { CategoriasComponent } from './categorias/categorias.component';
 
 @NgModule({ 
   imports: [
@@ -43,7 +45,9 @@ import { CadastroEscritorComponent } from './cadastro-escritor/cadastro-escritor
     SliderComponent,
     CadastroLeitorComponent,
     SlickSliderComponent,
-    CadastroEscritorComponent
+    CadastroEscritorComponent,
+    CategoriaSliderComponent,
+    CategoriasComponent
   ]
 })
 export class InternetModule { }
