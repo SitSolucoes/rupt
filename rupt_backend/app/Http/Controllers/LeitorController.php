@@ -3,54 +3,39 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Hash;
 use App\Leitor;
 
 class LeitorController extends Controller
 {
-    public function signin(Request $request){
-        $credentials = $request->only('email', 'password');
-        $email = $request->input('email');
-        $senha = $request->input('password');
-        try{
-            $leitor = Leitor::where('email', $request->input('email'))
-            ->where('ativo', 1)
-            ->first();
-            if($leitor != null){
-                if($leitor->password == bcrypt($senha) || $leitor->password = $senha){
-                    $leitor->tokenLogin = $this->generateRandomString($email);//token gerado;
-                    $leitor->tokenExpira = date_default_timezone_get();
-                    $leitor->save();
+    public function signin (Request $request){
+        $leitor = Leitor::where('email', $request->email)->first();
+        
+        if ($leitor){
+            if (!$leitor->ativo){
+                return response()->json(['login' => "Conta desativada."], 200);
+            }
 
-                    return response()->json([
-                        'token' => $leitor->tokenLogin,
-                        'user_name' => $leitor->nome,
-                        'user_id' => $leitor->id
-                    ],200);       
-                }else
-                    return response()->json([
-                        'erro' => 'Senha incorreta'
-                    ],500);
-            }else
-                return response()->json([
-                    'erro' => 'Email não localizado'
-                ],500);
-            
-        }catch(JWTException $e){
-            return response()->json(['error' => 'Erro JWT'],401);
+            if (Hash::check($request->senha, $leitor->password)){
+                $token = date('z')*$leitor->id;
+                $leitor->tokenLogin = Hash::make($token);
+                $leitor->save();
+
+                $response = [
+                    'leitor' => $leitor,
+                    'token' => $leitor->tokenLogin,
+                    'login' => true
+                ];
+                    
+                return response()->json($response, 200);
+            }
+            else 
+                return response()->json(['login' => "Senha incorreta."], 200);
         }
+        else 
+            return response()->json(['login' => "Email não encontrado."], 200);
     }
-    
-    private function generateRandomString($email){
-        $characters = $email . 'segurancapesada';
-        $charactersLength = strlen($characters);
-        $randomString = '';
-        $length = 45;
-        for ($i = 0; $i < $length; $i++) {
-            $randomString .= $characters[rand(0, $charactersLength - 1)];
-        }
-        return $randomString;
-    }
+ 
     private function getById($id){
         $leitor = Leitor::where('id', $id)->get();
         return $leitor;
@@ -66,7 +51,7 @@ class LeitorController extends Controller
             $leitor->nascimento = date('Y-m-d', strtotime($date));
             $leitor->sexo = $request->input('sexo');
             $leitor->src_foto = $request->input('src_foto');
-            $leitor->password = bcrypt($request->input('password'));
+            $leitor->password = Hash::make($request->input('password'));
             $leitor->ativo = $request->input('ativo');
             $leitor->save();
         }catch(Exception $exception){

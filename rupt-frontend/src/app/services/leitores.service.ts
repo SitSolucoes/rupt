@@ -1,3 +1,4 @@
+import { Base64 } from './../shared/Base64';
 import { ConnectionFactory } from './../classes/connection-factory';
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
@@ -6,6 +7,7 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class LeitoresService {
+  base64: Base64 = new Base64();
 
   private headers = new Headers({'Content-Type': 'application/json'});
   private _url: string = ConnectionFactory.API_CONNECTION;
@@ -43,23 +45,24 @@ export class LeitoresService {
     });
   }  
 
-  doLogin(f){
-    const body = JSON.stringify({
-        email: f.value.email,
-        password: f.value.senha
-    });
-    //console.log("senha: " +f.value.password);
-    return this._http.put(this._url + 'leitor/signin', body, {headers: this.headers})
-    .map(
-      (response: Response) => {
-        let data = response.json();
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('user_id', data.user_id);
-        localStorage.setItem('user_name', data.user_name);
+  doLogin(form){
+    const body = JSON.stringify(form.value);
 
-        return true;
+    return this._http.put(this._url + 'leitor/signin', body, {headers: this.headers}).map(
+      (response: Response) => { 
+        if (response.json().login == true){
+          localStorage.setItem('l', this.base64.encode(response.json().leitor.id));
+          localStorage.setItem('token', response.json().token);
+
+          //this.leitor.emit(response.json().funcionario);
+          
+          return [true, response.json().leitor];
+        }
+        else {
+          return [false, response.json().login];
+        }
       }
-    );
+    )
   }
 
   getLeitores(): Observable<any>{

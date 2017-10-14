@@ -7,48 +7,65 @@
       <div class="menu">
         <label> Nome </label> 
         
-        <input type="text" class="input" maxlength="60" name="marca" placeholder="Seu primeiro nome" formControlName="nome">
+        <input type="text" class="input" maxlength="60" name="nome" placeholder="Seu primeiro nome" formControlName="nome"
+        [ngClass]="{'invalid': verificaValidTouched('nome')}"
+        >
 
+        <div class="error" *ngIf="verificaValidTouched('nome')">{{ mensagemErro('nome') }}</div>
       </div>
       <div class="menu marginless">
 
         <label> Nick </label> 
         
-        <input type="text" class="input" maxlength="20" name="marca" placeholder="A sua marca na Rupt" formControlName="nick">
+        <input type="text" class="input" maxlength="20" name="nick" placeholder="A sua marca na Rupt" formControlName="nick"
+        [ngClass]="{'invalid': verificaValidTouched('nick') || nickInvalido}" (ngModelChange)="validaNick()" (blur)="validaNick()">
 
+        <div class="error" *ngIf="verificaValidTouched('nick')">{{ mensagemErro('nick') }}</div>
+        <div class="error" *ngIf="!verificaValidTouched('nick') && nickInvalido">Nick já cadastrado</div>
       </div>
 
       <div class="menu">
 
         <label> Nascimento </label> 
         
-        <input type="text" class="input" maxlength="10" name="marca" placeholder="Qual sua idade" formControlName="nascimento">
+        <input type="text" class="input" maxlength="10" name="nascimento" placeholder="Qual sua idade" formControlName="nascimento"
+        [ngClass]="{'invalid': verificaValidTouched('nascimento')}" mask="00/00/0000">
+
+        <div class="error" *ngIf="verificaValidTouched('nascimento')">{{ mensagemErro('nascimento') }}</div>
 
       </div>
       <div class="menu marginless">
 
         <label> Email </label> 
         
-        <input type="text" class="input" maxlength="30" name="marca" placeholder="Insira seu email" formControlName="email">
+        <input type="text" class="input" maxlength="30" name="email" placeholder="Insira seu email" formControlName="email"
+        [ngClass]="{'invalid': verificaValidTouched('email') || emailInvalido}" (ngModelChange)="validaEmail()" (blur)="validaEmail()">
 
+        <div class="error" *ngIf="verificaValidTouched('email')">{{ mensagemErro('email') }}</div>
+        <div class="error" *ngIf="!verificaValidTouched('email') && emailInvalido">Email já cadastrado</div>
       </div>
 
       <div class="menu">
         <label> Senha </label> 
-        <input type="password" class="input" maxlength="20" name="marca" placeholder="Crie sua senha" formControlName="senha">
+        <input type="password" class="input" maxlength="20" name="senha" placeholder="Crie sua senha" formControlName="senha"
+        [ngClass]="{'invalid': verificaValidTouched('senha')}">
+
+        <div class="error" *ngIf="verificaValidTouched('senha')">{{ mensagemErro('senha') }}</div>
       </div>
       <div class="menu marginless">
         <label> Confirmar Senha </label> 
-        <input type="password" class="input" maxlength="20" name="marca" placeholder="Confirme sua senha" formControlName="confirma_senha">
+        <input type="password" class="input" maxlength="20" name="confirma_senha" placeholder="Confirme sua senha" formControlName="confirma_senha">
+
+        <div class="error" *ngIf="form.get('confirma_senha').value != form.get('senha').value">Senhas não coincidem</div>
       </div>
       <div class="menu">
           <div class="row menu-radio">
-                  <input name="sexo" type="radio" id="f" value="F"/>
-                  <label for="f">Feminino</label>
+                  <input name="sexo" type="radio" id="f" value="F" checked/>
+                  <label for="f" (click)="selectSexo('F')">Feminino</label>
                   <input name="sexo" type="radio" id="m" value="M"/>
-                  <label for="m">Masculino</label>
+                  <label for="m" (click)="selectSexo('M')">Masculino</label>
                   <input name="sexo" type="radio" id="o" value="O" />
-                  <label for="o">Outro</label>
+                  <label for="o" (click)="selectSexo('O')">Outro</label>
           </div>
       </div>
       

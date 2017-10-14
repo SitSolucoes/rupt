@@ -34,23 +34,33 @@ input[type=text]:not(.browser-default),
 input[type=password]:not(.browser-default) 
 {
   width: auto;
-  border-bottom: 0px !important;
   background: #fff;
   padding-left: 10px;
   border-radius: 5px;
   font-size: 16px;
   color: #363636;
   height: 40px;
-  border: 1px solid #dedede !important;
-  box-sizing: border-box !important;
+  border: 1px solid #dedede;
+  box-sizing: border-box;
+  box-shadow: none!important;
 }
 
 input[type=text]:not(.browser-default):focus:not([readonly]),
 input[type=password]:not(.browser-default):focus:not([readonly]) {
-  border: 1px solid #dedede !important;
+  border: 1px solid #dedede;
   box-shadow: none;
   transition: 0px;
   background: #fff;
+}
+
+.invalid{
+    border: 1px solid #F44336 !important;
+}
+
+.error {
+    color: red;
+    font-size: 14px;
+    margin-top: -20px;
 }
 
 [type="radio"]:not(:checked), [type="radio"]:checked{
@@ -123,6 +133,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     font-size: 22px;
     text-transform: uppercase;
     outline: none;
+    cursor: pointer;
 }
 
 .headbar .login-border{
@@ -1674,6 +1685,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .cadastro .container .area .menu-radio label{
     display: inline;
     margin-right: 25px;
+    margin-left: 10px;
 }
 
 [type="radio"]:not(:checked), [type="radio"]:checked {

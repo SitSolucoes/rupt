@@ -48,7 +48,7 @@
                         <input id="nascimento" name="nascimento" type="text" maxlength="10"
                             [ngClass]="{'invalid': nascimento.touched && dataInvalida}"
                             [ngModel]="leitor.nascimento" #nascimento="ngModel" 
-                            (ngModelChange)="validaData($event)" Masks="99/99/9999">
+                            (ngModelChange)="validaData($event)" mask="00/00/0000">
                             
                         <label [ngClass]="{'active': leitor?.nascimento}" for="nascimento">Data de Nascimento*</label>
 

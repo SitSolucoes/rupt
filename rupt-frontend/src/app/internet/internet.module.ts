@@ -1,3 +1,4 @@
+import { InputMaskModule } from 'ng2-inputmask';
 import { SliderComponent } from './slider/slider.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterializeModule } from 'angular2-materialize';
@@ -25,7 +26,8 @@ import { CadastroEscritorComponent } from './cadastro-escritor/cadastro-escritor
     InternetRoutingModule,
     MaterializeModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    InputMaskModule
   ],
   declarations: [
     FaqComponent,

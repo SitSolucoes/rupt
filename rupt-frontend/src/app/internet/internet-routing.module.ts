@@ -19,7 +19,7 @@ const routes: Routes = [
       { path : 'user', component: UserComponent},
       { path : 'noticias', component: HomeComponent},  
       { path : 'faq', component: FaqComponent},
-      { path : 'user', component: UserComponent },
+      { path : 'perfil', component: UserComponent },
       { path : 'footer', component: FooterComponent },
       { path : 'news', component: NewsComponent },
       { path : 'cadastro', component: CadastroLeitorComponent },

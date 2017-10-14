@@ -13,6 +13,8 @@ class Leitor extends Model
         'sugestoes'
     ];
 
+    protected $hidden = ['password', 'tokenLogin'];
+
     public function escritor(){
         return $this->hasOne('App\Escritor', 'leitor_idLeitor');
     }
