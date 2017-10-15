@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { LeitoresService } from './../../services/leitores.service';
 import { MaterializeAction } from 'angular2-materialize';
 import { NgForm } from '@angular/forms/src/directives';
 import { Leitor } from './../../classes/leitor';
@@ -11,13 +13,19 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  usuarioLogado: any;
+  leitor: Leitor;
   modalActions = new EventEmitter<string|MaterializeAction>();
   modalLogin = new EventEmitter<string|MaterializeAction>();
 
-  constructor() { }
+  constructor(private _leitorService: LeitoresService,
+              private _router: Router) { }
 
   ngOnInit() {
+      this._leitorService.leitor.subscribe(
+        (leitor: Leitor) => { this.leitor = leitor }
+      )
+
+      this._leitorService.verificaLogin().subscribe();
   }
 
   openModal() {
@@ -42,6 +50,11 @@ export class HeaderComponent implements OnInit {
     if(e){
       this.modalLogin.emit({action:"modal",params:['close']});
     }
+  }
+
+  logout(){
+    this._leitorService.logout();
+    this._router.navigate(['/']);
   }
 
 }

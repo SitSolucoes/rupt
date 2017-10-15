@@ -11,59 +11,48 @@
 
 <div class="headbar">
   
-        <a routerLink="noticias"><img src="../../../assets/img/logo.png" class="img2"></a>
+    <a routerLink="noticias"><img src="../../../assets/img/logo.png" class="img2"></a>
+    <a routerLink="faq"><div class="title"> Faq </div></a>
+    <a routerLink="contato"><div class="title"> contato </div></a>
 
-            <input type="text" class="search" maxlength="30" name="marca" placeholder="Pesquisar">
+    <input type="text" class="search" maxlength="30" name="marca" placeholder="Pesquisar">
+    <img src="../../../assets/img/search2.png" class="img5">
 
-        <img src="../../../assets/img/search2.png" class="img5">
+        
+    <div class="headbar-right" *ngIf="leitor">
 
-        <!--
+        <a routerLink="perfil"><img src="../../../assets/img/profile.png" class="img4"> <p>Nátaly</p> </a>
 
-          <a routerLink="faq"><div class="title"> Faq </div></a>
-  
-          <a routerLink="contato"><div class="title"> contato </div></a>
+        <div class="login"> | </div>
 
-          -->
-  
-          <div class="headbar-right">
+        <img src="../../../assets/img/bell.png" class="img">
 
-              <a routerLink="perfil"><img src="../../../assets/img/profile.png" class="img4"> <p>Nátaly</p> </a>
+        <div class="notificacao"> 3</div>
 
-              <div class="login"> | </div>
+        <a class='dropdown-button btn' data-activates='dropdown1' materialize="dropdown"><img src="../../../assets/img/arrow.png" class="img img6"></a>
 
-              <img src="../../../assets/img/bell.png" class="img">
+        <!-- Dropdown Structure -->
+        <ul id='dropdown1' class='dropdown-content' style="top: 60px !important;">
+            <li><a routerLink="cadastro">Editar Perfil</a></li>
+            <li><a href="#!">Mudar Senha</a></li>
+            <li class="divider"></li>
+            <li><a (click)="logout()">Logout</a></li>
+        </ul>
 
-              <div class="notificacao"> 3</div>
+    </div>
 
-              <a class='dropdown-button btn' data-activates='dropdown1'><img src="../../../assets/img/arrow.png" class="img img6"></a>
+    <div class="headbar-right" *ngIf="!leitor">
+              
+        <a (click)="openModalLogin()">  
+            <div class="login login-border"> 
+                Entrar 
+            </div>
+        </a>
 
-              <!-- Dropdown Structure -->
-              <ul id='dropdown1' class='dropdown-content' style="top: 60px !important;">
-                  <li><a routerLink="cadastro">Editar Perfil</a></li>
-                  <li><a href="#!">Mudar Senha</a></li>
-                  <li class="divider"></li>
-                  <li><a href="#!">Logout</a></li>
-              </ul>
-
-              <!--
-
-            <a (click)="openModalLogin()">  
-                <div class="login login-border"> 
-                    Entrar 
-                </div>
-            </a>
-  
-            <a (click)="openModal()">  
-                <div class="login login-border"> 
-                      Cadastre-se 
-                </div> 
-            </a>
-
-            -->
-
-
-
-
-          </div>
-  
-      </div>
+        <a (click)="openModal()">  
+            <div class="login login-border"> 
+                    Cadastre-se 
+            </div> 
+        </a>
+    </div>
+</div>

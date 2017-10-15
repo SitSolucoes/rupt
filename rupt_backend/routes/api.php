@@ -69,33 +69,14 @@ Route::put('/envia_esqueciSenha', [
 ]);
 
 //Leitores
-Route::post('/storeLeitor',[
-            'uses' => 'LeitorController@store'
-]);
-
-Route::put('/leitor/signin',[
-            'uses' => 'LeitorController@signin'
-]);
-
-Route::get('/getLeitores',[
-            'uses' => 'LeitorController@getLeitores'
-]);
-
-Route::get('/getLeitor/{id}',[
-            'uses' => 'LeitorController@getLeitor'
-]);
-
-Route::put('/updateLeitor/{id}',[
-            'uses' => 'LeitorController@update'
-]);
-
-Route::get('/validaNick/{nick}/{id}', [
-            'uses' => 'LeitorController@validaNick'
-]);
-
-Route::get('/validaEmailLeitor/{nick}/{id}', [
-            'uses' => 'LeitorController@validaEmail'
-]);
+Route::post('/storeLeitor',['uses' => 'LeitorController@store']);
+Route::get('/getLeitores',['uses' => 'LeitorController@getLeitores']);
+Route::get('/getLeitor/{id}',['uses' => 'LeitorController@getLeitor']);
+Route::put('/updateLeitor/{id}',['uses' => 'LeitorController@update']);
+Route::get('/validaNick/{nick}/{id}', ['uses' => 'LeitorController@validaNick']);
+Route::get('/validaEmailLeitor/{nick}/{id}', ['uses' => 'LeitorController@validaEmail']);
+Route::put('/leitor/signin',['uses' => 'LeitorController@signin']);
+Route::post('leitor/verificaLogin', ['uses' => 'LeitorController@verificaLogin']);
 
 //escritores
 Route::get('/getEscritores',['uses' => 'EscritorController@getEscritores']);

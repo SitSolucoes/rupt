@@ -8,34 +8,6 @@ use App\Leitor;
 
 class LeitorController extends Controller
 {
-    public function signin (Request $request){
-        $leitor = Leitor::where('email', $request->email)->first();
-        
-        if ($leitor){
-            if (!$leitor->ativo){
-                return response()->json(['login' => "Conta desativada."], 200);
-            }
-
-            if (Hash::check($request->senha, $leitor->password)){
-                $token = date('z')*$leitor->id;
-                $leitor->tokenLogin = Hash::make($token);
-                $leitor->save();
-
-                $response = [
-                    'leitor' => $leitor,
-                    'token' => $leitor->tokenLogin,
-                    'login' => true
-                ];
-                    
-                return response()->json($response, 200);
-            }
-            else 
-                return response()->json(['login' => "Senha incorreta."], 200);
-        }
-        else 
-            return response()->json(['login' => "Email não encontrado."], 200);
-    }
- 
     private function getById($id){
         $leitor = Leitor::where('id', $id)->get();
         return $leitor;
@@ -171,6 +143,46 @@ class LeitorController extends Controller
             return $leitor->id;     
         else
             return -1;
+    }
+
+    public function signin (Request $request){
+        $leitor = Leitor::where('email', $request->email)->first();
+        
+        if ($leitor){
+            if (!$leitor->ativo){
+                return response()->json(['login' => "Conta desativada."], 200);
+            }
+
+            if (Hash::check($request->senha, $leitor->password)){
+                $token = date('z')*$leitor->id;
+                $leitor->tokenLogin = Hash::make($token);
+                $leitor->save();
+
+                $response = [
+                    'leitor' => $leitor,
+                    'token' => $leitor->tokenLogin,
+                    'login' => true
+                ];
+                    
+                return response()->json($response, 200);
+            }
+            else 
+                return response()->json(['login' => "Senha incorreta."], 200);
+        }
+        else 
+            return response()->json(['login' => "Email não encontrado."], 200);
+    }
+
+    public function verificaLogin(Request $request){
+        if ($request->token){
+            $leitor = Leitor::where('id', $request->id)
+                        ->where('tokenLogin', $request->token)->first();
+
+            if ($leitor)
+                return response()->json(['leitor' => $leitor], 200);
+        }
+        
+        return response()->json(['leitor' => false], 200);
     }
 
 }
