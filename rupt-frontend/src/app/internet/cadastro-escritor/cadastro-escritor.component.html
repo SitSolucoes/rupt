@@ -16,14 +16,14 @@
                     Preencha os campos abaixo corretamente que sua solicitação será enviada para avaliação. </div>
 
                 <div class="menu">
-                    <label> RG </label>
+                    <label> RG *</label>
                     <input type="text" class="input" maxlength="11" formControlName='rg' placeholder="Insira seu RG"
                     [ngClass]="{'invalid': verificaValidTouched('rg')}">
 
                     <div class="error" *ngIf="verificaValidTouched('rg')">RG inválido</div>
                 </div>
                 <div class="menu">
-                    <label> CPF </label>
+                    <label> CPF *</label>
                     <input type="text" class="input" maxlength="14" formControlName='cpf' mask='000.000.000-00' placeholder="Insira seu CPF"
                     [ngClass]="{'invalid': verificaValidTouched('cpf')}" (blur)="validaCpf()">
 
@@ -47,7 +47,7 @@
                 </div>
 
                 <div class="menu">
-                    <label> CEP </label>
+                    <label> CEP *</label>
                     <input type="text" class="input" maxlength="9" formControlName='cep' mask='00000-000' placeholder="Seu CEP"
                     [ngClass]="{'invalid': verificaValidTouched('cep')}" (blur)="consultaCep()">
 
@@ -83,7 +83,8 @@
                 </div>
             </div>
 
-            <button type="submit" class="button background-orange" (click)="next()" [disabled]="!formulario.valid">Próximo</button>
+            <button type="submit" class="button background-orange" (click)="next()" 
+            [disabled]="!formulario.valid || cpfInvalido || cpfUsado">Próximo</button>
         </div>
         <div *ngIf='page == 2'>
             <div class="progress">
@@ -138,23 +139,18 @@
                 <p> Dados bancários </p>
 
                 <div class="menu">
-                        
                     <label> Banco </label>
-
-                    <select name="carlist" class="input">
-                        <option value="volvo">Volvo</option>
-                        <option value="saab">Saab</option>
-                        <option value="opel">Opel</option>
-                        <option value="audi">Audi</option>
+                    <select name="banco" class="input"
+                    formControlName='banco'>
+                        <option *ngFor="let option of selectBancos" [value]="option.value">{{option.name}}</option>
                     </select>
-
                 </div>
                         
                 <div class="menu">
 
                     <label> Agência </label>
 
-                    <input type="text" class="input" maxlength="30" name="marca" placeholder="Sua agência">
+                    <input type="text" class="input" maxlength="15" formControlName='agencia' placeholder="Sua agência">
 
                 </div>
                         
@@ -162,7 +158,7 @@
 
                     <label> Conta </label>
 
-                    <input type="text" class="input" maxlength="30" name="marca" placeholder="Conta do seu banco">
+                    <input type="text" class="input" maxlength="20" formControlName='conta_corrente' placeholder="Conta do seu banco">
 
                 </div>
             </div>

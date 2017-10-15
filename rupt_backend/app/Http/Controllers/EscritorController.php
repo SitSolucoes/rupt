@@ -70,11 +70,13 @@ class EscritorController extends Controller
         $escritor->leitor_idLeitor = $leitor_idLeitor;
         $escritor->motivo_recusa = "";
         $escritor->admin_idAdmin = $admin_idAdmin;
-        $escritor->data_aceite = date('Y-m-d H:i:s');
+        
+        if ($admin_idAdmin != 0)
+            $escritor->data_aceite = date('Y-m-d H:i:s');
 
         $escritor->save();
 
-        return response()->json(['escritor_id' => $escritor->id], 200);
+        return response()->json(['message' => 'Criado com sucesso'], 200);
     }
 
     public function update(Request $request, $id){

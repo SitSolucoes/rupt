@@ -1,3 +1,4 @@
+import { DateBr } from 'app/shared/dateBr';
 import { ValidaCampo } from './../../shared/valida-campo';
 import { EscritoresService } from './../../services/escritores.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -43,25 +44,47 @@ export class CadastroEscritorComponent implements OnInit {
 
       this._leitorService.verificaLogin().subscribe(
           (response) => { 
-             if (!response)
+            if (!response){
               this._router.navigate(['/']);
+            }
+            else{
+              this.formulario.patchValue({
+                nome: this.leitor.nome,
+                nick: this.leitor.nick,
+                email: this.leitor.email,
+                nascimento: DateBr.convert(this.leitor.nascimento),
+                sexo: this.leitor.sexo,
+                ativo: this.leitor.ativo
+              })
+            }
           }
       );
   }
 
   createForm(){
     this.formulario = this._formBuilder.group({
-       rg: ['', [Validators.required, Validators.minLength(8)]],
-       cpf: ['', [Validators.required]],
-       telefone: ['', Validators.minLength(14)],
-       celular: ['', Validators.minLength(14)],
-       cep: ['', [Validators.required, Validators.minLength(9)]],
-       logradouro: [''],
-       numero: [''],
-       complemento: [''],
-       cidade: [''],
-       bairro: [''],
-       uf: [''],
+        nome: '',
+        nick: '',
+        email: '',
+        $date: '',
+        nascimento: '',
+        sexo: '',
+        ativo: '',
+        rg: ['', [Validators.required, Validators.minLength(8)]],
+        cpf: ['', [Validators.required]],
+        telefone: ['', Validators.minLength(14)],
+        celular: ['', Validators.minLength(14)],
+        cep: ['', [Validators.required, Validators.minLength(9)]],
+        logradouro: [''],
+        numero: [''],
+        complemento: [''],
+        cidade: [''],
+        bairro: [''],
+        uf: [''],
+        banco: [''],
+        agencia: [''],
+        conta_corrente: [''],
+        status: 'p'
     })
   }
 
@@ -126,6 +149,12 @@ export class CadastroEscritorComponent implements OnInit {
         }
       }
     }
+  }
+
+  onSubmit(){
+    this._escritorService.createEscritor(this.formulario, this.leitor.id).subscribe(
+      (response) => { this._router.navigate(['rupt/perfil']) }
+    )
   }
 
 }
