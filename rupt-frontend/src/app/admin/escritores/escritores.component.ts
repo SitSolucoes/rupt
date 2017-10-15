@@ -359,8 +359,6 @@ export class EscritoresComponent implements OnInit {
   }
 
   consultaCep(cep){
-    console.log(cep);
-
     cep = cep.replace(/\D/g, '');
 
     if (cep != ''){

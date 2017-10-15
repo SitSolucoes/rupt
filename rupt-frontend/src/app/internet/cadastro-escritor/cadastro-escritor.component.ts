@@ -1,3 +1,4 @@
+import { ValidaCampo } from './../../shared/valida-campo';
 import { EscritoresService } from './../../services/escritores.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LeitoresService } from './../../services/leitores.service';
@@ -8,6 +9,7 @@ import { Option } from 'app/shared/option';
 import { Bancos } from 'app/shared/arrayBanco';
 import { Estados } from 'app/shared/arrayEstados';
 import { validarCpf } from 'app/shared/valida-cpf';
+import { Http } from '@angular/http';
 
 @Component({
   selector: 'app-cadastro-escritor',
@@ -18,8 +20,9 @@ export class CadastroEscritorComponent implements OnInit {
   
   cpfInvalido: boolean;
   cpfUsado: boolean;
-  leitor: Leitor;
+  leitor: Leitor = new Leitor();
   page: number = 1;
+  validaCampo: ValidaCampo = new ValidaCampo();
 
   formulario: FormGroup;
   selectBancos: Option[] = Bancos;
@@ -28,9 +31,12 @@ export class CadastroEscritorComponent implements OnInit {
   constructor(private _leitorService: LeitoresService, 
               private _escritorService: EscritoresService,
               private _router:Router,
-              private _formBuilder: FormBuilder) { }
+              private _formBuilder: FormBuilder,
+              private _http: Http) { }
 
   ngOnInit() {
+      this.createForm();
+
       this._leitorService.leitor.subscribe(
         (leitor: Leitor) => { this.leitor = leitor }
       );
@@ -57,6 +63,14 @@ export class CadastroEscritorComponent implements OnInit {
        bairro: [''],
        uf: [''],
     })
+  }
+
+  verificaValidTouched(campo: string){
+    return this.validaCampo.verificaValidTouched(campo, this.formulario);
+  }
+
+  mensagemErro(campo: string){
+    return this.validaCampo.mensagemErro(campo, this.formulario);
   }
 
   next(){
@@ -89,6 +103,29 @@ export class CadastroEscritorComponent implements OnInit {
     }
     else
       this.cpfUsado = false;
+  }
+
+  consultaCep(){
+    if (this.formulario.get('cep').value){
+      let cep = this.formulario.get('cep').value.replace(/\D/g, '');
+
+      if (cep != ''){
+        let validaCep = /^[0-9]{8}$/;
+
+        if (validaCep.test(cep)){
+          this._http.get("//viacep.com.br/ws/"+cep+"/json")
+            .map(dados => dados.json())
+            .subscribe(dados => {
+              this.formulario.patchValue({
+                logradouro: dados.logradouro,
+                bairro: dados.bairro,  
+                cidade: dados.localidade,
+                uf: dados.uf,
+              })
+          });
+        }
+      }
+    }
   }
 
 }

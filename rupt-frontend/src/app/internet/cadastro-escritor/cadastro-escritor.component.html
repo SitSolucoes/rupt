@@ -16,40 +16,42 @@
                     Preencha os campos abaixo corretamente que sua solicitação será enviada para avaliação. </div>
 
                 <div class="menu">
-
                     <label> RG </label>
+                    <input type="text" class="input" maxlength="11" formControlName='rg' placeholder="Insira seu RG"
+                    [ngClass]="{'invalid': verificaValidTouched('rg')}">
 
-                    <input type="text" class="input" maxlength="11" formControlName='rg' placeholder="Insira seu RG">
-
+                    <div class="error" *ngIf="verificaValidTouched('rg')">RG inválido</div>
                 </div>
                 <div class="menu">
-
                     <label> CPF </label>
+                    <input type="text" class="input" maxlength="14" formControlName='cpf' mask='000.000.000-00' placeholder="Insira seu CPF"
+                    [ngClass]="{'invalid': verificaValidTouched('cpf')}" (blur)="validaCpf()">
 
-                    <input type="text" class="input" maxlength="14" formControlName='cpf' mask='000.000.000-00' placeholder="Insira seu CPF">
-
+                    <div class="error" *ngIf="verificaValidTouched('cpf')">{{ mensagemErro('cpf') }}</div>
+                    <div class="error" *ngIf="!verificaValidTouched('cpf') && cpfInvalido">CPF inválido</div>
+                    <div class="error" *ngIf="!verificaValidTouched('cpf') && cpfUsado">CPF já cadastrado</div>
                 </div>
                 <div class="menu">
-
                     <label> Telefone </label>
+                    <input type="text" class="input" maxlength="15" formControlName='telefone' mask='(00) 0000-0000' placeholder="Insira seu telefone"
+                    [ngClass]="{'invalid': verificaValidTouched('telefone')}">
 
-                    <input type="text" class="input" maxlength="15" formControlName='telefone' mask='(00) 0000-0000' placeholder="Insira seu telefone">
-
+                    <div class="error" *ngIf="verificaValidTouched('telefone')">Telefone inválido</div>
                 </div>
                 <div class="menu">
-
                     <label> Celular </label>
-
-                    <input type="text" class="input" maxlength="15" formControlName='celular' mask='(00) 0000-00000' placeholder="Insira seu celular">
-
+                    <input type="text" class="input" maxlength="15" formControlName='celular' mask='(00) 0000-00000' placeholder="Insira seu celular"
+                    [ngClass]="{'invalid': verificaValidTouched('celular')}">
+                    
+                    <div class="error" *ngIf="verificaValidTouched('celular')">Celular inválido</div>
                 </div>
 
                 <div class="menu">
-
                     <label> CEP </label>
+                    <input type="text" class="input" maxlength="9" formControlName='cep' mask='00000-000' placeholder="Seu CEP"
+                    [ngClass]="{'invalid': verificaValidTouched('cep')}" (blur)="consultaCep()">
 
-                    <input type="text" class="input" maxlength="9" formControlName='cep' mask='00000-000' placeholder="Seu CEP">
-
+                    <div class="error" *ngIf="verificaValidTouched('cep')">Cep inválido</div>
                 </div>
 
                 <div class="menu">
@@ -59,7 +61,10 @@
 
                 <div class="menu">
                     <label> Número </label>
-                    <input type="text" class="input" maxlength="20" formControlName='numero' placeholder="Seu número residencial">
+                    <input type="text" class="input" maxlength="20" formControlName='numero' placeholder="Seu número residencial"
+                    [ngClass]="{'invalid': verificaValidTouched('numero')}">
+
+                    <div class="error" *ngIf="verificaValidTouched('numero')">{{ mensagemErro('numero') }}</div>
                 </div>
 
                 <div class="menu">
@@ -78,7 +83,7 @@
                 </div>
             </div>
 
-            <button type="submit" class="button background-orange" (click)="next()">Próximo</button>
+            <button type="submit" class="button background-orange" (click)="next()" [disabled]="!formulario.valid">Próximo</button>
         </div>
         <div *ngIf='page == 2'>
             <div class="progress">
