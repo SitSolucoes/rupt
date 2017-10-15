@@ -68,7 +68,11 @@ export class EscritoresService {
   createEscritor(form, id){
     const body = this.createBody(form);
 
-    return this._http.put(this._url + 'createEscritor/' + id + "/" + localStorage.getItem('admin_id'), body, {headers: this.headers}).map(
+    let admin_id = localStorage.getItem('admin_id');
+    if (!admin_id)
+      admin_id = '0';
+
+    return this._http.put(this._url + 'createEscritor/' + id + "/" + admin_id, body, {headers: this.headers}).map(
     (response: Response)=>{
       response.json().escritor_id;
     });
