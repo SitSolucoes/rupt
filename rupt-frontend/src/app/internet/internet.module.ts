@@ -21,6 +21,7 @@ import { ModalLoginComponent } from './modal-login/modal-login.component';
 import { CadastroEscritorComponent } from './cadastro-escritor/cadastro-escritor.component';
 import { CategoriaSliderComponent } from './categoria-slider/categoria-slider.component';
 import { CategoriasComponent } from './categorias/categorias.component';
+import { ModalCategoriasComponent } from './modal-categorias/modal-categorias.component';
 
 @NgModule({ 
   imports: [
@@ -47,7 +48,8 @@ import { CategoriasComponent } from './categorias/categorias.component';
     SlickSliderComponent,
     CadastroEscritorComponent,
     CategoriaSliderComponent,
-    CategoriasComponent
+    CategoriasComponent,
+    ModalCategoriasComponent
   ]
 })
 export class InternetModule { }

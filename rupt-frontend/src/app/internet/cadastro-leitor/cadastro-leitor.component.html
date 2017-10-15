@@ -51,6 +51,23 @@
         <div class="error" *ngIf="!verificaValidTouched('email') && emailInvalido">Email já cadastrado</div>
       </div>
 
+          <div class="menu">
+
+              <label> Foto de perfil </label>
+
+              <input type="file" name="arquivo" id="txFoto" class="input-img"/>
+
+          </div>
+
+          <div class="menu marginless">
+
+              <label> Foto de capa </label>
+
+              <input type="file" name="arquivo" id="txFoto2" class="input-img"/>
+
+          </div>
+
+
       <div *ngIf="form.get('id').value == 0">
           <div class="menu">
               <label> Senha </label> 
@@ -76,6 +93,18 @@
                   <label for="o" (click)="selectSexo('O')">Outro</label>
           </div>
       </div>
+
+          <div class="menu ">
+
+              <label> Biografia </label>
+
+              <textarea class="textarea"></textarea>
+
+          </div>
+
+
+
+
 
         <!-- Caso esteja logado
         <button type="submit" class="button" id="submit-contato">Salvar</button>

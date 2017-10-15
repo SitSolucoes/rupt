@@ -4,14 +4,21 @@
     <modal-cadastro-leitor (closeModal)="closeModal($event)"></modal-cadastro-leitor>
 </div>
 <div id="ModalLogin" class="modal modal2"
-     materialize="modal" [materializeParams]="[{dismissible: false}]" 
+     materialize="modal" [materializeParams]="[{dismissible: false}]"
      [materializeActions]="modalLogin">
     <modal-login (closeModalLogin)="closeModalLogin($event)"></modal-login>
 </div>
+<!--
+<div id="ModalCategoria" class="modal modal2"
+     materialize="modal" [materializeParams]="[{dismissible: false}]"
+     [materializeActions]="modalCategoria">
+    <app-modal-categorias (closeModalCategoria)="closeModalCategoria($event)"></app-modal-categorias>
+</div>-->
 
 <div class="headbar">
   
     <a routerLink="noticias"><img src="../../../assets/img/logo.png" class="img2"></a>
+    <a routerLink="faq"><div class="title active"> Categorias </div></a>
     <a routerLink="faq"><div class="title"> Faq </div></a>
     <a routerLink="contato"><div class="title"> contato </div></a>
 
@@ -35,6 +42,7 @@
 
         <!-- Dropdown Structure -->
         <ul id='dropdown1' class='dropdown-content' style="top: 60px !important;">
+            <!-- Caso user seja escritor <li><a routerLink="cadastro-escritor">Editar Perfil</a></li>-->
             <li><a routerLink="cadastro">Editar Perfil</a></li>
             <li><a href="#!">Mudar Senha</a></li>
             <li class="divider"></li>
@@ -44,10 +52,10 @@
     </div>
 
     <div class="headbar-right" *ngIf="!leitor">
-              
-        <a (click)="openModalLogin()">  
-            <div class="login login-border"> 
-                Entrar 
+
+        <a (click)="openModalLogin()">
+            <div class="login login-border">
+                Entrar
             </div>
         </a>
 
