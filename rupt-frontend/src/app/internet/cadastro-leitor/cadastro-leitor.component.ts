@@ -1,3 +1,5 @@
+import { DateBr } from './../../shared/dateBr';
+import { Leitor } from 'app/classes/leitor';
 import { ValidaCampo } from './../../shared/valida-campo';
 import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -14,13 +16,15 @@ import { UploadItem } from "./../../classes/upload-item";
   styleUrls: ['./cadastro-leitor.component.css']
 })
 export class CadastroLeitorComponent implements OnInit {
-  validaCampo: ValidaCampo = new ValidaCampo();
   
+  leitor: Leitor;
   form: FormGroup;
   message: any;
+  textButton: string = "Cadastrar";
 
   emailInvalido: boolean;
   nickInvalido: boolean;
+  validaCampo: ValidaCampo = new ValidaCampo();
 
   selectOptions: Option[] = [
     {value: 'M', name: 'Masculino'},
@@ -34,7 +38,26 @@ export class CadastroLeitorComponent implements OnInit {
     private _router: Router) { }
 
   ngOnInit() {
+    this.createForm();
+
+    this._leitoresService.leitor.subscribe(
+      (leitor: Leitor) => { this.leitor = leitor }
+    ); 
+
+    this._leitoresService.verificaLogin().subscribe(
+      (response) => {
+          if (response) {
+              this.textButton = 'Editar';
+              this.preencheForm();
+          }
+            
+      }
+    )
+  }
+
+  createForm(){
     this.form = this._formBuilder.group({
+      id: '0',
       nome: [null, [Validators.required, Validators.minLength(3)]],
       nick: [null, [Validators.required, Validators.minLength(3)]],
       sexo: ["F", Validators.required],
@@ -47,11 +70,25 @@ export class CadastroLeitorComponent implements OnInit {
     }); 
   }
   
+  preencheForm(){
+    this.form.patchValue({
+      id: this.leitor.id,
+      nome: this.leitor.nome,
+      nick: this.leitor.nick,
+      sexo: this.leitor.sexo,
+      nascimento: DateBr.convert(this.leitor.nascimento),
+      src_foto: [null],
+      email: this.leitor.email,
+      senha: 'update',
+      confirma_senha: 'update',
+      ativo: true
+    })
+  }
 
   validaNick(){
     if (this.form.get('nick').value){
       if (this.form.get('nick').value.length >= 3){
-        this._leitoresService.validaNick(this.form.get('nick').value, 0).subscribe(
+        this._leitoresService.validaNick(this.form.get('nick').value, this.form.get('id').value).subscribe(
           (nick: boolean) => {this.nickInvalido = nick}
         );
       }
@@ -65,7 +102,7 @@ export class CadastroLeitorComponent implements OnInit {
   validaEmail(){
     if (this.form.get('email').value){
       if (this.form.get('email').value.length >= 6){
-        this._leitoresService.validaEmail(this.form.get('email').value, 0).subscribe(
+        this._leitoresService.validaEmail(this.form.get('email').value, this.form.get('id').value).subscribe(
           (email: boolean) => {this.emailInvalido = email}
         );
       }
@@ -99,17 +136,22 @@ export class CadastroLeitorComponent implements OnInit {
       }
       else if ((this.form.get('senha').value == this.form.get('confirma_senha').value) &&
         !this.nickInvalido && !this.emailInvalido){
-          this._leitoresService.createLeitor(this.form).subscribe(
-            (data: any) => {
-              //this.message = response;
-              //console.log(data);
-              //this.uploadFiles(data);
-              this.doLogin();
-            },
-            (error) =>{
-              console.log(error);
+            if (this.form.get('id').value == 0){
+                this._leitoresService.createLeitor(this.form).subscribe(
+                  (data: any) => {
+                    //this.uploadFiles(data);
+                    this.doLogin();
+                  },
+                  (error) =>{
+                    console.log(error);
+                  }
+                );
             }
-          );
+            else {
+                this._leitoresService.updateLeitor(this.form, this.form.get('id').value).subscribe(
+                  (response) => { console.log(response) }
+                )
+            }
       }
   }
 

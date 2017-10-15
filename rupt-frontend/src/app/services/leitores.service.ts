@@ -43,7 +43,7 @@ export class LeitoresService {
     
     return this._http.put(this._url + 'updateLeitor/'+id, body, {headers: this.headers}).map(
     (response: Response)=>{
-      response.json()
+      return response.json().message;
     });
   }  
 

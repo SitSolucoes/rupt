@@ -1,37 +1,36 @@
-<form [formGroup]='form' (ngSubmit)="onSubmit()">
-    <div class="modal-content">
-        <div class="title"> 
-        Cadastre-se 
-        <a click="#" class=" modal-action modal-close close">x</a> 
+
+<div class="modal-content">
+    <div class="title"> 
+    Cadastre-se 
+    <a click="#" class=" modal-action modal-close close">x</a> 
+    </div>
+
+    <div class="info">
+
+        <p> Cadastrado na RUPT, você só tem a ganhar! </p>
+
+        <div class="subtitle">
+            Estando cadastrado, você consegue visualizar todas as notícias publicadas pelos Escritores e mais, caso você tenha interesse, poderá se tornar um Escritor e ganhar dinheiro com as suas publicaçõe! Leia o <a href="#">Contrato</a> e a <a href="#">Política de Privacidade</a> ou para maiores informações: <a href="#">clique aqui </a>
         </div>
 
-        <div class="info">
+        <p> Cadastre-se utilizando as redes sociais </p>
+
+        <div class="img-area">
+
+            <img src="../../../assets/img/face2.png" class="img">
+
+            <img src="../../../assets/img/google2.png" class="img">
+
+            <img src="../../../assets/img/twitter2.png" class="img">
+
+        </div>
+
+        <p> ou  </p>
+
     
-            <p> Cadastrado na RUPT, você só tem a ganhar! </p>
-
-            <div class="subtitle">
-                Estando cadastrado, você consegue visualizar todas as notícias publicadas pelos Escritores e mais, caso você tenha interesse, poderá se tornar um Escritor e ganhar dinheiro com as suas publicaçõe! Leia o <a href="#">Contrato</a> e a <a href="#">Política de Privacidade</a> ou para maiores informações: <a href="#">clique aqui </a>
-            </div>
-
-            <p> Cadastre-se utilizando as redes sociais </p>
-
-            <div class="img-area">
-
-                <img src="../../../assets/img/face2.png" class="img">
-
-                <img src="../../../assets/img/google2.png" class="img">
-
-                <img src="../../../assets/img/twitter2.png" class="img">
-
-            </div>
-
-            <p> ou  </p>
-
-       
-        </div>
     </div>
-    <div class="modal-footer">
-        <a (click)="redirectCadastro()"><button type="submit" class="button color"> cadastrar </button></a>
-        <a click="#" class="modal-action modal-close"><div class="button"> cancelar </div></a>
-    </div>
-</form>
+</div>
+<div class="modal-footer">
+    <a (click)="redirectCadastro()"><button type="submit" class="button color"> cadastrar </button></a>
+    <a click="#" class="modal-action modal-close"><div class="button"> cancelar </div></a>
+</div>
