@@ -21,7 +21,9 @@
         
     <div class="headbar-right" *ngIf="leitor">
 
-        <a routerLink="perfil"><img src="../../../assets/img/profile.png" class="img4"> <p>Nátaly</p> </a>
+        <a routerLink="perfil"><img src="../../../assets/img/profile.png" class="img4"> 
+            <p>{{ leitor.nome.split(' ')[0] }}</p> 
+        </a>
 
         <div class="login"> | </div>
 

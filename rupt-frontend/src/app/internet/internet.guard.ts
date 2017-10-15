@@ -12,7 +12,7 @@ export class InternetGuard implements CanActivate{
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean{
     return Observable.create(
       observer => {
-        return this._leitorService.verificaLogin(false).subscribe(
+        return this._leitorService.verificaLogin().subscribe(
           login => {
             if (login == true){
               observer.next(true);

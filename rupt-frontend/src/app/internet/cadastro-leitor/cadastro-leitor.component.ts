@@ -22,6 +22,7 @@ export class CadastroLeitorComponent implements OnInit {
   message: any;
   textButton: string = "Cadastrar";
 
+  dataInvalida: boolean;
   emailInvalido: boolean;
   nickInvalido: boolean;
   validaCampo: ValidaCampo = new ValidaCampo();
@@ -112,6 +113,10 @@ export class CadastroLeitorComponent implements OnInit {
     else
         this.emailInvalido = false;
   }
+
+  validaData(){
+      this.dataInvalida = !DateBr.valida(this.form.get('nascimento').value);
+  }
   
   verificaValidTouched(campo: string){
     return this.validaCampo.verificaValidTouched(campo, this.form);
@@ -135,7 +140,7 @@ export class CadastroLeitorComponent implements OnInit {
         })
       }
       else if ((this.form.get('senha').value == this.form.get('confirma_senha').value) &&
-        !this.nickInvalido && !this.emailInvalido){
+        !this.nickInvalido && !this.emailInvalido && !this.dataInvalida){
             if (this.form.get('id').value == 0){
                 this._leitoresService.createLeitor(this.form).subscribe(
                   (data: any) => {
