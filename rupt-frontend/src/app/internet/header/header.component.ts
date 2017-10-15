@@ -36,16 +36,16 @@ export class HeaderComponent implements OnInit {
   }
 
   openModalLogin() {
-        this.modalLogin.emit({
-            action: 'modal',
-            params: ['open']});
-    }
+      this.modalLogin.emit({
+          action: 'modal',
+          params: ['open']});
+  }
 
-    openModalCategoria() {
-        this.modalCategoria.emit({
-            action: 'modal',
-            params: ['open']});
-    }
+  openModalCategoria() {
+      this.modalCategoria.emit({
+          action: 'modal',
+          params: ['open']});
+  }
 
   closeModal(e){
     if(e){

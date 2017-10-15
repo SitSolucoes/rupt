@@ -8,17 +8,17 @@
      [materializeActions]="modalLogin">
     <modal-login (closeModalLogin)="closeModalLogin($event)"></modal-login>
 </div>
-<!--
+
 <div id="ModalCategoria" class="modal modal2"
      materialize="modal" [materializeParams]="[{dismissible: false}]"
      [materializeActions]="modalCategoria">
     <app-modal-categorias (closeModalCategoria)="closeModalCategoria($event)"></app-modal-categorias>
-</div>-->
+</div>
 
 <div class="headbar">
   
     <a routerLink="noticias"><img src="../../../assets/img/logo.png" class="img2"></a>
-    <a routerLink="faq"><div class="title active"> Categorias </div></a>
+    <a (click)="openModalCategoria()"><div class="title active"> Categorias </div></a>
     <a routerLink="faq"><div class="title"> Faq </div></a>
     <a routerLink="contato"><div class="title"> contato </div></a>
 
