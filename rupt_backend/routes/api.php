@@ -126,6 +126,10 @@ Route::get('/denuncia/getEscritor/{id}', [
           'uses' => 'PostController@getEscritor'
 ]);
 
+Route::get('/posts/PostsByCategory/{id}', [
+    'uses' => 'PostController@getSliderPostsByCategory'
+]);
+
 Route::get('posts/getSliderPosts/', [
     'uses' => 'PostController@getSliderPosts'
 ]);

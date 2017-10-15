@@ -1,3 +1,5 @@
+import { Categoria } from './../../classes/categoria';
+import { CategoriasService } from './../../services/categorias.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CategoriasComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _categoriasService: CategoriasService) { }
+
+  categorias;
 
   ngOnInit() {
+    if(!localStorage.getItem('l')){
+      this._categoriasService.getCategoriasAtivas().subscribe(
+        (categorias: Categoria[]) => {
+          this.categorias = categorias
+          });
+    }
   }
 
 }

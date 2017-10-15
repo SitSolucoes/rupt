@@ -75,4 +75,5 @@ class CategoriaController extends Controller
 
         return response()->json(['categoria' => $categoria], 200);   
     }
+    
 }
