@@ -389,9 +389,9 @@ export class EscritoresComponent implements OnInit {
   onSubmit(form){
     this.mensagemErro = "";
 
-    if (!(<HTMLInputElement>window.document.getElementById('doc0')).files[0] ||
-        !(<HTMLInputElement>window.document.getElementById('doc1')).files[0] ||
-        !(<HTMLInputElement>window.document.getElementById('doc2')).files[0])
+    if (!(<HTMLInputElement>window.document.getElementById('doc1')).files[0] ||
+        !(<HTMLInputElement>window.document.getElementById('doc2')).files[0] ||
+        !(<HTMLInputElement>window.document.getElementById('doc3')).files[0])
           this.mensagemErro = "Inclua as imagens dos documentos.";
 
     else {
@@ -443,9 +443,9 @@ export class EscritoresComponent implements OnInit {
 
   uploadFiles(form, id){
     let files = new Array();
-    files.push((<HTMLInputElement>window.document.getElementById('doc0')).files[0]);
     files.push((<HTMLInputElement>window.document.getElementById('doc1')).files[0]);
     files.push((<HTMLInputElement>window.document.getElementById('doc2')).files[0]);
+    files.push((<HTMLInputElement>window.document.getElementById('doc3')).files[0]);
 
     let myUploadItem = new UploadItem(files, "escritor/uploadDocs/"+id);
     

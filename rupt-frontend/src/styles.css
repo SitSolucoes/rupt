@@ -1914,6 +1914,11 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     margin-bottom: 5px;
 }
 
+.cadastro-escritor .error{
+    margin-left: 170px;
+    margin-bottom: 15px;
+}
+
 .cadastro-escritor .container .area{
     display: block;
     float: left;

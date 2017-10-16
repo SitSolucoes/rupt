@@ -75,7 +75,7 @@ class EscritorController extends Controller
 
         $escritor->save();
 
-        return response()->json(['message' => 'Criado com sucesso'], 200);
+        return response()->json(['leitor_idLeitor' => $leitor_idLeitor], 200);
     }
 
     public function update(Request $request, $id){

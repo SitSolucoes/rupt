@@ -139,37 +139,28 @@
                             <div class="error" *ngIf="celular.errors?.required && celular.touched">Campo obrigatório.</div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <textarea id="biografia" name="biografia" class="materialize-textarea" data-length="180"
-                            [(ngModel)]="escritor.biografia"
-                            [readOnly]="escritor.status == 'p' || escritor.status == 'r'"
-                            ></textarea>
-                            <label [ngClass]="{'active': escritor?.biografia}" for="biografia">Biografia</label>
-                        </div>
-                    </div>
                     <div class="file-field input-field">
-                        <div class="btn col s5">
+                        <div class="btn btn-save col s5">
                             <span>Frente do documento</span>
-                            <input type="file" accept="image/*" id="doc0" required>
+                            <input type="file" accept="image/*" id="doc1" required>
                         </div>
                         <div class="file-path-wrapper">
                             <input class="file-path" type="text" required>
                         </div>
                     </div>
                     <div class="file-field input-field">
-                        <div class="btn col s5">
+                        <div class="btn btn-save col s5">
                             <span>Verso do documento</span>
-                            <input type="file" accept="image/*" id="doc1" required>
+                            <input type="file" accept="image/*" id="doc2" required>
                         </div>
                         <div class="file-path-wrapper">
                             <input class="file-path" type="text">
                         </div>
                     </div>
                     <div class="file-field input-field">
-                        <div class="btn col s5">
+                        <div class="btn btn-save col s5">
                             <span>Selfie</span>
-                            <input type="file" accept="image/*" id="doc2" required>
+                            <input type="file" accept="image/*" id="doc3" required>
                         </div>
                         <div class="file-path-wrapper">
                             <input class="file-path" type="text" >
@@ -328,7 +319,7 @@
                 <div class="row" *ngIf="(escritor.id == 0 || idLeitor != 0) && newPage == 4">
                     <div class="input-field col s12 m12 l5 xl5">
                         <input id="password" name="password" type="password"
-                        minlength="8" maxlength="20" required 
+                        minlength="6" maxlength="20" required 
                         [(ngModel)]="escritor.password" #senha="ngModel"
                         [readOnly]="escritor.status == 'p' || escritor.status == 'r'">
                         

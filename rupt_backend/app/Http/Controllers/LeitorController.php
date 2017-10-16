@@ -146,7 +146,7 @@ class LeitorController extends Controller
     }
 
     public function signin (Request $request){
-        $leitor = Leitor::where('email', $request->email)->first();
+        $leitor = Leitor::where('email', $request->email)->with('escritor')->first();
         
         if ($leitor){
             if (!$leitor->ativo){
@@ -176,7 +176,8 @@ class LeitorController extends Controller
     public function verificaLogin(Request $request){
         if ($request->token){
             $leitor = Leitor::where('id', $request->id)
-                        ->where('tokenLogin', $request->token)->first();
+                        ->where('tokenLogin', $request->token)
+                        ->with('escritor')->first();
 
             if ($leitor)
                 return response()->json(['leitor' => $leitor], 200);

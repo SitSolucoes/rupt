@@ -74,7 +74,7 @@ export class EscritoresService {
 
     return this._http.put(this._url + 'createEscritor/' + id + "/" + admin_id, body, {headers: this.headers}).map(
     (response: Response)=>{
-      response.json().escritor_id;
+      return response.json().leitor_idLeitor;
     });
   }
 

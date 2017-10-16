@@ -3,7 +3,7 @@
     <p> Dados pessoais </p>
 
     
-    <a routerLink="../cadastro-escritor" *ngIf="form.get('id').value != 0"> 
+    <a routerLink="../cadastro-escritor" *ngIf="form.get('id').value != 0 && !leitor.escritor"> 
         <div class="button"> Tornar-se escritor </div> 
     </a>
     
@@ -92,7 +92,7 @@
                   <input name="sexo" type="radio" id="o" value="O" [checked]="form.get('sexo').value == 'O'"/>
                   <label for="o" (click)="selectSexo('O')">Outro</label>
           </div>
-      </div>
+        </div>
 
           <div class="menu ">
 
@@ -102,14 +102,7 @@
 
           </div>
 
-
-
-
-
-        <!-- Caso esteja logado
-        <button type="submit" class="button" id="submit-contato">Salvar</button>
-        -->
-      <button type="submit" class="button" id="submit-contato">{{ textButton }}</button>
+        <button type="submit" class="button" id="submit-contato">{{ textButton }}</button>
     </form>
       
     </div>

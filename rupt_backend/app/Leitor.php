@@ -7,12 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Leitor extends Model
 {
     protected $table = 'leitores';
-
-    protected $fillable = [
-        'categoria',
-        'sugestoes'
-    ];
-
+    protected $fillable = ['categoria', 'sugestoes'];
     protected $hidden = ['password', 'tokenLogin'];
 
     public function escritor(){
