@@ -9,6 +9,7 @@ use App\Categoria;
 
 class CategoriaController extends Controller
 {
+    
     public function getCategorias(){
         $categorias = Categoria::orderBy("categoria")
             ->where("categoria_idCategoria", null);
@@ -19,10 +20,14 @@ class CategoriaController extends Controller
     }
 
     public function getCategoriasAtivas(){
-        $categorias = Categoria::where('status', 1)->orderBy("categoria")
-        ->where("categoria_idCategoria", null)->get();
+        $categorias = $this->categoriasAtivas();
 
         return response()->json(['categorias' => $categorias], 200);
+    }    
+
+    public function categoriasAtivas(){
+        return Categoria::where('status', 1)->orderBy("categoria")
+        ->where("categoria_idCategoria", null)->get();
     }
 
     private function recursiveSubCategorias($categorias){

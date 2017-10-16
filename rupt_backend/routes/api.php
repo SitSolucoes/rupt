@@ -89,7 +89,7 @@ Route::get('/denuncia/getEscritor/{id}', [
           'uses' => 'PostController@getEscritor'
 ]);
 
-Route::get('/posts/PostsByCategory/{id}', [
+Route::get('/posts/PostsToHome/', [
     'uses' => 'PostController@getSliderPostsByCategory'
 ]);
 

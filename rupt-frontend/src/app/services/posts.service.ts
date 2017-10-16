@@ -32,4 +32,13 @@ export class PostsService {
       }); 
   }
 
+  getCategoryPostsSlider(){
+    return this._http.get(this._url + 'posts/PostsToHome/')
+      .map((retorno: Response) => {
+        return{
+          'posts': retorno.json().retorno
+        };
+      }); 
+  }
+
 }

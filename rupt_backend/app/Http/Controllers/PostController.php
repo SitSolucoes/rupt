@@ -9,6 +9,7 @@ use App\Categoria;
 use App\Visualizacao;
 use App\Http\Controllers\EscritorController;
 use App\Http\Controllers\LeitorController;
+use App\Http\Controllers\CategoriaController;
 use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
@@ -53,37 +54,32 @@ class PostController extends Controller
         return response()->json($retorno, 200);
     }
 
-    public function getSliderPostsByCategory($id){
-        //posts da categoria X
-        $posts_ids = Post::whereIn('id', PostCategoria::select('post_idPost')
-                                                      ->whereIn('categoria_idCategoria', Categoria::select('id')
-                                                                                                  ->where('categoria_idCategoria', null )
-                                                                                                  ->where('id', $id)))->get();
+    public function postsPorCategoria($id){
+        return Post::select('posts.*')
+            ->join('post_categoria', 'posts.id', '=', 'post_categoria.post_idPost')
+            ->where('post_categoria.categoria_idCategoria', $id)
+            ->orderBy('posts.publishedAt', 'desc')->get();
+    }
 
-        //ordenados por quantidade de visualização
-        if($posts_ids->length > 0){
-            $idPosts_q = Visualizacao::select(DB::raw('post_idPost as id, count(*) as q'))
-            ->whereIn('post_idPost', $posts_ids)
-            ->groupBy('post_idPost')
-            ->orderBy('q', 'desc')
-            ->limit(10)
-            ->get();
-            //posts
-            $posts = Post::whereIn('id', $idPosts)->get();
-            $retorno = [
-                'posts' => $posts
+    public function getSliderPostsByCategory(){
+        $cat_con = new CategoriaController();
+        $retorno = [];
+
+        $categorias = $cat_con->categoriasAtivas();
+
+        foreach($categorias as $c){
+            $posts = $this->postsPorCategoria($c->id);
+            $retorno[] = [
+                "nome" => $c->categoria,
+                "posts" => $posts
             ];
-
-            return response()->json($retorno, 200);
         }
 
-        $retorno = [
-            'erro' => 'Não foram encontrados posts nessa categoria.'
+        $ret = [
+            "retorno" => $retorno
         ];
-            
-        return response()->json($retorno, 500);
-        
 
-        
+
+        return response()->json($ret, 200);
     }
 }
