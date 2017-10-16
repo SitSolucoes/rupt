@@ -1,4 +1,4 @@
-import { AuthService } from './../../services/auth.service';
+import { AdministradoresService } from './../../services/administradores.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -15,7 +15,7 @@ export class EsqueciSenhaComponent implements OnInit {
   spinner: boolean = false;
   succes: boolean = false;
 
-  constructor(private _authService: AuthService) { }
+  constructor(private _adminService: AdministradoresService) { }
 
   ngOnInit() {
   }
@@ -23,7 +23,7 @@ export class EsqueciSenhaComponent implements OnInit {
   esqueciSenha(form){
     this.spinner = true;
 
-    this._authService.envia_esqueciSenha(form).subscribe(
+    this._adminService.envia_esqueciSenha(form).subscribe(
       retorno => {
         if(retorno.json().error){
           this.erro = retorno.json().error;

@@ -1,7 +1,7 @@
-import { Admin } from './../admin/admin';
 import { Post } from './post';
 import { Leitor } from './leitor';
 import { Motivo_Denuncia } from './motivo_denuncia';
+import { Admin } from 'app/classes/admin';
 
 export class Denuncia {
     id: number;
@@ -13,8 +13,6 @@ export class Denuncia {
     created_at: Date;
     updated_at: Date;
     quantidade: number;
-
-    
 
     constructor(id: number, post: Post, admin: Admin, leitor: Leitor, motivo: Motivo_Denuncia, created_at: Date, updated_at: Date, quantidade: number){
                 this.id = id;

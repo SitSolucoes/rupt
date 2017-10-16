@@ -1,3 +1,4 @@
+import { AdminGuard } from './admin.guard';
 import { CategoriaFiltroService } from './../services/categoria-filtro.service';
 import { CurrencyFormatPipe } from './../shared/currency-format-pipe.pipe';
 import { DndModule, DragDropService, DragDropConfig, DragDropSortableService} from 'ng2-dnd';
@@ -25,7 +26,6 @@ import { SugestoesService } from './../services/sugestoes.service';
 import { NotificacoesService } from './../services/notificacoes.service';
 import {Ng2PaginationModule} from 'ng2-pagination';
 import { LeitoresService } from './../services/leitores.service';
-import { AuthService } from './../services/auth.service';
 import { RedefineSenhaComponent } from './redefine-senha/redefine-senha.component';
 import { MensagensComponent } from './mensagens/mensagens.component';
 import { EscritoresComponent } from './escritores/escritores.component';
@@ -75,12 +75,12 @@ import { ModalSaveComponent } from './modal-save/modal-save.component';
     LoginComponent
   ],
   providers: [
+    AdminGuard,
     AdministradoresService,
     LeitoresService,
     NotificacoesService,
     SugestoesService,
     EscritoresService,
-    AuthService,
     DenunciasService,
     PostsService,
     MensagensService,

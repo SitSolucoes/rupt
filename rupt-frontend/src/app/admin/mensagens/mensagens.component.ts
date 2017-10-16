@@ -1,8 +1,5 @@
 import { Component, OnInit, EventEmitter, HostListener } from '@angular/core';
-
-
 import { MaterializeAction } from 'angular2-materialize';
-
 import { Mensagem } from './../../classes/mensagem';
 import { MensagensService } from './../../services/mensagens.service';
 import { NotificacoesService } from './../../services/notificacoes.service';

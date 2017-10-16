@@ -48,9 +48,6 @@ class LeitorController extends Controller
         }catch(Exception $e){
 
         }
-        
-
-        
     }
 
     public function getLeitor($id){

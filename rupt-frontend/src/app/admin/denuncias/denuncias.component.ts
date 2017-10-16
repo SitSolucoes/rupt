@@ -7,7 +7,6 @@ import { PostsService } from './../../services/posts.service';
 import { Denuncia } from './../../classes/denuncia';
 import { Option } from './../../shared/option';
 import { Post } from './../../classes/post';
-import { Admin } from './../admin';
 import { Leitor } from './../../classes/leitor';
 import { Motivo_Denuncia } from './../../classes/motivo_denuncia';
 

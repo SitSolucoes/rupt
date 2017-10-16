@@ -1,5 +1,3 @@
-import { Admin } from './../admin/admin';
-
 export class Post {
     id: number;
     titulo: string;

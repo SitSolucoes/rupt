@@ -59,11 +59,11 @@
                 </div>
                 <div class="row">
                      <div class="input-field col s12 m6">
-                        <select name="ativo" materialize="material_select" 
+                        <select name="ativo" materialize="material_select"
                                 [materializeSelectOptions]="selectOptions" [(ngModel)]="admin_selecionado.ativo">
                              <option *ngFor="let option of selectOptions" [value]="option.value">{{option.name}}</option>
                         </select>
-                         <label for="ativo">Status*</label>
+                        <label for="ativo">Status*</label>
                     </div>
                 </div>
         </div>

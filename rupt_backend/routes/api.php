@@ -18,55 +18,17 @@ use Illuminate\Http\Request;
 //});
 
 //Administradores
+Route::any('admin/signin',['uses' => 'AdminController@signin']);
+Route::post('admin/verificaLogin', ['uses' => 'AdminController@verificaLogin']);
+Route::put('admin/envia_esqueciSenha', ['uses' => "AdminController@envia_esqueciSenha"]);
 
-Route::post('/signup',[
-            'uses' => 'AdminController@signup'
-]);
-
-Route::post('/storeAdmin',[
-            'uses' => 'AdminController@store'
-]);
-
-Route::post('/signin',[
-            'uses' => 'AdminController@signin'
-]);
-
-Route::post('redefineSenha',[
-           'uses' => 'AdminController@redefineSenha'
-]);
-
-Route::get('validaTokenRedefine/{token}',[
-           'uses' => 'AdminController@validaTokenRedefine'
-]);
-
-Route::get('/getAdmins',[
-            'uses' => 'AdminController@getAdmins'
-]);
-
-Route::get('/getAdmin/{id}',[
-            'uses' => 'AdminController@getAdmin'
-]);
-
-Route::put('/updateAdmin/{id}',[
-            'uses' => 'AdminController@update'
-]);
-
-Route::get('/validaEmail/{email}/{id}',[
-           'uses' => "AdminController@validaEmail"
-]);
-
-Route::get('/validaToken',[
-           'uses' => "AdminController@validaToken"
-]);
-
-Route::post('/invalidaToken',[
-           'uses' => "AdminController@invalidaToken"
-]);
-
-
-Route::put('/envia_esqueciSenha', [
-           'uses' => "AdminController@envia_esqueciSenha"
-]);
+Route::post('/storeAdmin',['uses' => 'AdminController@store']);
+Route::post('redefineSenha',['uses' => 'AdminController@redefineSenha']);
+Route::get('validaTokenRedefine/{token}',['uses' => 'AdminController@validaTokenRedefine']);
+Route::get('/getAdmins',['uses' => 'AdminController@getAdmins']);
+Route::get('/getAdmin/{id}',['uses' => 'AdminController@getAdmin']);
+Route::put('/updateAdmin/{id}',['uses' => 'AdminController@update']);
+Route::get('/validaEmail/{email}/{id}',['uses' => "AdminController@validaEmail"]);
 
 //Leitores
 Route::post('/storeLeitor',['uses' => 'LeitorController@store']);

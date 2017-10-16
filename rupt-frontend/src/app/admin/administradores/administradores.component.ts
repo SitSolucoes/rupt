@@ -1,13 +1,12 @@
 import { Component, OnInit, EventEmitter, HostListener } from '@angular/core';
 import { NgForm } from '@angular/forms/src/directives';
-
 import {MaterializeAction} from 'angular2-materialize';
 import { AdministradoresService } from '../../services/administradores.service';
 import { Location } from '@angular/common';
-import { Admin } from './../admin';
 import { Router } from '@angular/router';
 import { Option } from './../../shared/option';
 import { ActivatedRoute } from '@angular/router';
+import { Admin } from 'app/classes/admin';
 
 @Component({
   selector: 'administradores',

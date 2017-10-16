@@ -1,5 +1,5 @@
 import { Leitor } from './leitor';
-import { Admin } from './../admin/admin';
+import { Admin } from 'app/classes/admin';
 
 export class Mensagem {
     id: number;

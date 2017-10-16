@@ -1,8 +1,7 @@
+import { AdministradoresService } from './../../services/administradores.service';
 import { CategoriasComponent } from '../categorias/categorias.component';
 import { format } from 'util';
-import { AuthService } from './../../services/auth.service';
 import { Component, OnInit, EventEmitter } from '@angular/core';
-
 import {MaterializeAction} from 'angular2-materialize';
 import { Router } from '@angular/router';
 
@@ -18,28 +17,28 @@ export class LoginComponent implements OnInit {
   message: string = '';
   spinner: boolean = false;
 
-  constructor(private _authService: AuthService,
+  constructor(private _adminService: AdministradoresService,
               private _router: Router) { 
   }
 
   ngOnInit() {
   }
  
-  login(form) {
+  login(form){
     this.spinner = true;
     this.login_error = '';
 
-    this._authService.signin(form).subscribe(
-      tokenData => {
-          this._router.navigate(['admin/home']);
-          
-      },
-      error => {
-          this.login_error = error.json().error;
+    this._adminService.signin(form).subscribe(
+      (response) => { 
+        if (response[0] == false){
+          this.login_error = response[1];
           this.spinner = false;
+        }
+        else {
+          this.spinner = false;
+          this._router.navigate(['admin/home']);
+        }
       }
-    );
+    )
   }
-
-  
 }

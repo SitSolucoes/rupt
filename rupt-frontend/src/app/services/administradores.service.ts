@@ -1,12 +1,16 @@
 import { ConnectionFactory } from './../classes/connection-factory';
-import { Admin } from './../admin/admin';
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import 'rxjs/Rx';
 import { Observable } from 'rxjs';
+import { NgForm } from '@angular/forms';
+import { Base64 } from 'app/shared/Base64';
+import { Admin } from 'app/classes/admin';
 
 @Injectable()
 export class AdministradoresService {
+  public admin = new EventEmitter<Admin>();
+  private base64: Base64 = new Base64();
   private _url: string = ConnectionFactory.API_CONNECTION;
   private headers = new Headers({'Content-Type': 'application/json'});
 
@@ -46,7 +50,6 @@ export class AdministradoresService {
     (response: Response)=>{
       response.json()
     });
-    //return this._http.post('http://laravel-ng2-vue.dev/api/quote?token=' + token, body, {headers: headers});
   }  
 
   redefineSenha(form, token){
@@ -69,8 +72,7 @@ export class AdministradoresService {
     
     return this._http.put(this._url + 'updateAdmin/'+ id, body, {headers: this.headers}).map(
     (response: any)=>{
-      console.log("editou");
-      return response.json().message;
+        return response.json().message;
     });
   }
 
@@ -78,20 +80,81 @@ export class AdministradoresService {
     return this._http.get(this._url + 'validaEmail/' + email + "/" + id)
       .map(
         (response: Response) => {
-          console.log("retorna: "+response.json().valido);
           return response.json().valido;
         }
       );
   }
 
   validaTokenRedefine(token){
-    console.log(token);
     return this._http.get(this._url + 'validaTokenRedefine/' + token)
       .map(
         (response: Response) => {
-          console.log("retorna: "+response.json().valido);
           return response.json().valido;
         }
       );
   }
+
+  signin(form: NgForm) {
+    const body = JSON.stringify(form.value);
+    
+    return this._http.put(this._url + 'admin/signin', body, {headers: this.headers}).map(
+      (response: Response) => { 
+        if (response.json().login == true){
+          localStorage.setItem('a', this.base64.encode(response.json().admin.id));
+          localStorage.setItem('token', response.json().token);
+
+          this.admin.emit(response.json().admin);
+          
+          return [true, response.json().admin];
+        }
+        else {
+          return [false, response.json().login];
+        }
+      }
+    )
+  }
+
+  verificaLogin(){
+    let token = localStorage.getItem("token");
+    let id = this.base64.decode(localStorage.getItem("a"));
+    
+    const body = JSON.stringify({
+      id: id,
+      token: token
+    })
+
+    return this._http.post(this._url + 'admin/verificaLogin', body, {headers: this.headers}).map(
+      (response: Response) => {
+        if (response.json().admin != false){
+          this.admin.emit(response.json().admin);
+            
+          return true;
+        }
+
+        return response.json().admin;
+      }
+    )
+  }
+
+  logout(){
+    localStorage.removeItem('token');
+    localStorage.removeItem('a');
+    this.admin.emit(null);
+  }
+
+  envia_esqueciSenha(form: NgForm){
+    const body = {
+      email: form.value.email
+    };
+    let resp: string = '';
+    return this._http.put(this._url + 'admin/envia_esqueciSenha', body, {headers: new Headers({'X-Requested-With': 'XMLHttpRequest'})})
+                     .map(
+                        response => {
+                          //resp = response.json().retorno;
+                          return response;
+                        }
+                     );
+  }
+
+  
 }

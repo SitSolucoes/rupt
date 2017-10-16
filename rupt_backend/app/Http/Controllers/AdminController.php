@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Admin;
 use Illuminate\Http\Request;
-use Tymon\JWTAuth\Exceptions\JWTException;
 use Illuminate\Support\Facades\Hash;
-use JWTAuth;
 use App\Mail\EsqueciSenhaAdmin;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
@@ -24,41 +22,51 @@ class AdminController extends Controller
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'ativo' => $request->input('ativo'),
-            'password' => bcrypt($request->input('password'))
+            'password' => Hash::make($request->input('password'))
         ]);
         $admin->save();
 
-        return response()->json([
-                'message'=>'Administrador cadastrado com sucesso!'
-            ],201);
+        return response()->json(['message'=>'Administrador cadastrado com sucesso!'],201);
     }
-    
-    public function signin(Request $request){
-        $this->validate($request,[
-            'email' => 'required|email',
-            'password' => 'required'
-        ]);
-        $credentials = $request->only('email', 'password');
-        try{
-            if(!$token = JWTAuth::attempt($credentials)){
-                return response()->json([
-                    'error' => 'E-mail ou senha incorretos'// $request->input('password')
-                ],401);
+
+    public function signin (Request $request){
+        $admin = Admin::where('email', $request->email)->first();
+        
+        if ($admin){
+            if (!$admin->ativo){
+                return response()->json(['login' => "Conta desativada."], 200);
             }
-        }catch(JWTException $e){
-            return response()->json(['error' => 'Erro JWT'],401);
+
+            if (Hash::check($request->senha, $admin->password)){
+                $token = date('z')*$admin->id;
+                $admin->tokenLogin = Hash::make($token);
+                $admin->save();
+
+                $response = [
+                    'admin' => $admin,
+                    'token' => $admin->tokenLogin,
+                    'login' => true
+                ];
+                    
+                return response()->json($response, 200);
+            }
+            else 
+                return response()->json(['login' => "Senha incorreta."], 200);
         }
-        $admin = Admin::where('email', $request->input('email'))
-                      ->where('ativo', 1)
-                      ->first();
-        if (Hash::check($request->input('password'), $admin->password)) {
-             return response()->json([
-                'token' => $token,
-                'admin_name' => $admin->name,
-                'admin_id' => $admin->id
-            ],200);
-        }                      
-       
+        else 
+            return response()->json(['login' => "Email não encontrado."], 200);
+    }
+
+    public function verificaLogin(Request $request){
+        if ($request->token){
+            $admin = Admin::where('id', $request->id)
+                        ->where('tokenLogin', $request->token)->first();
+
+            if ($admin)
+                return response()->json(['admin' => $admin], 200);
+        }
+        
+        return response()->json(['admin' => false], 200);
     }
 
     public function getAdmins(){
@@ -108,21 +116,6 @@ class AdminController extends Controller
         return response()->json(['valido' => $retorno], 200);
     }
 
-    public function validaToken(){
-        try{
-            if(! $admin = JWTAuth::parseToken()->authenticate())
-                return response()->json(['valido' => false], 401);
-            return response()->json(['valido' => true], 200);
-        }catch(Exception $exception){
-                return response()->json(['valido' => false], 401);
-        }    
-    }
-
-    public function invalidaToken(){
-        JWTAuth::parseToken()->invalidate();
-        return response()->json(['result' => true], 200);
-    }
-
     public function envia_esqueciSenha(Request $request){
         $email = $request->input('email');
         $error = "";
@@ -152,6 +145,7 @@ class AdminController extends Controller
         else
             return response()->json(['valido' => false], 200);
     }
+
     public function redefineSenha(Request $r){
         $admin = Admin::where('token_esqueci_senha', $r->input('token'))->first();
         if($admin != null){
