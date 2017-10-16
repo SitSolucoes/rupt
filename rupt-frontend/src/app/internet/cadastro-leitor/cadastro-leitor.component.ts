@@ -67,7 +67,8 @@ export class CadastroLeitorComponent implements OnInit {
       email: [null, [Validators.required, Validators.email]],
       senha: [null, [Validators.required, Validators.minLength(6)]],
       confirma_senha: [null],
-      ativo: true
+      ativo: true,
+      biografia: ['']
     }); 
   }
   
@@ -78,11 +79,13 @@ export class CadastroLeitorComponent implements OnInit {
       nick: this.leitor.nick,
       sexo: this.leitor.sexo,
       nascimento: DateBr.convert(this.leitor.nascimento),
-      src_foto: [null],
+      src_foto: this.leitor.src_foto,
+      src_capa: this.leitor.src_capa,
+      biografia: this.leitor.biografia,
       email: this.leitor.email,
       senha: 'update',
       confirma_senha: 'update',
-      ativo: true
+      ativo: true,
     })
   }
 

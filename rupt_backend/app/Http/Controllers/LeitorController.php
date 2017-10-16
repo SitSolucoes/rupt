@@ -22,7 +22,7 @@ class LeitorController extends Controller
             $date = str_replace('/', '-', $request->input("nascimento"));
             $leitor->nascimento = date('Y-m-d', strtotime($date));
             $leitor->sexo = $request->input('sexo');
-            $leitor->src_foto = $request->input('src_foto');
+            $leitor->biografia = $request->biografia;
             $leitor->password = Hash::make($request->input('password'));
             $leitor->ativo = $request->input('ativo');
             $leitor->save();

@@ -5,6 +5,8 @@ export class Leitor {
     sexo: string;
     nascimento: string;
     src_foto: string;
+    src_capa: string;
+    biografia: string;
     email: string;
     password: string;
     ativo: boolean;

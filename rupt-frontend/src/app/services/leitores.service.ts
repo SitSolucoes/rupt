@@ -22,9 +22,9 @@ export class LeitoresService {
          nick: form.value.nick,
          email: form.value.email,
          nascimento: form.value.nascimento,
+         biografia: form.value.biografia,
          sexo: form.value.sexo,
          ativo: form.value.ativo,
-         src_foto: form.value.src_foto,
          password: form.value.senha
       });
   }
@@ -33,9 +33,7 @@ export class LeitoresService {
     const body = this.createBody(form);
     
     return this._http.post(this._url + 'storeLeitor', body, {headers: this.headers}).map(
-    (response: Response)=>{
-      console.log(response.json());
-    });
+    (response: Response)=>{});
   } 
 
   updateLeitor(form, id){

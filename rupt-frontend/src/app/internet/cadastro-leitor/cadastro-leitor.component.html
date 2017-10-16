@@ -61,25 +61,19 @@
             </div>
         </div>
         <div class="menu ">
-            <label> Biografia </label>
-            <textarea class="textarea"></textarea>
+            <label> Biografia 
+                <font style='font-size: 12px'>({{ 500 - form.get('biografia').value.length }})</font>
+            </label>
+            <textarea class="textarea" formControlName='biografia'></textarea>
         </div>
 
-          <div class="menu">
-
-              <label> Foto de perfil </label>
-
-              <input type="file" name="arquivo" id="txFoto" class="input-img"/>
-
-          </div>
-
-          <div class="menu marginless">
-
-              <label> Foto de capa </label>
-
-              <input type="file" name="arquivo" id="txFoto2" class="input-img"/>
-
-          </div>
+        <div class="menu marginless">
+            <label> Foto de perfil </label>
+            <input type="file" name="arquivo" id="txFoto" class="input-img" style="margin-bottom:35px;"/>
+            
+            <label> Foto de capa </label>
+            <input type="file" name="arquivo" id="txFoto2" class="input-img"/>
+        </div>
 
 
       <div *ngIf="form.get('id').value == 0">
