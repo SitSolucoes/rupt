@@ -113,9 +113,9 @@ input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):
 }
 
 .dropdown-content{
-	left: auto!important;
+	/*left: auto!important;
 	margin-bottom: 10px;
-	width: 100%!important;
+	width: 100%!important;*/
 }
 
 .dropdown-content li>a{

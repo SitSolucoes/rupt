@@ -50,6 +50,20 @@
         <div class="error" *ngIf="verificaValidTouched('email')">{{ mensagemErro('email') }}</div>
         <div class="error" *ngIf="!verificaValidTouched('email') && emailInvalido">Email já cadastrado</div>
       </div>
+      <div class="menu">
+            <div class="row menu-radio">
+                    <input name="sexo" type="radio" id="f" value="F" [checked]="form.get('sexo').value == 'F'"/>
+                    <label for="f" (click)="selectSexo('F')">Feminino</label>
+                    <input name="sexo" type="radio" id="m" value="M" [checked]="form.get('sexo').value == 'M'"/>
+                    <label for="m" (click)="selectSexo('M')">Masculino</label>
+                    <input name="sexo" type="radio" id="o" value="O" [checked]="form.get('sexo').value == 'O'"/>
+                    <label for="o" (click)="selectSexo('O')">Outro</label>
+            </div>
+        </div>
+        <div class="menu ">
+            <label> Biografia </label>
+            <textarea class="textarea"></textarea>
+        </div>
 
           <div class="menu">
 
@@ -83,25 +97,7 @@
               <div class="error" *ngIf="form.get('confirma_senha').value != form.get('senha').value">Senhas não coincidem</div>
           </div>
       </div>
-      <div class="menu">
-          <div class="row menu-radio">
-                  <input name="sexo" type="radio" id="f" value="F" [checked]="form.get('sexo').value == 'F'"/>
-                  <label for="f" (click)="selectSexo('F')">Feminino</label>
-                  <input name="sexo" type="radio" id="m" value="M" [checked]="form.get('sexo').value == 'M'"/>
-                  <label for="m" (click)="selectSexo('M')">Masculino</label>
-                  <input name="sexo" type="radio" id="o" value="O" [checked]="form.get('sexo').value == 'O'"/>
-                  <label for="o" (click)="selectSexo('O')">Outro</label>
-          </div>
-        </div>
-
-          <div class="menu ">
-
-              <label> Biografia </label>
-
-              <textarea class="textarea"></textarea>
-
-          </div>
-
+    
         <button type="submit" class="button" id="submit-contato">{{ textButton }}</button>
     </form>
       

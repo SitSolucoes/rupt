@@ -166,9 +166,12 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .dropdown-content{
-    top: 60px !important;
+    /*não mexa nessa classe pia, por favor, caga tudo no admin
+    crie outra classe pra fazer o que precisa*/
+
+    /*top: 60px !important;
     width: 130px !important;
-    left: 1110px !important;
+    left: 1110px !important;*/
 }
 
 .headbar .headbar-right .dropdown-content li > a:hover{
