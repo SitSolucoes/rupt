@@ -17,7 +17,7 @@ import { UploadItem } from "./../../classes/upload-item";
 })
 export class CadastroLeitorComponent implements OnInit {
   
-  leitor: Leitor;
+  leitor: Leitor = new Leitor();
   form: FormGroup;
   message: any;
   textButton: string = "Cadastrar";
@@ -147,8 +147,8 @@ export class CadastroLeitorComponent implements OnInit {
             if (this.form.get('id').value == 0){
                 this._leitoresService.createLeitor(this.form).subscribe(
                   (data: any) => {
-                    //this.uploadFiles(data);
-                    this.doLogin();
+                    this.leitor.id = data;
+                    this.uploadFiles();
                   },
                   (error) =>{
                     console.log(error);
@@ -163,16 +163,21 @@ export class CadastroLeitorComponent implements OnInit {
       }
   }
 
-  uploadFiles(id){
+  uploadFiles(){
     let files = new Array();
-    files.push((<HTMLInputElement>window.document.getElementById('src_foto')).files[0]);
+    files.push((<HTMLInputElement>window.document.getElementById('foto')).files[0]);
+    files.push((<HTMLInputElement>window.document.getElementById('capa')).files[0]);
 
-    let myUploadItem = new UploadItem(files, "leitores/fotos_perfil/"+id);
+    console.log((<HTMLInputElement>window.document.getElementById('foto')).files[0]);
+    console.log((<HTMLInputElement>window.document.getElementById('capa')).files[0]);
+  
+    let myUploadItem = new UploadItem(files, "leitor/uploadImages/"+this.leitor.id);
     
     myUploadItem.formData = { FormDataKey: 'Form Data Value' };  // (optional) form data can be sent with file
 
     this._uploadFileService.onSuccessUpload = (item, response, status, headers) => {
           // success callback
+          this.doLogin();
     };
     this._uploadFileService.onErrorUpload = (item, response, status, headers) => {
           // error callback
@@ -181,8 +186,6 @@ export class CadastroLeitorComponent implements OnInit {
           // complete callback, called regardless of success or failure
     };
     this._uploadFileService.upload(myUploadItem);
-
-    //this.afterSubmit("Salvo com sucesso.");
   }
 
   doLogin(){

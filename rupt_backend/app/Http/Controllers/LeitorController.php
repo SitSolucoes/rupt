@@ -15,38 +15,31 @@ class LeitorController extends Controller
 
     public function create($request){
         $leitor = new Leitor(); 
-        try{
-            $leitor->nome = $request->input('nome');
-            $leitor->nick = $request->input('nick');
-            $leitor->email = $request->input('email');
-            $date = str_replace('/', '-', $request->input("nascimento"));
-            $leitor->nascimento = date('Y-m-d', strtotime($date));
-            $leitor->sexo = $request->input('sexo');
-            $leitor->biografia = $request->biografia;
-            $leitor->password = Hash::make($request->input('password'));
-            $leitor->ativo = $request->input('ativo');
-            $leitor->save();
-        }catch(Exception $exception){
-            return null;
-        }
-        return $leitor->id;
         
+        $leitor->nome = $request->input('nome');
+        $leitor->nick = $request->input('nick');
+        $leitor->email = $request->input('email');
+        $date = str_replace('/', '-', $request->input("nascimento"));
+        $leitor->nascimento = date('Y-m-d', strtotime($date));
+        $leitor->sexo = $request->input('sexo');
+        $leitor->biografia = $request->biografia;
+        $leitor->password = Hash::make($request->input('password'));
+        $leitor->ativo = $request->input('ativo');
+        $leitor->save();
+        
+        return $leitor->id;
     }
     
     public function store(Request $request){
         $leitor = new Leitor();
-        try{
-            $leitor_id = $this->create($request);
-            if($leitor_id != null){
-                $leitor = $this->getById($leitor_id)->first();
-                return response()->json([
-                    'message'=>'Leitor criado com sucesso!',
-                    'id_leitor'=>$leitor->id,
-                    'nome_leitor'=>$leitor->nome
-                ],201);        
-            }
-        }catch(Exception $e){
-
+    
+        $leitor_id = $this->create($request);
+        if($leitor_id != null){
+            $leitor = $this->getById($leitor_id)->first();
+            return response()->json([
+                'message' => 'Leitor criado com sucesso!',
+                'id' => $leitor->id,
+            ],201);        
         }
     }
 
@@ -181,6 +174,28 @@ class LeitorController extends Controller
         }
         
         return response()->json(['leitor' => false], 200);
+    }
+
+    public function uploadImages (Request $request, $id){
+        $leitor = Leitor::find($id);
+        $path = public_path()."/"."profile/";
+        
+        if ($_FILES['doc1']['tmp_name']){
+            echo 'primeiro';
+
+            move_uploaded_file($_FILES['doc1']['tmp_name'], $path.$id."_profile.".pathinfo($_FILES['doc1']['name'], PATHINFO_EXTENSION));
+            $leitor->src_foto = $id."_profile.".pathinfo($_FILES['doc1']['name'], PATHINFO_EXTENSION);
+        }
+        if ($_FILES['doc2']['tmp_name']){
+            echo 'segundo';
+
+            move_uploaded_file($_FILES['doc2']['tmp_name'], $path.$id."_capa.".pathinfo($_FILES['doc2']['name'], PATHINFO_EXTENSION));
+            $leitor->src_capa = $id."_capa.".pathinfo($_FILES['doc2']['name'], PATHINFO_EXTENSION);
+        }
+        
+        $leitor->save();
+
+        return response()->json(['message' => "Escritor alterado com sucesso."], 200);
     }
 
 }

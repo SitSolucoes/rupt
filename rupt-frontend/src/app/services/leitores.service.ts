@@ -33,7 +33,9 @@ export class LeitoresService {
     const body = this.createBody(form);
     
     return this._http.post(this._url + 'storeLeitor', body, {headers: this.headers}).map(
-    (response: Response)=>{});
+    (response: Response)=>{
+        return response.json().id;
+    });
   } 
 
   updateLeitor(form, id){
