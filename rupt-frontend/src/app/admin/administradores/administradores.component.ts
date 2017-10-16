@@ -45,11 +45,9 @@ export class AdministradoresComponent implements OnInit {
               private _location: Location) { }
 
   ngOnInit() {
-    console.log('inicia de novo');
     if(this._route.snapshot.params['id']){
       this._adminService.getAdmin(+this._route.snapshot.params['id']).subscribe(
         (admin: any) => {
-          console.log('entra no console');
           this.admin_selecionado = admin;
           this.openModalEdit(this.admin_selecionado);
           //setTimeout(()=> {this.openModal()},2000)

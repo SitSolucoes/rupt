@@ -112,6 +112,12 @@ input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):
 	margin-top: -25px;
 }
 
+.dropdown-content{
+	left: auto!important;
+	margin-bottom: 10px;
+	width: 100%!important;
+}
+
 .dropdown-content li>a{
 	color: #131313;
 }

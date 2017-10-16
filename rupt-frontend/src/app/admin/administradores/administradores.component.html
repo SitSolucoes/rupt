@@ -59,13 +59,16 @@
                 </div>
                 <div class="row">
                      <div class="input-field col s12 m6">
-                        <select name="ativo" materialize="material_select"
+                        <select name="ativo" materialize="material_select" material-select
                                 [materializeSelectOptions]="selectOptions" [(ngModel)]="admin_selecionado.ativo">
                              <option *ngFor="let option of selectOptions" [value]="option.value">{{option.name}}</option>
                         </select>
                         <label for="ativo">Status*</label>
                     </div>
                 </div>
+                
+
+                
         </div>
         </div>
         <div class="modal-footer">
@@ -85,7 +88,7 @@
 
 <div class="row">
     <div class="col s12 m12 l4 xl2">
-        <a class="modal-trigger" (click)="openModal(f)">
+        <a (click)="openModal(f)">
             <div class="btn new">
                 Novo
             </div>
