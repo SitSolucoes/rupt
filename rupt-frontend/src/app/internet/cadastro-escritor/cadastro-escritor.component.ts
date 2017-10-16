@@ -11,6 +11,8 @@ import { Bancos } from 'app/shared/arrayBanco';
 import { Estados } from 'app/shared/arrayEstados';
 import { validarCpf } from 'app/shared/valida-cpf';
 import { Http } from '@angular/http';
+import { UploadFileService } from 'app/services/upload-file.service';
+import { UploadItem } from 'app/classes/upload-item';
 
 @Component({
   selector: 'app-cadastro-escritor',
@@ -33,7 +35,8 @@ export class CadastroEscritorComponent implements OnInit {
               private _escritorService: EscritoresService,
               private _router:Router,
               private _formBuilder: FormBuilder,
-              private _http: Http) { }
+              private _http: Http,
+              private _uploadFileService: UploadFileService) { }
 
   ngOnInit() {
       this.createForm();
@@ -153,8 +156,33 @@ export class CadastroEscritorComponent implements OnInit {
 
   onSubmit(){
     this._escritorService.createEscritor(this.formulario, this.leitor.id).subscribe(
-      (response) => { this._router.navigate(['rupt/perfil']) }
+      (response) => { 
+        this.uploadFiles();
+      }
     )
+  }
+
+  uploadFiles(){
+      let files = new Array();
+      files.push((<HTMLInputElement>window.document.getElementById('doc1')).files[0]);
+      files.push((<HTMLInputElement>window.document.getElementById('doc2')).files[0]);
+      files.push((<HTMLInputElement>window.document.getElementById('doc3')).files[0]);
+
+      let myUploadItem = new UploadItem(files, "escritor/uploadDocs/"+this.leitor.id);
+      
+      myUploadItem.formData = { FormDataKey: 'Form Data Value' };  // (optional) form data can be sent with file
+
+      this._uploadFileService.onSuccessUpload = (item, response, status, headers) => {
+            // success callback
+            this._router.navigate(['rupt/perfil']) ;
+      };
+      this._uploadFileService.onErrorUpload = (item, response, status, headers) => {
+            // error callback
+      };
+      this._uploadFileService.onCompleteUpload = (item, response, status, headers) => {
+            // complete callback, called regardless of success or failure
+      };
+      this._uploadFileService.upload(myUploadItem);
   }
 
 }

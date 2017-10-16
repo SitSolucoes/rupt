@@ -38,7 +38,6 @@ class EscritorController extends Controller
         $escritor->cpf = $this->Mask("###.###.###-##", $request->cpf);
         $escritor->telefone = $request->telefone;
         $escritor->celular = $request->celular;
-        $escritor->biografia = $request->biografia;
         $escritor->banco = $request->banco;
         $escritor->agencia = $request->agencia;
         $escritor->conta_corrente = $request->conta_corrente;
@@ -92,14 +91,17 @@ class EscritorController extends Controller
     }
 
     public function uploadDocs (Request $request, $id){
-        //$originalName = $_FILES['file']['name'];
-
-        /*$ext = '.'.pathinfo($originalName, PATHINFO_EXTENSION);
-        $generatedName = "e1".$ext;
+        $path = public_path()."/"."docs/";
         
-        $request->file('file')->move("docs", $generatedName);*/
+        move_uploaded_file($_FILES['doc1']['tmp_name'], $path.$id."_1.".pathinfo($_FILES['doc1']['name'], PATHINFO_EXTENSION));
+        move_uploaded_file($_FILES['doc2']['tmp_name'], $path.$id."_2.".pathinfo($_FILES['doc2']['name'], PATHINFO_EXTENSION));
+        move_uploaded_file($_FILES['doc3']['tmp_name'], $path.$id."_3.".pathinfo($_FILES['doc3']['name'], PATHINFO_EXTENSION));
 
-        echo json_encode($_FILES['doc1']);
+        $escritor = $this->getById($id);
+        $escritor->doc_1 = $id."_1.".pathinfo($_FILES['doc1']['name'], PATHINFO_EXTENSION);
+        $escritor->doc_2 = $id."_2.".pathinfo($_FILES['doc2']['name'], PATHINFO_EXTENSION);
+        $escritor->doc_3 = $id."_3.".pathinfo($_FILES['doc3']['name'], PATHINFO_EXTENSION);
+        $escritor->save();
 
         return response()->json(['message' => "Escritor alterado com sucesso."], 200);
     }

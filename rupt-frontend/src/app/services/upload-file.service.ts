@@ -32,7 +32,7 @@ export class UploadFileService {
 
     //form.append(item.alias, item.file, item.file.name);
 
-    let i = 0;
+    let i = 1;
 
     item.file.forEach(file => {
         form.append('doc'+i, file, file.name);

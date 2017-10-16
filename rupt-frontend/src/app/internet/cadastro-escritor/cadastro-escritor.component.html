@@ -4,7 +4,7 @@
     <div class="container">
         <p> Progresso </p>
 
-        <div *ngIf='page == 1'>
+        <div [hidden]="page != 1">
             <div class="progress">
                 <div class="green"> </div>
             </div>   
@@ -83,10 +83,10 @@
                 </div>
             </div>
 
-            <button type="submit" class="button background-orange" (click)="next()" 
+            <button type="button" class="button background-orange" (click)="next()" 
             [disabled]="!formulario.valid || cpfInvalido || cpfUsado">Próximo</button>
         </div>
-        <div *ngIf='page == 2'>
+        <div [hidden]="page != 2">
             <div class="progress">
                 <div class="green green2"> </div>
             </div>   
@@ -98,39 +98,29 @@
                 </div>
                 
                 <div class="img-area">
-                        
                     <p> 1. Foto - Frente do RG/Carteira de motorista  </p>
-
                     <img src="../../../assets/img/rg.png" class="img">
-
-                    <input type="file" name="arquivo" id="txFoto" />
-
+                    <input type="file" accept="image/*" id='doc1'>
                 </div>
 
                 <div class="img-area">
-
                     <p> 2. Foto - Verso do RG/Carteira de motorista </p>
-
                     <img src="../../../assets/img/cpf.png" class="img">
-
-                    <input type="file" name="arquivo" />
-
+                    <input type="file" name="arquivo" id='doc2'/>
                 </div>
 
                 <div class="img-area">
-
                     <p> 3. Foto do usuário mais frente do RG/Carteira de motorista  </p>
-
                     <img src="../../../assets/img/pessoa_cpf.png" class="img">
-
-                    <input type="file" name="arquivo" />
+                    <input type="file" name="arquivo" id='doc3'/>
                 </div>
-            </div>
-            <button type="submit" class="button background-orange" (click)="next()">Próximo</button>
             
-            <button type="submit" class="button" (click)="prev()">Voltar</button>
+            </div>
+            <button type="button" class="button background-orange" (click)="next()">Próximo</button>
+            
+            <button type="button" class="button" (click)="prev()">Voltar</button>
         </div>
-        <div *ngIf='page == 3'>
+        <div [hidden]='page != 3'>
             <div class="progress">
                 <div class="green green3"> </div>
             </div>
@@ -164,7 +154,7 @@
             </div>
             <button type="submit" class="button background-orange">Salvar</button>
             
-            <button type="submit" class="button" (click)="prev()">Voltar</button>
+            <button type="button" class="button" (click)="prev()">Voltar</button>
         </div>
     </div>
 </form>
