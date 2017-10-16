@@ -100,7 +100,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 
 .headbar .title{
     font-family: 'nexa-bold';
-    font-size: 17px;
+    font-size: 16px;
     display: block;
     float: left;
     color: #FFFDFD;
@@ -110,7 +110,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     left: 10px;
     padding-left: 15px;
     padding-right: 15px;
-    padding-top: 19px;
+    padding-top: 20px;
     font-weight: 500;
     text-transform: uppercase;
 }
@@ -991,6 +991,14 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     clear: both;
     outline: none;
     border-bottom: 1px solid #9C9C9C;
+}
+
+.modal-content .img{
+    height: 35px;
+}
+
+.modal-content .title2{
+    padding-bottom: 0px;
 }
 
 .modal-footer{
@@ -2060,10 +2068,89 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     width: 50%;
 }
 
+.modal3{
+    top: 15% !important;
+    width: 60%;
+}
+
 .login-modal .container .text{
     display: block;
     float: left;
     margin-top: 10px;
     color: #969696;
     margin-left: 50px;
+}
+
+.login-categorias{
+    display: block;
+    float: left;
+}
+
+.login-categorias p{
+    font-family: lato;
+    font-weight: bold;
+    text-align: center;
+    font-size: 19px;
+    color: #696969;
+    width: 80%;
+    display: block;
+    margin: 0 auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.login-categorias .container{
+    display: block;
+    float: left;
+    height: 300px;
+    width: 100%;
+}
+
+.login-categorias .container .info{
+    display: block;
+    float: left;
+    width: 20%;
+    height: 90px;
+    margin-right: 20px;
+    position: relative;
+    left: 6%;
+    border-radius: 4px;
+}
+
+.login-categorias .container .info .area{
+    width: 100%;
+    height: 70px;
+    display: block;
+    margin: 0 auto;
+    overflow: hidden;
+    filter: brightness(50%);
+    border-radius: 4px;
+}
+
+.login-categorias .container .info .area .img {
+    height: 70px;
+    width: 100%;
+}
+
+.login-categorias .container .info .area .title2{
+    display: block;
+    float: left;
+    height: 30px;
+    border: 2px solid #fff;
+    display: block;
+}
+
+.login-categorias .container .info .button3{
+    background: transparent;
+    color: #fff;
+    border: 1px solid #fff;
+    width: 85%;
+    position: relative;
+    bottom: 50px;
+    font-family: nexa-bold;
+    text-transform: uppercase;
+    display: block;
+    padding: 5px;
+    font-size: 13px;
+    margin: 0 auto;
 }
