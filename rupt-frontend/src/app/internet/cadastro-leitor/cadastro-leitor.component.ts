@@ -59,14 +59,14 @@ export class CadastroLeitorComponent implements OnInit {
   createForm(){
     this.form = this._formBuilder.group({
       id: '0',
-      nome: [null, [Validators.required, Validators.minLength(3)]],
-      nick: [null, [Validators.required, Validators.minLength(3)]],
-      sexo: ["F", Validators.required],
-      nascimento: [null, [Validators.required, Validators.minLength(10)]],
-      src_foto: [null],
-      email: [null, [Validators.required, Validators.email]],
-      senha: [null, [Validators.required, Validators.minLength(6)]],
-      confirma_senha: [null],
+      nome: ['', [Validators.required, Validators.minLength(3)]],
+      nick: ['', [Validators.required, Validators.minLength(3)]],
+      sexo: ['F', Validators.required],
+      nascimento: ['', [Validators.required, Validators.minLength(10)]],
+      src_foto: [''],
+      email: ['', [Validators.required, Validators.email]],
+      senha: ['', [Validators.required, Validators.minLength(6)]],
+      confirma_senha: [''],
       ativo: true,
       biografia: ['']
     }); 
@@ -142,9 +142,9 @@ export class CadastroLeitorComponent implements OnInit {
             control.markAsTouched();
         })
       }
-      else if ((this.form.get('senha').value == this.form.get('confirma_senha').value) &&
-        !this.nickInvalido && !this.emailInvalido && !this.dataInvalida){
+      else if (!this.nickInvalido && !this.emailInvalido && !this.dataInvalida){
             if (this.form.get('id').value == 0){
+              if ((this.form.get('senha').value == this.form.get('confirma_senha').value)){
                 this._leitoresService.createLeitor(this.form).subscribe(
                   (data: any) => {
                     this.leitor.id = data;
@@ -154,6 +154,7 @@ export class CadastroLeitorComponent implements OnInit {
                     console.log(error);
                   }
                 );
+              }
             }
             else {
                 this._leitoresService.updateLeitor(this.form, this.form.get('id').value).subscribe(

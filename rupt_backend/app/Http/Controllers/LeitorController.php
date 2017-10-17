@@ -75,7 +75,8 @@ class LeitorController extends Controller
         $leitor->save();
 
         $response = [
-            'message' => "Leitor alterado com Sucesso"
+            'message' => "Leitor alterado com Sucesso",
+            'leitor' => $leitor
         ];
 
         return response()->json($response, 200);

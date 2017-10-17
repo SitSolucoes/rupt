@@ -1,3 +1,4 @@
+import { Base64 } from './../shared/Base64';
 import { ConnectionFactory } from './../classes/connection-factory';
 import { Observable } from 'rxjs';
 import { Http, Response, Headers} from '@angular/http';
@@ -5,7 +6,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class EscritoresService {
-
+  private base64: Base64 = new Base64();
   private headers = new Headers({'Content-Type': 'application/json'});
   private _url: string = ConnectionFactory.API_CONNECTION;
   constructor(private _http: Http) { }
@@ -68,7 +69,7 @@ export class EscritoresService {
   createEscritor(form, id){
     const body = this.createBody(form);
 
-    let admin_id = localStorage.getItem('admin_id');
+    let admin_id = this.base64.decode(localStorage.getItem('a'));
     if (!admin_id)
       admin_id = '0';
 

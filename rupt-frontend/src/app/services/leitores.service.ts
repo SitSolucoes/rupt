@@ -43,6 +43,7 @@ export class LeitoresService {
     
     return this._http.put(this._url + 'updateLeitor/'+id, body, {headers: this.headers}).map(
     (response: Response)=>{
+      this.leitor.emit(response.json().leitor);
       return response.json().message;
     });
   }  

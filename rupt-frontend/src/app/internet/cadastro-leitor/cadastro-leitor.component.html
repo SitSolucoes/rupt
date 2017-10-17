@@ -62,7 +62,9 @@
         </div>
         <div class="menu ">
             <label> Biografia 
-                <font style='font-size: 12px'>({{ 500 - form.get('biografia').value.length }})</font>
+                <font style='font-size: 12px' *ngIf="form.get('biografia').value">
+                    ({{ 500 - form.get('biografia').value.length }})
+                </font>
             </label>
             <textarea class="textarea" formControlName='biografia'></textarea>
         </div>
