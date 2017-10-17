@@ -37,9 +37,11 @@ Route::get('/getLeitor/{id}',['uses' => 'LeitorController@getLeitor']);
 Route::put('/updateLeitor/{id}',['uses' => 'LeitorController@update']);
 Route::get('/validaNick/{nick}/{id}', ['uses' => 'LeitorController@validaNick']);
 Route::get('/validaEmailLeitor/{nick}/{id}', ['uses' => 'LeitorController@validaEmail']);
+
 Route::put('/leitor/signin',['uses' => 'LeitorController@signin']);
 Route::post('leitor/verificaLogin', ['uses' => 'LeitorController@verificaLogin']);
 Route::post('leitor/uploadImages/{id}', ['uses' => 'LeitorController@uploadImages']);
+Route::get('leitor/getLeitorByNick/{nick}', ['uses' => 'LeitorController@getLeitorByNick']);
 
 //escritores
 Route::get('/getEscritores',['uses' => 'EscritorController@getEscritores']);

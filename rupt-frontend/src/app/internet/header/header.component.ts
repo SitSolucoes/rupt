@@ -1,3 +1,4 @@
+import { ConnectionFactory } from 'app/classes/connection-factory';
 import { Router } from '@angular/router';
 import { LeitoresService } from './../../services/leitores.service';
 import { MaterializeAction } from 'angular2-materialize';
@@ -12,7 +13,7 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
+  url = ConnectionFactory.API_IMAGEM;
   leitor: Leitor;
   modalActions = new EventEmitter<string|MaterializeAction>();
   modalLogin = new EventEmitter<string|MaterializeAction>();

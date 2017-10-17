@@ -1,3 +1,4 @@
+import { Escritor } from './escritor';
 export class Leitor {
     id: number;
     nome: string;
@@ -10,6 +11,7 @@ export class Leitor {
     email: string;
     password: string;
     ativo: boolean;
+    escritor: Escritor;
     
     constructor(){
         this.id = 0;

@@ -1,39 +1,38 @@
+<div class="user">
 
-    <div class="user">
-
-        <div class="capa">
-
-                <img src="../../../assets/img/capa2.png" class="img">
-        </div>
+    <div class="capa">
+        <img src="../../../assets/img/capa2.png" class="img">
+    </div>
 
 
-        <div class="bio">
-
+    <div class="bio">
         <div class="profile"> <img src="../../../assets/img/profile.png" class="img"> </div>
 
-                
-                              <div class="info">
-                                  
-                                    <b> Especialista em tv e famosos </b> <br/><br/>
-                
-                                     Cientista social em formação, feminista negra, vegetariana e youtuber. <br/><br/>
-                
-                                    <img src="../../../assets/img/map.png" class="img">  <font class="gray"> São Paulo, SP </font> <br/><br/>
-                
-                                    <img src="../../../assets/img/calendar.png" class="img">  <font class="gray"> Participa desde julho de 2017 </font>
-                
-                              </div>
-                
+        <div class="info">
+            
+            <div *ngIf='leitor.biografia'>
+                {{ leitor.biografia }} <br/><br/>
+            </div>
+
+            <div *ngIf='leitor.escritor.cidade'>
+                <img src="../../../assets/img/map.png" class="img">  
+                <font class="gray"> 
+                    {{ leitor.escritor.cidade }}, {{ leitor.escritor.uf }} 
+                </font> <br/><br/>
+            </div>
+
+            <img src="../../../assets/img/calendar.png" class="img">  <font class="gray"> Participa desde julho de 2017 </font>
         </div>
+    </div>
 
 
         <div class="area"> 
                 
             <div class="info">
 
-                <div class="title">  Nátaly Neri </div> <img src="../../../assets/img/verify.png" class="img">               
+                <div class="title">  {{ leitor.nome }} </div> 
 
-                <div class="title subtitle">  <b>@Nath</b> </div>
+                <div class="title subtitle">  <b>@{{ leitor.nick }} </b> </div>
 
             </div>    
 

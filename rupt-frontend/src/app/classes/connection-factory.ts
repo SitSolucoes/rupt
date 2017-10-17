@@ -4,7 +4,7 @@ export class ConnectionFactory {
         'http://localhost:8000/api/'; //DEV
 
     public static API_IMAGEM = 
-        //"http://localhost:8000/docs/";
-        "http://api.sitsolucoes.com.br/docs";
+        "http://localhost:8000/";
+        //"http://api.sitsolucoes.com.br/";
 
 }

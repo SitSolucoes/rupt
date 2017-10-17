@@ -49,6 +49,12 @@ class LeitorController extends Controller
         return response()->json(['leitor' => $leitor], 200);
     }
 
+    public function getLeitorByNick($nick){
+        $leitor = Leitor::where('nick', $nick)->with('escritor')->first();
+
+        return response()->json(['leitor' => $leitor], 200);
+    }
+
     public function getLeitores(){
         $leitores = Leitor::orderBy("nome");
 
@@ -181,13 +187,13 @@ class LeitorController extends Controller
         $leitor = Leitor::find($id);
         $path = public_path()."/"."profile/";
         
-        if ($_FILES['doc1']['tmp_name']){
+        if (isset($_FILES['doc1']['tmp_name'])){
             echo 'primeiro';
 
             move_uploaded_file($_FILES['doc1']['tmp_name'], $path.$id."_profile.".pathinfo($_FILES['doc1']['name'], PATHINFO_EXTENSION));
             $leitor->src_foto = $id."_profile.".pathinfo($_FILES['doc1']['name'], PATHINFO_EXTENSION);
         }
-        if ($_FILES['doc2']['tmp_name']){
+        if (isset($_FILES['doc2']['tmp_name'])){
             echo 'segundo';
 
             move_uploaded_file($_FILES['doc2']['tmp_name'], $path.$id."_capa.".pathinfo($_FILES['doc2']['name'], PATHINFO_EXTENSION));

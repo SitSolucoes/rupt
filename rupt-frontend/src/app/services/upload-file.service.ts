@@ -37,7 +37,6 @@ export class UploadFileService {
     item.file.forEach(file => {
         form.append('doc'+i, file, file.name);
         i++;
-        console.log('upload: '+i);
     });
 
     xhr.upload.onprogress = (event: any) => {

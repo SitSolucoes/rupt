@@ -158,7 +158,10 @@ export class CadastroLeitorComponent implements OnInit {
             }
             else {
                 this._leitoresService.updateLeitor(this.form, this.form.get('id').value).subscribe(
-                  (response) => { console.log(response) }
+                  (response) => { 
+                    console.log(response);
+                    this.uploadFiles();
+                  }
                 )
             }
       }
@@ -166,11 +169,12 @@ export class CadastroLeitorComponent implements OnInit {
 
   uploadFiles(){
     let files = new Array();
-    files.push((<HTMLInputElement>window.document.getElementById('foto')).files[0]);
-    files.push((<HTMLInputElement>window.document.getElementById('capa')).files[0]);
-
-    console.log((<HTMLInputElement>window.document.getElementById('foto')).files[0]);
-    console.log((<HTMLInputElement>window.document.getElementById('capa')).files[0]);
+    
+    if ((<HTMLInputElement>window.document.getElementById('foto')).files[0])
+      files.push((<HTMLInputElement>window.document.getElementById('foto')).files[0]);
+    
+    if ((<HTMLInputElement>window.document.getElementById('capa')).files[0])
+      files.push((<HTMLInputElement>window.document.getElementById('capa')).files[0]);
   
     let myUploadItem = new UploadItem(files, "leitor/uploadImages/"+this.leitor.id);
     
