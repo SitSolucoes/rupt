@@ -14,6 +14,7 @@ import { InputMaskModule } from 'ng2-inputmask';
 import { InternetModule } from "app/internet/internet.module";
 import { Angular2SocialLoginModule } from "angular2-social-login";
 import { SliderComponent } from 'app/internet/slider/slider.component';
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 
 let providers = {
    "google": {
@@ -43,7 +44,9 @@ let providers = {
     MaterializeModule,
     BrowserAnimationsModule,
     InputMaskModule,
-    Angular2SocialLoginModule
+    Angular2SocialLoginModule,
+    FroalaEditorModule, 
+    FroalaViewModule
   ],
   providers: [
     {

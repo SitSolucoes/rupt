@@ -23,6 +23,7 @@ import { CategoriaSliderComponent } from './categoria-slider/categoria-slider.co
 import { CategoriasComponent } from './categorias/categorias.component';
 import { ModalCategoriasComponent } from './modal-categorias/modal-categorias.component';
 import { PublicacaoComponent } from './publicacao/publicacao.component';
+import { FroalaViewModule, FroalaEditorModule } from 'angular2-froala-wysiwyg';
 
 @NgModule({ 
   imports: [
@@ -31,7 +32,9 @@ import { PublicacaoComponent } from './publicacao/publicacao.component';
     MaterializeModule,
     FormsModule,
     ReactiveFormsModule,
-    InputMaskModule
+    InputMaskModule,
+    FroalaEditorModule, 
+    FroalaViewModule
   ],
   declarations: [
     FaqComponent,
