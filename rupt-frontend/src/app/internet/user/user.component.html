@@ -18,7 +18,10 @@
                 </font> <br/><br/>
             </div>
 
-            <img src="../../../assets/img/calendar.png" class="img">  <font class="gray"> Participa desde julho de 2017 </font>
+            <img src="../../../assets/img/calendar.png" class="img">  
+            <font class="gray"> 
+                Participa desde {{ leitor.created_at | date: 'MMMM' }} de {{ leitor.created_at | date: 'y'}} 
+            </font>
         </div>
     </div>
 
@@ -29,22 +32,18 @@
         </div>
 
         <div class="button button-orange" *ngIf="leitor.id != leitorLogado.id"> Seguir </div>    
-
-        <div class="write-area">
+        
+        <a routerLink="../../cadastro-escritor" *ngIf="leitor.id == leitorLogado.id && !leitor.escritor"> 
+            <div class="button"> Tornar-se escritor </div> 
+        </a>
+        
+        <div class="write-area" *ngIf="leitor.id == leitorLogado.id && leitor.escritor">
             <img src="../../../assets/img/write.png" class="img3">
-
             <p>Escrever uma nova publicação</p>
-
         </div>
 
         <div class="area2">
-
-
         </div>
-
-
-
-        
     </div>
 
     <div class="feed">  
