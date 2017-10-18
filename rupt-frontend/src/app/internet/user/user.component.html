@@ -25,11 +25,26 @@
     <div class="area"> 
         <div class="info">
             <div class="title">  {{ leitor.nome }} </div> 
-
             <div class="title subtitle">  <b>@{{ leitor.nick }} </b> </div>
-        </div>    
+        </div>
 
-        <div class="button button-orange" *ngIf="leitor.id != leitorLogado.id"> Seguir </div>
+        <div class="button button-orange" *ngIf="leitor.id != leitorLogado.id"> Seguir </div>    
+
+        <div class="write-area">
+            <img src="../../../assets/img/write.png" class="img3">
+
+            <p>Escrever uma nova publicação</p>
+
+        </div>
+
+        <div class="area2">
+
+
+        </div>
+
+
+
+        
     </div>
 
     <div class="feed">  
@@ -48,6 +63,14 @@
                     
             </div>
 
+        <div class="search">
+
+            <input class="input-search" maxlength="30" name="marca" placeholder="Pesquise uma publicação pelo título" type="text">
+
+            <img src="../../../assets/img/search2.png" class="img6">
+
+        </div>
+
             <div class="post"> 
                 
                 <img src="../../../assets/img/profile.png" class="img"> 
@@ -55,6 +78,8 @@
                 <font class="title"> Nátaly Neri </font> <img src="../../../assets/img/marcador.png" class="img img2">                                         
 
                 <font class="title title2">     2h </font>
+
+                <img src="../../../assets/img/edit.png" class="img img5">
 
                 <div class="info">
 
@@ -95,6 +120,8 @@
                 
                 <font class="title title2"> 1d </font>
 
+                <img src="../../../assets/img/edit.png" class="img img5">
+
                 <div class="info"> 
                         
                 <div class="border">    
@@ -127,6 +154,8 @@
                     <font class="title"> Nátaly Neri </font> <img src="../../../assets/img/marcador.png" class="img img2"> 
                     
                     <font class="title title2"> 1d </font>
+
+                <img src="../../../assets/img/edit.png" class="img img5">
     
                     <div class="info">
                             
@@ -173,6 +202,4 @@
                         
     </div>
         
-    </div>
-
-            
+</div>

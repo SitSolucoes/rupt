@@ -9,23 +9,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./categorias.component.css']
 })
 export class CategoriasComponent implements OnInit {
-
-  constructor(private _categoriasService: CategoriasService,
-              private _postsService: PostsService) { }
-
+  
   categorias;
 
+  constructor(private _categoriasService: CategoriasService,
+              private _postsService: PostsService) {
+
+                this.getPosts();
+  }
+
+
   ngOnInit() {
-    //não logado
-    console.log("testando");
-    //if(localStorage.getItem('l') != null){
-      this._postsService.getCategoryPostsSlider().subscribe(
-        (p: any) =>{
-          console.log(p);
-        }
-      );
-    //}
-    //logado
+  }
+
+  getPosts(){
+    this._postsService.getCategoryPostsSlider().subscribe(
+      (p: any) =>{
+        this.categorias = p.posts;
+        //console.log(p.posts);
+      }
+    );
   }
 
 }

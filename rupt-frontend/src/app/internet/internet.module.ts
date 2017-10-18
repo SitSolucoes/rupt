@@ -22,6 +22,7 @@ import { CadastroEscritorComponent } from './cadastro-escritor/cadastro-escritor
 import { CategoriaSliderComponent } from './categoria-slider/categoria-slider.component';
 import { CategoriasComponent } from './categorias/categorias.component';
 import { ModalCategoriasComponent } from './modal-categorias/modal-categorias.component';
+import { PublicacaoComponent } from './publicacao/publicacao.component';
 
 @NgModule({ 
   imports: [
@@ -49,7 +50,8 @@ import { ModalCategoriasComponent } from './modal-categorias/modal-categorias.co
     CadastroEscritorComponent,
     CategoriaSliderComponent,
     CategoriasComponent,
-    ModalCategoriasComponent
+    ModalCategoriasComponent,
+    PublicacaoComponent
   ]
 })
 export class InternetModule { }

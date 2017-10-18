@@ -1065,7 +1065,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     display: block;
     float: left;
     height: 70px;
-    width: 50%;
+    width: 70%;
     background: #fff;
     padding-left: 30px;
     padding-top: 13px;
@@ -1075,6 +1075,32 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .user .area .info{
   display: block;
   float: left;
+}
+
+.user .area .write-area{
+    display: block;
+    float: right;
+    width: 150px;
+    height: 50px;
+    margin-right: 40px;
+    overflow: hidden;
+}
+
+.user .area .img3{
+    height: 40px;
+    display: block;
+    float: left;
+    margin-top: 2px;
+}
+
+.user .area .write-area p{
+    font-size: 13px;
+    font-weight: bolder;
+    width: 100px;
+    display: block;
+    float: right;
+    margin-top: 0px;
+    color: #f97000;
 }
 
 .user .area .title{
@@ -1110,7 +1136,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     padding-right: 10px;
     color: #ffffff;
     font-weight: 600;
-    background: #828282;
+    background: #005a87;
     border-radius: 2px;
     position: relative;
     right: 30px;
@@ -1195,7 +1221,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
   float: left;
   position: relative;
   left: 5%;
-  margin-right: 45px;
+  margin-right: 50px;
   padding-top: 14px;
   font-family: 'nexa-bold';
   text-align: center;
@@ -1234,6 +1260,13 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
    height: 10px;
    margin-left: 5px;
    margin-top: 25px;
+}
+
+.user .feed .post .img5{
+    height: 18px;
+    margin-left: 5px;
+    margin-top: 20px;
+    border-radius: 0px;
 }
 
 .user .feed .post .title{
@@ -1313,6 +1346,42 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
   margin-left: 10px;
   position: relative;
   top: 5px;
+}
+
+.user .feed .search{
+    display: block;
+    float: left;
+    width: 100%;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.user .feed .search .input-search{
+    width: 90%;
+    height: 40px;
+    display: block;
+    float: left;
+    border-radius: 0px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 5%;
+    background: #f7f7f7;
+    border: 1px solid #f7f7f7;
+    border-radius: 2px;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, .1) !important;
+}
+
+.user .feed .search input[type=text]:not(.browser-default):focus:not([readonly]), input[type=password]:not(.browser-default):focus:not([readonly]){
+    background: #fff;
+    border: 1px solid #fff;
+}
+
+.user .feed .search .img6{
+    height: 20px;
+    display: block;
+    float: left;
+    position: relative;
+    right: 35px;
+    top: 20px;
 }
 
 .user .patrocinio{

@@ -29,6 +29,15 @@ class CategoriaController extends Controller
         return Categoria::where('status', 1)->orderBy("categoria")
         ->where("categoria_idCategoria", null)->get();
     }
+    
+    public function categoriasToHome(){
+        return Categoria::join('categoria_filtros', 'categoria_filtros.categoria_idCategoria', '=', 'categorias.id')
+                        ->where('categorias.status', 1)
+                        ->where("categorias.categoria_idCategoria", null)
+                        ->orderBy("categoria_filtros.ordem", 'asc')->get();
+    }
+
+
 
     private function recursiveSubCategorias($categorias){
          $listCategoria = new Collection();
@@ -45,7 +54,7 @@ class CategoriaController extends Controller
          return $listCategoria;
     }
 
-    private function getSubCategorias($id){
+    public function getSubCategorias($id){
         $categorias = Categoria::orderBy("categoria")
             ->where("categoria_idCategoria", $id);
 

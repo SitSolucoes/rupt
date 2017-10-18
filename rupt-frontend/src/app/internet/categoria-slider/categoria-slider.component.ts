@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'categoria-slider',
@@ -7,9 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CategoriaSliderComponent implements OnInit {
 
-  constructor() { }
+  @Input('categoria') categoria: any;
+
+  nomeCategoria;
+  posts;
+  constructor() {
+    console.log(this.categoria)
+    
+   }
 
   ngOnInit() {
+    
   }
 
 }

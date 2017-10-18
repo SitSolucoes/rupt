@@ -65,11 +65,16 @@ class PostController extends Controller
         $cat_con = new CategoriaController();
         $retorno = [];
 
-        $categorias = $cat_con->categoriasAtivas();
+        $categorias = $cat_con->categoriasToHome();
 
         foreach($categorias as $c){
+            $subs = $cat_con->getSubCategorias($c->id);
             $posts = $this->postsPorCategoria($c->id);
-            $retorno[] = [
+            if($subs->count() > 0)
+                foreach($subs as $s)
+                    foreach($this->postsPorCategoria($s->id) as $p)
+                        $posts[] = $p;
+            $retorno[] = (object) [
                 "nome" => $c->categoria,
                 "posts" => $posts
             ];
@@ -82,4 +87,5 @@ class PostController extends Controller
 
         return response()->json($ret, 200);
     }
+
 }
