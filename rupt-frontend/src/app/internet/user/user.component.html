@@ -1,31 +1,37 @@
 <div class="user">
-
     <div class="capa">
-        <img src="../../../assets/img/capa2.png" class="img">
+        <img src="{{ url + leitor.src_capa }}" class="img">
     </div>
 
-
     <div class="bio">
-        <div class="profile"> <img src="../../../assets/img/profile.png" class="img"> </div>
+        <div class="profile"> <img src="{{ url + leitor.src_foto }}" class="img"> </div>
 
         <div class="info">
-            
             <div *ngIf='leitor.biografia'>
                 {{ leitor.biografia }} <br/><br/>
             </div>
 
-            <div *ngIf='leitor.escritor.cidade'>
+            <div *ngIf='leitor.escritor && leitor.escritor.cidade'>
                 <img src="../../../assets/img/map.png" class="img">  
                 <font class="gray"> 
                     {{ leitor.escritor.cidade }}, {{ leitor.escritor.uf }} 
                 </font> <br/><br/>
             </div>
 
-            <img src="../../../assets/img/calendar.png" class="img">  <font class="gray"> Participa desde julho de 2017 </font>
+            <img src="../../../assets/img/calendar.png" class="img">  
+            <font class="gray"> 
+                Participa desde {{ leitor.created_at | date: 'MMMM' }} de {{ leitor.created_at | date: 'y'}} 
+            </font>
         </div>
     </div>
 
+    <div class="area"> 
+        <div class="info">
+            <div class="title">  {{ leitor.nome }} </div> 
+            <div class="title subtitle">  <b>@{{ leitor.nick }} </b> </div>
+        </div>
 
+<<<<<<< HEAD
         <div class="area"> 
                 
             <div class="info">
@@ -48,14 +54,22 @@
 
             </div></a>
 
+=======
+        <div class="button button-orange" *ngIf="leitor.id != leitorLogado.id"> Seguir </div>    
+        
+        <a routerLink="../../cadastro-escritor" *ngIf="leitor.id == leitorLogado.id && !leitor.escritor"> 
+            <div class="button"> Tornar-se escritor </div> 
+        </a>
+        
+        <div class="write-area" *ngIf="leitor.id == leitorLogado.id && leitor.escritor">
+            <img src="../../../assets/img/write.png" class="img3">
+            <p>Escrever uma nova publicação</p>
+>>>>>>> 4577f0f500aaf322597c66d42db793c3a753c76a
         </div>
 
         <div class="area2">
-
-
         </div>
-
-
+    </div>
 
     <div class="feed">  
 
@@ -95,7 +109,7 @@
 
                   <div class="border">
 
-                  <a routerLink="../news"> <img src="../../../assets/img/news3.png" class="img3">
+                  <a routerLink="/news"> <img src="../../../assets/img/news3.png" class="img3">
 
                   <div class="new">
 
@@ -212,6 +226,4 @@
                         
     </div>
         
-    </div>
-
-            
+</div>

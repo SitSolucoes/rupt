@@ -8,14 +8,7 @@ use App\Leitor;
 
 class LeitorController extends Controller
 {
-    private function getById($id){
-        $leitor = Leitor::where('id', $id)->get();
-        return $leitor;
-    }
-
-    public function create($request){
-        $leitor = new Leitor(); 
-        
+    private function createLeitor (Request $request, $leitor){
         $leitor->nome = $request->input('nome');
         $leitor->nick = $request->input('nick');
         $leitor->email = $request->input('email');
@@ -23,11 +16,42 @@ class LeitorController extends Controller
         $leitor->nascimento = date('Y-m-d', strtotime($date));
         $leitor->sexo = $request->input('sexo');
         $leitor->biografia = $request->biografia;
-        $leitor->password = Hash::make($request->input('password'));
         $leitor->ativo = $request->input('ativo');
+
+        return $leitor;
+    }
+
+    private function getById($id){
+        $leitor = Leitor::where('id', $id)->get();
+        return $leitor;
+    }
+
+    public function create($request){
+        $leitor = new Leitor(); 
+        $leitor = $this->createLeitor($request, $leitor);
+        $leitor->password = Hash::make($request->input('password'));
+        $leitor->src_foto = 'default.png';
+        $leitor->src_capa = 'capa.png';
         $leitor->save();
         
         return $leitor->id;
+    }
+
+    public function update(Request $request, $id){
+        $leitor = Leitor::find($id);
+        if (!$leitor) {
+            return response()->json(['message' => 'Leitor não encontrado'], 404);
+        }
+        
+        $leitor = $this->createLeitor($request, $leitor);
+        $leitor->save();
+
+        $response = [
+            'message' => "Leitor alterado com Sucesso",
+            'leitor' => $leitor
+        ];
+
+        return response()->json($response, 200);
     }
     
     public function store(Request $request){
@@ -65,28 +89,7 @@ class LeitorController extends Controller
         return response()->json($response, 200);
     }
 
-    public function update(Request $request, $id){
-        $leitor = Leitor::find($id);
-        if (!$leitor) {
-            return response()->json(['message' => 'Leitor não encontrado'], 404);
-        }
-        
-        $leitor->nome = $request->input('nome');
-        $leitor->nick = $request->input('nick');
-        $leitor->email = $request->input('email');
-        $date = str_replace('/', '-', $request->input("nascimento"));
-        $leitor->nascimento = date('Y-m-d', strtotime($date));
-        $leitor->sexo = $request->input('sexo');
-        $leitor->ativo = $request->input('ativo');
-        $leitor->save();
-
-        $response = [
-            'message' => "Leitor alterado com Sucesso",
-            'leitor' => $leitor
-        ];
-
-        return response()->json($response, 200);
-    }
+    
 
     public function validaNick($nick, $id){
         $leitor = Leitor::where("nick", $nick)

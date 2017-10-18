@@ -15,7 +15,8 @@ export class Leitor {
     
     constructor(){
         this.id = 0;
-        this.src_foto = "path_do_sem_imagem";
+        this.src_foto = "default.png";
+        this.src_capa = 'capa.png';
         this.sexo = "m";
         this.ativo = true;
     }
