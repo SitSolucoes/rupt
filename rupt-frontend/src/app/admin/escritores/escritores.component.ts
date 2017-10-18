@@ -447,7 +447,9 @@ export class EscritoresComponent implements OnInit {
     files.push((<HTMLInputElement>window.document.getElementById('doc2')).files[0]);
     files.push((<HTMLInputElement>window.document.getElementById('doc3')).files[0]);
 
-    let myUploadItem = new UploadItem(files, "escritor/uploadDocs/"+id);
+    let file_names = ['doc1', 'doc2', 'doc3'];
+
+    let myUploadItem = new UploadItem(files, file_names, "escritor/uploadDocs/"+id);
     
     myUploadItem.formData = { FormDataKey: 'Form Data Value' };  // (optional) form data can be sent with file
 

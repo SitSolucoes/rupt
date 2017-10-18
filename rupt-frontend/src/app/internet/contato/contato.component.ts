@@ -34,7 +34,7 @@ export class ContatoComponent implements OnInit {
   enviaMensagem(){
     return this._mensagemService.enviaMensagem(this.msg_form).subscribe(
       (data: any) => {
-          console.log("sucesso!");
+//          console.log("sucesso!");
       }
   );
   }

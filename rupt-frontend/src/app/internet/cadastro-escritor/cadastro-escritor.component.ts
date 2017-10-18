@@ -164,25 +164,40 @@ export class CadastroEscritorComponent implements OnInit {
 
   uploadFiles(){
       let files = new Array();
-      files.push((<HTMLInputElement>window.document.getElementById('doc1')).files[0]);
-      files.push((<HTMLInputElement>window.document.getElementById('doc2')).files[0]);
-      files.push((<HTMLInputElement>window.document.getElementById('doc3')).files[0]);
+      let files_name = new Array();
 
-      let myUploadItem = new UploadItem(files, "escritor/uploadDocs/"+this.leitor.id);
-      
-      myUploadItem.formData = { FormDataKey: 'Form Data Value' };  // (optional) form data can be sent with file
+      if ((<HTMLInputElement>window.document.getElementById('doc1')).files[0]){
+          files.push((<HTMLInputElement>window.document.getElementById('doc1')).files[0]);
+          files_name.push('doc1');
+      }
+      if ((<HTMLInputElement>window.document.getElementById('doc2')).files[0]){
+          files.push((<HTMLInputElement>window.document.getElementById('doc2')).files[0]);
+          files_name.push('doc2');
+      }
+      if ((<HTMLInputElement>window.document.getElementById('doc3')).files[0]){
+          files.push((<HTMLInputElement>window.document.getElementById('doc3')).files[0]);
+          files_name.push('doc3');
+      }
 
-      this._uploadFileService.onSuccessUpload = (item, response, status, headers) => {
-            // success callback
-            this._router.navigate(['rupt/perfil']) ;
-      };
-      this._uploadFileService.onErrorUpload = (item, response, status, headers) => {
-            // error callback
-      };
-      this._uploadFileService.onCompleteUpload = (item, response, status, headers) => {
-            // complete callback, called regardless of success or failure
-      };
-      this._uploadFileService.upload(myUploadItem);
+      if (files.length > 0){
+          let myUploadItem = new UploadItem(files, files_name, "escritor/uploadDocs/"+this.leitor.id);
+          
+          myUploadItem.formData = { FormDataKey: 'Form Data Value' };  // (optional) form data can be sent with file
+
+          this._uploadFileService.onSuccessUpload = (item, response, status, headers) => {
+                // success callback
+                this._router.navigate(['rupt/perfil']) ;
+          };
+          this._uploadFileService.onErrorUpload = (item, response, status, headers) => {
+                // error callback
+          };
+          this._uploadFileService.onCompleteUpload = (item, response, status, headers) => {
+                // complete callback, called regardless of success or failure
+          };
+          this._uploadFileService.upload(myUploadItem);
+      }
+      else 
+          this._router.navigate(['rupt/perfil']) ;
   }
 
 }

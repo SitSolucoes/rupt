@@ -70,14 +70,12 @@ export class MensagensService {
   }
 
   enviaResposta(f, id): Observable<any>{
-    console.log(f.value.resposta);
     const body =  {
         lida: f.value.lida,
         resposta: f.value.resposta,
         admin: localStorage.getItem('admin_id')
       };
 
-    console.log(body);
     return this._http.post(this._url + 'respondeMensagem/'+id, body, {headers: this.headers}).map(
         (resultado: Response) => {
           return resultado.json().enviada;
