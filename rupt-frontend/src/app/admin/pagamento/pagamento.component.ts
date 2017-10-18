@@ -149,9 +149,11 @@ export class PagamentoComponent implements OnInit {
 
   uploadFiles(){
     let files = new Array();
+    let files_name = ['doc1'];
+
     files.push((<HTMLInputElement>window.document.getElementById('doc')).files[0]);
     
-    let myUploadItem = new UploadItem(files, "pagamento/uploadDoc/"+this.pagamento.id);
+    let myUploadItem = new UploadItem(files, files_name, "pagamento/uploadDoc/"+this.pagamento.id);
 
     myUploadItem.formData = { FormDataKey: 'Form Data Value' };  // (optional) form data can be sent with file
 
