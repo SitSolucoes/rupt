@@ -1,20 +1,17 @@
 <div class="user">
-
     <div class="capa">
-        <img src="../../../assets/img/capa2.png" class="img">
+        <img src="{{ url + leitor.src_capa }}" class="img">
     </div>
 
-
     <div class="bio">
-        <div class="profile"> <img src="../../../assets/img/profile.png" class="img"> </div>
+        <div class="profile"> <img src="{{ url + leitor.src_foto }}" class="img"> </div>
 
         <div class="info">
-            
             <div *ngIf='leitor.biografia'>
                 {{ leitor.biografia }} <br/><br/>
             </div>
 
-            <div *ngIf='leitor.escritor.cidade'>
+            <div *ngIf='leitor.escritor && leitor.escritor.cidade'>
                 <img src="../../../assets/img/map.png" class="img">  
                 <font class="gray"> 
                     {{ leitor.escritor.cidade }}, {{ leitor.escritor.uf }} 
@@ -25,24 +22,15 @@
         </div>
     </div>
 
+    <div class="area"> 
+        <div class="info">
+            <div class="title">  {{ leitor.nome }} </div> 
 
-        <div class="area"> 
-                
-            <div class="info">
+            <div class="title subtitle">  <b>@{{ leitor.nick }} </b> </div>
+        </div>    
 
-                <div class="title">  {{ leitor.nome }} </div> 
-
-                <div class="title subtitle">  <b>@{{ leitor.nick }} </b> </div>
-
-            </div>    
-
-            <a routerLink="../cadastro-escritor"> <div class="button"> Tornar-se escritor </div> </a>
-
-                <div class="button button-orange"> Seguir </div>
-
-        </div>
-
-
+        <div class="button button-orange" *ngIf="leitor.id != leitorLogado.id"> Seguir </div>
+    </div>
 
     <div class="feed">  
 
@@ -72,7 +60,7 @@
 
                   <div class="border">
 
-                  <a routerLink="../news"> <img src="../../../assets/img/news3.png" class="img3">
+                  <a routerLink="/news"> <img src="../../../assets/img/news3.png" class="img3">
 
                   <div class="new">
 
