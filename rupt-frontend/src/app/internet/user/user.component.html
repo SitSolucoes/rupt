@@ -25,13 +25,7 @@
         </div>
     </div>
 
-    <div class="area"> 
-        <div class="info">
-            <div class="title">  {{ leitor.nome }} </div> 
-            <div class="title subtitle">  <b>@{{ leitor.nick }} </b> </div>
-        </div>
 
-<<<<<<< HEAD
         <div class="area"> 
                 
             <div class="info">
@@ -42,33 +36,21 @@
 
             </div>
 
-            <a routerLink="../cadastro-escritor"> <div class="button"> Tornar-se escritor </div> </a>
-
-                <div class="button button-orange"> Seguir </div>
-
-            <a routerLink="../publicacao">
-            <div class="write-area">
-                <img src="../../../assets/img/write.png" class="img3">
-
-                <p>Escrever uma nova publicação</p>
-
-            </div></a>
-
-=======
-        <div class="button button-orange" *ngIf="leitor.id != leitorLogado.id"> Seguir </div>    
+        <div class="button button-orange" *ngIf="leitor.id != leitorLogado.id"> Seguir </div>
         
         <a routerLink="../../cadastro-escritor" *ngIf="leitor.id == leitorLogado.id && !leitor.escritor"> 
             <div class="button"> Tornar-se escritor </div> 
         </a>
-        
-        <div class="write-area" *ngIf="leitor.id == leitorLogado.id && leitor.escritor">
-            <img src="../../../assets/img/write.png" class="img3">
-            <p>Escrever uma nova publicação</p>
->>>>>>> 4577f0f500aaf322597c66d42db793c3a753c76a
-        </div>
 
-        <div class="area2">
-        </div>
+            <a routerLink="../publicacao">
+                <div class="write-area">
+                    <img src="../../../assets/img/write.png" class="img3">
+
+                    <p>Escrever uma nova publicação</p>
+
+                </div></a>
+
+
     </div>
 
     <div class="feed">  

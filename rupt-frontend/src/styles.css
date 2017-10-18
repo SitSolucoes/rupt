@@ -2227,3 +2227,42 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     font-size: 13px;
     margin: 0 auto;
 }
+
+.publicacao{
+    display: block;
+    float: left;
+    width: 100%;
+    padding-bottom: 60px;
+}
+
+.publicacao .container{
+    width: 90%;
+    margin-left: 5%;
+    height: 400px;
+    margin-top: 60px;
+    border: 1px solid #ccc;
+}
+
+.publicacao .container .top{
+    display: block;
+    width: 100%;
+    border-bottom: 1px solid #fafafa;
+}
+
+.publicacao .container .top select{
+    display: block;
+    background: #fafafa;
+    border: 1px solid #fafafa;
+    border-bottom: 1px solid #ccc;
+}
+
+.publicacao .container .top .input{
+    width: 100%;
+    background: #fafafa;
+    border-radius: 0px;
+    border: 1px solid #fafafa;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 0px;
+}
+
+#editor {overflow:scroll; max-height:300px}
