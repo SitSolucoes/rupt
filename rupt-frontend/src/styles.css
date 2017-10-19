@@ -884,6 +884,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     padding-left: 30px;
     padding-right: 30px;
     margin-top: 10px;
+    margin-bottom: 5px;
 }
 
 .modal-content .info .subtitle{
@@ -2157,6 +2158,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .login-categorias{
     display: block;
     float: left;
+    width: 100%;
 }
 
 .login-categorias p{
@@ -2215,8 +2217,8 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 
 .login-categorias .container .info .button3{
     background: transparent;
-    color: #fff;
-    border: 1px solid #fff;
+    color: #4f4f4f;
+    border: 1px solid #4f4f4f;
     width: 85%;
     position: relative;
     bottom: 50px;
@@ -2226,6 +2228,11 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     padding: 5px;
     font-size: 13px;
     margin: 0 auto;
+}
+
+.login-categorias .container .info .active{
+    color: #f97000;
+    border: 1px solid #f97000;
 }
 
 .publicacao{
@@ -2238,7 +2245,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .publicacao .container{
     width: 90%;
     margin-left: 5%;
-    height: 400px;
+    height: 500px;
     margin-top: 60px;
     border: 1px solid #ccc;
 }
@@ -2246,7 +2253,6 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .publicacao .container .top{
     display: block;
     width: 100%;
-    border-bottom: 1px solid #fafafa;
 }
 
 .publicacao .container .top select{
@@ -2265,4 +2271,50 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     margin-bottom: 0px;
 }
 
-#editor {overflow:scroll; max-height:300px}
+.publicacao .info{
+    display: block;
+    width: 26%;
+    height: 100px;
+    margin: 0 auto;
+    margin-top: 40px;
+}
+
+.publicacao .info .button{
+    width: auto;
+    display: block;
+    float: left;
+    position: relative;
+    margin-left: 15px;
+    margin-top: 10px;
+    margin-bottom: 40px;
+    padding: 10px;
+    border: 1px solid #d9d9d9;
+    background: #d9d9d9;
+    text-transform: uppercase;
+    font-family: 'nexa-bold';
+    font-size: 13px;
+    color: #4f4f4f;
+    border-radius: 5px;
+}
+
+.publicacao .info .background-orange{
+    background: #f97000;
+    border: 1px solid #f97000;
+    color: #fff;
+}
+
+.publicacao .info .background-blue{
+    background: #0a70c9;
+    border: 1px solid #0a70c9;
+    color: #fff;
+}
+
+#editor {overflow:scroll; height:200px}
+
+.fr-box.fr-basic .fr-element{
+    height: 300px
+}
+
+.fr-toolbar{
+    border-top: 1px solid #cfcfcf;
+}
