@@ -1,185 +1,20 @@
 <div class="modal-content">
-  <div class="title title2">
-    <img src="../../../assets/img/logo.png" class="img">
-    <a click="#" class=" modal-action modal-close close">x</a>
-  </div>
-
-  <div class="login-categorias">
-    <p>  Escolha ao menos três categorias que definem melhor o seu gosto: </p>
-
-
-
-    <div class="container">
-
-      <div class="info">
-
-        <div class="area">
-
-
-          <img src="../../../assets/img/categoria_ico.png" class="img">
-
-        </div>
-
-
-        <button type="submit" class="button3">Economia</button>
-
-      </div>
-
-      <div class="info">
-
-        <div class="area">
-
-
-          <img src="../../../assets/img/categoria_ico2.png" class="img">
-
-
-        </div>
-
-        <button type="submit" class="button3">educação</button>
-
-      </div>
-
-      <div class="info">
-
-        <div class="area">
-
-
-          <img src="../../../assets/img/categoria_ico3.png" class="img">
-
-
-        </div>
-
-        <button type="submit" class="button3">ciência</button>
-
-      </div>
-
-      <div class="info">
-
-        <div class="area">
-
-
-          <img src="../../../assets/img/categoria_ico4.png" class="img">
-
-
-        </div>
-
-        <button type="submit" class="button3">esporte</button>
-
-      </div>
-
-      <div class="info">
-
-        <div class="area">
-
-
-          <img src="../../../assets/img/categoria_ico5.png" class="img">
-
-
-        </div>
-
-        <button type="submit" class="button3">política</button>
-
-      </div>
-
-      <div class="info">
-
-        <div class="area">
-
-
-          <img src="../../../assets/img/categoria_ico6.png" class="img">
-
-
-        </div>
-
-        <button type="submit" class="button3">tecnologia</button>
-
-      </div>
-
-      <div class="info">
-
-        <div class="area">
-
-
-          <img src="../../../assets/img/categoria_ico7.png" class="img">
-
-
-        </div>
-
-        <button type="submit" class="button3">entreterimento</button>
-
-      </div>
-
-      <div class="info">
-
-        <div class="area">
-
-
-          <img src="../../../assets/img/categoria_ico8.png" class="img">
-
-
-        </div>
-
-        <button type="submit" class="button3">policial</button>
-
-      </div>
-
-      <div class="info">
-
-        <div class="area">
-
-
-          <img src="../../../assets/img/categoria_ico9.png" class="img">
-
-
-        </div>
-
-        <button type="submit" class="button3">humor</button>
-
-      </div>
-
-      <div class="info">
-
-        <div class="area">
-
-
-          <img src="../../../assets/img/categoria_ico10.png" class="img">
-
-
-        </div>
-
-        <button type="submit" class="button3">astrologia</button>
-
-      </div>
-
-      <div class="info">
-
-        <div class="area">
-
-
-          <img src="../../../assets/img/categoria_ico11.png" class="img">
-
-
-        </div>
-
-        <button type="submit" class="button3">metereorologia</button>
-
-      </div>
-
-      <div class="info">
-
-        <div class="area">
-
-
-          <img src="../../../assets/img/categoria_ico12.png" class="img">
-
-
-        </div>
-
-        <button type="submit" class="button3">cultura</button>
-
-      </div>
-
+    <div class="title title2">
+        <img src="../../../assets/img/logo.png" class="img">
+        <a click="#" class=" modal-action modal-close close">x</a>
     </div>
 
-  </div>
+    <div class="login-categorias">
+        <p>  Escolha ao menos três categorias que definem melhor o seu gosto: </p>
+
+        <div class="container">
+            <div class="info" *ngFor='let cat of categoriasFiltro'>
+                <div class="area">
+                    <img src="../../../assets/img/categoria_ico.png" class="img">
+              </div>
+              <button type="submit" class="button3">{{ cat.categoria.categoria }}</button>
+            </div>
+        </div>
+
+    </div>
 </div>
