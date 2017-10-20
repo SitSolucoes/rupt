@@ -3,9 +3,9 @@
 
   <div class="container">
 
+    <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+
     <div class="top">
-
-
         <select name="banco" class="input">
           <option >Selecione uma categoria</option>
           <option >Economia</option>
@@ -20,7 +20,15 @@
 
     </div>
 
-    <div [froalaEditor]='options' [(froalaModel)]="text"></div>
+    <!-- use with ngModel -->
+    <quill-editor formControlName='texto'
+    [options]="editorOptions"
+    (blur)="onEditorBlured($event)"
+    (focus)="onEditorFocused($event)"
+    (ready)="onEditorCreated($event)"
+    (change)="onContentChanged($event)"></quill-editor>
+
+    </form>
 
   </div>
 

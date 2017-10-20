@@ -25,6 +25,7 @@ import { CategoriasComponent } from './categorias/categorias.component';
 import { ModalCategoriasComponent } from './modal-categorias/modal-categorias.component';
 import { PublicacaoComponent } from './publicacao/publicacao.component';
 import { FroalaViewModule, FroalaEditorModule } from 'angular2-froala-wysiwyg';
+import { QuillEditorModule } from 'ngx-quill-editor';
 
 @NgModule({ 
   imports: [
@@ -34,8 +35,7 @@ import { FroalaViewModule, FroalaEditorModule } from 'angular2-froala-wysiwyg';
     FormsModule,
     ReactiveFormsModule,
     InputMaskModule,
-    FroalaEditorModule, 
-    FroalaViewModule
+    QuillEditorModule
   ],
   declarations: [
     FaqComponent,

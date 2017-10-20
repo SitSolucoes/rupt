@@ -3,7 +3,7 @@ import { ConnectionFactory } from "app/classes/connection-factory";
 export class UploadItem {
     method: string = 'POST';
     url: string = '';
-    headers: any = {};
+    headers: any =  new Headers({'Content-Type': 'application/json'});
     formData: any = {};
     withCredentials = false;
     alias: string = 'file';

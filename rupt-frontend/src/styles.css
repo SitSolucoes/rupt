@@ -8,7 +8,7 @@
 
 @font-face {
     font-family: nexa-bold;
-    src: url('/assets/Nexa Bold.otf');
+    src: url('/assets/NexaBold.otf');
 }
 
 @font-face {
@@ -2361,4 +2361,27 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 
 .fr-toolbar{
     border-top: 1px solid #cfcfcf;
+}
+
+
+/* editor de texto */
+.ql-snow .ql-picker.ql-size .ql-picker-label::before,
+.ql-snow .ql-picker.ql-size .ql-picker-item::before {
+  content: 'Normal'!important;
+}
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-value=small]::before,
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value=small]::before {
+  content: 'Pequeno'!important;
+}
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-value=large]::before,
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value=large]::before {
+  content: 'Grande'!important;
+}
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-value=huge]::before,
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value=huge]::before {
+  content: 'Extra grande'!important;
+}
+
+.ql-snow .ql-picker.ql-size {
+    width: 120px!important;
 }

@@ -15,6 +15,7 @@ import { InternetModule } from "app/internet/internet.module";
 import { Angular2SocialLoginModule } from "angular2-social-login";
 import { SliderComponent } from 'app/internet/slider/slider.component';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+import { QuillEditorModule } from 'ngx-quill-editor';
 
 let providers = {
    "google": {
@@ -45,8 +46,7 @@ let providers = {
     BrowserAnimationsModule,
     InputMaskModule,
     Angular2SocialLoginModule,
-    FroalaEditorModule, 
-    FroalaViewModule
+    QuillEditorModule
   ],
   providers: [
     {
