@@ -20,7 +20,7 @@
     <img src="../../../assets/img/search2.png" class="img5">
 
         
-    <div class="headbar-right" *ngIf="leitor">
+    <div class="headbar-right" *ngIf="leitor?.id">
 
         <a routerLink="perfil/{{ leitor.nick }}">
             <div class="area-img">
@@ -49,7 +49,7 @@
 
     </div>
 
-    <div class="headbar-right" *ngIf="!leitor">
+    <div class="headbar-right" *ngIf="!leitor?.id">
 
         <a (click)="openModalLogin()">
             <div class="login login-border">
