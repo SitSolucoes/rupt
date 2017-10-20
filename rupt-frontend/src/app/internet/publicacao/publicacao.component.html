@@ -20,7 +20,7 @@
 
     </div>
 
-    <div [froalaEditor]>Escreva seu texto aqui...</div>
+    <div [froalaEditor]='options' [(froalaModel)]="text"></div>
 
   </div>
 
@@ -30,7 +30,7 @@
 
     <button type="button" class="button background-blue" >Inativar</button>
 
-    <button type="button" class="button background-orange" >Publicar</button>
+    <button type="button" class="button background-orange" (click)="onSubmit()">Publicar</button>
 
 
   </div>

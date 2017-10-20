@@ -9,10 +9,20 @@ import * as $ from 'jquery';
 })
 export class PublicacaoComponent implements OnInit {
 
+  text;
+  public options: Object = { 
+    placeholderText: 'Escreva seu texto aqui!',
+    language: 'pt_br'
+  }
+
   constructor() { }
 
   ngOnInit() {
 
+  }
+
+  onSubmit(){
+    console.log(this.text);
   }
 
 }
