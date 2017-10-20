@@ -2177,7 +2177,8 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .login-categorias .container{
     display: block;
     float: left;
-    height: 300px;
+    max-height: 350px;
+    padding-bottom: 30px;
     width: 100%;
 }
 
@@ -2185,7 +2186,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     display: block;
     float: left;
     width: 20%;
-    height: 90px;
+    height: 60px;
     margin-right: 20px;
     position: relative;
     left: 6%;
@@ -2233,6 +2234,43 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .login-categorias .container .info .active{
     color: #f97000;
     border: 1px solid #f97000;
+}
+
+.login-categorias .bottom{
+    width: 90%;
+    height: 70px;
+    display: block;
+    float: left;
+    border-top: 1px solid #b5b5b5;
+    margin-right: 40px;
+    margin-left: 40px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.login-categorias .bottom .button {
+    width: auto !important;
+    height: auto !important;
+    display: block !important;
+    float: right !important;
+    position: relative !important;
+    margin-right: 20px !important;
+    margin-top: 10px !important;
+    margin-bottom: 40px !important;
+    padding: 10px !important;
+    border: 1px solid #d9d9d9 !important;
+    background: #d9d9d9 !important;
+    text-transform: uppercase !important;
+    font-family: 'nexa-bold' !important;
+    font-size: 13px !important;
+    color: #4f4f4f !important;
+    border-radius: 5px !important;
+}
+
+.login-categorias .bottom .background-orange{
+    background: #f97000 !important;
+    border: 1px solid #f97000 !important;
+    color:  #fff !important;
 }
 
 .publicacao{
