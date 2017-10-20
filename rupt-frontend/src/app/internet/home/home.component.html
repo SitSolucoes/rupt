@@ -1,3 +1,11 @@
+<!--modal filtro categorias-->
+<div id="ModalCategoria" class="modal modal3"
+materialize="modal" [materializeParams]="[{dismissible: false}]"
+[materializeActions]="modalCategoria">
+<app-modal-categorias (closeModalCategoria)="closeModalCategoria($event)" [id]="leitor.id"></app-modal-categorias>
+</div>
+
+
 <!--publicidade-->
 <div class="banner-promo">
     <div class="area">

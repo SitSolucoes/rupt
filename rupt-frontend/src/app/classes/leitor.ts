@@ -1,4 +1,6 @@
+import { CategoriaLeitor } from './categoria-leitor';
 import { Escritor } from './escritor';
+
 export class Leitor {
     id: number;
     nome: string;
@@ -11,7 +13,9 @@ export class Leitor {
     email: string;
     password: string;
     ativo: boolean;
+    
     escritor: Escritor;
+    categoria_leitor: CategoriaLeitor[];
     
     constructor(){
         this.id = 0;

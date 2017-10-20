@@ -13,4 +13,8 @@ class Leitor extends Model
     public function escritor(){
         return $this->hasOne('App\Escritor', 'leitor_idLeitor');
     }
+
+    public function categoriaLeitor(){
+        return $this->hasMany('App\CategoriaLeitor', 'leitor_idLeitor', 'id');
+    }
 }

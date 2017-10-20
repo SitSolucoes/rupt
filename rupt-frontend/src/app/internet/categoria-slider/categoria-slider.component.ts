@@ -16,7 +16,7 @@ export class CategoriaSliderComponent implements OnInit {
    }
 
   ngOnInit() {
-    console.log(this.categoria);  
+    //console.log(this.categoria);  
   }
 
 }

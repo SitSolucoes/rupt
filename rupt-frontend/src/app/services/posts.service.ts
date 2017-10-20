@@ -1,4 +1,4 @@
-import { ConnectionFactory } from './../classes/connection-factory';
+import { ConnectionFactory } from 'app/classes/connection-factory';
 import { Injectable } from '@angular/core';
 
 import { Http, Response, Headers } from '@angular/http';
@@ -9,10 +9,11 @@ export class PostsService {
   constructor(private _http: Http) { }
 
   private _url: string = ConnectionFactory.API_CONNECTION;
+  private headers = new Headers({'Content-Type': 'application/json'});
 
   getEscritor(id){
     
-    return this._http.get(this._url + 'getEscritor/' + id)
+    return this._http.get(this._url + 'getEscritor/' + id, {headers: this.headers})
       .map(
           (response: Response) => { 
             return {
@@ -24,7 +25,7 @@ export class PostsService {
   }
 
   getSliderPosts(){
-    return this._http.get(this._url + 'posts/getSliderPosts')
+    return this._http.get(this._url + 'posts/getSliderPosts', {headers: this.headers})
       .map((retorno: Response) => {
         return{
           'posts': retorno.json().posts
@@ -33,7 +34,7 @@ export class PostsService {
   }
 
   getCategoryPostsSlider(){
-    return this._http.get(this._url + 'posts/PostsToHome/')
+    return this._http.get(this._url + 'posts/PostsToHome/', {headers: this.headers})
       .map((retorno: Response) => {
         return{
           'posts': retorno.json().retorno
@@ -42,7 +43,7 @@ export class PostsService {
   }
 
   getPost(id){
-    return this._http.get(this._url + 'posts/Post/'+id)
+    return this._http.get(this._url + 'posts/Post/'+id, {headers: this.headers})
     .map((retorno: Response) => {
       return{
         'dados': retorno.json().retorno

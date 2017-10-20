@@ -112,7 +112,7 @@ export class LeitoresService {
   logout(){
     localStorage.removeItem('token');
     localStorage.removeItem('l');
-    this.leitor.emit(null);
+    this.leitor.emit(new Leitor); //tem que ser assim por causa do modal das categorias
   }
 
   verificaLogin(){

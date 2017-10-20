@@ -1,20 +1,41 @@
-import { Component, OnInit } from '@angular/core';
+import { Leitor } from 'app/classes/leitor';
+import { CategoriaLeitorService } from './../../services/categoria-leitor.service';
+import { LeitoresService } from './../../services/leitores.service';
+import { MaterializeAction } from 'angular2-materialize';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 
 declare var $: any;
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
-              //'../../../assets/styles/materialize.css',
-              //'../../../assets/styles/materialize.min.css']
 })
+
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  leitor: Leitor = new Leitor();
+  modalCategoria = new EventEmitter<string|MaterializeAction>();
+
+  constructor(private _leitorService: LeitoresService,
+              private _categoriaLeitorService: CategoriaLeitorService) { }
 
   ngOnInit() {
-  
-  
+    this._leitorService.leitor.subscribe(
+      (leitor: Leitor) => { this.leitor = leitor; console.log(leitor) }
+    );
+
+    this._leitorService.verificaLogin().subscribe(
+      ( response )  => { 
+          if (response && !this.leitor.categoria_leitor)
+            this.openModalCategoria();
+       }
+    )
+
+    this.createSlick();
+  }
+
+  createSlick(){
     $(".regular").slick({
       dots: false,
       infinite: false,
@@ -32,7 +53,18 @@ export class HomeComponent implements OnInit {
       infinite: false,
       variableWidth: true,
     });
+  }
 
+  openModalCategoria() {
+    this.modalCategoria.emit({
+        action: 'modal',
+        params: ['open']});
+  }
+
+  closeModalCategoria(e){
+    if(e){
+        this.modalCategoria.emit({action:"modal",params:['close']});
+    }
   }
   
 }

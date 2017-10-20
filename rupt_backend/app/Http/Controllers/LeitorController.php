@@ -185,7 +185,8 @@ class LeitorController extends Controller
         if ($request->token){
             $leitor = Leitor::where('id', $request->id)
                         ->where('tokenLogin', $request->token)
-                        ->with('escritor')->first();
+                        ->with('escritor')
+                        ->with('categoriaLeitor')->first();
 
             if ($leitor)
                 return response()->json(['leitor' => $leitor], 200);

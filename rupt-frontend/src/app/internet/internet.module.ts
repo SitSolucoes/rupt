@@ -1,3 +1,4 @@
+import { CategoriaLeitorService } from './../services/categoria-leitor.service';
 import { InputMaskModule } from 'ng2-inputmask';
 import { SliderComponent } from './slider/slider.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -55,6 +56,9 @@ import { FroalaViewModule, FroalaEditorModule } from 'angular2-froala-wysiwyg';
     CategoriasComponent,
     ModalCategoriasComponent,
     PublicacaoComponent
+  ],
+  providers: [
+    CategoriaLeitorService
   ]
 })
 export class InternetModule { }

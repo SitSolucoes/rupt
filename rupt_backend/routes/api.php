@@ -73,6 +73,9 @@ Route::post('/categoria/createSubCategoria/{id}', ['uses' => 'CategoriaControlle
 Route::post('categoriaFiltro/save', ['uses' => 'CategoriaFiltroController@save']);
 Route::get('categoriaFiltro/getCategoriasFiltro', ['uses' => 'CategoriaFiltroController@getCategoriasFiltro']);
 
+//categoria leitor
+Route::post('categoriaLeitor/create', ['uses' => 'CategoriaLeitorController@create']);
+
 //denuncias
 Route::get('/sugestao/getDenuncias', [
            'uses' => 'DenunciasController@getDenuncias'

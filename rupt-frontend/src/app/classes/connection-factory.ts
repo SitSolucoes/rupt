@@ -5,6 +5,6 @@ export class ConnectionFactory {
 
     public static API_IMAGEM = 
         "http://localhost:8000/";
-        //"http://api.sitsolucoes.com.br/";
+        //"http://sitsolucoes.com.br/api/laravel/public/";
 
 }
