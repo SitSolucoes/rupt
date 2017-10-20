@@ -52,7 +52,7 @@ export class MensagensComponent implements OnInit {
   }
 
   mostralog(r){
-    console.log(r);
+    //console.log(r);
   }
 
   getMensagens_nLidas(){

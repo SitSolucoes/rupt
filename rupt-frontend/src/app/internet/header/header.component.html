@@ -28,7 +28,10 @@
         
     <div class="headbar-right" *ngIf="leitor">
 
-        <a routerLink="perfil/{{ leitor.nick }}"><img src="{{ url + 'profile/' + leitor.src_foto }}" class="img4"> 
+        <a routerLink="perfil/{{ leitor.nick }}">
+            <div class="area-img">
+            <img src="{{ url + 'profile/' + leitor.src_foto }}" class="img4">
+            </div>
             <p>{{ leitor.nome.split(' ')[0] }}</p> 
         </a>
 
@@ -45,6 +48,7 @@
             <!-- Caso user seja escritor <li><a routerLink="cadastro-escritor">Editar Perfil</a></li>-->
             <li><a routerLink="cadastro">Editar Perfil</a></li>
             <li><a href="#!">Mudar Senha</a></li>
+            <li><a routerLink="../publicacao">Publicar</a></li>
             <li class="divider"></li>
             <li><a (click)="logout()">Logout</a></li>
         </ul>

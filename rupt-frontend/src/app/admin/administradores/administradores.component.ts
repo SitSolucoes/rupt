@@ -121,7 +121,6 @@ export class AdministradoresComponent implements OnInit {
   }
 
   comparaSenhas(e, f){
-    console.log(f);
     if((f.value.confirm_senha+e.key == f.value.senha) || (f.value.confirm_senha+e.key == '' && f.value.senha == '' && this.editando)){
       this.senhaValida = true;
       return;

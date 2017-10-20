@@ -10,11 +10,9 @@ export class MaskDirective {
 
   @HostListener('keyup', ['$event']) 
   onKeyup($event: any) {
-    console.log('keyup');
   }
  
   @HostListener('blur', ['$event']) 
   onBlur($event: any) {
-   console.log('blur');
   }
 }

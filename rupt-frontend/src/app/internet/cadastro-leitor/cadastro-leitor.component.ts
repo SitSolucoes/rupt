@@ -151,7 +151,7 @@ export class CadastroLeitorComponent implements OnInit {
                     this.uploadFiles();
                   },
                   (error) =>{
-                    console.log(error);
+                    //console.log(error);
                   }
                 );
               }
@@ -159,7 +159,7 @@ export class CadastroLeitorComponent implements OnInit {
             else {
                 this._leitoresService.updateLeitor(this.form, this.form.get('id').value).subscribe(
                   (response) => { 
-                    console.log(response);
+                    
                     this.uploadFiles();
                   }
                 )
@@ -169,34 +169,44 @@ export class CadastroLeitorComponent implements OnInit {
 
   uploadFiles(){
     let files = new Array();
+    let files_name = new Array();
     
-    if ((<HTMLInputElement>window.document.getElementById('foto')).files[0])
+    if ((<HTMLInputElement>window.document.getElementById('foto')).files[0]){
       files.push((<HTMLInputElement>window.document.getElementById('foto')).files[0]);
-    
-    if ((<HTMLInputElement>window.document.getElementById('capa')).files[0])
+      files_name.push('doc1');
+    }
+      
+    if ((<HTMLInputElement>window.document.getElementById('capa')).files[0]){
       files.push((<HTMLInputElement>window.document.getElementById('capa')).files[0]);
-  
-    let myUploadItem = new UploadItem(files, "leitor/uploadImages/"+this.leitor.id);
-    
-    myUploadItem.formData = { FormDataKey: 'Form Data Value' };  // (optional) form data can be sent with file
+      files_name.push('doc2');
+    }
 
-    this._uploadFileService.onSuccessUpload = (item, response, status, headers) => {
-          // success callback
+
+    if (files.length > 0){
+        let myUploadItem = new UploadItem(files, files_name, "leitor/uploadImages/"+this.leitor.id);
+        
+        myUploadItem.formData = { FormDataKey: 'Form Data Value' };  // (optional) form data can be sent with file
+
+        this._uploadFileService.onSuccessUpload = (item, response, status, headers) => {
+              // success callback
+              this.doLogin();
+        };
+        this._uploadFileService.onErrorUpload = (item, response, status, headers) => {
+              // error callback
+        };
+        this._uploadFileService.onCompleteUpload = (item, response, status, headers) => {
+              // complete callback, called regardless of success or failure
+        };
+        this._uploadFileService.upload(myUploadItem);
+      }
+      else 
           this.doLogin();
-    };
-    this._uploadFileService.onErrorUpload = (item, response, status, headers) => {
-          // error callback
-    };
-    this._uploadFileService.onCompleteUpload = (item, response, status, headers) => {
-          // complete callback, called regardless of success or failure
-    };
-    this._uploadFileService.upload(myUploadItem);
   }
 
   doLogin(){
     this._leitoresService.doLogin(this.form).subscribe(
       (ret: any) => {
-          this._router.navigate(['rupt/perfil']);
+          //this._router.navigate(['rupt/perfil']);
       },  
     );
   }

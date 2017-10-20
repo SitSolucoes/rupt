@@ -68,8 +68,6 @@ export class AdministradoresService {
   updateAdmin(form, id){
     const body = this.createBody(form);
 
-    console.log(form);
-    
     return this._http.put(this._url + 'updateAdmin/'+ id, body, {headers: this.headers}).map(
     (response: any)=>{
         return response.json().message;

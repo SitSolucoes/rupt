@@ -20,8 +20,6 @@ export class RedefineSenhaComponent implements OnInit {
     if(this._route.snapshot.params['token']){
       this._adminService.validaTokenRedefine(this._route.snapshot.params['token']).subscribe(
         (valido: any) => {
-          console.log(this._route.snapshot.params['token']);
-          console.log(valido);
           if(!valido)
             this.token_valido = false;
             this.erro = "Link inválido, entre em contato com outro administrador";

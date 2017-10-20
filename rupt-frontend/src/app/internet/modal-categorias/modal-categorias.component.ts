@@ -1,3 +1,5 @@
+import { CategoriaFiltro } from './../../classes/categoria-filtro';
+import { CategoriaFiltroService } from './../../services/categoria-filtro.service';
 import { Router } from '@angular/router';
 import { LeitoresService } from './../../services/leitores.service';
 import { FormGroup, FormBuilder, Validator, Validators } from '@angular/forms';
@@ -12,40 +14,17 @@ export class ModalCategoriasComponent implements OnInit {
 
     @Output('closeModalCategoria') closeModalCategoria = new EventEmitter();
 
-    erro: boolean;
-    formulario: FormGroup;
-    mensagemErro: string;
+    categoriasFiltro: CategoriaFiltro[];
 
-    constructor(private _formBuilder: FormBuilder,
-                private _leitorService: LeitoresService,
-                private _router: Router) { }
+    constructor(private _categoriaFiltroService: CategoriaFiltroService) { }
 
     ngOnInit() {
-        this.createForm();
+        this.getCategoriasFiltro();
     }
 
-    createForm(){
-        this.formulario = this._formBuilder.group({
-            email: ['', Validators.required],
-            senha: ['', Validators.required]
-        })
-    }
-
-    onSubmit(){
-        this.erro = false;
-
-        this._leitorService.doLogin(this.formulario).subscribe(
-            (response) => {
-                if (response[0] == false){
-                    this.erro = true;
-                    this.mensagemErro = response[1];
-                }
-                else {
-                    this.closeModalCategoria.emit(true);
-
-                    this._router.navigate(['rupt/perfil']);
-                }
-            }
+    getCategoriasFiltro(){
+        this._categoriaFiltroService.getCategoriasFiltro().subscribe(
+            ( categoriasFiltro ) => { this.categoriasFiltro = categoriasFiltro }
         )
     }
 

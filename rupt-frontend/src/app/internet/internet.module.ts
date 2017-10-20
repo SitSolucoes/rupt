@@ -22,6 +22,8 @@ import { CadastroEscritorComponent } from './cadastro-escritor/cadastro-escritor
 import { CategoriaSliderComponent } from './categoria-slider/categoria-slider.component';
 import { CategoriasComponent } from './categorias/categorias.component';
 import { ModalCategoriasComponent } from './modal-categorias/modal-categorias.component';
+import { PublicacaoComponent } from './publicacao/publicacao.component';
+import { FroalaViewModule, FroalaEditorModule } from 'angular2-froala-wysiwyg';
 
 @NgModule({ 
   imports: [
@@ -30,7 +32,9 @@ import { ModalCategoriasComponent } from './modal-categorias/modal-categorias.co
     MaterializeModule,
     FormsModule,
     ReactiveFormsModule,
-    InputMaskModule
+    InputMaskModule,
+    FroalaEditorModule, 
+    FroalaViewModule
   ],
   declarations: [
     FaqComponent,
@@ -49,7 +53,8 @@ import { ModalCategoriasComponent } from './modal-categorias/modal-categorias.co
     CadastroEscritorComponent,
     CategoriaSliderComponent,
     CategoriasComponent,
-    ModalCategoriasComponent
+    ModalCategoriasComponent,
+    PublicacaoComponent
   ]
 })
 export class InternetModule { }

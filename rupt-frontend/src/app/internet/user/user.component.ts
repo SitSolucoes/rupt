@@ -1,3 +1,4 @@
+import { ConnectionFactory } from 'app/classes/connection-factory';
 import { Escritor } from './../../classes/escritor';
 import { LeitoresService } from './../../services/leitores.service';
 import { ActivatedRoute } from '@angular/router';
@@ -12,6 +13,7 @@ import { Leitor } from 'app/classes/leitor';
 export class UserComponent implements OnInit {
   leitor: Leitor;
   leitorLogado: Leitor;
+  url = ConnectionFactory.API_IMAGEM + 'profile/';
 
   constructor(private _activatedRoute: ActivatedRoute,
               private _leitorService: LeitoresService) { }
@@ -21,11 +23,18 @@ export class UserComponent implements OnInit {
       this.leitor.escritor = new Escritor();
       this.leitorLogado = new Leitor();
 
-      this._leitorService.getLeitorByNick(this._activatedRoute.snapshot.params['nick']).subscribe(
-        (leitor: Leitor) => {
-          this.leitor = leitor;
-        }
-      )
+      this._activatedRoute.params.subscribe(params => {
+        this._leitorService.getLeitorByNick(params['nick']).subscribe(
+          (leitor: Leitor) => {
+            this.leitor = leitor;
+          }
+        );
+      });
+
+      this._leitorService.leitor.subscribe(
+        (leitor: Leitor) => { this.leitorLogado = leitor }
+      );
+      this._leitorService.verificaLogin().subscribe();
   }
 
 }
