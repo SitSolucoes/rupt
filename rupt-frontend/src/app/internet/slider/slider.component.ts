@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { PostsService } from './../../services/posts.service';
 import { Component, OnInit, Renderer, ElementRef, ViewChild} from '@angular/core';
 
@@ -11,7 +12,8 @@ export class SliderComponent implements OnInit {
   sliderPostsHTML:string = '';
 
   constructor(private _postServices: PostsService,
-              private _elementRef: ElementRef) {
+              private _elementRef: ElementRef,
+              private _router: Router) {
   }
 
   ngOnInit() {
@@ -21,11 +23,17 @@ export class SliderComponent implements OnInit {
     this.getSliderPostsHTML();
   }
 
+  openNew(id){
+    console.log('dentro do openNeW()');
+    this._router.navigate(['/rupt/noticia', id]);
+  }
+
 
   getSliderPostsHTML(){
     this._postServices.getSliderPosts().subscribe(
       (retorno: any) => {
-        //console.log(retorno);
+        console.log('retorno');
+        console.log(retorno);
         this.sliderPosts = retorno.posts;
     });
   }

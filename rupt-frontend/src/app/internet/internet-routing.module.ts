@@ -21,7 +21,7 @@ const routes: Routes = [
       { path : 'faq', component: FaqComponent},
       { path : 'perfil/:nick', component: UserComponent },
       { path : 'footer', component: FooterComponent },
-      { path : 'news', component: NewsComponent },
+      { path : 'noticia/:id', component: NewsComponent },
       { path : 'cadastro', component: CadastroLeitorComponent },
       { path : 'cadastro-escritor', component: CadastroEscritorComponent },
       { path : 'contato', component: ContatoComponent},

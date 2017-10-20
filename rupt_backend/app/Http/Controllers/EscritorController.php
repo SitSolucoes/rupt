@@ -20,6 +20,13 @@ class EscritorController extends Controller
         return response()->json(['escritores' => $escritores], 200);
     }
 
+    public function getEscritor($id){
+        $leitorController = new LeitorController();
+        $escritor = $leitorController->getEscritor($id);
+
+        return response()->json(['escritor' => $escritor], 200);
+    }
+
     public function countSolicitacoes(){
         $count = Escritor::where('data_aceite', null)->count();
 

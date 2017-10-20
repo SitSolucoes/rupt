@@ -1,80 +1,85 @@
 <div class="container-categoria">
     <div class="area">
-        <div class="title"> Esportes </div>
+        <div class="title"> {{ categoria.nome }} </div>
         <div class="underline"></div>
-        <!--tipo imagem + texto -->
-        <div class="content-img-text">
-            <div class="info-img-text">
-                <div class="banner-img-text">
-                    <img src="../../../assets/img/section4.png" class="img shadow">
-                    <div class="img-container img-container-duplo">
-                        <div class="number">1.1K</div> 
-                        <img src="../../../assets/img/talk.png" class="img2">
-                        <div class="number">3.1K</div> 
-                        <img src="../../../assets/img/like.png" class="img2">
-                        <div class="number">2.1K</div> 
-                        <img src="../../../assets/img/eye.png" class="img2">
-                    </div>
-                </div>
-                <div class="title"> Djokovic cogita parada para tratar lesão no cotovelo </div>
-                <div class="text"> Cirurgia e uma parada na temporada são duas situações cogitadas por Novak Djokovic após a despedida de Wimbledon nesta quarta-feira ... </div>
-                <div class="info-post">
-                <div class="img-person">
-                    <img src="../../../assets/img/person3.png" class="img">
-                    </div>
-                    <p> Lucas Franz</p>
-                    <div class="area-post">
-                        <img src="../../../assets/img/calendar.png" class="img-cal">
-                        <div class="time"> 1 min </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- tipo texto -->
-        <div class="content">
-            <div class="info-text">
-                <div class="banner-single">
-                    <div class="title"> Lula fala pela 1ª vez após sentença de Moro </div>
-                    <div class="text"> O ex-presidente Luiz Inácio Lula da Silva fez nesta quinta-feira seu primeiro pronunciamento como condenado na Operação Lava Jato pelos .. </div>
-                    <div class="info-post">
-                        <div class="img-person">
-                            <img src="../../../assets/img/person6.png" class="img">
+        <slick-slider *ngIf="categoria.posts">
+            <div name="post" *ngFor="let p of categoria.posts">
+                <!--tipo imagem + texto -->
+                <div *ngIf="p.post.tipo_post == 1" class="content-img-text">
+                    <div class="info-img-text">
+                        <div class="banner-img-text">
+                            <!--../../../assets/img/section4.png-->
+                            <img src="{{ p.post.src_imagem }}" class="img shadow">
+                            <div class="img-container img-container-duplo"><!--dados post: likes etc -->
+                                <div class="number">{{ p.post.comentarios }}</div> 
+                                <img src="../../../assets/img/talk.png" class="img2">
+                                <div class="number">{{ p.post.likes }}</div> 
+                                <img src="../../../assets/img/like.png" class="img2">
+                                <div class="number">{{ p.post.visualizacoes}}</div> 
+                                <img src="../../../assets/img/eye.png" class="img2">
+                            </div>
                         </div>
-                        <p> Marcela Prado </p>
-                        <div class="area-post">  
-                        <img src="../../../assets/img/calendar.png" class="img-cal">
-                        <div class="time"> 2  min </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- tipo imagem -->
-        <div class="content">
-            <div class="info-img">
-                <div class="banner-img-text banner-solo">
-                    <img src="../../../assets/img/section15.png" class="img shadow">
-                    <div class="img-container img-container-duplo">
-                        <div class="number">1.1K</div> 
-                        <img src="../../../assets/img/talk.png" class="img2">
-                        <div class="number">3.1K</div> 
-                        <img src="../../../assets/img/like.png" class="img2">
-                        <div class="number">2.1K</div> 
-                        <img src="../../../assets/img/eye.png" class="img2">
-                        <div class="title"> Trump quer 1,4 mil quilômetros de muro </div>
-                        <div class="info-post info-post2">
+                        <div class="title"> {{ p.post.titulo }} </div>
+                        <div class="text"> {{ p.post.subtitulo }}...</div>
+                        <div class="info-post">
                             <div class="img-person">
-                                <img src="../../../assets/img/person4.png" class="img">
+                                <img src="{{ p.escritor.src_foto }}" class="img">
                             </div>
-                            <p> Luisa Accorsi</p>
+                            <p> {{ p.escritor.nick}}</p>
                             <div class="area-post">
-                                <img src="../../../assets/img/calendar2.png" class="img-cal">
-                                <div class="time"> 2  min </div>
+                                <img src="../../../assets/img/calendar.png" class="img-cal">
+                                <div class="time">{{ p.post.publishedAt}} </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- tipo texto -->
+                <div *ngIf="p.post.tipo_post == 3" class="content" >
+                    <div class="info-text">
+                        <div class="banner-single">
+                            <div class="title"> {{ p.post.titulo }} </div>
+                            <div class="text"> {{ p.post.subtitulo }}...</div>
+                            <div class="info-post">
+                                <div class="img-person">
+                                    <img src="{{ p.escritor.src_foto }}" class="img">
+                                </div>
+                                <p> Marcela Prado </p>
+                                <div class="area-post">  
+                                <img src="../../../assets/img/calendar.png" class="img-cal">
+                                <div class="time"> {{ p.post.publishedAt }} </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- tipo imagem -->
+                <div  *ngIf="p.post.tipo_post == 2" class="content">
+                    <div class="info-img">
+                        <div class="banner-img-text banner-solo">
+                            <img src="{{ p.post.src_imagem }}" class="img shadow">
+                            <div class="img-container img-container-duplo">
+                                <div class="number">{{ p.post.comentarios }}</div> 
+                                <img src="../../../assets/img/talk.png" class="img2">
+                                <div class="number">{{ p.post.likes }}</div> 
+                                <img src="../../../assets/img/like.png" class="img2">
+                                <div class="number">{{ p.post.visualizacoes }}</div> 
+                                <img src="../../../assets/img/eye.png" class="img2">
+                                <div class="title"> {{ p.post.titulo }} </div>
+                                <div class="info-post info-post2">
+                                    <div class="img-person">
+                                        <img src="{{ p.escritor.src_foto }}" class="img">
+                                    </div>
+                                    <p> {{ p.escritor.nick }} </p>
+                                    <div class="area-post">
+                                        <img src="../../../assets/img/calendar2.png" class="img-cal">
+                                        <div class="time"> {{ p.post.publishedAt}} </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </slick-slider>
     </div>
 </div>

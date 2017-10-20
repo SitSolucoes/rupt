@@ -80,6 +80,11 @@ class CategoriaController extends Controller
         return response()->json(['mensagem' => "Salvo com sucesso."], 200);
     }
 
+    public function categoriaByPost($id){
+        return Categoria::select('categorias.id')
+                        ->join('post_categoria', 'post_categoria.post_idPost','=', $id);
+    }
+
     public function createSubCategoria(Request $request, $id){
         $categoria = new Categoria();
         $categoria->categoria = $request->categoria;

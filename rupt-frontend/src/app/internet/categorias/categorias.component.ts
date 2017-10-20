@@ -20,6 +20,7 @@ export class CategoriasComponent implements OnInit {
 
 
   ngOnInit() {
+    this.getPosts();
   }
 
   getPosts(){

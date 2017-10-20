@@ -35,7 +35,7 @@ class PostController extends Controller
         
         $idPosts_q = Visualizacao::select(DB::raw('post_idPost as id, count(*) as q'))
                         ->whereIn('post_idPost', Post::select('id')
-                                                       ->whereDate('publishedAt', '>=', DB::raw('DATE(DATE_ADD(NOW(), INTERVAL - 10 DAY))'))->get())
+                                                       ->whereDate('publishedAt', '>=', DB::raw('DATE(DATE_ADD(NOW(), INTERVAL - 100 DAY))'))->get())
                         ->groupBy('post_idPost')
                         ->orderBy('q', 'desc')
                         ->limit(10)
@@ -54,6 +54,22 @@ class PostController extends Controller
         return response()->json($retorno, 200);
     }
 
+    public function getPost($id){
+        $c_con = new CategoriaController();
+        $post = $this->getById($id)->first();
+
+        $retorno[] = (object) [
+            "categorias" => $c_con->recursiveSubCategorias($c_con->categoriaByPost($post->id))
+        ];
+        
+        $ret = [
+            "dados" => $retorno
+        ];
+
+
+        return response()->json($ret, 200);
+    }
+
     public function postsPorCategoria($id){
         return Post::select('posts.*')
             ->join('post_categoria', 'posts.id', '=', 'post_categoria.post_idPost')
@@ -69,11 +85,21 @@ class PostController extends Controller
 
         foreach($categorias as $c){
             $subs = $cat_con->getSubCategorias($c->id);
-            $posts = $this->postsPorCategoria($c->id);
+            $tmp_posts = $this->postsPorCategoria($c->id);
+            $posts = [];
             if($subs->count() > 0)
                 foreach($subs as $s)
                     foreach($this->postsPorCategoria($s->id) as $p)
-                        $posts[] = $p;
+                        $tmp_posts[] = $p;
+            foreach($tmp_posts as $p)
+                $posts[] = (object) [
+                    "post" => $p,
+                    "escritor" => $p->autor,
+                    "visualizacoes" =>  300,//$p->getVisualizacoes(),
+                    "likes" => (3000>1000) ? (3000/1000) . 'k' : 3000, //$p->getIteracoes(),
+                    "comentarios" => ["comentario", "comentario", "comentario"],//$p->getComentarios()
+                ];
+            
             $retorno[] = (object) [
                 "nome" => $c->categoria,
                 "posts" => $posts

@@ -99,6 +99,10 @@ Route::get('posts/getSliderPosts/', [
     'uses' => 'PostController@getSliderPosts'
 ]);
 
+Route::get('/posts/Post/{id}', [
+    'uses' => 'PostController@getPost'
+]);
+
 
 //Mensagens
 Route::get('/getMensagens/naoLidas', [

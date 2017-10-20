@@ -41,4 +41,13 @@ export class PostsService {
       }); 
   }
 
+  getPost(id){
+    return this._http.get(this._url + 'posts/Post/'+id)
+    .map((retorno: Response) => {
+      return{
+        'dados': retorno.json().retorno
+      };
+    }); 
+  }
+
 }

@@ -19,6 +19,14 @@ export class EscritoresService {
       )
   }
 
+  getEscritor(id): Observable<any>{
+    return this._http.get(this._url + 'getEscritor/'+id).map(
+      (escritor: Response) => {
+        return escritor.json().escritor;
+      }
+    )
+  }
+
   countSolicitacoes(): Observable<any>{
     return this._http.get(this._url + 'countSolicitacoes').map(
       (response: Response) => {
