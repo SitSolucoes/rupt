@@ -28,7 +28,10 @@
         
     <div class="headbar-right" *ngIf="leitor">
 
-        <a routerLink="perfil/{{ leitor.nick }}"><img src="{{ url + 'profile/' + leitor.src_foto }}" class="img4"> 
+        <a routerLink="perfil/{{ leitor.nick }}">
+            <div class="area-img">
+            <img src="{{ url + 'profile/' + leitor.src_foto }}" class="img4">
+            </div>
             <p>{{ leitor.nome.split(' ')[0] }}</p> 
         </a>
 

@@ -36,7 +36,7 @@ input[type=password]:not(.browser-default)
   width: auto;
   background: #fff;
   padding-left: 10px;
-  border-radius: 5px;
+  border-radius: 3px;
   font-size: 16px;
   color: #363636;
   height: 40px;
@@ -129,10 +129,10 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     display: block;
     float: left;
     color: #fff;
-    font-family: 'nexa-bold';
+    font-family: 'gilroy-bold';
     font-weight: bolder;
     margin-left: 5px;
-    margin-top: 12px;
+    margin-top: 20px;
 }
 
 .headbar .headbar-right .btn{
@@ -147,6 +147,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     float: left;
     position: absolute;
     right: 90px;
+    top: 13px;
     color: #fff;
     width: 15px;
     font-size: 10px;
@@ -179,9 +180,9 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     float: left;
     font-family: 'nexa';
     color: #ffffff;
-    margin-left: 15px;
-    margin-right:  5px;
-    margin-top: 6px;
+    margin-left: 10px;
+    margin-right:  10px;
+    margin-top: 15px;
     font-size: 22px;
     text-transform: uppercase;
     outline: none;
@@ -212,7 +213,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     display: block;
     float: left;
     height: 30px;
-    margin-top: 5px;
+    margin-top: 13px;
 }
 
 .headbar .img2{
@@ -232,28 +233,33 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     margin-top: 10px;
 }
 
-.headbar .img4{
+.headbar .headbar-right .area-img{
     border-radius: 100%;
-    width: auto;
-    height: 35px;
+    width: 45px;
+    height: 45px;
     display: block;
-    margin-top: 3px;
+    margin-top: 8px;
     float: left;
     margin-left: 15px;
+    overflow: hidden;
+}
+
+.headbar .img4{
+    height: 60px;
 }
 
 .headbar .img5{
     display: block;
     float: left;
-    height: 20px;
-    margin-top: 20px;
+    height: 18px;
+    margin-top: 22px;
     position: relative;
     right: 30px;
 }
 
 .headbar .img6{
     height: 20px;
-    margin-top: 12px;
+    margin-top: 20px;
 }
 
 .banner-promo{
@@ -1107,12 +1113,12 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .user .area .title{
   display: block;
   float: left;
-  font-family: 'nexa-bold';
+  font-family: 'gilroy-bold';
   font-size: 19px;
 }
 
 .user .area .subtitle{
-  font-family: 'nexa';
+  font-family: 'lato';
   font-size: 16px;
   clear: both;
   color: #696969;
@@ -1160,21 +1166,19 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .user .bio .profile{
-  display: block;
-  float: left;
-  height: 200px;
-  width: 200px;
-  padding: 10px;
-  border-radius: 300px;
-  box-shadow: 1px 3px 1px #B9B7B7;
-  margin-bottom:  20px;
-  background: #fff;
+    display: block;
+    float: left;
+    height: 200px;
+    overflow: hidden;
+    width: 200px;
+    border-radius: 100%;
+    box-shadow: 1px 3px 1px #B9B7B7;
+    margin-bottom: 20px;
+    border: 5px solid #fff;
 }
 
 .user .bio .profile .img{
-  height: 100%;
-  width: 100%;
-  border-radius: 300px;
+  width: 200px;
 }
 
 .user .bio .info{
@@ -1326,6 +1330,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     font-family: 'nexa-bold';
     padding-left: 20px;
     padding-right: 100px;
+    letter-spacing: -1px;
 }
 
 .user .feed .post .status{
@@ -1463,9 +1468,10 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
   width: 85%;
   font-size: 37px;
   line-height: 50px;
-  color: #4A4A4A;
+  color: #3b3b3b;
   font-family: 'gilroy-bold';
   text-align: center;
+    letter-spacing: -2px;
 }
 
 .news .container{
