@@ -206,7 +206,7 @@ export class CadastroLeitorComponent implements OnInit {
   doLogin(){
     this._leitoresService.doLogin(this.form).subscribe(
       (ret: any) => {
-          //this._router.navigate(['rupt/perfil']);
+          this._router.navigate(['/']);
       },  
     );
   }
