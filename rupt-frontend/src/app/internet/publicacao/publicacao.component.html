@@ -6,22 +6,16 @@
     <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
 
     <div class="top">
-        <select name="banco" class="input">
-          <option >Selecione uma categoria</option>
-          <option >Economia</option>
-          <option >Educação</option>
-          <option >Ciência</option>
+        <select name="banco" class="input" formControlName='categoria_id'>
+            <option disabled selected>Selecione uma categoria</option>
+            <option *ngFor="let categoria of categorias" [value]='categoria.id'>{{ categoria.categoria }}</option>
         </select>
 
-      <input type="text" class="input" maxlength="40" placeholder="Insira o título da sua notícia">
-
-      <input type="text" class="input" maxlength="40" placeholder="Insira o subtítulo da sua notícia">
-
-
+      <input type="text" class="input" maxlength="160" formControlName='titulo' placeholder="Insira o título da sua notícia">
     </div>
 
     <!-- use with ngModel -->
-    <quill-editor formControlName='texto'
+    <quill-editor formControlName='conteudo'
     [options]="editorOptions"
     (blur)="onEditorBlured($event)"
     (focus)="onEditorFocused($event)"
@@ -32,10 +26,10 @@
       <div class="file-field input-field">
         <div class="btn">
           <span>Carregue uma foto</span>
-          <input type="file">
+          <input type="file" id='imagem'>
         </div>
         <div class="file-path-wrapper">
-          <input class="file-path validate" type="text">
+          <input class="file-path validate" type="text" >
         </div>
       </div>
 

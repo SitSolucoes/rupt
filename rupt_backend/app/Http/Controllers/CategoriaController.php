@@ -9,7 +9,10 @@ use App\Categoria;
 
 class CategoriaController extends Controller
 {
-    
+    public function get($id){
+        return Categoria::find($id);
+    }
+
     public function getCategorias(){
         $categorias = Categoria::orderBy("categoria")
             ->where("categoria_idCategoria", null);

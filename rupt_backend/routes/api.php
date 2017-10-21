@@ -110,6 +110,8 @@ Route::get('/posts/Post/{id}', [
     'uses' => 'PostController@getPost'
 ]);
 
+Route::post('posts/create', ['uses' => 'PostController@createPost']);
+Route::post('posts/uploadImages/{id}', ['uses' => 'PostController@uploadImages']);
 
 //Mensagens
 Route::get('/getMensagens/naoLidas', [
@@ -146,3 +148,6 @@ Route::get('pagamento/getPagamentos', ['uses' => 'PagamentoController@getPagamen
 Route::get('pagamento/getPagamentosPendentes', ['uses' => 'PagamentoController@getPagamentosPendentes']);
 Route::get('pagamento/countPagamentosPendentes', ['uses' => 'PagamentoController@countPagamentosPendentes']);
 Route::post('pagamento/uploadDoc/{id}', ['uses' => 'PagamentoController@uploadDoc']);
+
+//timeline
+Route::get('timeline/getTimeline/{id}', ['uses' => 'TimelineController@getTimeline']);
