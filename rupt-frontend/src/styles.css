@@ -1210,7 +1210,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .user .bio .profile .img{
-  width: 200px;
+  width: 250px;
 }
 
 .user .bio .info{
