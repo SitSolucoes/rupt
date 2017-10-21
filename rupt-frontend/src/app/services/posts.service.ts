@@ -33,6 +33,15 @@ export class PostsService {
       }); 
   }
 
+  getMaisLidas(){
+    return this._http.get(this._url + 'posts/getPostsMaisLidos', {headers: this.headers})
+    .map((retorno: Response) => {
+      return{
+        'posts': retorno.json().posts
+      };
+    });
+  }
+
   getCategoryPostsSlider(){
     return this._http.get(this._url + 'posts/PostsToHome/', {headers: this.headers})
       .map((retorno: Response) => {
@@ -46,7 +55,7 @@ export class PostsService {
     return this._http.get(this._url + 'posts/Post/'+id, {headers: this.headers})
     .map((retorno: Response) => {
       return{
-        'dados': retorno.json().retorno
+        'dados': retorno.json().dados[0]
       };
     }); 
   }

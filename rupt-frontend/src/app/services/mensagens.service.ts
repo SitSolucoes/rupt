@@ -17,10 +17,10 @@ export class MensagensService {
   
   enviaMensagem(f){
     const body = this.createBody(f);
-    
+    console.log(body);
     return this._http.post(this._url + 'enviaMensagem', body, {headers: this.headers}).map(
     (response: Response)=>{
-      response.json()
+        return response.json();
     });
   }
   
@@ -84,7 +84,8 @@ export class MensagensService {
 
   private createBody(form){
     return JSON.stringify(
-        {mensagem: form.value.mensagem,
+        {
+         mensagem: form.value.conteudo,
          email: form.value.email,
          assunto: form.value.assunto,
          nome: form.value.nome,

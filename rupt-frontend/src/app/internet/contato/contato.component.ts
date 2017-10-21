@@ -1,3 +1,4 @@
+import { LeitoresService } from './../../services/leitores.service';
 import { Option } from './../../shared/option';
 import { FormGroup } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
@@ -13,16 +14,30 @@ export class ContatoComponent implements OnInit {
 
   msg_form: FormGroup;
 
-  constructor(private _formBuilder: FormBuilder, private _mensagemService: MensagensService) { }
+  constructor(private _formBuilder: FormBuilder, private _leitorService: LeitoresService, private _mensagemService: MensagensService) { }
 
   ngOnInit() {
-    this.msg_form = this._formBuilder.group({
-      nome: [localStorage.getItem('leitorNome')],
-      email: [localStorage.getItem('leitorEmail')],
-      leitorId: [localStorage.getItem('leitorId')],
-      assunto: [null],
-      conteudo: [null]
-    });
+    
+    if(localStorage.getItem('l'))
+      this._leitorService.getLeitor(localStorage.getItem('l')).subscribe(
+        (l) => {
+          this.msg_form = this._formBuilder.group({
+            nome: [l.nome],
+            email: [l.email],
+            leitorId: [l.id],
+            assunto: [null],
+            conteudo: [null]
+          });
+        }
+      );
+    else  
+      this.msg_form = this._formBuilder.group({
+        nome: [null],
+        email: [null],
+        leitorId: [null],
+        assunto: [null],
+        conteudo: [null]
+      });
   }
 
   assuntoOptions: Option[] = [
@@ -32,11 +47,19 @@ export class ContatoComponent implements OnInit {
   ]; 
 
   enviaMensagem(){
+    console.log('msg_form');
+    console.log(this.msg_form);
     return this._mensagemService.enviaMensagem(this.msg_form).subscribe(
       (data: any) => {
-//          console.log("sucesso!");
+        console.log(data);
+          if(data.resultado){
+            console.log(data.resultado)
+          }
+      },
+      (error: any) => {
+        console.log(error);
       }
-  );
+    );
   }
 
 }

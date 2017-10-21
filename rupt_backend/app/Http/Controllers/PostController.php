@@ -30,6 +30,28 @@ class PostController extends Controller
         return response()->json($response, 200);
     }
 
+    public function getPostsMaisLidos(){
+        $idPosts_q = Visualizacao::select(DB::raw('post_idPost as id, count(*) as q'))
+        ->whereIn('post_idPost', Post::select('id')
+                                       ->whereDate('publishedAt', '>=', DB::raw('DATE(DATE_ADD(NOW(), INTERVAL - 100 DAY))'))->get())
+        ->groupBy('post_idPost')
+        ->orderBy('q', 'desc')
+        ->limit(3)
+        ->get();
+        $idsPosts = [];
+        foreach($idPosts_q as $post){
+        $idsPosts[] = $post->id;
+        }
+
+        //print_r( $idsPosts);
+
+        $posts = Post::select('id', 'titulo', 'src_imagem')->whereIn('id', $idsPosts)->get();
+        $retorno = [
+        'posts' => $posts
+        ];
+        return response()->json($retorno, 200);
+    }
+
     public function getSliderPosts(){
         //ultimas 24h
         
@@ -59,16 +81,20 @@ class PostController extends Controller
         $post = $this->getById($id)->first();
 
         $retorno[] = (object) [
-            "categorias" => $c_con->recursiveSubCategorias($c_con->categoriaByPost($post->id))
+            "categoria" => $c_con->casulaByPost($post->id)['categoria'],
+            "post" => $post,
+            "escritor" => $post->autor
         ];
         
-        $ret = [
+        $ret = (object)[
             "dados" => $retorno
         ];
 
 
         return response()->json($ret, 200);
     }
+
+
 
     public function postsPorCategoria($id){
         return Post::select('posts.*')
