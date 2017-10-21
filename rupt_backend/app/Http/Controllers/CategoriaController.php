@@ -85,6 +85,15 @@ class CategoriaController extends Controller
                         ->join('post_categoria', 'post_categoria.post_idPost','=', $id);
     }
 
+    public function casulaByPost($id){
+        return Categoria::select('categorias.id', 'categorias.categoria')
+                        ->join('post_categoria', 'post_categoria.categoria_idCategoria', '=', 'categorias.id')
+                        ->where('post_categoria.post_idPost', '=', $id)
+                        ->orderBy('post_categoria.id', 'desc')
+                        ->get()
+                        ->first();
+    }
+
     public function createSubCategoria(Request $request, $id){
         $categoria = new Categoria();
         $categoria->categoria = $request->categoria;

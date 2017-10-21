@@ -12,7 +12,7 @@
       <div class="menu">
         <label> Nome </label>
         
-        <input type="text" class="input" maxlength="60" name="nome" placeholder="Seu primeiro nome" formControlName="nome"
+        <input type="text" class="input" maxlength="60" name="nome" placeholder="Seu nome" formControlName="nome"
         [ngClass]="{'invalid': verificaValidTouched('nome')}"
         >
 
@@ -33,11 +33,11 @@
 
         <label> Nascimento </label> 
         
-        <input type="text" class="input" maxlength="10" name="nascimento" placeholder="Qual sua idade" formControlName="nascimento"
+        <input type="text" class="input" maxlength="10" name="nascimento" placeholder="Sua data de nascimento" formControlName="nascimento"
         [ngClass]="{'invalid': verificaValidTouched('nascimento')}" mask="00/00/0000" (blur)='validaData()'>
 
-        <div class="error" *ngIf="verificaValidTouched('nascimento')">{{ mensagemErro('nascimento') }}</div>
-        <div class="error" *ngIf="!verificaValidTouched('nascimento') && dataInvalida">Data inválida</div>
+        <div class="error" *ngIf="verificaValidTouched('nascimento')">Preencha corretamente sua data de nascimento</div>
+        <div class="error" *ngIf="!verificaValidTouched('nascimento') && dataInvalida">Preencha corretamente sua data de nascimento</div>
 
       </div>
       <div class="menu marginless">

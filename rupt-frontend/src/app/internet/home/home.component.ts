@@ -2,7 +2,7 @@ import { Leitor } from 'app/classes/leitor';
 import { CategoriaLeitorService } from './../../services/categoria-leitor.service';
 import { LeitoresService } from './../../services/leitores.service';
 import { MaterializeAction } from 'angular2-materialize';
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, HostListener } from '@angular/core';
 
 declare var $: any;
 
@@ -22,12 +22,12 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this._leitorService.leitor.subscribe(
-      (leitor: Leitor) => { this.leitor = leitor; console.log(leitor) }
+      (leitor: Leitor) => { this.leitor = leitor; }
     );
 
     this._leitorService.verificaLogin().subscribe(
       ( response )  => { 
-          if (response && !this.leitor.categoria_leitor)
+          if (response && this.leitor.categoria_leitor.length == 0)
             this.openModalCategoria();
        }
     )
@@ -65,6 +65,11 @@ export class HomeComponent implements OnInit {
     if(e){
         this.modalCategoria.emit({action:"modal",params:['close']});
     }
+  }
+
+  @HostListener('window:popstate', ['$event'])
+  onPopState(event) {
+    this.modalCategoria.emit({action:"modal",params:['close']});
   }
   
 }

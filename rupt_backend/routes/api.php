@@ -102,6 +102,10 @@ Route::get('posts/getSliderPosts/', [
     'uses' => 'PostController@getSliderPosts'
 ]);
 
+Route::get('posts/getPostsMaisLidos/', [
+    'uses' => 'PostController@getPostsMaisLidos'
+]);
+
 Route::get('/posts/Post/{id}', [
     'uses' => 'PostController@getPost'
 ]);

@@ -66,5 +66,13 @@ export class ModalCategoriasComponent implements OnInit {
         )
     }
 
+    pular(){
+        this.categoriasFiltro.forEach(categoriaFiltro => {
+            this.click(categoriaFiltro.categoria);
+        });
+
+        this.onSubmit();
+    }
+
 }
 

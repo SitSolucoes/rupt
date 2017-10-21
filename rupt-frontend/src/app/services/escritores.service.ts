@@ -106,7 +106,9 @@ export class EscritoresService {
   }
 
   aceitarEscritor(id){
-    return this._http.put(this._url + 'aceitarEscritor/'+ id + '/' + localStorage.getItem('admin_id'), {headers: this.headers}).map(
+    let admin_id = this.base64.decode(localStorage.getItem('a'));
+
+    return this._http.put(this._url + 'aceitarEscritor/'+ id + '/' + admin_id, {headers: this.headers}).map(
     (response: Response)=>{
       response.json()
     });

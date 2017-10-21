@@ -3,7 +3,7 @@
         <div class="title"> {{ categoria.nome }} </div>
         <div class="underline"></div>
         <slick-slider *ngIf="categoria.posts">
-            <div name="post" *ngFor="let p of categoria.posts">
+            <div name="post" *ngFor="let p of categoria.posts" (click)="openNew(p.post.id)">
                 <!--tipo imagem + texto -->
                 <div *ngIf="p.post.tipo_post == 1" class="content-img-text">
                     <div class="info-img-text">
