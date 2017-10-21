@@ -161,7 +161,7 @@ class LeitorController extends Controller
                 return response()->json(['login' => "Conta desativada."], 200);
             }
 
-            if (Hash::check($request->senha, $leitor->password)){
+            if (Hash::check($request->password, $leitor->password)){
                 $token = date('z')*$leitor->id;
                 $leitor->tokenLogin = Hash::make($token);
                 $leitor->save();
@@ -200,14 +200,10 @@ class LeitorController extends Controller
         $path = public_path()."/"."profile/";
         
         if (isset($_FILES['doc1']['tmp_name'])){
-            echo 'primeiro';
-
             move_uploaded_file($_FILES['doc1']['tmp_name'], $path.$id."_profile.".pathinfo($_FILES['doc1']['name'], PATHINFO_EXTENSION));
             $leitor->src_foto = $id."_profile.".pathinfo($_FILES['doc1']['name'], PATHINFO_EXTENSION);
         }
         if (isset($_FILES['doc2']['tmp_name'])){
-            echo 'segundo';
-
             move_uploaded_file($_FILES['doc2']['tmp_name'], $path.$id."_capa.".pathinfo($_FILES['doc2']['name'], PATHINFO_EXTENSION));
             $leitor->src_capa = $id."_capa.".pathinfo($_FILES['doc2']['name'], PATHINFO_EXTENSION);
         }

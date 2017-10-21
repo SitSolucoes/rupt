@@ -10,10 +10,38 @@ use App\Visualizacao;
 use App\Http\Controllers\EscritorController;
 use App\Http\Controllers\LeitorController;
 use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\PostCategoriaController;
+use App\Http\Controllers\TimelineController;
 use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
+    private function create(Request $request, $post){
+        $post->titulo = $request->titulo;
+        $post->conteudo = $request->conteudo;
+        
+        return $post;
+    }
+
+    public function createPost(Request $request){
+        $post = new Post();
+        $post = $this->create($request, $post);
+        $post->autor_idLeitor = $request->leitor_id;
+        $post->visualizacoes = 0;
+        $post->publishedAt = time();
+
+        $post->save();
+
+        $c = new PostCategoriaController();
+        $c->save($request->categoria_id, $post->id);
+
+        $c = new TimelineController();
+        $c->create($request->leitor_id, $post->id);
+
+        return response()->json(['post_id' => $post->id], 201);
+    }
+
+
     public function getById($id){
         $post = Post::where('id', $id)->get();
 
@@ -138,6 +166,20 @@ class PostController extends Controller
 
 
         return response()->json($ret, 200);
+    }
+
+    public function uploadImages (Request $request, $id){
+        $post = Post::find($id);
+        $path = public_path()."/"."posts/";
+        
+        if (isset($_FILES['doc1']['tmp_name'])){
+            move_uploaded_file($_FILES['doc1']['tmp_name'], $path.$id.".".pathinfo($_FILES['doc1']['name'], PATHINFO_EXTENSION));
+            $post->src_imagem = $id.".".pathinfo($_FILES['doc1']['name'], PATHINFO_EXTENSION);
+        }
+        
+        $post->save();
+
+        return response()->json(['message' => "Post salvo com sucesso."], 200);
     }
 
 }

@@ -1,3 +1,7 @@
+import { UploadFileService } from './../../services/upload-file.service';
+import { PostsService } from './../../services/posts.service';
+import { Categoria } from 'app/classes/categoria';
+import { CategoriasService } from './../../services/categorias.service';
 import { Router } from '@angular/router';
 import { LeitoresService } from './../../services/leitores.service';
 import { Leitor } from 'app/classes/leitor';
@@ -7,6 +11,7 @@ import { FormGroup } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
 import * as $ from 'jquery';
+import { UploadItem } from 'app/classes/upload-item';
 
 @Component({
   selector: 'app-publicacao',
@@ -14,17 +19,21 @@ import * as $ from 'jquery';
   styleUrls: ['./publicacao.component.css']
 })
 export class PublicacaoComponent implements OnInit {
-
+  categorias: Categoria[];
   formulario: FormGroup;
   leitor: Leitor;
 
   constructor(private _formBuilder: FormBuilder,
               private _leitorService: LeitoresService,
-              private _router: Router
+              private _router: Router,
+              private _categoriaService: CategoriasService,
+              private _postService: PostsService,
+              private _uploadFileService: UploadFileService
               ) { }
 
   ngOnInit() {
       this.createForm();
+      this.getCategorias();
 
       this._leitorService.leitor.subscribe(
         (leitor: Leitor) => { 
@@ -51,12 +60,23 @@ export class PublicacaoComponent implements OnInit {
     this.formulario = this._formBuilder.group({
       categoria_id: ['', Validators.required],
       leitor_id: [''],
-      texto: ['', Validators.required]
+      titulo: ['', Validators.required],
+      conteudo: ['', Validators.required],
     })
+  }
+
+  getCategorias(){
+    this._categoriaService.getCategoriasAtivas().subscribe(
+      ( response ) => { this.categorias = response }
+    )
   }
 
   onSubmit(){
     console.log(this.formulario);
+
+    this._postService.create(this.formulario).subscribe(
+      (response) => { this.uploadFiles(response) }
+    )
   }
 
   public editor;
@@ -80,6 +100,36 @@ export class PublicacaoComponent implements OnInit {
 
   onContentChanged({ quill, html, text }) {
     //console.log('quill content is changed!', quill, html, text);
+  }
+
+  uploadFiles(post_id){
+    let files = new Array();
+    let files_name = new Array();
+    
+    if ((<HTMLInputElement>window.document.getElementById('imagem')).files[0]){
+      files.push((<HTMLInputElement>window.document.getElementById('imagem')).files[0]);
+      files_name.push('doc1');
+    }
+
+    if (files.length > 0){
+        let myUploadItem = new UploadItem(files, files_name, "posts/uploadImages/"+post_id);
+        
+        myUploadItem.formData = { FormDataKey: 'Form Data Value' };  // (optional) form data can be sent with file
+
+        this._uploadFileService.onSuccessUpload = (item, response, status, headers) => {
+              // success callback
+              this._router.navigate(['/rupt/noticia/'+post_id]);
+        };
+        this._uploadFileService.onErrorUpload = (item, response, status, headers) => {
+              // error callback
+        };
+        this._uploadFileService.onCompleteUpload = (item, response, status, headers) => {
+              // complete callback, called regardless of success or failure
+        };
+        this._uploadFileService.upload(myUploadItem);
+      }
+      else 
+          this._router.navigate(['/rupt/noticia/'+post_id]);
   }
 
 }

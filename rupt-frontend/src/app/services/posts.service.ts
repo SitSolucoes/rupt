@@ -60,4 +60,10 @@ export class PostsService {
     }); 
   }
 
+  create(form){
+    return this._http.post(this._url + 'posts/create', JSON.stringify(form.value), {headers: this.headers}).map(
+      (response) => { return response.json().post_id }
+    )
+  }
+
 }

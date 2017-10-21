@@ -17,7 +17,6 @@ const routes: Routes = [
   { path : '', redirectTo: 'rupt', pathMatch: 'full'},
   { path : 'rupt', component: InternetInicioComponent,
     children: [
-      { path : 'user', component: UserComponent},
       { path : 'noticias', component: HomeComponent},
       { path : 'faq', component: FaqComponent},
       { path : 'perfil/:nick', component: UserComponent },
