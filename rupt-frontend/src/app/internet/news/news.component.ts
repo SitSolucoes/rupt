@@ -17,13 +17,12 @@ export class NewsComponent implements OnInit {
   constructor( private _activatedRoute: ActivatedRoute, 
                private _postService: PostsService,
                private _router: Router) {
-    this.carregaPosts();
    }
 
   ngOnInit() {
   }
 
-  carregaPosts(id = this._activatedRoute.snapshot.params['id']){
+  /*carregaPosts(id = this._activatedRoute.snapshot.params['id']){
     
     this.id_post = this._activatedRoute.snapshot.params['id'];
     this._postService.getPost(this._activatedRoute.snapshot.params['id']).subscribe(
@@ -37,12 +36,12 @@ export class NewsComponent implements OnInit {
         });
       }
     );
-  }
+  }*/
 
-  openNew(id){
+  /*openNew(id){
     //console.log('merda');
     this._router.navigate(['/rupt/noticia', id]);
     this.carregaPosts(id);
-  }
+  }*/
 
 }

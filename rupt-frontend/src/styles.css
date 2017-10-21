@@ -2427,3 +2427,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .ql-snow .ql-picker.ql-size {
     width: 120px!important;
 }
+
+.ql-editor{
+    overflow-y: auto;
+}

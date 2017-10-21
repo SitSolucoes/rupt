@@ -37,20 +37,20 @@
             </div>
 
         <div class="button button-orange" *ngIf="leitor.id != leitorLogado.id"> Seguir </div>
-        
-        <a routerLink="../../cadastro-escritor" *ngIf="leitor.id == leitorLogado.id && !leitor.escritor"> 
+
+        <a routerLink="../../cadastro-escritor" 
+            *ngIf="leitor.id == leitorLogado.id && (!leitor.escritor || leitor.escritor.status == 'r')"> 
             <div class="button"> Tornar-se escritor </div> 
         </a>
 
-            <a routerLink="../../publicacao">
-                <div class="write-area">
-                    <img src="../../../assets/img/write.png" class="img3">
+        <a routerLink="../../publicacao" *ngIf="leitor.id == leitorLogado.id && leitor.escritor && leitor.escritor.status != 'r'">
+            <div class="write-area">
+                <img src="../../../assets/img/write.png" class="img3">
 
-                    <p>Escrever uma nova publicação</p>
+                <p>Escrever uma nova publicação</p>
 
-                </div></a>
-
-
+            </div>
+        </a>
     </div>
 
     <div class="feed">  

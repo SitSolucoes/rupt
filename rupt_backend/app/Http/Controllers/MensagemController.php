@@ -47,6 +47,7 @@ class MensagemController extends Controller
         }
         if($n_mensagem->id == 0 || $n_mensagem->id == null)
             return response()->json(['resultado' => false]);
+       
         return response()->json(['resultado' => true]);
     }
 
