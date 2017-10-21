@@ -26,7 +26,8 @@ export class LeitoresComponent implements OnInit {
   senhaValida;
   selectOptions: Option[] = [
     {value: "f", name: 'Feminino'},
-    {value: "m", name: 'Masculino'}
+    {value: "m", name: 'Masculino'},
+    {value: 'o', name: 'Outro'}
   ];
 
   selectAtivo: Option[] = [

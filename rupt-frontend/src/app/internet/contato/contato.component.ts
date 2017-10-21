@@ -46,7 +46,7 @@ export class ContatoComponent implements OnInit {
       nome: '',
       email: '',
       leitorId:'',
-      assunto:'',
+      assunto: 'assunto',
       conteudo: ''
     })
   }
@@ -58,12 +58,9 @@ export class ContatoComponent implements OnInit {
   ]; 
 
   enviaMensagem(){
-    console.log('msg_form');
-    console.log(this.msg_form);
     return this._mensagemService.enviaMensagem(this.msg_form).subscribe(
       (data: any) => {
-        console.log(data);
-          if(data.resultado){
+        if(data.resultado){
             console.log(data.resultado)
           }
       },
@@ -72,5 +69,4 @@ export class ContatoComponent implements OnInit {
       }
     );
   }
-
 }

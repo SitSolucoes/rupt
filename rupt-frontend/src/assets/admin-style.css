@@ -712,6 +712,7 @@ span.badge.new:after {
 
 .card-escritor .img-content img{
 	width: 180px;
+	height: 180px;
 	border-radius: 50%;
 	display: block;
 	margin: auto;

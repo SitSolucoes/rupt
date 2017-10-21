@@ -17,7 +17,6 @@ export class MensagensService {
   
   enviaMensagem(f){
     const body = this.createBody(f);
-    console.log(body);
     return this._http.post(this._url + 'enviaMensagem', body, {headers: this.headers}).map(
     (response: Response)=>{
         return response.json();
@@ -89,7 +88,7 @@ export class MensagensService {
          email: form.value.email,
          assunto: form.value.assunto,
          nome: form.value.nome,
-         leitor_id: form.value.leitor_id
+         leitorId: form.value.leitorId
         });
   }
 }

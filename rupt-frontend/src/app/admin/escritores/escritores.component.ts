@@ -1,3 +1,4 @@
+import { ConnectionFactory } from 'app/classes/connection-factory';
 import { Http } from '@angular/http';
 import { Leitor } from './../../classes/leitor';
 import { LeitoresService } from './../../services/leitores.service';
@@ -115,6 +116,8 @@ export class EscritoresComponent implements OnInit {
 
   selectBancos: Option[] = Bancos;
   selectEstados: Option[] = Estados;
+
+  url = ConnectionFactory.API_IMAGEM;
 
   constructor(
     private _notificacoesService: NotificacoesService,

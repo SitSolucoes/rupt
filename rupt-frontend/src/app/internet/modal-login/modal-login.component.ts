@@ -27,7 +27,7 @@ export class ModalLoginComponent implements OnInit {
   createForm(){
     this.formulario = this._formBuilder.group({
         email: ['', Validators.required],
-        senha: ['', Validators.required]
+        password: ['', Validators.required]
     })
   }
 

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { LeitoresService } from './../../services/leitores.service';
 import { Leitor } from 'app/classes/leitor';
 import { Validators } from '@angular/forms';
@@ -18,7 +19,8 @@ export class PublicacaoComponent implements OnInit {
   leitor: Leitor;
 
   constructor(private _formBuilder: FormBuilder,
-              private _leitorService: LeitoresService
+              private _leitorService: LeitoresService,
+              private _router: Router
               ) { }
 
   ngOnInit() {
@@ -33,7 +35,16 @@ export class PublicacaoComponent implements OnInit {
         }
       )
 
-      this._leitorService.verificaLogin().subscribe();
+      this._leitorService.verificaLogin().subscribe(
+        (response) => {
+          if (!response)
+            this._router.navigate(['/']);
+          else{
+            if (!this.leitor.escritor || this.leitor.escritor.status == 'r')
+              this._router.navigate(['rupt/cadastro-escritor']);
+          }
+        }
+      );
   }
 
   createForm(){

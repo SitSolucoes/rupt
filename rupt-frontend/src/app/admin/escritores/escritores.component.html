@@ -139,36 +139,43 @@
                             <div class="error" *ngIf="celular.errors?.required && celular.touched">Campo obrigatório.</div>
                         </div>
                     </div>
-                    <div class="file-field input-field">
-                        <div class="btn btn-save col s5">
-                            <span>Frente do documento</span>
-                            <input type="file" accept="image/*" id="doc1" required>
+                    <div *ngIf="!escritor.id">
+                        <div class="file-field input-field">
+                            <div class="btn btn-save col s5">
+                                <span>Frente do documento</span>
+                                <input type="file" accept="image/*" id="doc1" required>
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path" type="text" required>
+                            </div>
                         </div>
-                        <div class="file-path-wrapper">
-                            <input class="file-path" type="text" required>
+                        <div class="file-field input-field">
+                            <div class="btn btn-save col s5">
+                                <span>Verso do documento</span>
+                                <input type="file" accept="image/*" id="doc2" required>
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path" type="text">
+                            </div>
+                        </div>
+                        <div class="file-field input-field">
+                            <div class="btn btn-save col s5">
+                                <span>Selfie</span>
+                                <input type="file" accept="image/*" id="doc3" required>
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path" type="text" >
+                            </div>
                         </div>
                     </div>
-                    <div class="file-field input-field">
-                        <div class="btn btn-save col s5">
-                            <span>Verso do documento</span>
-                            <input type="file" accept="image/*" id="doc2" required>
-                        </div>
-                        <div class="file-path-wrapper">
-                            <input class="file-path" type="text">
-                        </div>
-                    </div>
-                    <div class="file-field input-field">
-                        <div class="btn btn-save col s5">
-                            <span>Selfie</span>
-                            <input type="file" accept="image/*" id="doc3" required>
-                        </div>
-                        <div class="file-path-wrapper">
-                            <input class="file-path" type="text" >
-                        </div>
+                    <div *ngIf="escritor.id" style="margin-bottom: 20px">
+                        <img src="{{ url + 'docs/' + escritor.doc_1 }}" materialize="materialbox" class="col m4">
+                        <img src="{{ url + 'docs/' + escritor.doc_2 }}" materialize="materialbox" class="col m4">
+                        <img src="{{ url + 'docs/' + escritor.doc_3 }}" materialize="materialbox" class="col m4">
                     </div>
                 </div>
                 <div [hidden]="(escritor.id == 0 || idLeitor != 0) && newPage != 2">
-                    <div class="row">
+                    <div class="row" style="clear:both">
                         <div class="input-field col s12 m12 l5 xl5">
                             <input id="cep" name="cep" type="text"
                             minlength="9" maxlength="9" mask="00000-000"
@@ -501,7 +508,7 @@
                             </div>
                         </div>
                         <div class="img-content">
-                            <img src="https://s-media-cache-ak0.pinimg.com/736x/a2/e1/8c/a2e18cbfbcaa8756fe5b40f472eeff45--profile-picture-profile-pics.jpg">
+                            <img src="{{ url + 'profile/' + s.src_foto }}">
                         </div>
                         <div class="container">
                             <div class="nome"> 

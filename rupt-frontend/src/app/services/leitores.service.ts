@@ -25,13 +25,13 @@ export class LeitoresService {
          biografia: form.value.biografia,
          sexo: form.value.sexo,
          ativo: form.value.ativo,
-         password: form.value.senha
+         password: form.value.password
       });
   }
   
   createLeitor(form){
     const body = this.createBody(form);
-    
+
     return this._http.post(this._url + 'storeLeitor', body, {headers: this.headers}).map(
     (response: Response)=>{
         return response.json().id;

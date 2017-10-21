@@ -65,7 +65,7 @@ export class CadastroLeitorComponent implements OnInit {
       nascimento: ['', [Validators.required, Validators.minLength(10)]],
       src_foto: [''],
       email: ['', [Validators.required, Validators.email]],
-      senha: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
       confirma_senha: [''],
       ativo: true,
       biografia: ['']
@@ -83,7 +83,7 @@ export class CadastroLeitorComponent implements OnInit {
       src_capa: this.leitor.src_capa,
       biografia: this.leitor.biografia,
       email: this.leitor.email,
-      senha: 'update',
+      password: 'update',
       confirma_senha: 'update',
       ativo: true,
     })
@@ -144,7 +144,7 @@ export class CadastroLeitorComponent implements OnInit {
       }
       else if (!this.nickInvalido && !this.emailInvalido && !this.dataInvalida){
             if (this.form.get('id').value == 0){
-              if ((this.form.get('senha').value == this.form.get('confirma_senha').value)){
+              if ((this.form.get('password').value == this.form.get('confirma_senha').value)){
                 this._leitoresService.createLeitor(this.form).subscribe(
                   (data: any) => {
                     this.leitor.id = data;
