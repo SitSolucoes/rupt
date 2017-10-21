@@ -20,7 +20,7 @@ class MensagemController extends Controller
     
     public function enviaMensagem(Request $request){
         //pega dados para mensagem
-        $mensagem = $request->input('conteudo');
+        $mensagem = $request->input('mensagem');
         $remetente = $request->nome;
         $remetente_email = $request->email;
         $assunto = $request->assunto;
@@ -38,10 +38,16 @@ class MensagemController extends Controller
             $n_mensagem->admin_idAdmin = null;
             $n_mensagem->leitor_idLeitor = $leitor;
             $n_mensagem->mensagem_idMensagem = null;
-            $n_mensagem->save();
+            try{
+                $n_mensagem->save();
+            }catch(Exception $exception){
+                return response()->json(['resultado' => false, 'erro' => $exception]);    
+            }
+            
         }
-
-        return response()->json(['Enviada' => $n_mensagem]);
+        if($n_mensagem->id == 0 || $n_mensagem->id == null)
+            return response()->json(['resultado' => false]);
+        return response()->json(['resultado' => true]);
     }
 
     public function getMensagens_lidas(){
