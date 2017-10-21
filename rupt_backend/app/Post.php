@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     public function autor(){
-        return $this->hasOne('App\Leitor', 'id', 'autor_idLeitor');
+        return $this->hasOne('App\Leitor', 'id', 'autor_idLeitor')->with('escritor');
     }
 
-    public function categoriaLeitor(){
-        return $this->hasMany('App\CategoriaPost', 'post_idPost', 'id')->with('categoria');
+    public function categoriasPost(){
+        return $this->hasMany('App\PostCategoria', 'post_idPost', 'id')->with('categoria');
     }
 }

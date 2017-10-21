@@ -1,17 +1,17 @@
 
-<div class="news">
+<div class="news" *ngIf='post'>
 
   <div class="area-top">
 
     <div class="tag-menu">
     
-      <div class="tag red"> {{ categoria }} </div> 
+      <div class="tag red"> {{ post.categorias_post[post.categorias_post.length-1].categoria.categoria }} </div> 
       
     <!--  <div class="tag black2"> Racismo </div>-->
 
     </div>  
 
-  <div class="title"> {{ post.titulo }} </div>
+  <div class="title"> {{ post.titulo }}</div>
 
   </div>
 
@@ -20,7 +20,7 @@
     <div class="area">
 
       Por
-      <font class="name"> {{ escritor.nick }} </font> <img src="../../../assets/img/marcador.png" class="img"> <b>{{post.publishedAt | date: 'dd/MM/yyyy'}}</b>
+      <font class="name"> {{ post?.autor?.nick }} </font> <img src="../../../assets/img/marcador.png" class="img"> <b>{{post.publishedAt | date: 'dd/MM/yyyy'}}</b>
 
       <div class="social">
 
@@ -39,13 +39,11 @@
 
     <div class="frame">
 
-      <img src="../../../assets/img/news3.png" class="img">
+      <img src="{{ url + 'posts/' + post.src_imagem }}" class="img" *ngIf="post.src_imagem">
 
-      <div class="subtitle"> Nátaly Neri, youtuber e femista negra </div>
+      <div class="info" [innerHTML]="post.conteudo">
 
-      <div class="info">
-
-        {{post.conteudo}}
+      
       </div>
 
         <div class="reactions">
@@ -94,7 +92,7 @@
 
             <div class="img-area">  <img src="../../../assets/img/person.png" class="img"> </div>
 
-                <input type="text" class="input" maxlength="60" name="nome" placeholder="Escreva um comentário..." formControlName="nome">
+                <input type="text" class="input" maxlength="60" name="nome" placeholder="Escreva um comentário..." >
 
                 <button type="submit" class="button" id="submit-contato"> Enviar </button>
 
@@ -171,11 +169,11 @@
     <p>
       <font style="color:#f97000">+</font> Lidas </p>
 
-    <div class="info" *ngFor="let p of maislidos.posts" (click)="openNew(p.id)">
+    <div class="info">
 
-      <img src="{{p.src_imagem}}" class="img">
+      <img src="" class="img">
 
-      <div class="label">{{p.titulo}}</div>
+      <div class="label"></div>
 
     </div>
   </div>

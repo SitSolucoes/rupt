@@ -105,24 +105,13 @@ class PostController extends Controller
     }
 
     public function getPost($id){
-        $c_con = new CategoriaController();
-        $post = $this->getById($id)->first();
+        $post = Post::where('id', $id)
+                    ->with('autor')
+                    ->with('categoriasPost')
+                    ->first();
 
-        $retorno[] = (object) [
-            "categoria" => $c_con->casulaByPost($post->id)['categoria'],
-            "post" => $post,
-            "escritor" => $post->autor
-        ];
-        
-        $ret = (object)[
-            "dados" => $retorno
-        ];
-
-
-        return response()->json($ret, 200);
+        return response()->json(['post' => $post], 200);
     }
-
-
 
     public function postsPorCategoria($id){
         return Post::select('posts.*')

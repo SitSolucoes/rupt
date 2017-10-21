@@ -1,3 +1,5 @@
+import { ConnectionFactory } from 'app/classes/connection-factory';
+import { Post } from './../../classes/post';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
@@ -10,9 +12,9 @@ declare var $: any;
   styleUrls: ['./news.component.css']
 })
 export class NewsComponent implements OnInit {
-
-  id_post: number;
-  post; categoria; escritor; maislidos;
+  url = ConnectionFactory.API_IMAGEM;
+  post: Post;
+  maisLidos: Post[];
 
   constructor( private _activatedRoute: ActivatedRoute, 
                private _postService: PostsService,
@@ -20,28 +22,19 @@ export class NewsComponent implements OnInit {
    }
 
   ngOnInit() {
+    this._activatedRoute.params.subscribe(params => {
+        this.carregaPosts(params['id']);
+    });
   }
 
-  /*carregaPosts(id = this._activatedRoute.snapshot.params['id']){
-    
-    this.id_post = this._activatedRoute.snapshot.params['id'];
-    this._postService.getPost(this._activatedRoute.snapshot.params['id']).subscribe(
-      (dados) => {
-        
-        this.post = dados.dados.post;
-        this.categoria = dados.dados.categoria;
-        this.escritor = dados.dados.escritor;
-        this._postService.getMaisLidas().subscribe((posts) => {
-          this.maislidos = posts;
-        });
-      }
+  carregaPosts(id){
+    this._postService.getPost(id).subscribe(
+      ( post ) => { this.post = post; }
     );
-  }*/
 
-  /*openNew(id){
-    //console.log('merda');
-    this._router.navigate(['/rupt/noticia', id]);
-    this.carregaPosts(id);
-  }*/
+    this._postService.getMaisLidas().subscribe(
+        ( maisLidos: Post[] )  => { this.maisLidos = maisLidos }
+    );
+  }
 
 }

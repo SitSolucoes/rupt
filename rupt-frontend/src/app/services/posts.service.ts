@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { ConnectionFactory } from 'app/classes/connection-factory';
 import { Injectable } from '@angular/core';
 
@@ -33,7 +34,7 @@ export class PostsService {
       }); 
   }
 
-  getMaisLidas(){
+  getMaisLidas():Observable<any>{
     return this._http.get(this._url + 'posts/getPostsMaisLidos', {headers: this.headers})
     .map((retorno: Response) => {
       return{
@@ -51,12 +52,10 @@ export class PostsService {
       }); 
   }
 
-  getPost(id){
-    return this._http.get(this._url + 'posts/Post/'+id, {headers: this.headers})
-    .map((retorno: Response) => {
-      return{
-        'dados': retorno.json().dados[0]
-      };
+  getPost(id):Observable<any>{
+    return this._http.get(this._url + 'posts/Post/'+id, {headers: this.headers}).map(
+      (retorno: Response) => {
+        return retorno.json().post
     }); 
   }
 
