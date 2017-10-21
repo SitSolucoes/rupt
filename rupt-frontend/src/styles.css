@@ -272,7 +272,8 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .banner-promo2{
-    height: 150px;
+    height: 250px;
+    margin-bottom: 20px;
 }
 
 .banner-promo .area{
@@ -308,7 +309,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .banner-promo .img{
     display: block;
     margin: 0 auto;
-    height: auto;
+    max-width: 1100px;
 }
 
 .menu-top{
@@ -770,7 +771,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 
 .social-media .area{
     height: 40px;
-    width: 300px;
+    width: 30%;
     display: block;
     margin: 0 auto;
     margin-top: 20px;
@@ -793,7 +794,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     float: left;
     margin-top: 10px;
     margin-bottom: 20px;
-    margin-right: 30px;
+    margin-left: 30px;
     border: 2px solid #F2F2F2;
     border-radius: 100%;
     padding: 10px;
@@ -1708,7 +1709,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .contato .menu{
   display: block;
   float: left;
-  width: 55%;
+  width: 60%;
   margin-left: 70px;
   margin-top: 20px;
   clear: both;
@@ -2155,7 +2156,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .login-modal .container{
     display: block;
     margin: 0 auto;
-    width: 70%;
+    width: 75%;
 }
 
 .login-modal .container .input{
@@ -2168,7 +2169,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .login-modal .container .button{
-    width: 60% !important;
+    width: 55% !important;
     height: 35px !important;
     border: 1px solid #f97000 !important;
     color: #fff;
@@ -2185,13 +2186,13 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .login-modal .container .img{
     height: 25px;
     position: absolute;
-    left: 79%;
+    left: 81%;
     margin-top: 7px;
 }
 
 .modal2{
     top: 15% !important;
-    width: 50%;
+    width: 45%;
 }
 
 .modal3{
