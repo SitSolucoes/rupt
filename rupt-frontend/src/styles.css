@@ -212,8 +212,8 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .headbar .img{
     display: block;
     float: left;
-    height: 30px;
-    margin-top: 13px;
+    height: 28px;
+    margin-top: 15px;
 }
 
 .headbar .img2{
@@ -235,10 +235,10 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 
 .headbar .headbar-right .area-img{
     border-radius: 100%;
-    width: 45px;
-    height: 45px;
+    width: 42px;
+    height: 42px;
     display: block;
-    margin-top: 8px;
+    margin-top: 10px;
     float: left;
     margin-left: 15px;
     overflow: hidden;
@@ -1206,8 +1206,16 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     width: 200px;
     border-radius: 100%;
     box-shadow: 1px 3px 1px #B9B7B7;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     border: 5px solid #fff;
+}
+
+.user .bio .rating{
+    display: block;
+    float: left;
+    width: 55%;
+    margin-left: 20%;
+    margin-bottom: 10px;
 }
 
 .user .bio .profile .img{
@@ -1301,9 +1309,11 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .user .feed .post .img2{
-   height: 10px;
-   margin-left: 5px;
-   margin-top: 27px;
+    height: 10px;
+    margin-left: 5px;
+    margin-top: 27px;
+    display: block;
+    float: left;
 }
 
 .user .feed .post .img5{
@@ -2503,9 +2513,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .publicacao .container{
     width: 90%;
     margin-left: 5%;
-    height: 500px;
     margin-top: 60px;
-    border: 1px solid #ccc;
 }
 
 .publicacao .container .top{
@@ -2524,9 +2532,12 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     width: 100%;
     background: #fafafa;
     border-radius: 0px;
-    border: 1px solid #fafafa;
-    border-bottom: 1px solid #ccc;
+    border: 1px solid #ccc;
     margin-bottom: 0px;
+}
+
+.publicacao .container .top .input2{
+    border-top: 0px;
 }
 
 .publicacao .info{
@@ -2613,4 +2624,8 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 
 .ql-toolbar.ql-snow{
     background: #fff;
+    border-left: 1px solid #ccc !important;
+    border-bottom: 1px solid #ccc !important;
+    border-right: 1px solid #ccc !important;
+    border-top: 0px !important;
 }
