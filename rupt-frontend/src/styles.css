@@ -1284,13 +1284,19 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     padding-bottom: 10px;
 }
 
-.user .feed .post .img{
+.user .feed .post .img-area{
     display: block;
     float: left;
     height: 50px;
+    width: 50px;
     border-radius: 100%;
     margin-left: 30px;
     margin-top: 10px;
+    overflow: hidden;
+}
+
+.user .feed .post .img{
+    height: 70px;
 }
 
 .user .feed .post .img2{
@@ -1334,7 +1340,6 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .user .feed .post .info .border{
-  border-radius: 6px;
   margin-top: 10px;
   overflow: hidden;
   max-height: 260px;
@@ -1343,7 +1348,6 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .user .feed .post .info .img3{
   width: auto;
   max-height: 250px;
-  border-radius: 6px;
   padding: 1px;
   filter: brightness(70%);
 }
@@ -2362,7 +2366,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     width: 26%;
     height: 100px;
     margin: 0 auto;
-    margin-top: 40px;
+    margin-top: 80px;
 }
 
 .publicacao .info .button{
@@ -2428,6 +2432,17 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     width: 120px!important;
 }
 
+.ql-container .ql-editor{
+    min-height: 310px !important;
+    font-family: lato;
+    font-size: 15px;
+}
+
 .ql-editor{
     overflow-y: auto;
+    background: #fff;
+}
+
+.ql-toolbar.ql-snow{
+    background: #fff;
 }
