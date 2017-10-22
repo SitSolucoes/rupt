@@ -392,18 +392,18 @@ export class EscritoresComponent implements OnInit {
   onSubmit(form){
     this.mensagemErro = "";
 
-    if (!(<HTMLInputElement>window.document.getElementById('doc1')).files[0] ||
-        !(<HTMLInputElement>window.document.getElementById('doc2')).files[0] ||
-        !(<HTMLInputElement>window.document.getElementById('doc3')).files[0])
-          this.mensagemErro = "Inclua as imagens dos documentos.";
-
-    else {
-      if (this.escritor.id == 0 || this.idLeitor != 0){
-        this._escritoresService.createEscritor(form, this.escritor.id).subscribe(
-          (response: any) => {
-            this.uploadFiles(form, response);
-          }
-        );
+    if (this.escritor.id == 0 || this.idLeitor != 0){
+        if (!(<HTMLInputElement>window.document.getElementById('doc1')).files[0] ||
+          !(<HTMLInputElement>window.document.getElementById('doc2')).files[0] ||
+          !(<HTMLInputElement>window.document.getElementById('doc3')).files[0])
+            this.mensagemErro = "Inclua as imagens dos documentos.";
+        else {
+            this._escritoresService.createEscritor(form, this.escritor.id).subscribe(
+              (response: any) => {
+                this.uploadFiles(form, response);
+              }
+            );
+        }
       }
       else if (this.recusar){
         this._escritoresService.recusarEscritor(form.value.motivo_recusa, this.escritor.id).subscribe(
@@ -415,10 +415,10 @@ export class EscritoresComponent implements OnInit {
       else {
         this._escritoresService.updateEscritor(form, this.escritor.id).subscribe(
           (response: any) => {
-            this.uploadFiles(form, this.escritor.id);
+            //this.uploadFiles(form, this.escritor.id);
+            this.afterSubmit("Salvo com sucesso.");
           }
         );
-      }
     }
   }
 

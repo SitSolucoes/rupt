@@ -133,15 +133,15 @@
         </div>
     </li>
     <li *ngFor="let a of getAdmins() | paginate: {itemsPerPage: 10, currentPage: page, id: '1'}; let i = index"
-        [ngClass]="{ 'recusado' : !a.ativo }"
+        [ngClass]="{ 'recusado' : a.ativo == 0 }"
     >
         <div class="list-item option-icons">
             <div class="col s8 m9 l9 xl9 item">
                 {{a.name}}
             </div>
             <div class="col s2 m1 l1 xl1 right-align item">
-                <div *ngIf="!a.ativo">Inativo</div>
-                <div *ngIf="a.ativo">Ativo</div>
+                <div *ngIf="a.ativo == 0">Inativo</div>
+                <div *ngIf="a.ativo == 1">Ativo</div>
             </div>
             <div class="option-icons col s2 m2 l2 xl2">
                 <i class="material-icons" (click)="openModalEdit(a)">mode_edit</i>

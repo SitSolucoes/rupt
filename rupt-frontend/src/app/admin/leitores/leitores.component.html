@@ -163,7 +163,7 @@
         </div>
     </li>
     <li *ngFor="let l of listLeitores() | paginate: {itemsPerPage: 10, currentPage:page, id: '1'}; let i = index" (click)="openModalEdit(l)"
-    [ngClass]="{ 'recusado' : !l.ativo }"
+    [ngClass]="{ 'recusado' : l.ativo == 0 }"
     >
         <div class="list-item option-icons">
             <div class="col s2 m2 l2 xl2 item">
@@ -176,8 +176,8 @@
                 {{l.email}}
             </div>
             <div class="col s2 m1 l1 xl1 item">
-                <div *ngIf="!l.ativo">Inativo</div>
-                <div *ngIf="l.ativo">Ativo</div>
+                <div *ngIf="l.ativo == 0">Inativo</div>
+                <div *ngIf="l.ativo == 1">Ativo</div>
             </div>
             <div class="option-icons col s2 m2 l2 xl2">
                 <i class="material-icons" (click)="openModalEdit(l)">mode_edit</i>

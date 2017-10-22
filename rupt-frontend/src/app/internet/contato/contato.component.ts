@@ -31,11 +31,7 @@ export class ContatoComponent implements OnInit {
     this._leitorService.verificaLogin().subscribe(
       (response) => { 
         if (response){
-            this.msg_form.patchValue({
-                nome: this.leitor.nome,
-                email: this.leitor.email,
-                leitorId: this.leitor.id
-            })
+            this.preencheForm();
         }
       }
     )
@@ -51,6 +47,14 @@ export class ContatoComponent implements OnInit {
     })
   }
 
+  preencheForm(){
+    this.msg_form.patchValue({
+      nome: this.leitor.nome,
+      email: this.leitor.email,
+      leitorId: this.leitor.id
+    })
+  }
+
   assuntoOptions: Option[] = [
     {value: 'Dúvidas', name: 'Dúvidas'},
     {value: 'Sujestão', name: 'Sujestão'},
@@ -60,13 +64,9 @@ export class ContatoComponent implements OnInit {
   enviaMensagem(){
     return this._mensagemService.enviaMensagem(this.msg_form).subscribe(
       (data: any) => {
-        if(data.resultado){
-            console.log(data.resultado)
-          }
-      },
-      (error: any) => {
-        console.log(error);
-      }
-    );
+        this.msg_form.reset();
+        if (this.leitor)
+          this.preencheForm();
+    });
   }
 }
