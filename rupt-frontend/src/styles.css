@@ -1951,6 +1951,13 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
   opacity: .8;
 }
 
+.contato select{
+    display: block;
+    background-color: #fff;
+    border: 1px solid #dedede !important;
+    border-bottom: 1px solid #ccc;
+}
+
 
 /*---------------- faq ---------- */
 

@@ -22,6 +22,7 @@ export class Escritor extends Leitor{
     bairro: string;
     cidade: string;
     uf: string;
+    data_aceite: string;
 
     constructor(){
         super ();

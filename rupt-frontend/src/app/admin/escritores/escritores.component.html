@@ -474,9 +474,10 @@
                 <div class="col s6 m6 l6 xl6">
                     Ordenar:
                     <div class="input-field inline">
-                        <select name="ativo" materialize="material_select" 
-                                [materializeSelectOptions]="selectOptions">
-                                <option *ngFor="let option of selectOptions" [value]="option.value">{{option.name}}</option>
+                        <select name="ativo" materialize="material_select" [materializeSelectOptions]="selectOptionsSolicitacao"
+                            (ngModelChange)="ordenarSolicitacao($event)" [(ngModel)]="ordemSolicitacao"
+                        >
+                                <option *ngFor="let option of selectOptionsSolicitacao" [value]="option.value">{{option.name}}</option>
                         </select>
                     </div>
                 </div>
@@ -534,10 +535,14 @@
                 <li>
                     <div class="list-item header">
                         <div class="col s3 m3 l2 xl2 item">
-                            Usuário
+                            Nick
+                            <i *ngIf="this.ordenacoesSolicitacao['nick']" class="material-icons" (click)="ordenarSolicitacao('1')">keyboard_arrow_up</i>
+                            <i *ngIf="!this.ordenacoesSolicitacao['nick']" class="material-icons" (click)="ordenarSolicitacao('1')">keyboard_arrow_down</i>
                         </div>
                         <div class="col s4 m4 l3 xl2 item">
                             Nome
+                            <i *ngIf="this.ordenacoesSolicitacao['nome']" class="material-icons" (click)="ordenarSolicitacao('2')">keyboard_arrow_up</i>
+                            <i *ngIf="!this.ordenacoesSolicitacao['nome']" class="material-icons" (click)="ordenarSolicitacao('2')">keyboard_arrow_down</i>
                         </div>
                         <div class="col s3 m4 l2 xl2 item">
                             Cpf
@@ -547,6 +552,8 @@
                         </div>
                         <div class="col s2 m2 l2 xl2 item">
                             Solicitado
+                            <i *ngIf="this.ordenacoesSolicitacao['data']" class="material-icons" (click)="ordenarSolicitacao('3')">keyboard_arrow_up</i>
+                            <i *ngIf="!this.ordenacoesSolicitacao['data']" class="material-icons" (click)="ordenarSolicitacao('3')">keyboard_arrow_down</i>
                         </div>
                         <div class="col s1 m1 l1 xl1 item">
                             Status
@@ -634,9 +641,11 @@
                 <div class="col s6 m6 l6 xl6">
                     Ordenar:
                     <div class="input-field inline">
-                        <select name="ativo" materialize="material_select" 
-                                [materializeSelectOptions]="selectOptions">
-                                <option *ngFor="let option of selectOptions" [value]="option.value">{{option.name}}</option>
+                        <select name="ativo" materialize="material_select" [materializeSelectOptions]="selectOptions"
+                            (ngModelChange)="ordenarEscritor($event)" [(ngModel)]="ordemEscritor"
+                        >
+                                <option *ngFor="let option of selectOptions" [value]="option.value">{{option.name}}
+                                </option>
                         </select>
                     </div>
                 </div>
@@ -667,7 +676,7 @@
                             </div>
                         </div>  
                         <div class="img-content">
-                            <img src="http://www.musica-brasileira.com/images/rihanna_33.jpg">
+                            <img src="{{ url + 'profile/' + e.src_foto }}">
                         </div>
                         <div class="container">
                             <div class="nome"> 
@@ -694,10 +703,14 @@
                 <li>
                     <div class="list-item header">
                         <div class="col s3 m3 l2 xl2 item">
-                            Usuário
+                            Nick
+                            <i *ngIf="this.ordenacoesEscritor['nick']" class="material-icons" (click)="ordenarEscritor('1')">keyboard_arrow_up</i>
+                            <i *ngIf="!this.ordenacoesEscritor['nick']" class="material-icons" (click)="ordenarEscritor('1')">keyboard_arrow_down</i>
                         </div>
                         <div class="col s4 m4 l3 xl3 item">
                             Nome
+                            <i *ngIf="this.ordenacoesEscritor['nome']" class="material-icons" (click)="ordenarEscritor('2')">keyboard_arrow_up</i>
+                            <i *ngIf="!this.ordenacoesEscritor['nome']" class="material-icons" (click)="ordenarEscritor('2')">keyboard_arrow_down</i>
                         </div>
                         <div class="col s3 m4 l2 xl2 item">
                             Cpf

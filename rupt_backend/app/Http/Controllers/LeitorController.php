@@ -117,7 +117,7 @@ class LeitorController extends Controller
         return Leitor::join('escritores', function ($join) {
             $join->on('leitores.id', '=', 'escritores.leitor_idLeitor')
                  ->where('data_aceite', '<>', null);
-        })->get();
+        })->orderBy('nick')->get();
     }
 
     public function getEscritor($id){

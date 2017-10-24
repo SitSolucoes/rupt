@@ -57,7 +57,8 @@ export class ContatoComponent implements OnInit {
 
   assuntoOptions: Option[] = [
     {value: 'Dúvidas', name: 'Dúvidas'},
-    {value: 'Sujestão', name: 'Sujestão'},
+    {value: 'Informar problema', name: 'Informar problema'},
+    {value: 'Sugestão', name: 'Sugestão'},
     {value: 'Sobre Minha Conta', name: 'Duvidas'}
   ]; 
 
@@ -66,7 +67,7 @@ export class ContatoComponent implements OnInit {
       (data: any) => {
         this.msg_form.reset();
         if (this.leitor)
-          this.preencheForm();
+          this.preencheForm();0
     });
   }
 }

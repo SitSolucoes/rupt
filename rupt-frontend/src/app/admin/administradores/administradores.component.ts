@@ -62,7 +62,7 @@ export class AdministradoresComponent implements OnInit {
   getList(){
     this._adminService.getAdmins()
       .subscribe(
-        (admins: Admin[]) => {this.admins = admins;}
+        (admins: Admin[]) => {this.admins = admins; this.ordenacoes['nome'] = true}
       );
   }
 

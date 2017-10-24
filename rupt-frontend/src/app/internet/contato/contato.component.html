@@ -1,19 +1,26 @@
 <div class="contato">
-    
-     <div class="title title2">Fale conosco 
+    <div class="title title2">Fale conosco 
          <div class="underline"> </div>
     </div>
   
     <div class="menu">
-      <form [formGroup]="msg_form" (ngSubmit)="enviaMensagem()">
-          <div class="label"> Nome </div>
-          <input type="text" formControlName="nome" class="input" placeholder="Insira seu nome">
-          <div class="label"> E-mail </div>
-          <input type="text" formControlName="email" class="input" placeholder="Digite seu email">
-          <div class="label"> Mensagem </div>
-          <textarea formControlName="conteudo" class="input-area" placeholder="Insira sua mensagem"></textarea>
-          <button type="submit" class="button color"> Enviar </button>
-      </form>
+        <form [formGroup]="msg_form" (ngSubmit)="enviaMensagem()">
+            <div class="label"> Nome </div>
+            <input type="text" formControlName="nome" class="input" placeholder="Insira seu nome">
+            
+            <div class="label"> E-mail </div>
+            <input type="text" formControlName="email" class="input" placeholder="Digite seu email">
+            
+            <div class="label"> Assunto </div>
+            <select class="input" formControlName='assunto'>
+                <option selected>Selecione uma categoria</option>
+                <option *ngFor="let assunto of assuntoOptions" [value]='assunto.value'>{{ assunto.name }}</option>
+            </select>
+            
+            <div class="label"> Mensagem </div>
+            <textarea formControlName="conteudo" class="input-area" placeholder="Insira sua mensagem"></textarea>
+            <button type="submit" class="button color"> Enviar </button>
+        </form>
     </div>
 
     <img src="../assets/img/robot.png" class="img">

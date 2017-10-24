@@ -83,9 +83,14 @@ export class EscritoresComponent implements OnInit {
   modalConfirm = new EventEmitter<string|MaterializeAction>();
 
   selectOptions: Option[] = [
-    {value: 2, name: 'Nome'},
     {value: 1, name: 'Nick'},
-    {value: 0, name: 'Data'}
+    {value: 2, name: 'Nome'},
+  ];
+
+  selectOptionsSolicitacao: Option[] = [
+    {value: 1, name: 'Nick'},
+    {value: 2, name: 'Nome'},
+    {value: 3, name: 'Data'},
   ];
 
   selectSexo: Option[] = [
@@ -119,6 +124,19 @@ export class EscritoresComponent implements OnInit {
 
   url = ConnectionFactory.API_IMAGEM;
 
+  ordemEscritor = 1;
+  ordemSolicitacao = 3;
+
+  private ordenacoesEscritor = [
+    {'nome': null},
+    {'nick': true}
+  ];
+  private ordenacoesSolicitacao = [
+    {'nome': null},
+    {'nick': null},
+    {'data': true}
+  ];
+
   constructor(
     private _notificacoesService: NotificacoesService,
     private _escritoresService: EscritoresService,
@@ -128,6 +146,9 @@ export class EscritoresComponent implements OnInit {
     ) { }
 
   ngOnInit() {
+    this.ordenacoesEscritor['nick'] = true;
+    this.ordenacoesSolicitacao['data'] = true;
+
     this.notificacoes = this._notificacoesService.getNotificacoes();
     this.getEscritores();
     this.getSolicitacoes();
@@ -209,8 +230,8 @@ export class EscritoresComponent implements OnInit {
 
       return this.escritores.filter((v) => {
       if (
-        (v.cpf.toLocaleLowerCase().replace(/\D/g,'').indexOf(this.filtroSolicitacoes.toLowerCase().replace(/\D/g,'')) >= 0
-          && this.filtroSolicitacoes.toLowerCase().replace(/\D/g,'').length > 0 ) ||
+        (v.cpf.toLocaleLowerCase().replace(/\D/g,'').indexOf(this.filtroEscritores.toLowerCase().replace(/\D/g,'')) >= 0
+          && this.filtroEscritores.toLowerCase().replace(/\D/g,'').length > 0 ) ||
         v.nome.toLowerCase().indexOf(this.filtroEscritores.toLowerCase()) >= 0 ||
         v.nick.toLowerCase().indexOf(this.filtroEscritores.toLowerCase()) >= 0 ||
         v.email.toLowerCase().indexOf(this.filtroEscritores.toLowerCase()) >= 0
@@ -376,6 +397,149 @@ export class EscritoresComponent implements OnInit {
             this.escritor.cidade = dados.localidade;
             this.escritor.uf = dados.uf;
           });
+      }
+    }
+  }
+
+  ordenarEscritor(por){
+    switch(por){
+        case '2': {
+            this.ordenacoesEscritor['nick'] = null;
+            
+            if (this.ordenacoesEscritor['nome']){
+              this.ordenacoesEscritor['nome'] = null;
+              this.escritores.sort((e1, e2) => {
+                if (e1.nome > e2.nome)
+                  return -1;
+                else if (e1.nome < e2.nome) 
+                  return 1;
+                return 0;
+              });
+            }
+            else {
+              this.ordenacoesEscritor['nome'] = true;
+              this.escritores.sort((e1, e2) => {
+                  if (e1.nome > e2.nome)
+                    return 1;
+                  else if (e1.nome < e2.nome) 
+                    return -1;
+                  return 0;
+              });
+            }
+            
+            break;
+        }
+        case '1': {
+          this.ordenacoesEscritor['nome'] = null;
+          
+          if (this.ordenacoesEscritor['nick']){
+            this.ordenacoesEscritor['nick'] = null;
+            this.escritores.sort((e1, e2) => {
+              if (e1.nick > e2.nick)
+                return -1;
+              else if (e1.nick < e2.nick) 
+                return 1;
+              return 0;
+            });
+          }
+          else {
+            this.ordenacoesEscritor['nick'] = true;
+            this.escritores.sort((e1, e2) => {
+                if (e1.nick > e2.nick)
+                  return 1;
+                else if (e1.nick < e2.nick) 
+                  return -1;
+                return 0;
+            });
+          }
+          
+          break;
+        }
+    }
+  }
+
+  ordenarSolicitacao(por){
+    switch(por){
+      case '3': {
+        this.ordenacoesSolicitacao['nick'] = null;
+        this.ordenacoesSolicitacao['nome'] = null;
+        
+        if (this.ordenacoesSolicitacao['data']){
+          this.ordenacoesSolicitacao['data'] = null;
+          this.solicitacoes.sort((e1, e2) => {
+            if (e1.data_aceite > e2.data_aceite)
+              return -1;
+            else if (e1.data_aceite < e2.data_aceite) 
+              return 1;
+            return 0;
+          });
+        }
+        else {
+          this.ordenacoesSolicitacao['date'] = true;
+          this.solicitacoes.sort((e1, e2) => {
+              if (e1.created_at > e2.created_at)
+                return 1;
+              else if (e1.created_at < e2.created_at) 
+                return -1;
+              return 0;
+          });
+        }
+        
+        break;
+      }
+      case '2': {
+          this.ordenacoesSolicitacao['nick'] = null;
+          this.ordenacoesSolicitacao['data'] = null;
+          
+          if (this.ordenacoesSolicitacao['nome']){
+            this.ordenacoesSolicitacao['nome'] = null;
+            this.solicitacoes.sort((e1, e2) => {
+              if (e1.nome > e2.nome)
+                return -1;
+              else if (e1.nome < e2.nome) 
+                return 1;
+              return 0;
+            });
+          }
+          else {
+            this.ordenacoesSolicitacao['nome'] = true;
+            this.solicitacoes.sort((e1, e2) => {
+                if (e1.nome > e2.nome)
+                  return 1;
+                else if (e1.nome < e2.nome) 
+                  return -1;
+                return 0;
+            });
+          }
+          
+          break;
+      }
+      case '1': {
+        this.ordenacoesSolicitacao['nome'] = null;
+        this.ordenacoesSolicitacao['data'] = null;
+        
+        if (this.ordenacoesSolicitacao['nick']){
+          this.ordenacoesSolicitacao['nick'] = null;
+          this.solicitacoes.sort((e1, e2) => {
+            if (e1.nick > e2.nick)
+              return -1;
+            else if (e1.nick < e2.nick) 
+              return 1;
+            return 0;
+          });
+        }
+        else {
+          this.ordenacoesSolicitacao['nick'] = true;
+          this.solicitacoes.sort((e1, e2) => {
+              if (e1.nick > e2.nick)
+                return 1;
+              else if (e1.nick < e2.nick) 
+                return -1;
+              return 0;
+          });
+        }
+        
+        break;
       }
     }
   }
