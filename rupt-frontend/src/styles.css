@@ -235,17 +235,17 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 
 .headbar .headbar-right .area-img{
     border-radius: 100%;
-    width: 42px;
-    height: 42px;
+    width: 38px;
+    height: 38px;
     display: block;
-    margin-top: 10px;
+    margin-top: 12px;
     float: left;
     margin-left: 15px;
     overflow: hidden;
 }
 
 .headbar .img4{
-    height: 60px;
+    height: 50px;
 }
 
 .headbar .img5{
@@ -1857,11 +1857,13 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
   width: 30%;
   margin-bottom: 80px;
   font-family: 'nexa-bold';
-  font-size:35px;
+  font-size: 30px;
   color: #403d3d;
   position: relative;
   left: 70px;
   top: 60px;
+    text-transform: uppercase;
+  letter-spacing: -1px;
 }
 
 .contato .underline{
@@ -1958,8 +1960,41 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     border-bottom: 1px solid #ccc;
 }
 
+.contato .error{
+    display: block;
+    margin: 0 auto;
+    clear: both;
+    width: 30%;
+    background: darkred;
+    color: #fff;
+    font-family: Gilroy;
+    font-weight: bolder;
+    margin-top: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 4px;
+}
 
-/*---------------- faq ---------- */
+.contato .img-button{
+    display: block;
+    float: left;
+    height: 40px;
+    position: relative;
+    bottom: 12px;
+}
+
+.contato .img-button2{
+    height: 18px;
+    bottom: 0px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.contato .success{
+    background: green;
+}
+
+    /*---------------- faq ---------- */
 
 .faq{
     float: left;
@@ -1973,11 +2008,13 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     width: 40%;
     margin-bottom: 120px;
     font-family: 'nexa-bold';
-    font-size:34px;
+    font-size:30px;
     color: #403d3d;
     position: relative;
     left: 70px;
     top: 60px;
+    letter-spacing: -1px;
+    text-transform: uppercase;
 }
 
 .faq .title2{
@@ -2109,6 +2146,40 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     display: inline;
     margin-right: 25px;
     margin-left: 10px;
+}
+
+.cadastro .error{
+    display: block;
+    margin: 0 auto;
+    clear: both;
+    width: 22%;
+    background: darkred;
+    color: #fff;
+    font-family: Gilroy;
+    font-weight: bolder;
+    margin-top: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 4px;
+}
+
+.cadastro .img-button{
+    display: block;
+    float: left;
+    height: 40px;
+    position: relative;
+    bottom: 12px;
+}
+
+.cadastro .img-button2{
+    height: 18px;
+    bottom: 0px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.cadastro .success{
+    background: green;
 }
 
 [type="radio"]:not(:checked), [type="radio"]:checked {
