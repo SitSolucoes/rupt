@@ -245,7 +245,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .headbar .img4{
-    height: 50px;
+    height: 40px;
 }
 
 .headbar .img5{
@@ -1305,7 +1305,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .user .feed .post .img{
-    height: 70px;
+    height: 55px;
 }
 
 .user .feed .post .img2{
@@ -1455,6 +1455,55 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
   height: 300px;
   display: block;
   margin: 0 auto;
+}
+
+.user .not-found{
+    display: block;
+    float: left;
+    width: 100%;
+    height: 400px;
+}
+
+.user .not-found .container{
+    display: block;
+    margin: 0 auto;
+    width: 40%;
+    margin-top: 8%;
+    border-radius: 4px;
+    background: #d9d9d9;
+    padding: 20px;
+}
+
+.user .not-found .container .background{
+    background: #ebebeb;
+    height: 100%;
+}
+
+.user .not-found .container .area2{
+    display: block;
+    float: left;
+    width: 100%;
+}
+
+.user .not-found .container .img{
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    height: 70px;
+}
+
+.user .not-found .container p{
+    font-family: nexa;
+    font-weight: bolder;
+    text-align: center;
+    display: block;
+    width: 100%;
+    font-size: 20px;
+    margin-top: 0px;
+    margin-bottom: 30px;
+    color: #3d3d3d;
+    letter-spacing: -1px;
 }
 
 /*---------------- news ---------- */
@@ -1960,7 +2009,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     border-bottom: 1px solid #ccc;
 }
 
-.contato .error{
+.contato .error-alert{
     display: block;
     margin: 0 auto;
     clear: both;
@@ -2148,7 +2197,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     margin-left: 10px;
 }
 
-.cadastro .error{
+.cadastro .error-alert{
     display: block;
     margin: 0 auto;
     clear: both;
