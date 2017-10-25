@@ -21,6 +21,7 @@ export class CadastroLeitorComponent implements OnInit {
   form: FormGroup;
   message: any;
   textButton: string = "Cadastrar";
+  enviado: boolean;
 
   dataInvalida: boolean;
   emailInvalido: boolean;
@@ -136,6 +137,8 @@ export class CadastroLeitorComponent implements OnInit {
   }
 
   onSubmit(){
+      this.enviado = false;
+
       if (!this.form.valid){
         Object.keys(this.form.controls).forEach(campo => {
             const control = this.form.get(campo);
@@ -148,7 +151,7 @@ export class CadastroLeitorComponent implements OnInit {
                 this._leitoresService.createLeitor(this.form).subscribe(
                   (data: any) => {
                     this.leitor.id = data;
-                    this.uploadFiles();
+                    this.uploadFiles(false);
                   },
                   (error) =>{
                     //console.log(error);
@@ -160,14 +163,14 @@ export class CadastroLeitorComponent implements OnInit {
                 this._leitoresService.updateLeitor(this.form, this.form.get('id').value).subscribe(
                   (response) => { 
                     
-                    this.uploadFiles();
+                    this.uploadFiles(true);
                   }
                 )
             }
       }
   }
 
-  uploadFiles(){
+  uploadFiles(edit){
     let files = new Array();
     let files_name = new Array();
     
@@ -181,7 +184,6 @@ export class CadastroLeitorComponent implements OnInit {
       files_name.push('doc2');
     }
 
-
     if (files.length > 0){
         let myUploadItem = new UploadItem(files, files_name, "leitor/uploadImages/"+this.leitor.id);
         
@@ -189,7 +191,10 @@ export class CadastroLeitorComponent implements OnInit {
 
         this._uploadFileService.onSuccessUpload = (item, response, status, headers) => {
               // success callback
-              this.doLogin();
+              if (!edit)
+                  this.doLogin();
+              else 
+                  this.enviado = true;
         };
         this._uploadFileService.onErrorUpload = (item, response, status, headers) => {
               // error callback
@@ -200,7 +205,10 @@ export class CadastroLeitorComponent implements OnInit {
         this._uploadFileService.upload(myUploadItem);
       }
       else 
-          this.doLogin();
+        if (!edit)  
+            this.doLogin();
+        else 
+            this.enviado = true;
   }
 
   doLogin(){

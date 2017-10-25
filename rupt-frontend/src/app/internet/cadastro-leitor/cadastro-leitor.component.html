@@ -100,12 +100,10 @@
     
         <button type="submit" class="button" id="submit-contato">{{ textButton }}</button>
 
-          <div class="error-alert"> <img src="../../../assets/img/attention.png"  class="img-button">
-              Deu erro nessa porra!
-          </div>
-          <div class="error-alert success"> <img src="../../../assets/img/success.png"  class="img-button img-button2">
-              Deu boa nessa porra!
-          </div>
+        <div class="error-alert success" *ngIf='enviado'> 
+            <img src="../../../assets/img/success.png"  class="img-button img-button2">
+            Salvo com sucesso.
+        </div>
     </form>
       
     </div>

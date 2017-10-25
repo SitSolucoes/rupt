@@ -39,6 +39,10 @@ export class ModalLoginComponent implements OnInit {
         if (response[0] == false){
           this.erro = true;
           this.mensagemErro = response[1];
+
+          this.formulario.patchValue({
+            password: ''
+          })
         }
         else {
           this.closeModalLogin.emit(true);
