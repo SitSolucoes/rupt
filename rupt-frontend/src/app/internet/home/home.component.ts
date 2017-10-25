@@ -27,8 +27,9 @@ export class HomeComponent implements OnInit {
 
     this._leitorService.verificaLogin().subscribe(
       ( response )  => { 
-          if (response && this.leitor.categoria_leitor.length == 0)
+          if (response && this.leitor.categoria_leitor.length == 0){
             this.openModalCategoria();
+          }
        }
     )
 

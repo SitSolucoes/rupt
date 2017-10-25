@@ -21,11 +21,13 @@
             <textarea formControlName="conteudo" class="input-area" placeholder="Insira sua mensagem"></textarea>
             <button type="submit" class="button color"> Enviar </button>
 
-            <div class="error-alert"> <img src="../../../assets/img/attention.png"  class="img-button">
-                 Deu erro nessa porra!
+            <div class="error-alert" *ngIf='mensagemErro != ""'> 
+                <img src="../../../assets/img/attention.png"  class="img-button">
+                 {{ mensagemErro }}
             </div>
-            <div class="error-alert success"> <img src="../../../assets/img/success.png"  class="img-button img-button2">
-                Deu boa nessa porra!
+            <div class="error-alert success" *ngIf='enviado'> 
+                <img src="../../../assets/img/success.png"  class="img-button img-button2">
+                Mensagem enviada com sucesso.
             </div>
 
         </form>

@@ -27,7 +27,11 @@ class CategoriaFiltroController extends Controller
     }
 
     public function getCategoriasFiltro(){
-        $categoriasFiltro = CategoriaFiltro::orderBy('ordem')->with('categoria')->get();
+        $categoriasFiltro = CategoriaFiltro::orderBy('ordem')
+            ->whereHas('categoria', function ($query) {
+                    $query->where('status', 1);
+            })
+            ->with('categoria')->get();
 
         return response()->json(['categoriasFiltro' => $categoriasFiltro], 200);
     }

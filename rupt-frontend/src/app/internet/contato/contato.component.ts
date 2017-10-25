@@ -1,3 +1,4 @@
+import { Validators } from '@angular/forms';
 import { Base64 } from './../../shared/Base64';
 import { LeitoresService } from './../../services/leitores.service';
 import { Option } from './../../shared/option';
@@ -16,6 +17,9 @@ export class ContatoComponent implements OnInit {
   base64: Base64 = new Base64();
   msg_form: FormGroup;
   leitor: Leitor;
+
+  mensagemErro: string = '';
+  enviado: boolean;
 
   constructor(private _formBuilder: FormBuilder, 
               private _leitorService: LeitoresService, 
@@ -39,11 +43,11 @@ export class ContatoComponent implements OnInit {
 
   createForm(){
     this.msg_form = this._formBuilder.group({
-      nome: '',
-      email: '',
+      nome: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       leitorId:'',
-      assunto: 'assunto',
-      conteudo: ''
+      assunto: ['', Validators.required],
+      conteudo: ['', Validators.required]
     })
   }
 
@@ -63,11 +67,21 @@ export class ContatoComponent implements OnInit {
   ]; 
 
   enviaMensagem(){
-    return this._mensagemService.enviaMensagem(this.msg_form).subscribe(
-      (data: any) => {
-        this.msg_form.reset();
-        if (this.leitor)
-          this.preencheForm();0
-    });
+    this.mensagemErro = '';
+    this.enviado = false;
+
+    if(!this.msg_form.controls.email.valid)
+        this.mensagemErro = 'Insira um email válido.'
+    else if (!this.msg_form.valid)
+        this.mensagemErro = 'Preencha todos os campos.'
+    else {
+        return this._mensagemService.enviaMensagem(this.msg_form).subscribe(
+          (data: any) => {
+            this.enviado = true;
+            this.msg_form.reset();
+            if (this.leitor)
+              this.preencheForm();
+        });
+    }
   }
 }

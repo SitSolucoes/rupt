@@ -2013,7 +2013,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     display: block;
     margin: 0 auto;
     clear: both;
-    width: 30%;
+    width: 50%;
     background: darkred;
     color: #fff;
     font-family: Gilroy;
