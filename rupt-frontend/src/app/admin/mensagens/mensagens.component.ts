@@ -12,7 +12,7 @@ import { AdministradoresService } from './../../services/administradores.service
   styleUrls: ['./mensagens.component.css']
 })
 export class MensagensComponent implements OnInit {
-
+  
   mensagens_nLidas: Mensagem[] = [];
   mensagens_lidas: Mensagem[] = [];
   notificacoes: any;
@@ -20,11 +20,12 @@ export class MensagensComponent implements OnInit {
   filtroMensagens_lidas: any;
   resposta_msg_selecionada: Mensagem;
   vetor_ordena: string[];
+  spinner: boolean = false;
+  
   private ordenacoes = [
     {'remetente': null},
     {'data': null}
   ];
-  spinner: boolean = false;
   private mensagem_selecionada: Mensagem;
   private resposta: string;
 

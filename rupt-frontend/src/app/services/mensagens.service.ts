@@ -1,3 +1,4 @@
+import { Base64 } from 'app/shared/Base64';
 import { ConnectionFactory } from './../classes/connection-factory';
 import { identifierName } from '@angular/compiler/compiler';
 import { Injectable } from '@angular/core';
@@ -8,9 +9,10 @@ import { Headers } from '@angular/http';
 
 @Injectable()
 export class MensagensService {
-
-    private headers = new Headers({'Content-Type': 'application/json'});
-    private _url: string = ConnectionFactory.API_CONNECTION;
+  
+  base64: Base64 = new Base64();
+  private headers = new Headers({'Content-Type': 'application/json'});
+  private _url: string = ConnectionFactory.API_CONNECTION;
 
   constructor(private _http: Http) { }
 
@@ -72,7 +74,7 @@ export class MensagensService {
     const body =  {
         lida: f.value.lida,
         resposta: f.value.resposta,
-        admin: localStorage.getItem('admin_id')
+        admin: this.base64.decode(localStorage.getItem('admin_id'))
       };
 
     return this._http.post(this._url + 'respondeMensagem/'+id, body, {headers: this.headers}).map(
