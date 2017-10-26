@@ -1,3 +1,5 @@
+import { TimelineService } from './../services/timeline.service';
+import { Timeline } from './../classes/timeline';
 import { CategoriaLeitorService } from './../services/categoria-leitor.service';
 import { InputMaskModule } from 'ng2-inputmask';
 import { SliderComponent } from './slider/slider.component';
@@ -58,7 +60,8 @@ import { QuillEditorModule } from 'ngx-quill-editor';
     PublicacaoComponent
   ],
   providers: [
-    CategoriaLeitorService
+    CategoriaLeitorService,
+    TimelineService
   ]
 })
 export class InternetModule { }
