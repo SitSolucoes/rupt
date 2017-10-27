@@ -25,6 +25,30 @@ export class PostsService {
         );
   }
 
+  createComentario(id){
+    return this._http.post(this._url + 'posts/postCreateComentario', {headers: this.headers})
+    .map(
+        (response: Response) => { 
+          console.log(response);
+          return {
+            'sucesso': response.json().sucesso,
+            'comentarios': response.json().comentarios[0]
+          };
+        }
+      );
+  }
+  
+  getComentarios(id){
+    return this._http.get(this._url + 'posts/getComentarios' + id, {headers: this.headers})
+    .map(
+        (response: Response) => { 
+          return {
+            'comentarios': response.json().comentarios[0]
+          }; 
+        }
+    );
+  }
+
   getSliderPosts(){
     return this._http.get(this._url + 'posts/getSliderPosts', {headers: this.headers})
       .map((retorno: Response) => {

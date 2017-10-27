@@ -90,6 +90,7 @@ Route::get('/denuncia/getLeitor/{id}',[
            'uses' => 'DenunciasController@getLeitor'
 ]);
 //Posts
+
 Route::get('/denuncia/getEscritor/{id}', [
           'uses' => 'PostController@getEscritor'
 ]);
@@ -109,6 +110,10 @@ Route::get('posts/getPostsMaisLidos/', [
 Route::get('/posts/Post/{id}', [
     'uses' => 'PostController@getPost'
 ]);
+
+Route::post('posts/postCreateComentario', ['uses' => 'ComentarioController@create']);
+
+Route::post('posts/getComentarios', ['uses' => 'ComentarioController@getComentariosFromPost']);
 
 Route::post('posts/create', ['uses' => 'PostController@createPost']);
 Route::post('posts/uploadImages/{id}', ['uses' => 'PostController@uploadImages']);

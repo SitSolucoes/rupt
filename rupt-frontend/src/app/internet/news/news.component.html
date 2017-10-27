@@ -91,11 +91,10 @@
             <div class="profile">
 
             <div class="img-area">  <img src="../../../assets/img/person.png" class="img"> </div>
-
-                <input type="text" class="input" maxlength="60" name="nome" placeholder="Escreva um comentário..." >
-
+              <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <input type="text" class="input" maxlength="140" name="nome" formControlName="comentario" placeholder="Escreva um comentário..." >
                 <button type="submit" class="button" id="submit-contato"> Enviar </button>
-
+              </form>
             </div>
 
             <div class="separate"> recentes </div>
