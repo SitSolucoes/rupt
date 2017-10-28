@@ -24,13 +24,13 @@
 
       <div class="social">
 
-        <p>343</p>
+        <p>{{interacoes.likes?.length}}</p>
         <img src="../../../assets/img/like3.png" class="img">
 
-        <p>18</p>
+        <p>{{interacoes.dislikes?.length}}</p>
         <img src="../../../assets/img/dislike.png" class="img">
 
-        <p>22</p>
+        <p>{{interacoes.shares?.length}}</p>
         <img src="../../../assets/img/share2.png" class="img">
 
       </div>
@@ -48,7 +48,7 @@
 
         <div class="reactions">
 
-            <div class="area2">
+            <div class="area2" (click)="interagePost('like')">
 
                 <img src="../../../assets/img/like4.png" class="img">
 
@@ -56,7 +56,7 @@
 
             </div>
 
-            <div class="area2">
+            <div class="area2" (click)="interagePost('dislike')">
 
                 <img src="../../../assets/img/dislike2.png" class="img">
 
@@ -64,7 +64,7 @@
 
             </div>
 
-            <div class="area2">
+            <div class="area2" (click)="interagePost('share')">
 
                 <img src="../../../assets/img/share3.png" class="img">
 
@@ -84,13 +84,13 @@
 
         <div class="comentarios">
 
-            <p> <b>306</b> comentários </p>
+            <p> <b>{{ comentarios?.length}}</b> comentários </p>
 
             <div class="subtitle">Os comentários dessa sessão são de responsabilidade exclusiva de seus autores e não representam a opnião deste site. Se achar algo que viole os <b>Termos de uso</b>, denuncie. Leia as <a routerLink="../../faq">perguntas mais frequentes</a> para saber o que é impróprio ou ilegal.</div>
 
             <div class="profile">
 
-            <div class="img-area">  <img src="../../../assets/img/person.png" class="img"> </div>
+            <div class="img-area">  <img src="{{  url + 'profile/' + leitor?.src_foto }}" class="img"> </div>
               <form [formGroup]="form" (ngSubmit)="onSubmit()">
                 <input type="text" class="input" maxlength="140" name="comentario" formControlName="comentario" placeholder="Escreva um comentário..." >
                 <button type="submit" class="button" id="submit-contato"> Enviar </button>
@@ -100,16 +100,17 @@
             <div class="separate"> recentes </div>
 
 
-            <div class="profile">
-
-                <div class="img-area">  <img src="../../../assets/img/person.png" class="img"> </div>
+            <div class="profile" *ngFor="let c of comentarios">
+                
+                <div class="img-area">  <img src="{{url + 'profile/' + c?.comentario?.leitor?.src_foto}}" class="img"> </div>
 
                 <div class="user">
 
-                    <div class="title"> Lucrécia Silva </div>
-                    <div class="time"> Há 21 minutos </div>
+                    <div class="title"> {{ c.comentario.leitor.nick ? c.comentario.leitor.nick : c.comentario.leitor.nome }} </div>
+                    
+                    <div class="time"> {{c.comentario.minutos <= 1 ? "Segundos atrás" : getHoras(c.comentario.minutos) >= 2 ? getHoras(c.comentario.minutos) + " Horas" : c.comentario.minutos >= 60 ? getHoras(c.comentario.minutos) + " Hora" : "Há "+ c.comentario.minutos + " minutos" }} </div>
 
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lobortis scelerisque diam, non tincidunt augue vulputate sit amet. Fusce varius nunc vitae risus varius placerat. Proin eu volutpat orci.
+                    {{c.comentario.comentario}}
 
                     <div class="reaction">
 
@@ -124,35 +125,6 @@
                 </div>
 
             </div>
-
-
-
-            <div class="profile">
-
-                <div class="img-area">  <img src="../../../assets/img/person2.png" class="img"> </div>
-
-                <div class="user">
-
-                    <div class="title"> Márcio Silva </div>
-                    <div class="time"> Há 21 minutos </div>
-
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lobortis scelerisque diam, non tincidunt augue vulputate sit amet. Fusce varius nunc vitae risus varius placerat. Proin eu volutpat orci.
-
-                    <div class="reaction">
-
-                        <img src="../../../assets/img/like2.png" class="img2">
-                        <div class="number">2</div>
-
-                        <img src="../../../assets/img/dislike3.png" class="img2 img3">
-                        <div class="number">5</div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
         </div>
 
 

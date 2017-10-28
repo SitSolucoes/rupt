@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Comentario;
+use Carbon\Carbon;
 
 class ComentarioController extends Controller
 {
@@ -15,7 +16,7 @@ class ComentarioController extends Controller
         
         $comentario->save();
 
-        $comentarios = $this->getComentariosFromPost($comentario->post_idPost);
+        $comentarios = $this->comentariosFromPost($comentario->post_idPost);
 
         return response()->json(['comentarios' => $comentarios, 'status' => 'OK'], 200);
     }
@@ -30,31 +31,50 @@ class ComentarioController extends Controller
     }
     
     public function getComentariosFromPost($id){
-        $comentarios = Comentario::where("post_idPost","=", $id)->get();
-
-        $response = [];
-        //para cada comentario
-        //pegar respostas
-            //montar objeto {comentario, respostas} e inserir no array de resposta;
-            //retornar
-        
-        
-        $response = [
-            'comentarios' => $comentarios,
-            'respostas' => $respostas
-        ];
-        return response()->json(['response' => (object) $response], 200);
+        $comentarios = $this->comentariosFromPost($id);
+        return response()->json(['comentarios' => $comentarios], 200);
     }
 
-    /*private function getRespostas($comentarios){
-        $respostas = [];
-        foreach($comentarios as $c)
-            $respostas[] = Comentario::where('comentario_idComentario', '=' ,$c->id)->get();
-        if(count($respostas > 0){
-            return $respostas;
-        }else
-            return [];
-    }*/
+    public function comentariosFromPost($id){
+        $comentarios = Comentario::where("post_idPost","=", $id)
+                                 ->whereNull("comentario_idComentario")
+                                 ->orderBy('created_at', 'desc')
+                                 ->get();
+        
+        $response = [];
+        //para cada comentario
+
+        foreach($comentarios as $c){
+            //pegar respostas
+            $respostas = $this->getRespostas($c->id);
+            $c = $this->montaComentario($c);
+            $criado = new Carbon($c->created_at);
+            $c->minutos = $criado->diffInMinutes(Carbon::now());
+            //montar objeto {comentario, respostas} e inserir no array de resposta;
+            $response[] = (object) [
+                'comentario' => $c,
+                'respostas' => $respostas
+            ];
+            //retornar
+        }
+        return $response;
+    }
+
+    public function montaComentario($comentario){
+        //echo $comentario->leitor;
+        $comentarios = (object) [
+                'comentario' => $comentario->comentario,
+                'leitor' => $comentario->leitor->nick ? $comentario->leitor->nick : $comentario->leitor->nome,
+                'src_leitor' => $comentario->leitor->src_imagem,
+                'data' => $comentario->created_at
+        ];
+        return $comentario;
+    }
+
+    private function getRespostas($id){
+        $respostas = Comentario::where('comentario_idComentario', '=' ,$id)->get();
+        return $respostas;
+    }
 
     public function likeComentario($id){
 

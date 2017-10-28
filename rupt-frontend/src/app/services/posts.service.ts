@@ -40,10 +40,10 @@ export class PostsService {
     return this._http.post(this._url + 'posts/postCreateComentario', body, {headers: this.headers})
     .map(
         (response: Response) => { 
-          console.log(response);
+          //console.log(response);
           return {
-            'sucesso': response.json().sucesso,
-            'comentarios': response.json().comentarios[0]
+            'sucesso': response.json().status,
+            'comentarios': response.json().comentarios
           };
         }
       );
@@ -68,6 +68,47 @@ export class PostsService {
         };
       }); 
   }
+
+  getInteracoes(id){
+    return this._http.get(this._url + 'posts/getInteracoesFromPost/' + id, {headers: this.headers})
+      .map((response: Response) => {
+        return {
+          'likes' : response.json().interacoes.likes,
+          'dislikes' : response.json().interacoes.dislikes,
+          'shares' : response.json().interacoes.shares,
+          'status': response.json().status,
+          'message': response.json().message
+        };
+      }); 
+  }
+
+  createBodyInteracao(post_id, comentario, leitor, alvo, tipo){
+    return JSON.stringify(
+      {
+       post_idPost: post_id,
+       leitor_idLeitor: leitor.id,
+       comentario_idComentario: comentario,
+       alvo: alvo,
+       tipo: tipo
+    });
+  }
+
+  interage(post_id, comentario, leitor, alvo, tipo){
+    const body = this.createBodyInteracao(post_id, comentario, leitor, alvo, tipo);
+    return this._http.post(this._url + 'posts/postInterage', body, {headers: this.headers})
+    .map(
+        (response: Response) => { 
+          return {
+            'likes' : response.json().interacoes.likes,
+            'dislikes' : response.json().interacoes.dislikes,
+            'shares' : response.json().interacoes.shares,
+            'status': response.json().status,
+            'message': response.json().message
+          };
+        } 
+      );
+  }
+
 
   getMaisLidas():Observable<any>{
     return this._http.get(this._url + 'posts/getPostsMaisLidos', {headers: this.headers})

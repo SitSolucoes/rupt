@@ -115,6 +115,10 @@ Route::post('posts/postCreateComentario', ['uses' => 'ComentarioController@creat
 
 Route::get('posts/getComentarios/{id}', ['uses' => 'ComentarioController@getComentariosFromPost']);
 
+Route::get('posts/getInteracoesFromPost/{id}', ['uses' => 'InteracaoController@getInteracoesFromPost']);
+
+Route::post('posts/postInterage', ['uses' => 'InteracaoController@novo']);
+
 Route::post('posts/create', ['uses' => 'PostController@createPost']);
 Route::post('posts/uploadImages/{id}', ['uses' => 'PostController@uploadImages']);
 
