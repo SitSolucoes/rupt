@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddAdminsToEscritores extends Migration
+class AlterComentariosChangeLeitorNullable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,7 @@ class AddAdminsToEscritores extends Migration
     public function up()
     {
         Schema::table('comentarios', function (Blueprint $table) {
-            $table->integer('comentario_idComentario')->unsigned()->nullable();
-            $table->foreign('comentario_idComentario')->references('id')->on('comentarios');
+            $table->integer('leitor_idLeitor')->nullable()->change();
         });
     }
 
@@ -26,6 +25,8 @@ class AddAdminsToEscritores extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('comentarios', function (Blueprint $table) {
+            //
+        });
     }
 }

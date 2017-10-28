@@ -30,15 +30,31 @@ class ComentarioController extends Controller
     }
     
     public function getComentariosFromPost($id){
-        $comentarios = Comentario::where("post_idPost", $id);
+        $comentarios = Comentario::where("post_idPost","=", $id)->get();
 
-        foreach($comentarios as $c){
-            $c = (object)['comentario' => $c,
-                         'respostas' => $c->respostas];
-        }
-
-        return response()->json(['comentarios' => $comentarios], 200);
+        $response = [];
+        //para cada comentario
+        //pegar respostas
+            //montar objeto {comentario, respostas} e inserir no array de resposta;
+            //retornar
+        
+        
+        $response = [
+            'comentarios' => $comentarios,
+            'respostas' => $respostas
+        ];
+        return response()->json(['response' => (object) $response], 200);
     }
+
+    /*private function getRespostas($comentarios){
+        $respostas = [];
+        foreach($comentarios as $c)
+            $respostas[] = Comentario::where('comentario_idComentario', '=' ,$c->id)->get();
+        if(count($respostas > 0){
+            return $respostas;
+        }else
+            return [];
+    }*/
 
     public function likeComentario($id){
 

@@ -18,15 +18,10 @@ export class NewsComponent implements OnInit {
   post: Post;
   leitor = null;
   comentarios;
+  form;
   maisLidos: Post[];
 
-  form = this._formBuilder.group({
-    id: '0',
-    comentario: ['', Validators.required],
-    comentario_idComentario: ['', [Validators.required, Validators.minLength(3)]],
-    post_idPost: [this.post],
-    leitor_idLeitor: [this.leitor]
-  }); 
+  
 
 
   constructor( private _activatedRoute: ActivatedRoute, 
@@ -36,17 +31,32 @@ export class NewsComponent implements OnInit {
    }
 
   ngOnInit() {
+    console.log()
     this._activatedRoute.params.subscribe(params => {
-        this.carregaPosts(params['id']);
+        console.log(params['id']);
+        this.carregaPosts(+params['id']);
         if(localStorage.getItem('l'))
           this.leitor = localStorage.getItem('l');
+        this.form = this._formBuilder.group({
+            id: '0',
+            comentario: ['', Validators.required],
+            comentario_idComentario: ['', [Validators.required, Validators.minLength(3)]],
+            post_idPost: [params['id']],
+            leitor_idLeitor: [this.leitor.id]
+          }); 
     });
   }
 
   onSubmit(){
-    this._postService.createComentario(this.post).subscribe(
+    console.log(this.form);
+    this._postService.createComentario(this.form).subscribe(
       ( post ) => { 
-        this.comentarios = this._postService.getComentarios(this.post.id);
+        this._postService.getComentarios(this.post.id).subscribe(
+          (response) => {
+            console.log(response);
+            this.comentarios = response.comentarios;
+          }
+        );
       }
     );
   }

@@ -113,7 +113,7 @@ Route::get('/posts/Post/{id}', [
 
 Route::post('posts/postCreateComentario', ['uses' => 'ComentarioController@create']);
 
-Route::post('posts/getComentarios', ['uses' => 'ComentarioController@getComentariosFromPost']);
+Route::get('posts/getComentarios/{id}', ['uses' => 'ComentarioController@getComentariosFromPost']);
 
 Route::post('posts/create', ['uses' => 'PostController@createPost']);
 Route::post('posts/uploadImages/{id}', ['uses' => 'PostController@uploadImages']);

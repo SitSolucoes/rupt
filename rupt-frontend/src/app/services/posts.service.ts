@@ -25,8 +25,19 @@ export class PostsService {
         );
   }
 
-  createComentario(id){
-    return this._http.post(this._url + 'posts/postCreateComentario', {headers: this.headers})
+  private createBody(form){
+    return JSON.stringify(
+        {
+         comentario: form.value.comentario,
+         comentario_idComentario: form.value.comentario_idComentario,
+         post_idPost: form.value.post_idPost,
+         leitor_idLeitor: form.value.leitor_idLeitor,
+      });
+  }
+
+  createComentario(f){
+    const body = this.createBody(f);
+    return this._http.post(this._url + 'posts/postCreateComentario', body, {headers: this.headers})
     .map(
         (response: Response) => { 
           console.log(response);
@@ -39,11 +50,11 @@ export class PostsService {
   }
   
   getComentarios(id){
-    return this._http.get(this._url + 'posts/getComentarios' + id, {headers: this.headers})
+    return this._http.get(this._url + 'posts/getComentarios/' + id, {headers: this.headers})
     .map(
         (response: Response) => { 
           return {
-            'comentarios': response.json().comentarios[0]
+            'comentarios': response.json().comentarios
           }; 
         }
     );
