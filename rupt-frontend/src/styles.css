@@ -263,11 +263,12 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .banner-promo{
-    height: 120px;
+    height: 150px;
     width: 100%;
     display: block;
     float: left;
     padding-top: 30px;
+    padding-bottom: 30px;
     overflow: hidden;
 }
 
@@ -296,10 +297,8 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 
 
 .banner-promo .container{
-    width: 92%;
-    margin-left: 4%;
-    margin-right: 4%;
-    margin-top: 15px;
+    width: 90%;
+    margin-left: 5%;
     height: 100%;
     background: url('/assets/img/banner-pat.png');
     background-repeat:repeat;
@@ -327,7 +326,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 
 .banner .section{
     position: relative;
-    bottom: 200px;
+    bottom: 180px;
     left: 20px;
     width: auto;
     display: block;
@@ -342,7 +341,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 
 .banner .banner-title{
     position: relative;
-    bottom: 190px !important;
+    bottom: 170px !important;
     left: 20px;
     width: 300px;
     height: 400px;
@@ -396,6 +395,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     width: 100%;
     display: block;
     float: left;
+    background: #ededed;
 }
 
 .container-categoria .title{
@@ -514,7 +514,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .container-categoria .img{
     width: auto;
     height: 250px;
-    filter: brightness(75%);
+    filter: brightness(85%);
 }
 
 .container-categoria .img-container{
@@ -866,14 +866,16 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .modal{
     overflow: hidden;
     max-height: 80%;
-    border-radius: 5px;
+    border-radius: 2px;
 }
 
 .modal .close{
     width: 30px;
+    height: 30px;
     color: #fff;
     float: right;
-    font-size: 20px;
+    font-size: 18px;
+    padding-top: 2px;
     border: solid 1px #fff;
     border-radius: 100px;
     margin-right: 20px;
@@ -964,8 +966,9 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     position: relative;
 }
 
-.modal-content .info .img{
-
+.modal-content .info .img2{
+    height: 50px;
+    margin-top: 5px;
 }
 
 .modal-content .register{
@@ -1062,7 +1065,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     font-family: 'nexa-bold';
     font-size: 13px;
     color: #4f4f4f;
-    border-radius: 5px;
+    border-radius: 2px;
 }
 
 .modal-footer .button:hover{
@@ -2478,12 +2481,11 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     border: 1px solid #f97000 !important;
     color: #fff;
     padding-top: 4px !important;
-    border-radius: 4px;
+    border-radius: 2px;
     text-transform: uppercase;
-    font-family: gilroy-bold;
+    font-family: nexa-bold;
     font-size: 17px !important;
     background: #f97000 !important;
-    font-weight: bold;
     opacity: .9;
 }
 
@@ -2495,13 +2497,18 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .modal2{
-    top: 15% !important;
+    top: 20% !important;
     width: 45%;
 }
 
 .modal3{
     top: 15% !important;
     width: 60%;
+}
+
+.modal4{
+    top: 25% !important;
+    width: 45%;
 }
 
 .login-modal .container .text{
@@ -2755,4 +2762,88 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     border-bottom: 1px solid #ccc !important;
     border-right: 1px solid #ccc !important;
     border-top: 0px !important;
+}
+
+.generico-modal{
+    display: block;
+    float: left;
+    width: 100%;
+    padding-bottom: 40px;
+}
+
+.generico-modal .text{
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 40px;
+}
+
+.generico-modal .button{
+    display: block;
+    float: none;
+    margin: 0 auto;
+    margin-top: 20px;
+    border: 1px solid #d1d1d1;
+    text-transform: uppercase;
+    height: auto !important;
+    width: auto !important;
+    padding: 8px !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    font-size: 16px !important;
+    border-radius: 3px;
+}
+
+.generico-modal .social-media2{
+    display: block;
+    float: left;
+    width: 100%;
+}
+
+.generico-modal .social-media2 p{
+    font-size: 18px;
+    color: #4f4f4f;
+    margin-left: 0%;
+    text-align: center;
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+.generico-modal .social-media2 .icons{
+    height: 50px;
+    width: 36%;
+    margin-left: 5%;
+    display: block;
+    float: none;
+    margin: auto;
+    margin-top: 20px;
+}
+
+.generico-modal .social-media2 .icons .img{
+    height: 60px;
+    margin-left: 8px;
+}
+
+.generico-modal .social-media2 .icons .img2{
+    height: 55px;
+    position: relative;
+    bottom: 5px;
+}
+
+.generico-modal .text-area{
+    display: block;
+    margin: 0 auto;
+    width: 80%;
+    margin-top: 40px;
+    background: #fff;
+    resize: none;
+    height: 150px;
+    border-radius: 2px;
+    border: 1px solid #dedede;
+    outline: none;
+    overflow: hidden;
+    padding: 5px 5px;
+    color: #333333;
+
 }
