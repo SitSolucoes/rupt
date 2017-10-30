@@ -221,7 +221,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     height: 40px;
     display: block;
     margin-left: 10px;
-    margin-top: 13px;
+    margin-top: 12px;
     float: left;
     margin-left: 60px;
 }
@@ -672,7 +672,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .container-slider{
-    width: 100%;
+    width: 99%;
     display: block;
     float: left;
     padding-top: 40px;

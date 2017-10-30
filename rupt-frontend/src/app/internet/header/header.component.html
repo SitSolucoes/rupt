@@ -8,11 +8,16 @@
      [materializeActions]="modalLogin">
     <modal-login (closeModalLogin)="closeModalLogin($event)"></modal-login>
 </div>
+<div id="ModalGenerico" class="modal modal2"
+     materialize="modal" [materializeParams]="[{dismissible: false}]"
+     [materializeActions]="modalGenerico">
+    <modal-generico (closeModalGenerico)="closeModalGenerico($event)"></modal-generico>
+</div>
 
 <div class="headbar">
   
     <a routerLink="noticias"><img src="../../../assets/img/logo.png" class="img2"></a>
-    <a routerLink="/"><div class="title active"> Início </div></a>
+    <a (click)="openModalGenerico()"><div class="title active"> Início </div></a>
     <a routerLink="faq"><div class="title"> Faq </div></a>
     <a routerLink="contato"><div class="title"> contato </div></a>
 

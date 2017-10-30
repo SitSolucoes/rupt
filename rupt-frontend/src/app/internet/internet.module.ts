@@ -28,6 +28,7 @@ import { ModalCategoriasComponent } from './modal-categorias/modal-categorias.co
 import { PublicacaoComponent } from './publicacao/publicacao.component';
 import { FroalaViewModule, FroalaEditorModule } from 'angular2-froala-wysiwyg';
 import { QuillEditorModule } from 'ngx-quill-editor';
+import { ModalGenericoComponent } from './modal-generico/modal-generico.component';
 
 @NgModule({ 
   imports: [
@@ -57,7 +58,8 @@ import { QuillEditorModule } from 'ngx-quill-editor';
     CategoriaSliderComponent,
     CategoriasComponent,
     ModalCategoriasComponent,
-    PublicacaoComponent
+    PublicacaoComponent,
+    ModalGenericoComponent
   ],
   providers: [
     CategoriaLeitorService,
