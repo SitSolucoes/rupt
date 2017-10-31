@@ -60,7 +60,7 @@
 
             </div>
 
-            <div class="button button-orange" *ngIf="leitor.id != leitorLogado.id"> Seguir </div>
+            <div class="button button-orange" *ngIf="leitorLogado.id && leitor.id != leitorLogado.id"> Seguir </div>
 
             <a routerLink="../../cadastro-escritor" 
                 *ngIf="leitor.id == leitorLogado.id && (!leitor.escritor || leitor.escritor.status == 'r')"> 
@@ -78,20 +78,21 @@
         </div>
 
         <div class="feed">  
-
-                <div class="status"> 
-                        
-                            <div class="menu active"> Notícias  <br/> <font class="title"> 1500 </font> </div>
-                
-                            <div class="menu"> Leitores <br/> <font class="title"> 2.700 </font> </div>
-                
-                            <div class="menu"> Comentários <br/> <font class="title"> 24.500 </font> </div>
-                
-                            <div class="menu"> Seguindo <br/> <font class="title"> 15 </font> </div>
-                
-                            <div class="menu"> Seguidores <br/> <font class="title"> 1200 </font> </div>
-                        
+            <div class="status"> 
+                    
+                <div class="menu active"> Notícias  <br/> 
+                    <font class="title"> {{ timeline.length }} </font> 
                 </div>
+    
+                <div class="menu"> Leitores <br/> <font class="title"> 2.700 </font> </div>
+    
+                <div class="menu"> Comentários <br/> <font class="title"> 24.500 </font> </div>
+    
+                <div class="menu"> Seguindo <br/> <font class="title"> 15 </font> </div>
+    
+                <div class="menu"> Seguidores <br/> <font class="title"> 1200 </font> </div>
+                    
+            </div>
 
             <div class="search">
 
@@ -101,148 +102,57 @@
 
             </div>
 
-                <div class="post">
+            <div class="post" *ngFor='let t of timeline'>
 
+                <a routerLink='../{{ t.post.autor.nick }}'>
                     <div class="img-area">
-
-                    <img src="{{ url + leitor.src_foto }}"  class="img">
-
+                        <img src="{{ url + t.post.autor.src_foto }}"  class="img">
                     </div>
 
-                    <font class="title"> {{ leitor.nome }} </font> <img src="../../../assets/img/marcador.png" class="img img2">
+                    <font class="title"> {{ t.post.autor.nome }} </font> 
+                </a>
+                
+                <img src="../../../assets/img/marcador.png" class="img img2">
 
-                    <font class="title title2">     2h </font>
+                <font class="title title2">
+                    {{ calcHour( t.post.publishedAt ) }}
+                </font>
 
+                <a href="" *ngIf="t.post.autor.id == leitorLogado.id">
                     <img src="../../../assets/img/edit.png" class="img img5">
+                </a>
 
-                    <div class="info">
+                <div class="info">
 
                     <div class="border">
+                        <a routerLink="../../news"> 
+                            <img src="../../../assets/img/news3.png" class="img3">
 
-                    <a routerLink="../../news"> <img src="../../../assets/img/news3.png" class="img3">
-
-                    <div class="new">
-
-                    Precisamos falar sobre racismo na propaganda. Mas por quê? 
-
-                    </div>
-
-                    </a>
-                    
+                            <div class="new">
+                                Precisamos falar sobre racismo na propaganda. Mas por quê? 
+                            </div>
+                        </a>
                     </div>
 
                     <div class="status">
-                            
-                    <img src="../../../assets/img/coment.png" class="img4"> <b>23</b>
-                                                        
-                    <img src="../../../assets/img/like2.png" class="img4"> <b>1.335</b>
-
-                    <img src="../../../assets/img/share.png" class="img4"> <b>6</b>
-                                                
+                        <img src="../../../assets/img/coment.png" class="img4"> <b>23</b>
+                        <img src="../../../assets/img/like2.png" class="img4"> <b>1.335</b>
+                        <img src="../../../assets/img/share.png" class="img4"> <b>6</b>
                     </div>
-
-                    </div>
-
-                
                 </div>
-
-                <div class="post">
-
-                    <div class="img-area">
-                    
-                    <img src="{{ url + leitor.src_foto }}" class="img">
-
-                    </div>
-
-                    <font class="title"> {{ leitor.nome }} </font> <img src="../../../assets/img/marcador.png" class="img img2">
-                    
-                    <font class="title title2"> 1d </font>
-
-                    <img src="../../../assets/img/edit.png" class="img img5">
-
-                    <div class="info"> 
-                            
-                    <div class="border">    
-
-                    <img src="../../../assets/img/news2.png" class="img3">
-                        
-                    <div class="new"> Não diga para meninas que elas serão 'mulherões' quando crescerem </div>
-
-                    </div>
-
-                    <div class="status">
-                            
-                    <img src="../../../assets/img/coment.png" class="img4"> <b>6</b>
-                                                        
-                    <img src="../../../assets/img/like2.png" class="img4"> <b>35</b>
-
-                    <img src="../../../assets/img/share.png" class="img4"> <b>12</b>
-                                                
-                    </div>
-                            
-                    </div>
-                            
-
-                </div>
-
-                <div class="post">
-
-                    <div class="img-area">
-                        
-                        <img src="{{ url + leitor.src_foto }}"  class="img">
-
-                    </div>
-        
-                        <font class="title"> {{ leitor.nome }} </font> <img src="../../../assets/img/marcador.png" class="img img2">
-                        
-                        <font class="title title2"> 1d </font>
-
-                    <img src="../../../assets/img/edit.png" class="img img5">
-        
-                        <div class="info">
-                                
-                        <div class="border">   
-                        <img src="../../../assets/img/news.png" class="img3">
-
-                        <div class="new"> Youtuber negra, Nátaly Neri desabafa: "A gente se sente muito excluído" </div>
-
-                        </div>
-
-                        <div class="status">
-
-                        <img src="../../../assets/img/coment.png" class="img4"> <b>46</b>
-                                
-                        <img src="../../../assets/img/like2.png" class="img4"> <b>135</b>
-
-                        <img src="../../../assets/img/share.png" class="img4"> <b>20</b>
-                        
-                        </div>
-                                
-                        </div>
-                                
-        
-                    </div>
-
-        </div>
-
-
-        <div class="patrocinio">
-
-                <img src="../../../assets/img/propaganda2.png" class="img">
-
+            </div>
         </div>
 
         <div class="patrocinio">
-                
-                <img src="../../../assets/img/propaganda3.png" class="img">
-                            
+            <img src="../../../assets/img/propaganda2.png" class="img">
         </div>
 
         <div class="patrocinio">
-                
-                <img src="../../../assets/img/propaganda4.png" class="img">
-                            
+            <img src="../../../assets/img/propaganda3.png" class="img">
+        </div>
+
+        <div class="patrocinio">
+            <img src="../../../assets/img/propaganda4.png" class="img">
         </div>
     </div>
-        
 </div>
