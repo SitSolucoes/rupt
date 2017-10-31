@@ -41,14 +41,7 @@ export class HeaderComponent implements OnInit {
           action: 'modal',
           params: ['open']});
   }
-
-    openModalGenerico() {
-      console.log();
-        this.modalGenerico.emit({
-            action: 'modal',
-            params: ['open']});
-    }
-
+  
   closeModal(e){
     if(e){
       this.modalActions.emit({action:"modal",params:['close']});

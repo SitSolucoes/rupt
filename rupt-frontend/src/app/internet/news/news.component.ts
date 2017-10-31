@@ -1,3 +1,4 @@
+import { MaterializeAction } from 'angular2-materialize';
 import { Base64 } from './../../shared/Base64';
 import { LeitoresService } from '../../services/leitores.service';
 import { FormBuilder } from '@angular/forms';
@@ -5,7 +6,7 @@ import { ConnectionFactory } from 'app/classes/connection-factory';
 import { Post } from './../../classes/post';
 import { Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 
 import { PostsService } from './../../services/posts.service';
 
@@ -29,6 +30,7 @@ export class NewsComponent implements OnInit {
     dislikes: [],
     shares: []
   };
+  modalDenuncia = new EventEmitter<string|MaterializeAction>();
 
 
   constructor( private _activatedRoute: ActivatedRoute, 
@@ -132,5 +134,19 @@ export class NewsComponent implements OnInit {
       }
     );
   }
+
+  openModalDenuncias() {
+    console.log("teste");
+      this.modalDenuncia.emit({
+          action: 'modal',
+          params: ['open']});
+  }
+
+  closeModalDenuncia(e){
+    if(e){
+      this.modalDenuncia.emit({action:"modal",params:['close']});
+    }
+  }
+
 
 }

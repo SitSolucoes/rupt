@@ -44,4 +44,21 @@ class DenunciasController extends Controller
         ];
         return response()->json($response, 200);
     }
+
+    //set denuncias
+    public function create(Request $request){
+        $d = new Denuncia();
+        $d = $this->createDenuncia($request, $d);
+    }
+
+    private function createDencia(Request $request, $i){
+        $i = new Interacao();
+
+        $i->post_idPost = $request->post_idPost;
+        $i->leitor_idLeitor = $request->leitor_idLeitor;
+        $i->motivo_idMotivo = $request->motivo_idMotivo;
+        $i->status = 'A';
+
+        return $i;
+    }
 }

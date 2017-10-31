@@ -1,4 +1,8 @@
-
+<div id="ModalDenuncia" class="modal modal2 modal4"
+  materialize="modal" [materializeParams]="[{dismissible: false}]"
+  [materializeActions]="modalDenuncia">
+  <modal-generico (closeModalDenuncia)="closeModalDenuncia($event)"></modal-generico>
+</div>
 <div class="news" *ngIf='post'>
 
   <div class="area-top">
@@ -72,7 +76,7 @@
 
             </div>
 
-            <div class="area2">
+            <div class="area2" (click)="openModalDenuncias()">
 
                 <img src="../../../assets/img/report.png" class="img">
 
