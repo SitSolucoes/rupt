@@ -1205,6 +1205,18 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     font-family: lato;
 }
 
+.user .bio .bio-text{
+    display: block;
+    float: left;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.user .bio .bio-date{
+    font-size: 13px;
+    color: #757575;
+}
+
 .user .bio .profile{
     display: block;
     float: left;
@@ -1241,7 +1253,8 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 
 .user .bio .info .img{
     height: 15px;
-    top: 3px;
+    position: relative;
+    top: 2px;
     margin-right: 3px;
 }
 
@@ -1300,6 +1313,20 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     padding-bottom: 10px;
 }
 
+.user .feed .post-none{
+    display: block;
+    float: left;
+    width: 100%;
+    background: #fff;
+    color: #3d3d3d;
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    font-weight: bolder;
+    font-family: Gilroy;
+    font-size: 17px;
+}
+
 .user .feed .post .img-area{
     display: block;
     float: left;
@@ -1334,7 +1361,8 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     display: block;
     float: left;
     font-size: 15px;
-    font-family: 'nexa-bold';
+    font-family: 'nexa';
+    font-weight: bold;
     margin-top: 20px;
     margin-left: 15px;
     color: #4F4F4F;
@@ -1342,9 +1370,9 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 
 .user .feed .post .title2{
   font-family: 'lato';
-  color: #696969;
-  font-size: 13px;
-  font-weight: bold;
+  color: #808080;
+  font-size: 12px;
+  margin-top: 22px;
   margin-left: 5px;
 }
 
@@ -1358,6 +1386,8 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .user .feed .post .info .border{
+  display: block;
+  float: left;
   margin-top: 10px;
   overflow: hidden;
   max-height: 260px;
@@ -1373,18 +1403,15 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .user .feed .post .info .new{
     display: block;
     float: left;
-    position: relative;
-    bottom: 110px;
-    color: #fff;
-    width: 90%;
+    color: #424242;
+    width: 100%;
     max-height: 95px;
     overflow: hidden;
-    font-size: 23px;
-    line-height: 30px;
-    font-family: 'nexa-bold';
-    padding-left: 20px;
-    padding-right: 100px;
-    letter-spacing: -1px;
+    font-size: 17px;
+    line-height: 22px;
+    font-family: lato;
+    font-weight: bold;
+    padding-right: 20px;
 }
 
 .user .feed .post .status{
@@ -1432,7 +1459,6 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 
 .user .feed .search input[type=text]:not(.browser-default):focus:not([readonly]), input[type=password]:not(.browser-default):focus:not([readonly]){
     background: #fff;
-    border: 1px solid #fff;
 }
 
 .user .feed .search .img6{
@@ -2021,7 +2047,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     border-bottom: 1px solid #ccc;
 }
 
-.contato .error-alert{
+.error-alert{
     display: block;
     margin: 0 auto;
     clear: both;
@@ -2051,7 +2077,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     margin-right: 15px;
 }
 
-.contato .success{
+.success{
     background: green;
 }
 
@@ -2209,21 +2235,6 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     margin-left: 10px;
 }
 
-.cadastro .error-alert{
-    display: block;
-    margin: 0 auto;
-    clear: both;
-    width: 22%;
-    background: darkred;
-    color: #fff;
-    font-family: Gilroy;
-    font-weight: bolder;
-    margin-top: 10px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    border-radius: 4px;
-}
-
 .cadastro .img-button{
     display: block;
     float: left;
@@ -2237,10 +2248,6 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     bottom: 0px;
     margin-left: 15px;
     margin-right: 15px;
-}
-
-.cadastro .success{
-    background: green;
 }
 
 [type="radio"]:not(:checked), [type="radio"]:checked {

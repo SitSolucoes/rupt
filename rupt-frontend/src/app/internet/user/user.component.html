@@ -31,19 +31,19 @@
 
                 </div>
 
-                <div *ngIf='leitor.biografia'>
+                <div *ngIf='leitor.biografia' class="bio-text">
                     {{ leitor.biografia }} <br/>
                 </div>
-                <br/>
-                <div *ngIf='leitor.escritor && leitor.escritor.cidade'>
+
+                <div *ngIf='leitor.escritor && leitor.escritor.cidade' class="bio-text">
                     <img src="../../../assets/img/map.png" class="img">  
                     <font class="gray"> 
                         {{ leitor.escritor.cidade }}, {{ leitor.escritor.uf }} 
-                    </font> <br/><br/>
+                    </font> <br/>
                 </div>
 
-                <img src="../../../assets/img/calendar.png" class="img">  
-                <font class="gray"> 
+                <font class="gray" class="bio-text bio-date">
+                <img src="../../../assets/img/calendar.png" class="img">
                     Participa desde {{ leitor.created_at | date: 'MMMM' }} de {{ leitor.created_at | date: 'y'}} 
                 </font>
             </div>
@@ -56,7 +56,7 @@
 
                 <div class="title">  {{ leitor.nome }} </div> 
 
-                <div class="title subtitle">  <b>@{{ leitor.nick }} </b> </div>
+                <div class="title subtitle">  @{{ leitor.nick }} </div>
 
             </div>
 
@@ -102,6 +102,13 @@
 
             </div>
 
+            <div class="post-none">
+
+            Sem publicações até o momento
+
+            </div>
+
+
             <div class="post" *ngFor='let t of timeline'>
 
                 <a routerLink='../{{ t.post.autor.nick }}'>
@@ -124,15 +131,15 @@
 
                 <div class="info">
 
-                    <div class="border">
-                        <a routerLink="../../news"> 
-                            <img src="../../../assets/img/news3.png" class="img3">
-
-                            <div class="new">
-                                Precisamos falar sobre racismo na propaganda. Mas por quê? 
-                            </div>
-                        </a>
+                    <div class="new">
+                        Precisamos falar sobre racismo na propaganda. Mas por quê?
                     </div>
+
+                    <a routerLink="../../noticia/{{t.post.id}}">
+                    <div class="border" >
+                            <img src="../../../assets/img/news3.png" class="img3">
+                    </div>
+                    </a>
 
                     <div class="status">
                         <img src="../../../assets/img/coment.png" class="img4"> <b>23</b>
