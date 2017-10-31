@@ -30,6 +30,10 @@ body{
     font-family: lato;
 }
 
+strong{
+    font-weight: bolder;
+}
+
 input[type=text]:not(.browser-default),
 input[type=password]:not(.browser-default) 
 {
@@ -1440,12 +1444,17 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     top: 20px;
 }
 
-.user .patrocinio{
-  display: block;
-  float: left;
-  width: 20%;
-  margin-left: 2%;
-  margin-top: 10px;
+.user .area-patrocinio{
+    display: block;
+    float: right;
+    width: 20%;
+    margin-left: 2%;
+    margin-right: 3%;
+    margin-top: 10px;
+}
+
+.user .area-patrocinio .patrocinio{
+  width: 100%;
   overflow: hidden;
   padding: 5px;
   padding-bottom: 20px;
@@ -1453,7 +1462,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
   border-radius: 3px;
 }
 
-.user .patrocinio .img{
+.user .area-patrocinio .patrocinio .img{
   width: auto;
   height: 300px;
   display: block;
@@ -1528,7 +1537,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .news .area-top .tag-menu{
   display: block;
   margin: 0 auto;
-  width: 220px;
+  width: 12%;
   height: 50px;
 }
 
@@ -2357,6 +2366,10 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     font-family: lato;
     border: 1px solid #e8dddd;
     padding: 20px;
+}
+
+.cadastro-escritor .container .area2{
+    border: 0px;
 }
 
 .cadastro-escritor .container .area p{

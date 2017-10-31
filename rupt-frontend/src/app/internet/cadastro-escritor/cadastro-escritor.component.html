@@ -81,8 +81,65 @@
                     <label> Bairro </label>
                     <input type="text" class="input" maxlength="40" formControlName='bairro' readonly placeholder="Insira seu bairro">
                 </div>
+
+
+
+                <div class="area area2">
+
+                    <div class="img-area">
+                        <p> 1. Foto - Frente do RG/Carteira de motorista  </p>
+                        <img src="../../../assets/img/rg.png" class="img">
+                        <input type="file" accept="image/*" id='doc1'>
+                    </div>
+
+                    <div class="img-area">
+                        <p> 2. Foto - Verso do RG/Carteira de motorista </p>
+                        <img src="../../../assets/img/cpf.png" class="img">
+                        <input type="file" name="arquivo" id='doc2'/>
+                    </div>
+
+                    <div class="img-area">
+                        <p> 3. Foto do usuário mais frente do RG/Carteira de motorista  </p>
+                        <img src="../../../assets/img/pessoa_cpf.png" class="img">
+                        <input type="file" name="arquivo" id='doc3'/>
+                    </div>
+
+                </div>
+
+
+                <div class="area area2">
+                    <p> Dados bancários </p>
+
+                    <div class="menu">
+                        <label> Banco </label>
+                        <select name="banco" class="input"
+                                formControlName='banco'>
+                            <option *ngFor="let option of selectBancos" [value]="option.value">{{option.name}}</option>
+                        </select>
+                    </div>
+
+                    <div class="menu">
+
+                        <label> Agência </label>
+
+                        <input type="text" class="input" maxlength="15" formControlName='agencia' placeholder="Sua agência">
+
+                    </div>
+
+                    <div class="menu">
+
+                        <label> Conta </label>
+
+                        <input type="text" class="input" maxlength="20" formControlName='conta_corrente' placeholder="Conta do seu banco">
+
+                    </div>
+                </div>
+
+
+
             </div>
 
+            <button type="submit" class="button background-orange">Salvar</button>
             <button type="button" class="button background-orange" (click)="next()" 
             [disabled]="!formulario.valid || cpfInvalido || cpfUsado">Próximo</button>
         </div>
