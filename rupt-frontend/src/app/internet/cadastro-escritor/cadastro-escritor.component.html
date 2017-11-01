@@ -2,10 +2,11 @@
 
 <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
     <div class="container">
-        <p> Progresso </p>
+        
+        <p *ngIf="!leitor.escritor"> Progresso </p>
 
         <div [hidden]="page != 1">
-            <div class="progress">
+            <div class="progress" *ngIf="!leitor.escritor">
                 <div class="green"> </div>
             </div>   
             
@@ -82,66 +83,75 @@
                     <input type="text" class="input" maxlength="40" formControlName='bairro' readonly placeholder="Insira seu bairro">
                 </div>
 
+                <div *ngIf="leitor.escritor">
+                    <div class="area area2">
 
+                        <div class="img-area">
+                            <p> 1. Foto - Frente do RG/Carteira de motorista  </p>
+                            <img src="../../../assets/img/rg.png" class="img" *ngIf="!leitor.escritor.doc_1">
+                            <img src="{{ url + leitor.escritor.doc_1 }}" class="img" *ngIf="leitor.escritor.doc_1">
+                            <input type="file" accept="image/*" id='doc1' *ngIf='leitor.escritor.status != "a"'>
+                        </div>
 
-                <div class="area area2">
+                        <div class="img-area">
+                            <p> 2. Foto - Verso do RG/Carteira de motorista </p>
+                            <img src="../../../assets/img/cpf.png" class="img" *ngIf="!leitor.escritor.doc_2">
+                            <img src="{{ url + leitor.escritor.doc_2 }}" class="img" *ngIf="leitor.escritor.doc_2">
+                            <input type="file" name="arquivo" id='doc2' *ngIf='leitor.escritor.status != "a"'/>
+                        </div>
 
-                    <div class="img-area">
-                        <p> 1. Foto - Frente do RG/Carteira de motorista  </p>
-                        <img src="../../../assets/img/rg.png" class="img">
-                        <input type="file" accept="image/*" id='doc1'>
+                        <div class="img-area">
+                            <p> 3. Foto do usuário mais frente do RG/Carteira de motorista  </p>
+                            <img src="../../../assets/img/pessoa_cpf.png" class="img" *ngIf="!leitor.escritor.doc_3">
+                            <img src="{{ url + leitor.escritor.doc_3 }}" class="img" *ngIf="leitor.escritor.doc_3">
+                            <input type="file" name="arquivo" id='doc3' *ngIf='leitor.escritor.status != "a"'/>
+                        </div>
+
                     </div>
 
-                    <div class="img-area">
-                        <p> 2. Foto - Verso do RG/Carteira de motorista </p>
-                        <img src="../../../assets/img/cpf.png" class="img">
-                        <input type="file" name="arquivo" id='doc2'/>
-                    </div>
+                    <div class="area area2">
+                        <p> Dados bancários </p>
 
-                    <div class="img-area">
-                        <p> 3. Foto do usuário mais frente do RG/Carteira de motorista  </p>
-                        <img src="../../../assets/img/pessoa_cpf.png" class="img">
-                        <input type="file" name="arquivo" id='doc3'/>
-                    </div>
+                        <div class="menu">
+                            <label> Banco </label>
+                            <select name="banco" class="input"
+                                    formControlName='banco'>
+                                <option *ngFor="let option of selectBancos" [value]="option.value">{{option.name}}</option>
+                            </select>
+                        </div>
 
+                        <div class="menu">
+
+                            <label> Agência </label>
+
+                            <input type="text" class="input" maxlength="15" formControlName='agencia' placeholder="Sua agência">
+
+                        </div>
+
+                        <div class="menu">
+
+                            <label> Conta </label>
+
+                            <input type="text" class="input" maxlength="20" formControlName='conta_corrente' placeholder="Conta do seu banco">
+
+                        </div>
+                    </div>
                 </div>
-
-
-                <div class="area area2">
-                    <p> Dados bancários </p>
-
-                    <div class="menu">
-                        <label> Banco </label>
-                        <select name="banco" class="input"
-                                formControlName='banco'>
-                            <option *ngFor="let option of selectBancos" [value]="option.value">{{option.name}}</option>
-                        </select>
-                    </div>
-
-                    <div class="menu">
-
-                        <label> Agência </label>
-
-                        <input type="text" class="input" maxlength="15" formControlName='agencia' placeholder="Sua agência">
-
-                    </div>
-
-                    <div class="menu">
-
-                        <label> Conta </label>
-
-                        <input type="text" class="input" maxlength="20" formControlName='conta_corrente' placeholder="Conta do seu banco">
-
-                    </div>
-                </div>
-
-
-
             </div>
 
-            <button type="submit" class="button background-orange">Salvar</button>
-            <button type="button" class="button background-orange" (click)="next()" 
-            [disabled]="!formulario.valid || cpfInvalido || cpfUsado">Próximo</button>
+            <div class="error-alert success" *ngIf='salvo'> 
+                <img src="../../../assets/img/success.png"  class="img-button img-button2">
+                Salvo com sucesso.
+            </div>
+
+            <button type='button' (click)="onSubmitEditar()" class="button background-orange" *ngIf='leitor.escritor'>
+                Salvar
+            </button>
+            
+            <button type="button" class="button background-orange" *ngIf="!leitor.escritor" (click)="next()" 
+                [disabled]="!formulario.valid || cpfInvalido || cpfUsado">
+                Próximo
+            </button>
         </div>
         <div [hidden]="page != 2">
             <div class="progress">

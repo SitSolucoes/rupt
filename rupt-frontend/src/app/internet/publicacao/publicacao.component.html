@@ -5,23 +5,23 @@
 
     <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
 
-    <div class="top">
-        <select name="banco" class="input" formControlName='categoria_id'>
-            <option disabled selected>Selecione uma categoria</option>
-            <option *ngFor="let categoria of categorias" [value]='categoria.id'>{{ categoria.categoria }}</option>
-        </select>
+      <div class="top">
+          <select name="banco" class="input" formControlName='categoria_id'>
+              <option disabled selected>Selecione uma categoria</option>
+              <option *ngFor="let categoria of categorias" [value]='categoria.id'>{{ categoria.categoria }}</option>
+          </select>
 
-      <input type="text" class="input input2" maxlength="160" formControlName='titulo' placeholder="Insira o título da sua notícia">
-    </div>
+        <input type="text" class="input input2" maxlength="160" formControlName='titulo' placeholder="Insira o título da sua notícia">
+      </div>
 
-    <!-- use with ngModel -->
-    <quill-editor formControlName='conteudo'
-    [options]="editorOptions"
-    (blur)="onEditorBlured($event)"
-    (focus)="onEditorFocused($event)"
-    (ready)="onEditorCreated($event)"
-    (change)="onContentChanged($event)"></quill-editor>
-
+      <!-- use with ngModel -->
+      <quill-editor formControlName='conteudo'
+          [options]="editorOptions"
+          (blur)="onEditorBlured($event)"
+          (focus)="onEditorFocused($event)"
+          (ready)="onEditorCreated($event)"
+          (change)="onContentChanged($event)">
+      </quill-editor>
 
       <div class="file-field input-field">
         <div class="btn">

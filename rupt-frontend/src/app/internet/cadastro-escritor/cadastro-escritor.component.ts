@@ -1,3 +1,4 @@
+import { ConnectionFactory } from './../../classes/connection-factory';
 import { DateBr } from 'app/shared/dateBr';
 import { ValidaCampo } from './../../shared/valida-campo';
 import { EscritoresService } from './../../services/escritores.service';
@@ -23,9 +24,11 @@ export class CadastroEscritorComponent implements OnInit {
   
   cpfInvalido: boolean;
   cpfUsado: boolean;
+  salvo: boolean;
   leitor: Leitor = new Leitor();
   page: number = 1;
   validaCampo: ValidaCampo = new ValidaCampo();
+  url = ConnectionFactory.API_IMAGEM + 'docs/';
 
   formulario: FormGroup;
   selectBancos: Option[] = Bancos;
@@ -42,7 +45,9 @@ export class CadastroEscritorComponent implements OnInit {
       this.createForm();
 
       this._leitorService.leitor.subscribe(
-        (leitor: Leitor) => { this.leitor = leitor }
+        (leitor: Leitor) => { 
+          this.leitor = leitor; 
+        }
       );
 
       this._leitorService.verificaLogin().subscribe(
@@ -58,7 +63,32 @@ export class CadastroEscritorComponent implements OnInit {
                 nascimento: DateBr.convert(this.leitor.nascimento),
                 sexo: this.leitor.sexo,
                 ativo: this.leitor.ativo
-              })
+              });
+
+              if (this.leitor.escritor){
+                this.formulario.patchValue({
+                  rg: this.leitor.escritor.rg,
+                  cpf: this.leitor.escritor.cpf,
+                  telefone: this.leitor.escritor.telefone,
+                  celular: this.leitor.escritor.celular,
+                  cep: this.leitor.escritor.cep,
+                  logradouro: this.leitor.escritor.logradouro,
+                  numero: this.leitor.escritor.numero,
+                  complemento: this.leitor.escritor.complemento,
+                  cidade: this.leitor.escritor.cidade,
+                  bairro: this.leitor.escritor.bairro,
+                  uf: this.leitor.escritor.uf,
+                  banco: this.leitor.escritor.banco,
+                  agencia: this.leitor.escritor.agencia,
+                  conta_corrente: this.leitor.escritor.conta_corrente,
+                  status: this.leitor.escritor.status
+                });
+
+                if (this.leitor.escritor.status == 'a'){
+                  this.formulario.controls.rg.disable();
+                  this.formulario.controls.cpf.disable();
+                }
+              }
             }
           }
       );
@@ -88,7 +118,7 @@ export class CadastroEscritorComponent implements OnInit {
         agencia: [''],
         conta_corrente: [''],
         status: 'p'
-    })
+    });
   }
 
   verificaValidTouched(campo: string){
@@ -157,12 +187,42 @@ export class CadastroEscritorComponent implements OnInit {
   onSubmit(){
     this._escritorService.createEscritor(this.formulario, this.leitor.id).subscribe(
       (response) => { 
-        this.uploadFiles();
+        this.uploadFiles(false);
       }
     )
   }
 
-  uploadFiles(){
+  onSubmitEditar(){
+    this.salvo = false;
+
+    //como o campo ta disable na tela, pode ter algum espetão que libere o campo pelo f12 e edite o campo,
+    //e como depois de aceito não pode mais mudar os dados, isso ta aqui pra garantir que não vai mudar
+    if (this.leitor.escritor.status == 'a'){
+      this.formulario.controls.rg.enable();
+      this.formulario.controls.cpf.enable();
+      
+      this.formulario.patchValue({
+        rg: this.leitor.escritor.rg,
+        cpf: this.leitor.escritor.cpf,
+        status: this.leitor.escritor.status
+      });
+    };
+
+    this._escritorService.updateEscritor(this.formulario, this.leitor.id).subscribe(
+      (response) => { 
+        if (this.leitor.escritor.status == 'a'){
+          this.formulario.controls.rg.disable();
+          this.formulario.controls.cpf.disable();
+          this.salvo = true; 
+        }
+        else {
+            this.uploadFiles(true);
+        }
+      }
+    )
+  }
+
+  uploadFiles(upload){
       let files = new Array();
       let files_name = new Array();
 
@@ -186,7 +246,10 @@ export class CadastroEscritorComponent implements OnInit {
 
           this._uploadFileService.onSuccessUpload = (item, response, status, headers) => {
                 // success callback
-                this._router.navigate(['rupt/perfil']) ;
+                if(!upload)
+                  this._router.navigate(['rupt/perfil']);
+                else 
+                  this.salvo = true; 
           };
           this._uploadFileService.onErrorUpload = (item, response, status, headers) => {
                 // error callback
@@ -197,7 +260,10 @@ export class CadastroEscritorComponent implements OnInit {
           this._uploadFileService.upload(myUploadItem);
       }
       else 
-          this._router.navigate(['rupt/perfil']) ;
+        if(!upload)
+          this._router.navigate(['rupt/perfil']);
+        else 
+          this.salvo = true; 
   }
 
 }
