@@ -22,7 +22,7 @@ export class PublicacaoComponent implements OnInit {
   categorias: Categoria[];
   formulario: FormGroup;
   leitor: Leitor;
-
+  
   constructor(private _formBuilder: FormBuilder,
               private _leitorService: LeitoresService,
               private _router: Router,
@@ -72,8 +72,6 @@ export class PublicacaoComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.formulario);
-
     this._postService.create(this.formulario).subscribe(
       (response) => { this.uploadFiles(response) }
     )
@@ -82,7 +80,7 @@ export class PublicacaoComponent implements OnInit {
   public editor;
   public editorContent = `<h3>I am Example content</h3>`;
   public editorOptions = {
-    placeholder: "Escreva seu texto aqui..."
+    placeholder: "Escreva seu texto aqui...",
   };
 
   onEditorBlured(quill) {
