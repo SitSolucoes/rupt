@@ -102,11 +102,12 @@
 
             </div>
 
+            <!--
             <div class="post-none">
 
             Sem publicações até o momento
 
-            </div>
+            </div> -->
 
 
             <div class="post" *ngFor='let t of timeline'>
@@ -115,21 +116,60 @@
                     <div class="img-area">
                         <img src="{{ url + t.post.autor.src_foto }}"  class="img">
                     </div>
-
-                    <font class="title"> {{ t.post.autor.nome }} </font> 
-                </a>
-                
-                <img src="../../../assets/img/marcador.png" class="img img2">
-
-                <font class="title title2">
-                    {{ calcHour( t.post.publishedAt ) }}
-                </font>
-
-                <a href="" *ngIf="t.post.autor.id == leitorLogado.id">
-                    <img src="../../../assets/img/edit.png" class="img img5">
                 </a>
 
+                <div class="text">
+
+                    <a routerLink='../{{ t.post.autor.nick }}'>
+                         <font class="title name"> {{ t.post.autor.nome }} </font>
+                        <font class="share">- Compartilhou a <b><a routerLink="../../noticia/{{t.post.id}}">publicação</a></b> de Brasil de Fato.</font>
+                        <a href="" *ngIf="t.post.autor.id == leitorLogado.id">
+                            <img src="../../../assets/img/dot.png" class="img img5">
+                            <img src="../../../assets/img/edit.png" class="img img5">
+                        </a>
+                    </a>
+
+                    <font class="title title2">
+                        {{ calcHour( t.post.publishedAt ) }}
+                    </font>
+
+                </div>
+
+                <!--
                 <div class="info">
+                    <div class="new">
+                        Precisamos falar sobre racismo na propaganda. Mas por quê?
+                    </div>
+
+                    <a routerLink="../../noticia/{{t.post.id}}">
+                        <div class="border" >
+                            <img src="../../../assets/img/news3.png" class="img3">
+                        </div>
+                    </a>
+
+                    <div class="status">
+                        <img src="../../../assets/img/coment.png" class="img4"> <b>23</b>
+                        <img src="../../../assets/img/like2.png" class="img4"> <b>1.335</b>
+                        <img src="../../../assets/img/share.png" class="img4"> <b>6</b>
+                    </div>
+                </div> -->
+
+                <div class="info info2">
+
+                    <div class="img-area img-area2">
+                        <img src="{{ url + t.post.autor.src_foto }}"  class="img4">
+                    </div>
+
+                    <div class="text">
+
+                    <font class="title"> {{ t.post.autor.nome }} </font>
+
+                    <font class="title title2">
+                        {{ calcHour( t.post.publishedAt ) }}
+                    </font>
+
+                    </div>
+
 
                     <div class="new">
                         Precisamos falar sobre racismo na propaganda. Mas por quê?
@@ -142,9 +182,11 @@
                     </a>
 
                     <div class="status">
-                        <img src="../../../assets/img/coment.png" class="img4"> <b>23</b>
-                        <img src="../../../assets/img/like2.png" class="img4"> <b>1.335</b>
-                        <img src="../../../assets/img/share.png" class="img4"> <b>6</b>
+                        <img src="../../../assets/img/rupt-ico.png" class="img4">
+                        <img src="../../../assets/img/rupt-ico9.png" class="img4">
+                        <img src="../../../assets/img/rupt-ico3.png" class="img4">
+                        <img src="../../../assets/img/rupt-ico4.png" class="img4">
+                        <img src="../../../assets/img/rupt-ico7.png" class="img4"> <div class="total">123</div>
                     </div>
                 </div>
             </div>

@@ -1196,9 +1196,9 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .user .bio{
     display: block;
     float: left;
-    width: 25%;
+    width: 26%;
     padding-left: 60px;
-    padding-right: 40px;
+    padding-right: 1%;
     padding-top: 20px;
     position: relative;
     bottom: 100px;
@@ -1209,7 +1209,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     display: block;
     float: left;
     width: 100%;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .user .bio .bio-date{
@@ -1227,13 +1227,14 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     box-shadow: 1px 3px 1px #B9B7B7;
     margin-bottom: 5px;
     border: 5px solid #fff;
+    position: relative;
+    left: 10%;
 }
 
 .user .bio .rating{
     display: block;
-    float: left;
-    width: 55%;
-    margin-left: 20%;
+    margin: 0 auto;
+    width: 65%;
     margin-bottom: 10px;
 }
 
@@ -1245,14 +1246,17 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     clear: both;
     display: block;
     float: left;
-    height: 30px;
     width: 100%;
     margin-top: 10px;
     line-height: 22px;
+    background: #fff;
+    padding-left: 15px;
+    padding-top: 20px;
+    padding-bottom: 15px;
 }
 
 .user .bio .info .img{
-    height: 15px;
+    height: 20px;
     position: relative;
     top: 2px;
     margin-right: 3px;
@@ -1266,7 +1270,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .user .feed{
     display: block;
     float: left;
-    width: 50%;
+    width: 51%;
     background: #fff;
     margin-top: 10px;
     margin-bottom: 20px;
@@ -1310,7 +1314,8 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     float: left;
     width: 100%;
     border-bottom: 1px solid #E8E8E8;
-    padding-bottom: 10px;
+    padding-bottom: 20px;
+    padding-top: 10px;
 }
 
 .user .feed .post-none{
@@ -1353,27 +1358,61 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .user .feed .post .img5{
     height: 18px;
     margin-left: 5px;
-    margin-top: 20px;
+    margin-top: 13px;
     border-radius: 0px;
+    display: block;
+    float: right;
+}
+
+.user .feed .post .text{
+    display: block;
+    float: left;
+    width: 80%;
+    line-height: 20px;
+}
+
+.user .feed .post .text .name{
+    margin-top: 13.5px;
+    margin-left: 15px;
+}
+
+.user .feed .post .text .share{
+    color: #5e5e5e;
+    display: block;
+    float: left;
+    margin-top: 12px;
+    margin-left: 5px;
+}
+
+.user .feed .post .text .share a{
+    color: #365899;
+    text-decoration: none;
+}
+
+.user .feed .post .text .share a:hover{
+    text-decoration: underline;
 }
 
 .user .feed .post .title{
     display: block;
     float: left;
-    font-size: 15px;
-    font-family: 'nexa';
-    font-weight: bold;
-    margin-top: 20px;
+    line-height: 18px;
+    font-size: 16px;
+    font-family: 'nexa-bold';
+    margin-top: 8px;
     margin-left: 15px;
-    color: #4F4F4F;
+    color: #f97000;
 }
 
 .user .feed .post .title2{
-  font-family: 'lato';
+    font-family: gilroy;
+    font-weight: bold;
   color: #808080;
   font-size: 12px;
   margin-top: 22px;
-  margin-left: 5px;
+  margin-left: 15px;
+  clear: both;
+  margin-top: 0px;
 }
 
 .user .feed .post .info{
@@ -1383,6 +1422,13 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
   padding-left: 15px;
   margin-top: 5px;
   overflow: hidden;
+}
+
+.user .feed .post .info2{
+    border: 1px solid #e6e6e6;
+    padding: 10px;
+    padding-top: 0px;
+    margin-top: 20px;
 }
 
 .user .feed .post .info .border{
@@ -1395,7 +1441,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 
 .user .feed .post .info .img3{
   width: auto;
-  max-height: 250px;
+  max-height: 260px;
   padding: 1px;
   filter: brightness(70%);
 }
@@ -1403,36 +1449,46 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .user .feed .post .info .new{
     display: block;
     float: left;
-    color: #424242;
+    color: #545454;
     width: 100%;
     max-height: 95px;
     overflow: hidden;
-    font-size: 17px;
+    font-size: 16px;
     line-height: 22px;
     font-family: lato;
-    font-weight: bold;
     padding-right: 20px;
 }
 
 .user .feed .post .status{
   display: block;
   float: left;
-  width: 40%;
+  width: 100%;
   height: 40px;
   border-bottom: 0px;
-  padding-top: 5px;
   font-size: 12px;
-  color: #696969;
+  color: #383838;
+  background: #f0f0f0;
   font-weight: bold;
-
+  margin-top: 10px;
 }
 
+.user .feed .post .status .total{
+    display: block;
+    float: left;
+    position: relative;
+    top: 12px;
+    left: 10px;
+    font-size: 13px;
+    color: #575757;
+}
 
 .user .feed .post .status .img4{
-  height: 20px;
-  margin-left: 10px;
+  display: block;
+  float: left;
+  height: 45px;
   position: relative;
-  top: 5px;
+  bottom: 3px;
+  margin-right: -10px;
 }
 
 .user .feed .search{
@@ -1473,9 +1529,10 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .user .area-patrocinio{
     display: block;
     float: right;
-    width: 20%;
-    margin-left: 2%;
-    margin-right: 3%;
+    width: 18%;
+    background: #fff;
+    margin-left: 0%;
+    margin-right: 4%;
     margin-top: 10px;
 }
 
@@ -1484,6 +1541,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
   overflow: hidden;
   padding: 5px;
   padding-bottom: 20px;
+  padding-top: 15px;
   margin-bottom: 15px;
   border-radius: 3px;
 }
@@ -1780,6 +1838,17 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 
 .news .container .comentarios .profile .img-area .img{
     height: 50px;
+}
+
+.user .feed .post .img-area2{
+    width: 30px;
+    height: 30px;
+    margin-left: 5px;
+    margin-bottom: 10px;
+}
+
+.user .feed .post .img4 {
+    height: 30px;
 }
 
 .news .container .comentarios .profile .input{
