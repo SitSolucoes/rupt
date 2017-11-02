@@ -25,6 +25,7 @@ const routes: Routes = [
       { path : 'cadastro', component: CadastroLeitorComponent },
       { path : 'cadastro-escritor', component: CadastroEscritorComponent },
       { path : 'publicacao', component: PublicacaoComponent },
+      { path : 'publicacao/:id', component: PublicacaoComponent},
       { path : 'contato', component: ContatoComponent},
       { path : '', redirectTo: 'noticias', pathMatch: 'full'},
       { path : '**', redirectTo: 'noticias', pathMatch: 'full'},

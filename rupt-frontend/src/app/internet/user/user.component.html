@@ -13,11 +13,11 @@
 
    <div *ngIf='leitor'>
         <div class="capa">
-            <img src="{{ url + leitor.src_capa }}" class="img">
+            <img src="{{ url + 'profile/' + leitor.src_capa }}" class="img">
         </div>
 
         <div class="bio">
-            <div class="profile"> <img src="{{ url + leitor.src_foto }}" class="img"> </div>
+            <div class="profile"> <img src="{{ url + 'profile/' + leitor.src_foto }}" class="img"> </div>
 
             <div class="info">
 
@@ -86,99 +86,103 @@
     
                 <div class="menu"> Leitores <br/> <font class="title"> 2.700 </font> </div>
     
-                <div class="menu"> Comentários <br/> <font class="title"> 24.500 </font> </div>
-    
                 <div class="menu"> Seguindo <br/> <font class="title"> 15 </font> </div>
-    
-                <div class="menu"> Seguidores <br/> <font class="title"> 1200 </font> </div>
-                    
+            
             </div>
 
             <div class="search">
 
-                <input class="input-search" maxlength="30" name="marca" placeholder="Pesquise uma publicação pelo título" type="text">
+                <input class="input-search" maxlength="30" name="marca" placeholder="Pesquise uma publicação" type="text" [(ngModel)]="filtro">
 
-                <img src="../../../assets/img/search2.png" class="img6">
+                <a (click)='search()'>
+                    <img src="../../../assets/img/search2.png" class="img6">
+                </a>
 
             </div>
 
-            <!--
-            <div class="post-none">
+            <div class="post-none" *ngIf='timeline.length == 0'>
+                Sem publicações até o momento
+            </div>
 
-            Sem publicações até o momento
+            <div class="post" *ngFor='let t of timelineFiltro'>
 
-            </div> -->
-
-
-            <div class="post" *ngFor='let t of timeline'>
-
-                <a routerLink='../{{ t.post.autor.nick }}'>
+                <a routerLink='../{{ leitor.nick }}'>
                     <div class="img-area">
-                        <img src="{{ url + t.post.autor.src_foto }}"  class="img">
+                        <img src="{{ url + 'profile/' + leitor.src_foto }}"  class="img">
                     </div>
                 </a>
 
                 <div class="text">
 
-                    <a routerLink='../{{ t.post.autor.nick }}'>
-                         <font class="title name"> {{ t.post.autor.nome }} </font>
-                        <font class="share">- Compartilhou a <b><a routerLink="../../noticia/{{t.post.id}}">publicação</a></b> de Brasil de Fato.</font>
-                        <a href="" *ngIf="t.post.autor.id == leitorLogado.id">
-                            <img src="../../../assets/img/dot.png" class="img img5">
-                            <img src="../../../assets/img/edit.png" class="img img5">
-                        </a>
+                    <a routerLink='../{{ leitor.nick }}'>
+                        <font class="title name"> {{ leitor.nome }} </font>
+                    </a>
+                    <font class="share" *ngIf="leitor.id != t.post.autor.id">
+                        - Compartilhou a <b><a routerLink="../../noticia/{{t.post.id}}">publicação</a></b> de 
+                        {{ t.post.autor.nome }}.
+                    </font>
+                    
+                    <a href="" *ngIf="t.leitor_idLeitor != leitorLogado.id">
+                        <img src="../../../assets/img/dot.png" class="img img5">
                     </a>
 
+                    <a routerLink='../../publicacao/{{ t.id }}' *ngIf="t.leitor_idLeitor == leitorLogado.id">
+                        <img src="../../../assets/img/edit.png" class="img img5">
+                    </a>
+                    
                     <font class="title title2">
-                        {{ calcHour( t.post.publishedAt ) }}
+                        {{ calcHour( t.created_at ) }}
                     </font>
 
                 </div>
 
-                <!--
-                <div class="info">
-                    <div class="new">
-                        Precisamos falar sobre racismo na propaganda. Mas por quê?
-                    </div>
-
+                <div class="info" *ngIf="leitor.id == t.post.autor.id">
                     <a routerLink="../../noticia/{{t.post.id}}">
-                        <div class="border" >
-                            <img src="../../../assets/img/news3.png" class="img3">
+                        <div class="new">
+                            {{ t.post.titulo }}
+                        </div>
+
+                        <div *ngIf='t.post.src_imagem'>
+                            <div class="border" >
+                                <img src="{{ url + 'posts/' + t.post.src_imagem }}" class="img3">
+                            </div>
                         </div>
                     </a>
 
                     <div class="status">
-                        <img src="../../../assets/img/coment.png" class="img4"> <b>23</b>
-                        <img src="../../../assets/img/like2.png" class="img4"> <b>1.335</b>
-                        <img src="../../../assets/img/share.png" class="img4"> <b>6</b>
+                        <img src="../../../assets/img/rupt-ico.png" class="img4">
+                        <img src="../../../assets/img/rupt-ico9.png" class="img4">
+                        <img src="../../../assets/img/rupt-ico3.png" class="img4">
+                        <img src="../../../assets/img/rupt-ico4.png" class="img4">
+                        <img src="../../../assets/img/rupt-ico7.png" class="img4"> <div class="total">123</div>
                     </div>
-                </div> -->
+                </div>
 
-                <div class="info info2">
-
-                    <div class="img-area img-area2">
-                        <img src="{{ url + t.post.autor.src_foto }}"  class="img4">
-                    </div>
-
-                    <div class="text">
-
-                    <font class="title"> {{ t.post.autor.nome }} </font>
-
-                    <font class="title title2">
-                        {{ calcHour( t.post.publishedAt ) }}
-                    </font>
-
-                    </div>
-
-
-                    <div class="new">
-                        Precisamos falar sobre racismo na propaganda. Mas por quê?
-                    </div>
-
+                <div class="info info2" *ngIf="leitor.id != t.post.autor.id">
                     <a routerLink="../../noticia/{{t.post.id}}">
-                    <div class="border" >
-                            <img src="../../../assets/img/news3.png" class="img3">
-                    </div>
+                        <div class="img-area img-area2">
+                            <img src="{{ url + 'profile/' + t.post.autor.src_foto }}"  class="img4">
+                        </div>
+
+                        <div class="text">
+
+                            <font class="title"> {{ t.post.autor.nome }} </font>
+
+                            <font class="title title2">
+                                {{ calcHour( t.post.publishedAt ) }}
+                            </font>
+
+                        </div>
+
+                        <div class="new">
+                            {{ t.post.titulo }}
+                        </div>
+
+                        <div *ngIf='t.post.src_imagem'>
+                            <div class="border" >
+                                    <img src="{{ url + 'posts/' + t.post.src_imagem }}" class="img3">
+                            </div>
+                        </div>
                     </a>
 
                     <div class="status">

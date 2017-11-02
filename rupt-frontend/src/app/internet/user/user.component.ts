@@ -13,10 +13,12 @@ import { Leitor } from 'app/classes/leitor';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
+  filtro: string;
   leitor: Leitor;
   leitorLogado: Leitor;
   timeline: Timeline[] = new Array;
-  url = ConnectionFactory.API_IMAGEM + 'profile/';
+  timelineFiltro: Timeline[] = new Array;
+  url = ConnectionFactory.API_IMAGEM;
 
   constructor(private _activatedRoute: ActivatedRoute,
               private _leitorService: LeitoresService, 
@@ -44,7 +46,10 @@ export class UserComponent implements OnInit {
 
   getTimeline(){
       this._timelineService.getTimeline(this.leitor.id).subscribe(
-        ( timeline: Timeline[] ) => { this.timeline = timeline }
+        ( timeline: Timeline[] ) => { 
+          this.timeline = timeline;
+          this.timelineFiltro = timeline;
+        }
       )
   }
 
@@ -90,7 +95,7 @@ export class UserComponent implements OnInit {
       let hour = Math.round(diffDays*24);
       return hour.toString() + "h";
     }
-    else if (diffDays <= 30){
+    else if (diffDays <= 7){
       let day = Math.round(diffDays);
       return day.toString() + 'd';
     }
@@ -101,6 +106,21 @@ export class UserComponent implements OnInit {
       return result.getDate().toString() + " " + this.getMonthString(result.getMonth()) + ' de ' + result.getFullYear();
     }
 
+  }
+
+  search(){
+      if (!this.filtro || this.filtro == '')
+        this.timelineFiltro = this.timeline;
+      else {
+        this.timelineFiltro = this.timelineFiltro.filter((t) => {
+          if (t.post.titulo.toLowerCase().indexOf(this.filtro.toLowerCase()) >= 0 ||
+              t.post.conteudo.toLowerCase().indexOf(this.filtro.toLowerCase()) >= 0) {
+
+            return true;
+          }
+          return false;
+        })
+      }
   }
 
 }
