@@ -1,3 +1,4 @@
+import { DenunciasService } from './../../services/denuncias.service';
 import { MaterializeAction } from 'angular2-materialize';
 import { Base64 } from './../../shared/Base64';
 import { LeitoresService } from '../../services/leitores.service';
@@ -31,13 +32,15 @@ export class NewsComponent implements OnInit {
     shares: []
   };
   modalDenuncia = new EventEmitter<string|MaterializeAction>();
+  denuncias;
 
 
   constructor( private _activatedRoute: ActivatedRoute, 
                private _postService: PostsService,
                private _router: Router,
                private _formBuilder: FormBuilder,
-               private _leitoresService: LeitoresService) {
+               private _leitoresService: LeitoresService,
+               private _denunciasService: DenunciasService) {
                 setInterval(() => { 
                   this._postService.getComentarios(this.post.id).subscribe(
                   (response) => {
@@ -135,18 +138,22 @@ export class NewsComponent implements OnInit {
     );
   }
 
-  openModalDenuncias() {
-    console.log("teste");
-      this.modalDenuncia.emit({
-          action: 'modal',
-          params: ['open']});
+  openModalDenuncia() {
+    this.modalDenuncia.emit({
+         action: 'modal',
+         params: ['open']});
   }
 
   closeModalDenuncia(e){
     if(e){
-      this.modalDenuncia.emit({action:"modal",params:['close']});
+      this.modalDenuncia.emit({
+        action:'modal',
+        params:['close']
+      });
     }
   }
+
+  
 
 
 }

@@ -31,6 +31,7 @@
     "hammerjs": "^2.0.8",
     "jquery": "^2.2.4",
     "materialize-css": "^0.100.2",
+    "ng-ip-address": "^1.1.12",
     "ng-pagination": "^1.0.1",
     "ng2-dnd": "^4.2.0",
     "ngx-quill-editor": "^2.2.2",

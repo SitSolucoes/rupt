@@ -8,6 +8,7 @@ import { Post } from './../classes/post';
 export class DenunciasService {
 
   private _url: string = ConnectionFactory.API_CONNECTION;
+  private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(private _http: Http) { }
 
@@ -19,7 +20,42 @@ export class DenunciasService {
         }
       );
   }
+  
+  getMotivosDenuncia(){
+    return this._http.get(this._url + 'posts/getMotivosDenuncia')
+    .map((retorno: Response) => {
+      return{
+        'motivos': retorno.json().motivos
+      };
+    });
+  }
 
+  create(motivo_idMotivo, post_idPost, leitor_idLeitor){
+    const body = JSON.stringify({
+      motivo_idMotivo: motivo_idMotivo,
+      post_idPost: post_idPost,
+      leitor_idLeitor: leitor_idLeitor
+    });
+    
+    return this._http.post(this._url + 'posts/denuncia', body, {headers: this.headers}).map(
+    (response: Response)=>{
+        return response.json();
+    },
+    (error) => {
+      return error.json();
+    });
+  }
+  private createBody(form){
+    return JSON.stringify(
+        {
+         mensagem: form.value.conteudo,
+         email: form.value.email,
+         assunto: form.value.assunto,
+         nome: form.value.nome,
+         leitorId: form.value.leitorId
+        });
+  }
+  
   getPost(id){
     return this._http.get(this._url + 'getPost/' + id)
       .map(

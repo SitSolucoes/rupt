@@ -48,7 +48,7 @@ export class PostsService {
         }
       );
   }
-  
+
   getComentarios(id){
     return this._http.get(this._url + 'posts/getComentarios/' + id, {headers: this.headers})
     .map(

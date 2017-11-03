@@ -1,14 +1,16 @@
-<div id="ModalDenuncia" class="modal modal2 modal4"
-  materialize="modal" [materializeParams]="[{dismissible: false}]"
-  [materializeActions]="modalDenuncia">
-  <modal-generico (closeModalDenuncia)="closeModalDenuncia($event)"></modal-generico>
-</div>
+
 <div class="news" *ngIf='post'>
+  
+  <div id="modalDenuncia" class="modal modal2 modal4"
+       materialize="modal" [materializeParams]="[{dismissible: false}]"
+       [materializeActions]="modalDenuncia">
+  <modal-generico [action]="'denuncia'" [idObj]="post?.id" (closeModalGenerico)="closeModalDenuncia($event)"></modal-generico>
+  </div>
 
   <div class="area-top">
-
-    <div class="tag-menu">
     
+    <div class="tag-menu">
+      
       <div class="tag red"> {{ post.categorias_post[post.categorias_post.length-1].categoria.categoria }} </div> 
       
     <!--  <div class="tag black2"> Racismo </div>-->
@@ -76,7 +78,7 @@
 
             </div>
 
-            <div class="area2" (click)="openModalDenuncias()">
+            <div class="area2" (click)="openModalDenuncia()">
 
                 <img src="../../../assets/img/report.png" class="img">
 

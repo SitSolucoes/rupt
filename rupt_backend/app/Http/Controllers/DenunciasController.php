@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Denuncia;
+use App\MotivoDenuncia;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LeitorController;
@@ -37,22 +38,47 @@ class DenunciasController extends Controller
         return response()->json($response, 200);
     }
 
-    public function getMotivo($id){
-        $c = new MotivoD();
+    public function getMotivos(){
         $response = [
-            'leitor' => $c->getById($id)
+            'motivos' => $this->motivosDenuncia()
         ];
         return response()->json($response, 200);
     }
 
+    public function motivosDenuncia(){
+        return MotivoDenuncia::where('ativo', true)->get();
+    }
+
+    private function validaDenunciaLeitor($leitor_idLeitor, $post_idPost){
+        return Denuncia::where('leitor_idLeitor', $leitor_idLeitor)
+                       ->where('post_idPost', $post_idPost)
+                       ->get();
+    }
     //set denuncias
     public function create(Request $request){
         $d = new Denuncia();
-        $d = $this->createDenuncia($request, $d);
+        //valida leitor ja denunciou
+        if($this->validaDenunciaLeitor($request->leitor_idLeitor, $request->post_idPost)->count() > 0)
+            return response()->json(['status'=> false, 'mensagem'=> "Sua denúncia já está sendo analisada, caso deseje, entre em contato com nossa equipe."], 200);
+        else
+            $d = $this->createDenuncia($request, $d);
+        try{
+            $d->save();
+            $response = [
+                'status' => true
+            ];
+        }catch(Exception $ex){
+            $response = [
+                'status' => false,
+                'mensagem' => $ex
+            ];
+            return response()->json($response, 500);
+        }
+        return response()->json($response, 200);
     }
 
-    private function createDencia(Request $request, $i){
-        $i = new Interacao();
+    private function createDenuncia(Request $request, $i){
+        $i = new Denuncia();
 
         $i->post_idPost = $request->post_idPost;
         $i->leitor_idLeitor = $request->leitor_idLeitor;

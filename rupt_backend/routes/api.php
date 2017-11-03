@@ -116,6 +116,8 @@ Route::post('posts/postCreateComentario', ['uses' => 'ComentarioController@creat
 Route::get('posts/getComentarios/{id}', ['uses' => 'ComentarioController@getComentariosFromPost']);
 
 Route::get('posts/getInteracoesFromPost/{id}', ['uses' => 'InteracaoController@getInteracoesFromPost']);
+Route::get('posts/getMotivosDenuncia', ['uses' => 'DenunciasController@getMotivos']);
+Route::post('posts/denuncia', ['uses' => 'DenunciasController@create']);
 
 Route::post('posts/postInterage', ['uses' => 'InteracaoController@novo']);
 

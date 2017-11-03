@@ -60,8 +60,6 @@ export class HeaderComponent implements OnInit {
         }
     }
 
-    
-
   logout(){
     this._leitorService.logout();
     this._router.navigate(['/']);
