@@ -44,25 +44,26 @@ export class ModalGenericoComponent implements OnInit {
   }
 
   denuncia(motivo){
-    
-    this._denunciasService.create(motivo, this.idObj, this.base64.decode(localStorage.getItem('l'))).subscribe(
-      (ret) =>{
-        if(ret.status){
+    if(localStorage.getItem('l'))
+      this._denunciasService.create(motivo, this.idObj, this.base64.decode(localStorage.getItem('l'))).subscribe(
+        (ret) =>{
+          if(ret.status){
+            this.action = "mensagemDenuncia";
+            this.mensagem = "Sua denúncia foi computada com sucesso, estamos analisando para tomar as devidas providências! Obrigado.";
+            console.log(this.mensagem);
+            console.log(this.action);
+          }else{
+            this.action = "mensagemDenuncia";
+            this.mensagem = ret.mensagem;
+          }
+        },
+        (error) => {
           this.action = "mensagemDenuncia";
-          this.mensagem = "Sua denúncia foi computada com sucesso, estamos analisando para tomar as devidas providências! Obrigado.";
-          console.log(this.mensagem);
-          console.log(this.action);
-        }else{
-          this.action = "mensagemDenuncia";
-          this.mensagem = ret.mensagem;
+          this.mensagem = "Ops, algo deu errado, tente novamente mais tarde.";
         }
-      },
-      (error) => {
-        this.action = "mensagemDenuncia";
-        this.mensagem = "Ops, algo deu errado, tente novamente mais tarde.";
-      }
-    )
+      );
   }
+  
   closeModal(){
     this.closeModalGenerico.emit(true);
     if(this.action=='mensagemDenuncia')

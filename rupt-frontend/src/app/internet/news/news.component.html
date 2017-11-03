@@ -78,7 +78,7 @@
 
             </div>
 
-            <div class="area2" (click)="openModalDenuncia()">
+            <div class="area2" *ngIf="leitorLogado" (click)="openModalDenuncia()">
 
                 <img src="../../../assets/img/report.png" class="img">
 
