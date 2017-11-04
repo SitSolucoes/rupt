@@ -26,4 +26,14 @@ class PostCategoriaController extends Controller
         $postCategoria->categoria_idCategoria = $categoria_id;
         $postCategoria->save();
     }
+
+    public function update($categoria_id, $post_id){
+        $postCategoria = PostCategoria::where('post_idPost', $post_id)->first();
+
+        if ($postCategoria->categoria_idCategoria != $categoria_id){
+            PostCategoria::where('post_idPost', $post_id)->delete();
+
+            $this->save($categoria_id, $post_id);
+        }
+    }
 }

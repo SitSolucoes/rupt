@@ -19,6 +19,7 @@ class PostController extends Controller
     private function create(Request $request, $post){
         $post->titulo = $request->titulo;
         $post->conteudo = $request->conteudo;
+        $post->adulto = $request->adulto;
         
         return $post;
     }
@@ -39,6 +40,16 @@ class PostController extends Controller
         $c->create($request->leitor_id, $post->id);
 
         return response()->json(['post_id' => $post->id], 201);
+    }
+
+    public function update(Request $request){
+        $post = Post::find($request->id);
+        $post = $this->create($request, $post);
+
+        $post->save();
+
+        $c = new PostCategoriaController();
+        $c->update($request->categoria_id, $post->id);
     }
 
 

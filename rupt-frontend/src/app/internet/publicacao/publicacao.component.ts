@@ -2,7 +2,7 @@ import { UploadFileService } from './../../services/upload-file.service';
 import { PostsService } from './../../services/posts.service';
 import { Categoria } from 'app/classes/categoria';
 import { CategoriasService } from './../../services/categorias.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { LeitoresService } from './../../services/leitores.service';
 import { Leitor } from 'app/classes/leitor';
 import { Validators } from '@angular/forms';
@@ -12,6 +12,7 @@ import { Component, OnInit } from '@angular/core';
 
 import * as $ from 'jquery';
 import { UploadItem } from 'app/classes/upload-item';
+import { Post } from 'app/classes/post';
 
 @Component({
   selector: 'app-publicacao',
@@ -28,7 +29,8 @@ export class PublicacaoComponent implements OnInit {
               private _router: Router,
               private _categoriaService: CategoriasService,
               private _postService: PostsService,
-              private _uploadFileService: UploadFileService
+              private _uploadFileService: UploadFileService,
+              private _activatedRoute: ActivatedRoute
               ) { }
 
   ngOnInit() {
@@ -51,6 +53,8 @@ export class PublicacaoComponent implements OnInit {
           else{
             if (!this.leitor.escritor || this.leitor.escritor.status == 'r')
               this._router.navigate(['rupt/cadastro-escritor']);
+            else 
+              this.getPost();
           }
         }
       );
@@ -63,6 +67,16 @@ export class PublicacaoComponent implements OnInit {
       titulo: ['', Validators.required],
       conteudo: ['', Validators.required],
     })
+  }
+
+  getPost(){
+    this._activatedRoute.params.subscribe(params => {
+      if (params['id']){
+        //esse id é o da timeline!
+        //porque o post pode ser do cara e ele vai editar, 
+        //mas também pode ser um post compartilhado, então ele não pode editar o post.
+      }
+    });
   }
 
   getCategorias(){
