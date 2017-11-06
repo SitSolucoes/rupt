@@ -66,6 +66,7 @@ export class PublicacaoComponent implements OnInit {
       leitor_id: [''],
       titulo: ['', Validators.required],
       conteudo: ['', Validators.required],
+      adulto: ''
     })
   }
 

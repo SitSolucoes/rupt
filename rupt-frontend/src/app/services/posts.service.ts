@@ -26,13 +26,7 @@ export class PostsService {
   }
 
   private createBody(form){
-    return JSON.stringify(
-        {
-         comentario: form.value.comentario,
-         comentario_idComentario: form.value.comentario_idComentario,
-         post_idPost: form.value.post_idPost,
-         leitor_idLeitor: form.value.leitor_idLeitor,
-      });
+    return JSON.stringify(form.value);
   }
 
   createComentario(f){
