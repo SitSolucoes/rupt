@@ -323,6 +323,10 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <input type="checkbox" class="filled-in" id='patrocinador' name='patrocinador' [(ngModel)]="escritor.patrocinador"/>
+                    <label for="patrocinador">Perfil patrocinado</label>
+                </div>
                 <div class="row" *ngIf="(escritor.id == 0 || idLeitor != 0) && newPage == 4">
                     <div class="input-field col s12 m12 l5 xl5">
                         <input id="password" name="password" type="password"
@@ -378,8 +382,8 @@
             <button *ngIf="newPage == 4 || (escritor.id != 0 && idLeitor == 0)"  type="submit" class="modal-action waves-effect waves-green btn-flat"
                 [disabled]="!f.valid || cpfUsado || cpfInvalido || emailInvalido || nickInvalido || dataInvalida || !senhaValida">
                 Salvar
-            </button>           
-
+            </button> 
+            
             <a (click)="newPage = newPage + 1" *ngIf="(escritor.id == 0 || idLeitor != 0) && newPage != 4 && f.valid && !emailInvalido && !nickInvalido && !dataInvalida && !cpfUsado && !cpfInvalido" 
                 class="modal-action waves-effect waves-green btn-flat">Avançar
             </a>

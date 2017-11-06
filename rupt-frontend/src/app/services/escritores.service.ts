@@ -44,34 +44,7 @@ export class EscritoresService {
   }
 
   private createBody(form){
-    return JSON.stringify(
-        {
-         id: form.value.id,
-         nome: form.value.nome,
-         nick: form.value.nick,
-         email: form.value.email,
-         nascimento: form.value.nascimento,
-         sexo: form.value.sexo,
-         ativo: form.value.ativo,
-         src_foto: form.value.src_foto,
-         password: form.value.senha,
-         rg: form.value.rg,
-         cpf: form.value.cpf,
-         telefone: form.value.telefone,
-         celular: form.value.celular,
-         biografia: form.value.biografia,
-         banco: form.value.banco,
-         agencia: form.value.agencia,
-         conta_corrente: form.value.conta_corrente,
-         status: form.value.status,
-         cep: form.value.cep,
-         logradouro: form.value.logradouro,
-         numero: form.value.numero,
-         complemento: form.value.complemento,
-         bairro: form.value.bairro,
-         cidade: form.value.cidade,
-         uf: form.value.uf
-      });
+    return JSON.stringify(form.value);
   }
 
   createEscritor(form, id){

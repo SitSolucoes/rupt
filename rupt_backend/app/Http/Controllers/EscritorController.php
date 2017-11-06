@@ -56,6 +56,7 @@ class EscritorController extends Controller
         $escritor->bairro = $request->bairro;
         $escritor->cidade = $request->cidade;
         $escritor->uf = $request->uf;
+        $escritor->patrocinador = $request->patrocinador;
 
         return $escritor;
     }

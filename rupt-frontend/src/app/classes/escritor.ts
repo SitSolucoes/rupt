@@ -18,6 +18,7 @@ export class Escritor extends Leitor{
     status: string;
     created_at: string;
     data_aceite: string;
+    patrocinador: boolean;
 
     constructor(){
         super ();

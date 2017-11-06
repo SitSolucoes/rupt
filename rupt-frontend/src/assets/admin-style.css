@@ -70,8 +70,14 @@ a{
 	font-size: 0.8rem;
 }
 
-.select-wrapper{
-	/*height: 46px;*/
+[type="checkbox"]:checked + label:before {
+    border-right: 2px solid #F97000;
+    border-bottom: 2px solid #F97000;
+}
+
+[type="checkbox"].filled-in:checked + label:after {
+    border: 2px solid #F97000;
+    background-color: #F97000;
 }
 
 input:not([type]):focus:not([readonly]) + label, input[type=text]:not(.browser-default):focus:not([readonly]) + label, input[type=password]:not(.browser-default):focus:not([readonly]) + label, input[type=email]:not(.browser-default):focus:not([readonly]) + label, input[type=url]:not(.browser-default):focus:not([readonly]) + label, input[type=time]:not(.browser-default):focus:not([readonly]) + label, input[type=date]:not(.browser-default):focus:not([readonly]) + label, input[type=datetime]:not(.browser-default):focus:not([readonly]) + label, input[type=datetime-local]:not(.browser-default):focus:not([readonly]) + label, input[type=tel]:not(.browser-default):focus:not([readonly]) + label, input[type=number]:not(.browser-default):focus:not([readonly]) + label, input[type=search]:not(.browser-default):focus:not([readonly]) + label, textarea.materialize-textarea:focus:not([readonly]) + label

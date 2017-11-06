@@ -47,8 +47,6 @@ declare var Materialize:any;
   ],
 })
 
-
-
 export class EscritoresComponent implements OnInit {
   notificacoes;
   mSolicitacao = 1;
@@ -632,5 +630,9 @@ export class EscritoresComponent implements OnInit {
     this._uploadFileService.upload(myUploadItem);
 
     this.afterSubmit("Salvo com sucesso.");
+  }
+
+  teste(form){
+    console.log(form);
   }
 }

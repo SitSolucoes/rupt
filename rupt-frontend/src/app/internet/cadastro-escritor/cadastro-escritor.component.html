@@ -18,7 +18,7 @@
 
                 <div class="menu">
                     <label> RG *</label>
-                    <input type="text" class="input" maxlength="11" formControlName='rg' placeholder="Insira seu RG"
+                    <input type="text" class="input" maxlength="10" formControlName='rg' placeholder="Insira seu RG"
                     [ngClass]="{'invalid': verificaValidTouched('rg')}">
 
                     <div class="error" *ngIf="verificaValidTouched('rg')">RG inválido</div>
