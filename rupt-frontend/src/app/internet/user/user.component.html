@@ -117,70 +117,71 @@
                     <a routerLink='../{{ leitor.nick }}'>
                         <font class="title name"> {{ leitor.nome }} </font>
                     </a>
-                    <font class="share" *ngIf="leitor.id != t.post.autor.id">
-                        - Compartilhou a <b><a routerLink="../../noticia/{{t.post.id}}">publicação</a></b> de 
-                        {{ t.post.autor.nome }}.
+                    <font class="share" *ngIf="leitor.id != t.tl.post.autor.id">
+                        - Compartilhou a <b><a routerLink="../../noticia/{{t.tl.post.id}}">publicação</a></b> de 
+                        {{ t.tl.post.autor.nome }}.
                     </font>
                     
-                    <a href="" *ngIf="t.leitor_idLeitor != leitorLogado.id">
+                    <a href="" *ngIf="t.tl.leitor_idLeitor != leitorLogado.id">
                         <img src="../../../assets/img/dot.png" class="img img5">
                     </a>
 
-                    <a routerLink='../../publicacao/{{ t.id }}' *ngIf="t.leitor_idLeitor == leitorLogado.id">
+                    <a routerLink='../../publicacao/{{ t.tl.id }}' *ngIf="t.tl.leitor_idLeitor == leitorLogado.id">
                         <img src="../../../assets/img/edit.png" class="img img5">
                     </a>
                     
                     <font class="title title2">
-                        {{ calcHour( t.created_at ) }}
+                        {{ calcHour( t.tl.created_at ) }}
                     </font>
 
                 </div>
 
-                <div class="info" *ngIf="leitor.id == t.post.autor.id">
+                <div class="info" *ngIf="leitor.id == t.tl.post.autor.id">
                     <a routerLink="../../noticia/{{t.post.id}}">
                         <div class="new">
-                            {{ t.post.titulo }}
+                            {{ t.tl.post.titulo }}
                         </div>
 
-                        <div *ngIf='t.post.src_imagem'>
+                        <div *ngIf='t.tl.post.src_imagem'>
                             <div class="border" >
-                                <img src="{{ url + 'posts/' + t.post.src_imagem }}" class="img3">
+                                <img src="{{ url + 'posts/' + t.tl.post.src_imagem }}" class="img3">
                             </div>
                         </div>
                     </a>
-
+                    <!--interacoes-->
                     <div class="status">
-                        <img src="../../../assets/img/rupt-ico.png" class="img4">
-                        <img src="../../../assets/img/rupt-ico9.png" class="img4">
-                        <img src="../../../assets/img/rupt-ico3.png" class="img4">
-                        <img src="../../../assets/img/rupt-ico4.png" class="img4">
-                        <img src="../../../assets/img/rupt-ico7.png" class="img4"> <div class="total">123</div>
+                        <img src="../../../assets/img/rupt-ico.png" (click)="interage()" class="img4">
+                        <img src="../../../assets/img/rupt-ico9.png" (click)="interage()" class="img4">
+                        <img src="../../../assets/img/rupt-ico3.png" (click)="interage()" class="img4">
+                        <img src="../../../assets/img/rupt-ico4.png" (click)="interage()" class="img4">
+                        <img src="../../../assets/img/rupt-ico7.png" (click)="interage()" class="img4"> 
+                        <div class="total">{{t.interacoes.likes.length + t.interacoes.love.length + t.interacoes.sad.length + t.interacoes.cry.length + t.interacoes.angry.length}}</div>
                     </div>
                 </div>
 
-                <div class="info info2" *ngIf="leitor.id != t.post.autor.id">
-                    <a routerLink="../../noticia/{{t.post.id}}">
+                <div class="info info2" *ngIf="leitor.id != t.tl.post.autor.id">
+                    <a routerLink="../../noticia/{{t.tl.post.id}}">
                         <div class="img-area img-area2">
-                            <img src="{{ url + 'profile/' + t.post.autor.src_foto }}"  class="img4">
+                            <img src="{{ url + 'profile/' + t.tl.post.autor.src_foto }}"  class="img4">
                         </div>
 
                         <div class="text">
 
-                            <font class="title"> {{ t.post.autor.nome }} </font>
+                            <font class="title"> {{ t.tl.post.autor.nome }} </font>
 
                             <font class="title title2">
-                                {{ calcHour( t.post.publishedAt ) }}
+                                {{ calcHour( t.tl.post.publishedAt ) }}
                             </font>
 
                         </div>
 
                         <div class="new">
-                            {{ t.post.titulo }}
+                            {{ t.tl.post.titulo }}
                         </div>
 
-                        <div *ngIf='t.post.src_imagem'>
+                        <div *ngIf='t.tl.post.src_imagem'>
                             <div class="border" >
-                                    <img src="{{ url + 'posts/' + t.post.src_imagem }}" class="img3">
+                                    <img src="{{ url + 'posts/' + t.tl.post.src_imagem }}" class="img3">
                             </div>
                         </div>
                     </a>
@@ -190,7 +191,8 @@
                         <img src="../../../assets/img/rupt-ico9.png" class="img4">
                         <img src="../../../assets/img/rupt-ico3.png" class="img4">
                         <img src="../../../assets/img/rupt-ico4.png" class="img4">
-                        <img src="../../../assets/img/rupt-ico7.png" class="img4"> <div class="total">123</div>
+                        <img src="../../../assets/img/rupt-ico7.png" class="img4">
+                        <div class="total">{{t.interacoes.likes.length + t.interacoes.love.length + t.interacoes.sad.length + t.interacoes.cry.length + t.interacoes.angry.length}}</div>
                     </div>
                 </div>
             </div>

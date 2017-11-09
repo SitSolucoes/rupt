@@ -30,10 +30,44 @@ class InteracaoController extends Controller
                             ->where('tipo_interacao', 'share')
                             ->groupBy('leitor_idLeitor')
                             ->get();
+        $loves = Interacao::where('post_idPost', $id)
+                            ->where('alvo', 'post')
+                            ->where('status', 'A')//A - ativo // N - NÃO ativo
+                            ->where('tipo_interacao', 'love')
+                            ->groupBy('leitor_idLeitor')
+                            ->get();
+        $sads = Interacao::where('post_idPost', $id)
+                            ->where('alvo', 'post')
+                            ->where('status', 'A')//A - ativo // N - NÃO ativo
+                            ->where('tipo_interacao', 'sad')
+                            ->groupBy('leitor_idLeitor')
+                            ->get();
+        $sads = Interacao::where('post_idPost', $id)
+                            ->where('alvo', 'post')
+                            ->where('status', 'A')//A - ativo // N - NÃO ativo
+                            ->where('tipo_interacao', 'angry')
+                            ->groupBy('leitor_idLeitor')
+                            ->get();
+        $angrys = Interacao::where('post_idPost', $id)
+                            ->where('alvo', 'post')
+                            ->where('status', 'A')//A - ativo // N - NÃO ativo
+                            ->where('tipo_interacao', 'angry')
+                            ->groupBy('leitor_idLeitor')
+                            ->get();
+        $cries = Interacao::where('post_idPost', $id)
+                            ->where('alvo', 'post')
+                            ->where('status', 'A')//A - ativo // N - NÃO ativo
+                            ->where('tipo_interacao', 'cries')
+                            ->groupBy('leitor_idLeitor')
+                            ->get();
         $response = [
             'likes' => $likes,
             'dislikes' => $dislikes,
-            'shares' => $shares
+            'shares' => $shares,
+            'love' => $loves,
+            'sad' => $sads,
+            'angry' => $angrys,
+            'cry' => $cries
         ];
 
         return $response;

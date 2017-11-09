@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Timeline;
+use App\Http\Controllers\InteracaoController;
 
 class TimelineController extends Controller
 {
@@ -24,7 +25,13 @@ class TimelineController extends Controller
     public function getTimeline($leitor_id){
         $timeline = Timeline::where('leitor_idLeitor', $leitor_id)
                              ->with('post')->get();
-
-        return response()->json(['timeline' => $timeline], 200);
+        $retorno = [];
+        $int_c = new InteracaoController();
+        foreach($timeline as $t){
+            $retorno[] = (object)['tl' => $t,
+                                  'interacoes' => $int_c->interacoesFromPost($t->id)
+            ];
+        }
+        return response()->json(['timeline' => $retorno], 200);
     }
 }

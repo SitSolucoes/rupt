@@ -70,6 +70,10 @@ export class PostsService {
           'likes' : response.json().interacoes.likes,
           'dislikes' : response.json().interacoes.dislikes,
           'shares' : response.json().interacoes.shares,
+          'loves' : response.json().interacoes.love,
+          'sads' : response.json().interacoes.sads,
+          'cry' : response.json().interacoes.angrys,
+          'angry' : response.json().interacoes.cries,
           'status': response.json().status,
           'message': response.json().message
         };
@@ -96,6 +100,10 @@ export class PostsService {
             'likes' : response.json().interacoes.likes,
             'dislikes' : response.json().interacoes.dislikes,
             'shares' : response.json().interacoes.shares,
+            'love' : response.json().interacoes.love,
+            'sad' : response.json().interacoes.sad,
+            'angry' : response.json().interacoes.angry,
+            'cry' : response.json().interacoes.cry,
             'status': response.json().status,
             'message': response.json().message
           };

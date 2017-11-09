@@ -1,3 +1,6 @@
+import { Base64 } from '../../shared/Base64';
+import { pairs } from 'rxjs/observable/pairs';
+import { PostsService } from '../../services/posts.service';
 import { Timeline } from './../../classes/timeline';
 import { TimelineService } from './../../services/timeline.service';
 import { ConnectionFactory } from 'app/classes/connection-factory';
@@ -19,10 +22,13 @@ export class UserComponent implements OnInit {
   timeline: Timeline[] = new Array;
   timelineFiltro: Timeline[] = new Array;
   url = ConnectionFactory.API_IMAGEM;
+  base64: Base64 = new Base64();
+  
 
   constructor(private _activatedRoute: ActivatedRoute,
               private _leitorService: LeitoresService, 
-              private _timelineService: TimelineService) { }
+              private _timelineService: TimelineService,
+              private _postService: PostsService) { }
 
   ngOnInit() {
       this.leitor = new Leitor();
@@ -46,7 +52,8 @@ export class UserComponent implements OnInit {
 
   getTimeline(){
       this._timelineService.getTimeline(this.leitor.id).subscribe(
-        ( timeline: Timeline[] ) => { 
+        ( timeline) => { 
+          console.log(timeline);
           this.timeline = timeline;
           this.timelineFiltro = timeline;
         }
@@ -122,5 +129,7 @@ export class UserComponent implements OnInit {
         })
       }
   }
+
+
 
 }
