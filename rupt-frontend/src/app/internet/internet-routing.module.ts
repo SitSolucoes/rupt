@@ -12,6 +12,7 @@ import { ContatoComponent } from './contato/contato.component';
 import { CadastroLeitorComponent} from './cadastro-leitor/cadastro-leitor.component';
 import { CadastroEscritorComponent } from './cadastro-escritor/cadastro-escritor.component';
 import {PublicacaoComponent} from './publicacao/publicacao.component';
+import { EsqueciSenhaComponent } from './esqueci-senha/esqueci-senha.component';
 
 const routes: Routes = [
   { path : '', redirectTo: 'rupt', pathMatch: 'full'},
@@ -27,6 +28,7 @@ const routes: Routes = [
       { path : 'publicacao', component: PublicacaoComponent },
       { path : 'publicacao/:id', component: PublicacaoComponent},
       { path : 'contato', component: ContatoComponent},
+      { path : 'esqueci-senha', component:  EsqueciSenhaComponent},
       { path : '', redirectTo: 'noticias', pathMatch: 'full'},
       { path : '**', redirectTo: 'noticias', pathMatch: 'full'},
 

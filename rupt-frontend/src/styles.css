@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Quattrocento+Sans');
-@import url('https://fonts.googleapis.com/css?family=Lato|Mandali');
+@import url('https://fonts.googleapis.com/css?family=Lato|Mandali|Quattrocento+Sans');
 
 @font-face {
     font-family: nexa;
@@ -778,7 +777,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     width: 30%;
     display: block;
     margin: 0 auto;
-    margin-top: 20px;
+    margin-top: 15px;
 }
 
 .social-media p{
@@ -877,7 +876,6 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     width: 30px;
     height: 30px;
     color: #fff;
-    float: right;
     font-size: 18px;
     padding-top: 2px;
     border: solid 1px #fff;
@@ -885,6 +883,8 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     margin-right: 20px;
     background: #ffffff;
     color: #f97000;
+    position: absolute;
+    right: 0px;
 }
 
 .modal .close:hover{
@@ -914,7 +914,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     display: block;
     float: left;
     width: 100%;
-    margin-top: 10px;
+    margin-top: 20px;
     font-family: 'nexa';
 }
 
@@ -928,8 +928,8 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     clear: both;
     padding-left: 30px;
     padding-right: 30px;
-    margin-top: 10px;
-    margin-bottom: 5px;
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
 
 .modal-content .info .subtitle{
@@ -937,7 +937,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     float: left;
     margin-right: 10%;
     margin-left: 10%;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     font-size: 15px;
     line-height: 26px;
     font-family: Lato;
@@ -953,26 +953,27 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .modal-content .info .img-area{
-  width: 240px;
+  width: 210px;
   height: 50px;
   display: block;
   margin: 0 auto;
-  padding-top: 10px;
+  padding-top: 0px;
   border-radius: 5px;
 }
 
 .modal-content .info .img{
-    height: 60px;
+    height: 50px;
     display: block;
     float: left;
-    margin-right: 20px;
-    margin-bottom: 15px;
+    margin-left: 17px;
+    margin-bottom: 0px;
+    margin-top: 10px;
     position: relative;
 }
 
 .modal-content .info .img2{
-    height: 50px;
-    margin-top: 5px;
+    height: 42px;
+    margin-top: 13px;
 }
 
 .modal-content .register{
@@ -1013,7 +1014,6 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     display: block;
     float: left;
     padding: 8px !important;
-    padding-left: 2px !important;
     border-bottom: 1px solid #ccc !important;
     width: 250px !important;
     height: 20px !important;
@@ -1063,29 +1063,32 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     margin-top: 10px;
     margin-bottom: 40px;
     padding: 10px;
-    border: 1px solid #d9d9d9;
-    background: #d9d9d9;
+    border: 2px solid #737373;
+    background: #737373;
     text-transform: uppercase;
     font-family: 'nexa-bold';
+    font-weight: bolder;
     font-size: 13px;
-    color: #4f4f4f;
+    color: #fff;
     border-radius: 2px;
 }
 
 .modal-footer .button:hover{
-    position: relative;
-    bottom: 2px;
-    opacity: .8;
+    background: #fff;
+    color: #737373;
+    border: 2px solid #737373;
+    transition: 0.5s;
 }
 
 .modal-footer .color{
     background: #f97000;
-    border: 1px solid #f97000;
+    border: 2px solid #f97000;
     color: #ffffff;
 }
 
 .modal-footer .color:hover{
-  opacity: .8;
+    border: 2px solid #f97000;
+    color: #f97000;
 }
 
 /*---------------- user ---------- */
@@ -1534,6 +1537,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     margin-left: 0%;
     margin-right: 4%;
     margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .user .area-patrocinio .patrocinio{
@@ -2530,8 +2534,12 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     display: block;
     float: left;
     width: 100%;
-    height: 200px;
     margin-top: 40px;
+}
+
+.login-modal2{
+    margin-top: 20px;
+    padding-bottom: 40px;
 }
 
 .login-modal .container{
@@ -2570,6 +2578,13 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     margin-top: 7px;
 }
 
+.login-modal p{
+    margin-bottom: 5px;
+    color: #737373;
+    font-family: 'lato';
+    font-weight: bolder;
+}
+
 .modal2{
     top: 20% !important;
     width: 45%;
@@ -2585,12 +2600,60 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     width: 45%;
 }
 
+.modal5{
+    top: 15% !important;
+}
+
 .login-modal .container .text{
     display: block;
     float: left;
     margin-top: 10px;
     color: #969696;
     margin-left: 50px;
+}
+
+.login-modal .bottom-line{
+    height: 30px;
+    display: block;
+    float: right;
+}
+
+.login-modal .bottom-line .button3{
+    padding: 10px;
+    font-size: 13px;
+    display: block;
+    float: left;
+    color: #fff;
+    background: #f97000;
+    border: 2px solid #f97000;
+    margin-left: 10px;
+    border-radius: 3px;
+    font-family: 'nexa-bold';
+    text-transform: uppercase;
+}
+
+.login-modal .bottom-line .button4{
+    background: #8c8c8c;
+    border: 2px solid #8c8c8c;
+}
+
+.modal-content .button3:hover{
+    transition: 0.5s;
+    background: #fff;
+    color: #f97000;
+    border: 2px solid #f97000;
+}
+
+.modal-content .button4:hover{
+    color: #8c8c8c;
+    border: 2px solid #8c8c8c;
+}
+
+.login-modal .bottom-line .button2{
+    background: #ccc !important;
+    border: 1px solid #ccc !important;
+    margin-top: 5px;
+    color: #4f4f4f;
 }
 
 .login-categorias{
@@ -2919,5 +2982,28 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     overflow: hidden;
     padding: 5px 5px;
     color: #333333;
+}
 
+.esqueci-senha{
+    display: block;
+    float: left;
+    width: 100%;
+    height: 300px;
+}
+
+.esqueci-senha .container{
+    display: block;
+    float: left;
+    width: 90%;
+    margin-left: 5%;
+}
+
+.esqueci-senha .container .area{
+    display: block;
+    margin: 0 auto;
+    width: 45%;
+    height: 200px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    background: #ccc;
 }
