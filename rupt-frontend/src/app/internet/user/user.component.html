@@ -150,12 +150,12 @@
                     </a>
                     <!--interacoes-->
                     <div class="status">
-                        <img src="../../../assets/img/rupt-ico.png" (click)="interage()" class="img4">
-                        <img src="../../../assets/img/rupt-ico9.png" (click)="interage()" class="img4">
-                        <img src="../../../assets/img/rupt-ico3.png" (click)="interage()" class="img4">
-                        <img src="../../../assets/img/rupt-ico4.png" (click)="interage()" class="img4">
-                        <img src="../../../assets/img/rupt-ico7.png" (click)="interage()" class="img4"> 
-                        <div class="total">{{t.interacoes.likes.length + t.interacoes.love.length + t.interacoes.sad.length + t.interacoes.cry.length + t.interacoes.angry.length}}</div>
+                        <img src="../../../assets/img/rupt-ico.png" (click)="interage(t.tl.post.id, 'like')" class="img4">
+                        <img src="../../../assets/img/rupt-ico9.png" (click)="interage(t.tl.post.id, 'love')" class="img4">
+                        <img src="../../../assets/img/rupt-ico3.png" (click)="interage(t.tl.post.id, 'sad')" class="img4">
+                        <img src="../../../assets/img/rupt-ico4.png" (click)="interage(t.tl.post.id, 'angry')" class="img4">
+                        <img src="../../../assets/img/rupt-ico7.png" (click)="interage(t.tl.post.id, 'cry')" class="img4"> 
+                        <div class="total">{{t.interacoes.likes.qnt + t.interacoes.loves.qnt + t.interacoes.sads.qnt + t.interacoes.cries.qnt + t.interacoes.angries.qnt}}</div>
                     </div>
                 </div>
 
@@ -187,12 +187,12 @@
                     </a>
 
                     <div class="status">
-                        <img src="../../../assets/img/rupt-ico.png" class="img4">
-                        <img src="../../../assets/img/rupt-ico9.png" class="img4">
-                        <img src="../../../assets/img/rupt-ico3.png" class="img4">
-                        <img src="../../../assets/img/rupt-ico4.png" class="img4">
-                        <img src="../../../assets/img/rupt-ico7.png" class="img4">
-                        <div class="total">{{t.interacoes.likes.length + t.interacoes.love.length + t.interacoes.sad.length + t.interacoes.cry.length + t.interacoes.angry.length}}</div>
+                            <img src="../../../assets/img/rupt-ico.png" (click)="interage(t.tl.post.id, 'like')" class="img4">
+                            <img src="../../../assets/img/rupt-ico9.png" (click)="interage(t.tl.post.id, 'love')" class="img4">
+                            <img src="../../../assets/img/rupt-ico3.png" (click)="interage(t.tl.post.id, 'sad')" class="img4">
+                            <img src="../../../assets/img/rupt-ico4.png" (click)="interage(t.tl.post.id, 'angry')" class="img4">
+                            <img src="../../../assets/img/rupt-ico7.png" (click)="interage(t.tl.post.id, 'cry')" class="img4"> 
+                        <div class="total">{{t.interacoes.likes.qnt + t.interacoes.loves.qnt + t.interacoes.sads.qnt + t.interacoes.cries.qnt + t.interacoes.angries.qnt}}</div>
                     </div>
                 </div>
             </div>

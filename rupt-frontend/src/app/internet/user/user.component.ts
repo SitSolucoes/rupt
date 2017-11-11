@@ -1,3 +1,4 @@
+import { Interacoes } from './../../interacoes';
 import { Base64 } from '../../shared/Base64';
 import { pairs } from 'rxjs/observable/pairs';
 import { PostsService } from '../../services/posts.service';
@@ -20,7 +21,7 @@ export class UserComponent implements OnInit {
   leitor: Leitor;
   leitorLogado: Leitor;
   timeline: Timeline[] = new Array;
-  timelineFiltro: Timeline[] = new Array;
+  timelineFiltro = new Array;
   url = ConnectionFactory.API_IMAGEM;
   base64: Base64 = new Base64();
   
@@ -128,6 +129,27 @@ export class UserComponent implements OnInit {
           return false;
         })
       }
+  }
+
+  interage(post, i){
+    this._postService.interage(post, null, this.leitor.id, 'post', i).subscribe(
+      (ret)=>{
+        if(ret.status == 'OK'){
+          let novainteracoes = new Interacoes(ret.likes, ret.love, ret.shares, ret.sad, ret.angry, ret.cry).interacoes;
+          let tl = this.timelineFiltro.find(
+            item => item.tl.post.id === post
+          );
+          console.log(tl);
+          for(let t of tl){
+            t.interacoes = novainteracoes;
+          }
+          console.log(tl);
+          console.log(this.timelineFiltro);
+          console.log('ok');
+        }
+        //console.log(ret);
+      }
+    );
   }
 
 
