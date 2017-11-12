@@ -42,12 +42,6 @@ class InteracaoController extends Controller
                             ->where('tipo_interacao', 'sad')
                             ->groupBy('leitor_idLeitor')
                             ->get();
-        $sads = Interacao::where('post_idPost', $id)
-                            ->where('alvo', 'post')
-                            ->where('status', 'A')//A - ativo // N - NÃO ativo
-                            ->where('tipo_interacao', 'angry')
-                            ->groupBy('leitor_idLeitor')
-                            ->get();
         $angrys = Interacao::where('post_idPost', $id)
                             ->where('alvo', 'post')
                             ->where('status', 'A')//A - ativo // N - NÃO ativo
@@ -57,7 +51,7 @@ class InteracaoController extends Controller
         $cries = Interacao::where('post_idPost', $id)
                             ->where('alvo', 'post')
                             ->where('status', 'A')//A - ativo // N - NÃO ativo
-                            ->where('tipo_interacao', 'cries')
+                            ->where('tipo_interacao', 'cry')
                             ->groupBy('leitor_idLeitor')
                             ->get();
         $response = [

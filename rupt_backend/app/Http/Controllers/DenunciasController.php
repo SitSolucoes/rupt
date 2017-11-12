@@ -15,9 +15,22 @@ class DenunciasController extends Controller
         $denuncias = Denuncia::select(DB::raw('denuncias.*, count(post_idPost) as quantidade'))
                              ->groupBy('post_idPost', 'motivo_idMotivo')
                              ->orderBy('created_At', 'desc');
-        
+        $denuncias_ret = [];
+
+        foreach($denuncias->get() as $d){
+            $denuncias_ret[] = (object)[
+                'id'=> $d->id,
+                'data' => $d->created_at,
+                'autor' => $d->autor->nick,
+                'post' => $d->post->id,
+                'titulo' => $d->post->titulo,
+                'motivo' => $d->motivo->motivo,
+                'quantidade' => $d->quantidade
+            ];
+        }
+
         $response = [
-            'denuncias' => $denuncias->get()
+            'denuncias' => $denuncias_ret
         ];
         return response()->json($response, 200);
     }

@@ -1,3 +1,4 @@
+import { MaterializeAction } from 'angular2-materialize';
 import { Interacoes } from './../../interacoes';
 import { Base64 } from '../../shared/Base64';
 import { pairs } from 'rxjs/observable/pairs';
@@ -8,7 +9,7 @@ import { ConnectionFactory } from 'app/classes/connection-factory';
 import { Escritor } from './../../classes/escritor';
 import { LeitoresService } from './../../services/leitores.service';
 import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Leitor } from 'app/classes/leitor';
 
 @Component({
@@ -23,7 +24,9 @@ export class UserComponent implements OnInit {
   timeline: Timeline[] = new Array;
   timelineFiltro = new Array;
   url = ConnectionFactory.API_IMAGEM;
+  modalDenuncia = new EventEmitter<string|MaterializeAction>();
   base64: Base64 = new Base64();
+  post;
   
 
   constructor(private _activatedRoute: ActivatedRoute,
@@ -54,7 +57,6 @@ export class UserComponent implements OnInit {
   getTimeline(){
       this._timelineService.getTimeline(this.leitor.id).subscribe(
         ( timeline) => { 
-          console.log(timeline);
           this.timeline = timeline;
           this.timelineFiltro = timeline;
         }
@@ -132,24 +134,39 @@ export class UserComponent implements OnInit {
   }
 
   interage(post, i){
+    console.log('está tentando dar' + i);
     this._postService.interage(post, null, this.leitor.id, 'post', i).subscribe(
       (ret)=>{
         if(ret.status == 'OK'){
-          let novainteracoes = new Interacoes(ret.likes, ret.love, ret.shares, ret.sad, ret.angry, ret.cry).interacoes;
-          let tl = this.timelineFiltro.find(
-            item => item.tl.post.id === post
-          );
-          console.log(tl);
-          for(let t of tl){
-            t.interacoes = novainteracoes;
-          }
-          console.log(tl);
-          console.log(this.timelineFiltro);
           console.log('ok');
+          let novainteracoes = new Interacoes(ret.likes.length, ret.love.length, ret.shares.length, ret.sad.length, ret.angry.length, ret.cry.length).interacoes;
+          this.changeInteracoes(post, novainteracoes);
+          console.log(this.timelineFiltro);
         }
-        //console.log(ret);
       }
     );
+  }
+
+  changeInteracoes(post, i){
+    for(let t of this.timelineFiltro){
+      if(t.tl.post_idPost === post)
+        t.interacoes = i;
+    }
+  }
+
+  openModalDenuncia(p){
+    this.post = p;
+    this.modalDenuncia.emit({
+      action: 'modal',
+      params: ['open']});
+  }
+  closeModalDenuncia(e){
+    if(e){
+      this.modalDenuncia.emit({
+        action:'modal',
+        params:['close']
+      });
+    }
   }
 
 

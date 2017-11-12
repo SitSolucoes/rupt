@@ -1,3 +1,8 @@
+<div id="modalDenuncia" class="modal modal2 modal4"
+    materialize="modal" [materializeParams]="[{dismissible: false}]"
+    [materializeActions]="modalDenuncia">
+    <modal-generico [action]="'denuncia'" [idObj]="post" (closeModalGenerico)="closeModalDenuncia($event)"></modal-generico>
+</div>
 <div class="user">
 
     <div class="not-found" *ngIf="!leitor">
@@ -155,6 +160,7 @@
                         <img src="../../../assets/img/rupt-ico3.png" (click)="interage(t.tl.post.id, 'sad')" class="img4">
                         <img src="../../../assets/img/rupt-ico4.png" (click)="interage(t.tl.post.id, 'angry')" class="img4">
                         <img src="../../../assets/img/rupt-ico7.png" (click)="interage(t.tl.post.id, 'cry')" class="img4"> 
+                        <img src="../../../assets/img/report.png" (click)="leitor ? openModalDenuncia(t.tl.post.id) : true" class="img4"> 
                         <div class="total">{{t.interacoes.likes.qnt + t.interacoes.loves.qnt + t.interacoes.sads.qnt + t.interacoes.cries.qnt + t.interacoes.angries.qnt}}</div>
                     </div>
                 </div>
@@ -192,6 +198,8 @@
                             <img src="../../../assets/img/rupt-ico3.png" (click)="interage(t.tl.post.id, 'sad')" class="img4">
                             <img src="../../../assets/img/rupt-ico4.png" (click)="interage(t.tl.post.id, 'angry')" class="img4">
                             <img src="../../../assets/img/rupt-ico7.png" (click)="interage(t.tl.post.id, 'cry')" class="img4"> 
+                            <img src="../../../assets/img/report.png" (click)="leitor ? openModalDenuncia(t.tl.post.id) : true" class="img4"> 
+                            
                         <div class="total">{{t.interacoes.likes.qnt + t.interacoes.loves.qnt + t.interacoes.sads.qnt + t.interacoes.cries.qnt + t.interacoes.angries.qnt}}</div>
                     </div>
                 </div>

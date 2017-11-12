@@ -80,6 +80,9 @@ Route::post('categoriaLeitor/create', ['uses' => 'CategoriaLeitorController@crea
 Route::get('/sugestao/getDenuncias', [
            'uses' => 'DenunciasController@getDenuncias'
 ]);
+Route::get('/getDenuncias', [
+           'uses' => 'DenunciasController@getDenuncias'
+]);
 
 
 Route::get('/denuncia/getPost/{id}', [
