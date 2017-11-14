@@ -86,6 +86,16 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     width: 100%;
     background: #f97000;
     float: left;
+    position: fixed;
+    z-index: 1000;
+}
+
+.header-margin{
+    display: block;
+    float: left;
+    width: 100%;
+    height: 100%;
+    margin-top: 60px;
 }
 
 .headbar .search{
@@ -758,6 +768,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .rodape{
+    position: relative;
     width: 100%;
     display: block;
     float: left;
@@ -1105,6 +1116,16 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     width: 100%;
 }
 
+.user-patrocinador .img-pat{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+
+.user-patrocinador .patrocinador-area{
+    position: relative;
+}
+
 .user .capa{
     display: block;
     float: left;
@@ -1127,6 +1148,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     padding-left: 30px;
     padding-top: 13px;
     margin-top: 10px;
+    position: relative;
 }
 
 .user .area .info{
@@ -1279,6 +1301,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 
 .user .feed{
     display: block;
+    position: relative;
     float: left;
     width: 51%;
     background: #fff;
@@ -1537,6 +1560,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .user .area-patrocinio{
+    position: relative;
     display: block;
     float: right;
     width: 18%;
@@ -1555,6 +1579,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
   padding-top: 15px;
   margin-bottom: 15px;
   border-radius: 3px;
+  position: relative;
 }
 
 .user .area-patrocinio .patrocinio .img{
@@ -2574,17 +2599,16 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .login-modal .container .button{
-    width: 55% !important;
+    width: 35% !important;
     height: 35px !important;
     border: 1px solid #f97000 !important;
     color: #fff;
-    padding-top: 4px !important;
-    border-radius: 2px;
-    text-transform: uppercase;
-    font-family: nexa-bold;
-    font-size: 17px !important;
+    padding-top: 2px !important;
+    font-family: lato;
+    font-size: 19px !important;
     background: #f97000 !important;
     opacity: .9;
+    margin-bottom: 30px;
 }
 
 .login-modal .container .img{
@@ -2626,10 +2650,9 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 
 .login-modal .container .text{
     display: block;
-    float: left;
+    float: right;
     margin-top: 10px;
-    color: #969696;
-    margin-left: 50px;
+    color: #365899;
 }
 
 .login-modal .bottom-line{

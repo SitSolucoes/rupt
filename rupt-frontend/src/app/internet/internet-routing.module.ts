@@ -15,8 +15,7 @@ import {PublicacaoComponent} from './publicacao/publicacao.component';
 import { EsqueciSenhaComponent } from './esqueci-senha/esqueci-senha.component';
 
 const routes: Routes = [
-  { path : '', redirectTo: 'rupt', pathMatch: 'full'},
-  { path : 'rupt', component: InternetInicioComponent,
+  { path : '', component: InternetInicioComponent,
     children: [
       { path : 'noticias', component: HomeComponent},
       { path : 'faq', component: FaqComponent},

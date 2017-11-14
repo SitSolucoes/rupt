@@ -3,7 +3,10 @@
     [materializeActions]="modalDenuncia">
     <modal-generico [action]="'denuncia'" [idObj]="post" (closeModalGenerico)="closeModalDenuncia($event)"></modal-generico>
 </div>
-<div class="user">
+<div class="user user-patrocinador">
+    <img src="{{ url + 'profile/' + leitor.src_capa }}" class="img-pat">
+
+    <div class="patrocinador-area">
 
     <div class="not-found" *ngIf="!leitor">
         <div class="container">
@@ -17,9 +20,10 @@
     </div>
 
    <div *ngIf='leitor'>
+        <!-- <div class="capa">
         <div class="capa">
             <img src="{{ url + 'profile/' + leitor.src_capa }}" class="img">
-        </div>
+        </div> -->
 
         <div class="bio">
             <div class="profile"> <img src="{{ url + 'profile/' + leitor.src_foto }}" class="img"> </div>
@@ -221,5 +225,6 @@
             </div>
 
         </div>
-    </div>
+     </div>
+  </div>
 </div>
