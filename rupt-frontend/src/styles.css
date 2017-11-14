@@ -39,9 +39,9 @@ input[type=password]:not(.browser-default)
   width: auto;
   background: #fff;
   padding-left: 10px;
-  border-radius: 3px;
   font-size: 16px;
   color: #363636;
+  margin-bottom: 15px;
   height: 40px;
   border: 1px solid #dedede;
   box-sizing: border-box;
@@ -50,7 +50,7 @@ input[type=password]:not(.browser-default)
 
 input[type=text]:not(.browser-default):focus:not([readonly]),
 input[type=password]:not(.browser-default):focus:not([readonly]) {
-  border: 1px solid #dedede;
+  border: 1px solid #e8e8e8;
   box-shadow: none;
   transition: 0px;
   background: #fff;
@@ -187,6 +187,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     margin-right:  10px;
     margin-top: 15px;
     font-size: 22px;
+    border-radius: 2px;
     text-transform: uppercase;
     outline: none;
     cursor: pointer;
@@ -198,7 +199,6 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     margin-top: 12px;
     font-size: 15px;
     font-family: 'nexa-bold';
-    border-radius: 5px;
 }
 
 .headbar .login-border a{
@@ -669,9 +669,9 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 
 .container-categoria .underline{
     height: 3px;
-    width: 100px;
+    width: 40px;
     background: #f97000;
-    margin-top: 10px;
+    margin-top: 0px;
 }
 
 .container-slider{
@@ -709,7 +709,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     height: auto;
     display: block;
     margin: 0 auto;
-    margin-bottom: 80px;
+    margin-bottom: 40px;
 }
 
 .slider-img{
@@ -901,8 +901,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     display: block;
     float: left;
     background: #f97000;
-    font-size: 22px;
-    text-transform: uppercase;
+    font-size: 24px;
     color: #fff;
     text-align: center;
     padding-top: 8px;
@@ -920,10 +919,8 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 
 .modal-content .info p{
     text-align: center;
-    font-weight: bold;
-    font-size: 19px;
+    font-size: 18px;
     font-family: 'lato';
-    font-weight: bold;
     color: #595858;
     clear: both;
     padding-left: 30px;
@@ -935,17 +932,23 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .modal-content .info .subtitle{
     display: block;
     float: left;
-    margin-right: 10%;
-    margin-left: 10%;
-    margin-bottom: 15px;
-    font-size: 15px;
-    line-height: 26px;
+    margin-right: 5%;
+    margin-left: 5%;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    line-height: 22px;
     font-family: Lato;
     color: #8A8A8A;
 }
 
 .modal-content .info .subtitle a{
-  text-decoration: underline;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+.modal-content .info .subtitle a:hover{
+    text-decoration: underline;
 }
 
 .modal-content .info .align{
@@ -953,27 +956,32 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .modal-content .info .img-area{
-  width: 210px;
+  width: 140px;
   height: 50px;
   display: block;
   margin: 0 auto;
   padding-top: 0px;
+  margin-top: 5px;
   border-radius: 5px;
 }
 
 .modal-content .info .img{
-    height: 50px;
+    height: 40px;
     display: block;
     float: left;
-    margin-left: 17px;
+    margin-left: 5px;
     margin-bottom: 0px;
     margin-top: 10px;
     position: relative;
 }
 
-.modal-content .info .img2{
-    height: 42px;
-    margin-top: 13px;
+.modal-content .info .img:hover{
+    -webkit-transform: translateY(-4px);
+    transform: translateY(-4px);
+    -webkit-transition:0.2s ease-out;
+    -moz-transition: 0.2s ease-out;
+    -o-transition: 0.2s ease-out;
+    -ms-transition: 0.2s ease-out;
 }
 
 .modal-content .register{
@@ -1051,7 +1059,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     height: auto !important;
     display: block;
     margin: 0 auto;
-    width: 40% !important;
+    width: 35% !important;
 }
 
 .modal-footer .button{
@@ -1059,35 +1067,34 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     display: block;
     float: right;
     position: relative;
-    margin-right: 20px;
-    margin-top: 10px;
+    left: -15px;
+    margin-left: 20px;
+    margin-top: 5px;
     margin-bottom: 40px;
-    padding: 10px;
-    border: 2px solid #737373;
-    background: #737373;
-    text-transform: uppercase;
-    font-family: 'nexa-bold';
+    padding: 6px;
+    border: 1px solid #ccc;
+    background: #ccc;
     font-weight: bolder;
-    font-size: 13px;
-    color: #fff;
-    border-radius: 2px;
+    font-size: 15px;
+    color: #5e5e5e;
+    opacity: 1;
 }
 
 .modal-footer .button:hover{
     background: #fff;
     color: #737373;
-    border: 2px solid #737373;
+    border: 1px solid #737373;
     transition: 0.5s;
 }
 
 .modal-footer .color{
     background: #f97000;
-    border: 2px solid #f97000;
+    border: 1px solid #f97000;
     color: #ffffff;
 }
 
 .modal-footer .color:hover{
-    border: 2px solid #f97000;
+    border: 1px solid #f97000;
     color: #f97000;
 }
 
@@ -2167,14 +2174,14 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     float: left;
     width: 40%;
     margin-bottom: 120px;
-    font-family: 'nexa-bold';
+    font-family: 'nexa';
+    font-weight: bolder;
     font-size:30px;
     color: #403d3d;
     position: relative;
     left: 70px;
     top: 60px;
     letter-spacing: -1px;
-    text-transform: uppercase;
 }
 
 .faq .title2{
@@ -2542,6 +2549,15 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     padding-bottom: 40px;
 }
 
+.login-modal2 .error{
+    border: 1px solid red;
+    padding: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+
 .login-modal .container{
     display: block;
     margin: 0 auto;
@@ -2580,7 +2596,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 
 .login-modal p{
     margin-bottom: 5px;
-    color: #737373;
+    color: #595858;
     font-family: 'lato';
     font-weight: bolder;
 }
@@ -2604,6 +2620,10 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     top: 15% !important;
 }
 
+.modal6{
+    width: 50% !important;
+}
+
 .login-modal .container .text{
     display: block;
     float: left;
@@ -2619,34 +2639,33 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .login-modal .bottom-line .button3{
-    padding: 10px;
-    font-size: 13px;
+    padding: 6px;
+    font-size: 15px;
     display: block;
     float: left;
     color: #fff;
     background: #f97000;
-    border: 2px solid #f97000;
+    border: 1px solid #f97000;
     margin-left: 10px;
-    border-radius: 3px;
-    font-family: 'nexa-bold';
-    text-transform: uppercase;
+    font-weight: bolder;
 }
 
 .login-modal .bottom-line .button4{
-    background: #8c8c8c;
-    border: 2px solid #8c8c8c;
+    background: #ccc;
+    border: 1px solid #ccc;
+    color: #5e5e5e;
 }
 
 .modal-content .button3:hover{
     transition: 0.5s;
     background: #fff;
     color: #f97000;
-    border: 2px solid #f97000;
+    border: 1px solid #f97000;
 }
 
 .modal-content .button4:hover{
-    color: #8c8c8c;
-    border: 2px solid #8c8c8c;
+    color: #737373;
+    border: 1px solid #5e5e5e;
 }
 
 .login-modal .bottom-line .button2{
@@ -2988,7 +3007,6 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     display: block;
     float: left;
     width: 100%;
-    height: 300px;
 }
 
 .esqueci-senha .container{
@@ -3002,8 +3020,71 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     display: block;
     margin: 0 auto;
     width: 45%;
-    height: 200px;
-    margin-top: 40px;
-    margin-bottom: 40px;
+    margin-top: 60px;
+}
+
+.esqueci-senha .container .area .position{
+    display: block;
+    float: left;
+    background: #fff;
+    margin-bottom: 60px;
+}
+
+.esqueci-senha .container .area .position p{
+    display: block;
+    float: left;
+    width: 100%;
+    color: #5e5e5e;
+    padding-bottom: 10px;
+    font-size: 18px;
+    padding-left: 20px;
+    border-bottom: 1px solid #e3e3e3;
+    font-weight: bolder;
+}
+
+.esqueci-senha .container .area .position .info{
+    display: block;
+    float: left;
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+}
+
+.esqueci-senha .container .area .position .info .input{
+    width: 100% !important;
+    margin-top: 0px;
+}
+
+.esqueci-senha .container .area .position .info .button{
+    margin-bottom: 20px;
+    background: #f97000;
+    border: 1px solid #f97000;
+    color: #fff;
+    float: right;
+    height: 40px;
+    margin-left: 15px;
+    padding: 5px;
+    font-weight: bolder;
+    border-radius: 1px;
+}
+
+.esqueci-senha .container .area .position .info .button:hover{
+    transition: 0.5s;
+    background: #fff;
+    color: #f97000;
+    border: 1px solid #f97000;
+}
+
+.esqueci-senha .container .area .position .info .button2{
     background: #ccc;
+    border: 1px solid #ccc;
+    padding: 6px;
+    color: #5e5e5e;
+}
+
+.esqueci-senha .container .area .position .info .button2:hover {
+    background: #fff;
+    color: #5e5e5e;
+    border: 1px solid #5e5e5e;;
 }
