@@ -247,7 +247,7 @@ export class CadastroEscritorComponent implements OnInit {
           this._uploadFileService.onSuccessUpload = (item, response, status, headers) => {
                 // success callback
                 if(!upload)
-                  this._router.navigate(['rupt/perfil']);
+                  this._router.navigate(['perfil']);
                 else 
                   this.salvo = true; 
           };
@@ -261,7 +261,7 @@ export class CadastroEscritorComponent implements OnInit {
       }
       else 
         if(!upload)
-          this._router.navigate(['rupt/perfil']);
+          this._router.navigate(['perfil']);
         else 
           this.salvo = true; 
   }

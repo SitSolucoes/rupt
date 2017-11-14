@@ -67,7 +67,7 @@ export class ModalGenericoComponent implements OnInit {
   closeModal(){
     this.closeModalGenerico.emit(true);
     //if(this.action=='mensagemDenuncia')
-      //this._router.navigate(['rupt/noticia/'+this.idObj]); 
+      //this._router.navigate(['noticia/'+this.idObj]); 
   }
 
 

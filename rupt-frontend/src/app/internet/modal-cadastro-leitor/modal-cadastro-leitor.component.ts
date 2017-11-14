@@ -21,7 +21,7 @@ export class ModalCadastroLeitorComponent implements OnInit {
 
   redirectCadastro(){
     this.closeModal.emit(true);
-    this._router.navigate(['rupt/cadastro']);
+    this._router.navigate(['cadastro']);
   }
   
 }

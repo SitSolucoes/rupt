@@ -47,7 +47,7 @@ export class ModalLoginComponent implements OnInit {
         else {
           this.closeModalLogin.emit(true);
 
-          this._router.navigate(['rupt/perfil']);
+          this._router.navigate(['perfil']);
         }
       }
     )

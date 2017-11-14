@@ -52,7 +52,7 @@ export class PublicacaoComponent implements OnInit {
             this._router.navigate(['/']);
           else{
             if (!this.leitor.escritor || this.leitor.escritor.status == 'r')
-              this._router.navigate(['rupt/cadastro-escritor']);
+              this._router.navigate(['cadastro-escritor']);
             else 
               this.getPost();
           }
@@ -131,7 +131,7 @@ export class PublicacaoComponent implements OnInit {
 
         this._uploadFileService.onSuccessUpload = (item, response, status, headers) => {
               // success callback
-              this._router.navigate(['/rupt/noticia/'+post_id]);
+              this._router.navigate(['noticia/'+post_id]);
         };
         this._uploadFileService.onErrorUpload = (item, response, status, headers) => {
               // error callback
@@ -142,7 +142,7 @@ export class PublicacaoComponent implements OnInit {
         this._uploadFileService.upload(myUploadItem);
       }
       else 
-          this._router.navigate(['/rupt/noticia/'+post_id]);
+          this._router.navigate(['noticia/'+post_id]);
   }
 
 }

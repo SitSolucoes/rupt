@@ -24,7 +24,7 @@ export class SliderComponent implements OnInit {
   }
 
   openNew(id){
-    this._router.navigate(['/rupt/noticia', id]);
+    this._router.navigate(['/noticia', id]);
   }
 
 
