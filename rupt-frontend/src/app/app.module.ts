@@ -17,6 +17,7 @@ import { SliderComponent } from 'app/internet/slider/slider.component';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { QuillEditorModule } from 'ngx-quill-editor';
 
+
 let providers = {
    "google": {
      "clientId": "GOOGLE_CLIENT_ID"

@@ -2,6 +2,28 @@
     <i class="material-icons">view_list</i> Denúncias
 </div>
 
+<div id="modalDetalhes" class="modal center-sheet" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions">
+    <div class="modal-content">
+        Denúncia de {{denuncia_selecionada?.motivo}}
+        
+        <p><strong>Titulo</strong></p>
+        <p>{{denuncia_selecionada?.post.titulo}}</p>
+        <p>Conteúdo</p>
+        <p>{{denuncia_selecionada?.post.conteudo}}</p>
+        <p>Status</p>
+        <p>{{denuncia_selecionada?.detalhes.status == 'A' ? 'Não Avaliada' : denuncia_selecionada?.detalhes.status == 'I' ? 'Ignorada' : 'Post Deletado'}}</p>
+        <!--<p>Link parar o post</p>
+            <p><a [router] target="_blank">Notícia</a></p>-->
+        
+    </div>
+    <div class="modal-footer">
+        
+        <a (click)="closeModal()" class="modal-action modal-close waves-effect waves-green btn-flat ">Fechar</a>
+        <button (click)="action('i')" class="modal-action modal-close waves-effect waves-green btn-flat">Ignorar</button> 
+        <button (click)="action('d')" type="submit" class="modal-action modal-close waves-effect waves-green btn-flat">Desativar Post</button>
+    </div>
+</div>
+
 <div class="row">
     <form class="col s12 search-full">
       <div class="row">
@@ -34,10 +56,7 @@
             <div class="col s2 m2 l1 xl1 item">
                 Data
             </div>
-            <div class="col s4 m4 l2 xl2 item">
-                Autor
-            </div>
-            <div class="col s4 m4 l4 xl4 item">
+            <div class="col s6 m6 l6 xl6 item">
                 Título
             </div>
             <div class="col s3 m3 l2 xl2 item">
@@ -51,15 +70,12 @@
             </div>
         </div>
     </li>
-    <li *ngFor="let d of denuncias" > <!--listLeitores() | paginate: {itemsPerPage: 10, currentPage:page, id: '1'}; let i = index">-->
-        <div class="list-item option-icons">
+    <li *ngFor="let d of denunciasFiltro" > <!--listLeitores() | paginate: {itemsPerPage: 10, currentPage:page, id: '1'}; let i = index">-->
+        <div class="list-item option-icons" [class.inativa]="d.status == 'I' || d.status == 'R'">
             <div class="col s2 m2 l1 xl1 item">
                 {{d.data.date | date: 'dd/MM/yy'}}
             </div>
-            <div class="col s4 m4 l2 xl2 item">
-                {{ d.autor }}
-            </div>
-            <div class="col s4 m4 l4 xl4 item">
+            <div class="col s6 m6 l6 xl6 item">
                 {{ d.titulo }}
             </div>
             <div class="col s4 m4 l2 xl2 item">
@@ -69,7 +85,7 @@
                 {{d.quantidade}}
             </div>
             <div class="option-icons col s3 m2 l1 xl1 right-align ">
-                <i class="material-icons" (click)="openModalEdit(l)">mode_edit</i>
+                <i class="material-icons" (click)="openModal(d)">mode_edit</i>
             </div>
 
             

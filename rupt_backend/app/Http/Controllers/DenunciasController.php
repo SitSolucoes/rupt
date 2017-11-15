@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Denuncia;
+use App\Post;
 use App\MotivoDenuncia;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\PostController;
@@ -13,16 +14,17 @@ class DenunciasController extends Controller
 {
     public function getDenuncias(){
         $denuncias = Denuncia::select(DB::raw('denuncias.*, count(post_idPost) as quantidade'))
-                             ->groupBy('post_idPost', 'motivo_idMotivo')
-                             ->orderBy('created_At', 'desc');
+                             ->groupBy('denuncias.post_idPost', 'denuncias.motivo_idMotivo')
+                             ->orderBy('created_At', 'desc')
+                             ->orderBy('status', 'asc');
         $denuncias_ret = [];
 
         foreach($denuncias->get() as $d){
             $denuncias_ret[] = (object)[
                 'id'=> $d->id,
                 'data' => $d->created_at,
-                'autor' => $d->autor->nick,
                 'post' => $d->post->id,
+                'status' => $d->status,
                 'titulo' => $d->post->titulo,
                 'motivo' => $d->motivo->motivo,
                 'quantidade' => $d->quantidade
@@ -33,6 +35,66 @@ class DenunciasController extends Controller
             'denuncias' => $denuncias_ret
         ];
         return response()->json($response, 200);
+    }
+
+    public function getDetalhes($id){
+        $dados = Denuncia::where('id', $id)->get();
+        $dado = $dados[0];
+        $ret = (object)[
+            'motivo' => $dado->motivo->motivo,
+            'detalhes' => $dado,
+            'post' => $dado->post,
+            'autor' => $dado->autor
+        ];
+        return response()->json([
+            'denuncia' => $ret
+        ], 200);
+    }
+
+    public function agir(Request $request){
+        if($request->action != 'i'){
+            //atualiza post
+            try{
+                $post = Post::where('id', $request->post_idPost)->get();
+                $post[0]->idAdmin_deleted = $request->idAdmin_Deleted;
+                $post[0]->save();
+                //atualiza denuncia
+                $denuncias = Denuncia::where('post_idPost', $request->post_idPost)
+                                    ->where('motivo_idMotivo', $request->motivo_idMotivo)
+                                    ->get();
+                foreach($denuncias as $d){
+                    $d->status = "R";
+                    $d->admin_idAdmin = $request->idAdmin_deleted;
+                    $d->save();
+                }
+                return response()->json([
+                    'status' => true
+                ], 200);
+            }catch(Exception $ex){
+                return response()->json([
+                    'status' => false
+                ], 500);
+            }
+        }else{
+            try{    
+                //atualiza denuncia
+                $denuncias = Denuncia::where('post_idPost', $request->post_idPost)
+                                    ->where('motivo_idMotivo', $request->motivo_idMotivo)
+                                    ->get();
+                foreach($denuncias as $d){
+                    $d->status = "I";
+                    $d->admin_idAdmin = $request->idAdmin_deleted;
+                    $d->save();
+                }
+                return response()->json([
+                    'status' => true
+                ], 200);
+            }catch(Exception $ex){
+                return response()->json([
+                    'status' => false
+                ], 500);
+            }
+        }
     }
 
     public function getPost($id){

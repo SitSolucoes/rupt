@@ -30,6 +30,32 @@ export class DenunciasService {
     });
   }
 
+  agir(f, a){
+    const body = JSON.stringify({
+      post_idPost: f.value.post_idPost,
+      leitor_idLeitor: f.value.leitor_idLeitor,
+      idAdmin_Deleted: f.value.idAdminDeleted,
+      motivo_idMotivo: f.value.motivo_idMotivo,
+      deleted_at: f.value.deleted_at,
+      action: a
+    })
+    return this._http.put(this._url + 'denuncias/agir/',body,{headers: this.headers}).map(
+      (ret) => {
+        return {
+          status: ret.json().status
+        }
+      }
+    );
+  }
+  getDetalhes(d){
+    return this._http.get(this._url + 'denuncias/getDetalhes/'+d.id)
+    .map((ret)=>{
+      return{
+        'denuncia': ret.json().denuncia
+      }
+    });
+  }
+
   create(motivo_idMotivo, post_idPost, leitor_idLeitor){
     const body = JSON.stringify({
       motivo_idMotivo: motivo_idMotivo,

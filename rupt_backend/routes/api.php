@@ -83,6 +83,12 @@ Route::get('/sugestao/getDenuncias', [
 Route::get('/getDenuncias', [
            'uses' => 'DenunciasController@getDenuncias'
 ]);
+Route::get('/denuncias/getDetalhes/{id}', [
+           'uses' => 'DenunciasController@getDetalhes'
+]);
+Route::put('/denuncias/agir', [
+           'uses' => 'DenunciasController@agir'
+]);
 
 
 Route::get('/denuncia/getPost/{id}', [
