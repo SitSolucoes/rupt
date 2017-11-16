@@ -23,6 +23,7 @@ export class PublicacaoComponent implements OnInit {
   categorias: Categoria[];
   formulario: FormGroup;
   leitor: Leitor;
+  post: Post;
   
   constructor(private _formBuilder: FormBuilder,
               private _leitorService: LeitoresService,
@@ -30,7 +31,7 @@ export class PublicacaoComponent implements OnInit {
               private _categoriaService: CategoriasService,
               private _postService: PostsService,
               private _uploadFileService: UploadFileService,
-              private _activatedRoute: ActivatedRoute
+              private _activatedRoute: ActivatedRoute,
               ) { }
 
   ngOnInit() {
@@ -73,9 +74,17 @@ export class PublicacaoComponent implements OnInit {
   getPost(){
     this._activatedRoute.params.subscribe(params => {
       if (params['id']){
-        //esse id é o da timeline!
-        //porque o post pode ser do cara e ele vai editar, 
-        //mas também pode ser um post compartilhado, então ele não pode editar o post.
+        this._postService.getPost(params['id']).subscribe(
+          (post: Post) => { 
+            this.post = post; 
+
+            this.formulario.patchValue({
+              titulo: post.titulo,
+              conteudo: post.conteudo,
+            });
+
+          }
+        )
       }
     });
   }
@@ -94,25 +103,13 @@ export class PublicacaoComponent implements OnInit {
 
   public editor;
   public editorContent = `<h3>I am Example content</h3>`;
-  public editorOptions = {
-    placeholder: "Escreva seu texto aqui...",
-  };
+  public editorOptions = { placeholder: "Escreva seu texto aqui...", };
 
-  onEditorBlured(quill) {
-    //console.log('editor blur!', quill);
-  }
-
-  onEditorFocused(quill) {
-    //console.log('editor focus!', quill);
-  }
-
+  onEditorBlured(quill) {}
+  onEditorFocused(quill) {}
+  onContentChanged({ quill, html, text }) {}
   onEditorCreated(quill) {
     this.editor = quill;
-    //console.log('quill is ready! this is current quill instance object', quill);
-  }
-
-  onContentChanged({ quill, html, text }) {
-    //console.log('quill content is changed!', quill, html, text);
   }
 
   uploadFiles(post_id){
