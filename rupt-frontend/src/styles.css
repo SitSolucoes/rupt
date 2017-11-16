@@ -785,10 +785,9 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 
 .social-media .area{
     height: 40px;
-    width: 30%;
+    width: 25%;
     display: block;
     margin: 0 auto;
-    margin-top: 15px;
 }
 
 .social-media p{
@@ -806,9 +805,9 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .social-media .img{
     display: block;
     float: left;
-    margin-top: 10px;
-    margin-bottom: 20px;
-    margin-left: 30px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-left: 20px;
     border: 2px solid #F2F2F2;
     border-radius: 100%;
     padding: 10px;
@@ -2044,18 +2043,18 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .contato .title{
-  display: block;
-  float: left;
-  width: 30%;
-  margin-bottom: 80px;
-  font-family: 'nexa-bold';
-  font-size: 30px;
-  color: #403d3d;
-  position: relative;
-  left: 70px;
-  top: 60px;
-    text-transform: uppercase;
-  letter-spacing: -1px;
+    display: block;
+    float: left;
+    width: 30%;
+    margin-bottom: 80px;
+    font-family: 'nexa';
+    font-weight: bold;
+    font-size: 30px;
+    color: #403d3d;
+    position: relative;
+    left: 70px;
+    top: 60px;
+    letter-spacing: -1px;
 }
 
 .contato .underline{
@@ -2116,9 +2115,9 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 
 .contato .img{
   float: right;
-  margin-right: 60px;
+  margin-right: 70px;
   position: relative;
-  top: 240px;
+  top: 300px;
   height: 200px;
 }
 
@@ -2198,14 +2197,14 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     display: block;
     float: left;
     width: 40%;
-    margin-bottom: 120px;
     font-family: 'nexa';
     font-weight: bolder;
     font-size:30px;
     color: #403d3d;
     position: relative;
     left: 70px;
-    top: 60px;
+    margin-top: 60px;
+    margin-bottom: 40px;
     letter-spacing: -1px;
 }
 
@@ -2225,7 +2224,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
   margin-right: 70px;
   height: 190px;
   position: relative;
-  top: 330px;
+  top: 260px;
 }
 
 .faq .img-logo2{
@@ -2361,7 +2360,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 
 .cadastro .container .area .input:focus{
   border: 1px solid #c9c9c9 !important;
-  transition: 0px;
+  transition: 2s;
   background: #fff;
 }
 
