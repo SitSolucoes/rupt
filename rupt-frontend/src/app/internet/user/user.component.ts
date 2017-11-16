@@ -1,3 +1,4 @@
+import { CalcTime } from './../../shared/calcTime';
 import { MaterializeAction } from 'angular2-materialize';
 import { Interacoes } from './../../interacoes';
 import { Base64 } from '../../shared/Base64';
@@ -24,6 +25,7 @@ export class UserComponent implements OnInit {
   timeline: Timeline[] = new Array;
   timelineFiltro = new Array;
   url = ConnectionFactory.API_IMAGEM;
+  calcTime = new CalcTime();
   modalDenuncia = new EventEmitter<string|MaterializeAction>();
   base64: Base64 = new Base64();
   post;
@@ -63,59 +65,8 @@ export class UserComponent implements OnInit {
       )
   }
 
-  getMonthString(month){
-    switch(month){
-      case 0:
-        return 'jan';
-      case 1:
-        return 'fev'  ;
-      case 2:
-        return 'mar';
-      case 3: 
-        return 'abr';
-      case 4: 
-        return 'mai';
-      case 5: 
-        return 'jun';
-      case 6:
-        return 'jul';
-      case 7:
-        return 'ago';
-      case 8: 
-        return 'set';
-      case 9:
-        return 'out';
-      case 10:
-        return 'nov';
-      case 11:
-        return 'dez';
-    }
-  }
-
   calcHour(date){
-    let t = date.split(/[- :]/);
-    let result = new Date(t[0], t[1] - 1, t[2], t[3] || 0, t[4] || 0, t[5] || 0);      
-
-    let today = new Date();
-
-    var timeDiff = Math.abs(today.getTime() - result.getTime());
-    var diffDays = (timeDiff / (1000 * 3600 * 24)); 
-
-    if (diffDays < 1){
-      let hour = Math.round(diffDays*24);
-      return hour.toString() + "h";
-    }
-    else if (diffDays <= 7){
-      let day = Math.round(diffDays);
-      return day.toString() + 'd';
-    }
-    else if (today.getFullYear == result.getFullYear){
-      return result.getDate().toString() + " " + this.getMonthString(result.getMonth());
-    }
-    else {
-      return result.getDate().toString() + " " + this.getMonthString(result.getMonth()) + ' de ' + result.getFullYear();
-    }
-
+    return this.calcTime.calcTime(date);
   }
 
   search(){
@@ -168,7 +119,4 @@ export class UserComponent implements OnInit {
       });
     }
   }
-
-
-
 }

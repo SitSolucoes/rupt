@@ -136,11 +136,20 @@
                         {{ t.tl.post.autor.nome }}.
                     </font>
                     
+                    <!-- não é a propria tl -->
                     <a href="" *ngIf="t.tl.leitor_idLeitor != leitorLogado.id">
                         <img src="../../../assets/img/dot.png" class="img img5">
                     </a>
 
-                    <a routerLink='../../publicacao/{{ t.tl.id }}' *ngIf="t.tl.leitor_idLeitor == leitorLogado.id">
+                    <!-- propria tl mas post compartilhado -->
+                    <a href="" *ngIf="t.tl.leitor_idLeitor == leitorLogado.id && t.tl.post.autor.id != leitorLogado.id">
+                        <img src="../../../assets/img/dot.png" class="img img5">
+                        excluir
+                        ARRUMAR AQUI
+                    </a>
+
+                    <!-- tl dele com post próprio -->
+                    <a routerLink='../../publicacao/{{ t.tl.post.id }}' *ngIf="t.tl.post.autor.id == leitorLogado.id">
                         <img src="../../../assets/img/edit.png" class="img img5">
                     </a>
                     
@@ -151,7 +160,7 @@
                 </div>
 
                 <div class="info" *ngIf="leitor.id == t.tl.post.autor.id">
-                    <a routerLink="../../noticia/{{t.post.id}}">
+                    <a routerLink="../../noticia/{{t.tl.post.id}}">
                         <div class="new">
                             {{ t.tl.post.titulo }}
                         </div>
@@ -175,20 +184,26 @@
                 </div>
 
                 <div class="info info2" *ngIf="leitor.id != t.tl.post.autor.id">
-                    <a routerLink="../../noticia/{{t.tl.post.id}}">
+                    
+                    <a routerLink='/perfil/{{ t.tl.post.autor.nick }}'>
                         <div class="img-area img-area2">
                             <img src="{{ url + 'profile/' + t.tl.post.autor.src_foto }}"  class="img4">
                         </div>
+                    </a>
 
-                        <div class="text">
+                    <div class="text">
 
+                        <a routerLink='/perfil/{{ t.tl.post.autor.nick }}'>
                             <font class="title"> {{ t.tl.post.autor.nome }} </font>
+                        </a>                            
 
-                            <font class="title title2">
-                                {{ calcHour( t.tl.post.publishedAt ) }}
-                            </font>
+                        <font class="title title2">
+                            {{ calcHour( t.tl.post.publishedAt ) }}
+                        </font>
 
-                        </div>
+                    </div>
+
+                    <a routerLink="../../noticia/{{t.tl.post.id}}">
 
                         <div class="new">
                             {{ t.tl.post.titulo }}

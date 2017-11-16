@@ -1,3 +1,4 @@
+import { CalcTime } from './../../shared/calcTime';
 import { DenunciasService } from './../../services/denuncias.service';
 import { MaterializeAction } from 'angular2-materialize';
 import { Base64 } from './../../shared/Base64';
@@ -19,6 +20,8 @@ declare var $: any;
 })
 export class NewsComponent implements OnInit {
   url = ConnectionFactory.API_IMAGEM;
+  calcTime = new CalcTime();
+  
   post: Post;
   leitor = null;
   comentarios;
@@ -26,11 +29,13 @@ export class NewsComponent implements OnInit {
   maisLidos: Post[];
   leitorLogado: boolean = localStorage.getItem('l') != null;
   data_atual: Date;
+  
   interacoes: any = {
     likes: [],
     dislikes: [],
     shares: []
   };
+  
   modalDenuncia = new EventEmitter<string|MaterializeAction>();
   denuncias;
 
@@ -50,9 +55,6 @@ export class NewsComponent implements OnInit {
    }
 
   ngOnInit() {
-    //this.data_atual = new Date();
-    //console.log(this.data_atual);
-    //console.log(this.leitorLogado);
     this._activatedRoute.params.subscribe(params => {
         this.carregaPost(+params['id']);
         if(this.leitorLogado)
@@ -71,14 +73,12 @@ export class NewsComponent implements OnInit {
   }
 
   onSubmit(){
-    //console.log(this.form);
     this._postService.createComentario(this.form).subscribe(
       ( ret ) => {
         if(ret.sucesso === 'OK')
           this.comentarios = ret.comentarios;
         else
           this.comentarios = [];
-        console.log(this.comentarios);
       }
     );
   }
@@ -94,7 +94,6 @@ export class NewsComponent implements OnInit {
             (leitor) => {
               this.leitor = leitor;
               this.getInteracoes();
-              //console.log(leitor);
             }
           );
         }
@@ -114,7 +113,6 @@ export class NewsComponent implements OnInit {
   getInteracoes(){
         this._postService.getInteracoes(this.post.id).subscribe(
           (ret) => {
-            console.log(ret);
             if(ret.status == 'OK'){
               this.interacoes.likes = ret.likes;
               this.interacoes.dislikes = ret.dislikes;
@@ -125,7 +123,6 @@ export class NewsComponent implements OnInit {
   }
 
   interagePost(i){
-    console.log('interagindo');
     this._postService.interage(this.post.id, null, this.leitor, 'post', i).subscribe(
       (ret)=>{
         if(ret.status == 'OK'){
@@ -133,7 +130,6 @@ export class NewsComponent implements OnInit {
           this.interacoes.dislikes = ret.dislikes;
           this.interacoes.shares = ret.shares;
         }
-        //console.log(ret);
       }
     );
   }
@@ -154,6 +150,8 @@ export class NewsComponent implements OnInit {
   }
 
   
-
+  calcHour(date){
+    return this.calcTime.calcTime(date);
+  }
 
 }

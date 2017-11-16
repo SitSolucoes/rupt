@@ -26,7 +26,12 @@
     <div class="area">
 
       Por
-      <font class="name"> {{ post?.autor?.nick }} </font> <img src="../../../assets/img/marcador.png" class="img"> <b>{{post.publishedAt | date: 'dd/MM/yyyy'}}</b>
+      <a routerLink='/perfil/{{ post.autor.nick }}'>
+          <font class="name"> {{ post?.autor?.nick }} </font> 
+      </a>
+      
+      <img src="../../../assets/img/marcador.png" class="img"> 
+      <b> {{ calcHour( post.publishedAt ) }} </b>
 
       <div class="social">
 
@@ -103,7 +108,7 @@
               </form>
             </div>
 
-            <div class="separate"> recentes </div>
+            <div class="separate" *ngIf='comentarios && comentarios.length > 0' > recentes </div>
 
 
             <div class="profile" *ngFor="let c of comentarios">
