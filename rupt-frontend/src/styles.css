@@ -128,8 +128,23 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     text-transform: uppercase;
 }
 
-.headbar .active{
+.active-link{
     background: #B05307;
+    font-size: 90px;
+    font-family: 'nexa-bold';
+    font-size: 16px;
+    display: block;
+    float: left;
+    color: #FFFDFD;
+    width: auto;
+    height: 100%;
+    position: relative;
+    left: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 20px;
+    font-weight: 500;
+    text-transform: uppercase;
 }
 
 .headbar .headbar-right{
@@ -1150,6 +1165,10 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     position: relative;
 }
 
+.user .area3{
+    margin-top: 235px;
+}
+
 .user .area .info{
   display: block;
   float: left;
@@ -1236,6 +1255,10 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     font-family: lato;
 }
 
+.user .bio2{
+    bottom: 0px;
+}
+
 .user .bio .bio-text{
     display: block;
     float: left;
@@ -1306,6 +1329,10 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     background: #fff;
     margin-top: 10px;
     margin-bottom: 20px;
+}
+
+.user .feed2{
+    width: 70%;
 }
 
 .user .feed .status{
