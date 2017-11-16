@@ -104,34 +104,20 @@ Route::get('/denuncia/getEscritor/{id}', [
           'uses' => 'PostController@getEscritor'
 ]);
 
-Route::get('/posts/PostsToHome/', [
-    'uses' => 'PostController@getSliderPostsByCategory'
-]);
-
-Route::get('posts/getSliderPosts/', [
-    'uses' => 'PostController@getSliderPosts'
-]);
-
-Route::get('posts/getPostsMaisLidos/', [
-    'uses' => 'PostController@getPostsMaisLidos'
-]);
-
-Route::get('/posts/Post/{id}', [
-    'uses' => 'PostController@getPost'
-]);
-
-Route::post('posts/postCreateComentario', ['uses' => 'ComentarioController@create']);
-
+Route::get('/posts/PostsToHome/', ['uses' => 'PostController@getSliderPostsByCategory']);
+Route::get('posts/getSliderPosts/', ['uses' => 'PostController@getSliderPosts']);
+Route::get('posts/getPostsMaisLidos/', ['uses' => 'PostController@getPostsMaisLidos']);
+Route::get('/posts/Post/{id}', ['uses' => 'PostController@getPost']);
 Route::get('posts/getComentarios/{id}', ['uses' => 'ComentarioController@getComentariosFromPost']);
-
 Route::get('posts/getInteracoesFromPost/{id}', ['uses' => 'InteracaoController@getInteracoesFromPost']);
 Route::get('posts/getMotivosDenuncia', ['uses' => 'DenunciasController@getMotivos']);
+
+Route::post('posts/postCreateComentario', ['uses' => 'ComentarioController@create']);
 Route::post('posts/denuncia', ['uses' => 'DenunciasController@create']);
-
 Route::post('posts/postInterage', ['uses' => 'InteracaoController@novo']);
-
 Route::post('posts/create', ['uses' => 'PostController@createPost']);
 Route::post('posts/uploadImages/{id}', ['uses' => 'PostController@uploadImages']);
+Route::post('posts/delete', ['uses' => 'PostController@delete']);
 
 //Mensagens
 Route::get('/getMensagens/naoLidas', [

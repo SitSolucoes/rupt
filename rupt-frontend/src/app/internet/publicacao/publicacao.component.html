@@ -47,7 +47,9 @@
 
     <a class="button" routerLink='/perfil/{{ leitor?.nick }}'>Cancelar</a>
 
-    <button type="button" class="button background-blue" >Inativar</button>
+    <button type="button" class="button background-blue" (click)='delete()' *ngIf='formulario.get("id").value > 0'>
+        Excluir
+    </button>
 
     <button type="button" class="button background-orange" (click)="onSubmit()">Publicar</button>
 

@@ -63,6 +63,7 @@ export class PublicacaoComponent implements OnInit {
 
   createForm(){
     this.formulario = this._formBuilder.group({
+      id: '',
       categoria_id: ['', Validators.required],
       leitor_id: [''],
       titulo: ['', Validators.required],
@@ -79,6 +80,7 @@ export class PublicacaoComponent implements OnInit {
             this.post = post; 
 
             this.formulario.patchValue({
+              id: post.id,
               titulo: post.titulo,
               conteudo: post.conteudo,
             });
@@ -98,6 +100,14 @@ export class PublicacaoComponent implements OnInit {
   onSubmit(){
     this._postService.create(this.formulario).subscribe(
       (response) => { this.uploadFiles(response) }
+    )
+  }
+
+  delete(){
+    this._postService.delete(this.formulario).subscribe(
+      (response) => {
+        this._router.navigate(['perfil/'+this.leitor.nick]);
+      }
     )
   }
 

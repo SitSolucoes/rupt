@@ -29,8 +29,7 @@ class PostController extends Controller
         $post = $this->create($request, $post);
         $post->autor_idLeitor = $request->leitor_id;
         $post->visualizacoes = 0;
-        //$post->publishedAt = time();
-
+        
         $post->save();
 
         $c = new PostCategoriaController();
@@ -52,6 +51,16 @@ class PostController extends Controller
         $c->update($request->categoria_id, $post->id);
     }
 
+    public function delete(Request $request){
+        $post = Post::find($request->id);
+        $post->deleted_at = date("Y-m-d H:i:s");
+        $post->save();
+
+        $c = new TimelineController();
+        $c->deleteByPost($post->id, $post->leitor_idLeitor);
+
+        return response()->json(['msg', 'Excluido com sucesso.'], 200);
+    }
 
     public function getById($id){
         $post = Post::where('id', $id)->get();
@@ -72,7 +81,11 @@ class PostController extends Controller
     public function getPostsMaisLidos(){
         $idPosts_q = Visualizacao::select(DB::raw('post_idPost as id, count(*) as q'))
         ->whereIn('post_idPost', Post::select('id')
-                                       ->whereDate('publishedAt', '>=', DB::raw('DATE(DATE_ADD(NOW(), INTERVAL - 100 DAY))'))->get())
+        ->whereNull('deleted_at')
+        ->whereDate('publishedAt', '>=', DB::raw('DATE(DATE_ADD(NOW(), INTERVAL - 100 DAY))'))
+        
+        ->get())
+        
         ->groupBy('post_idPost')
         ->orderBy('q', 'desc')
         ->limit(3)
@@ -96,7 +109,8 @@ class PostController extends Controller
         
         $idPosts_q = Visualizacao::select(DB::raw('post_idPost as id, count(*) as q'))
                         ->whereIn('post_idPost', Post::select('id')
-                                                       ->whereDate('publishedAt', '>=', DB::raw('DATE(DATE_ADD(NOW(), INTERVAL - 100 DAY))'))->get())
+                        ->whereNull('deleted_at')
+                        ->whereDate('publishedAt', '>=', DB::raw('DATE(DATE_ADD(NOW(), INTERVAL - 100 DAY))'))->get())
                         ->groupBy('post_idPost')
                         ->orderBy('q', 'desc')
                         ->limit(10)
@@ -117,6 +131,8 @@ class PostController extends Controller
 
     public function getPost($id){
         $post = Post::where('id', $id)
+                    ->whereNull('deleted_at')
+                    ->whereNotNull('publishedAt')
                     ->with('autor')
                     ->with('categoriasPost')
                     ->first();
@@ -126,6 +142,8 @@ class PostController extends Controller
 
     public function postsPorCategoria($id){
         return Post::select('posts.*')
+            ->whereNull('posts.deleted_at')
+            ->whereNotNull('posts.publishedAt')
             ->join('post_categoria', 'posts.id', '=', 'post_categoria.post_idPost')
             ->where('post_categoria.categoria_idCategoria', $id)
             ->orderBy('posts.publishedAt', 'desc')->get();

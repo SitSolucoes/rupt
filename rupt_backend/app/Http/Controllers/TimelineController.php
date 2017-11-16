@@ -24,7 +24,9 @@ class TimelineController extends Controller
 
     public function getTimeline($leitor_id){
         $timeline = Timeline::where('leitor_idLeitor', $leitor_id)
-                             ->with('post')->get();
+                             ->with('post')
+                             ->orderBy('created_at', 'desc')
+                             ->get();
         $retorno = [];
         $int_c = new InteracaoController();
         foreach($timeline as $t){
@@ -33,5 +35,10 @@ class TimelineController extends Controller
             ];
         }
         return response()->json(['timeline' => $retorno], 200);
+    }
+
+    public function deleteByPost($post_id, $leitor_id){
+        Timeline::where('post_idPost', $post_id)
+                ->delete();
     }
 }

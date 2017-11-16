@@ -59,6 +59,8 @@ export class UserComponent implements OnInit {
   getTimeline(){
       this._timelineService.getTimeline(this.leitor.id).subscribe(
         ( timeline) => { 
+          console.log(timeline);
+
           this.timeline = timeline;
           this.timelineFiltro = timeline;
         }
