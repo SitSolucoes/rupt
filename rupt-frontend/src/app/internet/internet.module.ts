@@ -30,6 +30,7 @@ import { FroalaViewModule, FroalaEditorModule } from 'angular2-froala-wysiwyg';
 import { QuillEditorModule } from 'ngx-quill-editor';
 import { ModalGenericoComponent } from './modal-generico/modal-generico.component';
 import { EsqueciSenhaComponent } from './esqueci-senha/esqueci-senha.component';
+import { ModalExcluirComponent } from './modal-excluir/modal-excluir.component';
 
 @NgModule({ 
   imports: [
@@ -61,7 +62,8 @@ import { EsqueciSenhaComponent } from './esqueci-senha/esqueci-senha.component';
     ModalCategoriasComponent,
     PublicacaoComponent,
     ModalGenericoComponent,
-    EsqueciSenhaComponent
+    EsqueciSenhaComponent,
+    ModalExcluirComponent
   ],
   providers: [
     CategoriaLeitorService,

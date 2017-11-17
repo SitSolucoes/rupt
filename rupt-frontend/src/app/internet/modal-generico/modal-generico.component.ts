@@ -14,7 +14,7 @@ import { Validators } from '@angular/forms';
 export class ModalGenericoComponent implements OnInit {
 
     @Output('closeModalGenerico') closeModalGenerico = new EventEmitter();
-    @Input('action') action;
+        @Input('action') action;
     @Input('idObj') idObj;
 
     formDenuncia;

@@ -833,8 +833,8 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     display: block;
     width: 90%;
     float: left;
-    margin-top: 45px;
-    margin-bottom: 40px;
+    margin-top: 35px;
+    margin-bottom: 30px;
     margin-left: 5%;
 }
 
@@ -845,6 +845,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     float: left;
     background: #ccc;
     margin-right: 40px;
+    margin-top: 5px;
 }
 
 .rodape .container .img{
@@ -879,7 +880,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .rodape .info{
-    margin-top: 5px;
+    margin-top: 10px;
     margin-right: 20px;
     display: block;
     float: left;
@@ -926,7 +927,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     display: block;
     float: left;
     background: #f97000;
-    font-size: 24px;
+    font-size: 22px;
     color: #fff;
     text-align: center;
     padding-top: 8px;
@@ -1084,7 +1085,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     height: auto !important;
     display: block;
     margin: 0 auto;
-    width: 35% !important;
+    width: 36% !important;
 }
 
 .modal-footer .button{
@@ -1096,7 +1097,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     margin-left: 20px;
     margin-top: 5px;
     margin-bottom: 40px;
-    padding: 6px;
+    padding: 8px;
     border: 1px solid #ccc;
     background: #ccc;
     font-weight: bolder;
@@ -1121,6 +1122,58 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .modal-footer .color:hover{
     border: 1px solid #f97000;
     color: #f97000;
+}
+
+.modal-excluir{
+    display: block;
+    float: left;
+    height: 200px;
+    width: 100%;
+}
+
+.modal-excluir .container{
+    display: block;
+    width: 40%;
+    margin: 0 auto;
+}
+
+.modal-excluir .container p{
+    text-align: center;
+    margin-top: 40px;
+}
+
+.modal-excluir .container .button{
+    height: auto !important;
+    padding: 2px !important;
+    display: block;
+    margin-bottom: 15px !important;
+    margin: 0 auto;
+    float: none;
+    font-size: 18px !important;
+    background-color: #F44336 !important;
+    color: #fff;
+    border: 1px solid #F44336 !important;
+    width: 70% !important;
+}
+
+.modal-excluir .container .button:hover{
+    background: #fff !important;
+    border: 1px solid #F44336;
+    color: #F44336;
+    transition: 0.5s;
+}
+
+.modal-excluir .container .button2{
+    background-color: #ccc !important;
+    border: 1px solid #ccc !important;
+    color: #000;
+}
+
+.modal-excluir .container .button2:hover{
+    background-color: #fff !important;
+    border: 1px solid #ccc !important;
+    color: #4f4f4f;
+    transition: 0.5s;
 }
 
 /*---------------- user ---------- */
@@ -1160,7 +1213,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     display: block;
     float: left;
     height: 70px;
-    width: 70%;
+    width: 51%;
     background: #fff;
     padding-left: 30px;
     padding-top: 13px;
@@ -1170,6 +1223,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 
 .user .area3{
     margin-top: 235px;
+    width: 69%;
 }
 
 .user .area .info{
@@ -1296,7 +1350,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .user .bio .profile .img{
-  height: 200px;
+    height: 200px;
 }
 
 .user .bio .info{
@@ -1335,7 +1389,20 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .user .feed2{
-    width: 70%;
+    width: 69%;
+}
+
+
+.user .feed .tabs{
+    position: relative;
+    overflow-y: hidden;
+    height: 69px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.user .feed .indicator{
+    display: none;
 }
 
 .user .feed .status{
@@ -1353,22 +1420,35 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
   float: left;
   position: relative;
   left: 5%;
-  margin-right: 50px;
-  padding-top: 14px;
   font-family: 'nexa-bold';
   text-align: center;
   font-size: 15px;
   color: #4f4f4f; 
 }
 
+.user .feed .tabs .tab a{
+    color: #5e5e5e;
+    font-size: 16px;
+    text-transform: none;
+}
+
+.user .feed .tabs .tab a:hover{
+    color: #f97000 !important;
+    transition: color .28s ease;
+}
+
 .user .feed .status .active{
-  color: #f97000;
+  color: #f97000 !important;
   border-bottom: 3px solid #f97000;
 }
 
 .user .feed .status .menu .title{
   font-size: 16px;
   font-family: 'gilroy-bold';
+    display: block;
+    clear: both;
+    position: relative;
+    bottom: 25px;
 }
 
 .user .feed .post{
@@ -1426,11 +1506,45 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     float: right;
 }
 
+.user .feed .post .img6{
+    height: 22px;
+    margin-top: 15px;
+    margin-right: 7px;
+}
+
 .user .feed .post .text{
     display: block;
     float: left;
     width: 80%;
     line-height: 20px;
+}
+
+.user .feed .post .text2{
+    width: 85%;
+}
+
+.user .feed .post .text2 .btn{
+    float: right;
+    padding-right: 0px;
+    padding-left: 0px;
+    box-shadow: none;
+    background-color: #fff;
+    margin-top: 5px;
+}
+
+.user .feed .post .text2 .dropdown-content{
+    width: 120px !important;
+    left: 710px !important;
+    margin-top: 50px;
+    position: absolute   !important;
+}
+
+.user .feed .post .text2 .dropdown-content li{
+    min-height: 0px !important;
+}
+
+.user .feed .post .text2 .dropdown-content li > a{
+    padding: 10px;
 }
 
 .user .feed .post .text .name{
@@ -1487,6 +1601,10 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .user .feed .post .info2{
+    width: 85%;
+}
+
+.user .feed .post .info2{
     border: 1px solid #e6e6e6;
     padding: 10px;
     padding-top: 0px;
@@ -1497,15 +1615,24 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
   display: block;
   float: left;
   margin-top: 10px;
+  width: 100%;
   overflow: hidden;
   max-height: 260px;
+}
+
+.user .feed .post .info .border2{
+    max-height: 300px;
 }
 
 .user .feed .post .info .img3{
   width: auto;
   max-height: 260px;
   padding: 1px;
-  filter: brightness(70%);
+  filter: brightness(80%);
+}
+
+.user .feed .post .info .img7{
+    max-height: 400px;
 }
 
 .user .feed .post .info .new{
@@ -1565,18 +1692,18 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     height: 40px;
     display: block;
     float: left;
-    border-radius: 0px;
     margin-top: 10px;
     margin-bottom: 10px;
     margin-left: 5%;
     background: #f7f7f7;
     border: 1px solid #f7f7f7;
     border-radius: 2px;
-    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, .1) !important;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, .2) !important;
 }
 
 .user .feed .search input[type=text]:not(.browser-default):focus:not([readonly]), input[type=password]:not(.browser-default):focus:not([readonly]){
     background: #fff;
+    border: 1px solid #fff;
 }
 
 .user .feed .search .img6{
@@ -1586,6 +1713,59 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     position: relative;
     right: 35px;
     top: 20px;
+}
+
+.user .feed .leitores{
+    display: block;
+    float: left;
+    width: 100%;
+}
+
+.user .feed .leitores .info{
+    display: block;
+    float: left;
+    width: 28%;
+    height: 170px;
+    background: #f5f5f5;
+    margin-left: 4%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+.user .feed .leitores .info .area{
+    display: block;
+    margin: 0 auto;
+    float: none;
+    width: 80px;
+    height: 80px;
+    border-radius: 100%;
+    overflow: hidden;
+    padding: 0px;
+    margin-top: 20px;
+}
+
+.user .feed .leitores .info .area .img{
+    height: 80px;
+    width: auto;
+    position: initial;
+}
+
+.user .feed .leitores .info p{
+    font-size: 16px;
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 0px;
+    text-align: center;
+    font-weight: bolder;
+    color: #383838;
+}
+
+.user .feed .leitores .info .title{
+    font-size: 14px;
+    color: #878787;
+    width: 100%;
+    text-align: center;
 }
 
 .user .area-patrocinio{
@@ -2628,16 +2808,17 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .login-modal .container .button{
-    width: 35% !important;
+    width: 30% !important;
     height: 35px !important;
     border: 1px solid #f97000 !important;
     color: #fff;
     padding-top: 2px !important;
     font-family: lato;
-    font-size: 19px !important;
+    font-size: 17px !important;
     background: #f97000 !important;
     opacity: .9;
     margin-bottom: 30px;
+    float: right;
 }
 
 .login-modal .container .img{
@@ -2679,7 +2860,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 
 .login-modal .container .text{
     display: block;
-    float: right;
+    float: left;
     margin-top: 10px;
     color: #365899;
 }

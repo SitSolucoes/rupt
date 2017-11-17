@@ -27,6 +27,7 @@ export class UserComponent implements OnInit {
   url = ConnectionFactory.API_IMAGEM;
   calcTime = new CalcTime();
   modalDenuncia = new EventEmitter<string|MaterializeAction>();
+  modalExcluir = new EventEmitter<string|MaterializeAction>();
   base64: Base64 = new Base64();
   post;
   
@@ -121,4 +122,21 @@ export class UserComponent implements OnInit {
       });
     }
   }
+
+
+    openModalExcluir(p){
+        this.post = p;
+        this.modalExcluir.emit({
+            action: 'modal',
+            params: ['open']});
+    }
+    closeModalExcluir(e){
+        if(e){
+            this.modalExcluir.emit({
+                action:'modal',
+                params:['close']
+            });
+        }
+    }
+
 }
