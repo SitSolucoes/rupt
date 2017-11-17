@@ -109,5 +109,14 @@ export class DenunciasService {
         );
   }
 
+  countDenunciasPendentes(){
+    return this._http.get(this._url + 'denuncias/countDenuncias').map(
+      (count) =>{
+        console.log(count);
+        return +count.json().quantidade;
+      }
+    )
+  }
+
 
 }

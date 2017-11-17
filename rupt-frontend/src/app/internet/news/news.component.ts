@@ -31,9 +31,12 @@ export class NewsComponent implements OnInit {
   data_atual: Date;
   
   interacoes: any = {
-    likes: [],
-    dislikes: [],
-    shares: []
+    likes: 0,
+    loves: 0,
+    sad: 0,
+    cry: 0,
+    angry: 0,
+    shares: 0
   };
   
   modalDenuncia = new EventEmitter<string|MaterializeAction>();
@@ -114,9 +117,12 @@ export class NewsComponent implements OnInit {
         this._postService.getInteracoes(this.post.id).subscribe(
           (ret) => {
             if(ret.status == 'OK'){
-              this.interacoes.likes = ret.likes;
-              this.interacoes.dislikes = ret.dislikes;
-              this.interacoes.shares = ret.shares;
+              this.interacoes.likes = ret.likes.length;
+              this.interacoes.loves = ret.loves.length;
+              this.interacoes.angry = ret.angry.length;
+              this.interacoes.sad = ret.sads.length;
+              this.interacoes.cry = ret.cry.length;
+              this.interacoes.shares = ret.shares.length;
             }
           }
         );
@@ -126,9 +132,13 @@ export class NewsComponent implements OnInit {
     this._postService.interage(this.post.id, null, this.leitor, 'post', i).subscribe(
       (ret)=>{
         if(ret.status == 'OK'){
-          this.interacoes.likes = ret.likes;
-          this.interacoes.dislikes = ret.dislikes;
-          this.interacoes.shares = ret.shares;
+          console.log(ret);
+          this.interacoes.likes = ret.likes.length;
+          this.interacoes.loves = ret.love.length;
+          this.interacoes.angry = ret.angry.length;
+          this.interacoes.sad = ret.sad.length;
+          this.interacoes.cry = ret.cry.length;
+          this.interacoes.shares = ret.shares.length;
         }
       }
     );

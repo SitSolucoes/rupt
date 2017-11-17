@@ -72,9 +72,9 @@ export class PostsService {
           'dislikes' : response.json().interacoes.dislikes,
           'shares' : response.json().interacoes.shares,
           'loves' : response.json().interacoes.love,
-          'sads' : response.json().interacoes.sads,
-          'cry' : response.json().interacoes.angrys,
-          'angry' : response.json().interacoes.cries,
+          'sads' : response.json().interacoes.sad,
+          'cry' : response.json().interacoes.angry,
+          'angry' : response.json().interacoes.cry,
           'status': response.json().status,
           'message': response.json().message
         };

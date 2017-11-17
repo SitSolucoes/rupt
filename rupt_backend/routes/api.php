@@ -86,6 +86,10 @@ Route::get('/getDenuncias', [
 Route::get('/denuncias/getDetalhes/{id}', [
            'uses' => 'DenunciasController@getDetalhes'
 ]);
+Route::get('/denuncias/countDenuncias', [
+           'uses' => 'DenunciasController@countDenunciasPendentes'
+]);
+
 Route::put('/denuncias/agir', [
            'uses' => 'DenunciasController@agir'
 ]);

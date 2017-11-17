@@ -1,3 +1,4 @@
+import { DenunciasService } from './denuncias.service';
 import { PagamentoService } from './pagamento.service';
 import { ConnectionFactory } from './../classes/connection-factory';
 import { MensagensService } from './mensagens.service';
@@ -16,7 +17,8 @@ export class NotificacoesService {
     private _sugestoesService: SugestoesService,
     private _mensagensService: MensagensService,
     private _escritoresService: EscritoresService,
-    private _pagamentoService: PagamentoService
+    private _pagamentoService: PagamentoService,
+    private _denunciasService: DenunciasService
   ) { }
   
   private _url: string = ConnectionFactory.API_CONNECTION;
@@ -39,8 +41,10 @@ export class NotificacoesService {
     this._pagamentoService.countPagamentosPendentes().subscribe(
       (countPagamentos: number) => {this.notificacoes["pagamentos"] = countPagamentos}
     )
-
-    this.notificacoes["denuncias"]  = 8;
+    
+    this._denunciasService.countDenunciasPendentes().subscribe(
+      (countDenuncias: number) => {this.notificacoes["denuncias"] = countDenuncias}
+    )
      
     return this.notificacoes;
   }

@@ -14,9 +14,9 @@ class DenunciasController extends Controller
 {
     public function getDenuncias(){
         $denuncias = Denuncia::select(DB::raw('denuncias.*, count(post_idPost) as quantidade'))
+                             ->whereIn('status', ['A', 'I'])
                              ->groupBy('denuncias.post_idPost', 'denuncias.motivo_idMotivo')
-                             ->orderBy('created_At', 'desc')
-                             ->orderBy('status', 'asc');
+                             ->orderBy('created_At', 'desc');
         $denuncias_ret = [];
 
         foreach($denuncias->get() as $d){
@@ -161,5 +161,12 @@ class DenunciasController extends Controller
         $i->status = 'A';
 
         return $i;
+    }
+    public function countDenunciasPendentes(){
+        $count = Denuncia::select(DB::raw('count(*) as quantidade'))
+        ->where('status', 'A')
+        ->get();
+
+        return response()->json((object)['quantidade' => $count[0]['quantidade']], 200);
     }
 }
