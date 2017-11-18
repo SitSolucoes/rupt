@@ -1,3 +1,4 @@
+import { MaterializeAction } from 'angular2-materialize';
 import { UploadFileService } from './../../services/upload-file.service';
 import { PostsService } from './../../services/posts.service';
 import { Categoria } from 'app/classes/categoria';
@@ -8,7 +9,7 @@ import { Leitor } from 'app/classes/leitor';
 import { Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 
 import * as $ from 'jquery';
 import { UploadItem } from 'app/classes/upload-item';
@@ -23,7 +24,9 @@ export class PublicacaoComponent implements OnInit {
   categorias: Categoria[];
   formulario: FormGroup;
   leitor: Leitor;
-  post: Post;
+  post: Post = new Post();
+
+  modalExcluir = new EventEmitter<string|MaterializeAction>();
   
   constructor(private _formBuilder: FormBuilder,
               private _leitorService: LeitoresService,
@@ -103,14 +106,6 @@ export class PublicacaoComponent implements OnInit {
     )
   }
 
-  delete(){
-    this._postService.delete(this.formulario).subscribe(
-      (response) => {
-        this._router.navigate(['perfil/'+this.leitor.nick]);
-      }
-    )
-  }
-
   public editor;
   public editorContent = `<h3>I am Example content</h3>`;
   public editorOptions = { placeholder: "Escreva seu texto aqui...", };
@@ -150,6 +145,19 @@ export class PublicacaoComponent implements OnInit {
       }
       else 
           this._router.navigate(['noticia/'+post_id]);
+  }
+
+  openModalExcluir(){
+    this.modalExcluir.emit({
+        action: 'modal',
+        params: ['open']});
+  }
+
+  closeModalExcluir(e){
+    if(e){
+        this.modalExcluir.emit({action:'modal',params:['close']});
+        this._router.navigate(['/perfil/'+ this.leitor.nick]);
+    }
   }
 
 }

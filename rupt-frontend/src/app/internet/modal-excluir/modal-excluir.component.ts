@@ -1,3 +1,4 @@
+import { PostsService } from './../../services/posts.service';
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { TimelineService } from 'app/services/timeline.service';
 import { Router } from '@angular/router';
@@ -12,8 +13,10 @@ export class ModalExcluirComponent implements OnInit {
   @Output('closeModalExcluir') closeModalExcluir = new EventEmitter();
   @Input('id') id;
   @Input('leitor') leitor;
+  @Input('op') op; //1 - post //2 - timeline
 
   constructor(private _timelineService: TimelineService, 
+              private _postService: PostsService,
               private _router: Router) { }
 
   ngOnInit() {}
@@ -23,11 +26,21 @@ export class ModalExcluirComponent implements OnInit {
   }
 
   confirm(){
-    this._timelineService.deletePost(this.id).subscribe(
-      (response) => {
-        this.closeModal();
-      }
-    )
+    if (this.op == 2){
+      this._timelineService.deletePost(this.id).subscribe(
+        (response) => {
+          this.closeModal();
+        }
+      )
+    }
+    else{
+      this._postService.delete(this.id).subscribe(
+        (response) => {
+          this.closeModal();
+        }
+      )
+    }
+    
   }
 
 }

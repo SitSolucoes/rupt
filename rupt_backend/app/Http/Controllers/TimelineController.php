@@ -30,7 +30,7 @@ class TimelineController extends Controller
         return response()->json(['timeline' => $retorno], 200);
     }
 
-    public function deleteByPost($post_id, $leitor_id){
+    public function deleteByPost($post_id){
         Timeline::where('post_idPost', $post_id)
                 ->delete();
     }

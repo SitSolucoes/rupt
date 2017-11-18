@@ -71,10 +71,6 @@ export class NewsComponent implements OnInit {
     });
   }
 
-  getHoras(m){
-    return Math.floor(m/60);
-  }
-
   onSubmit(){
     this._postService.createComentario(this.form).subscribe(
       ( ret ) => {

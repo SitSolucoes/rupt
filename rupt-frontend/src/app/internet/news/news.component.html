@@ -121,13 +121,14 @@
 
             <div class="subtitle">Os comentários dessa sessão são de responsabilidade exclusiva de seus autores e não representam a opnião deste site. Se achar algo que viole os <b>Termos de uso</b>, denuncie. Leia as <a routerLink="../../faq">perguntas mais frequentes</a> para saber o que é impróprio ou ilegal.</div>
 
-            <div class="profile">
-
-            <div class="img-area">  <img src="{{  url + 'profile/' + leitor?.src_foto }}" class="img"> </div>
-              <form [formGroup]="form" (ngSubmit)="onSubmit()">
-                <input type="text" class="input" maxlength="140" name="comentario" formControlName="comentario" placeholder="Escreva um comentário..." >
-                <button type="submit" class="button" id="submit-contato"> Enviar </button>
-              </form>
+            <div class="profile" *ngIf="leitorLogado">
+                <div class="img-area">  
+                    <img src="{{  url + 'profile/' + leitor?.src_foto }}" class="img"> 
+                </div>
+                <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                    <input type="text" class="input" maxlength="140" name="comentario" formControlName="comentario" placeholder="Escreva um comentário..." >
+                    <button type="submit" class="button" id="submit-contato"> Enviar </button>
+                </form>
             </div>
 
             <div class="separate" *ngIf='comentarios && comentarios.length > 0' > recentes </div>
@@ -135,13 +136,18 @@
 
             <div class="profile" *ngFor="let c of comentarios">
                 
-                <div class="img-area">  <img src="{{url + 'profile/' + c?.comentario?.leitor?.src_foto}}" class="img"> </div>
+                <a routerLink='/perfil/{{ c?.comentario?.leitor?.nick }}'>
+                    <div class="img-area">  
+                        <img src="{{url + 'profile/' + c?.comentario?.leitor?.src_foto}}" class="img"> 
+                    </div>
+                </a>
 
                 <div class="user">
+                    <a routerLink='/perfil/{{ c?.comentario?.leitor?.nick }}'>
+                        <div class="title"> {{ c.comentario.leitor.nick ? c.comentario.leitor.nick : c.comentario.leitor.nome }} </div>
+                    </a>
 
-                    <div class="title"> {{ c.comentario.leitor.nick ? c.comentario.leitor.nick : c.comentario.leitor.nome }} </div>
-                    
-                    <div class="time"> {{c.comentario.minutos <= 1 ? "Segundos atrás" : getHoras(c.comentario.minutos) >= 2 ? getHoras(c.comentario.minutos) + " Horas" : c.comentario.minutos >= 60 ? getHoras(c.comentario.minutos) + " Hora" : "Há "+ c.comentario.minutos + " minutos" }} </div>
+                    <div class="time"> {{ calcHour( c.comentario.created_at ) }}</div>
 
                     {{c.comentario.comentario}}
 

@@ -144,8 +144,8 @@ export class PostsService {
     )
   }
 
-  delete(form){
-    return this._http.post(this._url + 'posts/delete', JSON.stringify(form.value), {headers: this.headers}).map(
+  delete(id){
+    return this._http.post(this._url + 'posts/delete', JSON.stringify({id: id}), {headers: this.headers}).map(
       (response) => { return response.json().msg }
     )
   }

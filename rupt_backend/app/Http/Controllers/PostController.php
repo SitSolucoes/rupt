@@ -29,7 +29,7 @@ class PostController extends Controller
         $post = $this->create($request, $post);
         $post->autor_idLeitor = $request->leitor_id;
         $post->visualizacoes = 0;
-        $post->publichedAt = time();
+        $post->publishedAt = time();
         
         $post->save();
 
@@ -58,7 +58,7 @@ class PostController extends Controller
         $post->save();
 
         $c = new TimelineController();
-        $c->deleteByPost($post->id, $post->leitor_idLeitor);
+        $c->deleteByPost($post->id);
 
         return response()->json(['msg', 'Excluido com sucesso.'], 200);
     }
