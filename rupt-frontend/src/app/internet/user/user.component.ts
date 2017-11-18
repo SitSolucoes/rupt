@@ -72,12 +72,14 @@ export class UserComponent implements OnInit {
   }
 
   search(){
+      console.log(this.timelineFiltro);
+
       if (!this.filtro || this.filtro == '')
         this.timelineFiltro = this.timeline;
       else {
         this.timelineFiltro = this.timelineFiltro.filter((t) => {
-          if (t.post.titulo.toLowerCase().indexOf(this.filtro.toLowerCase()) >= 0 ||
-              t.post.conteudo.toLowerCase().indexOf(this.filtro.toLowerCase()) >= 0) {
+          if (t.tl.post.titulo.toLowerCase().indexOf(this.filtro.toLowerCase()) >= 0 ||
+              t.tl.post.conteudo.toLowerCase().indexOf(this.filtro.toLowerCase()) >= 0) {
 
             return true;
           }
