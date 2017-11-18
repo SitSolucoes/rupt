@@ -15,13 +15,6 @@ class TimelineController extends Controller
         $timeline->save();
     }
 
-    public function delete($leitor_id, $post_id){
-        $timeline = Timelike::where('leitor_idLeitor', $leitor_id)
-                            ->where('post_idPost', $post_id)
-                            -get()
-                            ->delete();
-    }
-
     public function getTimeline($leitor_id){
         $timeline = Timeline::where('leitor_idLeitor', $leitor_id)
                              ->with('post')
@@ -40,5 +33,12 @@ class TimelineController extends Controller
     public function deleteByPost($post_id, $leitor_id){
         Timeline::where('post_idPost', $post_id)
                 ->delete();
+    }
+
+    public function deleteTimeline(Request $request){
+        Timeline::where('id', $request->timeline_id)
+                  ->delete();
+
+        return response()->json(['deleted' => 'true'], 200);
     }
 }

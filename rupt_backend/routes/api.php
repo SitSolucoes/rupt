@@ -161,3 +161,4 @@ Route::post('pagamento/uploadDoc/{id}', ['uses' => 'PagamentoController@uploadDo
 
 //timeline
 Route::get('timeline/getTimeline/{id}', ['uses' => 'TimelineController@getTimeline']);
+Route::post('timeline/deleteTimeline', ['uses' => 'TimelineController@deleteTimeline']);

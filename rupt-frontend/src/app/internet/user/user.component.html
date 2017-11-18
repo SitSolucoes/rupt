@@ -1,12 +1,14 @@
 <div id="modalDenuncia" class="modal modal2 modal4"
     materialize="modal" [materializeParams]="[{dismissible: false}]"
     [materializeActions]="modalDenuncia">
-    <modal-generico [action]="'denuncia'" [idObj]="post" (closeModalGenerico)="closeModalDenuncia($event)"></modal-generico>
+    <modal-generico [action]="'denuncia'" [idObj]="post.id" (closeModalGenerico)="closeModalDenuncia($event)"></modal-generico>
 </div>
 <div id="modalExcluir" class="modal modal2 modal4"
      materialize="modal" [materializeParams]="[{dismissible: false}]"
      [materializeActions]="modalExcluir">
-    <modal-excluir (closeModalGenerico)="closeModalExcluir($event)"></modal-excluir>
+    <modal-excluir (closeModalExcluir)="closeModalExcluir($event)" 
+        [id]='timelineId' [leitor]='leitorLogado'>
+    </modal-excluir>
 </div>
 <div class="user user-patrocinador">
     <img src="{{ url + 'profile/' + leitor.src_capa }}" class="img-pat">
@@ -98,7 +100,7 @@
        <!-- <div class="feed"> -->
        <div class="feed feed2">
             <div class="status">
-                <ul id="tabs-swipe-demo" class="tabs">
+                <ul id="tabs-swipe-demo" class="tabs" materialize="tabs">
                     <li class="menu tab col s3"><a href="#test-swipe-1" class=" active"> Notícias
                         <font class="title"> {{ timeline.length }} </font>  </a> </li>
 
@@ -110,20 +112,18 @@
                 </ul>
             </div>
 
-            <div class="search">
+           <div id="test-swipe-1">
 
+            <div class="post-none" *ngIf='timeline.length == 0'>
+                Sem publicações até o momento
+            </div>
+
+            <div class="search" *ngIf='timeline.length > 0'>
                 <input class="input-search" maxlength="30" name="marca" placeholder="Pesquise uma publicação" type="text" [(ngModel)]="filtro">
 
                 <a (click)='search()'>
                     <img src="../../../assets/img/search2.png" class="img6">
                 </a>
-
-            </div>
-
-           <div id="test-swipe-1">
-
-            <div class="post-none" *ngIf='timeline.length == 0'>
-                Sem publicações até o momento
             </div>
 
             <div class="post" *ngFor='let t of timelineFiltro'>
@@ -147,15 +147,9 @@
                     </font>
 
                     <!-- não é a propria tl -->
-                    <a href="" *ngIf="t.tl.leitor_idLeitor != leitorLogado.id">
+                    <a class='dropdown-button btn' data-activates='dropdown' materialize="dropdown" *ngIf="t.tl.leitor_idLeitor != leitorLogado.id && leitorLogado.id">
                         <img src="../../../assets/img/dot.png" class="img img5">
                     </a>
-
-                    <!-- propria tl mas post compartilhado -->
-                    <a class='dropdown-button btn' data-activates='dropdown' materialize="dropdown">
-                        <img src="../../../assets/img/dot.png" class="img img5">
-                    </a>
-                      <img src="../../../assets/img/x.png" (click)="leitor ? openModalExcluir(t.tl.post.id) : true" class="img img5 img6">
 
                     <ul id='dropdown' class='dropdown-content' style="top: 60px !important;">
                         <!-- Caso user seja escritor <li><a routerLink="cadastro-escritor">Editar Perfil</a></li>-->
@@ -164,10 +158,15 @@
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a (click)="leitor ? openModalDenuncia(t.tl.post.id) : true"> Denunciar </a>
+                            <a (click)="openModalDenuncia(t.tl.post)"> Denunciar </a>
                         </li>
                     </ul>
 
+                    <!-- propria tl mas post compartilhado -->
+                    <a class='dropdown-button btn' *ngIf="t.tl.post.autor.id != leitorLogado.id && t.tl.leitor_idLeitor == leitorLogado.id">
+                        <img src="../../../assets/img/x.png" (click)="openModalExcluir(t.tl.id)" class="img img5 img6">
+                    </a>
+                    
                     <!-- tl dele com post próprio -->
                     <a routerLink='../../publicacao/{{ t.tl.post.id }}' *ngIf="t.tl.post.autor.id == leitorLogado.id">
                         <img src="../../../assets/img/edit.png" class="img img5">
@@ -200,7 +199,6 @@
                         <img src="../../../assets/img/rupt-ico3.png" (click)="interage(t.tl.post.id, 'sad')" class="img4">
                         <img src="../../../assets/img/rupt-ico4.png" (click)="interage(t.tl.post.id, 'angry')" class="img4">
                         <img src="../../../assets/img/rupt-ico7.png" (click)="interage(t.tl.post.id, 'cry')" class="img4">
-                        <img src="../../../assets/img/report.png" (click)="leitor ? openModalDenuncia(t.tl.post.id) : true" class="img4">
                         <div class="total">{{t.interacoes.likes.qnt + t.interacoes.loves.qnt + t.interacoes.sads.qnt + t.interacoes.cries.qnt + t.interacoes.angries.qnt}}</div>
                     </div>
                 </div>

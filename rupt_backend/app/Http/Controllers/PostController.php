@@ -29,6 +29,7 @@ class PostController extends Controller
         $post = $this->create($request, $post);
         $post->autor_idLeitor = $request->leitor_id;
         $post->visualizacoes = 0;
+        $post->publichedAt = time();
         
         $post->save();
 

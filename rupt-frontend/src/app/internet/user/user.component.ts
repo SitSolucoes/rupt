@@ -12,6 +12,7 @@ import { LeitoresService } from './../../services/leitores.service';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Leitor } from 'app/classes/leitor';
+import { Post } from 'app/classes/post';
 
 @Component({
   selector: 'app-user',
@@ -29,9 +30,9 @@ export class UserComponent implements OnInit {
   modalDenuncia = new EventEmitter<string|MaterializeAction>();
   modalExcluir = new EventEmitter<string|MaterializeAction>();
   base64: Base64 = new Base64();
-  post;
+  post = new Post();
+  timelineId = 0;
   
-
   constructor(private _activatedRoute: ActivatedRoute,
               private _leitorService: LeitoresService, 
               private _timelineService: TimelineService,
@@ -60,8 +61,6 @@ export class UserComponent implements OnInit {
   getTimeline(){
       this._timelineService.getTimeline(this.leitor.id).subscribe(
         ( timeline) => { 
-          console.log(timeline);
-
           this.timeline = timeline;
           this.timelineFiltro = timeline;
         }
@@ -88,14 +87,11 @@ export class UserComponent implements OnInit {
   }
 
   interage(post, i){
-    console.log('está tentando dar' + i);
     this._postService.interage(post, null, this.leitor.id, 'post', i).subscribe(
       (ret)=>{
         if(ret.status == 'OK'){
-          console.log('ok');
           let novainteracoes = new Interacoes(ret.likes.length, ret.love.length, ret.shares.length, ret.sad.length, ret.angry.length, ret.cry.length).interacoes;
           this.changeInteracoes(post, novainteracoes);
-          console.log(this.timelineFiltro);
         }
       }
     );
@@ -124,19 +120,18 @@ export class UserComponent implements OnInit {
   }
 
 
-    openModalExcluir(p){
-        this.post = p;
-        this.modalExcluir.emit({
-            action: 'modal',
-            params: ['open']});
+  openModalExcluir(id){
+      this.timelineId = id;
+      this.modalExcluir.emit({
+          action: 'modal',
+          params: ['open']});
+  }
+
+  closeModalExcluir(e){
+    if(e){
+        this.modalExcluir.emit({action:'modal',params:['close']});
+        this.getTimeline();
     }
-    closeModalExcluir(e){
-        if(e){
-            this.modalExcluir.emit({
-                action:'modal',
-                params:['close']
-            });
-        }
-    }
+  }
 
 }

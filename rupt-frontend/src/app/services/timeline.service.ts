@@ -2,7 +2,7 @@ import { Interacoes } from './../interacoes';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { ConnectionFactory } from 'app/classes/connection-factory';
-import { Http, Response } from '@angular/http';
+import { Http, Response, Headers } from '@angular/http';
 
 @Injectable()
 export class TimelineService {
@@ -26,6 +26,16 @@ export class TimelineService {
           return timeline;
         }
       )
+  }
+
+  deletePost(timeline_id): Observable<any>{
+    const body = JSON.stringify({
+      timeline_id: timeline_id
+    })
+
+    return this._http.post(this._url + 'timeline/deleteTimeline', body, { headers: this.headers }).map(
+      ( response ) => { return true }
+    )
   }
   
 }

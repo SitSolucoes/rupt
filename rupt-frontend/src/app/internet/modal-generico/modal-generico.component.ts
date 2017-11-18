@@ -14,7 +14,7 @@ import { Validators } from '@angular/forms';
 export class ModalGenericoComponent implements OnInit {
 
     @Output('closeModalGenerico') closeModalGenerico = new EventEmitter();
-        @Input('action') action;
+    @Input('action') action;
     @Input('idObj') idObj;
 
     formDenuncia;
@@ -66,10 +66,5 @@ export class ModalGenericoComponent implements OnInit {
   
   closeModal(){
     this.closeModalGenerico.emit(true);
-    //if(this.action=='mensagemDenuncia')
-      //this._router.navigate(['noticia/'+this.idObj]); 
   }
-
-
-
 }
