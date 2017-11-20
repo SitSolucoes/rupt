@@ -1,9 +1,9 @@
-<div class="esqueci-senha">
+<!--<div class="esqueci-senha">
 
     <div class="container">
 
         <div class="area">
-
+        -->
             <div class="position">
 
             <p> Encontre sua conta  </p>
@@ -12,20 +12,22 @@
 
                 <input type="text" class="input" maxlength="30" name="marca" readonly placeholder="joao@hotmail.com">
 
-                <input type="text" class="input" maxlength="30" name="marca" placeholder="e-mail">
+            <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+                <input type="text" class="input" maxlength="30" formControlName="email" name="marca" placeholder="e-mail">
 
-                <input type="text" class="input" maxlength="30" name="marca" placeholder="confirmar e-mail">
+                <input type="text" class="input" maxlength="30" formControlName="confirma" name="marca" placeholder="confirmar e-mail">
 
                 <button type="submit" class="button"> Salvar </button>
 
-                <button type="submit" class="button button2"> Voltar </button>
+                <button type="button" (click)="voltar()" class="button button2"> Voltar </button>
+            </form>    
 
             </div>
 
             </div>
 
-        </div>
+<!--        </div>
 
     </div>
 
-</div>
+</div>-->

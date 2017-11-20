@@ -6,7 +6,12 @@
 <div id="ModalLogin" class="modal modal2"
      materialize="modal" [materializeParams]="[{dismissible: false}]"
      [materializeActions]="modalLogin">
-    <modal-login (closeModalLogin)="closeModalLogin($event)"></modal-login>
+    <modal-login (closeModalLogin)="closeModalLogin($event)" (openEsqueciSenha)="openModalEsqueciSenha($event)"></modal-login>
+</div>
+<div id="ModalEsqueciSenha" class="modal modal2"
+     materialize="modal" [materializeParams]="[{dismissible: false}]"
+     [materializeActions]="modalEsqueciSenha">
+    <esqueci-senha (closeModalLogin)="closeModalEsqueciSenha($event)"></esqueci-senha>
 </div>
 <div id="ModalGenerico" class="modal modal2 modal4"
      materialize="modal" [materializeParams]="[{dismissible: false}]"

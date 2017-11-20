@@ -48,6 +48,18 @@ export class LeitoresService {
     });
   }  
 
+  esqueciSenha(f){
+    const body = JSON.stringify({
+      email: f.value.email
+    });
+
+    return this._http.post(this._url + 'esqueciSenhaLeitor', body, {headers: this.headers}).map(
+      (r) => {
+        return r.json().retorno;
+      }
+    );
+  }
+
   getLeitores(): Observable<any>{
      return this._http.get(this._url + 'getLeitores')
       .map(

@@ -73,6 +73,20 @@ class LeitorController extends Controller
         return response()->json(['leitor' => $leitor], 200);
     }
 
+    public function esqueciSenha(Request $request){
+        $leitor = Leitor::where('email', $request->email)->get();
+        try{
+            if(count($leitor) > 0){
+                return response()->json(['retorno' => true], 200);
+            }else{
+                return response()->json(['retorno' => false], 200);
+            }
+        }catch(ErrorException $e){
+            return response()->json(['retorno' => false], 200);
+        }
+        
+    }
+
     public function getLeitorByNick($nick){
         $leitor = Leitor::where('nick', $nick)->with('escritor')->first();
 

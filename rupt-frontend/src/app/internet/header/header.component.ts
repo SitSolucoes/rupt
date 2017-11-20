@@ -17,6 +17,7 @@ export class HeaderComponent implements OnInit {
   leitor: Leitor;
   modalActions = new EventEmitter<string|MaterializeAction>();
   modalLogin = new EventEmitter<string|MaterializeAction>();
+  modalEsqueciSenha = new EventEmitter<string|MaterializeAction>();
   modalGenerico = new EventEmitter<string|MaterializeAction>();
   
   constructor(private _leitorService: LeitoresService,
@@ -40,6 +41,16 @@ export class HeaderComponent implements OnInit {
       this.modalLogin.emit({
           action: 'modal',
           params: ['open']});
+  }
+
+  openModalEsqueciSenha(e){
+    if(e){
+      this.modalLogin.emit({action:"modal",params:['close']});
+    }
+    this.modalEsqueciSenha.emit({
+      action: 'modal',
+      params: ['open']
+    });
   }
   
   closeModal(e){

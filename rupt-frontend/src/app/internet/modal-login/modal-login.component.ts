@@ -11,6 +11,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 export class ModalLoginComponent implements OnInit {
   
   @Output('closeModalLogin') closeModalLogin = new EventEmitter();
+  @Output('openEsqueciSenha') openEsqueciSenha = new EventEmitter();
   
   erro: boolean;
   formulario: FormGroup;
@@ -29,6 +30,10 @@ export class ModalLoginComponent implements OnInit {
         email: ['', Validators.required],
         password: ['', Validators.required]
     })
+  }
+
+  openModalEsqSen(){
+    this.openEsqueciSenha.emit(true);
   }
 
   onSubmit(){
