@@ -10,21 +10,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EsqueciSenhaComponent implements OnInit {
 
+  erros;
   formulario: FormGroup;
+  enviado: boolean;
+  mensagem: string;
   constructor(private _formBuilder: FormBuilder, private _ls: LeitoresService) { }
 
   ngOnInit() {
     this.createForm();
+    this.enviado = false;
   }
 
   onSubmit(){
-    if(this.formulario.value.email != this.formulario.value.confirma)
-      console.log('teste de form invalido');
-      console.log('passou');
+    if(this.formulario.value.email != this.formulario.value.confirma){
+      this.erros = [];
+      this.erros.push('Os emails devem ser iguais.');
+      return false;
+    }
     this._ls.esqueciSenha(this.formulario).subscribe(
       (retorno)=>{
-        console.log('retorno');
-        console.log(retorno);
+        if(!retorno.retorno){
+          this.erros = [];
+          this.erros.push(retorno.mensagem);
+          console.log(retorno.mensagem);
+          return false;
+        }
+        this.enviado = true;
+        this.mensagem = retorno.mensagem;
       });
   }
 

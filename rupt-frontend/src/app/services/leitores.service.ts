@@ -55,7 +55,7 @@ export class LeitoresService {
 
     return this._http.post(this._url + 'esqueciSenhaLeitor', body, {headers: this.headers}).map(
       (r) => {
-        return r.json().retorno;
+        return r.json();
       }
     );
   }

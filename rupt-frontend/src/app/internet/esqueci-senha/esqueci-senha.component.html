@@ -4,27 +4,43 @@
 
         <div class="area">
         -->
+        <div *ngIf="!enviado">
             <div class="position">
 
             <p> Encontre sua conta  </p>
+            <div class="erros" *ngIf="erros?.length > 0">
+                <ul>
+                    <li *ngFor="let e of erros"> {{ e }}</li>
+                </ul>
+            </div>
 
             <div class="info">
 
-                <input type="text" class="input" maxlength="30" name="marca" readonly placeholder="joao@hotmail.com">
+                <!--<input type="text" class="input" maxlength="30" name="marca" readonly placeholder="joao@hotmail.com">-->
+                <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+                    <input type="text" class="input" maxlength="30" formControlName="email" name="marca" placeholder="e-mail">
 
-            <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
-                <input type="text" class="input" maxlength="30" formControlName="email" name="marca" placeholder="e-mail">
+                    <input type="text" class="input" maxlength="30" formControlName="confirma" name="marca" placeholder="confirmar e-mail">
 
-                <input type="text" class="input" maxlength="30" formControlName="confirma" name="marca" placeholder="confirmar e-mail">
+                    <button type="submit" class="button"> Salvar </button>
 
-                <button type="submit" class="button"> Salvar </button>
+                    <button type="button" (click)="voltar()" class="button button2"> Voltar </button>
+                </form>    
 
-                <button type="button" (click)="voltar()" class="button button2"> Voltar </button>
-            </form>    
+            </div>
 
             </div>
 
+        </div>
+        <div *ngIf="enviado">
+            <div class="position">
+                <p>Pronto!</p>
+                <div class="info">
+                    <span>{{mensagem}}</span>
+                </div>
             </div>
+
+        </div>
 
 <!--        </div>
 

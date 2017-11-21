@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
+use App\Mail\EsqueciSenhaLeitor;
 use App\Leitor;
 
 class LeitorController extends Controller
@@ -74,17 +76,44 @@ class LeitorController extends Controller
     }
 
     public function esqueciSenha(Request $request){
-        $leitor = Leitor::where('email', $request->email)->get();
+        $leitor = Leitor::where('email', $request->email)->first();
         try{
-            if(count($leitor) > 0){
-                return response()->json(['retorno' => true], 200);
+            if($leitor != null){    
+                if(!$leitor->ativo)
+                    return response()->json(['retorno' => false, 'mensagem' => 'Seu usuário está desativado, caso você nunca tenha recebido nenhum aviso ou alerta sobre este tema, por favor, entre em contato.'], 200);
+                $destino = $leitor->email;
+                $rdm_token = str_random(60);
+                $leitor->token_esqueci_senha = $rdm_token;
+                $leitor->save();
+                Mail::to($destino)->send(new esqueciSenhaLeitor($rdm_token));
+                return response()->json(['retorno' => true, 'mensagem' => "Um e-mail foi enviado com as instruções para recuperação da senha."]);
             }else{
-                return response()->json(['retorno' => false], 200);
+                return response()->json(['retorno' => false, 'mensagem' => "Seu email não foi encontrado em nossa base de dados, por favor confira os dados digitados."], 200);
             }
         }catch(ErrorException $e){
-            return response()->json(['retorno' => false], 200);
+            return response()->json(['retorno' => false, 'mensagem' => "Um erro inesperado ocorreu, tente novamente mais tarde"], 200);
         }
         
+    }
+
+    public function validaTokenRedefine($token){
+        $admin = Admin::where('token_esqueci_senha', $token)->first();
+        if($admin != null)
+            return response()->json(['valido' => true], 200);
+        else
+            return response()->json(['valido' => false], 200);
+    }
+
+    public function redefineSenha($token){
+        $leitor = Leitor::where('token_esqueci_senha', $token)->first();
+        if($leitor != null){
+            $leitor->token_esqueci_senha = '';
+            $leitor->password = bcrypt($r->input('senha'));
+            $leitor->save();
+            return response()->json(['retorno' => "Senha redefinida com sucesso! Efetue o login"], 200);
+        }
+        echo $r->input('token');
+        return response()->json(['error' => "Administrador não encontrado"]);
     }
 
     public function getLeitorByNick($nick){
