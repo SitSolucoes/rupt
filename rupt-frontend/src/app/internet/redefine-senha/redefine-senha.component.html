@@ -1,0 +1,27 @@
+<div class="cadastro">
+  <div class="container" *ngIf="tokenValido()">
+    <p> Olá! Por favor insira sua nova senha </p>
+    <div class="area"> 
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="menu">
+          <label> Senha </label> 
+          <input type="password" class="input" maxlength="20" name="senha" placeholder="Crie sua senha" formControlName="password"
+          [ngClass]="{'invalid': verificaValidTouched('password')}">
+
+          <div class="error" *ngIf="verificaValidTouched('password')">{{ mensagemErro('password') }}</div>
+      </div>
+      <div class="menu marginless">
+          <label> Confirmar Senha </label> 
+          <input type="password" class="input" maxlength="20" name="confirma_senha" placeholder="Confirme sua senha" formControlName="confirma_senha">
+
+          <div class="error" *ngIf="form.get('confirma_senha').value != form.get('password').value">Senhas não coincidem</div>
+      </div>
+      <button type="submit" class="button" id="submit-contato">Alterar</button>
+      </form>
+    </div>
+  </div>
+  <div class="container" *ngIf="!tokenValido()">
+    <p> {{erro}} </p>
+  </div>
+  
+</div>

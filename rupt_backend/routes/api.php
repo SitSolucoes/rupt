@@ -40,7 +40,9 @@ Route::get('/validaEmailLeitor/{nick}/{id}', ['uses' => 'LeitorController@valida
 
 Route::put('/leitor/signin',['uses' => 'LeitorController@signin']);
 Route::post('leitor/verificaLogin', ['uses' => 'LeitorController@verificaLogin']);
-Route::get('leitor/redefineSenha/{$token}', ['uses' => 'LeitorController@redefineSenha']);
+Route::put('leitor/redefineSenha', ['uses' => 'LeitorController@redefineSenha']);
+Route::get('leitor/validaToken/{token}', ['uses' => 'LeitorController@validaToken']);
+
 Route::post('leitor/uploadImages/{id}', ['uses' => 'LeitorController@uploadImages']);
 Route::post('/esqueciSenhaLeitor', ['uses' => 'LeitorController@esqueciSenha']);
 Route::get('leitor/getLeitorByNick/{nick}', ['uses' => 'LeitorController@getLeitorByNick']);

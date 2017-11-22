@@ -111,7 +111,7 @@ class PostController extends Controller
         $idPosts_q = Visualizacao::select(DB::raw('post_idPost as id, count(*) as q'))
                         ->whereIn('post_idPost', Post::select('id')
                         ->whereNull('deleted_at')
-                        ->whereDate('publishedAt', '>=', DB::raw('DATE(DATE_ADD(NOW(), INTERVAL - 100 DAY))'))->get())
+                        ->whereDate('publishedAt', '>=', DB::raw('DATE(DATE_ADD(NOW(), INTERVAL - 300 DAY))'))->get())
                         ->groupBy('post_idPost')
                         ->orderBy('q', 'desc')
                         ->limit(10)

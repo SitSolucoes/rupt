@@ -75,6 +75,19 @@ class LeitorController extends Controller
         return response()->json(['leitor' => $leitor], 200);
     }
 
+    public function 
+
+    public function validaToken($token){
+        $leitor = Leitor::where('token_esqueci_senha', $token)->first();
+        try{
+            if($leitor != null){
+                return response()->json(['resultado' => true, 'leitor' => $leitor->email], 200);
+            }
+        }catch(Exception $ex){
+            return response()->json(['retorno' => false, 'mensagem' => "Seu email não foi encontrado em nossa base de dados, por favor confira os dados digitados."], 200);
+        }
+    }
+
     public function esqueciSenha(Request $request){
         $leitor = Leitor::where('email', $request->email)->first();
         try{
@@ -104,8 +117,9 @@ class LeitorController extends Controller
             return response()->json(['valido' => false], 200);
     }
 
-    public function redefineSenha($token){
-        $leitor = Leitor::where('token_esqueci_senha', $token)->first();
+    public function redefineSenha(Request $request){
+        $leitor = Leitor::where('email', $request->input('email'))
+        ->first();
         if($leitor != null){
             $leitor->token_esqueci_senha = '';
             $leitor->password = bcrypt($r->input('senha'));

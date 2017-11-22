@@ -10,8 +10,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LeitorController;
 
-class DenunciasController extends Controller
-{
+class DenunciasController extends Controller{
     public function getDenuncias(){
         $denuncias = Denuncia::select(DB::raw('denuncias.*, count(post_idPost) as quantidade'))
                              ->whereIn('status', ['A', 'I'])
@@ -162,6 +161,7 @@ class DenunciasController extends Controller
 
         return $i;
     }
+    
     public function countDenunciasPendentes(){
         $count = Denuncia::select(DB::raw('count(*) as quantidade'))
         ->where('status', 'A')

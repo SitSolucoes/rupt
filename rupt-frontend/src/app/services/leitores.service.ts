@@ -38,6 +38,14 @@ export class LeitoresService {
     });
   } 
 
+  validaToken(token){
+    return this._http.get(this._url + 'leitor/validaToken/'+token).map(
+      (response)=> {
+        return response.json();
+      }
+    )
+  }
+
   updateLeitor(form, id){
     const body = this.createBody(form);
     

@@ -1,3 +1,4 @@
+import { RedefineSenhaComponent } from './redefine-senha/redefine-senha.component';
 
 
 import { NgModule } from '@angular/core';
@@ -28,6 +29,7 @@ const routes: Routes = [
       { path : 'publicacao/:id', component: PublicacaoComponent},
       { path : 'contato', component: ContatoComponent},
       { path : 'esqueci-senha', component:  EsqueciSenhaComponent},
+      { path : 'redefinindoSenha/:token', component: RedefineSenhaComponent}, 
       { path : '', redirectTo: 'noticias', pathMatch: 'full'},
       { path : '**', redirectTo: 'noticias', pathMatch: 'full'},
 
