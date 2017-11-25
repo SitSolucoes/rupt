@@ -4,46 +4,48 @@
 
         <div class="area">
         -->
-        <div *ngIf="!enviado">
-            <div class="position">
-
-            <p> Encontre sua conta  </p>
-            <div class="erros" *ngIf="erros?.length > 0">
-                <ul>
-                    <li *ngFor="let e of erros"> {{ e }}</li>
-                </ul>
-            </div>
-
-            <div class="info">
-
-                <!--<input type="text" class="input" maxlength="30" name="marca" readonly placeholder="joao@hotmail.com">-->
-                <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
-                    <input type="text" class="input" maxlength="30" formControlName="email" name="marca" placeholder="e-mail">
-
-                    <input type="text" class="input" maxlength="30" formControlName="confirma" name="marca" placeholder="confirmar e-mail">
-
-                    <button type="submit" class="button"> Salvar </button>
-
-                    <button type="button" (click)="voltar()" class="button button2"> Voltar </button>
-                </form>    
-
-            </div>
-
-            </div>
-
+<div class="modal-content">
+        <div class="title">
+                <span *ngIf="!spinner"> Esqueci Senha  </span>
+                <a click="#" class=" modal-action modal-close close">X</a>
+                <span *ngIf="spinner"> Enviando...</span>
         </div>
-        <div *ngIf="enviado">
-            <div class="position">
-                <p>Pronto!</p>
-                <div class="info">
-                    <span>{{mensagem}}</span>
+        <div *ngIf="!enviado">
+            <div class="login-modal">
+                <div class="container">
+                    <!--<input type="text" class="input" maxlength="30" name="marca" readonly placeholder="joao@hotmail.com">-->
+                    <form [formGroup]="formulario" *ngIf="!spinner" (ngSubmit)="onSubmit()">
+                        <input type="text" class="input" maxlength="30" formControlName="email" name="marca" placeholder="e-mail">
+
+                        <input type="text" class="input" maxlength="30" formControlName="confirma" name="marca" placeholder="confirmar e-mail">
+
+                        <button type="submit" class="button"> Enviar </button>
+
+                        <button type="button" (click)="voltar()" class="button button2"> Voltar </button>
+                    </form>    
+                    
+                    <div class="spinner" *ngIf="spinner">
+                        <div class="preloader-wrapper big active" >
+                            <div class="spinner-layer spinner-rupt">
+                                <div class="circle-clipper left">
+                                    <div class="circle"></div>
+                                </div><div class="gap-patch">
+                                    <div class="circle"></div>
+                                </div><div class="circle-clipper right">
+                                    <div class="circle"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-
         </div>
-
-<!--        </div>
-
-    </div>
-
-</div>-->
+        <div *ngIf="enviado">
+            <div class="login-modal">
+                <div class="container">
+                    <span>{{mensagem}}</span>
+                    <button type="button" (click)="voltar()" class="button button2"> Fechar </button>
+                </div>
+            </div>
+        </div>
+</div>

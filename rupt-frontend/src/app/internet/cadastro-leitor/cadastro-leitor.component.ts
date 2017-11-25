@@ -51,8 +51,7 @@ export class CadastroLeitorComponent implements OnInit {
           if (response) {
               this.textButton = 'Editar';
               this.preencheForm();
-          }
-            
+          }            
       }
     )
   }
@@ -74,6 +73,8 @@ export class CadastroLeitorComponent implements OnInit {
   }
   
   preencheForm(){
+    console.log('preenchendo o leito com');
+    console.log(this.leitor);
     this.form.patchValue({
       id: this.leitor.id,
       nome: this.leitor.nome,
@@ -88,6 +89,7 @@ export class CadastroLeitorComponent implements OnInit {
       confirma_senha: 'update',
       ativo: true,
     })
+    console.log(this.form);
   }
 
   validaNick(){

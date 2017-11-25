@@ -41,7 +41,23 @@ export class LeitoresService {
   validaToken(token){
     return this._http.get(this._url + 'leitor/validaToken/'+token).map(
       (response)=> {
+        console.log(response);
         return response.json();
+      }
+    )
+  }
+
+  redefineSenha(f){
+    const body = JSON.stringify({
+      email: f.value.email,
+      senha: f.value.novaSenha
+    })
+
+    //console.log(f.value.email);
+    
+    return this._http.put(this._url + 'leitor/redefineSenha', body, {headers: this.headers}).map(
+      (response)=>{
+        return response.json().resultado;
       }
     )
   }

@@ -75,16 +75,15 @@ class LeitorController extends Controller
         return response()->json(['leitor' => $leitor], 200);
     }
 
-    public function 
-
     public function validaToken($token){
         $leitor = Leitor::where('token_esqueci_senha', $token)->first();
         try{
             if($leitor != null){
                 return response()->json(['resultado' => true, 'leitor' => $leitor->email], 200);
             }
+                return response()->json(['resultado' => false, 'mensagem' => "Parece que este email já foi utilizado para recuperação de senha uma vez, por favor, solicite uma nova redefinição ou entre em contato com nossa equipe."], 200);
         }catch(Exception $ex){
-            return response()->json(['retorno' => false, 'mensagem' => "Seu email não foi encontrado em nossa base de dados, por favor confira os dados digitados."], 200);
+            return response()->json(['resultado' => false, 'mensagem' => "Ocorreu um erro, por favor, tente novamente mais tarde ou entre em contato com nossa equipe."], 200);
         }
     }
 
@@ -120,14 +119,17 @@ class LeitorController extends Controller
     public function redefineSenha(Request $request){
         $leitor = Leitor::where('email', $request->input('email'))
         ->first();
+        
         if($leitor != null){
+            if($leitor->token_esqueci_senha === '')
+                return response()->json(['retorno' => "Sua senha já foi redefinida, caso esteja enfrentando problemas com nosso serviço de recuperação, entre em"], 200);
             $leitor->token_esqueci_senha = '';
-            $leitor->password = bcrypt($r->input('senha'));
+            $leitor->password = bcrypt($request->input('senha'));
             $leitor->save();
             return response()->json(['retorno' => "Senha redefinida com sucesso! Efetue o login"], 200);
         }
-        echo $r->input('token');
-        return response()->json(['error' => "Administrador não encontrado"]);
+        echo $request->input('token');
+        return response()->json(['retorno' => "Ocorreu um erro em nossos servidores, por favor, entre em contato com nossa equipe e nos informe esse problema!"], 200);
     }
 
     public function getLeitorByNick($nick){

@@ -70,6 +70,11 @@ export class HeaderComponent implements OnInit {
             this.modalGenerico.emit({action:"modal",params:['close']});
         }
     }
+    closeModalEsqueciSenha(e){
+        if(e){
+            this.modalEsqueciSenha.emit({action:"modal",params:['close']});
+        }
+    }
 
   logout(){
     this._leitorService.logout();

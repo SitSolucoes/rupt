@@ -79,9 +79,6 @@
             <label> Foto de capa </label>
             <input type="file" name="arquivo2" id="capa" class="input-img"/>
         </div>
-
-
-      <div *ngIf="form.get('id').value == 0">
           <div class="menu">
               <label> Senha </label> 
               <input type="password" class="input" maxlength="20" name="senha" placeholder="Crie sua senha" formControlName="password"
@@ -95,7 +92,6 @@
 
               <div class="error" *ngIf="form.get('confirma_senha').value != form.get('password').value">Senhas não coincidem</div>
           </div>
-      </div>
     
         <button type="submit" class="button" id="submit-contato">{{ textButton }}</button>
 

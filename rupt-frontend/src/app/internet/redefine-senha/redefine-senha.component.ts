@@ -15,16 +15,26 @@ export class RedefineSenhaComponent implements OnInit {
 
   valido: boolean = false;
   form: FormGroup; 
+  erros = {
+    senha: '',
+    token: ''
+  }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((params: Params) => {
       console.log(params);
       this._leitoresService.validaToken(params.token).subscribe(
         (response) => {
+          console.log('response');
+          console.log(response);
             if (response.resultado) {
                 this.valido = true;
-                this.montaForm(response.email);
+                console.log(response);
+                this.montaForm(response.leitor);
                 //this.doLogin(response.email);
+            }else{
+              console.log(response);
+              this.erros.token = response.mensagem;
             }
               
         }
@@ -38,16 +48,26 @@ export class RedefineSenhaComponent implements OnInit {
   }
 
   onSubmit(){
-    this._leitoresService.redefineSenha(this.form).subscribe(
-
-    );
+    if(this.form.value.novaSenha == this.form.value.confirma_senha)
+      this._leitoresService.redefineSenha(this.form).subscribe(
+        (data)=> {
+          console.log(data);
+        }
+      );
+    else
+      this.erros.senha = "As senhas devem coincidir."
   }
 
   montaForm(email){
     this.form = this._fb.group({
       email: [email],
-      novaSenha: ['', Validators.required]
+      novaSenha: ['', Validators.required],
+      confirma_senha: ['', Validators.required]
     });
+  }
+
+  teste(){
+    console.log(this.form);
   }
 
   doLogin(email){

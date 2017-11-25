@@ -1,22 +1,19 @@
 <div class="cadastro">
-  <div class="container" *ngIf="tokenValido()">
-    <p> Olá! Por favor insira sua nova senha </p>
-    <div class="area"> 
+  <div class="container" >
+    <p *ngIf="erros.token != ''"> {{erros.token}} </p>
+    <p *ngIf="tokenValido()"> Olá! Por favor insira sua nova senha </p>
+    <div class="area" *ngIf="erros.token == ''"> 
+      <div class="error" *ngIf="erros.senha != ''"> {{erros.senha}} </div>
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="menu">
           <label> Senha </label> 
-          <input type="password" class="input" maxlength="20" name="senha" placeholder="Crie sua senha" formControlName="password"
-          [ngClass]="{'invalid': verificaValidTouched('password')}">
-
-          <div class="error" *ngIf="verificaValidTouched('password')">{{ mensagemErro('password') }}</div>
-      </div>
-      <div class="menu marginless">
+          <input type="password" (blur)="teste()" class="input" maxlength="20" name="novaSenha" placeholder="Insira sua nova senha" formControlName="novaSenha">
+        </div>
+        <div class="menu marginless">
           <label> Confirmar Senha </label> 
-          <input type="password" class="input" maxlength="20" name="confirma_senha" placeholder="Confirme sua senha" formControlName="confirma_senha">
-
-          <div class="error" *ngIf="form.get('confirma_senha').value != form.get('password').value">Senhas não coincidem</div>
-      </div>
-      <button type="submit" class="button" id="submit-contato">Alterar</button>
+          <input type="password" class="input" maxlength="20" name="confirma_senha" placeholder="Confirme sua nova senha" formControlName="confirma_senha">
+        </div>
+        <button type="submit" class="button" id="submit-contato" [disabled]="!form.valid">Alterar</button>
       </form>
     </div>
   </div>

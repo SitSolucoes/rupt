@@ -1,6 +1,6 @@
 import { LeitoresService } from './../../services/leitores.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 
 @Component({
@@ -14,6 +14,8 @@ export class EsqueciSenhaComponent implements OnInit {
   formulario: FormGroup;
   enviado: boolean;
   mensagem: string;
+  spinner: boolean = false;
+  @Output('closeModalEsqueciSenha') closeModalEsqueciSenha = new EventEmitter();
   constructor(private _formBuilder: FormBuilder, private _ls: LeitoresService) { }
 
   ngOnInit() {
@@ -22,9 +24,11 @@ export class EsqueciSenhaComponent implements OnInit {
   }
 
   onSubmit(){
+    this.spinner = true;
     if(this.formulario.value.email != this.formulario.value.confirma){
       this.erros = [];
       this.erros.push('Os emails devem ser iguais.');
+      this.spinner = false;
       return false;
     }
     this._ls.esqueciSenha(this.formulario).subscribe(
@@ -33,9 +37,11 @@ export class EsqueciSenhaComponent implements OnInit {
           this.erros = [];
           this.erros.push(retorno.mensagem);
           console.log(retorno.mensagem);
+          this.spinner = false;
           return false;
         }
         this.enviado = true;
+        this.spinner = false;
         this.mensagem = retorno.mensagem;
       });
   }
@@ -45,5 +51,8 @@ export class EsqueciSenhaComponent implements OnInit {
         email: ['', Validators.required],
         confirma: ['', Validators.required]
     })
+  }
+  voltar(){
+    this.closeModalEsqueciSenha.emit(true);
   }
 }
