@@ -1,4 +1,4 @@
-<div class="container-categoria">
+<div class="container-categoria" *ngIf="categoria.posts.length > 0 ">
     <div class="area">
         <div class="title"> {{ categoria.nome }} </div>
         <div class="underline"></div>
@@ -9,7 +9,8 @@
                     <div class="info-img-text">
                         <div class="banner-img-text">
                             <!--../../../assets/img/section4.png-->
-                            <img src="{{ p.post.src_imagem }}" class="img shadow">
+                            <img src="{{ url + 'posts/' + p.post.src_imagem }}" class="img" *ngIf="p.post.src_imagem">
+                            <!--><img src="{{ p.post.src_imagem }}" class="img shadow">-->
                             <div class="img-container img-container-duplo"><!--dados post: likes etc -->
                                 <div class="number">{{ p.post.comentarios }}</div> 
                                 <img src="../../../assets/img/talk.png" class="img2">
@@ -38,12 +39,12 @@
                     <div class="info-text">
                         <div class="banner-single">
                             <div class="title"> {{ p.post.titulo }} </div>
-                            <div class="text"> {{ p.post.subtitulo }}...</div>
+                            <!--<div class="text"></div>-->
                             <div class="info-post">
                                 <div class="img-person">
-                                    <img src="{{ p.escritor.src_foto }}" class="img">
+                                    <img src="{{ url + 'profile/' + p.escritor.src_foto }}" class="img">
                                 </div>
-                                <p> Marcela Prado </p>
+                                <p> {{p.escritor.nick}} </p>
                                 <div class="area-post">  
                                 <img src="../../../assets/img/calendar.png" class="img-cal">
                                 <div class="time"> {{ p.post.publishedAt }} </div>

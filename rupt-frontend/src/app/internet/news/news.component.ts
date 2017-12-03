@@ -91,6 +91,10 @@ export class NewsComponent implements OnInit {
           const leitor_id = base64.decode(localStorage.getItem('l'));
           this._leitoresService.getLeitor(leitor_id).subscribe(
             (leitor) => {
+              console.log(this.post);
+              /*if(this.post.autor_idLeitor = leitor_id){
+                this.publicaButton = true;
+              }*/
               this.leitor = leitor;
               this.getInteracoes();
             }

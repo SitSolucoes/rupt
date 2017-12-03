@@ -52,6 +52,7 @@ export class PublicacaoComponent implements OnInit {
 
       this._leitorService.verificaLogin().subscribe(
         (response) => {
+          
           if (!response)
             this._router.navigate(['/']);
           else{
@@ -71,7 +72,9 @@ export class PublicacaoComponent implements OnInit {
       leitor_id: [''],
       titulo: ['', Validators.required],
       conteudo: ['', Validators.required],
-      adulto: ''
+      adulto: '',
+      tipo_post: 3, 
+      rascunho: false
     })
   }
 
@@ -100,7 +103,12 @@ export class PublicacaoComponent implements OnInit {
     )
   }
 
-  onSubmit(){
+  onSubmit(rascunho = false){
+    if (this.formulario.value.conteudo.indexOf('img') > 0) 
+      this.formulario.value.tipo_post = 1;
+    if(rascunho){
+      this.formulario.value.rascunho = true;
+    }
     this._postService.create(this.formulario).subscribe(
       (response) => { this.uploadFiles(response) }
     )
