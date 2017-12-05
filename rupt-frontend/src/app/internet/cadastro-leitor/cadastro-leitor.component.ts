@@ -19,6 +19,7 @@ export class CadastroLeitorComponent implements OnInit {
   
   leitor: Leitor = new Leitor();
   form: FormGroup;
+  spinner: boolean = false;
   message: any;
   textButton: string = "Cadastrar";
   enviado: boolean;
@@ -45,7 +46,7 @@ export class CadastroLeitorComponent implements OnInit {
     this._leitoresService.leitor.subscribe(
       (leitor: Leitor) => { this.leitor = leitor }
     ); 
-
+    this.spinner = true;
     this._leitoresService.verificaLogin().subscribe(
       (response) => {
           if (response) {
@@ -140,12 +141,13 @@ export class CadastroLeitorComponent implements OnInit {
 
   onSubmit(){
       this.enviado = false;
-
+      this.spinner = true;
       if (!this.form.valid){
         Object.keys(this.form.controls).forEach(campo => {
             const control = this.form.get(campo);
             control.markAsTouched();
         })
+        this.spinner = false;
       }
       else if (!this.nickInvalido && !this.emailInvalido && !this.dataInvalida){
             if (this.form.get('id').value == 0){
@@ -156,16 +158,17 @@ export class CadastroLeitorComponent implements OnInit {
                     this.uploadFiles(false);
                   },
                   (error) =>{
+                    this.spinner = false;
                     //console.log(error);
                   }
                 );
               }
             }
             else {
-                this._leitoresService.updateLeitor(this.form, this.form.get('id').value).subscribe(
-                  (response) => { 
-                    
-                    this.uploadFiles(true);
+              this._leitoresService.updateLeitor(this.form, this.form.get('id').value).subscribe(
+                (response) => { 
+                  this.uploadFiles(true);
+                  this.spinner = false;
                   }
                 )
             }
@@ -193,10 +196,14 @@ export class CadastroLeitorComponent implements OnInit {
 
         this._uploadFileService.onSuccessUpload = (item, response, status, headers) => {
               // success callback
-              if (!edit)
-                  this.doLogin();
-              else 
-                  this.enviado = true;
+              if (!edit){
+                this.spinner = false;
+                this.doLogin();
+              }
+              else{
+                this.enviado = true;
+                this.spinner = false;
+              } 
         };
         this._uploadFileService.onErrorUpload = (item, response, status, headers) => {
               // error callback
@@ -207,15 +214,20 @@ export class CadastroLeitorComponent implements OnInit {
         this._uploadFileService.upload(myUploadItem);
       }
       else 
-        if (!edit)  
-            this.doLogin();
-        else 
-            this.enviado = true;
+        if (!edit)  {
+          this.spinner = false;
+          this.doLogin();
+        }
+        else {
+          this.spinner = false;
+          this.enviado = true;
+        }
   }
 
   doLogin(){
     this._leitoresService.doLogin(this.form).subscribe(
       (ret: any) => {
+          this.spinner = false;
           this._router.navigate(['/']);
       },  
     );

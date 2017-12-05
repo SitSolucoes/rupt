@@ -11,98 +11,111 @@
     </a>
     
     <div class="area"> 
-      <form [formGroup]="form" (ngSubmit)="onSubmit()">
-      <div class="menu">
-        <label> Nome </label>
-        
-        <input type="text" class="input" maxlength="60" name="nome" placeholder="Seu nome" formControlName="nome"
-        [ngClass]="{'invalid': verificaValidTouched('nome')}"
-        >
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="menu">
+                <label> Nome </label>
+                
+                <input type="text" class="input" maxlength="60" name="nome" placeholder="Seu nome" formControlName="nome"
+                [ngClass]="{'invalid': verificaValidTouched('nome')}"
+                >
 
-        <div class="error" *ngIf="verificaValidTouched('nome')">{{ mensagemErro('nome') }}</div>
-      </div>
-      <div class="menu marginless">
-
-        <label> Nick </label> 
-        
-        <input type="text" class="input" maxlength="20" name="nick" placeholder="A sua marca na Rupt" formControlName="nick"
-        [ngClass]="{'invalid': verificaValidTouched('nick') || nickInvalido}" (ngModelChange)="validaNick()" (blur)="validaNick()">
-
-        <div class="error" *ngIf="verificaValidTouched('nick')">{{ mensagemErro('nick') }}</div>
-        <div class="error" *ngIf="!verificaValidTouched('nick') && nickInvalido">Nick já cadastrado</div>
-      </div>
-
-      <div class="menu">
-
-        <label> Nascimento </label> 
-        
-        <input type="text" class="input" maxlength="10" name="nascimento" placeholder="Sua data de nascimento" formControlName="nascimento"
-        [ngClass]="{'invalid': verificaValidTouched('nascimento')}" mask="00/00/0000" (blur)='validaData()'>
-
-        <div class="error" *ngIf="verificaValidTouched('nascimento')">Preencha corretamente sua data de nascimento</div>
-        <div class="error" *ngIf="!verificaValidTouched('nascimento') && dataInvalida">Preencha corretamente sua data de nascimento</div>
-
-      </div>
-      <div class="menu marginless">
-
-        <label> Email </label> 
-        
-        <input type="text" class="input" maxlength="30" name="email" placeholder="Insira seu email" formControlName="email"
-        [ngClass]="{'invalid': verificaValidTouched('email') || emailInvalido}" (ngModelChange)="validaEmail()" (blur)="validaEmail()">
-
-        <div class="error" *ngIf="verificaValidTouched('email')">{{ mensagemErro('email') }}</div>
-        <div class="error" *ngIf="!verificaValidTouched('email') && emailInvalido">Email já cadastrado</div>
-      </div>
-      <div class="menu">
-            <div class="row menu-radio">
-                    <input name="sexo" type="radio" id="f" value="F" [checked]="form.get('sexo').value == 'F'"/>
-                    <label for="f" (click)="selectSexo('F')">Feminino</label>
-                    <input name="sexo" type="radio" id="m" value="M" [checked]="form.get('sexo').value == 'M'"/>
-                    <label for="m" (click)="selectSexo('M')">Masculino</label>
-                    <input name="sexo" type="radio" id="o" value="O" [checked]="form.get('sexo').value == 'O'"/>
-                    <label for="o" (click)="selectSexo('O')">Outro</label>
+                <div class="error" *ngIf="verificaValidTouched('nome')">{{ mensagemErro('nome') }}</div>
             </div>
-        </div>
-        <div class="menu ">
-            <label> Biografia 
-                <font style='font-size: 12px' *ngIf="form.get('biografia').value">
-                    ({{ 300 - form.get('biografia').value.length }})
-                </font>
-            </label>
-            <textarea class="textarea" formControlName='biografia' maxlength="300"></textarea>
-        </div>
+            <div class="menu marginless">
 
-        <div class="menu marginless">
-            <label> Foto de perfil </label>
-            <input type="file" name="arquivo1" id="foto" class="input-img" style="margin-bottom:35px;"/>
+                <label> Nick </label> 
+                
+                <input type="text" class="input" maxlength="20" name="nick" placeholder="A sua marca na Rupt" formControlName="nick"
+                [ngClass]="{'invalid': verificaValidTouched('nick') || nickInvalido}" (ngModelChange)="validaNick()" (blur)="validaNick()">
+
+                <div class="error" *ngIf="verificaValidTouched('nick')">{{ mensagemErro('nick') }}</div>
+                <div class="error" *ngIf="!verificaValidTouched('nick') && nickInvalido">Nick já cadastrado</div>
+            </div>
+            <div class="menu">
+
+                <label> Nascimento </label> 
+                
+                <input type="text" class="input" maxlength="10" name="nascimento" placeholder="Sua data de nascimento" formControlName="nascimento"
+                [ngClass]="{'invalid': verificaValidTouched('nascimento')}" mask="00/00/0000" (blur)='validaData()'>
+
+                <div class="error" *ngIf="verificaValidTouched('nascimento')">Preencha corretamente sua data de nascimento</div>
+                <div class="error" *ngIf="!verificaValidTouched('nascimento') && dataInvalida">Preencha corretamente sua data de nascimento</div>
+
+            </div>
+            <div class="menu marginless">
+
+                <label> Email </label> 
+                
+                <input type="text" class="input" maxlength="30" name="email" placeholder="Insira seu email" formControlName="email"
+                [ngClass]="{'invalid': verificaValidTouched('email') || emailInvalido}" (ngModelChange)="validaEmail()" (blur)="validaEmail()">
+
+                <div class="error" *ngIf="verificaValidTouched('email')">{{ mensagemErro('email') }}</div>
+                <div class="error" *ngIf="!verificaValidTouched('email') && emailInvalido">Email já cadastrado</div>
+            </div>
+            <div class="menu">
+                    <div class="row menu-radio">
+                            <input name="sexo" type="radio" id="f" value="F" [checked]="form.get('sexo').value == 'F'"/>
+                            <label for="f" (click)="selectSexo('F')">Feminino</label>
+                            <input name="sexo" type="radio" id="m" value="M" [checked]="form.get('sexo').value == 'M'"/>
+                            <label for="m" (click)="selectSexo('M')">Masculino</label>
+                            <input name="sexo" type="radio" id="o" value="O" [checked]="form.get('sexo').value == 'O'"/>
+                            <label for="o" (click)="selectSexo('O')">Outro</label>
+                    </div>
+            </div>
+            <div class="menu ">
+                <label> Biografia 
+                    <font style='font-size: 12px' *ngIf="form.get('biografia').value">
+                        ({{ 300 - form.get('biografia').value.length }})
+                    </font>
+                </label>
+                <textarea class="textarea" formControlName='biografia' maxlength="300"></textarea>
+            </div>  
+            <div class="menu marginless">
+                <label> Foto de perfil </label>
+                <input type="file" name="arquivo1" id="foto" class="input-img" style="margin-bottom:35px;"/>
+                
+                <label> Foto de capa </label>
+                <input type="file" name="arquivo2" id="capa" class="input-img"/>
+            </div>
+            <div class="menu">
+                <label> Senha </label> 
+                <input type="password" class="input" maxlength="20" name="senha" placeholder="Crie sua senha" formControlName="password"
+                [ngClass]="{'invalid': verificaValidTouched('password')}">
+
+                <div class="error" *ngIf="verificaValidTouched('password')">{{ mensagemErro('password') }}</div>
+            </div>
+            <div class="menu marginless">
+                <label> Confirmar Senha </label> 
+                <input type="password" class="input" maxlength="20" name="confirma_senha" placeholder="Confirme sua senha" formControlName="confirma_senha">
+                <div class="error" *ngIf="form.get('confirma_senha').value != form.get('password').value">Senhas não coincidem</div>
+            </div>
             
-            <label> Foto de capa </label>
-            <input type="file" name="arquivo2" id="capa" class="input-img"/>
-        </div>
-          <div class="menu">
-              <label> Senha </label> 
-              <input type="password" class="input" maxlength="20" name="senha" placeholder="Crie sua senha" formControlName="password"
-              [ngClass]="{'invalid': verificaValidTouched('password')}">
-
-              <div class="error" *ngIf="verificaValidTouched('password')">{{ mensagemErro('password') }}</div>
-          </div>
-          <div class="menu marginless">
-              <label> Confirmar Senha </label> 
-              <input type="password" class="input" maxlength="20" name="confirma_senha" placeholder="Confirme sua senha" formControlName="confirma_senha">
-
-              <div class="error" *ngIf="form.get('confirma_senha').value != form.get('password').value">Senhas não coincidem</div>
-          </div>
-    
-        <button type="submit" class="button" id="submit-contato">{{ textButton }}</button>
-
-        <div class="error-alert success" *ngIf='enviado'> 
-            <img src="../../../assets/img/success.png"  class="img-button img-button2">
-            Salvo com sucesso.
-        </div>
-    </form>
-      
+            <button type="submit" class="button" id="submit-contato">
+                {{ textButton }}
+            </button>
+            <div class="spinner" *ngIf="spinner">
+                    <div class="preloader-wrapper big active" >
+                        <div class="spinner-layer spinner-rupt">
+                        <div class="circle-clipper left">
+                            <div class="circle"></div>
+                        </div><div class="gap-patch">
+                            <div class="circle"></div>
+                        </div><div class="circle-clipper right">
+                            <div class="circle"></div>
+                        </div>
+                        </div>
+                    </div>
+            </div>
+            <div class="error-alert success" *ngIf='enviado'> 
+                <img src="../../../assets/img/success.png"  class="img-button img-button2">
+                Salvo com sucesso.
+            </div>
+        </form>
     </div>
-    
-  </div>
-  
 </div>
+        
+        
+    
+
+  
+

@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this._leitorService.leitor.subscribe(
-      (leitor: Leitor) => { this.leitor = leitor; }
+      (leitor: Leitor) => {  console.log('leitor'); this.leitor = leitor; console.log(leitor); }
     );
 
     this._leitorService.verificaLogin().subscribe(

@@ -190,10 +190,18 @@ class LeitorController extends Controller
     public function getSolicitacoes(){
         return Leitor::join('escritores', function ($join) {
             $join->on('leitores.id', '=', 'escritores.leitor_idLeitor')
-                 ->where('data_aceite', null);
+                 ->where('escritores.data_aceite', null);
         })->get();    
     }
 
+    public function countSolicitacoes(){
+        $count = Leitor::join('escritores', function ($join) {
+            $join->on('leitores.id', '=', 'escritores.leitor_idLeitor')
+                 ->where('escritores.data_aceite', null);
+            })->count();    
+        
+        return response()->json(['countSolicitacoes' => $count], 200);
+    }
     public function getIdByNick($nick){
         $leitor = Leitor::where("nick", $nick)->first();
         

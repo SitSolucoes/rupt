@@ -50,7 +50,7 @@ Route::get('leitor/getLeitorByNick/{nick}', ['uses' => 'LeitorController@getLeit
 //escritores
 Route::get('/getEscritores',['uses' => 'EscritorController@getEscritores']);
 Route::get('/getSolicitacoes', ['uses' => 'EscritorController@getSolicitacoes']);
-Route::get('/countSolicitacoes', ['uses' => 'EscritorController@countSolicitacoes']);
+Route::get('/countSolicitacoes', ['uses' => 'LeitorController@countSolicitacoes']);
 Route::put('/createEscritor/{id}/{admin_idAdmin}',['uses' => 'EscritorController@create']);
 Route::put('/updateEscritor/{id}',['uses' => 'EscritorController@update']);
 Route::put('/recusarEscritor/{id}',['uses' => 'EscritorController@recusar']);

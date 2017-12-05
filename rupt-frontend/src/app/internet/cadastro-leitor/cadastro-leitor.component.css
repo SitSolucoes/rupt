@@ -1,0 +1,13 @@
+/*spinner*/
+.spinner{
+	padding-bottom: 22px !important;
+	text-align: center !important;
+}
+
+.spinner-rupt{
+	border-color: #F97000 !important;
+}
+
+.spinner-area{
+    background-color: red;
+}

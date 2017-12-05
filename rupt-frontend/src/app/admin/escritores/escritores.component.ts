@@ -217,7 +217,9 @@ export class EscritoresComponent implements OnInit {
 
   getSolicitacoes(){
     this._escritoresService.getSolicitacoes().subscribe(
-      (solicitacoes: Escritor[]) => {this.solicitacoes = solicitacoes}
+      (solicitacoes: Escritor[]) => {
+        console.log(solicitacoes);
+        this.solicitacoes = solicitacoes}
     )
   }
 

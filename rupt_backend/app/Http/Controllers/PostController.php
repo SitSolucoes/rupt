@@ -28,6 +28,9 @@ class PostController extends Controller
         $post = new Post();
         $post = $this->create($request, $post);
         $post->autor_idLeitor = $request->leitor_id;
+        $post->tipo_post = $request->tipo_post;
+        //if(!$request->rascunho)
+        //$post->published_at = new Date(); 
         $post->visualizacoes = 0;
         $post->publishedAt = time();
         
@@ -144,7 +147,7 @@ class PostController extends Controller
     public function postsPorCategoria($id){
         return Post::select('posts.*')
             ->whereNull('posts.deleted_at')
-            ->whereNotNull('posts.publishedAt')
+            //->whereNotNull('posts.publishedAt')
             ->join('post_categoria', 'posts.id', '=', 'post_categoria.post_idPost')
             ->where('post_categoria.categoria_idCategoria', $id)
             ->orderBy('posts.publishedAt', 'desc')->get();

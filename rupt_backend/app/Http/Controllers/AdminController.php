@@ -36,7 +36,6 @@ class AdminController extends Controller
             if (!$admin->ativo){
                 return response()->json(['login' => "Conta desativada."], 200);
             }
-
             if (Hash::check($request->senha, $admin->password)){
                 $token = date('z')*$admin->id;
                 $admin->tokenLogin = Hash::make($token);
@@ -150,7 +149,7 @@ class AdminController extends Controller
         $admin = Admin::where('token_esqueci_senha', $r->input('token'))->first();
         if($admin != null){
             $admin->token_esqueci_senha = '';
-            $admin->password = bcrypt($r->input('senha'));
+            $admin->password = Hash::make($r->input('senha'));
             $admin->save();
             return response()->json(['retorno' => "Senha redefinida com sucesso! Efetue o login"], 200);
         }
