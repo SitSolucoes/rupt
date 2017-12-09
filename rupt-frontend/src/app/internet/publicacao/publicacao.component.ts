@@ -25,6 +25,11 @@ export class PublicacaoComponent implements OnInit {
   formulario: FormGroup;
   leitor: Leitor;
   post: Post = new Post();
+  estilos = [
+    {value: 1, option: 'Imagem e Texto'},
+    {value: 2, option: 'Apenas imagens'},
+    {value: 3, option: 'Texto'}
+  ]
 
   modalExcluir = new EventEmitter<string|MaterializeAction>();
   
@@ -68,12 +73,12 @@ export class PublicacaoComponent implements OnInit {
   createForm(){
     this.formulario = this._formBuilder.group({
       id: '',
-      categoria_id: ['', Validators.required],
+      categoria_id: [-1, Validators.required],
       leitor_id: [''],
       titulo: ['', Validators.required],
       conteudo: ['', Validators.required],
       adulto: '',
-      tipo_post: 3, 
+      tipo_post: -1,
       rascunho: false
     })
   }
@@ -104,11 +109,13 @@ export class PublicacaoComponent implements OnInit {
   }
 
   onSubmit(rascunho = false){
-    if (this.formulario.value.conteudo.indexOf('img') > 0) 
-      this.formulario.value.tipo_post = 1;
     if(rascunho){
       this.formulario.value.rascunho = true;
     }
+    if(this.formulario.value.tipo_post == -1)
+      this.formulario.patchValue({
+        tipo_post: 3
+      });
     this._postService.create(this.formulario).subscribe(
       (response) => { this.uploadFiles(response) }
     )

@@ -21,7 +21,7 @@
                             </div>
                         </div>
                         <div class="title"> {{ p.post.titulo }} </div>
-                        <div class="text"> {{ p.post.subtitulo }}...</div>
+                        <div class="text"> {{ p.post.conteudo.substring(0, 20) }}...</div>
                         <div class="info-post">
                             <div class="img-person">
                                 <img src="{{ p.escritor.src_foto }}" class="img">

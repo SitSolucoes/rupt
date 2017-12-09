@@ -14,9 +14,13 @@
     <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
 
       <div class="top">
-          <select name="banco" class="input" formControlName='categoria_id'>
-              <option disabled selected>Selecione uma categoria</option>
+          <select name="categoria" class="input" formControlName='categoria_id'>
+              <option disabled value='-1' selected>Selecione uma categoria</option>
               <option *ngFor="let categoria of categorias" [value]='categoria.id'>{{ categoria.categoria }}</option>
+          </select>
+          <select name="tipo_post" class="input" formControlName='tipo_post'>
+              <option disabled selected value='-1'>Selecione o Estilo do seu Post</option>
+              <option *ngFor="let e of estilos" [value]='e.value'>{{ e.option }}</option>
           </select>
 
         <input type="text" class="input input2" maxlength="160" formControlName='titulo' placeholder="Insira o título da sua notícia">
