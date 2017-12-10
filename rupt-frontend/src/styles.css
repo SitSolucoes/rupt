@@ -63,7 +63,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .error {
     color: red;
     font-size: 14px;
-    margin-top: -20px;
+    margin-top: -15px;
 }
 
 [type="radio"]:not(:checked), [type="radio"]:checked{
@@ -1213,7 +1213,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     display: block;
     float: left;
     height: 70px;
-    width: 51%;
+    width: 70%;
     background: #fff;
     padding-left: 30px;
     padding-top: 13px;
@@ -1223,7 +1223,6 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 
 .user .area3{
     margin-top: 235px;
-    width: 69%;
 }
 
 .user .area .info{
@@ -1389,7 +1388,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .user .feed2{
-    width: 69%;
+    width: 70%;
 }
 
 

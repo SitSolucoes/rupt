@@ -50,10 +50,10 @@
         <ul id='dropdown1' class='dropdown-content' style="top: 60px !important;">
             <!-- Caso user seja escritor <li><a routerLink="cadastro-escritor">Editar Perfil</a></li>-->
             <li><a routerLink="/cadastro">Editar Perfil</a></li>
+            <li><a >Trocar senha</a></li>
             <li *ngIf="leitor.escritor && leitor.escritor.status != 'r'">
                 <a routerLink="/publicacao">Publicar</a>
             </li>
-            <li class="divider"></li>
             <li><a (click)="logout()">Logout</a></li>
         </ul>
 

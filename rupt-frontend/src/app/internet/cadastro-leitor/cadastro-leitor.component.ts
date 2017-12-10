@@ -46,7 +46,6 @@ export class CadastroLeitorComponent implements OnInit {
     this._leitoresService.leitor.subscribe(
       (leitor: Leitor) => { this.leitor = leitor }
     ); 
-    this.spinner = true;
     this._leitoresService.verificaLogin().subscribe(
       (response) => {
           if (response) {
@@ -90,7 +89,6 @@ export class CadastroLeitorComponent implements OnInit {
       confirma_senha: 'update',
       ativo: true,
     })
-    console.log(this.form);
   }
 
   validaNick(){

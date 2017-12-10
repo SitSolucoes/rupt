@@ -11,7 +11,7 @@
     </a>
     
     <div class="area"> 
-        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
             <div class="menu">
                 <label> Nome </label>
                 
@@ -77,34 +77,23 @@
                 <label> Foto de capa </label>
                 <input type="file" name="arquivo2" id="capa" class="input-img"/>
             </div>
-            <div class="menu">
-                <label> Senha </label> 
-                <input type="password" class="input" maxlength="20" name="senha" placeholder="Crie sua senha" formControlName="password"
-                [ngClass]="{'invalid': verificaValidTouched('password')}">
-
-                <div class="error" *ngIf="verificaValidTouched('password')">{{ mensagemErro('password') }}</div>
-            </div>
-            <div class="menu marginless">
-                <label> Confirmar Senha </label> 
-                <input type="password" class="input" maxlength="20" name="confirma_senha" placeholder="Confirme sua senha" formControlName="confirma_senha">
-                <div class="error" *ngIf="form.get('confirma_senha').value != form.get('password').value">Senhas não coincidem</div>
-            </div>
             
             <button type="submit" class="button" id="submit-contato">
                 {{ textButton }}
             </button>
-            <div class="spinner" *ngIf="spinner">
-                    <div class="preloader-wrapper big active" >
-                        <div class="spinner-layer spinner-rupt">
-                        <div class="circle-clipper left">
-                            <div class="circle"></div>
-                        </div><div class="gap-patch">
-                            <div class="circle"></div>
-                        </div><div class="circle-clipper right">
-                            <div class="circle"></div>
-                        </div>
-                        </div>
+            
+            <div class="spinner clear" *ngIf="spinner">
+                <div class="preloader-wrapper big active" >
+                    <div class="spinner-layer spinner-rupt">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div><div class="gap-patch">
+                        <div class="circle"></div>
+                    </div><div class="circle-clipper right">
+                        <div class="circle"></div>
                     </div>
+                    </div>
+                </div>
             </div>
             <div class="error-alert success" *ngIf='enviado'> 
                 <img src="../../../assets/img/success.png"  class="img-button img-button2">

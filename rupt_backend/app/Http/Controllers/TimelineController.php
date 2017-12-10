@@ -18,7 +18,6 @@ class TimelineController extends Controller
     public function getTimeline($leitor_id){
         $timeline = Timeline::where('leitor_idLeitor', $leitor_id)
                              ->with('post')
-                             ->whereNull('posts.deleted_at')
                              ->orderBy('created_at', 'desc')
                              ->get();
         $retorno = [];
