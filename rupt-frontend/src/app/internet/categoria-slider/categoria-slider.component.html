@@ -5,7 +5,7 @@
         <slick-slider *ngIf="categoria.posts">
             <div name="post" *ngFor="let p of categoria.posts" (click)="openNew(p.post.id)">
                 <!--tipo imagem + texto -->
-                <div *ngIf="p.post.tipo_post == 1" class="content-img-text">
+                <div *ngIf="p.post.tipo_post == 1 && p.post.src_imagem != null" class="content-img-text">
                     <div class="info-img-text">
                         <div class="banner-img-text">
                             <!--../../../assets/img/section4.png-->
@@ -35,7 +35,7 @@
                     </div>
                 </div>
                 <!-- tipo texto -->
-                <div *ngIf="p.post.tipo_post == 3" class="content" >
+                <div *ngIf="p.post.tipo_post == 3 || p.post.src_imagem == null" class="content" >
                     <div class="info-text">
                         <div class="banner-single">
                             <div class="title"> {{ p.post.titulo }} </div>
@@ -54,10 +54,10 @@
                     </div>
                 </div>
                 <!-- tipo imagem -->
-                <div  *ngIf="p.post.tipo_post == 2" class="content">
+                <div  *ngIf="p.post.tipo_post == 2 && p.post.src_imagem != null" class="content">
                     <div class="info-img">
                         <div class="banner-img-text banner-solo">
-                            <img src="{{ p.post.src_imagem }}" class="img shadow">
+                            <img src="{{ url + 'posts/' + p.post.src_imagem }}" class="img shadow">
                             <div class="img-container img-container-duplo">
                                 <div class="number">{{ p.post.comentarios }}</div> 
                                 <img src="../../../assets/img/talk.png" class="img2">

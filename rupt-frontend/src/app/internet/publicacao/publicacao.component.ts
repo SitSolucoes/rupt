@@ -78,7 +78,7 @@ export class PublicacaoComponent implements OnInit {
       titulo: ['', Validators.required],
       conteudo: ['', Validators.required],
       adulto: '',
-      tipo_post: -1,
+      tipo_post: 3,
       rascunho: false
     })
   }
@@ -116,6 +116,24 @@ export class PublicacaoComponent implements OnInit {
       this.formulario.patchValue({
         tipo_post: 3
       });
+
+    //quantidade de imagens
+    let qnt_imgs = this.formulario.value.conteudo.split('<img').length - 1;
+    if(qnt_imgs === 0)
+      this.formulario.patchValue({
+        tipo_post: 3
+      });
+
+    if(qnt_imgs <= 2)
+      this.formulario.patchValue({
+        tipo_post: 1
+      });
+
+    if(qnt_imgs > 2)
+      this.formulario.patchValue({
+        tipo_post: 2
+      });
+    
     this._postService.create(this.formulario).subscribe(
       (response) => { this.uploadFiles(response) }
     )
