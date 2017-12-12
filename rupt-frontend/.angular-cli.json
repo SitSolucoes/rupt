@@ -24,13 +24,25 @@
         "../node_modules/materialize-css/dist/css/materialize.css",
         "../node_modules/font-awesome/css/font-awesome.css",
         "../node_modules/froala-editor/css/froala_editor.pkgd.min.css",
+        "assets/styles/gh-buttons.css",
+        "assets/styles/style.css",
+        "assets/styles/responsive.css",
         "styles.css"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.js",
         "../node_modules/hammerjs/hammer.js",
         "../node_modules/materialize-css/dist/js/materialize.js",
-        "assets/slick/slick.js", 
+        "assets/slick/slick.js",
+
+        "assets/js/example2_and_3.js",
+        "assets/js/script.js",
+        "assets/js/jquery.silver_track.responsive_hub_connector.js",
+        "assets/js/jquery.silver_track.bullet_navigator.js",
+        "assets/js/jquery.silver_track.navigator.js",
+        "assets/js/jquery.silver_track.js",
+
+        "https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js",
         "../node_modules/froala-editor/js/froala_editor.pkgd.min.js",
         "../node_modules/froala-editor/js/languages/pt_br.js"
       ],

@@ -1,86 +1,76 @@
-<div class="container-categoria" *ngIf="categoria.posts.length > 0 ">
-    <div class="area">
-        <div class="title"> {{ categoria.nome }} </div>
-        <div class="underline"></div>
-        <slick-slider *ngIf="categoria.posts">
-            <div name="post" *ngFor="let p of categoria.posts" (click)="openNew(p.post.id)">
-                <!--tipo imagem + texto -->
-                <div *ngIf="p.post.tipo_post == 1 && p.post.src_imagem != null" class="content-img-text">
-                    <div class="info-img-text">
-                        <div class="banner-img-text">
-                            <!--../../../assets/img/section4.png-->
-                            <img src="{{ url + 'posts/' + p.post.src_imagem }}" class="img" *ngIf="p.post.src_imagem">
-                            <!--><img src="{{ p.post.src_imagem }}" class="img shadow">-->
-                            <div class="img-container img-container-duplo"><!--dados post: likes etc -->
-                                <div class="number">{{ p.post.comentarios }}</div> 
-                                <img src="../../../assets/img/talk.png" class="img2">
-                                <div class="number">{{ p.post.likes }}</div> 
-                                <img src="../../../assets/img/like.png" class="img2">
-                                <div class="number">{{ p.post.visualizacoes}}</div> 
-                                <img src="../../../assets/img/eye.png" class="img2">
-                            </div>
+<div class="track example-2">
+    <div class="inner">
+        <h2>Cover 1</h2>
+
+        <div class="view-port">
+            <div id="example-2" class="slider-container big">
+                <div class="item cover">
+                    <img src="http://ib1.huluim.com/video/60155852?size=476x268">
+                    <div class="img-area">
+                        <div class="img-block">
+                            <img src="http://ib3.huluim.com/video/60155850?size=220x124">
                         </div>
-                        <div class="title"> {{ p.post.titulo }} </div>
-                        <div class="text"> {{ p.post.conteudo.substring(0, 20) }}...</div>
-                        <div class="info-post">
-                            <div class="img-person">
-                                <img src="{{ p.escritor.src_foto }}" class="img">
-                            </div>
-                            <p> {{ p.escritor.nick}}</p>
-                            <div class="area-post">
-                                <img src="../../../assets/img/calendar.png" class="img-cal">
-                                <div class="time">{{ p.post.publishedAt}} </div>
-                            </div>
+                        <div class="img-block">
+                            <img src="http://ib4.huluim.com/video/60155851?size=220x124">
+                        </div>
+                    </div>
+                    <div class="editorial">
+                        <div class="title">
+                            Carly Rose Takes on Bieber
+                        </div>
+                        <div class="desc">
+                            The X Factor unplugged the Top 6 finalists and then had them take requests from the audience. At the top: Carly Rose Sonenclair with Justin Bieber's "As Long As You Love Me."
                         </div>
                     </div>
                 </div>
-                <!-- tipo texto -->
-                <div *ngIf="p.post.tipo_post == 3 || p.post.src_imagem == null" class="content" >
-                    <div class="info-text">
-                        <div class="banner-single">
-                            <div class="title"> {{ p.post.titulo }} </div>
-                            <!--<div class="text"></div>-->
-                            <div class="info-post">
-                                <div class="img-person">
-                                    <img src="{{ url + 'profile/' + p.escritor.src_foto }}" class="img">
-                                </div>
-                                <p> {{p.escritor.nick}} </p>
-                                <div class="area-post">  
-                                <img src="../../../assets/img/calendar.png" class="img-cal">
-                                <div class="time"> {{ p.post.publishedAt }} </div>
-                                </div>
-                            </div>
-                        </div>
+                <div class="item">
+                    <div class="img-block">
+                        <img src="http://ib2.huluim.com/video/60155853?size=220x124">
+                    </div>
+                    <div class="img-block">
+                        <img src="http://ib3.huluim.com/video/60155854?size=220x124">
                     </div>
                 </div>
-                <!-- tipo imagem -->
-                <div  *ngIf="p.post.tipo_post == 2 && p.post.src_imagem != null" class="content">
-                    <div class="info-img">
-                        <div class="banner-img-text banner-solo">
-                            <img src="{{ url + 'posts/' + p.post.src_imagem }}" class="img shadow">
-                            <div class="img-container img-container-duplo">
-                                <div class="number">{{ p.post.comentarios }}</div> 
-                                <img src="../../../assets/img/talk.png" class="img2">
-                                <div class="number">{{ p.post.likes }}</div> 
-                                <img src="../../../assets/img/like.png" class="img2">
-                                <div class="number">{{ p.post.visualizacoes }}</div> 
-                                <img src="../../../assets/img/eye.png" class="img2">
-                                <div class="title"> {{ p.post.titulo }} </div>
-                                <div class="info-post info-post2">
-                                    <div class="img-person">
-                                        <img src="{{ p.escritor.src_foto }}" class="img">
-                                    </div>
-                                    <p> {{ p.escritor.nick }} </p>
-                                    <div class="area-post">
-                                        <img src="../../../assets/img/calendar2.png" class="img-cal">
-                                        <div class="time"> {{ p.post.publishedAt}} </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                <div class="item">
+                    <div class="img-block">
+                        <img src="http://ib4.huluim.com/video/60155855?size=220x124">
+                    </div>
+                    <div class="img-block">
+                        <img src="http://ib1.huluim.com/video/60155856?size=220x124">
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="img-block">
+                        <img src="http://ib2.huluim.com/video/60155857?size=220x124">
+                    </div>
+                    <div class="img-block">
+                        <img src="http://ib4.huluim.com/video/60155859?size=220x124">
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="img-block">
+                        <img src="http://ib1.huluim.com/video/60155860?size=220x124">
+                    </div>
+                    <div class="img-block">
+                        <img src="http://ib2.huluim.com/video/60155861?size=220x124">
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="img-block">
+                        <img src="http://ib3.huluim.com/video/60155862?size=220x124">
                     </div>
                 </div>
             </div>
-        </slick-slider>
+        </div>
+
+        <div class="bullet-pagination"></div>
+        <div class="actions button-group">
+            <a href="#" class="button primary icon reload">Restart</a>
+        </div>
+    </div>
+
+    <div class="pagination">
+        <a href="#" class="prev disabled"></a>
+        <a href="#" class="next disabled"></a>
     </div>
 </div>
