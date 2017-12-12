@@ -383,9 +383,9 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .menu-top .slick-slide{
-    height: 350px !important;
+    width: 380px !important;
     outline: none;
-
+    height: 350px !important;
 }
 
 .menu-top .img{
