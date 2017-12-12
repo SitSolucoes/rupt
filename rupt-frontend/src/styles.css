@@ -1870,7 +1870,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .news .area-top .tag{
-  width: 100px;
+  min-width: 100px;
   display: block;
   float: left;
   margin-bottom: 10px;
