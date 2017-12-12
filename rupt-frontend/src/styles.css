@@ -383,9 +383,9 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .menu-top .slick-slide{
-    height: 350px !important;
+    width: 380px !important;
     outline: none;
-
+    height: 350px !important;
 }
 
 .menu-top .img{
@@ -463,14 +463,15 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .container-categoria .content{
-    width: 24%;
-    display: block;
-    float: left;
+    width: 300px;
+    display: table;
+    margin: 0 auto;
+    background: #000;
     margin-right: 15px;
 }
 
 .container-categoria .banner-single{
-    width: 100%;
+    width: 300px;
     height: 250px;
     display: block;
     float: left;
@@ -479,11 +480,21 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .container-categoria .content-img-text{
-    width: 48%;
+    width: 600px;
     display: block;
     float: left;
     margin-right: 15px;
 }
+
+.container-categoria .container-slider{
+    padding: 0px !important;
+}
+
+.menu-top .container-slider{
+    padding-left: 4% !important;
+    padding-right: 4% !important;
+}
+
 
 .container-categoria .info-img-text{
     width: 100%;
@@ -552,6 +563,10 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     width: 200px;
 }
 
+.container-categoria .img-container-size{
+    width: 250px;
+}
+
 .img-container .title{
     font-family: 'nexa-bold';
     color: #ffffff;
@@ -559,7 +574,6 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     height: 150px;
     position: relative;
     right: 60px;
-    top: 10px;
 }
 
 .container-categoria .img-container-duplo{
@@ -625,7 +639,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .info-post2{
-    width: 145% !important;
+    width: 130% !important;
     left: -60px !important;
     top: 15px !important;
 }
@@ -665,7 +679,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     height: 25px;
     display: block;
     float: left;
-    margin-top: 15px;
+    margin-top: 12px;
     margin-left: 10px;
 }
 
@@ -689,7 +703,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     font-size: 13px;
     color: #646363;
     margin-left: 10px;
-    margin-top: 5px;
+    margin-top: 15px;
 }
 
 .container-categoria .underline{
@@ -1655,7 +1669,6 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
   border-bottom: 0px;
   font-size: 12px;
   color: #383838;
-  background: #f0f0f0;
   font-weight: bold;
   margin-top: 10px;
 }
@@ -1875,9 +1888,11 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
   float: left;
   margin-bottom: 10px;
   margin-right: 10px;
-  font-size: 18px;
+  font-size: 16px;
   font-family: 'gilroy';
-  padding: 4px;
+  padding: 8px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   color: #fff;
   text-align: center;
   border-radius: 5px;
@@ -1907,13 +1922,14 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
   color: #3b3b3b;
   font-family: 'gilroy-bold';
   text-align: center;
-    letter-spacing: -2px;
+  letter-spacing: -2px;
+  text-transform: capitalize;
 }
 
 .news .container{
   display: block;
   float: left;
-  margin-top: 50px;
+  margin-top: 30px;
   width: 70%;
   background: #fff;
   padding-left: 10px;
@@ -2018,7 +2034,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .news .container .reactions .area2{
     display: block;
     float: left;
-    width: 100px;
+    width: 90px;
     margin-left: 30px;
     position: relative;
     left: 8%;
@@ -2195,7 +2211,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
   background: #fff;
   width: 18%;
   margin-left: 30px;
-  margin-top: 50px;
+  margin-top: 30px;
 }
 
 .news .top-view-left{
@@ -3157,6 +3173,15 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     float: left;
     width: 100%;
     padding-bottom: 40px;
+}
+
+.generico-modal .button{
+    background: #ccc;
+    border: #ccc;
+    display: block;
+    float: left;
+    margin-right: 100px;
+    margin-top: 100px;
 }
 
 .generico-modal .text{

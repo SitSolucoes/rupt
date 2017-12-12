@@ -14,8 +14,7 @@ export class SlickSliderComponent implements AfterContentInit{
 
     defaultOptions: any = {
         infinite: true,
-        slidesToShow: 3,
-        slidesToScroll: 3
+        variableWidth: true
     };
 
     constructor(private el: ElementRef) {

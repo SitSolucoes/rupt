@@ -9,7 +9,7 @@
 
   <div class="generico-modal">
     <div name="denuncia" *ngIf="action == 'denuncia'">
-        <button type="button" (click)="denuncia(m.id)" *ngFor="let m of motivos">{{m.motivo}}</button>
+        <button type="button" class="button" (click)="denuncia(m.id)" *ngFor="let m of motivos">{{m.motivo}}</button>
     </div>
     <div name="mensagem" *ngIf="action == 'mensagemDenuncia'">
       <div class="text"> {{mensagem}}</div>
