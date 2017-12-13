@@ -32,7 +32,8 @@ export class PublicacaoComponent implements OnInit {
   ]
 
   modalExcluir = new EventEmitter<string|MaterializeAction>();
-  
+  modalRascunho = new EventEmitter<string|MaterializeAction>();
+
   constructor(private _formBuilder: FormBuilder,
               private _leitorService: LeitoresService,
               private _router: Router,
@@ -192,5 +193,20 @@ export class PublicacaoComponent implements OnInit {
         this._router.navigate(['/perfil/'+ this.leitor.nick]);
     }
   }
+
+    openModalRascunho() {
+        this.modalRascunho.emit({
+            action: 'modal',
+            params: ['open']});
+    }
+
+    closeModalRascunho(e){
+        if(e){
+            this.modalRascunho.emit({
+                action:'modal',
+                params:['close']
+            });
+        }
+    }
 
 }

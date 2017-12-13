@@ -56,6 +56,10 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
   background: #fff;
 }
 
+.button:hover{
+    opacity: .9;
+}
+
 .invalid{
     border: 1px solid #F44336 !important;
 }
@@ -88,6 +92,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     float: left;
     position: fixed;
     z-index: 1000;
+    box-shadow: 1px 1px 1px #B9B7B7;
 }
 
 .header-margin{
@@ -814,8 +819,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 
 .social-media .area{
     height: 40px;
-    width: 25%;
-    display: block;
+    display: table;
     margin: 0 auto;
 }
 
@@ -3045,7 +3049,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     display: block;
     float: left;
     width: 100%;
-    padding-bottom: 60px;
+    padding-bottom: 40px;
 }
 
 .publicacao .container{
@@ -3079,11 +3083,10 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .publicacao .info{
-    display: block;
-    width: 26%;
+    display: table;
     height: 100px;
     margin: 0 auto;
-    margin-top: 80px;
+    margin-top: 20px;
 }
 
 .publicacao .info .button{
@@ -3101,7 +3104,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     font-family: 'nexa-bold';
     font-size: 13px;
     color: #4f4f4f;
-    border-radius: 5px;
+    border-radius: 2px;
 }
 
 .publicacao .info .background-orange{
@@ -3110,10 +3113,34 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     color: #fff;
 }
 
+.publicacao .info .background-green{
+    background: #2c7a4b;
+    border: 1px solid #2c7a4b;
+    color: #fff;
+}
+
 .publicacao .info .background-blue{
     background: #0a70c9;
     border: 1px solid #0a70c9;
     color: #fff;
+}
+
+.publicacao .container .btn{
+    background: #005f96;
+    opacity: .8;
+    height: 39px;
+    width: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+    line-height: 2.7;
+}
+
+.publicacao .container [type="checkbox"] + label{
+    margin-left: 15px;
+}
+
+.publicacao .container input[type=text].valid:not(.browser-default){
+    border-bottom: 1px solid #005f96;
 }
 
 #editor {overflow:scroll; height:200px}
