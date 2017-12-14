@@ -118,7 +118,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 
 .headbar .title{
     font-family: 'nexa-bold';
-    font-size: 16px;
+    font-size: 18px;
     display: block;
     float: left;
     color: #FFFDFD;
@@ -473,6 +473,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     margin: 0 auto;
     background: #000;
     margin-right: 15px;
+    position: relative;
 }
 
 .container-categoria .banner-single{
@@ -507,6 +508,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     background: #ffffff;
     display: block;
     float: left;
+    position: relative;
 }
 
 .container-categoria .info-text{
@@ -540,14 +542,13 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .container-categoria .banner-img-text{
     display: block;
     float: left;
-    width: 50%;
+    width: 300px;
     height: 250px;
     overflow: hidden;
-    margin-right: 10px;
 }
 
 .container-categoria .banner-solo{
-    width: 100%;
+    width: 300px;
     float: left;
 }
 
@@ -575,16 +576,25 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .img-container .title{
     font-family: 'nexa-bold';
     color: #ffffff;
-    width: 100%;
+    width: 50%;
     height: 150px;
     position: relative;
-    right: 60px;
+    display: block;
+    float: left;
+}
+
+.img-container .reactions{
+    display: block;
+    float: right;
+    width: 45%;
+    margin-right: 15px;
 }
 
 .container-categoria .img-container-duplo{
-    left: 70px;
+    left: 10px;
     bottom: 250px;
     margin-top: 10px;
+    width: 100%;
 }
 
 .container-categoria .img2{
@@ -610,7 +620,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     display: block;
     float: left;
     width: 235px;
-    height: 60px;
+    max-height: 60px;
     overflow: hidden;
     margin-left: 20px;
     margin-top: 15px;
@@ -633,20 +643,19 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     line-height: 22px;
 }
 
-.container-categoria .info-post{
-    height: 100px;
+.container-categoria .info-post {
+    height: 70px;
     display: block;
     float: left;
-    position: relative;
-    top: 0px;
-    left: 15px;
+    position: absolute;
+    bottom: 0px;
+    right: -10px;
     width: 48%;
+    /* margin-left: 2%; */
 }
 
 .info-post2{
-    width: 130% !important;
-    left: -60px !important;
-    top: 15px !important;
+    width: 100% !important
 }
 
 .info-post2 p{
@@ -657,6 +666,10 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .info-post2 .time{
     color: #ffffff !important;
     text-shadow: 2px 1px 1px #000000;
+}
+
+.info-post3{
+    margin-left: 0px !important;
 }
 
 .container-categoria .img-person{
@@ -670,10 +683,12 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .container-categoria .info-post .area-post{
-  display: block;
-  float: right;
-  width: auto;
-  margin-right: 40px; 
+    display: block;
+    float: right;
+    width: auto;
+    /* height: 10px; */
+    max-width: 75px;
+    margin-right: 20px;
 }
 
 .img-person .img{
@@ -688,10 +703,13 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     margin-left: 10px;
 }
 
-.info-post .time{
+.info-post .time {
     font-family: 'gilroy';
     font-weight: bold;
     font-size: 13px;
+    width: 33px;
+    height: 15px;
+    overflow: hidden;
     color: #646363;
     display: block;
     float: left;
@@ -699,8 +717,8 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     margin-left: 5px;
 }
 
-.info-post p{
-    width: 60px;
+.info-post p {
+    width: 100px;
     display: block;
     float: left;
     font-family: 'gilroy';

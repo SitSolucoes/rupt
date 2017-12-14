@@ -11,12 +11,14 @@
                             <!--../../../assets/img/section4.png-->
                             <img src="{{ p.post.src_imagem }}" class="img shadow">
                             <div class="img-container img-container-duplo"><!--dados post: likes etc -->
-                                <div class="number">{{ p.post.comentarios }}</div>
-                                <img src="../../../assets/img/talk.png" class="img2">
-                                <div class="number">{{ p.post.likes }}</div>
-                                <img src="../../../assets/img/like.png" class="img2">
-                                <div class="number">{{ p.post.visualizacoes}}</div>
-                                <img src="../../../assets/img/eye.png" class="img2">
+                                <div class="reactions">
+                                    <div class="number">{{ p.post.comentarios }}</div>
+                                    <img src="../../../assets/img/talk.png" class="img2">
+                                    <div class="number">{{ p.post.likes }}</div>
+                                    <img src="../../../assets/img/like.png" class="img2">
+                                    <div class="number">{{ p.post.visualizacoes}}</div>
+                                    <img src="../../../assets/img/eye.png" class="img2">
+                                </div>
                             </div>
                         </div>
                         <div class="title"> {{ p.post.titulo }} </div>
@@ -58,22 +60,24 @@
                         <div class="banner-img-text banner-solo">
                             <img src="{{ p.post.src_imagem }}" class="img shadow">
                             <div class="img-container img-container-duplo img-container-size">
-                                <div class="number">{{ p.post.comentarios }}</div>
-                                <img src="../../../assets/img/talk.png" class="img2">
-                                <div class="number">{{ p.post.likes }}</div>
-                                <img src="../../../assets/img/like.png" class="img2">
-                                <div class="number">{{ p.post.visualizacoes }}</div>
-                                <img src="../../../assets/img/eye.png" class="img2">
                                 <div class="title"> {{ p.post.titulo }} </div>
-                                <div class="info-post info-post2">
-                                    <div class="img-person">
-                                        <img src="{{ p.escritor.src_foto }}" class="img">
-                                    </div>
-                                    <p> {{ p.escritor.nick }} </p>
-                                    <div class="area-post">
-                                        <img src="../../../assets/img/calendar2.png" class="img-cal">
-                                        <div class="time"> {{ p.post.publishedAt}} </div>
-                                    </div>
+                                <div class="reactions">
+                                    <div class="number">{{ p.post.comentarios }}</div>
+                                    <img src="../../../assets/img/talk.png" class="img2">
+                                    <div class="number">{{ p.post.likes }}</div>
+                                    <img src="../../../assets/img/like.png" class="img2">
+                                    <div class="number">{{ p.post.visualizacoes }}</div>
+                                    <img src="../../../assets/img/eye.png" class="img2">
+                                </div>
+                            </div>
+                            <div class="info-post info-post2 info-post3">
+                                <div class="img-person">
+                                    <img src="{{ p.escritor.src_foto }}" class="img">
+                                </div>
+                                <p> {{ p.escritor.nick }} </p>
+                                <div class="area-post">
+                                    <img src="../../../assets/img/calendar2.png" class="img-cal">
+                                    <div class="time"> {{ p.post.publishedAt}} </div>
                                 </div>
                             </div>
                         </div>
