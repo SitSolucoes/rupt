@@ -8,7 +8,7 @@ import { ConnectionFactory } from 'app/classes/connection-factory';
 import { Post } from './../../classes/post';
 import { Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input } from '@angular/core';
 
 import { PostsService } from './../../services/posts.service';
 
@@ -38,6 +38,9 @@ export class NewsComponent implements OnInit {
     angry: 0,
     shares: 0
   };
+
+  @Input('rascunho') rascunho: boolean = false;
+  @Input('rascunhoForm') rascunhoForm: any;
   
   modalDenuncia = new EventEmitter<string|MaterializeAction>();
   denuncias;
@@ -59,15 +62,23 @@ export class NewsComponent implements OnInit {
 
   ngOnInit() {
     this._activatedRoute.params.subscribe(params => {
-        this.carregaPost(+params['id']);
-        if(this.leitorLogado)
-          this.form = this._formBuilder.group({
-              id: '0',
-              comentario: ['', Validators.required],
-              comentario_idComentario: ['', [Validators.required, Validators.minLength(3)]],
-              post_idPost: [params['id']],
-              leitor_idLeitor: [new Base64().decode(localStorage.getItem('l'))]
-            }); 
+        if(params['id']){
+          this.carregaPost(+params['id']);
+          if(this.leitorLogado)
+            this.form = this._formBuilder.group({
+                id: '0',
+                comentario: ['', Validators.required],
+                comentario_idComentario: ['', [Validators.required, Validators.minLength(3)]],
+                post_idPost: [params['id']],
+                leitor_idLeitor: [new Base64().decode(localStorage.getItem('l'))]
+              }); 
+        }else{
+          if(this.rascunho){
+            //console.log(this.rascunhoForm);
+            this.montaRascunho();
+          }
+        }
+        
     });
   }
 
@@ -82,12 +93,36 @@ export class NewsComponent implements OnInit {
     );
   }
 
+  montaRascunho(){
+    let f = this.rascunhoForm;
+    console.log(f);
+    this.post = {
+      id: null,
+      titulo: f.titulo,
+      conteudo: f.conteudo,
+      autor_idLeitor: null, 
+      //escritor: ,
+      idAdmin_deleted: null,
+      src_imagem: null,//f.src_imagem,
+      visualizacoes: null,
+      publishedAt: null,
+      subtitulo: null,
+      created_at: null,
+      updated_at: null,
+      deleted_at: null,
+      tipo_post: null,
+    };
+  }
+
   carregaPost(id){
     this._postService.getPost(id).subscribe(
       ( post ) => { 
+        //retorno do método
         this.post = post;
+        //se o leitor está logado
         if(localStorage.getItem('l')){
           let base64: Base64 = new Base64();
+          //Popula o leitor + get interações
           const leitor_id = base64.decode(localStorage.getItem('l'));
           this._leitoresService.getLeitor(leitor_id).subscribe(
             (leitor) => {

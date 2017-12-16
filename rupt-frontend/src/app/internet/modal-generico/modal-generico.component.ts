@@ -15,6 +15,7 @@ export class ModalGenericoComponent implements OnInit {
 
     @Output('closeModalGenerico') closeModalGenerico = new EventEmitter();
     @Input('action') action;
+    @Input('obj') obj;
     @Input('idObj') idObj;
 
     formDenuncia;
@@ -32,6 +33,7 @@ export class ModalGenericoComponent implements OnInit {
     if(this.action=="denuncia"){
       this.preparaDenuncia();
     }
+    //console.log(this.obj);
   }
 
   preparaDenuncia(){

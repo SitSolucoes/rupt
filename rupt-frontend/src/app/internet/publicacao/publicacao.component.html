@@ -8,7 +8,7 @@
 <div id="modalRascunho" class="modal modal2 modal4"
      materialize="modal" [materializeParams]="[{dismissible: false}]"
      [materializeActions]="modalRascunho">
-    <modal-generico [action]="'rascunho'" [idObj]="post?.id" (closeModalGenerico)="closeModalRascunho($event)"></modal-generico>
+    <modal-generico [action]="'rascunho'" [idObj]="post?.id" [obj]="rascunho_param" (closeModalGenerico)="closeModalRascunho($event)"></modal-generico>
 </div>
 
 <div class="publicacao">

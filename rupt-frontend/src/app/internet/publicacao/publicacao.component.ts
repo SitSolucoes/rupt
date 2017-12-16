@@ -25,6 +25,7 @@ export class PublicacaoComponent implements OnInit {
   formulario: FormGroup;
   leitor: Leitor;
   post: Post = new Post();
+  rascunho_param = {titulo: 'Sem Título', conteudo: 'Sem conteudo'};
   estilos = [
     {value: 1, option: 'Imagem e Texto'},
     {value: 2, option: 'Apenas imagens'},
@@ -195,6 +196,10 @@ export class PublicacaoComponent implements OnInit {
   }
 
     openModalRascunho() {
+        if(this.formulario.value.titulo)
+          this.rascunho_param.titulo = this.formulario.value.titulo;
+        if(this.formulario.value.conteudo)
+          this.rascunho_param.conteudo = this.formulario.value.titulo;
         this.modalRascunho.emit({
             action: 'modal',
             params: ['open']});

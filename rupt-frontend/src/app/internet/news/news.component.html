@@ -9,15 +9,15 @@
 
   <div class="area-top">
     
-    <div class="tag-menu">
+    <div class="tag-menu" *ngIf="!rascunho">
       
-      <div class="tag red"> {{ post.categorias_post[post.categorias_post.length-1].categoria.categoria }} </div> 
+        <div class="tag red"> {{ post.categorias_post[post.categorias_post.length-1].categoria.categoria }} </div> 
       
-    <!--  <div class="tag black2"> Racismo </div>-->
+        <!--  <div class="tag black2"> Racismo </div>-->
 
     </div>  
 
-  <div class="title"> {{ post.titulo }}</div>
+    <div class="title"> {{ post.titulo }}</div>
 
   </div>
 
@@ -25,15 +25,15 @@
 
     <div class="area">
 
-      Por
-      <a routerLink='/perfil/{{ post.autor.nick }}'>
+      <font *ngIf="!rascunho">Por</font>
+      <a *ngIf="!rascunho" routerLink='/perfil/{{ post.autor.nick }}'>
           <font class="name"> {{ post?.autor?.nick }} </font> 
       </a>
       
-      <img src="../../../assets/img/marcador.png" class="img"> 
-      <b> {{ calcHour( post.publishedAt ) }} </b>
+      <img *ngIf="!rascunho" src="../../../assets/img/marcador.png" class="img"> 
+      <b *ngIf="!rascunho" > {{ calcHour( post.publishedAt ) }} </b>
 
-      <div class="social">
+      <div *ngIf="!rascunho" class="social">
 
         <p>{{interacoes.likes + interacoes.loves + interacoes.angry + interacoes.sad + interacoes.cry }}</p>
         <img src="../../../assets/img/rupt-ico.png" class="img">
@@ -50,14 +50,11 @@
 
     <div class="frame">
 
-      <img src="{{ url + 'posts/' + post.src_imagem }}" class="img" *ngIf="post.src_imagem">
+        <img src="{{ url + 'posts/' + post.src_imagem }}" class="img" *ngIf="post.src_imagem && !rascunho">
 
-      <div class="info" [innerHTML]="post.conteudo">
+        <div class="info" [innerHTML]="post.conteudo"></div>
 
-      
-      </div>
-
-        <div class="reactions">
+        <div *ngIf="!rascunho" class="reactions">
 
             <div class="area2" (click)="interagePost('like')">
 
@@ -115,7 +112,7 @@
 
         </div>
 
-        <div class="comentarios">
+        <div *ngIf="!rascunho" class="comentarios">
 
             <p> <b>{{ comentarios?.length}}</b> comentários </p>
 
@@ -166,15 +163,11 @@
             </div>
         </div>
 
-
-
     </div>
-
-    
 
   </div>
 
-  <div class="top-view">
+  <div class="top-view" *ngIf="!rascunho">
 
     <p>
       <font style="color:#f97000">+</font> Lidas </p>
@@ -188,7 +181,7 @@
     </div>
   </div>
 
-  <div class="top-view">
+  <div class="top-view" *ngIf="!rascunho">
       
           <p> Propagandas </p>
       

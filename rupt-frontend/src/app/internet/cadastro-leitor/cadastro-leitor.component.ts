@@ -1,3 +1,4 @@
+import { any } from 'codelyzer/util/function';
 import { DateBr } from './../../shared/dateBr';
 import { Leitor } from 'app/classes/leitor';
 import { ValidaCampo } from './../../shared/valida-campo';
@@ -28,6 +29,10 @@ export class CadastroLeitorComponent implements OnInit {
   emailInvalido: boolean;
   nickInvalido: boolean;
   validaCampo: ValidaCampo = new ValidaCampo();
+
+  //para visualização de miniaturas
+  url_perfil;
+  url_capa;
 
   selectOptions: Option[] = [
     {value: 'M', name: 'Masculino'},
@@ -109,7 +114,10 @@ export class CadastroLeitorComponent implements OnInit {
     if (this.form.get('email').value){
       if (this.form.get('email').value.length >= 6){
         this._leitoresService.validaEmail(this.form.get('email').value, this.form.get('id').value).subscribe(
-          (email: boolean) => {this.emailInvalido = email}
+          (email: boolean) => {
+            console.log(email);
+            this.emailInvalido = email
+          }
         );
       }
       else
@@ -117,6 +125,23 @@ export class CadastroLeitorComponent implements OnInit {
     }
     else
         this.emailInvalido = false;
+  }
+
+  imgShow(e, target){
+    if(e.target.files && e.target.files[0]){
+      let reader = new FileReader();
+
+      //console.log(target);
+      reader.onload = (event:any) => {
+        console.log(this.url_perfil);
+        if(target == 'perfil')
+          this.url_perfil = event.target.result;
+        if(target == 'capa')
+          this.url_capa = event.target.result;
+      }
+      //console.log(e.target);
+      reader.readAsDataURL(e.target.files[0]);
+    }
   }
 
   validaData(){
