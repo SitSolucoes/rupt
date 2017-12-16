@@ -40,6 +40,10 @@ export class CalcTime{
     
         if (diffDays < 1){
           let hour = Math.round(diffDays*24);
+          if(hour < 1){
+            return 'Há menos de 1 hora';
+
+          }
           return hour.toString() + "h";
         }
         else if (diffDays <= 7){

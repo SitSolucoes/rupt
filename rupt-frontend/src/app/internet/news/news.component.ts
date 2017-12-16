@@ -118,6 +118,7 @@ export class NewsComponent implements OnInit {
     this._postService.getPost(id).subscribe(
       ( post ) => { 
         //retorno do método
+        console.log(this.post);
         this.post = post;
         //se o leitor está logado
         if(localStorage.getItem('l')){
@@ -196,6 +197,7 @@ export class NewsComponent implements OnInit {
 
   
   calcHour(date){
+    console.log(this.calcTime.calcTime(date));
     return this.calcTime.calcTime(date);
   }
 

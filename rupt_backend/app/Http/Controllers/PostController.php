@@ -32,7 +32,7 @@ class PostController extends Controller
         //if(!$request->rascunho)
         //$post->published_at = new Date(); 
         $post->visualizacoes = 0;
-        $post->publishedAt = time();
+        $post->publishedAt = date('Y-m-d H:i:s');
         
         $post->save();
 
