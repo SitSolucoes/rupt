@@ -123,8 +123,10 @@
                     <img src="{{  url + 'profile/' + leitor?.src_foto }}" class="img"> 
                 </div>
                 <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                    {{form.valid}}
+                    {{form.value.comentario != ''}}
                     <input type="text" class="input" maxlength="140" name="comentario" formControlName="comentario" placeholder="Escreva um comentário..." >
-                    <button type="submit" class="button" id="submit-contato"> Enviar </button>
+                    <button type="submit" class="button" [disabled]="form.value.comentario === ''" id="submit-contato"> Enviar </button>
                 </form>
             </div>
 

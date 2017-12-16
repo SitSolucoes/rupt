@@ -68,7 +68,7 @@ export class NewsComponent implements OnInit {
             this.form = this._formBuilder.group({
                 id: '0',
                 comentario: ['', Validators.required],
-                comentario_idComentario: ['', [Validators.required, Validators.minLength(3)]],
+                comentario_idComentario: [''],
                 post_idPost: [params['id']],
                 leitor_idLeitor: [new Base64().decode(localStorage.getItem('l'))]
               }); 
@@ -85,10 +85,14 @@ export class NewsComponent implements OnInit {
   onSubmit(){
     this._postService.createComentario(this.form).subscribe(
       ( ret ) => {
-        if(ret.sucesso === 'OK')
+        console.log(ret);
+        if(ret.sucesso === 'OK'){
           this.comentarios = ret.comentarios;
-        else
-          this.comentarios = [];
+        }
+        this.form.patchValue({
+          comentario: '',
+          comentario_idComentario: 0
+        });
       }
     );
   }
