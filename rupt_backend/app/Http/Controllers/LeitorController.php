@@ -46,6 +46,8 @@ class LeitorController extends Controller
         }
         
         $leitor = $this->createLeitor($request, $leitor);
+        $leitor->password = Hash::make($request->input('password'));
+                
         $leitor->save();
 
         $response = [

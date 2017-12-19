@@ -79,6 +79,22 @@
                 <input type="file" name="arquivo2" id="capa" class="input-img" (change)="imgShow($event, 'capa')"/>
                 <img *ngIf="url_capa" [src]="url_capa" style="max-width: 100%; display: block;">
             </div>
+
+            <div class="menu">
+
+                <label> Senha </label> 
+                
+                <input type="password" class="input" maxlength="30" name="senha" placeholder="Sua Senha" formControlName="password">
+
+            </div>
+            <div class="menu marginless">
+
+                <label> Confirmar Senha </label> 
+                
+                <input type="password" class="input" maxlength="30" name="confirma" placeholder="Confirmar Senha" formControlName="confirma_senha"
+                (blur)="validaSenhas()" [style.border]="!senhaInvalida ? red : gray">
+
+            </div>
             
             <button type="submit" class="button" id="submit-contato">
                 {{ textButton }}

@@ -26,6 +26,7 @@ export class CadastroLeitorComponent implements OnInit {
   enviado: boolean;
 
   dataInvalida: boolean;
+  senhaInvalida: boolean;
   emailInvalido: boolean;
   nickInvalido: boolean;
   validaCampo: ValidaCampo = new ValidaCampo();
@@ -90,8 +91,8 @@ export class CadastroLeitorComponent implements OnInit {
       src_capa: this.leitor.src_capa,
       biografia: this.leitor.biografia,
       email: this.leitor.email,
-      password: 'update',
-      confirma_senha: 'update',
+      password: '',
+      confirma_senha: '',
       ativo: true,
     })
   }
@@ -172,7 +173,7 @@ export class CadastroLeitorComponent implements OnInit {
         })
         this.spinner = false;
       }
-      else if (!this.nickInvalido && !this.emailInvalido && !this.dataInvalida){
+      else if (!this.nickInvalido && !this.emailInvalido && !this.dataInvalida && !this.senhaInvalida){
             if (this.form.get('id').value == 0){
               if ((this.form.get('password').value == this.form.get('confirma_senha').value)){
                 this._leitoresService.createLeitor(this.form).subscribe(
@@ -196,6 +197,17 @@ export class CadastroLeitorComponent implements OnInit {
                 )
             }
       }
+  }
+
+  validaSenhas(){
+    if(this.form.get('password').value != this.form.get('confirma_senha').value){
+      this.senhaInvalida = true;
+      return true;
+    }
+    else{
+      this.senhaInvalida = false;
+      return false;
+    }
   }
 
   uploadFiles(edit){
