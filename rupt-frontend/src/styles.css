@@ -391,6 +391,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     width: 380px !important;
     outline: none;
     height: 350px !important;
+    cursor: pointer;
 }
 
 .menu-top .img{
@@ -474,6 +475,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     background: #000;
     margin-right: 15px;
     position: relative;
+    cursor: pointer;
 }
 
 .container-categoria .banner-single{
@@ -490,6 +492,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     display: block;
     float: left;
     margin-right: 15px;
+    cursor: pointer;
 }
 
 .container-categoria .container-slider{
@@ -1018,9 +1021,9 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .modal-content .info .img-area{
-  width: 140px;
+  width: auto;
   height: 50px;
-  display: block;
+  display: table;
   margin: 0 auto;
   padding-top: 0px;
   margin-top: 5px;
@@ -1119,18 +1122,17 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 
 .modal-footer{
     height: auto !important;
-    display: block;
+    display: table;
+    width: auto !important;
     margin: 0 auto;
-    width: 36% !important;
 }
 
 .modal-footer .button{
     width: auto;
     display: block;
-    float: right;
+    float: left;
     position: relative;
-    left: -15px;
-    margin-left: 20px;
+    margin-right: 10px;
     margin-top: 5px;
     margin-bottom: 40px;
     padding: 8px;
@@ -1140,6 +1142,10 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     font-size: 15px;
     color: #5e5e5e;
     opacity: 1;
+}
+
+.modal-footer .button2{
+    margin-right: 0px;
 }
 
 .modal-footer .button:hover{
