@@ -177,7 +177,9 @@
 
                         <div *ngIf='t.tl.post.src_imagem'>
                             <div class="border" >
-                                <img src="{{ url + 'posts/' + t.tl.post.src_imagem }}" class="img3">
+                                <img src="{{ url + 'posts/' + t.tl.post.src_imagem }}" class="img3"
+                                [ngClass]="{'post-adulto' : t.tl.post.adulto == 1}"
+                                >
                             </div>
                         </div>
                     </a>

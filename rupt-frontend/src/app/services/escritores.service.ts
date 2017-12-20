@@ -47,13 +47,13 @@ export class EscritoresService {
     return JSON.stringify(form.value);
   }
 
-  createEscritor(form, id){
+  createEscritor(form, id, admin){
     const body = this.createBody(form);
 
     let admin_id = this.base64.decode(localStorage.getItem('a'));
-    if (!admin_id)
+    if (!admin)
       admin_id = '0';
-
+    
     return this._http.put(this._url + 'createEscritor/' + id + "/" + admin_id, body, {headers: this.headers}).map(
     (response: Response)=>{
       return response.json().leitor_idLeitor;

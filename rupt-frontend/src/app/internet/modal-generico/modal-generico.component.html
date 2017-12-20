@@ -1,5 +1,5 @@
 <div class="modal-content">
-  <div class="title">
+  <div class="title"  *ngIf="action != 'loading'">
     <span *ngIf="action == 'denuncia'">Denunciar</span>
     <span *ngIf="action == 'mensagemDenuncia'">Denuncia Enviada</span>
     <span *ngIf="action == 'rascunho'">Rascunho</span>
@@ -9,8 +9,28 @@
   </div>
 
   <div class="generico-modal">
-    <app-news [rascunho]="true" *ngIf="action == 'rascunho' && obj" [rascunhoForm]="obj"></app-news>
-    <!-- Exemplo denuncia
+    <app-news [rascunho]="true" *ngIf="action == 'rascunho' && obj" [rascunhoForm]="obj"></app-news> 
+    <!--loaging-->
+    
+    <div class="spinner-loading" *ngIf="action == 'loading'">
+      <!--spinner-->
+      <div class="spinner">
+          <div class="preloader-wrapper big active" >
+            <div class="spinner-layer spinner-rupt">
+              <div class="circle-clipper left">
+                <div class="circle"></div>
+              </div><div class="gap-patch">
+                <div class="circle"></div>
+              </div><div class="circle-clipper right">
+                <div class="circle"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <!--texto-->
+      <span>{{texto}}</span>
+    </div>
+    
     <div name="denuncia" *ngIf="action == 'denuncia'">
         <button type="button" class="button" (click)="denuncia(m.id)" *ngFor="let m of motivos">{{m.motivo}}</button>
     </div>
@@ -18,11 +38,8 @@
       <div class="text"> {{mensagem}}</div>
       <button type="submit" class="button" id="submit-contato" (click)="closeModal()" >OK</button>
     </div>
-    -->
+    
 
-
-    <!-- Exemplo com mensagem de feedback
-    -->
 
     <!-- Exemplo com Redes sociais
    <div class="social-media2">

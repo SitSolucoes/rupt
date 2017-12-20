@@ -131,7 +131,6 @@ export class CadastroLeitorComponent implements OnInit {
 
       //console.log(target);
       reader.onload = (event:any) => {
-        console.log(this.url_perfil);
         if(target == 'perfil')
           this.url_perfil = event.target.result;
         if(target == 'capa')
@@ -221,6 +220,7 @@ export class CadastroLeitorComponent implements OnInit {
     if ((<HTMLInputElement>window.document.getElementById('capa')).files[0]){
       files.push((<HTMLInputElement>window.document.getElementById('capa')).files[0]);
       files_name.push('doc2');
+      console.log('capa');
     }
 
     if (files.length > 0){

@@ -185,7 +185,7 @@ export class CadastroEscritorComponent implements OnInit {
   }
 
   onSubmit(){
-    this._escritorService.createEscritor(this.formulario, this.leitor.id).subscribe(
+    this._escritorService.createEscritor(this.formulario, this.leitor.id, false).subscribe(
       (response) => { 
         this.uploadFiles(false);
       }

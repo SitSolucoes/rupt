@@ -553,6 +553,11 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     width: 100% !important;
 }
 
+.post-adulto{
+    -webkit-filter: blur(6px)!important;
+    filter: blur(6px)!important;
+}
+
 .container-categoria .banner-img-text{
     display: block;
     float: left;

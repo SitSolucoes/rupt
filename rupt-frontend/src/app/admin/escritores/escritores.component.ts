@@ -561,7 +561,7 @@ export class EscritoresComponent implements OnInit {
           !(<HTMLInputElement>window.document.getElementById('doc3')).files[0])
             this.mensagemErro = "Inclua as imagens dos documentos.";
         else {
-            this._escritoresService.createEscritor(form, this.escritor.id).subscribe(
+            this._escritoresService.createEscritor(form, this.escritor.id, true).subscribe(
               (response: any) => {
                 this.uploadFiles(form, response);
               }
