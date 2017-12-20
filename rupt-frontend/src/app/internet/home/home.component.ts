@@ -16,14 +16,16 @@ export class HomeComponent implements OnInit {
 
   leitor: Leitor = new Leitor();
   modalCategoria = new EventEmitter<string|MaterializeAction>();
-  modalLoading = new EventEmitter<string|MaterializeAction>();
+  
   slidersProntos = 0;
 
   constructor(private _leitorService: LeitoresService,
-              private _categoriaLeitorService: CategoriaLeitorService) { }
+              private _categoriaLeitorService: CategoriaLeitorService) {}
 
   ngOnInit() {
-    this.openModalLoading();
+    setTimeout(()=>{
+      this.openModalLoading();
+    }, 1)
     this._leitorService.leitor.subscribe(
       (leitor: Leitor) => {  console.log('leitor'); this.leitor = leitor; console.log(leitor); }
     );
@@ -37,14 +39,6 @@ export class HomeComponent implements OnInit {
     )
 
     this.createSlick();
-  }
-
-  pronto(){
-    console.log('prontos ' +  this.slidersProntos);
-    this.slidersProntos += 1;
-    if(this.slidersProntos == 2){
-      this.closeModalLoading(true);
-    }
   }
 
   createSlick(){
@@ -84,6 +78,8 @@ export class HomeComponent implements OnInit {
     this.modalCategoria.emit({action:"modal",params:['close']});
   }
 
+  modalLoading = new EventEmitter<string|MaterializeAction>();
+
   openModalLoading() {
     console.log('loading...')
     this.modalLoading.emit({
@@ -97,6 +93,14 @@ export class HomeComponent implements OnInit {
         action:'modal',
         params:['close']
       });
+    }
+  }
+
+  pronto(){
+    console.log('prontos ' +  this.slidersProntos);
+    this.slidersProntos += 1;
+    if(this.slidersProntos == 2){
+      this.closeModalLoading(true);
     }
   }
 }

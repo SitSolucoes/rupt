@@ -5,7 +5,7 @@
     <app-modal-categorias (closeModalCategoria)="closeModalCategoria($event)" [id]="leitor.id"></app-modal-categorias>
 </div>
 
-<div id="modalLoading" class="modal modal2 modal4"
+<div id="modalLoading" class="loading-modal modal modal2 modal4"
     materialize="modal" [materializeParams]="[{dismissible: false}]"
     [materializeActions]="modalLoading">
     <modal-generico [action]="'loading'" [obj]="'Carregando postagens'" (closeModalGenerico)="closeModalLoading($event)"></modal-generico>

@@ -61,6 +61,9 @@ export class NewsComponent implements OnInit {
    }
 
   ngOnInit() {
+    setTimeout(()=>{
+      this.openModalLoading();
+    }, 15)
     this._activatedRoute.params.subscribe(params => {
         if(params['id']){
           this.carregaPost(+params['id']);
@@ -117,10 +120,12 @@ export class NewsComponent implements OnInit {
   }
 
   carregaPost(id){
+    
     this._postService.getPost(id).subscribe(
       ( post ) => { 
         //retorno do método
-        
+        this.pronto();
+
         this.post = post;
         //se o leitor está logado
         if(localStorage.getItem('l')){
@@ -201,4 +206,29 @@ export class NewsComponent implements OnInit {
       return this.calcTime.calcTime(date);
   }
 
+  modalLoading = new EventEmitter<string|MaterializeAction>();
+
+  openModalLoading() {
+    this.modalLoading.emit({
+         action: 'modal',
+         params: ['open']});
+  }
+
+  closeModalLoading(e){
+    if(e){
+      this.modalLoading.emit({
+        action:'modal',
+        params:['close']
+      });
+    }
+  }
+
+  pronto(){
+    console.log('pronto');
+    this.closeModalLoading(true);
+    //console.log('prontos ' +  this.slidersProntos);
+    //this.slidersProntos += 1;
+    //if(this.slidersProntos == 2){
+    //}
+  }
 }
