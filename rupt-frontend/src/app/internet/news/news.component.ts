@@ -55,6 +55,9 @@ export class NewsComponent implements OnInit {
    }
 
   ngOnInit() {
+    setTimeout(()=>{
+      this.openModalLoading();
+    }, 15)
     this._activatedRoute.params.subscribe(params => {
         if(params['id']){
           this.carregaPost(+params['id']);
@@ -111,32 +114,36 @@ export class NewsComponent implements OnInit {
   }
 
   carregaPost(id){
+    
     this._postService.getPost(id).subscribe(
       ( post ) => { 
         
         if (post){
             this.post = post;
+            
             //se o leitor está logado
             if(localStorage.getItem('l')){
-              let base64: Base64 = new Base64();
-              //Popula o leitor + get interações
-              const leitor_id = base64.decode(localStorage.getItem('l'));
-              this._leitoresService.getLeitor(leitor_id).subscribe(
-                (leitor) => {
-                  
-                this.leitor = leitor;
-                  this.getInteracoes();
-                }
-              );
-            }
+                let base64: Base64 = new Base64();
+                //Popula o leitor + get interações
+                const leitor_id = base64.decode(localStorage.getItem('l'));
+                this._leitoresService.getLeitor(leitor_id).subscribe(
+                    (leitor) => {
+                      
+                    this.leitor = leitor;
+                      this.getInteracoes();
+                    }
+                )
+            };
+
             this._postService.getComentarios(this.post.id).subscribe(
               (response) => {
                 this.comentarios = response.comentarios;
+                this.pronto();
               }
             );
         }
-
-        
+        else 
+          this.pronto();
       }
     );
 
@@ -195,4 +202,28 @@ export class NewsComponent implements OnInit {
       return this.calcTime.calcTime(date);
   }
 
+  modalLoading = new EventEmitter<string|MaterializeAction>();
+
+  openModalLoading() {
+    this.modalLoading.emit({
+         action: 'modal',
+         params: ['open']});
+  }
+
+  closeModalLoading(e){
+    if(e){
+      this.modalLoading.emit({
+        action:'modal',
+        params:['close']
+      });
+    }
+  }
+
+  pronto(){
+    this.closeModalLoading(true);
+    //console.log('prontos ' +  this.slidersProntos);
+    //this.slidersProntos += 1;
+    //if(this.slidersProntos == 2){
+    //}
+  }
 }

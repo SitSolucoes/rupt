@@ -7,6 +7,12 @@
   <modal-generico [action]="'denuncia'" [idObj]="post?.id" (closeModalGenerico)="closeModalDenuncia($event)"></modal-generico>
   </div>
 
+  <div id="modalLoading" class="loading-modal modal modal2 modal4"
+    materialize="modal" [materializeParams]="[{dismissible: false}]"
+    [materializeActions]="modalLoading">
+    <modal-generico [action]="'loading'" [obj]="'Carregando'" (closeModalGenerico)="closeModalLoading($event)"></modal-generico>
+    </div>
+
   <div class="area-top">
     
     <div class="tag-menu" *ngIf="!rascunho">

@@ -31,7 +31,6 @@ export class CategoriasComponent implements OnInit {
   getPosts(){
     this._postsService.getCategoryPostsSlider().subscribe(
       (p: any) =>{
-        console.log(p);
         this.categorias = p.posts;
         this.pronto();
         //console.log(p.posts);

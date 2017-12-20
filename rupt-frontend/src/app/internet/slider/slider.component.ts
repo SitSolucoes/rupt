@@ -34,7 +34,6 @@ export class SliderComponent implements OnInit {
   getSliderPostsHTML(){
     this._postServices.getSliderPosts().subscribe(
       (retorno: any) => {
-        console.log(retorno); 
         this.sliderPosts = retorno.posts;
         this.pronto();
     });
