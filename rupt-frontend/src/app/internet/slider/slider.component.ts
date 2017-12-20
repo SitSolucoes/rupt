@@ -1,6 +1,7 @@
 import { Router } from '@angular/router';
 import { PostsService } from './../../services/posts.service';
 import { Component, OnInit, Renderer, ElementRef, ViewChild, EventEmitter, Output } from '@angular/core';
+import { ConnectionFactory } from 'app/classes/connection-factory';
 
 @Component({
   selector: 'slider',
@@ -12,7 +13,7 @@ export class SliderComponent implements OnInit {
   
   sliderPosts: any;
   sliderPostsHTML:string = '';
-  
+  url = ConnectionFactory.API_IMAGEM;
 
   constructor(private _postServices: PostsService,
               private _elementRef: ElementRef,

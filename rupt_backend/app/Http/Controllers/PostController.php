@@ -133,7 +133,10 @@ class PostController extends Controller
         
         //print_r( $idsPosts);
         
-        $posts = Post::whereIn('id', $idsPosts)->get();
+        $posts = Post::whereIn('id', $idsPosts)
+                     ->with('categoriasPost')
+                     ->get();
+                     
         $retorno = [
             'posts' => $posts
         ];

@@ -15,11 +15,14 @@
 <div class="container-slider">
     <section class="regular slider">
         <slick-slider *ngIf="sliderPosts">
-            <div class="banner" *ngFor="let s of sliderPosts" >
-                <img src="../../../assets/img/banner4.png" class="img" (click)="openNew(s.id)">
+            <div class="banner" *ngFor="let p of sliderPosts" >
+                <img src="{{ url + 'posts/' + p.src_imagem }}" class="img shadow"
+                    [ngClass]="{'post-adulto' : p.adulto == 1}" (click)="openNew(p.id)"
+                >
+
                 <div class="info-slider">
-                    <div class="section"> entreterimento </div>
-                    <div class="banner-title"> {{ s.subtitulo }}</div>
+                    <div class="section"> {{ p.categorias_post[p.categorias_post.length-1].categoria.categoria }} </div>
+                    <div class="banner-title"> {{ p.titulo }}</div>
                 </div>
             </div>
         </slick-slider>

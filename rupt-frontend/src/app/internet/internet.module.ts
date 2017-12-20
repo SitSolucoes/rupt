@@ -33,6 +33,7 @@ import { RedefineSenhaComponent  } from './redefine-senha/redefine-senha.compone
 import { EsqueciSenhaComponent } from './esqueci-senha/esqueci-senha.component';
 import { ModalExcluirComponent } from './modal-excluir/modal-excluir.component';
 import { ModalRascunhoComponent } from './modal-rascunho/modal-rascunho.component';
+import { VisualizacoesService } from 'app/services/visualizacoes.service';
 
 @NgModule({ 
   imports: [
@@ -71,7 +72,8 @@ import { ModalRascunhoComponent } from './modal-rascunho/modal-rascunho.componen
   ],
   providers: [
     CategoriaLeitorService,
-    TimelineService
+    TimelineService,
+    VisualizacoesService
   ]
 })
 export class InternetModule { }

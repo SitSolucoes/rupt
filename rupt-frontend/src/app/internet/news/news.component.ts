@@ -11,6 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, EventEmitter, Input } from '@angular/core';
 
 import { PostsService } from './../../services/posts.service';
+import { VisualizacoesService } from 'app/services/visualizacoes.service';
 
 declare var $: any;
 @Component({
@@ -51,7 +52,8 @@ export class NewsComponent implements OnInit {
                private _router: Router,
                private _formBuilder: FormBuilder,
                private _leitoresService: LeitoresService,
-               private _denunciasService: DenunciasService) {
+               private _denunciasService: DenunciasService,
+               private _visualizacoesService: VisualizacoesService) {
    }
 
   ngOnInit() {
@@ -114,26 +116,32 @@ export class NewsComponent implements OnInit {
   }
 
   carregaPost(id){
-    
     this._postService.getPost(id).subscribe(
       ( post ) => { 
-        
         if (post){
             this.post = post;
             
             //se o leitor está logado
             if(localStorage.getItem('l')){
-                let base64: Base64 = new Base64();
+                let base64 = new Base64();
                 //Popula o leitor + get interações
                 const leitor_id = base64.decode(localStorage.getItem('l'));
                 this._leitoresService.getLeitor(leitor_id).subscribe(
                     (leitor) => {
-                      
-                    this.leitor = leitor;
-                      this.getInteracoes();
+                        this.leitor = leitor;
+                        this.getInteracoes();
+
+                        //se não for o dono do post conta uma visualizacao
+                        if (post.autor.id != leitor.id){
+                            this._visualizacoesService.create(post.id, leitor_id).subscribe();
+                        }
                     }
-                )
-            };
+                );
+            }
+            else {
+                //se não tiver ninguem logado conta uma visualização sem leitor
+                this._visualizacoesService.create(post.id, 0).subscribe();
+            }
 
             this._postService.getComentarios(this.post.id).subscribe(
               (response) => {

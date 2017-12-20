@@ -127,6 +127,8 @@ Route::post('posts/create', ['uses' => 'PostController@createPost']);
 Route::post('posts/uploadImages/{id}', ['uses' => 'PostController@uploadImages']);
 Route::post('posts/delete', ['uses' => 'PostController@delete']);
 
+Route::post('visualizacoes/create', ['uses' => 'VisualizacaoController@create']);
+
 //Mensagens
 Route::get('/getMensagens/naoLidas', [
           'uses' => 'MensagemController@getMensagens_nLidas'
