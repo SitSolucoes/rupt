@@ -44,7 +44,6 @@ export class DenunciasComponent implements OnInit {
     this._denunciaService.getDenuncias()
       .subscribe(
         (denuncias: any) => {
-          console.log(denuncias);
           this.denuncias = denuncias;
           this.denunciasFiltro = denuncias;
         }
@@ -52,16 +51,12 @@ export class DenunciasComponent implements OnInit {
   }
 
   getPost(id): Post{
-    console.log('antes');
     let post: Post;
     this._denunciaService.getPost(id).subscribe(
               (p: any) =>{
                 post = p[0];
-                console.log(post);
-                console.log('tinha que ser entre');
               }
             );
-    //console.log(post);
     return post;
   }
 
@@ -73,12 +68,8 @@ export class DenunciasComponent implements OnInit {
   openModal(d){
     this._denunciaService.getDetalhes(d).subscribe(
       (ret: any) =>{
-        console.log('retorno do get denuncias: ');
-        console.log(ret.denuncia);
         this.denuncia_selecionada = ret.denuncia;
         this.montaForm();
-        console.log('form');
-        console.log(this.form);
         this.modalActions.emit({action:"modal",params:['open']});
       }
     );

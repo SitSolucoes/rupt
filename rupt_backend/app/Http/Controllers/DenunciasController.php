@@ -54,9 +54,9 @@ class DenunciasController extends Controller{
         if($request->action != 'i'){
             //atualiza post
             try{
-                $post = Post::where('id', $request->post_idPost)->get();
-                $post[0]->idAdmin_deleted = $request->idAdmin_Deleted;
-                $post[0]->save();
+                $c = new PostController();
+                $c->removePorDenuncia($request->post_idPost, $request->idAdmin_Deleted);
+
                 //atualiza denuncia
                 $denuncias = Denuncia::where('post_idPost', $request->post_idPost)
                                     ->where('motivo_idMotivo', $request->motivo_idMotivo)
@@ -66,6 +66,8 @@ class DenunciasController extends Controller{
                     $d->admin_idAdmin = $request->idAdmin_deleted;
                     $d->save();
                 }
+
+
                 return response()->json([
                     'status' => true
                 ], 200);

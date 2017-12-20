@@ -80,19 +80,27 @@
                 <img *ngIf="url_capa" [src]="url_capa" style="max-width: 100%; display: block;">
             </div>
 
-            <div class="menu">
+            <div *ngIf="!leitor.id">
 
-                <label> Senha </label> 
-                
-                <input type="password" class="input" maxlength="30" name="senha" placeholder="Sua Senha" formControlName="password">
+                <div class="menu">
 
-            </div>
-            <div class="menu marginless">
+                    <label> Senha </label> 
+                    
+                    <input type="password" class="input" maxlength="30" name="senha" placeholder="Sua Senha" formControlName="password"
+                    [ngClass]="{'invalid': verificaValidTouched('password')}">
 
-                <label> Confirmar Senha </label> 
-                
-                <input type="password" class="input" maxlength="30" name="confirma" placeholder="Confirmar Senha" formControlName="confirma_senha"
-                (blur)="validaSenhas()" [style.border]="!senhaInvalida ? red : gray">
+                    <div class="error" *ngIf="verificaValidTouched('password')">{{ mensagemErro('password') }}</div>
+
+                </div>
+                <div class="menu marginless">
+
+                    <label> Confirmar Senha </label> 
+                    
+                    <input type="password" class="input" maxlength="30" name="confirma" placeholder="Confirmar Senha" formControlName="confirma_senha"
+                    (blur)="validaSenhas()">
+                    
+                    <div class="error" *ngIf="form.get('password').value != form.get('confirma_senha').value">Senhas não coincdem</div>
+                </div>
 
             </div>
             

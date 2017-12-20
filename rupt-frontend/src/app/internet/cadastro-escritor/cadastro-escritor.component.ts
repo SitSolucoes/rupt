@@ -195,7 +195,7 @@ export class CadastroEscritorComponent implements OnInit {
   onSubmitEditar(){
     this.salvo = false;
 
-    //como o campo ta disable na tela, pode ter algum espetão que libere o campo pelo f12 e edite o campo,
+    //como o campo ta disable na tela, pode ter algum espertão que libere o campo pelo f12 e edite o campo,
     //e como depois de aceito não pode mais mudar os dados, isso ta aqui pra garantir que não vai mudar
     if (this.leitor.escritor.status == 'a'){
       this.formulario.controls.rg.enable();

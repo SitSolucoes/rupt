@@ -79,8 +79,6 @@ export class CadastroLeitorComponent implements OnInit {
   }
   
   preencheForm(){
-    console.log('preenchendo o leito com');
-    console.log(this.leitor);
     this.form.patchValue({
       id: this.leitor.id,
       nome: this.leitor.nome,
@@ -91,8 +89,8 @@ export class CadastroLeitorComponent implements OnInit {
       src_capa: this.leitor.src_capa,
       biografia: this.leitor.biografia,
       email: this.leitor.email,
-      password: '',
-      confirma_senha: '',
+      password: 'update',
+      confirma_senha: 'update',
       ativo: true,
     })
   }
@@ -116,8 +114,7 @@ export class CadastroLeitorComponent implements OnInit {
       if (this.form.get('email').value.length >= 6){
         this._leitoresService.validaEmail(this.form.get('email').value, this.form.get('id').value).subscribe(
           (email: boolean) => {
-            console.log(email);
-            this.emailInvalido = email
+            this.emailInvalido = email;
           }
         );
       }
@@ -164,6 +161,8 @@ export class CadastroLeitorComponent implements OnInit {
   }
 
   onSubmit(){
+      this.validaSenhas();
+
       this.enviado = false;
       this.spinner = true;
       if (!this.form.valid){

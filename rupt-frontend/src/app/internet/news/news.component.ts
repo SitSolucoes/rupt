@@ -52,12 +52,6 @@ export class NewsComponent implements OnInit {
                private _formBuilder: FormBuilder,
                private _leitoresService: LeitoresService,
                private _denunciasService: DenunciasService) {
-                setInterval(() => { 
-                  this._postService.getComentarios(this.post.id).subscribe(
-                  (response) => {
-                    this.comentarios = response.comentarios;
-                  }
-                ); }, 1000 * 30);
    }
 
   ngOnInit() {
@@ -90,7 +84,7 @@ export class NewsComponent implements OnInit {
         }
         this.form.patchValue({
           comentario: '',
-          comentario_idComentario: 0
+          comentario_idComentario: ''
         });
       }
     );
@@ -119,30 +113,30 @@ export class NewsComponent implements OnInit {
   carregaPost(id){
     this._postService.getPost(id).subscribe(
       ( post ) => { 
-        //retorno do método
         
-        this.post = post;
-        //se o leitor está logado
-        if(localStorage.getItem('l')){
-          let base64: Base64 = new Base64();
-          //Popula o leitor + get interações
-          const leitor_id = base64.decode(localStorage.getItem('l'));
-          this._leitoresService.getLeitor(leitor_id).subscribe(
-            (leitor) => {
-              
-              /*if(this.post.autor_idLeitor = leitor_id){
-                this.publicaButton = true;
-              }*/
-              this.leitor = leitor;
-              this.getInteracoes();
+        if (post){
+            this.post = post;
+            //se o leitor está logado
+            if(localStorage.getItem('l')){
+              let base64: Base64 = new Base64();
+              //Popula o leitor + get interações
+              const leitor_id = base64.decode(localStorage.getItem('l'));
+              this._leitoresService.getLeitor(leitor_id).subscribe(
+                (leitor) => {
+                  
+                this.leitor = leitor;
+                  this.getInteracoes();
+                }
+              );
             }
-          );
+            this._postService.getComentarios(this.post.id).subscribe(
+              (response) => {
+                this.comentarios = response.comentarios;
+              }
+            );
         }
-        this._postService.getComentarios(this.post.id).subscribe(
-          (response) => {
-            this.comentarios = response.comentarios;
-          }
-        );
+
+        
       }
     );
 

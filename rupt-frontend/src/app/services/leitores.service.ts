@@ -168,6 +168,7 @@ export class LeitoresService {
           return true;
         }
 
+        localStorage.removeItem('l');
         return response.json().leitor;
       }
     )

@@ -3,13 +3,15 @@ import { Injectable } from '@angular/core';
 
 import { Http, Response, Headers } from '@angular/http';
 import { Post } from './../classes/post';
+import { Base64 } from 'app/shared/Base64';
 
 @Injectable()
 export class DenunciasService {
 
   private _url: string = ConnectionFactory.API_CONNECTION;
   private headers = new Headers({'Content-Type': 'application/json'});
-
+  base64: Base64 = new Base64();
+  
   constructor(private _http: Http) { }
 
   getDenuncias(){
@@ -34,11 +36,12 @@ export class DenunciasService {
     const body = JSON.stringify({
       post_idPost: f.value.post_idPost,
       leitor_idLeitor: f.value.leitor_idLeitor,
-      idAdmin_Deleted: f.value.idAdminDeleted,
+      idAdmin_Deleted: this.base64.decode(localStorage.getItem("a")),
       motivo_idMotivo: f.value.motivo_idMotivo,
       deleted_at: f.value.deleted_at,
       action: a
-    })
+    });
+
     return this._http.put(this._url + 'denuncias/agir/',body,{headers: this.headers}).map(
       (ret) => {
         return {
