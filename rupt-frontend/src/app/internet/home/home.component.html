@@ -1,8 +1,14 @@
 <!--modal filtro categorias-->
 <div id="ModalCategoria" class="modal modal3"
-materialize="modal" [materializeParams]="[{dismissible: false}]"
-[materializeActions]="modalCategoria">
-<app-modal-categorias (closeModalCategoria)="closeModalCategoria($event)" [id]="leitor.id"></app-modal-categorias>
+    materialize="modal" [materializeParams]="[{dismissible: false}]"
+    [materializeActions]="modalCategoria">
+    <app-modal-categorias (closeModalCategoria)="closeModalCategoria($event)" [id]="leitor.id"></app-modal-categorias>
+</div>
+
+<div id="modalLoading" class="modal modal2 modal4"
+    materialize="modal" [materializeParams]="[{dismissible: false}]"
+    [materializeActions]="modalLoading">
+    <modal-generico [action]="'loading'" [obj]="'Carregando postagens'" (closeModalGenerico)="closeModalLoading($event)"></modal-generico>
 </div>
 
 
@@ -17,7 +23,7 @@ materialize="modal" [materializeParams]="[{dismissible: false}]"
 </div>
 <div class="menu-top container-categoria">
     <!--slider-->
-    <slider></slider>
+    <slider (ready)="pronto($event)"></slider>
 </div>
 
 
@@ -27,7 +33,7 @@ materialize="modal" [materializeParams]="[{dismissible: false}]"
     </div>
 </div>
 
-<categorias></categorias>
+<categorias (ready)="pronto($event)"></categorias>
     
     
 

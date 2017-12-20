@@ -5,6 +5,7 @@ import { FormBuilder } from '@angular/forms';
 import { PostsService } from './../../services/posts.service';
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Validators } from '@angular/forms';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'modal-generico',
@@ -22,6 +23,7 @@ export class ModalGenericoComponent implements OnInit {
     leitor;
     motivos;
     post;
+    private texto = 'Carregando';
     mensagem;
     base64: Base64 = new Base64();
   constructor(private _postService: PostsService,
@@ -32,6 +34,9 @@ export class ModalGenericoComponent implements OnInit {
   ngOnInit() {
     if(this.action=="denuncia"){
       this.preparaDenuncia();
+    }
+    if(this.action=="loading"){
+      this.texto = this.obj;
     }
     //console.log(this.obj);
   }
