@@ -5,6 +5,7 @@ import { FormBuilder } from '@angular/forms';
 import { PostsService } from './../../services/posts.service';
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Validators } from '@angular/forms';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'modal-generico',
@@ -22,6 +23,7 @@ export class ModalGenericoComponent implements OnInit {
     leitor;
     motivos;
     post;
+    private texto = 'Carregando';
     mensagem;
     base64: Base64 = new Base64();
   constructor(private _postService: PostsService,
@@ -30,17 +32,19 @@ export class ModalGenericoComponent implements OnInit {
               private _router: Router) { }
 
   ngOnInit() {
+
     if(this.action=="denuncia"){
       this.preparaDenuncia();
     }
-    //console.log(this.obj);
+    if(this.action=="loading"){
+      this.texto = this.obj;
+    }
   }
 
   preparaDenuncia(){
     this._denunciasService.getMotivosDenuncia().subscribe(
       (ret)=>{
         this.motivos = ret.motivos;
-        console.log(this.motivos);
       }
     );
   }
@@ -52,8 +56,6 @@ export class ModalGenericoComponent implements OnInit {
           if(ret.status){
             this.action = "mensagemDenuncia";
             this.mensagem = "Sua denúncia foi computada com sucesso, estamos analisando para tomar as devidas providências! Obrigado.";
-            console.log(this.mensagem);
-            console.log(this.action);
           }else{
             this.action = "mensagemDenuncia";
             this.mensagem = ret.mensagem;

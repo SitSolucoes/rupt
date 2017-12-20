@@ -23,9 +23,12 @@ class TimelineController extends Controller
         $retorno = [];
         $int_c = new InteracaoController();
         foreach($timeline as $t){
-            $retorno[] = (object)['tl' => $t,
+            if ($t->post->deleted_at == null){
+                $retorno[] = (object)['tl' => $t,
                                   'interacoes' => $int_c->interacoesFromPost($t->id)
-            ];
+                ];
+            }
+            
         }
         return response()->json(['timeline' => $retorno], 200);
     }

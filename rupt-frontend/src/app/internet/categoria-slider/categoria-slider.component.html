@@ -25,12 +25,12 @@
                         <div class="text"> {{ p.post.subtitulo }}...</div>
                         <div class="info-post">
                             <div class="img-person">
-                                <img src="{{ p.escritor.src_foto }}" class="img">
+                                <img src="{{ url + 'profile/' + p.escritor.src_foto }}" class="img">
                             </div>
                             <p> {{ p.escritor.nick}}</p>
                             <div class="area-post">
                                 <img src="../../../assets/img/calendar.png" class="img-cal">
-                                <div class="time">{{ p.post.publishedAt}} </div>
+                                <div class="time">{{ p.post.publishedAt | date:'dd/MM' }} </div>
                             </div>
                         </div>
                     </div>

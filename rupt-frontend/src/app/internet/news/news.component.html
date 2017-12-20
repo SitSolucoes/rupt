@@ -7,6 +7,12 @@
   <modal-generico [action]="'denuncia'" [idObj]="post?.id" (closeModalGenerico)="closeModalDenuncia($event)"></modal-generico>
   </div>
 
+  <div id="modalLoading" class="loading-modal modal modal2 modal4"
+    materialize="modal" [materializeParams]="[{dismissible: false}]"
+    [materializeActions]="modalLoading">
+    <modal-generico [action]="'loading'" [obj]="'Carregando'" (closeModalGenerico)="closeModalLoading($event)"></modal-generico>
+    </div>
+
   <div class="area-top">
     
     <div class="tag-menu" *ngIf="!rascunho">
@@ -116,8 +122,6 @@
                     <img src="{{  url + 'profile/' + leitor?.src_foto }}" class="img"> 
                 </div>
                 <form [formGroup]="form" (ngSubmit)="onSubmit()">
-                    {{form.valid}}
-                    {{form.value.comentario != ''}}
                     <input type="text" class="input" maxlength="140" name="comentario" formControlName="comentario" placeholder="Escreva um comentário..." >
                     <button type="submit" class="button" [disabled]="form.value.comentario === ''" id="submit-contato"> Enviar </button>
                 </form>

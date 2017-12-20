@@ -94,7 +94,6 @@ export class AdministradoresService {
 
   signin(form: NgForm) {
     const body = JSON.stringify(form.value);
-    console.log(body);
     
     return this._http.put(this._url + 'admin/signin', body, {headers: this.headers}).map(
       (response: Response) => { 

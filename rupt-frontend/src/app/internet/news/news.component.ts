@@ -52,15 +52,12 @@ export class NewsComponent implements OnInit {
                private _formBuilder: FormBuilder,
                private _leitoresService: LeitoresService,
                private _denunciasService: DenunciasService) {
-                setInterval(() => { 
-                  this._postService.getComentarios(this.post.id).subscribe(
-                  (response) => {
-                    this.comentarios = response.comentarios;
-                  }
-                ); }, 1000 * 30);
    }
 
   ngOnInit() {
+    setTimeout(()=>{
+      this.openModalLoading();
+    }, 15)
     this._activatedRoute.params.subscribe(params => {
         if(params['id']){
           this.carregaPost(+params['id']);
@@ -85,13 +82,12 @@ export class NewsComponent implements OnInit {
   onSubmit(){
     this._postService.createComentario(this.form).subscribe(
       ( ret ) => {
-        console.log(ret);
         if(ret.sucesso === 'OK'){
           this.comentarios = ret.comentarios;
         }
         this.form.patchValue({
           comentario: '',
-          comentario_idComentario: 0
+          comentario_idComentario: ''
         });
       }
     );
@@ -99,7 +95,6 @@ export class NewsComponent implements OnInit {
 
   montaRascunho(){
     let f = this.rascunhoForm;
-    console.log(f);
     this.post = {
       id: null,
       titulo: f.titulo,
@@ -119,32 +114,36 @@ export class NewsComponent implements OnInit {
   }
 
   carregaPost(id){
+    
     this._postService.getPost(id).subscribe(
       ( post ) => { 
-        //retorno do método
-        console.log(this.post);
-        this.post = post;
-        //se o leitor está logado
-        if(localStorage.getItem('l')){
-          let base64: Base64 = new Base64();
-          //Popula o leitor + get interações
-          const leitor_id = base64.decode(localStorage.getItem('l'));
-          this._leitoresService.getLeitor(leitor_id).subscribe(
-            (leitor) => {
-              console.log(this.post);
-              /*if(this.post.autor_idLeitor = leitor_id){
-                this.publicaButton = true;
-              }*/
-              this.leitor = leitor;
-              this.getInteracoes();
-            }
-          );
+        
+        if (post){
+            this.post = post;
+            
+            //se o leitor está logado
+            if(localStorage.getItem('l')){
+                let base64: Base64 = new Base64();
+                //Popula o leitor + get interações
+                const leitor_id = base64.decode(localStorage.getItem('l'));
+                this._leitoresService.getLeitor(leitor_id).subscribe(
+                    (leitor) => {
+                      
+                    this.leitor = leitor;
+                      this.getInteracoes();
+                    }
+                )
+            };
+
+            this._postService.getComentarios(this.post.id).subscribe(
+              (response) => {
+                this.comentarios = response.comentarios;
+                this.pronto();
+              }
+            );
         }
-        this._postService.getComentarios(this.post.id).subscribe(
-          (response) => {
-            this.comentarios = response.comentarios;
-          }
-        );
+        else 
+          this.pronto();
       }
     );
 
@@ -172,7 +171,7 @@ export class NewsComponent implements OnInit {
     this._postService.interage(this.post.id, null, this.leitor, 'post', i).subscribe(
       (ret)=>{
         if(ret.status == 'OK'){
-          console.log(ret);
+          
           this.interacoes.likes = ret.likes.length;
           this.interacoes.loves = ret.love.length;
           this.interacoes.angry = ret.angry.length;
@@ -199,10 +198,32 @@ export class NewsComponent implements OnInit {
     }
   }
 
-  
   calcHour(date){
-    console.log(this.calcTime.calcTime(date));
-    return this.calcTime.calcTime(date);
+      return this.calcTime.calcTime(date);
   }
 
+  modalLoading = new EventEmitter<string|MaterializeAction>();
+
+  openModalLoading() {
+    this.modalLoading.emit({
+         action: 'modal',
+         params: ['open']});
+  }
+
+  closeModalLoading(e){
+    if(e){
+      this.modalLoading.emit({
+        action:'modal',
+        params:['close']
+      });
+    }
+  }
+
+  pronto(){
+    this.closeModalLoading(true);
+    //console.log('prontos ' +  this.slidersProntos);
+    //this.slidersProntos += 1;
+    //if(this.slidersProntos == 2){
+    //}
+  }
 }

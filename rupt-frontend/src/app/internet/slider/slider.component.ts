@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { PostsService } from './../../services/posts.service';
-import { Component, OnInit, Renderer, ElementRef, ViewChild} from '@angular/core';
+import { Component, OnInit, Renderer, ElementRef, ViewChild, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'slider',
@@ -8,8 +8,11 @@ import { Component, OnInit, Renderer, ElementRef, ViewChild} from '@angular/core
   styleUrls: ['./slider.component.css']
 })
 export class SliderComponent implements OnInit {
+  @Output() ready = new EventEmitter();
+  
   sliderPosts: any;
   sliderPostsHTML:string = '';
+  
 
   constructor(private _postServices: PostsService,
               private _elementRef: ElementRef,
@@ -31,9 +34,13 @@ export class SliderComponent implements OnInit {
   getSliderPostsHTML(){
     this._postServices.getSliderPosts().subscribe(
       (retorno: any) => {
-        console.log(retorno); 
         this.sliderPosts = retorno.posts;
+        this.pronto();
     });
+  }
+
+  pronto(){
+    this.ready.emit(true);
   }
 
 }

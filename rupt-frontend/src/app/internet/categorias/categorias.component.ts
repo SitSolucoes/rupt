@@ -1,7 +1,7 @@
 import { PostsService } from './../../services/posts.service';
 import { Categoria } from './../../classes/categoria';
 import { CategoriasService } from './../../services/categorias.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'categorias',
@@ -11,6 +11,7 @@ import { Component, OnInit } from '@angular/core';
 export class CategoriasComponent implements OnInit {
   
   categorias;
+  @Output() ready = new EventEmitter();
 
   constructor(private _categoriasService: CategoriasService,
               private _postsService: PostsService) {
@@ -23,11 +24,15 @@ export class CategoriasComponent implements OnInit {
     this.getPosts();
   }
 
+  pronto(){
+    this.ready.emit(true);
+  }
+
   getPosts(){
     this._postsService.getCategoryPostsSlider().subscribe(
       (p: any) =>{
-        console.log(p);
         this.categorias = p.posts;
+        this.pronto();
         //console.log(p.posts);
       }
     );

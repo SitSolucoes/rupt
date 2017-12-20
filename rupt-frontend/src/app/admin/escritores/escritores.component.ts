@@ -218,7 +218,6 @@ export class EscritoresComponent implements OnInit {
   getSolicitacoes(){
     this._escritoresService.getSolicitacoes().subscribe(
       (solicitacoes: Escritor[]) => {
-        console.log(solicitacoes);
         this.solicitacoes = solicitacoes}
     )
   }
@@ -634,7 +633,4 @@ export class EscritoresComponent implements OnInit {
     this.afterSubmit("Salvo com sucesso.");
   }
 
-  teste(form){
-    console.log(form);
-  }
 }

@@ -323,7 +323,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" *ngIf="escritor.data_aceite || escritor.id == 0 || idLeitor != 0">
                     <input type="checkbox" class="filled-in" id='patrocinador' name='patrocinador' [(ngModel)]="escritor.patrocinador"/>
                     <label for="patrocinador">Perfil patrocinado</label>
                 </div>

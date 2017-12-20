@@ -66,6 +66,13 @@ class PostController extends Controller
         return response()->json(['msg', 'Excluido com sucesso.'], 200);
     }
 
+    public function removePorDenuncia($id, $admin_id){
+        $post = Post::find($id);
+        $post->deleted_at = date("Y-m-d H:i:s");
+        $post->idAdmin_deleted = $admin_id;
+        $post->save();
+    }
+
     public function getById($id){
         $post = Post::where('id', $id)->get();
 

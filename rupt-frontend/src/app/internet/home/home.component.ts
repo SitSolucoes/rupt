@@ -16,13 +16,18 @@ export class HomeComponent implements OnInit {
 
   leitor: Leitor = new Leitor();
   modalCategoria = new EventEmitter<string|MaterializeAction>();
+  
+  slidersProntos = 0;
 
   constructor(private _leitorService: LeitoresService,
-              private _categoriaLeitorService: CategoriaLeitorService) { }
+              private _categoriaLeitorService: CategoriaLeitorService) {}
 
   ngOnInit() {
+    setTimeout(()=>{
+      this.openModalLoading();
+    }, 1)
     this._leitorService.leitor.subscribe(
-      (leitor: Leitor) => {  console.log('leitor'); this.leitor = leitor; console.log(leitor); }
+      (leitor: Leitor) => { this.leitor = leitor; }
     );
 
     this._leitorService.verificaLogin().subscribe(
@@ -72,5 +77,30 @@ export class HomeComponent implements OnInit {
   onPopState(event) {
     this.modalCategoria.emit({action:"modal",params:['close']});
   }
-  
+
+  modalLoading = new EventEmitter<string|MaterializeAction>();
+
+  openModalLoading() {
+    
+    this.modalLoading.emit({
+         action: 'modal',
+         params: ['open']});
+  }
+
+  closeModalLoading(e){
+    if(e){
+      this.modalLoading.emit({
+        action:'modal',
+        params:['close']
+      });
+    }
+  }
+
+  pronto(){
+    
+    this.slidersProntos += 1;
+    if(this.slidersProntos == 2){
+      this.closeModalLoading(true);
+    }
+  }
 }
