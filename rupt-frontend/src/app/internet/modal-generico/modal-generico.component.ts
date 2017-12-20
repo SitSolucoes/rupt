@@ -32,20 +32,19 @@ export class ModalGenericoComponent implements OnInit {
               private _router: Router) { }
 
   ngOnInit() {
+
     if(this.action=="denuncia"){
       this.preparaDenuncia();
     }
     if(this.action=="loading"){
       this.texto = this.obj;
     }
-    //console.log(this.obj);
   }
 
   preparaDenuncia(){
     this._denunciasService.getMotivosDenuncia().subscribe(
       (ret)=>{
         this.motivos = ret.motivos;
-        console.log(this.motivos);
       }
     );
   }
@@ -57,8 +56,6 @@ export class ModalGenericoComponent implements OnInit {
           if(ret.status){
             this.action = "mensagemDenuncia";
             this.mensagem = "Sua denúncia foi computada com sucesso, estamos analisando para tomar as devidas providências! Obrigado.";
-            console.log(this.mensagem);
-            console.log(this.action);
           }else{
             this.action = "mensagemDenuncia";
             this.mensagem = ret.mensagem;

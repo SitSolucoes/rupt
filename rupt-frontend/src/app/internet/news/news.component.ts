@@ -85,7 +85,6 @@ export class NewsComponent implements OnInit {
   onSubmit(){
     this._postService.createComentario(this.form).subscribe(
       ( ret ) => {
-        console.log(ret);
         if(ret.sucesso === 'OK'){
           this.comentarios = ret.comentarios;
         }
@@ -99,7 +98,6 @@ export class NewsComponent implements OnInit {
 
   montaRascunho(){
     let f = this.rascunhoForm;
-    console.log(f);
     this.post = {
       id: null,
       titulo: f.titulo,
@@ -122,7 +120,7 @@ export class NewsComponent implements OnInit {
     this._postService.getPost(id).subscribe(
       ( post ) => { 
         //retorno do método
-        console.log(this.post);
+        
         this.post = post;
         //se o leitor está logado
         if(localStorage.getItem('l')){
@@ -131,7 +129,7 @@ export class NewsComponent implements OnInit {
           const leitor_id = base64.decode(localStorage.getItem('l'));
           this._leitoresService.getLeitor(leitor_id).subscribe(
             (leitor) => {
-              console.log(this.post);
+              
               /*if(this.post.autor_idLeitor = leitor_id){
                 this.publicaButton = true;
               }*/
@@ -172,7 +170,7 @@ export class NewsComponent implements OnInit {
     this._postService.interage(this.post.id, null, this.leitor, 'post', i).subscribe(
       (ret)=>{
         if(ret.status == 'OK'){
-          console.log(ret);
+          
           this.interacoes.likes = ret.likes.length;
           this.interacoes.loves = ret.love.length;
           this.interacoes.angry = ret.angry.length;
@@ -199,10 +197,8 @@ export class NewsComponent implements OnInit {
     }
   }
 
-  
   calcHour(date){
-    console.log(this.calcTime.calcTime(date));
-    return this.calcTime.calcTime(date);
+      return this.calcTime.calcTime(date);
   }
 
 }
