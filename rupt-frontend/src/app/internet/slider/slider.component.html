@@ -17,8 +17,10 @@
         <slick-slider *ngIf="sliderPosts">
             <div class="banner" *ngFor="let s of sliderPosts" >
                 <img src="../../../assets/img/banner4.png" class="img" (click)="openNew(s.id)">
-                <div class="section"> entreterimento </div>
-                <div class="banner-title"> {{ s.subtitulo }}</div>
+                <div class="info-slider">
+                    <div class="section"> entreterimento </div>
+                    <div class="banner-title"> {{ s.subtitulo }}</div>
+                </div>
             </div>
         </slick-slider>
     </section>

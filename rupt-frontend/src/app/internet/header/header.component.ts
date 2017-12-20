@@ -19,6 +19,7 @@ export class HeaderComponent implements OnInit {
   modalLogin = new EventEmitter<string|MaterializeAction>();
   modalEsqueciSenha = new EventEmitter<string|MaterializeAction>();
   modalGenerico = new EventEmitter<string|MaterializeAction>();
+  modalRascunho = new EventEmitter<string|MaterializeAction>();
   
   constructor(private _leitorService: LeitoresService,
               private _router: Router) { }
@@ -62,6 +63,12 @@ export class HeaderComponent implements OnInit {
   closeModalLogin(e){
         if(e){
             this.modalLogin.emit({action:"modal",params:['close']});
+        }
+    }
+
+    closeModalRascunho(e){
+        if(e){
+            this.modalRascunho.emit({action:"modal",params:['close']});
         }
     }
 

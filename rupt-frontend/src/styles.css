@@ -166,6 +166,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     font-weight: bolder;
     margin-left: 5px;
     margin-top: 20px;
+    text-transform: capitalize;
 }
 
 .headbar .headbar-right .btn{
@@ -357,9 +358,18 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     box-shadow: 1px 3px 1px #B9B7B7;
 }
 
+.banner .info-slider{
+    width: 300px;
+    height: 150px;
+    padding-top: 10px;
+    display: block;
+    float: left;
+    position: absolute;
+    bottom: 0px;
+}
+
 .banner .section{
     position: relative;
-    bottom: 180px;
     left: 20px;
     width: auto;
     display: block;
@@ -373,11 +383,12 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .banner .banner-title{
-    position: relative;
-    bottom: 170px !important;
+    position: absolute;
+    top: 50px;
     left: 20px;
+    max-height: 90px;
+    overflow: hidden;
     width: 300px;
-    height: 400px;
     color: #ffffff;
     font-family: 'nexa-bold';
     text-transform: uppercase;
@@ -500,8 +511,8 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .menu-top .container-slider{
-    padding-left: 4% !important;
-    padding-right: 4% !important;
+    padding-left: 5% !important;
+    padding-right: 5% !important;
 }
 
 
@@ -831,11 +842,10 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .rodape .social-media{
-    width: 90%;
-    margin-left: 5%;
+    width: 100%;
     display: block;
     float: left;
-    border-bottom: 1px solid #525252;
+    border-bottom: 1px solid #3d3d3d;
 }
 
 .social-media .area{
@@ -861,20 +871,37 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     float: left;
     margin-top: 15px;
     margin-bottom: 15px;
-    margin-left: 20px;
+    margin-left: 15px;
     border: 2px solid #F2F2F2;
     border-radius: 100%;
     padding: 10px;
-    width: 45px;
+    height: 50px;
+    width: 50px;
+    color: #fff;
+    padding-top: 12px;
+    font-size: 22px;
+    text-align: center;
+}
+
+.social-media .img:hover{
+    -webkit-transform: translateY(-4px);
+    transform: translateY(-4px);
+    -webkit-transition:0.1s ease-out;
+    -moz-transition: 0.1s ease-out;
+    -o-transition: 0.1s ease-out;
+    -ms-transition: 0.1s ease-out;
+    cursor: pointer;
+    background: #fff;
+    color: #3d3d3d;
 }
 
 .rodape .container{
     display: block;
-    width: 90%;
+    width: 100%;
     float: left;
-    margin-top: 35px;
-    margin-bottom: 30px;
-    margin-left: 5%;
+    padding-top: 35px;
+    padding-bottom: 30px;
+    padding-left: 5%;
 }
 
 .rodape .container .border{
@@ -895,14 +922,13 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .rodape .container-bottom{
-    width: 90%;
-    margin-left: 5%;
+    width: 100%;
     padding-top: 5px;
     padding-bottom: 10px;
     height: 30px;
     display: block;
     float: left;
-    border-top: 1px solid #525252;
+    border-top: 1px solid #3d3d3d;
     text-align: center;
     color: #AAAAAA;
     font-size: 13px;
@@ -950,6 +976,12 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     color: #f97000;
     position: absolute;
     right: 0px;
+}
+
+.modal .close2{
+    text-align: center;
+    border: 1px solid #f97000 !important;
+    top: 20px;
 }
 
 .modal .close:hover{
@@ -1031,7 +1063,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .modal-content .info .img{
-    height: 40px;
+    height: 45px;
     display: block;
     float: left;
     margin-left: 5px;
@@ -1043,10 +1075,10 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .modal-content .info .img:hover{
     -webkit-transform: translateY(-4px);
     transform: translateY(-4px);
-    -webkit-transition:0.2s ease-out;
-    -moz-transition: 0.2s ease-out;
-    -o-transition: 0.2s ease-out;
-    -ms-transition: 0.2s ease-out;
+    -webkit-transition:0.1s ease-out;
+    -moz-transition: 0.1s ease-out;
+    -o-transition: 0.1s ease-out;
+    -ms-transition: 0.1s ease-out;
 }
 
 .modal-content .register{
@@ -1136,10 +1168,13 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     margin-top: 5px;
     margin-bottom: 40px;
     padding: 8px;
+    padding-left: 12px;
+    padding-right: 12px;
     border: 1px solid #ccc;
+    border-radius: 2px;
     background: #ccc;
     font-weight: bolder;
-    font-size: 15px;
+    font-size: 16px;
     color: #5e5e5e;
     opacity: 1;
 }
@@ -1303,6 +1338,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
   float: left;
   font-family: 'gilroy-bold';
   font-size: 19px;
+  text-transform: capitalize;
 }
 
 .user .area .subtitle{
@@ -1384,14 +1420,16 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .user .bio .rating{
-    display: block;
+    display: table;
     margin: 0 auto;
-    width: 65%;
     margin-bottom: 10px;
+    font-family: gilroy;
+    font-weight: bold;
 }
 
 .user .bio .profile .img{
     height: 200px;
+    position: relative;
 }
 
 .user .bio .info{
@@ -1410,7 +1448,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .user .bio .info .img{
     height: 20px;
     position: relative;
-    top: 2px;
+    top: 3px;
     margin-right: 3px;
 }
 
@@ -1545,6 +1583,8 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     border-radius: 0px;
     display: block;
     float: right;
+    font-size: 22px;
+    color: #f97000;
 }
 
 .user .feed .post .img6{
@@ -1670,6 +1710,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
   max-height: 260px;
   padding: 1px;
   filter: brightness(80%);
+    border-radius: 4px;
 }
 
 .user .feed .post .info .img7{
@@ -1693,7 +1734,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
   display: block;
   float: left;
   width: 100%;
-  height: 40px;
+  height: 45px;
   border-bottom: 0px;
   font-size: 12px;
   color: #383838;
@@ -1705,19 +1746,19 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     display: block;
     float: left;
     position: relative;
-    top: 12px;
+    top: 16px;
     left: 10px;
-    font-size: 13px;
+    font-size: 14px;
     color: #575757;
 }
 
 .user .feed .post .status .img4{
   display: block;
   float: left;
-  height: 45px;
+  height: 43px;
   position: relative;
   bottom: 3px;
-  margin-right: -10px;
+  margin-right: -6px;
 }
 
 .user .feed .search{
@@ -1896,17 +1937,20 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .news .area-top{
-  height: 150px;
   width: 70%;
-  margin-left: 70px;
-  margin-top: 50px;
+  margin-left: 60px;
+  margin-top: 20px;
   padding-top: 30px;
 }
 
+.news .area-top2{
+    width: 80%;
+    padding-top: 15px;
+}
+
 .news .area-top .tag-menu{
-  display: block;
+  display: table;
   margin: 0 auto;
-  width: 12%;
   height: 50px;
 }
 
@@ -1924,6 +1968,10 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
   color: #fff;
   text-align: center;
   border-radius: 5px;
+}
+
+.news .area-top .tag:last-child{
+    margin-right: 0px;
 }
 
 .news .area-top .red{
@@ -1963,6 +2011,15 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
   padding-left: 10px;
   padding-right: 10px;
   margin-left: 60px;
+  overflow: auto;
+}
+
+.news .container2{
+    width: 95%;
+    overflow: auto;
+    height: 250px;
+    margin-top: 10px;
+    margin-left: 25px;
 }
 
 .news .container .area{
@@ -1984,7 +2041,8 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .news .container .area .name{
   font-family: 'gilroy-bold';
   color: #575757;
-    font-size: 18px;
+  font-size: 18px;
+  text-transform: capitalize;
 }
 
 .news .container .area .social{
@@ -2002,6 +2060,12 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     margin-right: 2px;
     margin-top: 2px;
     color: #707070;
+}
+
+.news .container .area b{
+    color: #8c8c8c;
+    position: relative;
+    bottom: 2px;
 }
 
 .news .container .area .social .img{
@@ -2046,6 +2110,8 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
   font-family: 'Lato';
   line-height: 38px;
   color: #4F4F4F;
+  text-align: justify;
+   margin-top: 20px;
 }
 
 .news .container .fb-size{
@@ -2053,25 +2119,31 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .news .container .reactions{
-    display: block;
-    width: 80%;
-    margin-left: 10%;
-    height: 100px;
+    margin: 0 auto !important;
+    display: table;
+    width: auto !important;
+    float: none;
 }
 
 .news .container .reactions .area2{
     display: block;
     float: left;
-    width: 90px;
-    margin-left: 30px;
+    margin-left: 15px;
+    margin-right: 15px;
     position: relative;
     left: 8%;
 }
 
 .news .container .reactions .area2 .img{
-    height: 35px;
+    height: 45px;
     display: block;
     margin: 0 auto;
+}
+
+.news .container .reactions .area2 .img:hover{
+    transform: scale(1.8);
+    transition: transform 0.30s;
+    cursor: pointer;
 }
 
 .news .container .reactions .area2 p{
@@ -2300,7 +2372,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     float: left;
     width: 30%;
     margin-bottom: 80px;
-    font-family: 'nexa';
+    font-family: 'gilroy';
     font-weight: bold;
     font-size: 30px;
     color: #403d3d;
@@ -2450,7 +2522,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     display: block;
     float: left;
     width: 40%;
-    font-family: 'nexa';
+    font-family: 'gilroy';
     font-weight: bolder;
     font-size:30px;
     color: #403d3d;
@@ -2851,13 +2923,14 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .login-modal .container .button{
-    width: 30% !important;
+    width: 20% !important;
     height: 35px !important;
     border: 1px solid #f97000 !important;
     color: #fff;
     padding-top: 2px !important;
     font-family: lato;
-    font-size: 17px !important;
+    font-size: 16px !important;
+    border-radius: 2px;
     background: #f97000 !important;
     opacity: .9;
     margin-bottom: 30px;
@@ -2899,6 +2972,11 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 
 .modal6{
     width: 50% !important;
+}
+
+.modal7{
+    width: 70% !important;
+    top: 10% !important;
 }
 
 .login-modal .container .text{
@@ -3124,9 +3202,9 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     padding: 10px;
     border: 1px solid #d9d9d9;
     background: #d9d9d9;
-    text-transform: uppercase;
-    font-family: 'nexa-bold';
-    font-size: 13px;
+    font-weight: bolder;
+    text-transform: capitalize;
+    font-size: 16px;
     color: #4f4f4f;
     border-radius: 2px;
 }
@@ -3138,14 +3216,20 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .publicacao .info .background-green{
-    background: #2c7a4b;
-    border: 1px solid #2c7a4b;
+    background: #3b9c00;
+    border: 1px solid #3b9c00;
     color: #fff;
 }
 
 .publicacao .info .background-blue{
     background: #0a70c9;
     border: 1px solid #0a70c9;
+    color: #fff;
+}
+
+.publicacao .info .background-red{
+    background: #d12020;
+    border: 1px solid #d12020;
     color: #fff;
 }
 
@@ -3157,6 +3241,8 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     padding-left: 10px;
     padding-right: 10px;
     line-height: 2.7;
+    text-transform: inherit;
+    box-shadow: none;
 }
 
 .publicacao .container [type="checkbox"] + label{
@@ -3309,6 +3395,23 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     overflow: hidden;
     padding: 5px 5px;
     color: #333333;
+}
+
+.generico-modal .news-modal{
+    display: block;
+    float: left;
+    width: 100%;
+    height: 100%;
+}
+
+.generico-modal .news-modal .container{
+    display: block;
+    float: left;
+    width: 90%;
+    margin-left: 5%;
+}
+
+.generico-modal .news-modal .container p{
 }
 
 .esqueci-senha{

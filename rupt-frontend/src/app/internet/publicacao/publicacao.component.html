@@ -5,10 +5,10 @@
                    [id]='post.id' [leitor]='0' [op]='1'>
     </modal-excluir>
 </div>
-<div id="modalRascunho" class="modal modal2 modal4"
+<div id="modalRascunho" class="modal modal2 modal7"
      materialize="modal" [materializeParams]="[{dismissible: false}]"
      [materializeActions]="modalRascunho">
-    <modal-generico [action]="'rascunho'" [idObj]="post?.id" [obj]="rascunho_param" (closeModalGenerico)="closeModalRascunho($event)"></modal-generico>
+    <modal-rascunho (closeModalRascunho)="closeModalRascunho($event)"></modal-rascunho>
 </div>
 
 <div class="publicacao">
@@ -60,10 +60,10 @@
 
         <a class="button" routerLink='/perfil/{{ leitor?.nick }}'>Cancelar</a>
 
-        <button type="button" class="button background-blue" (click)='openModalExcluir()' *ngIf='formulario.get("id").value > 0'>
+        <button type="button" class="button background-red" (click)='openModalExcluir()' *ngIf='formulario.get("id").value > 0'>
             Excluir
         </button>
-        <button type="button" class="button background-green" (click)="openModalRascunho()">Ver Rascunho</button>
+        <a (click)="openModalRascunho()"><button type="button" class="button background-green">Ver Rascunho</button></a>
         <button type="button" class="button background-orange" (click)="onSubmit(false)">Publicar</button>
     </div>
 </div>

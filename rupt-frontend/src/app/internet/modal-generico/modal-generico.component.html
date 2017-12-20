@@ -5,11 +5,23 @@
     <span *ngIf="action == 'rascunho'">Rascunho</span>
     <!--Compartilhar -->
     <!-- Deu certo -->
-    <a click="#" class="modal-action modal-close close">x</a>
+    <a click="#" class="modal-action modal-close close">X</a>
   </div>
 
   <div class="generico-modal">
-    <app-news [rascunho]="true" *ngIf="action == 'rascunho' && obj" [rascunhoForm]="obj"></app-news> 
+   <!--
+    coisa do giba
+   <app-news [rascunho]="true" *ngIf="action == 'rascunho' && obj" [rascunhoForm]="obj"></app-news>
+   -->
+    <div class="news-modal">
+
+      <div class="container">
+
+        <p> Titulo Qualquer </p>
+      </div>
+
+    </div>
+
     <!-- Exemplo denuncia
     <div name="denuncia" *ngIf="action == 'denuncia'">
         <button type="button" class="button" (click)="denuncia(m.id)" *ngFor="let m of motivos">{{m.motivo}}</button>

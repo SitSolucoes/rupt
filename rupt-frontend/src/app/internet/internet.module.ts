@@ -32,6 +32,7 @@ import { ModalGenericoComponent } from './modal-generico/modal-generico.componen
 import { RedefineSenhaComponent  } from './redefine-senha/redefine-senha.component';
 import { EsqueciSenhaComponent } from './esqueci-senha/esqueci-senha.component';
 import { ModalExcluirComponent } from './modal-excluir/modal-excluir.component';
+import { ModalRascunhoComponent } from './modal-rascunho/modal-rascunho.component';
 
 @NgModule({ 
   imports: [
@@ -65,7 +66,8 @@ import { ModalExcluirComponent } from './modal-excluir/modal-excluir.component';
     ModalGenericoComponent,
     EsqueciSenhaComponent,
     ModalExcluirComponent,
-    RedefineSenhaComponent
+    RedefineSenhaComponent,
+    ModalRascunhoComponent
   ],
   providers: [
     CategoriaLeitorService,
