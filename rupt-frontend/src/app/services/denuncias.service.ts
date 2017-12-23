@@ -42,7 +42,7 @@ export class DenunciasService {
       action: a
     });
 
-    return this._http.put(this._url + 'denuncias/agir/',body,{headers: this.headers}).map(
+    return this._http.put(this._url + 'denuncias/agir',body,{headers: this.headers}).map(
       (ret) => {
         return {
           status: ret.json().status

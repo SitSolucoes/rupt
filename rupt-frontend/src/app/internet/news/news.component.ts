@@ -229,9 +229,5 @@ export class NewsComponent implements OnInit {
 
   pronto(){
     this.closeModalLoading(true);
-    //console.log('prontos ' +  this.slidersProntos);
-    //this.slidersProntos += 1;
-    //if(this.slidersProntos == 2){
-    //}
   }
 }

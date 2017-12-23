@@ -41,7 +41,7 @@
 
       <div *ngIf="!rascunho" class="social">
 
-        <p>{{interacoes.likes + interacoes.loves + interacoes.angry + interacoes.sad + interacoes.cry }}</p>
+        <p>{{ interacoes.likes + interacoes.loves + interacoes.angry + interacoes.sad + interacoes.cry }}</p>
         <img src="../../../assets/img/rupt-ico.png" class="img">
 
         <!--<p>{{interacoes.dislikes?.length}}</p>
@@ -62,7 +62,7 @@
 
         <div *ngIf="!rascunho" class="reactions">
 
-            <div class="area2" (click)="interagePost('like')">
+            <div class="area2" (click)="interagePost('like')" *ngIf="leitorLogado">
 
                 <img src="../../../assets/img/rupt-ico2.png" class="img">
 
@@ -70,7 +70,7 @@
 
             </div>
 
-            <div class="area2" (click)="interagePost('love')">
+            <div class="area2" (click)="interagePost('love')" *ngIf="leitorLogado">
 
                 <img src="../../../assets/img/rupt-ico.png" class="img">
 
@@ -78,14 +78,14 @@
 
             </div>
 
-            <div class="area2" (click)="interagePost('sad')">
+            <div class="area2" (click)="interagePost('sad')" *ngIf="leitorLogado">
 
                 <img src="../../../assets/img/rupt-ico4.png" class="img">
 
                 <p> Triste </p>
 
             </div>
-            <div class="area2" (click)="interagePost('angry')">
+            <div class="area2" (click)="interagePost('angry')" *ngIf="leitorLogado">
 
                 <img src="../../../assets/img/rupt-ico3.png" class="img">
 

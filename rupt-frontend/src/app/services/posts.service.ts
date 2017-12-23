@@ -123,7 +123,7 @@ export class PostsService {
   }
 
   getCategoryPostsSlider(){
-    return this._http.get(this._url + 'posts/PostsToHome/', {headers: this.headers})
+    return this._http.get(this._url + 'posts/PostsToHome', {headers: this.headers})
       .map((retorno: Response) => {
         return{
           'posts': retorno.json().retorno
