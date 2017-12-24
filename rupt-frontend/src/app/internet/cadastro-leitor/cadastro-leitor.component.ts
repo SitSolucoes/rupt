@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import { LeitoresService } from './../../services/leitores.service';
 import { Option } from './../../shared/option';
 import { FormBuilder, FormGroup, Validator } from '@angular/forms';
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, ElementRef, ViewChild } from '@angular/core';
 import { UploadFileService } from "./../../services/upload-file.service";
 import { UploadItem } from "./../../classes/upload-item";
 
@@ -17,6 +17,10 @@ import { UploadItem } from "./../../classes/upload-item";
   styleUrls: ['./cadastro-leitor.component.css']
 })
 export class CadastroLeitorComponent implements OnInit {
+
+  //VIEW CHILDS FOR FOCUS
+  @ViewChild("email") emailEl: ElementRef;
+  @ViewChild("nick") nickEl: ElementRef;
   
   leitor: Leitor = new Leitor();
   form: FormGroup;
@@ -99,7 +103,12 @@ export class CadastroLeitorComponent implements OnInit {
     if (this.form.get('nick').value){
       if (this.form.get('nick').value.length >= 3){
         this._leitoresService.validaNick(this.form.get('nick').value, this.form.get('id').value).subscribe(
-          (nick: boolean) => {this.nickInvalido = nick}
+          (nick: boolean) => {
+            this.nickInvalido = nick
+            if(this.nickInvalido){
+              this.nickEl.nativeElement.focus();
+            }
+          }
         );
       }
       else
@@ -115,14 +124,21 @@ export class CadastroLeitorComponent implements OnInit {
         this._leitoresService.validaEmail(this.form.get('email').value, this.form.get('id').value).subscribe(
           (email: boolean) => {
             this.emailInvalido = email;
+            /*if(this.emailInvalido == true){
+              console.log('retornou true');
+              this.emailEl.nativeElement.focus(); 
+            }else
+              console.log('retornou false nessa porra?');*/
           }
         );
       }
       else
         this.emailInvalido = false;
+        this.emailEl.nativeElement.focus(); 
     }
     else
         this.emailInvalido = false;
+        this.emailEl.nativeElement.focus(); 
   }
 
   imgShow(e, target){

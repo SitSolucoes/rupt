@@ -25,8 +25,8 @@
 
                 <label> Nick </label> 
                 
-                <input type="text" class="input" maxlength="20" name="nick" placeholder="A sua marca na Rupt" formControlName="nick"
-                [ngClass]="{'invalid': verificaValidTouched('nick') || nickInvalido}" (ngModelChange)="validaNick()" (blur)="validaNick()">
+                <input type="text" class="input" maxlength="20" name="nick" placeholder="A sua marca na Rupt" #nick formControlName="nick"
+                [ngClass]="{'invalid': verificaValidTouched('nick') || nickInvalido}" (blur)="validaNick()" >
 
                 <div class="error" *ngIf="verificaValidTouched('nick')">{{ mensagemErro('nick') }}</div>
                 <div class="error" *ngIf="!verificaValidTouched('nick') && nickInvalido">Nick já cadastrado</div>
@@ -46,8 +46,8 @@
 
                 <label> Email </label> 
                 
-                <input type="text" class="input" maxlength="30" name="email" placeholder="Insira seu email" formControlName="email"
-                [ngClass]="{'invalid': verificaValidTouched('email') || emailInvalido}" (ngModelChange)="validaEmail()" (blur)="validaEmail()">
+                <input type="text" class="input" maxlength="30" name="email" placeholder="Insira seu email" #email formControlName="email"
+                [ngClass]="{'invalid': verificaValidTouched('email') || emailInvalido}"  (blur)="validaEmail()">
 
                 <div class="error" *ngIf="verificaValidTouched('email')">{{ mensagemErro('email') }}</div>
                 <div class="error" *ngIf="!verificaValidTouched('email') && emailInvalido">Email já cadastrado</div>

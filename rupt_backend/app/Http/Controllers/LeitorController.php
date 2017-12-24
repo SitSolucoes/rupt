@@ -164,12 +164,14 @@ class LeitorController extends Controller
 
     public function validaEmail($email, $id){
         $leitor = Leitor::where("email", $email)
-                        ->where("id", '<>', $id)
                         ->first();
 
         if ($leitor == null)
             return response()->json(['email' => false], 200);
 
+        if($leitor->id === $id)
+            return response()->json(['email' => false]);        
+            
         return response()->json(['email' => true], 200);
     }
 

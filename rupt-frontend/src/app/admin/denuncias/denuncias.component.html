@@ -9,7 +9,7 @@
         <p><strong>Titulo</strong></p>
         <p>{{denuncia_selecionada?.post.titulo}}</p>
         <p>Conteúdo</p>
-        <p>{{denuncia_selecionada?.post.conteudo}}</p>
+        <p [innerHTML]="denuncia_selecionada?.post.conteudo"></p>
         <p>Status</p>
         <p>{{denuncia_selecionada?.detalhes.status == 'A' ? 'Não Avaliada' : denuncia_selecionada?.detalhes.status == 'I' ? 'Ignorada' : 'Post Deletado'}}</p>
         <!--<p>Link parar o post</p>

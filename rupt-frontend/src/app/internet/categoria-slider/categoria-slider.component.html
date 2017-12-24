@@ -79,7 +79,7 @@
                                 <p> {{ p.escritor.nick }} </p>
                                 <div class="area-post">
                                     <img src="../../../assets/img/calendar2.png" class="img-cal">
-                                    <div class="time"> {{ p.post.publishedAt}} </div>
+                                    <div class="time">{{ p.post.publishedAt | date:'dd/MM' }} </div>
                                 </div>
                             </div>
                         </div>

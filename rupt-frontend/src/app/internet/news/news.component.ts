@@ -25,6 +25,7 @@ export class NewsComponent implements OnInit {
   
   post: Post;
   leitor = null;
+  edited = false;
   comentarios;
   form;
   maisLidos: Post[];
@@ -120,7 +121,9 @@ export class NewsComponent implements OnInit {
       ( post ) => { 
         if (post){
             this.post = post;
-            
+            console.log(new Date(post.updated_at).getTime() - new Date(post.created_at).getTime());
+            if(new Date(post.updated_at).getTime() - new Date(post.created_at).getTime() > 30000)
+              this.edited = true;
             //se o leitor está logado
             if(localStorage.getItem('l')){
                 let base64 = new Base64();

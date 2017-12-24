@@ -35,8 +35,8 @@ export class LoginComponent implements OnInit {
           this.spinner = false;
         }
         else {
-          this.spinner = false;
           this._router.navigate(['admin/home']);
+          this.spinner = false;
         }
       }
     )

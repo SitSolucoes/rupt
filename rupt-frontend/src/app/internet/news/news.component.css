@@ -3,6 +3,12 @@
     margin-left: 18px !important;
 }
 
+.editado-text{
+    color: gray;
+    text-align: center;
+    width: 100%;
+}
+
 .reactions{
     margin-left: 0 !important;
     width: 100% !important;
