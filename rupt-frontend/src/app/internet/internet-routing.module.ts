@@ -22,6 +22,7 @@ const routes: Routes = [
       { path : 'faq', component: FaqComponent},
       { path : 'perfil/:nick', component: UserComponent },
       { path : 'footer', component: FooterComponent },
+      { path : 'perfil/:nick/:torne-se-um-escritor', component: UserComponent },
       { path : 'noticia/:id', component: NewsComponent },
       { path : 'cadastro', component: CadastroLeitorComponent },
       { path : 'cadastro-escritor', component: CadastroEscritorComponent },

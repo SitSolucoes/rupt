@@ -32,6 +32,7 @@ export class UserComponent implements OnInit {
   base64: Base64 = new Base64();
   post = new Post();
   timelineId = 0;
+  private torne_se: boolean = false
   
   constructor(private _activatedRoute: ActivatedRoute,
               private _leitorService: LeitoresService, 
@@ -50,8 +51,12 @@ export class UserComponent implements OnInit {
             this.getTimeline();
           }
         );
-      });
+        if(params['torne-se-um-escritor']){
+          this.torne_se = true;
+        }else
+          this.torne_se = false;
 
+      });
       this._leitorService.leitor.subscribe(
         (leitor: Leitor) => { this.leitorLogado = leitor }
       );

@@ -78,7 +78,7 @@
 
             <a routerLink="../../cadastro-escritor" 
                 *ngIf="leitor.id == leitorLogado.id && (!leitor.escritor || leitor.escritor.status == 'r')"> 
-                <div class="button"> Tornar-se escritor </div> 
+                    <div class="button" [class.destacado]="torne_se"> Tornar-se escritor </div>
             </a>
 
             <a routerLink="../../publicacao" *ngIf="leitor.id == leitorLogado.id && leitor.escritor && leitor.escritor.status != 'r'">

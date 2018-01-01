@@ -51,8 +51,9 @@
             <!-- Caso user seja escritor <li><a routerLink="cadastro-escritor">Editar Perfil</a></li>-->
             <li><a routerLink="/cadastro">Editar Perfil</a></li>
             <!--<li><a >Trocar senha</a></li>-->
-            <li *ngIf="leitor.escritor && leitor.escritor.status != 'r'">
-                <a routerLink="/publicacao">Publicar</a>
+            <li >
+                <a *ngIf="leitor.escritor && leitor.escritor.status != 'r'" routerLink="/publicacao">Publicar</a>
+                <a *ngIf="!leitor.escritor || leitor.escritor.status == 'r'" routerLink="/perfil/{{leitor.nick}}/torne-se-um-escritor" >Publicar</a>
             </li>
             <li><a (click)="logout()">Logout</a></li>
         </ul>
