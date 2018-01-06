@@ -26,6 +26,7 @@ export class PublicacaoComponent implements OnInit {
   leitor: Leitor;
   post: Post = new Post();
   rascunho_param = {titulo: 'Sem Título', conteudo: 'Sem conteudo'};
+  url_img;
   estilos = [
     {value: 1, option: 'Imagem e Texto'},
     {value: 2, option: 'Apenas imagens'},
@@ -81,6 +82,7 @@ export class PublicacaoComponent implements OnInit {
       conteudo: ['', Validators.required],
       adulto: '',
       tipo_post: 3,
+      regiao_id: [-1, Validators.required],
       rascunho: false
     })
   }
@@ -212,6 +214,19 @@ export class PublicacaoComponent implements OnInit {
                 params:['close']
             });
         }
+    }
+
+    imgShow(e){
+      if(e.target.files && e.target.files[0]){
+        let reader = new FileReader();
+  
+        //console.log(target);
+        reader.onload = (event:any) => {
+            this.url_img = event.target.result;
+        }
+        //console.log(e.target);
+        reader.readAsDataURL(e.target.files[0]);
+      }
     }
 
 }

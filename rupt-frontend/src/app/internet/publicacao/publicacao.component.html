@@ -8,62 +8,52 @@
 <div id="modalRascunho" class="modal modal2 modal7"
      materialize="modal" [materializeParams]="[{dismissible: false}]"
      [materializeActions]="modalRascunho">
-    <modal-rascunho (closeModalRascunho)="closeModalRascunho($event)"></modal-rascunho>
+     <modal-rascunho (closeModalRascunho)="closeModalRascunho($event)"></modal-rascunho>
 </div>
-
+    
 <div class="publicacao">
-
-
+    <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
     <div class="container">
-
-        <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
-
-            <div class="top">
+        <h3>Nova Publicação</h3>
+        <div class="container_left">
+            <input type="text" class="input input2" maxlength="160" formControlName='titulo' placeholder="Insira o título da sua notícia">            
+            <!--editor-->
+            <quill-editor style="    margin-top: 7%;
+            border-top: 1px solid #ccc !important;" formControlName='conteudo'
+                            [options]="editorOptions"
+                            (blur)="onEditorBlured($event)"
+                            (focus)="onEditorFocused($event)"
+                            (ready)="onEditorCreated($event)"
+                            (change)="onContentChanged($event)">
+            </quill-editor> 
+        </div>
+        <div class="container_right">
+            <div class=" right-container-input-group top">
                 <select name="categoria" class="input" formControlName='categoria_id'>
-                    <option disabled value='-1' selected>Selecione uma categoria</option>
+                    <option disabled value='-1' selected>Categoria</option>
                     <option *ngFor="let categoria of categorias" [value]='categoria.id'>{{ categoria.categoria }}</option>
                 </select>
-
-                <input type="text" class="input input2" maxlength="160" formControlName='titulo' placeholder="Insira o título da sua notícia">
+                <select name="regiao" class="input" formControlName="regiao_id">
+                    <option disabled value='-1' selected>Região</option>
+                </select>
             </div>
-
-            <!-- use with ngModel -->
-            <quill-editor formControlName='conteudo'
-                          [options]="editorOptions"
-                          (blur)="onEditorBlured($event)"
-                          (focus)="onEditorFocused($event)"
-                          (ready)="onEditorCreated($event)"
-                          (change)="onContentChanged($event)">
-            </quill-editor>
-
-            <div class="file-field input-field">
-                <div class="btn">
-                    <span>Imagem de capa</span>
-                    <input type="file" id='imagem'>
-                </div>
-                <div class="file-path-wrapper">
-                    <input class="file-path validate" type="text" >
+            <div class="right-container-imagem-destaque">
+                <span>Imagem de Destaque</span>
+                <img *ngIf="url_img" [src]="url_img" (click)="img.click()">
+                <div *ngIf="!url_img" class="no_image" (click)="img.click()"><i class="material-icons large" style="display: block">image</i> Clique para Adicionar...   </div>
+                <input type="file" #img id='imagem' style="display:none" (change)="imgShow($event)">
+                <div class="menu">
+                    <div class="row menu-radio">
+                        <input type="checkbox" class="filled-in" id='adulto' formControlName='adulto'/>
+                        <label for="adulto">Imagem com conteudo inapropriado</label>
+                    </div>
                 </div>
             </div>
-            <div class="menu">
-                <div class="row menu-radio">
-                    <input type="checkbox" class="filled-in" id='adulto' formControlName='adulto'/>
-                    <label for="adulto">Imagem com conteudo inapropriado</label>
-                </div>
+            <div class="righht-container-buttons info">
+                <a (click)="openModalRascunho()"><button type="button" class="button bd-white-bord-orange">Salvar Rascunho</button></a>
+                <button type="button" class="button background-orange" (click)="onSubmit(false)">Publicar</button>
             </div>
-
-        </form>
-
+        </div>
     </div>
-
-    <div class="info">
-
-        <a class="button" routerLink='/perfil/{{ leitor?.nick }}'>Cancelar</a>
-
-        <button type="button" class="button background-red" (click)='openModalExcluir()' *ngIf='formulario.get("id").value > 0'>
-            Excluir
-        </button>
-        <a (click)="openModalRascunho()"><button type="button" class="button background-green">Ver Rascunho</button></a>
-        <button type="button" class="button background-orange" (click)="onSubmit(false)">Publicar</button>
-    </div>
+    </form>
 </div>

@@ -1,0 +1,192 @@
+.container{
+    text-align: center;
+    margin: 0px;
+    width: 100%;
+    padding: 10px 10px 10px 10px;
+    height: 100% !important;
+    float: left;
+    margin-left: 3%;
+}
+
+.container h3{
+    color: rgb(99, 98, 98);
+    font-size: 40px;
+    text-align: center;
+}
+
+/*CONTAINER LEFT*/
+    .container_left{
+        float: left;
+        width: 65% !important;
+        display: inline-block !important;
+        height: 410px !important;
+        margin-right: 4%;
+    }
+
+    .container_left input{
+        float: left;
+        width: 100%;
+    }
+
+/*CONTAINER RIGHT*/
+    .container_right{
+        float: left;
+        background: white;
+        width: 30% !important;
+        display: inline-block !important;
+        padding: 1.5% !important;
+        border: 1px solid #ccc;
+        text-align: left;
+        color: rgb(148, 148, 148);
+    }
+    
+    .container_right .right-container-input-group{
+        height: 100px;
+        width: 100%;
+    }
+
+    .container_right .right-container-imagem-destaque span{
+        font-size: 24px;
+        display: block;
+    }
+
+    .container_right .right-container-imagem-destaque img, .no_image{
+        width: 100%;
+        height: 200px;
+        margin-bottom: 2%;
+    }
+
+    .container_right .menu{
+        margin-top: 3%;
+    }
+
+    .no_image{
+        padding-top: 15%;
+        background: rgb(170, 170, 170);
+        color: rgb(50, 48, 48);
+        text-align: center;
+        vertical-align: center;
+    }
+
+/* QUILL EDITOR*/
+.ql-container{
+    height: 76%;
+}
+
+.publicacao{
+    display: block;
+    float: left;
+    width: 100%;
+    padding-bottom: 40px;
+}
+
+.publicacao .container{
+    width: 90%;
+    margin-left: 5%;
+    margin-top: -9px;
+}
+
+.publicacao .container .top{
+    display: block;
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+}
+
+.publicacao .container .top select{
+    display: block;
+    background: #fff;
+    border: 1px solid #ccc;
+    height: 36px;
+    border-bottom: 1px solid #ccc;
+}
+
+.publicacao .container .top .input{
+    width: 100%;
+    background: #fff;
+    border-radius: 0px;
+    border: 1px solid #ccc;
+    margin-bottom: 1%; 
+}
+
+.top .input:nth-child(1){
+    margin-bottom: 3% !important;
+}
+
+.publicacao .container .top .input2{
+    border-top: 0px;
+}
+
+.publicacao .info{
+    display: table;
+    height: 50px;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+.publicacao .info .button{
+    width: auto;
+    display: block;
+    float: left;
+    position: relative;
+    margin-left: 15px;
+    margin-top: 10px;
+    margin-bottom: 40px;
+    padding: 10px;
+    border: 1px solid #d9d9d9;
+    background: #d9d9d9;
+    font-weight: bolder;
+    text-transform: capitalize;
+    font-size: 16px;
+    color: #4f4f4f;
+    border-radius: 2px;
+}
+
+.publicacao .info .background-orange{
+    background: #f97000;
+    border: 1px solid #f97000;
+    color: #fff;
+}
+
+.publicacao .info .background-green{
+    background: #3b9c00;
+    border: 1px solid #3b9c00;
+    color: #fff;
+}
+
+.publicacao .info .bd-white-bord-orange{
+    background: white;
+    border: 1px solid #f97000;
+    color: #f97000;
+}
+.publicacao .info .background-blue{
+    background: #0a70c9;
+    border: 1px solid #0a70c9;
+    color: #fff;
+}
+
+.publicacao .info .background-red{
+    background: #d12020;
+    border: 1px solid #d12020;
+    color: #fff;
+}
+
+.publicacao .container .btn{
+    background: #005f96;
+    opacity: .8;
+    height: 39px;
+    width: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+    line-height: 2.7;
+    text-transform: inherit;
+    box-shadow: none;
+}
+
+.publicacao .container [type="checkbox"] + label{
+    margin-left: 15px;
+}
+
+.publicacao .container input[type=text].valid:not(.browser-default){
+    border-bottom: 1px solid #005f96;
+}
+
