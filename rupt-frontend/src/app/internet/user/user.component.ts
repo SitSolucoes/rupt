@@ -23,7 +23,7 @@ export class UserComponent implements OnInit {
   filtro: string;
   leitor: Leitor;
   leitorLogado: Leitor;
-  timeline: Timeline[] = new Array;
+  timeline;//: Timeline[] = new Array;
   timelineFiltro = new Array;
   url = ConnectionFactory.API_IMAGEM;
   calcTime = new CalcTime();
@@ -67,7 +67,13 @@ export class UserComponent implements OnInit {
       this._timelineService.getTimeline(this.leitor.id).subscribe(
         ( timeline) => { 
           this.timeline = timeline;
-          this.timelineFiltro = timeline;
+          console.log(this.timeline);
+          this.timelineFiltro = []
+          for(let t of this.timeline){
+            t.interacoes = this.getInteracoes(t.tl.id);
+            this.timelineFiltro.push(t);
+          }
+          console.log(this.timelineFiltro);
         }
       )
   }
@@ -117,6 +123,24 @@ export class UserComponent implements OnInit {
       action: 'modal',
       params: ['open']});
   }
+
+  getInteracoes(post_id){
+    let interacoes;
+    this._postService.getInteracoes(post_id).subscribe(
+      (ret) => {
+        if(ret.status == 'OK'){
+          interacoes.likes = ret.likes.length;
+          interacoes.loves = ret.loves.length;
+          interacoes.angry = ret.angry.length;
+          interacoes.sad = ret.sads.length;
+          interacoes.cry = ret.cry.length;
+          interacoes.shares = ret.shares.length;
+        }
+        return interacoes;
+      }
+    );
+}
+
   closeModalDenuncia(e){
     if(e){
       this.modalDenuncia.emit({

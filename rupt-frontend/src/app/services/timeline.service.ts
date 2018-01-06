@@ -16,13 +16,13 @@ export class TimelineService {
       return this._http.get(this._url + 'timeline/getTimeline/'+ leitor_id).map(
         ( response:Response ) => { 
           let timeline = response.json().timeline;
-          if(timeline.length > 0){
+          /*if(timeline.length > 0){
             for(let v of timeline){
               v.interacoes = new Interacoes(v.interacoes.likes.length, v.interacoes.love.length, 
                 v.interacoes.shares.length, v.interacoes.sad.length, v.interacoes.angry.length, 
                 v.interacoes.cry.length).interacoes;
             }
-          }
+          }*/
           return timeline;
         }
       )

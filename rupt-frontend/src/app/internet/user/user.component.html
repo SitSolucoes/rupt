@@ -95,7 +95,7 @@
             <div class="status">
                 <ul id="tabs-swipe-demo" class="tabs" materialize="tabs">
                     <li class="menu tab col s3"><a href="#test-swipe-1" class=" active"> Notícias
-                        <font class="title"> {{ timeline.length }} </font>  </a> </li>
+                        <font class="title"> {{ timeline?.length }} </font>  </a> </li>
 
                 <li class="menu tab col s3"> <a href="#test-swipe-2"> Leitores
                     <font class="title"> 2.700 </font> </a></li>
@@ -107,11 +107,11 @@
 
            <div id="test-swipe-1">
 
-            <div class="post-none" *ngIf='timeline.length == 0'>
+            <div class="post-none" *ngIf='timeline?.length == 0'>
                 Sem publicações até o momento
             </div>
 
-            <div class="search" *ngIf='timeline.length > 0'>
+            <div class="search" *ngIf='timeline?.length > 0'>
                 <input class="input-search" maxlength="30" name="marca" placeholder="Pesquise uma publicação" type="text" [(ngModel)]="filtro">
 
                 <a (click)='search()'>
@@ -190,6 +190,7 @@
                         <img src="../../../assets/img/rupt-ico4.png" (click)="interage(t.tl.post.id, 'sad')" class="img4">
                         <img src="../../../assets/img/rupt-ico3.png" (click)="interage(t.tl.post.id, 'angry')" class="img4">
                         <img src="../../../assets/img/rupt-ico5.png" (click)="interage(t.tl.post.id, 'uau')" class="img4">
+                        {{t.interacoes }}
                         <div class="total">{{t.interacoes.likes.qnt + t.interacoes.loves.qnt + t.interacoes.sads.qnt + t.interacoes.cries.qnt + t.interacoes.angries.qnt}}</div>
                     </div>
                 </div>

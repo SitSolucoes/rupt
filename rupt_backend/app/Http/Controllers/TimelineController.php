@@ -25,7 +25,7 @@ class TimelineController extends Controller
         foreach($timeline as $t){
             if ($t->post->deleted_at == null){
                 $retorno[] = (object)['tl' => $t,
-                                  'interacoes' => $int_c->interacoesFromPost($t->id)
+                                  //'interacoes' => $int_c->interacoesFromPost($t->id)
                 ];
             }
             
