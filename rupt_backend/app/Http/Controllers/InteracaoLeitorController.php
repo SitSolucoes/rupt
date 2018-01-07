@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\InteracaoLeitor;
+use App\Http\Controllers\InteracaoController;
 
 class InteracaoLeitorController extends Controller
 {
@@ -18,32 +19,40 @@ class InteracaoLeitorController extends Controller
         $interacaoLeitor->save();
     }
 
-    public function interagePost(Request $request){
-        $exist = false;
+    private function interagePost(Request $request){
+        $exist = null;
         
-        if ($request->interacao_idInteracao != 1){
+        if ($request->interacao_idInteracao != 100){
             //verifica se essa interação ja existe
             $interacaoLeitor = InteracaoLeitor::where('post_idPost', $request->post_idPost)
                                 ->where('leitor_idLeitor', $request->leitor_idLeitor)
-                                ->whereNull('comentario_idComentario')
                                 ->where('interacao_idInteracao', $request->interacao_idInteracao)
+                                ->whereNull('comentario_idComentario')
                                 ->first();
 
-            if ($interacaoLeitor)  {
+            if ($interacaoLeitor)
                 $exist = true;
-                $interacaoLeitor->delete();
-            }
+        
+            InteracaoLeitor::where('post_idPost', $request->post_idPost)
+                                ->where('leitor_idLeitor', $request->leitor_idLeitor)
+                                ->whereNull('comentario_idComentario')
+                                ->delete();
         }
 
         //se a interação não existia ou se é compartilhar, cria uma nova
         //se a interação já existia, quer dizer que ele ta desfazendo ela
-        if ($exist == false)
+        if (!$exist)
             $this->createInteracao($request);
 
-        return response()->json(['ok' => 'true'], 201);
+        $c = new InteracaoController();
+        $interacoesCount = $c->getInteracoes($request->post_idPost, 1);
+
+        $interacoesLeitor = $this->getPost($request->post_idPost, $request->leitor_idLeitor);
+
+        return response()->json(['interacoes' => $interacoesCount, 'interacoesLeitor' => $interacoesLeitor], 200);
     }
 
-    public function interageComentario(Request $request){
+    private function interageComentario(Request $request){
         $exist = false;
         
         //verifica se essa interação ja existe
@@ -54,7 +63,9 @@ class InteracaoLeitorController extends Controller
 
         if ($interacaoLeitor)  {
             $exist = true;
-            $interacaoLeitor->delete();
+            InteracaoLeitor::where('comentario_idComentario', $request->post_idPost)
+                           ->where('leitor_idLeitor', $request->leitor_idLeitor)
+                           ->delete();
         }
             
         //se a interação não existia, cria uma nova
@@ -63,5 +74,31 @@ class InteracaoLeitorController extends Controller
             $this->createInteracao($request);
 
         return response()->json(['ok' => 'true'], 201);
+    }
+
+    private function getPost($post_id, $leitor_id){
+        return InteracaoLeitor::where('post_idPost', $post_id)
+                                           ->where('leitor_idLeitor', $leitor_id)
+                                           ->whereNull('comentario_idComentario')
+                                           ->get();
+    }
+
+    public function interage(Request $request){
+        if ($request->comentario_idComentario)
+            return $this->interageComentario($request);
+        else 
+            return $this->interagePost($request);
+    }
+
+    public function countInteracao($post_id, $interacao_id){
+        return InteracaoLeitor::where('post_idPost', $post_id)
+                                ->where('interacao_idInteracao', $interacao_id)
+                                ->count();
+    }
+
+    public function getInteracoesLeitorPost($post_id, $leitor_id){
+        $interacoesLeitor = $this->getPost($post_id, $leitor_id);
+
+        return response()->json(['interacoesLeitor' => $interacoesLeitor], 200);
     }
 }

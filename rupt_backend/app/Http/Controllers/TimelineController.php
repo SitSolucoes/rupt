@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Collection;
 use App\Timeline;
-use App\Http\Controllers\InteracaoController;
+use App\Http\Controllers\InteracaoLeitorController;
 
 class TimelineController extends Controller
 {
@@ -20,8 +21,11 @@ class TimelineController extends Controller
                              ->with('post')
                              ->orderBy('created_at', 'desc')
                              ->get();
-        $retorno = [];
-        $int_c = new InteracaoController();
+        
+                             $retorno = [];
+        
+        $int_c = new InteracaoLeitorController();
+        
         foreach($timeline as $t){
             if ($t->post->deleted_at == null){
                 $retorno[] = (object)['tl' => $t,
@@ -30,6 +34,7 @@ class TimelineController extends Controller
             }
             
         }
+        
         return response()->json(['timeline' => $retorno], 200);
     }
 

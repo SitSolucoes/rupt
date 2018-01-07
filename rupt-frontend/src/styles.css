@@ -2151,6 +2151,11 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     cursor: pointer;
 }
 
+.news .container .reactions .area2 .img.pb{
+    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(100%);
+}
+
 .news .container .reactions .area2 p{
     width: 100%;
     display: block;
@@ -2160,6 +2165,18 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     font-size: 14px;
     text-align: center;
     margin-top: 10px;
+    letter-spacing: -1px;
+}
+
+.news .container .reactions .area2 .count{
+    width: 100%;
+    display: block;
+    color: #7a7a7a;
+    float: left;
+    clear: both;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 0px;
     letter-spacing: -1px;
 }
 

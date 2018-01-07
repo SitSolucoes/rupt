@@ -13,6 +13,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Leitor } from 'app/classes/leitor';
 import { Post } from 'app/classes/post';
+import { InteracoesService } from 'app/services/interacoes.service';
 
 @Component({
   selector: 'app-user',
@@ -37,7 +38,8 @@ export class UserComponent implements OnInit {
   constructor(private _activatedRoute: ActivatedRoute,
               private _leitorService: LeitoresService, 
               private _timelineService: TimelineService,
-              private _postService: PostsService) { }
+              private _postService: PostsService,
+              private _interacoesService: InteracoesService) { }
 
   ngOnInit() {
       this.leitor = new Leitor();
@@ -67,13 +69,12 @@ export class UserComponent implements OnInit {
       this._timelineService.getTimeline(this.leitor.id).subscribe(
         ( timeline) => { 
           this.timeline = timeline;
-          console.log(this.timeline);
           this.timelineFiltro = []
+        
           for(let t of this.timeline){
-            t.interacoes = this.getInteracoes(t.tl.id);
-            this.timelineFiltro.push(t);
+              this.timelineFiltro.push(t);
           }
-          console.log(this.timelineFiltro);
+        
         }
       )
   }
@@ -99,7 +100,16 @@ export class UserComponent implements OnInit {
       }
   }
 
-  interage(post, i){
+  getInteracoes(){
+    this._interacoesService.getAll( this.post.id, 1).subscribe(
+       (interacoes: Interacao[]) => {
+          this.interacoes = interacoes;
+          this.countInteracao();
+       }
+    )
+  }
+
+  /*interage(post, i){
     this._postService.interage(post, null, this.leitor.id, 'post', i).subscribe(
       (ret)=>{
         if(ret.status == 'OK'){
@@ -108,7 +118,7 @@ export class UserComponent implements OnInit {
         }
       }
     );
-  }
+  }*/
 
   changeInteracoes(post, i){
     for(let t of this.timelineFiltro){
@@ -124,23 +134,6 @@ export class UserComponent implements OnInit {
       params: ['open']});
   }
 
-  getInteracoes(post_id){
-    let interacoes;
-    this._postService.getInteracoes(post_id).subscribe(
-      (ret) => {
-        if(ret.status == 'OK'){
-          interacoes.likes = ret.likes.length;
-          interacoes.loves = ret.loves.length;
-          interacoes.angry = ret.angry.length;
-          interacoes.sad = ret.sads.length;
-          interacoes.cry = ret.cry.length;
-          interacoes.shares = ret.shares.length;
-        }
-        return interacoes;
-      }
-    );
-}
-
   closeModalDenuncia(e){
     if(e){
       this.modalDenuncia.emit({
@@ -149,7 +142,6 @@ export class UserComponent implements OnInit {
       });
     }
   }
-
 
   openModalExcluir(id){
       this.timelineId = id;

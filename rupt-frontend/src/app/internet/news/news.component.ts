@@ -12,6 +12,10 @@ import { Component, OnInit, EventEmitter, Input } from '@angular/core';
 
 import { PostsService } from './../../services/posts.service';
 import { VisualizacoesService } from 'app/services/visualizacoes.service';
+import { InteracoesService } from 'app/services/interacoes.service';
+import { Interacao } from 'app/classes/interacao';
+import { InteracoesLeitorService } from 'app/services/interacoes-leitor.service';
+import { InteracaoLeitor } from 'app/classes/interacao-leitor';
 
 declare var $: any;
 @Component({
@@ -20,47 +24,47 @@ declare var $: any;
   styleUrls: ['./news.component.css']
 })
 export class NewsComponent implements OnInit {
-  url = ConnectionFactory.API_IMAGEM;
-  calcTime = new CalcTime();
-  
-  post: Post;
-  leitor = null;
-  edited = false;
-  comentarios;
-  form;
-  maisLidos: Post[];
-  leitorLogado: boolean = localStorage.getItem('l') != null;
-  data_atual: Date;
-  
-  interacoes: any = {
-    likes: 0,
-    loves: 0,
-    sad: 0,
-    cry: 0,
-    angry: 0,
-    shares: 0
-  };
-
   @Input('rascunho') rascunho: boolean = false;
   @Input('rascunhoForm') rascunhoForm: any;
   
-  modalDenuncia = new EventEmitter<string|MaterializeAction>();
+  calcTime = new CalcTime();
+  comentarios;
+
+  countInteracoes: number;
+  countCompartilhar: number;
+
+  data_atual: Date;
   denuncias;
-
-
+  edited = false;
+  form;
+  
+  interacoes: Interacao[];
+  interacoesLeitor: InteracaoLeitor[];
+  interacoesTotal = [0, 0];
+  interagiu: boolean = false;
+  
+  leitor = null;
+  leitorLogado: boolean = localStorage.getItem('l') != null;
+  maisLidos: Post[];
+  modalDenuncia = new EventEmitter<string|MaterializeAction>();
+  post: Post;
+  url = ConnectionFactory.API_IMAGEM;
+  
   constructor( private _activatedRoute: ActivatedRoute, 
                private _postService: PostsService,
                private _router: Router,
                private _formBuilder: FormBuilder,
                private _leitoresService: LeitoresService,
                private _denunciasService: DenunciasService,
-               private _visualizacoesService: VisualizacoesService) {
-   }
+               private _visualizacoesService: VisualizacoesService,
+               private _interacoesService: InteracoesService,
+               private _interacoesLeitorService: InteracoesLeitorService) {}
 
   ngOnInit() {
     setTimeout(()=>{
       this.openModalLoading();
-    }, 15)
+    }, 15);
+
     this._activatedRoute.params.subscribe(params => {
         if(params['id']){
           this.carregaPost(+params['id']);
@@ -121,10 +125,13 @@ export class NewsComponent implements OnInit {
       ( post ) => { 
         if (post){
             this.post = post;
-            console.log(new Date(post.updated_at).getTime() - new Date(post.created_at).getTime());
+
+            this.getInteracoes();
+            
             if(new Date(post.updated_at).getTime() - new Date(post.created_at).getTime() > 30000)
               this.edited = true;
-            //se o leitor está logado
+            
+              //se o leitor está logado
             if(localStorage.getItem('l')){
                 let base64 = new Base64();
                 //Popula o leitor + get interações
@@ -132,7 +139,8 @@ export class NewsComponent implements OnInit {
                 this._leitoresService.getLeitor(leitor_id).subscribe(
                     (leitor) => {
                         this.leitor = leitor;
-                        this.getInteracoes();
+
+                        this.getInteracoesLeitorPost();
 
                         //se não for o dono do post conta uma visualizacao
                         if (post.autor.id != leitor.id){
@@ -164,34 +172,74 @@ export class NewsComponent implements OnInit {
   }
 
   getInteracoes(){
-        this._postService.getInteracoes(this.post.id).subscribe(
-          (ret) => {
-            if(ret.status == 'OK'){
-              this.interacoes.likes = ret.likes.length;
-              this.interacoes.loves = ret.loves.length;
-              this.interacoes.angry = ret.angry.length;
-              this.interacoes.sad = ret.sads.length;
-              this.interacoes.cry = ret.cry.length;
-              this.interacoes.shares = ret.shares.length;
-            }
+      this._interacoesService.getAll( this.post.id, 1).subscribe(
+         (interacoes: Interacao[]) => {
+            this.interacoes = interacoes;
+            this.countInteracao();
+         }
+      )
+  }
+
+  getInteracoesLeitorPost(){
+      this._interacoesLeitorService.getInteracaoLeitor( this.post.id, this.leitor.id).subscribe(
+          (interacoesLeitor: InteracaoLeitor[]) => {
+              this.interacoesLeitor = interacoesLeitor;
+              this.verifyInteragiuPost();
           }
-        );
+      )
+  }
+
+  verifyInteragiuPost(){
+      if (!this.interacoesLeitor || this.interacoesLeitor.length == 0)
+        this.interagiu = false;
+      else if (this.interacoesLeitor.length == 1 && this.interacoesLeitor[0].id == 100)
+        this.interagiu = false;
+      else
+        this.interagiu = true;
+  }
+
+  checkInteracao(interacao_id){
+      if (!this.interacoesLeitor || this.interacoesLeitor.length == 0)
+        return false;
+
+      let check = false;
+
+      for (let i = 0; i < this.interacoesLeitor.length; i++){
+        if (this.interacoesLeitor[i].interacao_idInteracao == interacao_id){
+            check = true;
+            break;
+        }
+      }
+
+      return check;
+  }
+
+  countInteracao(){
+      this.interacoesTotal = [0,0];
+
+      for (let i = 0; i < this.interacoes.length; i++){
+        if(this.interacoes[i].id == 100)
+          this.interacoesTotal[1] = this.interacoes[i].count;
+        else 
+        this.interacoesTotal[0] = this.interacoesTotal[0] + this.interacoes[i].count;
+      }
   }
 
   interagePost(i){
-    this._postService.interage(this.post.id, null, this.leitor, 'post', i).subscribe(
-      (ret)=>{
-        if(ret.status == 'OK'){
-          
-          this.interacoes.likes = ret.likes.length;
-          this.interacoes.loves = ret.love.length;
-          this.interacoes.angry = ret.angry.length;
-          this.interacoes.sad = ret.sad.length;
-          this.interacoes.cry = ret.cry.length;
-          this.interacoes.shares = ret.shares.length;
-        }
-      }
-    );
+      let interacaoLeitor = new InteracaoLeitor();
+      interacaoLeitor.post_idPost = this.post.id;
+      interacaoLeitor.leitor_idLeitor = this.leitor.id;
+      interacaoLeitor.interacao_idInteracao = i;
+
+      this._interacoesLeitorService.interage(interacaoLeitor).subscribe(
+        (response) => { 
+            this.interacoes = response.interacoes;
+            this.interacoesLeitor = response.interacoesLeitor;
+
+            this.verifyInteragiuPost();
+            this.countInteracao();
+         }
+      );
   }
 
   openModalDenuncia() {

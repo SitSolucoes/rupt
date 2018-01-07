@@ -44,13 +44,10 @@
 
       <div *ngIf="!rascunho" class="social">
 
-        <p>{{ interacoes.likes + interacoes.loves + interacoes.angry + interacoes.sad + interacoes.cry }}</p>
+        <p> {{ interacoesTotal[0] }} </p>
         <img src="../../../assets/img/rupt-ico.png" class="img">
 
-        <!--<p>{{interacoes.dislikes?.length}}</p>
-        <img src="../../../assets/img/dislike.png" class="img">-->
-
-        <p>{{interacoes.shares.toString()}}</p>
+        <p> {{ interacoesTotal[1] }} </p>
         <img src="../../../assets/img/share2.png" class="img">
 
       </div>
@@ -63,45 +60,16 @@
 
         <div class="info" [innerHTML]="post.conteudo"></div>
 
-        <div *ngIf="!rascunho" class="reactions">
+        <div class="reactions" *ngIf="leitorLogado">
+            <div *ngFor='let i of interacoes' class="area2">
+                <div *ngIf='i.categoria == 1' (click)='interagePost(i.id)'>
+                    <img src="../../../assets/{{ i.src_icone }}" class="img"
+                        [ngClass]="{'pb': interagiu && !checkInteracao(i.id)}"
+                    >
 
-            <div class="area2" (click)="interagePost('like')" *ngIf="leitorLogado">
-
-                <img src="../../../assets/img/rupt-ico2.png" class="img">
-
-                <p> Like </p>
-
-            </div>
-
-            <div class="area2" (click)="interagePost('love')" *ngIf="leitorLogado">
-
-                <img src="../../../assets/img/rupt-ico.png" class="img">
-
-                <p> Amei </p>
-
-            </div>
-
-            <div class="area2" (click)="interagePost('sad')" *ngIf="leitorLogado">
-
-                <img src="../../../assets/img/rupt-ico4.png" class="img">
-
-                <p> Triste </p>
-
-            </div>
-            <div class="area2" (click)="interagePost('angry')" *ngIf="leitorLogado">
-
-                <img src="../../../assets/img/rupt-ico3.png" class="img">
-
-                <p> Raiva </p>
-
-            </div>
-
-            <div class="area2" (click)="interagePost('share')">
-
-                <img src="../../../assets/img/share3.png" class="img">
-
-                <p> Compartilhar </p>
-
+                    <p>{{ i.nome }}</p>
+                    <span class="count">{{ i.count }}</span>
+                </div>
             </div>
 
             <div class="area2" *ngIf="leitorLogado" (click)="openModalDenuncia()">
@@ -111,8 +79,7 @@
                 <p> Denunciar </p>
                 
             </div>
-
-        </div>
+        </div> 
 
         <div *ngIf="!rascunho" class="comentarios">
 
@@ -131,7 +98,6 @@
             </div>
 
             <div class="separate" *ngIf='comentarios && comentarios.length > 0' > recentes </div>
-
 
             <div class="profile" *ngFor="let c of comentarios">
                 
@@ -152,11 +118,14 @@
 
                     <div class="reaction">
 
-                        <img src="../../../assets/img/like2.png" class="img2">
-                        <div class="number">2</div>
+                        <div *ngFor='let i of interacoes' class="area2">
+                            <div *ngIf='i.categoria == 2' (click)='interagePost(i.id)'>
 
-                        <img src="../../../assets/img/dislike3.png" class="img2 img3">
-                        <div class="number">5</div>
+                                <img src="../../../assets/{{ i.src_icone}}" class="img2">
+                                <div class="number">2</div>
+
+                            </div>
+                        </div>
 
                     </div>
 

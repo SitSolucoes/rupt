@@ -64,55 +64,6 @@ export class PostsService {
       }); 
   }
 
-  getInteracoes(id){
-    return this._http.get(this._url + 'posts/getInteracoesFromPost/' + id, {headers: this.headers})
-      .map((response: Response) => {
-        return {
-          'likes' : response.json().interacoes.likes,
-          'dislikes' : response.json().interacoes.dislikes,
-          'shares' : response.json().interacoes.shares,
-          'loves' : response.json().interacoes.love,
-          'sads' : response.json().interacoes.sad,
-          'cry' : response.json().interacoes.angry,
-          'angry' : response.json().interacoes.cry,
-          'status': response.json().status,
-          'message': response.json().message
-        };
-      }); 
-  }
-
-  createBodyInteracao(post_id, comentario, leitor, alvo, tipo){
-    return JSON.stringify(
-      {
-       post_idPost: post_id,
-       leitor_idLeitor: leitor.id,
-       comentario_idComentario: comentario,
-       alvo: alvo,
-       tipo: tipo
-    });
-  }
-
-  interage(post_id, comentario, leitor, alvo, tipo){
-    const body = this.createBodyInteracao(post_id, comentario, leitor, alvo, tipo);
-    return this._http.post(this._url + 'posts/postInterage', body, {headers: this.headers})
-    .map(
-        (response: Response) => { 
-          return {
-            'likes' : response.json().interacoes.likes,
-            'dislikes' : response.json().interacoes.dislikes,
-            'shares' : response.json().interacoes.shares,
-            'love' : response.json().interacoes.love,
-            'sad' : response.json().interacoes.sad,
-            'angry' : response.json().interacoes.angry,
-            'cry' : response.json().interacoes.cry,
-            'status': response.json().status,
-            'message': response.json().message
-          };
-        } 
-      );
-  }
-
-
   getMaisLidas():Observable<any>{
     return this._http.get(this._url + 'posts/getPostsMaisLidos', {headers: this.headers})
     .map((retorno: Response) => {

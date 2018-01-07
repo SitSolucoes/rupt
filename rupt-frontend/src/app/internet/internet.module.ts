@@ -34,6 +34,8 @@ import { EsqueciSenhaComponent } from './esqueci-senha/esqueci-senha.component';
 import { ModalExcluirComponent } from './modal-excluir/modal-excluir.component';
 import { ModalRascunhoComponent } from './modal-rascunho/modal-rascunho.component';
 import { VisualizacoesService } from 'app/services/visualizacoes.service';
+import { InteracoesService } from 'app/services/interacoes.service';
+import { InteracoesLeitorService } from 'app/services/interacoes-leitor.service';
 
 @NgModule({ 
   imports: [
@@ -73,7 +75,9 @@ import { VisualizacoesService } from 'app/services/visualizacoes.service';
   providers: [
     CategoriaLeitorService,
     TimelineService,
-    VisualizacoesService
+    VisualizacoesService,
+    InteracoesService,
+    InteracoesLeitorService
   ]
 })
 export class InternetModule { }
