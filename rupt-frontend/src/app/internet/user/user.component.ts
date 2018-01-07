@@ -1,6 +1,5 @@
 import { CalcTime } from './../../shared/calcTime';
 import { MaterializeAction } from 'angular2-materialize';
-import { Interacoes } from './../../interacoes';
 import { Base64 } from '../../shared/Base64';
 import { pairs } from 'rxjs/observable/pairs';
 import { PostsService } from '../../services/posts.service';
@@ -14,6 +13,9 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Leitor } from 'app/classes/leitor';
 import { Post } from 'app/classes/post';
 import { InteracoesService } from 'app/services/interacoes.service';
+import { Interacao } from 'app/classes/interacao';
+import { InteracaoLeitor } from 'app/classes/interacao-leitor';
+import { InteracoesLeitorService } from 'app/services/interacoes-leitor.service';
 
 @Component({
   selector: 'app-user',
@@ -39,9 +41,11 @@ export class UserComponent implements OnInit {
               private _leitorService: LeitoresService, 
               private _timelineService: TimelineService,
               private _postService: PostsService,
-              private _interacoesService: InteracoesService) { }
+              private _interacoesLeitorService: InteracoesLeitorService) { }
 
   ngOnInit() {
+      window.scrollTo(0, 0);
+
       this.leitor = new Leitor();
       this.leitor.escritor = new Escritor();
       this.leitorLogado = new Leitor();
@@ -50,7 +54,6 @@ export class UserComponent implements OnInit {
         this._leitorService.getLeitorByNick(params['nick']).subscribe(
           (leitor: Leitor) => {
             this.leitor = leitor;
-            this.getTimeline();
           }
         );
         if(params['torne-se-um-escritor']){
@@ -58,22 +61,28 @@ export class UserComponent implements OnInit {
         }else
           this.torne_se = false;
 
+        this._leitorService.leitor.subscribe(
+            (leitor: Leitor) => { this.leitorLogado = leitor }
+          );
+        this._leitorService.verificaLogin().subscribe(
+            (response) => {
+              this.getTimeline();
+        });
+
       });
-      this._leitorService.leitor.subscribe(
-        (leitor: Leitor) => { this.leitorLogado = leitor }
-      );
-      this._leitorService.verificaLogin().subscribe();
   }
 
   getTimeline(){
-      this._timelineService.getTimeline(this.leitor.id).subscribe(
+      this.timelineFiltro = new Array();
+
+      this._timelineService.getTimeline(this.leitor.id, this.leitorLogado.id).subscribe(
         ( timeline) => { 
           this.timeline = timeline;
-          this.timelineFiltro = []
-        
-          for(let t of this.timeline){
+          this.timelineFiltro = timeline;
+          
+          /*for(let t of this.timeline){
               this.timelineFiltro.push(t);
-          }
+          }*/
         
         }
       )
@@ -84,14 +93,12 @@ export class UserComponent implements OnInit {
   }
 
   search(){
-      console.log(this.timelineFiltro);
-
       if (!this.filtro || this.filtro == '')
         this.timelineFiltro = this.timeline;
       else {
         this.timelineFiltro = this.timelineFiltro.filter((t) => {
-          if (t.tl.post.titulo.toLowerCase().indexOf(this.filtro.toLowerCase()) >= 0 ||
-              t.tl.post.conteudo.toLowerCase().indexOf(this.filtro.toLowerCase()) >= 0) {
+          if (t.post.titulo.toLowerCase().indexOf(this.filtro.toLowerCase()) >= 0 ||
+              t.post.conteudo.toLowerCase().indexOf(this.filtro.toLowerCase()) >= 0) {
 
             return true;
           }
@@ -100,31 +107,49 @@ export class UserComponent implements OnInit {
       }
   }
 
-  getInteracoes(){
-    this._interacoesService.getAll( this.post.id, 1).subscribe(
-       (interacoes: Interacao[]) => {
-          this.interacoes = interacoes;
-          this.countInteracao();
-       }
-    )
+  countInteracoes(interacoes: Interacao[]){
+      let soma = 0;
+      for (let i = 0; i < interacoes.length; i++){
+        if (interacoes[i].id != 100)
+          soma = soma + interacoes[i].count;
+      }
+
+      return soma;
   }
 
-  /*interage(post, i){
-    this._postService.interage(post, null, this.leitor.id, 'post', i).subscribe(
-      (ret)=>{
-        if(ret.status == 'OK'){
-          let novainteracoes = new Interacoes(ret.likes.length, ret.love.length, ret.shares.length, ret.sad.length, ret.angry.length, ret.cry.length).interacoes;
-          this.changeInteracoes(post, novainteracoes);
+  checkInteracao(interacao_id, interacoesLeitor: InteracaoLeitor[]){
+      if (!interacoesLeitor || interacoesLeitor.length == 0)
+        return true;
+
+      if (interacoesLeitor.length == 1 && interacoesLeitor[0].id == 100)
+        return true;
+
+      let check = false;
+
+      for (let i = 0; i < interacoesLeitor.length; i++){
+        if (interacoesLeitor[i].interacao_idInteracao == interacao_id){
+            check = true;
+            break;
         }
       }
-    );
-  }*/
 
-  changeInteracoes(post, i){
-    for(let t of this.timelineFiltro){
-      if(t.tl.post_idPost === post)
-        t.interacoes = i;
-    }
+      return check;
+  }
+
+  interageTimeline(t: Timeline, interacao_id){
+    let interacaoLeitor = new InteracaoLeitor();
+    interacaoLeitor.post_idPost = t.post.id;
+    interacaoLeitor.leitor_idLeitor = this.leitorLogado.id;
+    interacaoLeitor.interacao_idInteracao = interacao_id;
+
+    if (t.post.autor_idLeitor != this.leitor.id)
+        interacaoLeitor.timeline_idTimeline = t.id;
+
+    this._interacoesLeitorService.interage(interacaoLeitor).subscribe(
+      (response) => { 
+          console.log('agora tem que ajustar os contadores');
+       }
+    );
   }
 
   openModalDenuncia(p){

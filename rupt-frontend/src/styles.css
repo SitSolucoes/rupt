@@ -1609,7 +1609,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     width: 85%;
 }
 
-.user .feed .post .text2 .btn{
+.user .feed .post .text .btn{
     float: right;
     padding-right: 0px;
     padding-left: 0px;
@@ -1618,19 +1618,26 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     margin-top: 5px;
 }
 
-.user .feed .post .text2 .dropdown-content{
+.user .feed .post .text .dropdown-area{
+    position: relative;
+    display: block;
+}
+
+.user .feed .post .text .dropdown-content{
     width: 120px !important;
-    left: 710px !important;
-    margin-top: 50px;
-    position: absolute   !important;
+    position: absolute !important;
+    top: 40px!important;
+    margin-right: 400px;
+    margin-left: -40px;
 }
 
 .user .feed .post .text2 .dropdown-content li{
     min-height: 0px !important;
 }
 
-.user .feed .post .text2 .dropdown-content li > a{
+.user .feed .post .text .dropdown-content li > a{
     padding: 10px;
+    text-align: center;
 }
 
 .user .feed .post .text .name{
@@ -1764,6 +1771,11 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
   position: relative;
   bottom: 3px;
   margin-right: -6px;
+}
+
+.user .feed .post .status .img4.pb{
+    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(100%);
 }
 
 .user .feed .search{
@@ -2053,6 +2065,11 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .news .container .area .social{
   display: block; 
   float: right;
+}
+
+.news .container .area .social .report{
+    cursor: pointer;
+    margin-left: 15px;
 }
 
 .news .container .area .social p{

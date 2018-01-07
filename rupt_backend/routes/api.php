@@ -167,5 +167,5 @@ Route::get('pagamento/countPagamentosPendentes', ['uses' => 'PagamentoController
 Route::post('pagamento/uploadDoc/{id}', ['uses' => 'PagamentoController@uploadDoc']);
 
 //timeline
-Route::get('timeline/getTimeline/{id}', ['uses' => 'TimelineController@getTimeline']);
+Route::get('timeline/getTimeline/{id}/{leitor_id}', ['uses' => 'TimelineController@getTimeline']);
 Route::post('timeline/deleteTimeline', ['uses' => 'TimelineController@deleteTimeline']);

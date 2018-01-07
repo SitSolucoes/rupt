@@ -1,4 +1,3 @@
-import { Interacoes } from './../interacoes';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { ConnectionFactory } from 'app/classes/connection-factory';

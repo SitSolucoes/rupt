@@ -42,15 +42,17 @@
       <img *ngIf="!rascunho" src="../../../assets/img/marcador.png" class="img"> 
       <b *ngIf="!rascunho" > {{ calcHour( post.publishedAt ) }} </b>
 
-      <div *ngIf="!rascunho" class="social">
+        <div class="social">
 
-        <p> {{ interacoesTotal[0] }} </p>
-        <img src="../../../assets/img/rupt-ico.png" class="img">
+            <p> {{ interacoesTotal[0] }} </p>
+            <img src="../../../assets/img/rupt-ico.png" class="img">
 
-        <p> {{ interacoesTotal[1] }} </p>
-        <img src="../../../assets/img/share2.png" class="img">
+            <p> {{ interacoesTotal[1] }} </p>
+            <img src="../../../assets/img/share2.png" class="img">
 
-      </div>
+            <img src="../../../assets/img/report.png" class="img report" (click)="openModalDenuncia()" alt='Denunciar'>
+
+        </div>
 
     </div>
 
@@ -70,14 +72,6 @@
                     <p>{{ i.nome }}</p>
                     <span class="count">{{ i.count }}</span>
                 </div>
-            </div>
-
-            <div class="area2" *ngIf="leitorLogado" (click)="openModalDenuncia()">
-
-                <img src="../../../assets/img/report.png" class="img">
-
-                <p> Denunciar </p>
-                
             </div>
         </div> 
 

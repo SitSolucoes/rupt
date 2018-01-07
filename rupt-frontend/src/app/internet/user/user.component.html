@@ -132,114 +132,112 @@
                     <a routerLink='../{{ leitor.nick }}'>
                         <font class="title name"> {{ leitor.nome }} </font>
                     </a>
-                    <font class="share" *ngIf="leitor.id != t.tl.post.autor.id">
-                        - Compartilhou a <b><a routerLink="../../noticia/{{t.tl.post.id}}">publicação</a></b> de
-                        {{ t.tl.post.autor.nome }}.
+                    <font class="share" *ngIf="leitor.id != t.post.autor.id">
+                        - Compartilhou a <b><a routerLink="../../noticia/{{t.post.id}}">publicação</a></b> de
+                        {{ t.post.autor.nome }}.
                     </font>
 
                     <!-- não é a propria tl -->
-                    <a class='dropdown-button btn' data-activates='dropdown' materialize="dropdown" *ngIf="t.tl.leitor_idLeitor != leitorLogado.id && leitorLogado.id">
-                        <img src="../../../assets/img/dot.png" class="img img5">
-                    </a>
+                    <span class="dropdown-area">
+                        <a class='dropdown-button btn' data-activates='dropdown' materialize="dropdown" *ngIf="t.leitor_idLeitor != leitorLogado.id && leitorLogado.id">
+                            <img src="../../../assets/img/dot.png" class="img img5">
+                        </a>
 
-                    <ul id='dropdown' class='dropdown-content' style="top: 60px !important;">
-                        <!-- Caso user seja escritor <li><a routerLink="cadastro-escritor">Editar Perfil</a></li>-->
-                        <li>
-                            <a href="">Compartilhar</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a (click)="openModalDenuncia(t.tl.post)"> Denunciar </a>
-                        </li>
-                    </ul>
+                        <ul id='dropdown' class='dropdown-content' style="top: 60px !important;">
+                            <!-- Caso user seja escritor <li><a routerLink="cadastro-escritor">Editar Perfil</a></li>-->
+                            <li>
+                                <a href="">Compartilhar</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a (click)="openModalDenuncia(t.post)"> Denunciar </a>
+                            </li>
+                        </ul>
+                    </span>
 
                     <!-- propria tl mas post compartilhado -->
-                    <a class='dropdown-button btn' *ngIf="t.tl.post.autor.id != leitorLogado.id && t.tl.leitor_idLeitor == leitorLogado.id">
-                        <img src="../../../assets/img/x.png" (click)="openModalExcluir(t.tl.id)" class="img img5 img6">
+                    <a class='dropdown-button btn' *ngIf="t.post.autor.id != leitorLogado.id && t.leitor_idLeitor == leitorLogado.id">
+                        <img src="../../../assets/img/x.png" (click)="openModalExcluir(t.id)" class="img img5 img6">
                     </a>
                     
                     <!-- tl dele com post próprio -->
-                    <a routerLink='../../publicacao/{{ t.tl.post.id }}' *ngIf="t.tl.post.autor.id == leitorLogado.id">
+                    <a routerLink='../../publicacao/{{ t.post.id }}' *ngIf="t.post.autor.id == leitorLogado.id">
                         <i class="fa fa-pencil-square-o img img5" aria-hidden="true"></i>
                     </a>
 
                     <font class="title title2">
-                        {{ calcHour( t.tl.created_at ) }}
+                        {{ calcHour( t.created_at ) }}
                     </font>
 
                 </div>
                 
-                <div class="info " [ngClass]="{'info2' : leitor?.escritor?.patrocinador}" *ngIf="leitor.id == t.tl.post.autor.id">
-                    <a routerLink="../../noticia/{{t.tl.post.id}}">
+                <div class="info " [ngClass]="{'info2' : leitor?.escritor?.patrocinador}" *ngIf="leitor.id == t.post.autor.id">
+                    <a routerLink="../../noticia/{{t.post.id}}">
                         <div class="new">
-                            {{ t.tl.post.titulo }}
+                            {{ t.post.titulo }}
                         </div>
 
-                        <div *ngIf='t.tl.post.src_imagem'>
+                        <div *ngIf='t.post.src_imagem'>
                             <div class="border" >
-                                <img src="{{ url + 'posts/' + t.tl.post.src_imagem }}" class="img3"
-                                [ngClass]="{'post-adulto' : t.tl.post.adulto == 1}"
+                                <img src="{{ url + 'posts/' + t.post.src_imagem }}" class="img3"
+                                [ngClass]="{'post-adulto' : t.post.adulto == 1}"
                                 >
                             </div>
                         </div>
                     </a>
                     <!--interacoes-->
                     <div class="status">
-                        <img src="../../../assets/img/rupt-ico2.png" (click)="interage(t.tl.post.id, 'like')" class="img4">
-                        <img src="../../../assets/img/rupt-ico.png" (click)="interage(t.tl.post.id, 'love')" class="img4">
-                        <img src="../../../assets/img/rupt-ico4.png" (click)="interage(t.tl.post.id, 'sad')" class="img4">
-                        <img src="../../../assets/img/rupt-ico3.png" (click)="interage(t.tl.post.id, 'angry')" class="img4">
-                        <img src="../../../assets/img/rupt-ico5.png" (click)="interage(t.tl.post.id, 'uau')" class="img4">
-                        {{t.interacoes }}
-                        <div class="total">{{t.interacoes.likes.qnt + t.interacoes.loves.qnt + t.interacoes.sads.qnt + t.interacoes.cries.qnt + t.interacoes.angries.qnt}}</div>
+                        <span *ngFor='let i of t.interacoes'>
+                            <img *ngIf='i.id != 100' src="../../../assets/{{ i.src_icone }}" class="img4"
+                                (click)="interageTimeline(t, i.id)" [ngClass]="{'pb': !checkInteracao(i.id, t.interacoesLeitor)}">
+                        </span>
+                        <div class="total">{{ countInteracoes(t.interacoes) }}</div>
                     </div>
                 </div>
 
-                <div class="info info2" *ngIf="leitor.id != t.tl.post.autor.id">
+                <div class="info info2" *ngIf="leitor.id != t.post.autor.id">
 
-                    <a routerLink='/perfil/{{ t.tl.post.autor.nick }}'>
+                    <a routerLink='/perfil/{{ t.post.autor.nick }}'>
                         <div class="img-area img-area2">
-                            <img src="{{ url + 'profile/' + t.tl.post.autor.src_foto }}"  class="img4">
+                            <img src="{{ url + 'profile/' + t.post.autor.src_foto }}"  class="img4">
                         </div>
                     </a>
 
                     <div class="text">
 
-                        <a routerLink='/perfil/{{ t.tl.post.autor.nick }}'>
-                            <font class="title"> {{ t.tl.post.autor.nome }} </font>
+                        <a routerLink='/perfil/{{ t.post.autor.nick }}'>
+                            <font class="title"> {{ t.post.autor.nome }} </font>
                         </a>
 
                         <font class="title title2">
-                            {{ calcHour( t.tl.post.publishedAt ) }}
+                            {{ calcHour( t.post.publishedAt ) }}
                         </font>
 
                     </div>
 
-                    <a routerLink="../../noticia/{{t.tl.post.id}}">
+                    <a routerLink="../../noticia/{{t.post.id}}">
 
                         <div class="new">
-                            {{ t.tl.post.titulo }}
+                            {{ t.post.titulo }}
                         </div>
 
-                        <div *ngIf='t.tl.post.src_imagem'>
+                        <div *ngIf='t.post.src_imagem'>
                            <!-- <div class="border" > -->
                                 <div class="border border2">
                                     <!--
-                                    <img src="{{ url + 'posts/' + t.tl.post.src_imagem }}" class="img3">
+                                    <img src="{{ url + 'posts/' + t.post.src_imagem }}" class="img3">
                                     -->
-                                    <img src="{{ url + 'posts/' + t.tl.post.src_imagem }}" class="img3 img7">
+                                    <img src="{{ url + 'posts/' + t.post.src_imagem }}" class="img3 img7">
                             </div>
                         </div>
                     </a>
 
                     <div class="status">
-                        <img src="../../../assets/img/rupt-ico.png" (click)="interage(t.tl.post.id, 'like')" class="img4">
-                        <img src="../../../assets/img/rupt-ico9.png" (click)="interage(t.tl.post.id, 'love')" class="img4">
-                        <img src="../../../assets/img/rupt-ico3.png" (click)="interage(t.tl.post.id, 'sad')" class="img4">
-                        <img src="../../../assets/img/rupt-ico4.png" (click)="interage(t.tl.post.id, 'angry')" class="img4">
-                        <img src="../../../assets/img/rupt-ico7.png" (click)="interage(t.tl.post.id, 'cry')" class="img4">
-
-                        <div class="total">{{t.interacoes.likes.qnt + t.interacoes.loves.qnt + t.interacoes.sads.qnt + t.interacoes.cries.qnt + t.interacoes.angries.qnt}}</div>
+                        <span *ngFor='let i of t.interacoes'>
+                            <img *ngIf='i.id != 100' src="../../../assets/{{ i.src_icone }}" class="img4"
+                                (click)="interageTimeline(t, i.id)" [ngClass]="{'pb': !checkInteracao(i.id, t.interacoesLeitor)}">
+                        </span>
+                        <div class="total">{{ countInteracoes(t.interacoes) }}</div>
                     </div>
                 </div>
 
