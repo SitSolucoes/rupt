@@ -36,6 +36,7 @@ import { ModalRascunhoComponent } from './modal-rascunho/modal-rascunho.componen
 import { VisualizacoesService } from 'app/services/visualizacoes.service';
 import { InteracoesService } from 'app/services/interacoes.service';
 import { InteracoesLeitorService } from 'app/services/interacoes-leitor.service';
+import { ModalCompartilharComponent } from './modal-compartilhar/modal-compartilhar.component';
 
 @NgModule({ 
   imports: [
@@ -70,7 +71,8 @@ import { InteracoesLeitorService } from 'app/services/interacoes-leitor.service'
     EsqueciSenhaComponent,
     ModalExcluirComponent,
     RedefineSenhaComponent,
-    ModalRascunhoComponent
+    ModalRascunhoComponent,
+    ModalCompartilharComponent
   ],
   providers: [
     CategoriaLeitorService,

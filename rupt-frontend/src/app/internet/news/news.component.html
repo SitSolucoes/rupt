@@ -1,16 +1,22 @@
 
 <div class="news" *ngIf='post'>
   
-  <div id="modalDenuncia" class="modal modal2 modal4"
-       materialize="modal" [materializeParams]="[{dismissible: false}]"
-       [materializeActions]="modalDenuncia">
-  <modal-generico [action]="'denuncia'" [idObj]="post?.id" (closeModalGenerico)="closeModalDenuncia($event)"></modal-generico>
-  </div>
+    <div id="modalDenuncia" class="modal modal2 modal4"
+        materialize="modal" [materializeParams]="[{dismissible: false}]"
+        [materializeActions]="modalDenuncia">
+        <modal-generico [action]="'denuncia'" [idObj]="post?.id" (closeModalGenerico)="closeModalDenuncia($event)"></modal-generico>
+    </div>
 
-  <div id="modalLoading" class="loading-modal modal modal2 modal4"
-    materialize="modal" [materializeParams]="[{dismissible: false}]"
-    [materializeActions]="modalLoading">
-    <modal-generico [action]="'loading'" [obj]="'Carregando'" (closeModalGenerico)="closeModalLoading($event)"></modal-generico>
+    <div id="modalLoading" class="loading-modal modal modal2 modal4"
+        materialize="modal" [materializeParams]="[{dismissible: false}]"
+        [materializeActions]="modalLoading">
+        <modal-generico [action]="'loading'" [obj]="'Carregando'" (closeModalGenerico)="closeModalLoading($event)"></modal-generico>
+    </div>
+
+    <div id="modalCompartilhar" class="modal modal2 modal4"
+        materialize="modal" [materializeParams]="[{dismissible: true}]"
+        [materializeActions]="modalCompartilhar">
+        <modal-compartilhar></modal-compartilhar>
     </div>
 
   <div class="area-top">
@@ -71,6 +77,16 @@
 
                     <p>{{ i.nome }}</p>
                     <span class="count">{{ i.count }}</span>
+                </div>
+            </div>
+
+            <div class="area2">
+                <div (click)='openModalCompartilhar()'>
+                    <img src="../../../assets/img/share.png" class="img"
+                        [ngClass]="{'pb': interagiu && !checkInteracao(i.id)}"
+                    >
+
+                    <p>Compartilhar</p>
                 </div>
             </div>
         </div> 

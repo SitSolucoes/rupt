@@ -30,25 +30,25 @@ export class NewsComponent implements OnInit {
   calcTime = new CalcTime();
   comentarios;
 
-  countInteracoes: number;
-  countCompartilhar: number;
-
   data_atual: Date;
   denuncias;
   edited = false;
   form;
+  leitor = null;
+  leitorLogado: boolean = localStorage.getItem('l') != null;
+  maisLidos: Post[];
   
+  post: Post;
+  url = ConnectionFactory.API_IMAGEM;
+
   interacoes: Interacao[];
   interacoesLeitor: InteracaoLeitor[];
   interacoesTotal = [0, 0];
   interagiu: boolean = false;
-  
-  leitor = null;
-  leitorLogado: boolean = localStorage.getItem('l') != null;
-  maisLidos: Post[];
+
+  modalCompartilhar = new EventEmitter<string|MaterializeAction>();
   modalDenuncia = new EventEmitter<string|MaterializeAction>();
-  post: Post;
-  url = ConnectionFactory.API_IMAGEM;
+  modalLoading = new EventEmitter<string|MaterializeAction>();
   
   constructor( private _activatedRoute: ActivatedRoute, 
                private _postService: PostsService,
@@ -76,13 +76,7 @@ export class NewsComponent implements OnInit {
                 post_idPost: [params['id']],
                 leitor_idLeitor: [new Base64().decode(localStorage.getItem('l'))]
               }); 
-        }else{
-          if(this.rascunho){
-            //console.log(this.rascunhoForm);
-            this.montaRascunho();
-          }
         }
-        
     });
   }
 
@@ -100,24 +94,9 @@ export class NewsComponent implements OnInit {
     );
   }
 
-  montaRascunho(){
-    let f = this.rascunhoForm;
-    this.post = {
-      id: null,
-      titulo: f.titulo,
-      conteudo: f.conteudo,
-      autor_idLeitor: null, 
-      //escritor: ,
-      idAdmin_deleted: null,
-      src_imagem: null,//f.src_imagem,
-      visualizacoes: null,
-      publishedAt: null,
-      subtitulo: null,
-      created_at: null,
-      updated_at: null,
-      deleted_at: null,
-      tipo_post: null,
-    };
+  
+  calcHour(date){
+    return this.calcTime.calcTime(date);
   }
 
   carregaPost(id){
@@ -242,6 +221,15 @@ export class NewsComponent implements OnInit {
       );
   }
 
+  openModalCompartilhar(){
+      this.modalCompartilhar.emit({action: 'modal', params: ['open']});
+  }
+
+  closeModalCompartilhar(e){
+      if (e)
+        this.modalCompartilhar.emit({action: 'modal', params: ['close']});
+  }
+
   openModalDenuncia() {
     this.modalDenuncia.emit({
          action: 'modal',
@@ -256,12 +244,6 @@ export class NewsComponent implements OnInit {
       });
     }
   }
-
-  calcHour(date){
-      return this.calcTime.calcTime(date);
-  }
-
-  modalLoading = new EventEmitter<string|MaterializeAction>();
 
   openModalLoading() {
     this.modalLoading.emit({

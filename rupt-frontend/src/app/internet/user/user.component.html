@@ -171,7 +171,7 @@
 
                 </div>
                 
-                <div class="info " [ngClass]="{'info2' : leitor?.escritor?.patrocinador}" *ngIf="leitor.id == t.post.autor.id">
+                <div class="info " *ngIf="leitor.id == t.post.autor.id">
                     <a routerLink="../../noticia/{{t.post.id}}">
                         <div class="new">
                             {{ t.post.titulo }}
@@ -195,42 +195,43 @@
                     </div>
                 </div>
 
-                <div class="info info2" *ngIf="leitor.id != t.post.autor.id">
-
-                    <a routerLink='/perfil/{{ t.post.autor.nick }}'>
-                        <div class="img-area img-area2">
-                            <img src="{{ url + 'profile/' + t.post.autor.src_foto }}"  class="img4">
-                        </div>
-                    </a>
-
-                    <div class="text">
-
+                <div class="info" *ngIf="leitor.id != t.post.autor.id">
+                    <div class="info2">
                         <a routerLink='/perfil/{{ t.post.autor.nick }}'>
-                            <font class="title"> {{ t.post.autor.nome }} </font>
+                            <div class="img-area img-area2">
+                                <img src="{{ url + 'profile/' + t.post.autor.src_foto }}"  class="img4">
+                            </div>
                         </a>
 
-                        <font class="title title2">
-                            {{ calcHour( t.post.publishedAt ) }}
-                        </font>
+                        <div class="text">
 
-                    </div>
+                            <a routerLink='/perfil/{{ t.post.autor.nick }}'>
+                                <font class="title"> {{ t.post.autor.nome }} </font>
+                            </a>
 
-                    <a routerLink="../../noticia/{{t.post.id}}">
+                            <font class="title title2">
+                                {{ calcHour( t.post.publishedAt ) }}
+                            </font>
 
-                        <div class="new">
-                            {{ t.post.titulo }}
                         </div>
 
-                        <div *ngIf='t.post.src_imagem'>
-                           <!-- <div class="border" > -->
-                                <div class="border border2">
-                                    <!--
-                                    <img src="{{ url + 'posts/' + t.post.src_imagem }}" class="img3">
-                                    -->
-                                    <img src="{{ url + 'posts/' + t.post.src_imagem }}" class="img3 img7">
+                        <a routerLink="../../noticia/{{t.post.id}}">
+
+                            <div class="new">
+                                {{ t.post.titulo }}
                             </div>
-                        </div>
-                    </a>
+
+                            <div *ngIf='t.post.src_imagem'>
+                            <!-- <div class="border" > -->
+                                    <div class="border border2">
+                                        <!--
+                                        <img src="{{ url + 'posts/' + t.post.src_imagem }}" class="img3">
+                                        -->
+                                        <img src="{{ url + 'posts/' + t.post.src_imagem }}" class="img3 img7">
+                                </div>
+                            </div>
+                        </a>
+                    </div>
 
                     <div class="status">
                         <span *ngFor='let i of t.interacoes'>

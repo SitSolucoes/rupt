@@ -141,15 +141,38 @@ export class UserComponent implements OnInit {
     interacaoLeitor.post_idPost = t.post.id;
     interacaoLeitor.leitor_idLeitor = this.leitorLogado.id;
     interacaoLeitor.interacao_idInteracao = interacao_id;
-
+    
     if (t.post.autor_idLeitor != this.leitor.id)
         interacaoLeitor.timeline_idTimeline = t.id;
 
     this._interacoesLeitorService.interage(interacaoLeitor).subscribe(
       (response) => { 
-          console.log('agora tem que ajustar os contadores');
+          if (t.post.autor_idLeitor != this.leitor.id)
+            this.refreshInteracao(t.id, response.interacoes, response.interacoesLeitor, true);
+          else
+            this.refreshInteracao(t.post.id, response.interacoes, response.interacoesLeitor, false);
        }
     );
+  }
+
+  refreshInteracao(id, interacoes: Interacao[], interacoesLeitor: InteracaoLeitor[], timeline:boolean){
+      if (timeline == false){
+        for (let i = 0; i < this.timelineFiltro.length; i++){
+          if (this.timelineFiltro[i].post.id == id){
+              this.timelineFiltro[i].interacoes = interacoes;
+              this.timelineFiltro[i].interacoesLeitor = interacoesLeitor;
+          }
+        }
+      }
+      else{
+        for (let i = 0; i < this.timelineFiltro.length; i++){
+          if (this.timelineFiltro[i].id == id){
+              console.log('achou');
+              this.timelineFiltro[i].interacoes = interacoes;
+              this.timelineFiltro[i].interacoesLeitor = interacoesLeitor;
+          }
+        }
+      }
   }
 
   openModalDenuncia(p){

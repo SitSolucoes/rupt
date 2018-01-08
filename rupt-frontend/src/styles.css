@@ -1615,7 +1615,6 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     padding-left: 0px;
     box-shadow: none;
     background-color: #fff;
-    margin-top: 5px;
 }
 
 .user .feed .post .text .dropdown-area{
@@ -1694,14 +1693,12 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .user .feed .post .info2{
-    width: 85%;
-}
-
-.user .feed .post .info2{
+    display: block;
+    float: left;
+    width: 100%;
     border: 1px solid #e6e6e6;
     padding: 10px;
     padding-top: 0px;
-    margin-top: 20px;
 }
 
 .user .feed .post .info .border{
