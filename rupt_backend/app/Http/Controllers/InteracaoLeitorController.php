@@ -53,7 +53,7 @@ class InteracaoLeitorController extends Controller
             $this->createInteracao($request);
 
         $c = new InteracaoController();
-        $interacoesCount = $c->getInteracoes($request->post_idPost, 1);
+        $interacoesCount = $c->getInteracoes($request->post_idPost, 1, false);
 
         $interacoesLeitor = $this->getPost($request->post_idPost, $request->leitor_idLeitor);
 
@@ -113,9 +113,9 @@ class InteracaoLeitorController extends Controller
             $this->createInteracao($request);
 
         $c = new InteracaoController();
-        $interacoesCount = $c->getInteracoes($request->post_idPost, 1);
+        $interacoesCount = $c->getInteracoes($request->timeline_idTimeline, 1, true);
 
-        $interacoesLeitor = $this->getPost($request->post_idPost, $request->leitor_idLeitor);
+        $interacoesLeitor = $this->getTimeline($request->timeline_idTimeline, $request->leitor_idLeitor);
 
         return response()->json(['interacoes' => $interacoesCount, 'interacoesLeitor' => $interacoesLeitor], 200);
     }
@@ -125,6 +125,12 @@ class InteracaoLeitorController extends Controller
                               ->where('leitor_idLeitor', $leitor_id)
                               ->whereNull('comentario_idComentario')
                               ->whereNull('timeline_idTimeline')
+                              ->get();
+    }
+
+    public function getTimeline($timeline_id, $leitor_id){
+        return InteracaoLeitor::where('timeline_idTimeline', $timeline_id)
+                              ->where('leitor_idLeitor', $leitor_id)
                               ->get();
     }
 
@@ -142,6 +148,12 @@ class InteracaoLeitorController extends Controller
                                 ->where('interacao_idInteracao', $interacao_id)
                                 ->whereNull('comentario_idComentario')
                                 ->whereNull('timeline_idTimeline')
+                                ->count();
+    }
+
+    public function countInteracaoTimeline($timeline_id, $interacao_id){
+        return InteracaoLeitor::where('timeline_idTimeline', $timeline_id)
+                                ->where('interacao_idInteracao', $interacao_id)
                                 ->count();
     }
 

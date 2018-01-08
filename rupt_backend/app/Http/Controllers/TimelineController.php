@@ -29,11 +29,18 @@ class TimelineController extends Controller
         
         foreach($timeline as $t){
             if ($t->post->deleted_at == null && $t->post->publishedAt != null){
-                $t->interacoes = $i->getInteracoes($t->post->id, 1);
                 
-                if ($leitor_id !=0)
-                    $t->interacoesLeitor = $il->getPost($t->post->id, $leitor_id);
-
+                if ($t->post->autor_idLeitor == $autor_id){
+                    $t->interacoes = $i->getInteracoes($t->post->id, 1, false);
+                    if ($leitor_id !=0)
+                        $t->interacoesLeitor = $il->getPost($t->post->id, $leitor_id);
+                }
+                else{
+                    $t->interacoes = $i->getInteracoes($t->id, 1, true);
+                    if ($leitor_id !=0)
+                        $t->interacoesLeitor = $il->getTimeline($t->id, $leitor_id);
+                }
+                
                 $timelineInteracao->push($t);
             }
         }
