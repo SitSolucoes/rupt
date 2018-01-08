@@ -70,9 +70,14 @@
 
 /* QUILL EDITOR*/
 .ql-container{
-    height: 76%;
+    height: 76%;   
 }
 
+.ql-toolbar.ql-snow{
+    text-align: left;
+}
+
+/*STYLES*/
 .publicacao{
     display: block;
     float: left;

@@ -19,7 +19,7 @@
             <input type="text" class="input input2" maxlength="160" formControlName='titulo' placeholder="Insira o título da sua notícia">            
             <!--editor-->
             <quill-editor style="    margin-top: 7%;
-            border-top: 1px solid #ccc !important;" formControlName='conteudo'
+            border-top: 1px solid #ccc !important; text-align: left;" formControlName='conteudo'
                             [options]="editorOptions"
                             (blur)="onEditorBlured($event)"
                             (focus)="onEditorFocused($event)"
