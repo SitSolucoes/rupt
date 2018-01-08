@@ -50,10 +50,10 @@ class AdminController extends Controller
                 return response()->json($response, 200);
             }
             else 
-                return response()->json(['login' => "Senha incorreta."], 200);
+                return response()->json(['login' => "Email e/ou Senha incorretos."], 200);
         }
         else 
-            return response()->json(['login' => "Email não encontrado."], 200);
+            return response()->json(['login' => "Email e/ou Senha incorretos."], 200);
     }
 
     public function verificaLogin(Request $request){
