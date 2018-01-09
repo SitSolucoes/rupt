@@ -41,6 +41,7 @@ export class NewsComponent implements OnInit {
   post: Post;
   url = ConnectionFactory.API_IMAGEM;
 
+  interacao: Interacao;
   interacoes: Interacao[];
   interacoesLeitor: InteracaoLeitor[];
   interacoesTotal = [0, 0];
@@ -48,6 +49,7 @@ export class NewsComponent implements OnInit {
 
   modalCompartilhar = new EventEmitter<string|MaterializeAction>();
   modalDenuncia = new EventEmitter<string|MaterializeAction>();
+  modalExcluir = new EventEmitter<string|MaterializeAction>();
   modalLoading = new EventEmitter<string|MaterializeAction>();
   
   constructor( private _activatedRoute: ActivatedRoute, 
@@ -94,7 +96,6 @@ export class NewsComponent implements OnInit {
     );
   }
 
-  
   calcHour(date){
     return this.calcTime.calcTime(date);
   }
@@ -170,11 +171,16 @@ export class NewsComponent implements OnInit {
 
   verifyInteragiuPost(){
       if (!this.interacoesLeitor || this.interacoesLeitor.length == 0)
-        this.interagiu = false;
-      else if (this.interacoesLeitor.length == 1 && this.interacoesLeitor[0].id == 100)
-        this.interagiu = false;
-      else
-        this.interagiu = true;
+          this.interagiu = false;
+      else {
+          let interagiu: boolean = false;
+          for (let i = 0; i < this.interacoesLeitor.length; i++){
+              if (!this.interacoesLeitor[i].interacao.compartilhar)  
+                  interagiu = true;
+          }
+
+          this.interagiu = interagiu;
+      }
   }
 
   checkInteracao(interacao_id){
@@ -197,7 +203,7 @@ export class NewsComponent implements OnInit {
       this.interacoesTotal = [0,0];
 
       for (let i = 0; i < this.interacoes.length; i++){
-        if(this.interacoes[i].id == 100)
+        if(this.interacoes[i].compartilhar && !this.interacoes[i].externa)
           this.interacoesTotal[1] = this.interacoes[i].count;
         else 
         this.interacoesTotal[0] = this.interacoesTotal[0] + this.interacoes[i].count;
@@ -208,7 +214,7 @@ export class NewsComponent implements OnInit {
       let interacaoLeitor = new InteracaoLeitor();
       interacaoLeitor.post_idPost = this.post.id;
       interacaoLeitor.leitor_idLeitor = this.leitor.id;
-      interacaoLeitor.interacao_idInteracao = i;
+      interacaoLeitor.interacao = i;
 
       this._interacoesLeitorService.interage(interacaoLeitor).subscribe(
         (response) => { 
@@ -221,7 +227,20 @@ export class NewsComponent implements OnInit {
       );
   }
 
+  compartilhar(compartilhar){
+      if (compartilhar[1] == true){
+          this.interacao = compartilhar[0];
+          this.openModalExcluir();
+      }
+      else {
+          this.interagePost(compartilhar[0]);
+      }   
+      
+      this.modalCompartilhar.emit({action: 'modal', params: ['close']});
+  }
+
   openModalCompartilhar(){
+      this.interacao = null;
       this.modalCompartilhar.emit({action: 'modal', params: ['open']});
   }
 
@@ -243,6 +262,16 @@ export class NewsComponent implements OnInit {
         params:['close']
       });
     }
+  }
+
+  openModalExcluir(){
+      this.modalExcluir.emit({action: 'modal', params: ['open']});
+  }
+
+  closeModalExcluir(e){
+      if (e){
+          this.modalExcluir.emit({action: 'modal', params:['close']});
+      }
   }
 
   openModalLoading() {

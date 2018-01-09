@@ -127,6 +127,7 @@ Route::post('posts/delete', ['uses' => 'PostController@delete']);
 Route::get('interacoes/getAll/{post_id}/{categoria}', ['uses' => 'InteracaoController@getByCategoria']);
 Route::get('interacaoLeitor/getInteracoesLeitorPost/{post_id}/{leitor_id}', ['uses' => 'InteracaoLeitorController@getInteracoesLeitorPost']);
 Route::post('interacaoLeitor/interage', ['uses' => 'InteracaoLeitorController@interage']);
+Route::post('interacaoLeitor/desfazCompartilhamento', ['uses' => 'InteracaoLeitorController@desfazCompartilhamento']);
 
 Route::post('visualizacoes/create', ['uses' => 'VisualizacaoController@create']);
 

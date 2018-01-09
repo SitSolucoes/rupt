@@ -16,7 +16,14 @@
     <div id="modalCompartilhar" class="modal modal2 modal4"
         materialize="modal" [materializeParams]="[{dismissible: true}]"
         [materializeActions]="modalCompartilhar">
-        <modal-compartilhar></modal-compartilhar>
+        <modal-compartilhar [interacoes]='interacoes' [interacoesLeitor]='interacoesLeitor' (compartilhar)="compartilhar($event)"></modal-compartilhar>
+    </div>
+
+    <div id="modalExcluir" class="modal modal2 modal4" materialize="modal" [materializeParams]="[{dismissible: false}]"
+        [materializeActions]="modalExcluir">
+        <modal-excluir (closeModalExcluir)="closeModalExcluir($event)" 
+            [id]='post.id' [leitor]='leitor' [op]='3' [interacao]='interacao'>
+        </modal-excluir>
     </div>
 
   <div class="area-top">
@@ -70,7 +77,7 @@
 
         <div class="reactions" *ngIf="leitorLogado">
             <div *ngFor='let i of interacoes' class="area2">
-                <div *ngIf='i.categoria == 1' (click)='interagePost(i.id)'>
+                <div *ngIf='i.categoria == 1 && !i.compartilhar' (click)='interagePost(i)'>
                     <img src="../../../assets/{{ i.src_icone }}" class="img"
                         [ngClass]="{'pb': interagiu && !checkInteracao(i.id)}"
                     >
@@ -82,16 +89,14 @@
 
             <div class="area2">
                 <div (click)='openModalCompartilhar()'>
-                    <img src="../../../assets/img/share.png" class="img"
-                        [ngClass]="{'pb': interagiu && !checkInteracao(i.id)}"
-                    >
+                    <img src="../../../assets/img/share.png" class="img">
 
                     <p>Compartilhar</p>
                 </div>
             </div>
         </div> 
 
-        <div *ngIf="!rascunho" class="comentarios">
+        <div class="comentarios">
 
             <p> <b>{{ comentarios?.length}}</b> comentários </p>
 
@@ -129,7 +134,7 @@
                     <div class="reaction">
 
                         <div *ngFor='let i of interacoes' class="area2">
-                            <div *ngIf='i.categoria == 2' (click)='interagePost(i.id)'>
+                            <div *ngIf='i.categoria == 2' (click)='interagePost(i)'>
 
                                 <img src="../../../assets/{{ i.src_icone}}" class="img2">
                                 <div class="number">2</div>

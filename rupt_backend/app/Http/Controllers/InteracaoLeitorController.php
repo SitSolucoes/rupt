@@ -16,19 +16,19 @@ class InteracaoLeitorController extends Controller
         $interacaoLeitor->comentario_idComentario = $request->comentario_idComentario;
         $interacaoLeitor->timeline_idTimeline = $request->timeline_idTimeline;
         $interacaoLeitor->leitor_idLeitor = $request->leitor_idLeitor;
-        $interacaoLeitor->interacao_idInteracao = $request->interacao_idInteracao;
+        $interacaoLeitor->interacao_idInteracao = $request->interacao['id'];
 
         $interacaoLeitor->save();
     }
 
     private function interagePost(Request $request){
         $exist = null;
-        
-        if ($request->interacao_idInteracao != 100){
+
+        if (!$request->interacao['compartilhar']){
             //verifica se essa interação ja existe
             $interacaoLeitor = InteracaoLeitor::where('post_idPost', $request->post_idPost)
                                 ->where('leitor_idLeitor', $request->leitor_idLeitor)
-                                ->where('interacao_idInteracao', $request->interacao_idInteracao)
+                                ->where('interacao_idInteracao', $request->interacao['id'])
                                 ->whereNull('comentario_idComentario')
                                 ->whereNull('timeline_idTimeline')
                                 ->first();
@@ -42,7 +42,7 @@ class InteracaoLeitorController extends Controller
                                 ->whereNull('timeline_idTimeline')
                                 ->delete();
         }
-        else{
+        else if (!$request->interacao['externa']){
             $c = new TimelineController();
             $c->create($request->leitor_idLeitor, $request->post_idPost);
         }
@@ -87,11 +87,11 @@ class InteracaoLeitorController extends Controller
     private function interageTimeline(Request $request){
         $exist = null;
         
-        if ($request->interacao_idInteracao != 100){
+        if (!$request->interacao['compartilhar']){
             //verifica se essa interação ja existe
             $interacaoLeitor = InteracaoLeitor::where('timeline_idTimeline', $request->timeline_idTimeline)
                                 ->where('leitor_idLeitor', $request->leitor_idLeitor)
-                                ->where('interacao_idInteracao', $request->interacao_idInteracao)
+                                ->where('interacao_idInteracao', $request->interacao['id'])
                                 ->first();
 
             if ($interacaoLeitor)
@@ -125,6 +125,7 @@ class InteracaoLeitorController extends Controller
                               ->where('leitor_idLeitor', $leitor_id)
                               ->whereNull('comentario_idComentario')
                               ->whereNull('timeline_idTimeline')
+                              ->with('interacao')
                               ->get();
     }
 
@@ -161,5 +162,18 @@ class InteracaoLeitorController extends Controller
         $interacoesLeitor = $this->getPost($post_id, $leitor_id);
 
         return response()->json(['interacoesLeitor' => $interacoesLeitor], 200);
+    }
+
+    public function desfazCompartilhamento(Request $request){
+        InteracaoLeitor::where('interacao_idInteracao', $request->interacao['id'])
+                       ->where('leitor_idLeitor', $request->leitor_idLeitor)
+                       ->where('post_idPost', $request->post_idPost)
+                       ->delete();
+        $tc = new TimelineController();
+        $id = $tc->getIdTimeline($request->post_idPost, $request->leitor_idLeitor);
+
+        $tc->delete($id);
+
+        return response()->json(['msg' => true], 200);
     }
 }

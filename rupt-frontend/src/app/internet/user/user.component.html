@@ -188,8 +188,8 @@
                     <!--interacoes-->
                     <div class="status">
                         <span *ngFor='let i of t.interacoes'>
-                            <img *ngIf='i.id != 100' src="../../../assets/{{ i.src_icone }}" class="img4"
-                                (click)="interageTimeline(t, i.id)" [ngClass]="{'pb': !checkInteracao(i.id, t.interacoesLeitor)}">
+                            <img *ngIf='!i.compartilhar' src="../../../assets/{{ i.src_icone }}" class="img4"
+                                (click)="interageTimeline(t, i)" [ngClass]="{'pb': !checkInteracao(i.id, t.interacoesLeitor)}">
                         </span>
                         <div class="total">{{ countInteracoes(t.interacoes) }}</div>
                     </div>
@@ -235,8 +235,8 @@
 
                     <div class="status">
                         <span *ngFor='let i of t.interacoes'>
-                            <img *ngIf='i.id != 100' src="../../../assets/{{ i.src_icone }}" class="img4"
-                                (click)="interageTimeline(t, i.id)" [ngClass]="{'pb': !checkInteracao(i.id, t.interacoesLeitor)}">
+                            <img *ngIf='!i.compartilhar' src="../../../assets/{{ i.src_icone }}" class="img4"
+                                (click)="interageTimeline(t, i)" [ngClass]="{'pb': !checkInteracao(i.id, t.interacoesLeitor)}">
                         </span>
                         <div class="total">{{ countInteracoes(t.interacoes) }}</div>
                     </div>

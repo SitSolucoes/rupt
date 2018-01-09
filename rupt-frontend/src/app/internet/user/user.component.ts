@@ -110,7 +110,7 @@ export class UserComponent implements OnInit {
   countInteracoes(interacoes: Interacao[]){
       let soma = 0;
       for (let i = 0; i < interacoes.length; i++){
-        if (interacoes[i].id != 100)
+        if (!interacoes[i].compartilhar)
           soma = soma + interacoes[i].count;
       }
 
@@ -121,13 +121,10 @@ export class UserComponent implements OnInit {
       if (!interacoesLeitor || interacoesLeitor.length == 0)
         return true;
 
-      if (interacoesLeitor.length == 1 && interacoesLeitor[0].id == 100)
-        return true;
-
       let check = false;
 
       for (let i = 0; i < interacoesLeitor.length; i++){
-        if (interacoesLeitor[i].interacao_idInteracao == interacao_id){
+        if (!interacoesLeitor[i].interacao.compartilhar && interacoesLeitor[i].interacao.categoria == 1 && interacoesLeitor[i].interacao_idInteracao == interacao_id){
             check = true;
             break;
         }
@@ -136,11 +133,11 @@ export class UserComponent implements OnInit {
       return check;
   }
 
-  interageTimeline(t: Timeline, interacao_id){
+  interageTimeline(t: Timeline, interacao){
     let interacaoLeitor = new InteracaoLeitor();
     interacaoLeitor.post_idPost = t.post.id;
     interacaoLeitor.leitor_idLeitor = this.leitorLogado.id;
-    interacaoLeitor.interacao_idInteracao = interacao_id;
+    interacaoLeitor.interacao = interacao;
     
     if (t.post.autor_idLeitor != this.leitor.id)
         interacaoLeitor.timeline_idTimeline = t.id;

@@ -26,4 +26,12 @@ export class InteracoesLeitorService {
       )
   }
 
+  desfazCompartilhamento(interacaoLeitor: InteracaoLeitor):Observable<any>{
+      return this._http.post(this._url + 'interacaoLeitor/desfazCompartilhamento', JSON.stringify(interacaoLeitor), {headers: this.headers}).map(
+        (response) => { 
+            return response.json();
+        }
+      )
+  }
+
 }

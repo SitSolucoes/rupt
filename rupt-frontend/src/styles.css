@@ -1213,18 +1213,18 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     width: 100%;
 }
 
-.modal-excluir .container{
+.modal-excluir .container-excluir{
     display: block;
     width: 40%;
     margin: 0 auto;
 }
 
-.modal-excluir .container p{
+.modal-excluir .container-excluir p{
     text-align: center;
     margin-top: 40px;
 }
 
-.modal-excluir .container .button{
+.modal-excluir .container-excluir .button{
     height: auto !important;
     padding: 2px !important;
     display: block;
@@ -1238,20 +1238,20 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     width: 70% !important;
 }
 
-.modal-excluir .container .button:hover{
+.modal-excluir .container-excluir .button:hover{
     background: #fff !important;
     border: 1px solid #F44336;
     color: #F44336;
     transition: 0.5s;
 }
 
-.modal-excluir .container .button2{
+.modal-excluir .container-excluir .button2{
     background-color: #ccc !important;
     border: 1px solid #ccc !important;
     color: #000;
 }
 
-.modal-excluir .container .button2:hover{
+.modal-excluir .container-excluir .button2:hover{
     background-color: #fff !important;
     border: 1px solid #ccc !important;
     color: #4f4f4f;
@@ -2147,10 +2147,10 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .news .container .reactions .area2{
     display: block;
     float: left;
-    margin-left: 15px;
+    margin-left: 15px!important;
     margin-right: 15px;
     position: relative;
-    left: 8%;
+    left:8%!important;
 }
 
 .news .container .reactions .area2 .img{
@@ -3300,13 +3300,21 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     border-radius: 3px;
 }
 
-.generico-modal .social-media2{
+.modal-compartilhar .title{
+    float: none;
+}
+
+.modal-compartilhar .social-media2 .area{
+    display: table-cell;
+    cursor: pointer;
+}
+
+.modal-compartilhar .social-media2{
     display: block;
-    float: left;
     width: 100%;
 }
 
-.generico-modal .social-media2 p{
+.modal-compartilhar .social-media2 p{
     font-size: 18px;
     color: #4f4f4f;
     margin-left: 0%;
@@ -3317,25 +3325,31 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     margin-top: 30px;
 }
 
-.generico-modal .social-media2 .icons{
-    height: 50px;
-    width: 36%;
-    margin-left: 5%;
-    display: block;
-    float: none;
+.modal-compartilhar .social-media2 .area p{
+    font-size: 16px;
+    margin-top: 0px;
+}
+
+.modal-compartilhar .social-media2 .area p.desfazer{
+    font-size: 14px;
+    margin-top: -5px;
+}
+
+.modal-compartilhar .social-media2 .icons{
+    display: table;
     margin: auto;
-    margin-top: 20px;
+    padding: 30px;
 }
 
-.generico-modal .social-media2 .icons .img{
-    height: 60px;
-    margin-left: 8px;
+.modal-compartilhar .social-media2 .icons .img{
+    height: 50px;
+    margin-left: 30px;
+    margin-right: 30px;
 }
 
-.generico-modal .social-media2 .icons .img2{
-    height: 55px;
-    position: relative;
-    bottom: 5px;
+.modal-compartilhar .social-media2 .icons .img:hover{
+    transform: scale(1.2);
+    transition: transform 0.30s;
 }
 
 .generico-modal .text-area{
