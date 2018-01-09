@@ -26,8 +26,8 @@ let providers = {
      "clientId": "LINKEDIN_CLIENT_ID"
    },
    "facebook": {
-     "clientId": "FACEBOOK_CLIENT_ID",
-     "apiVersion": "<version>" //like v2.4 
+     "clientId": "832278863618741",
+     "apiVersion": "v2.11" //like v2.4 
    }
  };
 

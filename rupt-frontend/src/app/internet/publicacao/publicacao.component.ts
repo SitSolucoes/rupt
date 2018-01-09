@@ -145,60 +145,39 @@ export class PublicacaoComponent implements OnInit {
 
   public editor;
   public editorContent = `<h3>I am Example content</h3>`;
-  public editorOptions = { placeholder: "Escreva seu texto aqui...", modules: { 
-      toolbar: [
-        [
-          'bold', 
-          'italic', 
-          'underline', 
-          'strike', 
-          'blockquote', 
-          { 'header': 2 }, 
-          { 'list': 'ordered'}, 
-          { 'list': 'bullet' },
-          { 'indent': '-1'}, 
-          { 'indent': '+1' },
-          { 'direction': 'rtl' },
-          'link'
-        ]
-      ]
+  public editorToolbarOptions = [
+    'bold', 
+    'italic', 
+    'underline', 
+    'strike', 
+    'blockquote', 
+    { 'header': 2 }, 
+    { 'list': 'ordered'}, 
+    { 'list': 'bullet' },
+    { 'indent': '-1'}, 
+    { 'indent': '+1' },
+    { 'direction': 'rtl' },
+    'link'
+  ];
+  public editorOptions = { 
+    placeholder: "Escreva seu texto aqui...",
+    modules: { 
+        toolbar: this.editorToolbarOptions
     }
   };
 
+//////////QUILL EDITOR////////////
   onEditorBlured(quill) {}
+
   onEditorFocused(quill) {}
+
   onContentChanged({ quill, html, text }) {}
+
   onEditorCreated(quill) {
     this.editor = quill;
-    this.editor.options.modules.toolbar.container = {
-      toolbar: [
-        [
-          'bold', 
-          'italic', 
-          'underline', 
-          'strike', 
-          'blockquote', 
-          { 'header': 2 }, 
-          { 'list': 'ordered'}, 
-          { 'list': 'bullet' },
-          { 'indent': '-1'}, 
-          { 'indent': '+1' },
-          { 'direction': 'rtl' },
-          'link'
-        ]
-      ],
-    };
-    let toolbar_novo = this.monta_toolbar(this.editor.theme.modules.toolbar.controls);
-    this.editor.theme.modules.toolbar.controls = toolbar_novo;
-    console.log(this.editor);
-    console.log(this.editor.theme.modules.toolbar.controls);
   }
-  monta_toolbar(old){
-    let ret = [old[0], old[1], old[2], old[3], old[4], old[7], old[8], old[9], old[12], old[13], old[14], old[22]];
-    //add toolbar itens
-    return ret;
-  }
-  
+
+//////////UPLOAD////////
   uploadFiles(post_id){
     let files = new Array();
     let files_name = new Array();
@@ -229,6 +208,7 @@ export class PublicacaoComponent implements OnInit {
           this._router.navigate(['noticia/'+post_id]);
   }
 
+/////////MODAIS/////////
   openModalExcluir(){
     this.modalExcluir.emit({
         action: 'modal',
@@ -261,6 +241,7 @@ export class PublicacaoComponent implements OnInit {
         }
     }
 
+//////////IMAGEM CADASTRO////////
     imgShow(e){
       if(e.target.files && e.target.files[0]){
         let reader = new FileReader();

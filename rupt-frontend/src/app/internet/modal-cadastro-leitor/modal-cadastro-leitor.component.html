@@ -16,15 +16,15 @@
         <p> Cadastre-se utilizando as redes sociais </p>
 
         <div class="img-area">
-            <a href="https://www.facebook.com/rupt.news/?ref=br_rs" target="_blank">
+            <a target="_blank" (click)="signIn('facebook')">
             <img src="../../../assets/img/face2.png" class="img">
             </a>
-            <a href="https://pt.linkedin.com/company/rupt" target="_blank">
+            <a (click)="this.signIn('google')" target="_blank">
             <img src="../../../assets/img/linkedin.png" class="img">
             </a>
-            <a href="https://twitter.com/rupt_news" target="_blank" target="_blank">
+            <!--<a target="_blank" target="_blank">
             <img src="../../../assets/img/twitter2.png" class="img">
-            </a>
+            </a>-->
 
         </div>
 
