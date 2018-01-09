@@ -23,18 +23,27 @@ import { InteracoesLeitorService } from 'app/services/interacoes-leitor.service'
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
+  
+  base64: Base64 = new Base64();
+  calcTime = new CalcTime();
   filtro: string;
   leitor: Leitor;
   leitorLogado: Leitor;
+  post = new Post();
   timeline;//: Timeline[] = new Array;
   timelineFiltro = new Array;
   url = ConnectionFactory.API_IMAGEM;
-  calcTime = new CalcTime();
+
+  idExcluir = 0;
+  
+  interacao: Interacao;
+  interacoes: Interacao[];
+  interacoesLeitor: InteracaoLeitor[];
+  
+  modalCompartilhar = new EventEmitter<string|MaterializeAction>();
   modalDenuncia = new EventEmitter<string|MaterializeAction>();
   modalExcluir = new EventEmitter<string|MaterializeAction>();
-  base64: Base64 = new Base64();
-  post = new Post();
-  timelineId = 0;
+
   private torne_se: boolean = false
   
   constructor(private _activatedRoute: ActivatedRoute,
@@ -121,10 +130,19 @@ export class UserComponent implements OnInit {
       if (!interacoesLeitor || interacoesLeitor.length == 0)
         return true;
 
+      let notCompartilhar = interacoesLeitor.filter((element) => {
+        if (!element.interacao.compartilhar)
+          return true;
+        return false;
+      });
+
+      if (notCompartilhar.length == 0)
+        return true;
+
       let check = false;
 
       for (let i = 0; i < interacoesLeitor.length; i++){
-        if (!interacoesLeitor[i].interacao.compartilhar && interacoesLeitor[i].interacao.categoria == 1 && interacoesLeitor[i].interacao_idInteracao == interacao_id){
+        if (!interacoesLeitor[i].interacao.compartilhar && interacoesLeitor[i].interacao_idInteracao == interacao_id){
             check = true;
             break;
         }
@@ -164,12 +182,58 @@ export class UserComponent implements OnInit {
       else{
         for (let i = 0; i < this.timelineFiltro.length; i++){
           if (this.timelineFiltro[i].id == id){
-              console.log('achou');
               this.timelineFiltro[i].interacoes = interacoes;
               this.timelineFiltro[i].interacoesLeitor = interacoesLeitor;
           }
         }
       }
+  }
+
+  compartilhar(compartilhar){
+    if (compartilhar[1] == true){
+        this.interacao = compartilhar[0];
+        this.idExcluir = this.post.id;
+        this.modalExcluir.emit({action: 'modal',params: ['open']});
+    }
+    else {
+        this.interageCompartilhar(compartilhar[0]);
+    }   
+    
+    this.modalCompartilhar.emit({action: 'modal', params: ['close']});
+  }
+
+  interageCompartilhar(i){
+    let interacaoLeitor = new InteracaoLeitor();
+    interacaoLeitor.post_idPost = this.post.id;
+    interacaoLeitor.leitor_idLeitor = this.leitorLogado.id;
+    interacaoLeitor.interacao = i;
+
+    this._interacoesLeitorService.interage(interacaoLeitor).subscribe(
+      (response) => { 
+          this.refreshInteracao(this.post.id, response.interacoes, response.interacoesLeitor, false);
+       }
+    );
+  }
+
+  openModalCompartilhar(interacoes: Interacao[], interacoesLeitor: InteracaoLeitor[], post: Post){
+    this.post = post;
+    this.interacoes = interacoes;
+    this.interacoesLeitor = interacoesLeitor;
+    this.interacao = null;
+
+    this.modalCompartilhar.emit({action: 'modal', params: ['open']});
+  }
+
+  closeModalCompartilhar(e){
+      if (e)
+        this.modalCompartilhar.emit({action: 'modal', params: ['close']});
+  }
+
+  excluiuCompartilhamento(response){
+    //this.refreshInteracao(this.post.id, response.interacoes, response.interacoesLeitor, false);
+    this.getTimeline();
+
+    this.modalExcluir.emit({action: 'modal', params: ['close']});
   }
 
   openModalDenuncia(p){
@@ -188,11 +252,19 @@ export class UserComponent implements OnInit {
     }
   }
 
-  openModalExcluir(id){
-      this.timelineId = id;
-      this.modalExcluir.emit({
-          action: 'modal',
-          params: ['open']});
+  openModalExcluir(t: Timeline){
+      this.post = t.post;
+
+      let interacoes = t.interacoes.filter((element) => {
+          if (element.compartilhar && !element.externa)
+              return true;
+
+          return false;
+      });
+
+      this.interacao = interacoes[0];
+      this.idExcluir = this.post.id;
+      this.modalExcluir.emit({action: 'modal',params: ['open']});
   }
 
   closeModalExcluir(e){

@@ -169,11 +169,16 @@ class InteracaoLeitorController extends Controller
                        ->where('leitor_idLeitor', $request->leitor_idLeitor)
                        ->where('post_idPost', $request->post_idPost)
                        ->delete();
+        
         $tc = new TimelineController();
         $id = $tc->getIdTimeline($request->post_idPost, $request->leitor_idLeitor);
-
         $tc->delete($id);
 
-        return response()->json(['msg' => true], 200);
+        $c = new InteracaoController();
+        $interacoesCount = $c->getInteracoes($request->post_idPost, 1, false);
+
+        $interacoesLeitor = $this->getPost($request->post_idPost, $request->leitor_idLeitor);
+
+        return response()->json(['interacoes' => $interacoesCount, 'interacoesLeitor' => $interacoesLeitor], 200);
     }
 }
