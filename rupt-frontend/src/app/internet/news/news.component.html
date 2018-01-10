@@ -26,6 +26,17 @@
         </modal-excluir>
     </div>
 
+    <div id="ModalLogin" class="modal modal2"
+        materialize="modal" [materializeParams]="[{dismissible: false}]"
+        [materializeActions]="modalLogin">
+        <modal-login (closeModalLogin)="closeModalLogin($event)" (openEsqueciSenha)="openModalEsqueciSenha($event)"></modal-login>
+    </div>
+    <div id="ModalEsqueciSenha" class="modal modal2"
+        materialize="modal" [materializeParams]="[{dismissible: false}]"
+        [materializeActions]="modalEsqueciSenha">
+        <esqueci-senha (closeModalEsqueciSenha)="closeModalEsqueciSenha($event)"></esqueci-senha>
+    </div>
+
   <div class="area-top">
     
     <div class="tag-menu" *ngIf="!rascunho">
@@ -75,11 +86,29 @@
 
         <div class="reactions" *ngIf="leitorLogado">
             <div *ngFor='let i of interacoes' class="area2">
-                <div *ngIf='i.categoria == 1 && !i.compartilhar' (click)='interagePost(i)'>
+                <div *ngIf='i.categoria == 1 && i.compartilhar == 0' (click)='interagePost(i)'>
                     <img src="../../../assets/{{ i.src_icone }}" class="img"
                         [ngClass]="{'pb': interagiu && !checkInteracao(i.id)}"
                     >
 
+                    <p>{{ i.nome }}</p>
+                    <span class="count">{{ i.count }}</span>
+                </div>
+            </div>
+
+            <div class="area2">
+                <div (click)='openModalCompartilhar()'>
+                    <img src="../../../assets/img/share.png" class="img">
+
+                    <p>Compartilhar</p>
+                    <span class="count">{{ interacoesTotal[1] }}</span>
+                </div>
+            </div>
+        </div> 
+        <div class="reactions" *ngIf="!leitorLogado">
+            <div *ngFor='let i of interacoes' class="area2">
+                <div *ngIf='i.categoria == 1 && !i.compartilhar'>
+                    <img src="../../../assets/{{ i.src_icone }}" class="img disabled">
                     <p>{{ i.nome }}</p>
                     <span class="count">{{ i.count }}</span>
                 </div>

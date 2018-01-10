@@ -2169,6 +2169,18 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     cursor: pointer;
 }
 
+.news .container .reactions .area2 .img.disabled{
+    height: 45px;
+    display: block;
+    margin: 0 auto;
+    cursor: default;
+}
+
+.news .container .reactions .area2 .img.disabled:hover{
+    transform: scale(1);
+    cursor: default;
+}
+
 .news .container .reactions .area2 .img.pb{
     -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
     filter: grayscale(100%);
@@ -2966,22 +2978,22 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     margin-bottom: 10px;
 }
 
-.login-modal .container{
+.login-modal .login-container{
     display: block;
     margin: 0 auto;
     width: 75%;
 }
 
-.login-modal .container .input{
+.login-modal .login-container .input{
     width: 100% !important;
 }
 
-.login-modal .container .error{
+.login-modal .login-container .error{
     padding-top: 10px;
     margin-bottom: 10px;
 }
 
-.login-modal .container .button{
+.login-modal .login-container .button{
     width: 20% !important;
     height: 35px !important;
     border: 1px solid #f97000 !important;
@@ -2996,7 +3008,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     float: right;
 }
 
-.login-modal .container .img{
+.login-modal .login-container .img{
     height: 25px;
     position: absolute;
     left: 81%;

@@ -10,7 +10,7 @@
         <div class="icons">
 
             <div *ngFor='let i of interacoes' class="area">
-                <div *ngIf='i.categoria == 1 && i.compartilhar' (click)='interage(i)'>
+                <div *ngIf='i.categoria == 1 && i.compartilhar == 1' (click)='interage(i)'>
                     <img src="../../../assets/{{ i.src_icone }}" class="img">
                     <p>{{ i.nome }}</p>
 

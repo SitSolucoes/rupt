@@ -51,6 +51,8 @@ export class NewsComponent implements OnInit {
   modalDenuncia = new EventEmitter<string|MaterializeAction>();
   modalExcluir = new EventEmitter<string|MaterializeAction>();
   modalLoading = new EventEmitter<string|MaterializeAction>();
+  modalLogin = new EventEmitter<string|MaterializeAction>();
+  modalEsqueciSenha = new EventEmitter<string|MaterializeAction>();
   
   constructor( private _activatedRoute: ActivatedRoute, 
                private _postService: PostsService,
@@ -233,7 +235,10 @@ export class NewsComponent implements OnInit {
           this.openModalExcluir();
       }
       else {
-          this.interagePost(compartilhar[0]);
+          if (this.leitorLogado)
+              this.interagePost(compartilhar[0]);
+          else 
+              this.openModalLogin();
       }   
       
       this.modalCompartilhar.emit({action: 'modal', params: ['close']});
@@ -297,6 +302,22 @@ export class NewsComponent implements OnInit {
         params:['close']
       });
     }
+  }
+
+  openModalLogin() {
+    this.modalLogin.emit({
+        action: 'modal',
+        params: ['open']});
+  }
+
+  openModalEsqueciSenha(e){
+    if(e){
+      this.modalLogin.emit({action:"modal",params:['close']});
+    }
+    this.modalEsqueciSenha.emit({
+      action: 'modal',
+      params: ['open']
+    });
   }
 
   pronto(){
