@@ -249,6 +249,16 @@ export class NewsComponent implements OnInit {
         this.modalCompartilhar.emit({action: 'modal', params: ['close']});
   }
 
+  excluiuCompartilhamento(response){
+    this.interacoes = response.interacoes;
+    this.interacoesLeitor = response.interacoesLeitor;
+
+    this.verifyInteragiuPost();
+    this.countInteracao();
+
+    this.modalExcluir.emit({action: 'modal', params: ['close']});
+  }
+
   openModalDenuncia() {
     this.modalDenuncia.emit({
          action: 'modal',

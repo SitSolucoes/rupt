@@ -21,7 +21,7 @@
 
     <div id="modalExcluir" class="modal modal2 modal4" materialize="modal" [materializeParams]="[{dismissible: false}]"
         [materializeActions]="modalExcluir">
-        <modal-excluir (closeModalExcluir)="closeModalExcluir($event)" 
+        <modal-excluir (closeModalExcluir)="closeModalExcluir($event)" (excluiuCompartilhamento)='excluiuCompartilhamento($event)'
             [id]='post.id' [leitor]='leitor' [op]='3' [interacao]='interacao'>
         </modal-excluir>
     </div>
@@ -32,8 +32,6 @@
       
         <div class="tag red"> {{ post.categorias_post[post.categorias_post.length-1].categoria.categoria }} </div> 
       
-        <!--  <div class="tag black2"> Racismo </div>-->
-
     </div>  
 
     <div class="title"> {{ post.titulo }}</div>
@@ -92,6 +90,7 @@
                     <img src="../../../assets/img/share.png" class="img">
 
                     <p>Compartilhar</p>
+                    <span class="count">{{ interacoesTotal[1] }}</span>
                 </div>
             </div>
         </div> 

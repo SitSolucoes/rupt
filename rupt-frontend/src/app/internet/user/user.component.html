@@ -3,13 +3,20 @@
     [materializeActions]="modalDenuncia">
     <modal-generico [action]="'denuncia'" [idObj]="post.id" (closeModalGenerico)="closeModalDenuncia($event)"></modal-generico>
 </div>
-<div id="modalExcluir" class="modal modal2 modal4"
-     materialize="modal" [materializeParams]="[{dismissible: false}]"
+
+<div id="modalExcluir" class="modal modal2 modal4" materialize="modal" [materializeParams]="[{dismissible: false}]"
      [materializeActions]="modalExcluir">
-    <modal-excluir (closeModalExcluir)="closeModalExcluir($event)" 
-        [id]='timelineId' [leitor]='leitorLogado' [op]='2'>
+    <modal-excluir (closeModalExcluir)="closeModalExcluir($event)" (excluiuCompartilhamento)='excluiuCompartilhamento($event)'
+        [id]='idExcluir' [leitor]='leitorLogado' [op]='2' [interacao]='interacao'>
     </modal-excluir>
 </div>
+
+<div id="modalCompartilhar" class="modal modal2 modal4"
+    materialize="modal" [materializeParams]="[{dismissible: true}]"
+    [materializeActions]="modalCompartilhar">
+    <modal-compartilhar [interacoes]='interacoes' [interacoesLeitor]='interacoesLeitor' (compartilhar)="compartilhar($event)"></modal-compartilhar>
+</div>
+
 <div class="user user-patrocinador">
     <img src="{{ url + 'profile/' + leitor.src_capa }}" class="img-pat" *ngIf='leitor?.escritor?.patrocinador'>
 
@@ -146,7 +153,7 @@
                         <ul id='dropdown' class='dropdown-content' style="top: 60px !important;">
                             <!-- Caso user seja escritor <li><a routerLink="cadastro-escritor">Editar Perfil</a></li>-->
                             <li>
-                                <a href="">Compartilhar</a>
+                                <a (click)='openModalCompartilhar(t.interacoes, t.interacoesLeitor, t.post)'>Compartilhar</a>
                             </li>
                             <li class="divider"></li>
                             <li>
@@ -157,7 +164,7 @@
 
                     <!-- propria tl mas post compartilhado -->
                     <a class='dropdown-button btn' *ngIf="t.post.autor.id != leitorLogado.id && t.leitor_idLeitor == leitorLogado.id">
-                        <img src="../../../assets/img/x.png" (click)="openModalExcluir(t.id)" class="img img5 img6">
+                        <img src="../../../assets/img/x.png" (click)="openModalExcluir(t)" class="img img5 img6">
                     </a>
                     
                     <!-- tl dele com post próprio -->

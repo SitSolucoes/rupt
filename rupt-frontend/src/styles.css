@@ -56,6 +56,10 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
   background: #fff;
 }
 
+.dropdown-content li > a, .dropdown-content li > span{
+    color: #000;
+}
+
 .button:hover{
     opacity: .9;
 }
@@ -1630,7 +1634,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     margin-left: -40px;
 }
 
-.user .feed .post .text2 .dropdown-content li{
+.user .feed .post .text .dropdown-content li{
     min-height: 0px !important;
 }
 
