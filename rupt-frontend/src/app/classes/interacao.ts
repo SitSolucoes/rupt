@@ -5,6 +5,7 @@ export class Interacao {
     peso: number;
     categoria: number;
     count: number;
+    
     compartilhar: boolean;
     externa: boolean;
 }

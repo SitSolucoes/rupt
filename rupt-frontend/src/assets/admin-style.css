@@ -581,6 +581,7 @@ span.badge.new:after {
 	height: 180px;
 	padding: 0px;
 	text-align: center;
+	position: unset;
 }
 
 .card .card-content .material-icons{

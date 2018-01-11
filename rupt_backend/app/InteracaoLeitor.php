@@ -9,6 +9,6 @@ class InteracaoLeitor extends Model
     protected $table = 'interacao_leitores';
 
     public function interacao(){
-        return $this->hasOne('App\interacao', 'id', 'interacao_idInteracao');
+        return $this->hasOne('App\Interacao', 'id', 'interacao_idInteracao');
     }
 }

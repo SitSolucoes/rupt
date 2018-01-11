@@ -132,13 +132,15 @@ export class CadastroLeitorComponent implements OnInit {
           }
         );
       }
-      else
+      else {
+          this.emailInvalido = false;
+          this.emailEl.nativeElement.focus(); 
+      }
+    }
+    else{
         this.emailInvalido = false;
         this.emailEl.nativeElement.focus(); 
     }
-    else
-        this.emailInvalido = false;
-        this.emailEl.nativeElement.focus(); 
   }
 
   imgShow(e, target){

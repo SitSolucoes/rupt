@@ -54,11 +54,11 @@
             </div>
             <div class="menu">
                     <div class="row menu-radio">
-                            <input name="sexo" type="radio" id="f" value="F" [checked]="form.get('sexo').value == 'F'"/>
+                            <input name="sexo" type="radio" id="f" value="m" [checked]="form.get('sexo').value == 'F'"/>
                             <label for="f" (click)="selectSexo('F')">Feminino</label>
-                            <input name="sexo" type="radio" id="m" value="M" [checked]="form.get('sexo').value == 'M'"/>
+                            <input name="sexo" type="radio" id="m" value="f" [checked]="form.get('sexo').value == 'M'"/>
                             <label for="m" (click)="selectSexo('M')">Masculino</label>
-                            <input name="sexo" type="radio" id="o" value="O" [checked]="form.get('sexo').value == 'O'"/>
+                            <input name="sexo" type="radio" id="o" value="o" [checked]="form.get('sexo').value == 'O'"/>
                             <label for="o" (click)="selectSexo('O')">Outro</label>
                     </div>
             </div>

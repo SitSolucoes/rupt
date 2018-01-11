@@ -2,7 +2,7 @@
   <div id="modal" class="modal" style="display:block">
     <div class="modal-content">
       <h4>Login</h4>
-      <form class="col s12" #f="ngForm" (ngSubmit)="login(f)">
+      <form class="col s12" #f="ngForm" (ngSubmit)="login(f)" autocomplete="OFF">
         <div class="row">
           <div class="input-field col s12">
             <input id="email" type="email" name="email" 

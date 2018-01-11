@@ -12,7 +12,7 @@
         </div>
         <div *ngIf="!enviado">
             <div class="login-modal">
-                <div class="container">
+                <div class="login-container">
                     <!--<input type="text" class="input" maxlength="30" name="marca" readonly placeholder="joao@hotmail.com">-->
                     <form [formGroup]="formulario" *ngIf="!spinner" (ngSubmit)="onSubmit()">
                         <input type="text" class="input" maxlength="30" formControlName="email" name="marca" placeholder="e-mail">
@@ -20,8 +20,6 @@
                         <input type="text" class="input" maxlength="30" formControlName="confirma" name="marca" placeholder="confirmar e-mail">
 
                         <button type="submit" class="button"> Enviar </button>
-
-                        <button type="button" (click)="voltar()" class="button button2"> Voltar </button>
                     </form>    
                     
                     <div class="spinner" *ngIf="spinner">

@@ -59,6 +59,8 @@
                             <option *ngFor="let option of selectOptions" [value]="option.value">{{option.name}}</option>
                         </select>
                         <label for="sexo">Sexo*</label>
+
+                        {{ leitor.sexo }}
                     </div>
                 </div>
                 <div class="row" *ngIf="leitor.id == 0">

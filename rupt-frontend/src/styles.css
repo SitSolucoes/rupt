@@ -74,6 +74,10 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     margin-top: -15px;
 }
 
+.cursor-pointer{
+    cursor: pointer;
+}
+
 [type="radio"]:not(:checked), [type="radio"]:checked{
   opacity: 1.0;
   position: relative;
@@ -1766,12 +1770,12 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .user .feed .post .status .img4{
-  display: block;
-  float: left;
-  height: 43px;
-  position: relative;
-  bottom: 3px;
-  margin-right: -6px;
+    display: block;
+    float: left;
+    height: 43px;
+    position: relative;
+    bottom: 3px;
+    margin-right: -6px;
 }
 
 .user .feed .post .status .img4.pb{

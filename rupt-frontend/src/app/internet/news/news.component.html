@@ -22,7 +22,7 @@
     <div id="modalExcluir" class="modal modal2 modal4" materialize="modal" [materializeParams]="[{dismissible: false}]"
         [materializeActions]="modalExcluir">
         <modal-excluir (closeModalExcluir)="closeModalExcluir($event)" (excluiuCompartilhamento)='excluiuCompartilhamento($event)'
-            [id]='post.id' [leitor]='leitor' [op]='3' [interacao]='interacao'>
+            [id]='post.id' [leitor]='leitor' [op]='2' [interacao]='interacao'>
         </modal-excluir>
     </div>
 
@@ -72,8 +72,7 @@
             <p> {{ interacoesTotal[1] }} </p>
             <img src="../../../assets/img/share2.png" class="img">
 
-            <img src="../../../assets/img/report.png" class="img report" (click)="openModalDenuncia()" alt='Denunciar'>
-
+            <img  title='Denunciar' *ngIf='leitor.id != post.autor.id' src="../../../assets/img/report.png" class="img report" (click)="openModalDenuncia()">
         </div>
 
     </div>
@@ -86,13 +85,14 @@
 
         <div class="reactions" *ngIf="leitorLogado">
             <div *ngFor='let i of interacoes' class="area2">
-                <div *ngIf='i.categoria == 1 && i.compartilhar == 0' (click)='interagePost(i)'>
+                <div *ngIf='i.categoria == 1 && i.compartilhar == false' (click)='interagePost(i)'>
                     <img src="../../../assets/{{ i.src_icone }}" class="img"
                         [ngClass]="{'pb': interagiu && !checkInteracao(i.id)}"
                     >
 
                     <p>{{ i.nome }}</p>
                     <span class="count">{{ i.count }}</span>
+
                 </div>
             </div>
 
@@ -107,7 +107,7 @@
         </div> 
         <div class="reactions" *ngIf="!leitorLogado">
             <div *ngFor='let i of interacoes' class="area2">
-                <div *ngIf='i.categoria == 1 && !i.compartilhar'>
+                <div *ngIf='i.categoria == 1 && i.compartilhar == false'>
                     <img src="../../../assets/{{ i.src_icone }}" class="img disabled">
                     <p>{{ i.nome }}</p>
                     <span class="count">{{ i.count }}</span>

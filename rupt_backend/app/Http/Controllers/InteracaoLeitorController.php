@@ -132,6 +132,7 @@ class InteracaoLeitorController extends Controller
     public function getTimeline($timeline_id, $leitor_id){
         return InteracaoLeitor::where('timeline_idTimeline', $timeline_id)
                               ->where('leitor_idLeitor', $leitor_id)
+                              ->with('interacao')
                               ->get();
     }
 

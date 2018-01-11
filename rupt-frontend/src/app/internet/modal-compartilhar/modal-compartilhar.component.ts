@@ -23,7 +23,7 @@ export class ModalCompartilharComponent implements OnInit {
   }
 
   verifyInteragiu(i: Interacao){
-      if (i.externa || !this.interacoesLeitor || this.interacoesLeitor.length == 0)
+      if (i.externa == true || !this.interacoesLeitor || this.interacoesLeitor.length == 0)
         return false;
       
       let interacao = this.interacoesLeitor.filter((element) =>{

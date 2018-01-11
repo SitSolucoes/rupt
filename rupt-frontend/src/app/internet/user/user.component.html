@@ -85,7 +85,7 @@
 
             <a routerLink="../../cadastro-escritor" 
                 *ngIf="leitor.id == leitorLogado.id && (!leitor.escritor || leitor.escritor.status == 'r')"> 
-                    <div class="button" [class.destacado]="torne_se"> Tornar-se escritor </div>
+                    <div class="button"> Tornar-se escritor </div>
             </a>
 
             <a routerLink="../../publicacao" *ngIf="leitor.id == leitorLogado.id && leitor.escritor && leitor.escritor.status != 'r'">
@@ -195,14 +195,14 @@
                     <!--interacoes-->
                     <div class="status" *ngIf='leitorLogado.id'>
                         <span *ngFor='let i of t.interacoes'>
-                            <img *ngIf='i.compartilhar == 0' src="../../../assets/{{ i.src_icone }}" class="img4"
+                            <img *ngIf='i.compartilhar == false' src="../../../assets/{{ i.src_icone }}" class="img4 cursor-pointer"
                                 (click)="interageTimeline(t, i)" [ngClass]="{'pb': !checkInteracao(i.id, t.interacoesLeitor)}">
                         </span>
                         <div class="total">{{ countInteracoes(t.interacoes) }}</div>
                     </div>
                     <div class="status" *ngIf='!leitorLogado.id'>
                         <span *ngFor='let i of t.interacoes'>
-                            <img *ngIf='i.compartilhar == 0' src="../../../assets/{{ i.src_icone }}" class="img4">
+                            <img *ngIf='i.compartilhar == false' src="../../../assets/{{ i.src_icone }}" class="img4">
                         </span>
                         <div class="total">{{ countInteracoes(t.interacoes) }}</div>
                     </div>
@@ -246,10 +246,16 @@
                         </a>
                     </div>
 
-                    <div class="status">
+                    <div class="status" *ngIf='leitorLogado.id'>
                         <span *ngFor='let i of t.interacoes'>
-                            <img *ngIf='!i.compartilhar' src="../../../assets/{{ i.src_icone }}" class="img4"
+                            <img *ngIf='i.compartilhar == false' src="../../../assets/{{ i.src_icone }}" class="img4 cursor-pointer"
                                 (click)="interageTimeline(t, i)" [ngClass]="{'pb': !checkInteracao(i.id, t.interacoesLeitor)}">
+                        </span>
+                        <div class="total">{{ countInteracoes(t.interacoes) }}</div>
+                    </div>
+                    <div class="status" *ngIf='!leitorLogado.id'>
+                        <span *ngFor='let i of t.interacoes'>
+                            <img *ngIf='i.compartilhar == false' src="../../../assets/{{ i.src_icone }}" class="img4">
                         </span>
                         <div class="total">{{ countInteracoes(t.interacoes) }}</div>
                     </div>

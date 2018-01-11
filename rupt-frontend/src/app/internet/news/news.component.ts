@@ -65,6 +65,8 @@ export class NewsComponent implements OnInit {
                private _interacoesLeitorService: InteracoesLeitorService) {}
 
   ngOnInit() {
+    window.scrollTo( 0, 0);
+
     setTimeout(()=>{
       this.openModalLoading();
     }, 15);
@@ -177,7 +179,7 @@ export class NewsComponent implements OnInit {
       else {
           let interagiu: boolean = false;
           for (let i = 0; i < this.interacoesLeitor.length; i++){
-              if (!this.interacoesLeitor[i].interacao.compartilhar)  
+              if (this.interacoesLeitor[i].interacao.compartilhar == false)  
                   interagiu = true;
           }
 
@@ -205,10 +207,10 @@ export class NewsComponent implements OnInit {
       this.interacoesTotal = [0,0];
 
       for (let i = 0; i < this.interacoes.length; i++){
-        if(this.interacoes[i].compartilhar && !this.interacoes[i].externa)
+        if(this.interacoes[i].compartilhar == true && this.interacoes[i].externa == false)
           this.interacoesTotal[1] = this.interacoes[i].count;
         else 
-        this.interacoesTotal[0] = this.interacoesTotal[0] + this.interacoes[i].count;
+          this.interacoesTotal[0] = this.interacoesTotal[0] + this.interacoes[i].count;
       }
   }
 

@@ -44,8 +44,6 @@ export class UserComponent implements OnInit {
   modalDenuncia = new EventEmitter<string|MaterializeAction>();
   modalExcluir = new EventEmitter<string|MaterializeAction>();
 
-  private torne_se: boolean = false
-  
   constructor(private _activatedRoute: ActivatedRoute,
               private _leitorService: LeitoresService, 
               private _timelineService: TimelineService,
@@ -65,11 +63,7 @@ export class UserComponent implements OnInit {
             this.leitor = leitor;
           }
         );
-        if(params['torne-se-um-escritor']){
-          this.torne_se = true;
-        }else
-          this.torne_se = false;
-
+        
         this._leitorService.leitor.subscribe(
             (leitor: Leitor) => { this.leitorLogado = leitor }
           );
@@ -119,7 +113,7 @@ export class UserComponent implements OnInit {
   countInteracoes(interacoes: Interacao[]){
       let soma = 0;
       for (let i = 0; i < interacoes.length; i++){
-        if (!interacoes[i].compartilhar)
+        if (interacoes[i].compartilhar == false)
           soma = soma + interacoes[i].count;
       }
 
@@ -131,7 +125,7 @@ export class UserComponent implements OnInit {
         return true;
 
       let notCompartilhar = interacoesLeitor.filter((element) => {
-        if (!element.interacao.compartilhar)
+        if (element.interacao.compartilhar == false)
           return true;
         return false;
       });
@@ -142,7 +136,7 @@ export class UserComponent implements OnInit {
       let check = false;
 
       for (let i = 0; i < interacoesLeitor.length; i++){
-        if (!interacoesLeitor[i].interacao.compartilhar && interacoesLeitor[i].interacao_idInteracao == interacao_id){
+        if (interacoesLeitor[i].interacao.compartilhar == false && interacoesLeitor[i].interacao_idInteracao == interacao_id){
             check = true;
             break;
         }
@@ -170,22 +164,32 @@ export class UserComponent implements OnInit {
     );
   }
 
+  private refreshInteracaoPost(id, interacoes, interacoesLeitor, timeline){
+    for (let i = 0; i < timeline.length; i++){
+      if (timeline[i].post.id == id){
+          timeline[i].interacoes = interacoes;
+          timeline[i].interacoesLeitor = interacoesLeitor;
+      }
+    }
+  }
+
+  private refreshInteracaoTimeline(id, interacoes, interacoesLeitor, timeline){
+    for (let i = 0; i < timeline.length; i++){
+      if (timeline[i].id == id){
+          timeline[i].interacoes = interacoes;
+          timeline[i].interacoesLeitor = interacoesLeitor;
+      }
+    }
+  }
+
   refreshInteracao(id, interacoes: Interacao[], interacoesLeitor: InteracaoLeitor[], timeline:boolean){
       if (timeline == false){
-        for (let i = 0; i < this.timelineFiltro.length; i++){
-          if (this.timelineFiltro[i].post.id == id){
-              this.timelineFiltro[i].interacoes = interacoes;
-              this.timelineFiltro[i].interacoesLeitor = interacoesLeitor;
-          }
-        }
+          this.refreshInteracaoPost(id, interacoes, interacoesLeitor, this.timelineFiltro);
+          this.refreshInteracaoPost(id, interacoes, interacoesLeitor, this.timeline);
       }
       else{
-        for (let i = 0; i < this.timelineFiltro.length; i++){
-          if (this.timelineFiltro[i].id == id){
-              this.timelineFiltro[i].interacoes = interacoes;
-              this.timelineFiltro[i].interacoesLeitor = interacoesLeitor;
-          }
-        }
+          this.refreshInteracaoTimeline(id, interacoes, interacoesLeitor, this.timelineFiltro);
+          this.refreshInteracaoTimeline(id, interacoes, interacoesLeitor, this.timeline);
       }
   }
 
@@ -256,7 +260,7 @@ export class UserComponent implements OnInit {
       this.post = t.post;
 
       let interacoes = t.interacoes.filter((element) => {
-          if (element.compartilhar && !element.externa)
+          if (element.compartilhar == true && element.externa == false)
               return true;
 
           return false;
