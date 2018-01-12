@@ -72,7 +72,10 @@
             <p> {{ interacoesTotal[1] }} </p>
             <img src="../../../assets/img/share2.png" class="img">
 
-            <img  title='Denunciar' *ngIf='leitor.id != post.autor.id' src="../../../assets/img/report.png" class="img report" (click)="openModalDenuncia()">
+            <img  title='Denunciar' *ngIf='leitor && leitor.id != post.autor.id' src="../../../assets/img/report.png" class="img report" (click)="openModalDenuncia()">
+            <a routerLink='../../publicacao/{{ post.id }}' *ngIf='leitor && leitor.id == post.autor.id'>
+                <i class="fa fa-pencil-square-o edit" aria-hidden="true" title='Editar'></i>
+            </a>
         </div>
 
     </div>

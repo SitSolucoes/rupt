@@ -164,12 +164,12 @@
 
                     <!-- propria tl mas post compartilhado -->
                     <a class='dropdown-button btn' *ngIf="t.post.autor.id != leitorLogado.id && t.leitor_idLeitor == leitorLogado.id">
-                        <img src="../../../assets/img/x.png" (click)="openModalExcluir(t)" class="img img5 img6">
+                        <img src="../../../assets/img/x.png" (click)="openModalExcluir(t)" class="img img5 img6" title='Excluir'>
                     </a>
                     
                     <!-- tl dele com post próprio -->
                     <a routerLink='../../publicacao/{{ t.post.id }}' *ngIf="t.post.autor.id == leitorLogado.id">
-                        <i class="fa fa-pencil-square-o img img5" aria-hidden="true"></i>
+                        <i class="fa fa-pencil-square-o img img5" aria-hidden="true" title='Editar'></i>
                     </a>
 
                     <font class="title title2">

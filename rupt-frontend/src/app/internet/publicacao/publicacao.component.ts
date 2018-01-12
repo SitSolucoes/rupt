@@ -46,6 +46,8 @@ export class PublicacaoComponent implements OnInit {
               ) { }
 
   ngOnInit() {
+      window.scrollTo( 0, 0);
+
       this.createForm();
       this.getCategorias();
 
@@ -157,7 +159,8 @@ export class PublicacaoComponent implements OnInit {
     { 'indent': '-1'}, 
     { 'indent': '+1' },
     { 'direction': 'rtl' },
-    'link'
+    'link',
+    'image',
   ];
   public editorOptions = { 
     placeholder: "Escreva seu texto aqui...",

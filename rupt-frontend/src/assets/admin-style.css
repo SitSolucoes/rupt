@@ -638,6 +638,7 @@ span.badge.new:after {
 	min-height: 100%;
 	position: fixed;
 	background-color: rgba(0,0,0,.8);
+	z-index: 1000;
 }
 
 .content-login .row::after{

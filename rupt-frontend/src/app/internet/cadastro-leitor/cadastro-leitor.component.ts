@@ -71,7 +71,7 @@ export class CadastroLeitorComponent implements OnInit {
       id: '0',
       nome: ['', [Validators.required, Validators.minLength(3)]],
       nick: ['', [Validators.required, Validators.minLength(3)]],
-      sexo: ['F', Validators.required],
+      sexo: ['m', Validators.required],
       nascimento: ['', [Validators.required, Validators.minLength(10)]],
       src_foto: [''],
       email: ['', [Validators.required, Validators.email]],

@@ -2021,7 +2021,6 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
   font-family: 'gilroy-bold';
   text-align: center;
   letter-spacing: -2px;
-  text-transform: capitalize;
 }
 
 .news .container{
@@ -2100,6 +2099,16 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
   margin-right: 15px;
   display: block;
   float: left;
+}
+
+.news .container .area .social .edit{
+    height: 18px;
+    margin-left: 5px;
+    border-radius: 0px;
+    display: block;
+    float: right;
+    font-size: 22px;
+    color: #f97000;
 }
 
 .news .container .frame{

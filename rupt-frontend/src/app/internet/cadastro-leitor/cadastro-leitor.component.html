@@ -55,11 +55,11 @@
             <div class="menu">
                     <div class="row menu-radio">
                             <input name="sexo" type="radio" id="f" value="m" [checked]="form.get('sexo').value == 'F'"/>
-                            <label for="f" (click)="selectSexo('F')">Feminino</label>
+                            <label for="f" (click)="selectSexo('f')">Feminino</label>
                             <input name="sexo" type="radio" id="m" value="f" [checked]="form.get('sexo').value == 'M'"/>
-                            <label for="m" (click)="selectSexo('M')">Masculino</label>
+                            <label for="m" (click)="selectSexo('m')">Masculino</label>
                             <input name="sexo" type="radio" id="o" value="o" [checked]="form.get('sexo').value == 'O'"/>
-                            <label for="o" (click)="selectSexo('O')">Outro</label>
+                            <label for="o" (click)="selectSexo('o')">Outro</label>
                     </div>
             </div>
             <div class="menu ">
