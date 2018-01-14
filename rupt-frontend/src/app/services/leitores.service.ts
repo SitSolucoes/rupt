@@ -38,6 +38,15 @@ export class LeitoresService {
     });
   } 
 
+  checkFBToken(token, uid){
+    return this._http.get(this._url + 'checkFbToken/' + token + '/' + uid)
+      .map(
+        (response: Response) => {
+          return response.json().leitor;
+        }
+      );
+  }
+
   validaToken(token){
     return this._http.get(this._url + 'leitor/validaToken/'+token).map(
       (response)=> {
@@ -127,22 +136,21 @@ export class LeitoresService {
 
   doLogin(form){
     const body = JSON.stringify(form.value);
-
-    return this._http.put(this._url + 'leitor/signin', body, {headers: this.headers}).map(
-      (response: Response) => { 
-        if (response.json().login == true){
-          localStorage.setItem('l', this.base64.encode(response.json().leitor.id));
-          localStorage.setItem('token', response.json().token);
-
-          this.leitor.emit(response.json().leitor);
-          
-          return [true, response.json().leitor];
+      return this._http.put(this._url + 'leitor/signin', body, {headers: this.headers}).map(
+        (response: Response) => { 
+          if (response.json().login == true){
+            localStorage.setItem('l', this.base64.encode(response.json().leitor.id));
+            localStorage.setItem('token', response.json().token);
+  
+            this.leitor.emit(response.json().leitor);
+            
+            return [true, response.json().leitor];
+          }
+          else {
+            return [false, response.json().login];
+          }
         }
-        else {
-          return [false, response.json().login];
-        }
-      }
-    )
+      );
   }
 
   logout(){

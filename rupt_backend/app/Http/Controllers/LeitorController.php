@@ -19,8 +19,43 @@ class LeitorController extends Controller
         $leitor->sexo = $request->input('sexo');
         $leitor->biografia = $request->biografia;
         $leitor->ativo = $request->input('ativo');
+        if($request->input('fb_login') == true){
+            $aux_nick_nr = Leitor::where('nick', $leitor->nome)->count();
+            if($aux_nick_nr != null && $aux_nick_nr > 0){
+                $leitor->nick .= $aux_nick_nr;
+            }else{
+                $leitor->nick .= $aux_nick_nr;   
+            }
+            $leitor->token_fb = $request->input('token');
+            $leitor->uid_fb = $request->input('fb_uid');
+            $leitor->src_foto = $request->input('src_foto');
+        }
 
         return $leitor;
+    }
+
+    public function checkFbToken($token, $uid){
+        
+        
+        $retorno = (object)[
+            'resultado' => false,
+            'leitor' => null
+        ];
+        
+        if(!$token || $token == null){
+            return response()->json($retorno, 200);
+        }
+
+        $leitor = Leitor::where('token_fb', $token)->orWhere('uid', $uid)->get()->first();
+        
+        if($leitor != null){
+            $retorno['leitor'] = $leitor;
+            $retorno['resultado'] = true;
+        }
+        
+        return response()->json($retorno, 200);        
+        
+        
     }
 
     private function getById($id){
@@ -31,6 +66,11 @@ class LeitorController extends Controller
     public function create($request){
         $leitor = new Leitor(); 
         $leitor = $this->createLeitor($request, $leitor);
+
+        if($request->input('fb_login') != null && $request->input('fb_login') == true){
+            return $leitor->id;
+        }
+
         $leitor->password = Hash::make($request->input('password'));
         $leitor->src_foto = 'default.png';
         $leitor->src_capa = 'capa.png';

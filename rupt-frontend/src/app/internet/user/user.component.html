@@ -40,7 +40,7 @@
         </div>
 
         <div class=" bio" [ngClass]="{'bio2' : leitor?.escritor?.patrocinador}">
-            <div class="profile"> <img src="{{ url + 'profile/' + leitor.src_foto }}" class="img"> </div>
+            <div class="profile"> <img src="{{ leitor.src_foto.indexOf('http') > 0 ? leitor.src_foto : url + 'profile/' + leitor.src_foto }}" class="img"> </div>
 
             <div class="info">
 
@@ -130,7 +130,7 @@
 
                 <a routerLink='../{{ leitor.nick }}'>
                     <div class="img-area">
-                        <img src="{{ url + 'profile/' + leitor.src_foto }}"  class="img">
+                        <img src="{{ leitor.src_foto.indexOf('http') > 0 ? leitor.src_foto : url + 'profile/' + leitor.src_foto }}"  class="img">
                     </div>
                 </a>
 

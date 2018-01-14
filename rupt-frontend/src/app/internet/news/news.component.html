@@ -135,7 +135,7 @@
 
             <div class="profile" *ngIf="leitorLogado">
                 <div class="img-area">  
-                    <img src="{{  url + 'profile/' + leitor?.src_foto }}" class="img"> 
+                    <img src="{{ leitor?.src_foto.indexOf('http') > 0 ? leitor?.src_foto : url + 'profile/' + leitor?.src_foto }} }}" class="img"> 
                 </div>
                 <form [formGroup]="form" (ngSubmit)="onSubmit()">
                     <input type="text" class="input" maxlength="140" name="comentario" formControlName="comentario" placeholder="Escreva um comentário..." >
@@ -149,7 +149,8 @@
                 
                 <a routerLink='/perfil/{{ c?.comentario?.leitor?.nick }}'>
                     <div class="img-area">  
-                        <img src="{{url + 'profile/' + c?.comentario?.leitor?.src_foto}}" class="img"> 
+                            
+                        <img src="{{ c?.comentario?.leitor?.src_foto.indexOf('http') > 0 ? c?.comentario?.leitor?.src_foto : url + 'profile/' + c?.comentario?.leitor?.src_foto }}" class="img"> 
                     </div>
                 </a>
 

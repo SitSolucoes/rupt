@@ -27,7 +27,7 @@
                         <div class="text"> {{ p.post.subtitulo }}...</div>
                         <div class="info-post">
                             <div class="img-person">
-                                <img src="{{ url + 'profile/' + p.escritor.src_foto }}" class="img">
+                                <img src="{{ p.escritor.src_foto.indexOf('http') > 0 ? p.escritor.src_foto : url + 'profile/' + p.escritor.src_foto }}" class="img">
                             </div>
                             <p> {{ p.escritor.nick}}</p>
                             <div class="area-post">
@@ -45,7 +45,7 @@
                             <div class="text"> {{ p.post.subtitulo }}...</div>
                             <div class="info-post">
                                 <div class="img-person">
-                                    <img src="{{ p.escritor.src_foto }}" class="img">
+                                    <img src="{{ p.escritor.src_foto.indexOf('http') > 0 ? p.escritor.src_foto : url + 'profile/' + p.escritor.src_foto }}" class="img">
                                 </div>
                                 <p> Marcela Prado </p>
                                 <div class="area-post">
@@ -74,7 +74,7 @@
                             </div>
                             <div class="info-post info-post2 info-post3">
                                 <div class="img-person">
-                                    <img src="{{ p.escritor.src_foto }}" class="img">
+                                    <img src="{{ p.escritor.src_foto.indexOf('http') > 0 ? p.escritor.src_foto : url + 'profile/' + p.escritor.src_foto }}" class="img">
                                 </div>
                                 <p> {{ p.escritor.nick }} </p>
                                 <div class="area-post">
