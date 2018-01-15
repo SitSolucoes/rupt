@@ -46,7 +46,7 @@ class LeitorController extends Controller
             return response()->json($retorno, 200);
         }
 
-        $leitor = Leitor::where('token_fb', $token)->orWhere('uid', $uid)->get()->first();
+        $leitor = Leitor::where('token_fb', $token)->orWhere('uid_fb', $uid)->get()->first();
         
         if($leitor != null){
             $retorno['leitor'] = $leitor;

@@ -42,7 +42,7 @@ export class LeitoresService {
     return this._http.get(this._url + 'checkFbToken/' + token + '/' + uid)
       .map(
         (response: Response) => {
-          return response.json().leitor;
+          return response.json();
         }
       );
   }
