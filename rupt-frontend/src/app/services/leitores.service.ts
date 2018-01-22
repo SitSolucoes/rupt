@@ -16,6 +16,9 @@ export class LeitoresService {
   constructor(private _http: Http) { }
 
   private createBody(form){
+    console.log("createBody");
+    console.log(form);
+
     return JSON.stringify(
         {
          nome: form.value.nome,
@@ -24,14 +27,18 @@ export class LeitoresService {
          nascimento: form.value.nascimento,
          biografia: form.value.biografia,
          sexo: form.value.sexo,
+         src_foto: form.value.src_foto != null && form.value.src_foto != '' ? form.value.src_foto : '',
          ativo: form.value.ativo,
+         fb_login: form.value.fb_login ? true : false,
+         fb_uid: form.value.fb_uid != null ? form.value.uid : null,
+         token: form.value.token != null ? form.value.token : null,
          password: form.value.password
       });
   }
   
   createLeitor(form){
     const body = this.createBody(form);
-
+    console.log(form.value);
     return this._http.post(this._url + 'storeLeitor', body, {headers: this.headers}).map(
     (response: Response)=>{
         return response.json().id;

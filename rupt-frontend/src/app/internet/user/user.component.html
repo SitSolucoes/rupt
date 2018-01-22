@@ -18,7 +18,7 @@
 </div>
 
 <div class="user user-patrocinador">
-    <img src="{{ url + 'profile/' + leitor.src_capa }}" class="img-pat" *ngIf='leitor?.escritor?.patrocinador'>
+    <img src="{{ url + 'profile/' + leitor.src_capa }}" class="img-pat" *ngIf='leitor?.escritor?.patrocinador '>
 
     <div class="patrocinador-area">
 
@@ -36,11 +36,11 @@
    <div *ngIf='leitor'>
         
         <div class="capa" *ngIf='!leitor?.escritor?.patrocinador'>
-            <img src="{{ url + 'profile/' + leitor.src_capa }}" class="img">
+            <img src="{{ url + 'profile/' + leitor.src_capa }}" *ngIf="leitor?.src_capa != null" class="img">
         </div>
 
         <div class=" bio" [ngClass]="{'bio2' : leitor?.escritor?.patrocinador}">
-            <div class="profile"> <img src="{{ leitor.src_foto.indexOf('http') > 0 ? leitor.src_foto : url + 'profile/' + leitor.src_foto }}" class="img"> </div>
+            <div class="profile"> <img src="{{ leitor.src_foto.indexOf('http') >= 0 ? leitor.src_foto : url + 'profile/' + leitor.src_foto }}" class="img"> </div>
 
             <div class="info">
 
@@ -130,7 +130,7 @@
 
                 <a routerLink='../{{ leitor.nick }}'>
                     <div class="img-area">
-                        <img src="{{ leitor.src_foto.indexOf('http') > 0 ? leitor.src_foto : url + 'profile/' + leitor.src_foto }}"  class="img">
+                        <img src="{{ leitor.src_foto.indexOf('http') >= 0 ? leitor.src_foto : url + 'profile/' + leitor.src_foto }}"  class="img">
                     </div>
                 </a>
 

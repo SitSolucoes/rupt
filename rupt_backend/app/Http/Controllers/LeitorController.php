@@ -12,7 +12,20 @@ class LeitorController extends Controller
 {
     private function createLeitor (Request $request, $leitor){
         $leitor->nome = $request->input('nome');
-        $leitor->nick = $request->input('nick');
+        //tratar nick
+        if($request->input('nick') != ''){
+            $leitor->nick = $request->input('nick');
+        }else{
+            $quantidade = Leitor::where('nick', $request->input('nome'))
+                                ->count();
+            $nick = "Nick Default";
+            if($quantidade > 0){
+                $nick = $leitor->nome . $quantidade;
+            }else{
+                $nick = $leitor->nome;
+            }
+            $leitor->nick = $nick;
+        }
         $leitor->email = $request->input('email');
         $date = str_replace('/', '-', $request->input("nascimento"));
         $leitor->nascimento = date('Y-m-d', strtotime($date));
@@ -20,11 +33,11 @@ class LeitorController extends Controller
         $leitor->biografia = $request->biografia;
         $leitor->ativo = $request->input('ativo');
         if($request->input('fb_login') == true){
-            $aux_nick_nr = Leitor::where('nick', $leitor->nome)->count();
+            $aux_nick_nr = Leitor::where('nick', 'like', '%' . $leitor->nome . '%')->count();
             if($aux_nick_nr != null && $aux_nick_nr > 0){
                 $leitor->nick .= $aux_nick_nr;
             }else{
-                $leitor->nick .= $aux_nick_nr;   
+                $leitor->nick = $leitor->nome;   
             }
             $leitor->token_fb = $request->input('token');
             $leitor->uid_fb = $request->input('fb_uid');
@@ -37,7 +50,7 @@ class LeitorController extends Controller
     public function checkFbToken($token, $uid){
         
         
-        $retorno = (object)[
+        $retorno = [
             'resultado' => false,
             'leitor' => null
         ];
@@ -53,7 +66,7 @@ class LeitorController extends Controller
             $retorno['resultado'] = true;
         }
         
-        return response()->json($retorno, 200);        
+        return response()->json((object)$retorno, 200);        
         
         
     }
@@ -67,7 +80,8 @@ class LeitorController extends Controller
         $leitor = new Leitor(); 
         $leitor = $this->createLeitor($request, $leitor);
 
-        if($request->input('fb_login') != null && $request->input('fb_login') == true){
+        if($request->input('fb_login') != null && $request->input('fb_login') != false){
+            $leitor->save();
             return $leitor->id;
         }
 
@@ -262,30 +276,48 @@ class LeitorController extends Controller
         else
             return -1;
     }
-
+    
     public function signin (Request $request){
-        $leitor = Leitor::where('email', $request->email)->with('escritor')->first();
+        $logado = false;
+        
+        if(($request->fb_login == null || $request->fb_login == false) && $request->email == null)
+            return response()->json(['login' => "Email e/ou Senha incorretos"], 200);
+        
+        if($request->fb_login != null && $request->fb_login != false){
+            $leitor = Leitor::where('token_fb', $request->token)->orWhere('uid_fb', $request->fb_uid)->with('escritor')->first();
+        }else{
+            $leitor = Leitor::where('email', $request->email)->with('escritor')->first();
+        }
         
         if ($leitor){
             if (!$leitor->ativo){
                 return response()->json(['login' => "Conta desativada."], 200);
             }
-
             if (Hash::check($request->password, $leitor->password)){
-                $token = date('z')*$leitor->id;
-                $leitor->tokenLogin = Hash::make($token);
-                $leitor->save();
-
-                $response = [
-                    'leitor' => $leitor,
-                    'token' => $leitor->tokenLogin,
-                    'login' => true
-                ];
-                    
-                return response()->json($response, 200);
+                $logado = true;
+            }else {
+                if($request->fb_login != null && $request->fb_login != false){
+                    if($request->token == $leitor->token_fb || $request->fb_uid == $leitor->uid_fb){
+                        $logado = true;
+                    }
+                }
             }
-            else 
+
+            if($logado){
+                $token = date('z')*$leitor->id;
+                    $leitor->tokenLogin = Hash::make($token);
+                    $leitor->save();
+                    $logado = true;
+                    $response = [
+                        'leitor' => $leitor,
+                        'token' => $leitor->tokenLogin,
+                        'login' => true
+                    ];
+                        
+                    return response()->json($response, 200);
+            }else{
                 return response()->json(['login' => "Email e/ou Senha incorretos"], 200);
+            }
         }
         else 
             return response()->json(['login' => "Email e/ou Senha incorretos"], 200);
