@@ -29,10 +29,8 @@ class PostController extends Controller
         $post = $this->create($request, $post);
         $post->autor_idLeitor = $request->leitor_id;
         $post->tipo_post = $request->tipo_post;
-        //if(!$request->rascunho)
-        //$post->published_at = new Date(); 
         $post->visualizacoes = 0;
-        $post->publishedAt = date('Y-m-d H:i:s');
+        //$post->publishedAt = date('Y-m-d H:i:s');
         
         $post->save();
 
@@ -42,7 +40,9 @@ class PostController extends Controller
         $c = new TimelineController();
         $c->create($request->leitor_id, $post->id);
 
-        return response()->json(['post_id' => $post->id], 201);
+        $post = $this->getById($post->id);
+
+        return response()->json(['post' => $post->first()], 201);
     }
 
     public function update(Request $request){
@@ -74,7 +74,8 @@ class PostController extends Controller
     }
 
     public function getById($id){
-        $post = Post::where('id', $id)->get();
+        $post = Post::where('id', $id)->get()
+                    ->with('categoriasPost');
 
         return $post;
     }

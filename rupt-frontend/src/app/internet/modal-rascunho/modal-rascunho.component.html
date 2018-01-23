@@ -1,65 +1,33 @@
-<div class="modal-content">
-  <a click="#" class="modal-action modal-close close close2">X</a>
-</div>
-<div class="news">
+<div class="modal-rascunho">
 
-  <div class="area-top area-top2">
-
-    <div class="tag-menu">
-
-      <div class="tag red"> Entretenimento</div>
-
+    <div class="modal-content">
+        <a click="#" class="modal-action modal-close close close2">X</a>
     </div>
-
-    <div class="title"> Titulo Qualquer </div>
-
-  </div>
-
-    <div class="container container2">
-
-      <div class="area">
-
-        <font>Por</font>
-        <a href="#">
-          <font class="name"> Juca </font>
-        </a>
-
-        <img src="../../../assets/img/marcador.png" class="img">
-        <b> 30 nov </b>
-
-        <div class="social">
-
-          <p>0</p>
-          <img src="../../../assets/img/rupt-ico.png" class="img">
-
-          <p>0</p>
-          <img src="../../../assets/img/share2.png" class="img">
-
+    <div class="news">
+      <div class="area-top area-top2">
+        <div class="tag-menu" *ngIf='post.categorias_post'>
+            <div class="tag red"> {{ post.categorias_post[post.categorias_post.length-1].categoria.categoria }} </div>
         </div>
 
+        <div class="title"> {{ post.titulo }} </div>
       </div>
 
-      <div class="frame">
-
-        <img src="../../../assets/img/banner.png" class="img">
-
-        <div class="info">
-          m atentado terrorista sem mortos costuma despertar menor revolta. Não deveria ser assim. A explosão de ontem em Nova York só não causou uma tragédia maior por erro do terrorista, não por competência da polícia ou das autoridades.
-
-          Apenas 41 dias depois que um uzbeque, motivado pela propaganda do Estado Islâmico (EI), atropelou ciclistas e pedestres no sul da ilha de Manhattan, um bengalês identificado como Akayed Ullah entrou munido de uma bomba caseira numa movimentada passagem de pedestres que liga estações de ônibus e metrô perto de Times Square.
-
-          O artefato estava atado ao corpo do terrorista. Rudimentar, era constituído por um cano repleto de cabeças de fósforo, ativado por uma lâmpada decorativa de Natal quebrada. A explosão não obteve o efeito desejado, embora tenha ferido Ullah e três transeuntes.
-
-          A falta de mortos não obscurece o óbvio: um terrorista detonou uma bomba numa das áreas mais vigiadas e mais movimentadas do planeta. “Ficamos cegos pelo baixo número de vítimas”, escreveu a jornalista especializada Rukmini Callimachi, do New York Times. “Não esqueça: dez terroristas causaram os ataques catastróficos de Paris em 2015. Três deles só mataram a si próprios.”
-
-          Ela apresentou cartazes de propaganda do EI conclamando por ataques às vésperas do Natal na Times Square. Em seu depoimento à polícia, Ullah afirmou que atacou no local por causa de pôsteres com mensagens natalinas, numa retaliação contra bombardeios americanos na Síria. Canais de propaganda do EI no aplicativo Telegram incitam há semanas simpatizantes a adotar motivos natalinos como alvo.
-
+      <div class="container container2">
+        <div class="frame">
+          <div class="info" [innerHTML]="post.conteudo"></div>
         </div>
-
       </div>
 
-  </div>
-
-  <button type="button" class="button-modal" (click)="onSubmit(false)">Publicar </button>
+      <div class="button-area">
+          <button type="button" class="button-modal" (click)="onSubmit(false)">
+              <i class="fa fa-check" aria-hidden="true"></i>
+              Publicar 
+          </button>
+          <button type="button" class="button-modal red" (click)="onSubmit(false)">
+              <i class="fa fa-trash" aria-hidden="true"></i>
+              Excluir 
+          </button>
+      </div>
+    </div>
 
 </div>

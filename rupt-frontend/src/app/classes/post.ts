@@ -1,3 +1,5 @@
+import { CategoriasPost } from "app/classes/categorias-post";
+
 export class Post {
     id: number;
     titulo: string;
@@ -13,4 +15,6 @@ export class Post {
     updated_at: Date;
     deleted_at: Date;
     tipo_post: string;
+    adulto: boolean;
+    categorias_post: CategoriasPost[];
 }

@@ -2436,13 +2436,66 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     margin-top: 10px;
     margin-bottom: 40px;
     padding: 10px;
-    border: 1px solid #f97000;
+    border: 0px;
     background: #f97000;
     font-weight: bolder;
     text-transform: capitalize;
     font-size: 16px;
     color: #fff;
     border-radius: 2px;
+}
+
+.news .button-modal i{
+    margin-right: 10px;
+}
+
+.modal-rascunho{
+    max-height: 400px;
+}
+
+.modal-rascunho .news .area-top2 {
+    padding-top: 5px;
+    max-height: 150px;
+    height: auto;
+}
+
+.modal-rascunho .news .container2{
+    max-height: 280px;
+    height: auto;
+    width: 95%;
+    overflow: auto;
+    margin-top: 10px;
+    margin-left: 2.5%;
+}
+
+.modal-rascunho .news{
+    height: auto;
+    padding-bottom: 0px;
+}
+
+.modal-rascunho .button-area{
+    display: table;
+    margin: auto;
+}
+
+.modal-rascunho .news .button-modal{
+    margin-bottom: 10px;
+    margin-left: 0;
+    width: 120px;
+}
+
+.modal-rascunho .news .container .frame{
+    margin-top: 30px;
+}
+
+.modal-rascunho .news .area-top .title{
+    width: 95%;
+    font-size: 30px;
+    line-height: 35px;
+}
+
+.modal-rascunho .news .container .frame .info{
+    line-height: 28px;
 }
 
 .contato{

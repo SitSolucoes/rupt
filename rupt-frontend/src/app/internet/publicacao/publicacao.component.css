@@ -1,4 +1,4 @@
-.container{
+.publicacao .container{
     text-align: center;
     margin: 0px;
     width: 100%;
@@ -8,10 +8,18 @@
     margin-left: 3%;
 }
 
-.container h3{
-    color: rgb(99, 98, 98);
-    font-size: 40px;
+.publicacao .container h3{
+    display: block;
+    margin: 0 auto;
+    width: 85%;
+    font-size: 34px;
+    line-height: 50px;
+    color: #3b3b3b;
+    font-family: 'gilroy-bold';
     text-align: center;
+    letter-spacing: -2px;
+    text-transform: uppercase;
+    padding: 30px;
 }
 
 /*CONTAINER LEFT*/
@@ -135,7 +143,7 @@
     position: relative;
     margin-left: 15px;
     margin-top: 10px;
-    margin-bottom: 40px;
+    margin-bottom: 15px;
     padding: 10px;
     border: 1px solid #d9d9d9;
     background: #d9d9d9;
