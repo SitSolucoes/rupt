@@ -33,7 +33,7 @@
 
         <a routerLink="/perfil/{{ leitor.nick }}">
             <div class="area-img">
-            <img src="{{ leitor.src_foto.indexOf('http') > 0 ? leitor.src_foto : url + 'profile/' + leitor.src_foto }}" class="img4">
+            <img src="{{ leitor.src_foto.indexOf('http') >= 0 ? leitor.src_foto : url + 'profile/' + leitor.src_foto }}" class="img4">
             </div>
             <p>{{ leitor.nome.split(' ')[0] }}</p> 
         </a>

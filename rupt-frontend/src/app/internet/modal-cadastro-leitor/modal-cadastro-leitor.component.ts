@@ -31,7 +31,6 @@ export class ModalCadastroLeitorComponent implements OnInit {
   }
 
   signIn(p){
-    console.log('signin');
     this.login_sub = this._auth.login(p).subscribe(
       (data: any)=>{
         console.log(data);
@@ -39,13 +38,16 @@ export class ModalCadastroLeitorComponent implements OnInit {
         let form_leitor = this.createFormLeitor(data);
         this._leitorService.checkFBToken(data.token, data.uid).subscribe(
           (retorno) => {
-            if(retorno.resutado == true){
+            if(retorno.resultado == true){
               //não precisa cadastrar
               this.doLogin(form_leitor);
+              this.closeModal.emit(true);
             }else{
+              console.log('feito o login')
               this._leitorService.createLeitor(form_leitor).subscribe(
-                (leitor)=>{
+                (leitor)=>{ 
                   this.doLogin(form_leitor);
+                  this.closeModal.emit(true);
               });
               //this._leitorService.createLeitor()
             }
@@ -72,7 +74,7 @@ export class ModalCadastroLeitorComponent implements OnInit {
       nome: [data.name],
       nick: [''],
       sexo: [data.gender == 'male' ? 'm' : 'f'],
-      nascimento: ['', [Validators.required, Validators.minLength(10)]],
+      nascimento: [''],
       src_foto: [data.image],
       email: [data.email],
       fb_login: [true],
