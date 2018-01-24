@@ -20,8 +20,7 @@
                 [ngClass]="{'invalid': verificaValidTouched('titulo')}"
             > 
             <!--editor-->
-            <quill-editor style="margin-top: 7%;
-            border-top: 1px solid #ccc !important; text-align: left;" formControlName='conteudo'
+            <quill-editor style="margin-top: 7%; text-align: left;" formControlName='conteudo'
                             [options]="editorOptions"
                             (blur)="onEditorBlured($event)"
                             (focus)="onEditorFocused($event)"
@@ -62,5 +61,11 @@
             </div>
         </div>
     </div>
+
+    <div class="error-alert"> 
+        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+        Preencha os campos em vermelho.
+    </div>
+
     </form>
 </div>

@@ -2627,6 +2627,14 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     padding-top: 10px;
     padding-bottom: 10px;
     border-radius: 4px;
+    text-align: center;
+    position: relative;
+}
+
+.error-alert i{
+    position: absolute;
+    left: 13px;
+    top: 13px;
 }
 
 .img-button{
@@ -3346,7 +3354,7 @@ quill-editor{
 .ql-toolbar.ql-snow{
     background: #fff;
     border-top: none!important;
-    /*border-top: 0px !important;*/
+    border-top: 1px solid #ccc !important;
 }
 
 .generico-modal{
