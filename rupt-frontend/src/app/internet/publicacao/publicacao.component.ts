@@ -24,6 +24,7 @@ export class PublicacaoComponent implements OnInit {
   categorias: Categoria[];
   formulario: FormGroup;
   leitor: Leitor;
+  loading: boolean = false;
   post: Post = new Post();
   
   url_img;
@@ -114,43 +115,35 @@ export class PublicacaoComponent implements OnInit {
   }
 
   onSubmit(){
-    /*if(rascunho){
-      this.formulario.value.rascunho = true;
-    }
-    if(this.formulario.value.tipo_post == -1)
-      this.formulario.patchValue({
-        tipo_post: 3
-      });
-
+    this.loading = true;
+    
     //quantidade de imagens
     let qnt_imgs = this.formulario.value.conteudo.split('<img').length - 1;
-    if(qnt_imgs === 0)
+
+    //tipo 1 = imagem com texto // 2 = imagem só // 3 = so texto
+
+    if(qnt_imgs === 0){
       this.formulario.patchValue({
         tipo_post: 3
       });
+    }
 
-    if(qnt_imgs <= 2)
+    if(qnt_imgs > 0){
       this.formulario.patchValue({
         tipo_post: 1
       });
-
-    if(qnt_imgs > 2)
-      this.formulario.patchValue({
-        tipo_post: 2
-      });
+    }
     
-    this._postService.create(this.formulario).subscribe(
-      (response) => { this.uploadFiles(response) }
-    )*/
-
-    if (this.formulario.get('id').value == 0){
+    if (!this.post || this.post.publishedAt == null){
         this._postService.create(this.formulario).subscribe(
           (response) => { 
             this.post = response;
-            console.log(this.post);
             this.uploadFiles(true); 
           }
         )
+    }
+    else {
+        console.log('editando mesmo');
     }
   }
 
@@ -170,6 +163,8 @@ export class PublicacaoComponent implements OnInit {
         myUploadItem.formData = { FormDataKey: 'Form Data Value' };  // (optional) form data can be sent with file
 
         this._uploadFileService.onSuccessUpload = (item, response, status, headers) => {
+              this.loading = false;
+
               // success callback
               if (rascunho == true)
                   this.openModalRascunho();
@@ -184,11 +179,14 @@ export class PublicacaoComponent implements OnInit {
         };
         this._uploadFileService.upload(myUploadItem);
       }
-      else 
+      else {
+          this.loading = false;
+
           if (rascunho == true)
             this.openModalRascunho();
           else
             this._router.navigate(['noticia/' + this.post.id]);
+      }
   }
 
 /////////MODAIS/////////
@@ -210,6 +208,8 @@ export class PublicacaoComponent implements OnInit {
   }
 
   closeModalRascunho(e){
+      console.log('aqui');
+
       if(e){
           this.modalRascunho.emit({ action:'modal', params:['close']});
       }

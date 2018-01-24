@@ -129,11 +129,12 @@
     border-top: 0px;
 }
 
-.publicacao .info{
+.publicacao .right-container-buttons{
     display: table;
     height: 50px;
     margin: 0 auto;
     margin-top: 20px;
+    width: 100%;
 }
 
 .publicacao .info .button{
@@ -141,7 +142,6 @@
     display: block;
     float: left;
     position: relative;
-    margin-left: 15px;
     margin-top: 10px;
     margin-bottom: 15px;
     padding: 10px;
@@ -152,6 +152,13 @@
     font-size: 16px;
     color: #4f4f4f;
     border-radius: 2px;
+    display: table-cell;
+    width: 100%;
+}
+
+.publicacao .info .button i{
+    font-size: 20px;
+    margin-right: 10px;
 }
 
 .publicacao .info .background-orange{

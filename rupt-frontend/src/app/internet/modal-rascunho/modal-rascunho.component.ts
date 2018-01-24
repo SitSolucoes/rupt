@@ -17,8 +17,11 @@ import { PostsService } from 'app/services/posts.service';
 export class ModalRascunhoComponent implements OnInit {
     
     @Input() post: Post;
-    @Output('closeModal') closeModalRascunho = new EventEmitter();
-    
+    @Output() closeModalRascunho = new EventEmitter();
+
+    loadingExcluir: boolean = false;
+    loadingPublicar: boolean = false;
+
     constructor(private _router: Router,
                 private _postService: PostsService) { }
 
@@ -26,21 +29,29 @@ export class ModalRascunhoComponent implements OnInit {
     }
 
     publicar(){
-        this._postService.publicar(this.post.id).subscribe(
+        this.loadingPublicar = true;
+
+        /*this._postService.publicar(this.post.id).subscribe(
           (response) => {
+            this.loadingPublicar = false;
+
             this.closeModalRascunho.emit(true);
-            this._router.navigate(['rascunho']);
+            this._router.navigate(['noticia/'+ this.post.id]);
           }
-        )
+        )*/
     }
 
     excluir(){
-        this._postService.delete(this.post.id).subscribe(
+        this.loadingExcluir = true;
+
+        /*this._postService.delete(this.post.id).subscribe(
           (response) => {
+            this.loadingExcluir = false;
+
             this.closeModalRascunho.emit(true);
-            this._router.navigate(['rascunho']);
+            this._router.navigate(['perfil', this.post.autor.nick]);
           }
-        )
+        )*/
     }
 
 }

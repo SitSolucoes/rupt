@@ -122,6 +122,7 @@ Route::get('posts/getMotivosDenuncia', ['uses' => 'DenunciasController@getMotivo
 Route::post('posts/postCreateComentario', ['uses' => 'ComentarioController@create']);
 Route::post('posts/denuncia', ['uses' => 'DenunciasController@create']);
 Route::post('posts/create', ['uses' => 'PostController@createPost']);
+Route::post('posts/publicar', ['uses' => 'PostController@publicar']);
 Route::post('posts/uploadImages/{id}', ['uses' => 'PostController@uploadImages']);
 Route::post('posts/delete', ['uses' => 'PostController@delete']);
 

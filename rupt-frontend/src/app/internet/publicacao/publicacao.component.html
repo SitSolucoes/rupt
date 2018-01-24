@@ -39,9 +39,12 @@
             </div>
             <div class="right-container-imagem-destaque">
                 <span>Imagem de Destaque</span>
-                <img *ngIf="url_img" [src]="url_img" (click)="img.click()">
-                <div *ngIf="!url_img" class="no_image" (click)="img.click()"><i class="material-icons large" style="display: block">image</i> Clique para Adicionar...   </div>
-                <input type="file" #img id='imagem' style="display:none" (change)="imgShow($event)">
+
+                <div class="container-imagem">
+                    <img *ngIf="url_img" [src]="url_img" (click)="img.click()">
+                    <div *ngIf="!url_img" class="no_image" (click)="img.click()"><i class="material-icons large" style="display: block">image</i> Clique para Adicionar...   </div>
+                    <input type="file" #img id='imagem' style="display:none" (change)="imgShow($event)">
+                </div>
                 <div class="menu">
                     <div class="row menu-radio">
                         <input type="checkbox" class="filled-in" id='adulto' formControlName='adulto'/>
@@ -49,9 +52,11 @@
                     </div>
                 </div>
             </div>
-            <div class="righht-container-buttons info">
-                <a (click)="openModalRascunho()"><button type="button" class="button bd-white-bord-orange">Salvar Rascunho</button></a>
-                <button type="button" class="button background-orange" (click)="onSubmit(false)">Publicar</button>
+            <div class="right-container-buttons info">
+                <button type="button" class="button background-orange" (click)="onSubmit()" [disabled]='loading'>
+                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw" *ngIf='loading'></i>    
+                    Publicar
+                </button>
             </div>
         </div>
     </div>

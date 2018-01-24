@@ -66,6 +66,14 @@ class PostController extends Controller
         return response()->json(['msg', 'Excluido com sucesso.'], 200);
     }
 
+    public function publicar(Request $request){
+        $post = Post::find($request->id);
+        $post->publishedAt = date('Y-m-d H:i:s');
+        $post->save();
+
+        return response()->json(['publicado' => true], 200);
+    }
+
     public function removePorDenuncia($id, $admin_id){
         $post = Post::find($id);
         $post->deleted_at = date("Y-m-d H:i:s");
@@ -74,8 +82,10 @@ class PostController extends Controller
     }
 
     public function getById($id){
-        $post = Post::where('id', $id)->get()
-                    ->with('categoriasPost');
+        $post = Post::where('id', $id)
+                    ->with('autor')
+                    ->with('categoriasPost')
+                    ->get();
 
         return $post;
     }
