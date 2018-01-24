@@ -105,4 +105,10 @@ export class PostsService {
     )
   }
 
+  update(form){
+    return this._http.post(this._url + 'posts/update', JSON.stringify(form.value), {headers: this.headers}).map(
+      (response) => { return response.json().post }
+    )
+  }
+
 }

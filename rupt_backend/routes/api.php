@@ -125,6 +125,7 @@ Route::post('posts/create', ['uses' => 'PostController@createPost']);
 Route::post('posts/publicar', ['uses' => 'PostController@publicar']);
 Route::post('posts/uploadImages/{id}', ['uses' => 'PostController@uploadImages']);
 Route::post('posts/delete', ['uses' => 'PostController@delete']);
+Route::post('posts/update', ['uses' => 'PostController@update']);
 
 Route::get('interacoes/getAll/{post_id}/{categoria}', ['uses' => 'InteracaoController@getByCategoria']);
 Route::get('interacaoLeitor/getInteracoesLeitorPost/{post_id}/{leitor_id}', ['uses' => 'InteracaoLeitorController@getInteracoesLeitorPost']);

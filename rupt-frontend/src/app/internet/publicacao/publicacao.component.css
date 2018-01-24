@@ -54,8 +54,11 @@
     }
 
     .container_right .right-container-imagem-destaque span{
-        font-size: 24px;
+        font-size: 18px;
         display: block;
+        text-align: center;
+        font-family: 'nexa-bold';
+        margin-bottom: 10px;
     }
 
     .container_right .right-container-imagem-destaque img, .no_image{
@@ -68,17 +71,35 @@
         margin-top: 3%;
     }
 
-    .no_image{
-        padding-top: 15%;
+    .container-imagem{
         background: rgb(170, 170, 170);
+        background-size: 250px 250px;
+        width: 250px;
+        height: 250px;
+        display: table;
+        margin: auto;
+    }
+
+    .no_image{
+        padding-top: 60px;
+        background-color: rgba(198, 198, 198, 0.6);
         color: rgb(50, 48, 48);
         text-align: center;
         vertical-align: center;
+        cursor: pointer;
+        margin-bottom: 0;
+        height: 250px;
     }
 
 /* QUILL EDITOR*/
+.ql-editor {
+    height: 450px;
+    background: blue;
+}
+
 .ql-container{
     height: 76%;   
+    
 }
 
 .ql-toolbar.ql-snow{
@@ -102,7 +123,7 @@
 .publicacao .container .top{
     display: block;
     width: 100%;
-    border-bottom: 1px solid #ccc;
+    /*border-bottom: 1px solid #ccc;*/
 }
 
 .publicacao .container .top select{
@@ -143,7 +164,7 @@
     float: left;
     position: relative;
     margin-top: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     padding: 10px;
     border: 1px solid #d9d9d9;
     background: #d9d9d9;

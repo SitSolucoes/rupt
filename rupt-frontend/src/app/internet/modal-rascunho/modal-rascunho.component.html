@@ -6,7 +6,7 @@
     <div class="news">
       <div class="area-top area-top2">
         <div class="tag-menu" *ngIf='post.categorias_post'>
-            <div class="tag red"> {{ post.categorias_post[post.categorias_post.length-1].categoria.categoria }} </div>
+            <div class="tag red"> {{ post.categorias_post[0].categoria.categoria }} </div>
         </div>
 
         <div class="title"> {{ post.titulo }} </div>

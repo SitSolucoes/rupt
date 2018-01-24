@@ -11,7 +11,8 @@ class Post extends Model
     }
 
     public function categoriasPost(){
-        return $this->hasMany('App\PostCategoria', 'post_idPost', 'id')->with('categoria');
+        return $this->hasMany('App\PostCategoria', 'post_idPost', 'id')
+                    ->with('categoria')->orderBy('id');
     }
 
 }

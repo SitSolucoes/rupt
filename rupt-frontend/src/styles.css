@@ -3321,18 +3321,18 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .ql-container .ql-editor{
-    min-height: 310px !important;
     font-family: lato;
     font-size: 15px;
 }
 
 .ql-container.ql-snow{
-    height: 98.448%;
+    min-height: 450px !important;
 }
 
 .ql-editor{
     overflow-y: auto;
     background: #fff;
+    
 }
 
 .ql-toolbar.ql-snow{

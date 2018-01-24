@@ -53,6 +53,10 @@ class PostController extends Controller
 
         $c = new PostCategoriaController();
         $c->update($request->categoria_id, $post->id);
+
+        $post = $this->getById($post->id);
+
+        return response()->json(['post' => $post->first()], 201);
     }
 
     public function delete(Request $request){
@@ -213,6 +217,12 @@ class PostController extends Controller
 
     public function uploadImages (Request $request, $id){
         $post = Post::find($id);
+
+        if ($post->path && $post->path != ''){
+            $path = public_path()."/".$path_logo;
+            \File::Delete($path);
+        }
+
         $path = public_path()."/"."posts/";
         
         if (isset($_FILES['doc1']['tmp_name'])){

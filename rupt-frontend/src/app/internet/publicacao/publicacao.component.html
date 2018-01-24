@@ -40,9 +40,8 @@
             <div class="right-container-imagem-destaque">
                 <span>Imagem de Destaque</span>
 
-                <div class="container-imagem">
-                    <img *ngIf="url_img" [src]="url_img" (click)="img.click()">
-                    <div *ngIf="!url_img" class="no_image" (click)="img.click()"><i class="material-icons large" style="display: block">image</i> Clique para Adicionar...   </div>
+                <div class="container-imagem" [ngStyle]="{'background-image': url_img}">
+                    <div class="no_image" (click)="img.click()"><i class="material-icons large" style="display: block">image</i> Clique para Adicionar...   </div>
                     <input type="file" #img id='imagem' style="display:none" (change)="imgShow($event)">
                 </div>
                 <div class="menu">

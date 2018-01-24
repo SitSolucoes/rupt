@@ -31,27 +31,27 @@ export class ModalRascunhoComponent implements OnInit {
     publicar(){
         this.loadingPublicar = true;
 
-        /*this._postService.publicar(this.post.id).subscribe(
+        this._postService.publicar(this.post.id).subscribe(
           (response) => {
             this.loadingPublicar = false;
 
             this.closeModalRascunho.emit(true);
             this._router.navigate(['noticia/'+ this.post.id]);
           }
-        )*/
+        )
     }
 
     excluir(){
         this.loadingExcluir = true;
 
-        /*this._postService.delete(this.post.id).subscribe(
+        this._postService.delete(this.post.id).subscribe(
           (response) => {
             this.loadingExcluir = false;
 
             this.closeModalRascunho.emit(true);
             this._router.navigate(['perfil', this.post.autor.nick]);
           }
-        )*/
+        )
     }
 
 }
