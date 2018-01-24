@@ -3299,6 +3299,11 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 
 
 /* editor de texto */
+quill-editor{
+    display: table;
+    width: 100%;
+}
+
 .ql-snow .ql-picker.ql-size .ql-picker-label::before,
 .ql-snow .ql-picker.ql-size .ql-picker-item::before {
   content: 'Normal'!important;
@@ -3323,6 +3328,9 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .ql-container .ql-editor{
     font-family: lato;
     font-size: 15px;
+    min-height: 450px!important;
+    padding-bottom: 1rem;
+    height: auto;
 }
 
 .ql-container.ql-snow{
@@ -3336,12 +3344,8 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .ql-toolbar.ql-snow{
-    margin-top: 7%;
-    border-top: 1px solid #ccc !important;
     background: #fff;
-    border-left: 1px solid #ccc !important;
-    border-bottom: 1px solid #ccc !important;
-    border-right: 1px solid #ccc !important;
+    border-top: none!important;
     /*border-top: 0px !important;*/
 }
 

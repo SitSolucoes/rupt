@@ -14,6 +14,7 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
 import * as $ from 'jquery';
 import { UploadItem } from 'app/classes/upload-item';
 import { Post } from 'app/classes/post';
+import { ValidaCampo } from 'app/shared/valida-campo';
 
 @Component({
   selector: 'app-publicacao',
@@ -26,8 +27,9 @@ export class PublicacaoComponent implements OnInit {
   leitor: Leitor;
   loading: boolean = false;
   post: Post = new Post();
+  url_img: string;
+  validaCampo: ValidaCampo = new ValidaCampo();
   
-  url_img;
   estilos = [
     {value: 1, option: 'Imagem e Texto'},
     {value: 2, option: 'Apenas imagens'},
@@ -78,13 +80,13 @@ export class PublicacaoComponent implements OnInit {
   createForm(){
     this.formulario = this._formBuilder.group({
       id: '0',
-      categoria_id: [-1, Validators.required],
+      categoria_id: ['', Validators.required],
       leitor_id: [''],
       titulo: ['', Validators.required],
       conteudo: ['', Validators.required],
       adulto: '',
       tipo_post: 3,
-      regiao_id: [-1, Validators.required],
+      regiao_id: [''],
     });
   }
 
@@ -112,6 +114,10 @@ export class PublicacaoComponent implements OnInit {
     this._categoriaService.getCategoriasAtivas().subscribe(
       ( response ) => { this.categorias = response }
     )
+  }
+
+  verificaValidTouched(campo: string){
+    return this.validaCampo.verificaValidTouched(campo, this.formulario);
   }
 
   onSubmit(){

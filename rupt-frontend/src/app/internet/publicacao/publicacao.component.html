@@ -16,25 +16,28 @@
     <div class="container">
         <h3>Nova Publicação</h3>
         <div class="container_left">
-            <input type="text" class="input input2" maxlength="160" formControlName='titulo' placeholder="Insira o título da sua notícia">            
+            <input type="text" class="input input2" maxlength="150" formControlName='titulo' placeholder="Insira o título da sua notícia"
+                [ngClass]="{'invalid': verificaValidTouched('titulo')}"
+            > 
             <!--editor-->
-            <quill-editor style="    margin-top: 7%;
+            <quill-editor style="margin-top: 7%;
             border-top: 1px solid #ccc !important; text-align: left;" formControlName='conteudo'
                             [options]="editorOptions"
                             (blur)="onEditorBlured($event)"
                             (focus)="onEditorFocused($event)"
                             (ready)="onEditorCreated($event)"
-                            (change)="onContentChanged($event)">
+                            (change)="onContentChanged($event)"
+                            [ngClass]="{'invalid': verificaValidTouched('conteudo')}">
             </quill-editor> 
         </div>
         <div class="container_right">
             <div class=" right-container-input-group top">
-                <select name="categoria" class="input" formControlName='categoria_id'>
-                    <option disabled value='-1' selected>Categoria</option>
+                <select name="categoria" class="input" formControlName='categoria_id' [ngClass]="{'invalid': verificaValidTouched('categoria_id')}">
+                    <option disabled value='' selected>Categoria</option>
                     <option *ngFor="let categoria of categorias" [value]='categoria.id'>{{ categoria.categoria }}</option>
                 </select>
                 <select name="regiao" class="input" formControlName="regiao_id">
-                    <option disabled value='-1' selected>Região</option>
+                    <option disabled value='' selected>Região</option>
                 </select>
             </div>
             <div class="right-container-imagem-destaque">
