@@ -23,11 +23,14 @@ import { ValidaCampo } from 'app/shared/valida-campo';
 })
 export class PublicacaoComponent implements OnInit {
   categorias: Categoria[];
+  erro: boolean = false;
   formulario: FormGroup;
   leitor: Leitor;
   loading: boolean = false;
+  mensagemErro: string = '';
   post: Post = new Post();
   url_img: string;
+  url_img_style: string;
   validaCampo: ValidaCampo = new ValidaCampo();
   
   estilos = [
@@ -121,38 +124,57 @@ export class PublicacaoComponent implements OnInit {
   }
 
   onSubmit(){
-    this.loading = true;
+    var width = $('#imagem-hidden').width();
+    var height = $('#imagem-hidden').height();
     
-    //quantidade de imagens
-    let qnt_imgs = this.formulario.value.conteudo.split('<img').length - 1;
+    console.log(width + '|' + height);
 
-    //tipo 1 = imagem com texto // 2 = imagem só // 3 = so texto
+    if (!this.formulario.valid){
+      Object.keys(this.formulario.controls).forEach(campo => {
+          const control = this.formulario.get(campo);
+          control.markAsTouched();
+          this.erro = true;
+          this.mensagemErro = 'Preencha os campos em vermelho.';
+      });
 
-    let tipo = 3;
-    
-    if ((<HTMLInputElement>window.document.getElementById('imagem')).files[0]){
-        tipo = 1;
+      var s = $(window).scrollTop();
+
+      $(window).scrollTop(s + 100);
     }
-
-    this.formulario.patchValue({
-        tipo_post: tipo
-    });
-
-    if (!this.post || this.post.publishedAt == null){
-        this._postService.create(this.formulario).subscribe(
-          (response) => { 
-            this.post = response;
-            this.uploadFiles(true); 
-          }
-        )
+    else if ((width > 0 || height > 0) && (width != 400 || height != 400)){
+      this.erro = true;
+      this.mensagemErro = 'A imagem de capa deve ter resolução de 400 x 400 pixels.';
     }
     else {
-      this._postService.update(this.formulario).subscribe(
-        (response) => { 
-          this.post = response;
-          this.uploadFiles(false); 
-        }
-      )
+      this.loading = true;
+      
+      //tipo 1 = imagem com texto // 2 = imagem só // 3 = so texto
+      let tipo = 3;
+      
+      if ((<HTMLInputElement>window.document.getElementById('imagem')).files[0]){
+          tipo = 1;
+      }
+
+      this.formulario.patchValue({
+          tipo_post: tipo
+      });
+
+      if (!this.post || this.post.publishedAt == null){
+          this._postService.create(this.formulario).subscribe(
+            (response) => { 
+              this.post = response;
+              this.uploadFiles(true); 
+            }
+          )
+      }
+      else {
+        this._postService.update(this.formulario).subscribe(
+          (response) => { 
+            this.post = response;
+            this.uploadFiles(false); 
+          }
+        )
+      }
     }
   }
 
@@ -229,7 +251,8 @@ export class PublicacaoComponent implements OnInit {
 
       //console.log(target);
       reader.onload = (event:any) => {
-          this.url_img = 'url('+event.target.result+')';
+          this.url_img_style = 'url('+event.target.result+')';
+          this.url_img = event.target.result;
       }
       //console.log(e.target);
       reader.readAsDataURL(e.target.files[0]);

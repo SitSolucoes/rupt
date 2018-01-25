@@ -1,3 +1,7 @@
+<!-- não apagar, é usado para a validação do tamanho da imagem -->
+<img src='{{ url_img }}' id='imagem-hidden' style="display:none">
+<!-- fim não apagar -->
+
 <div id="modalExcluir" class="modal modal2 modal4"
      materialize="modal" [materializeParams]="[{dismissible: false}]"
      [materializeActions]="modalExcluir">
@@ -42,8 +46,12 @@
             <div class="right-container-imagem-destaque">
                 <span>Imagem de Destaque</span>
 
-                <div class="container-imagem" [ngStyle]="{'background-image': url_img}">
-                    <div class="no_image" (click)="img.click()"><i class="material-icons large" style="display: block">image</i> Clique para Adicionar...   </div>
+                <div class="container-imagem" [ngStyle]="{'background-image': url_img_style}">
+                    <div class="no_image" (click)="img.click()">
+                        <i class="material-icons large" style="display: block">image</i> 
+                        Clique para Adicionar...   
+                        <br>Resolução (400 x 400 pixels)
+                    </div>
                     <input type="file" #img id='imagem' style="display:none" (change)="imgShow($event)">
                 </div>
                 <div class="menu">
@@ -62,9 +70,11 @@
         </div>
     </div>
 
-    <div class="error-alert"> 
-        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-        Preencha os campos em vermelho.
+    <div id='error-alert'>
+        <div class="error-alert" *ngIf='erro'> 
+            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+            {{ mensagemErro }}
+        </div>
     </div>
 
     </form>
