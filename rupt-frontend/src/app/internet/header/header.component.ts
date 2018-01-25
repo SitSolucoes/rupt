@@ -6,6 +6,7 @@ import { NgForm } from '@angular/forms/src/directives';
 import { Leitor } from './../../classes/leitor';
 import { any } from 'codelyzer/util/function';
 import { Component, OnInit, EventEmitter } from '@angular/core';
+declare var $: any;
 
 @Component({
   selector: 'header',
@@ -28,6 +29,8 @@ export class HeaderComponent implements OnInit {
       this._leitorService.leitor.subscribe(
         (leitor: Leitor) => { this.leitor = leitor }
       )
+
+      $('.button-collapse').sideNav();
 
       this._leitorService.verificaLogin().subscribe();
   }

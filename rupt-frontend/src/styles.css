@@ -160,10 +160,28 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     text-transform: uppercase;
 }
 
+.headbar .headbar-left{
+    float: left;
+    height: 100%;
+    width: 33%;
+    padding-left: 40px;
+}
+
+.headbar .headbar-left .fa-bars{
+    color: #fff;
+    font-size: 25px;
+    margin-top: 18px;
+}
+
 .headbar .headbar-right{
     float: right;
     height: 100%;
-    padding-right: 60px;
+    padding-right: 40px;
+}
+
+.headbar .headbar-right .fa-search{
+    font-size: 23px;
+    margin-top: 12px;
 }
 
 .headbar .headbar-right p{
@@ -222,21 +240,15 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     float: left;
     font-family: 'nexa';
     color: #ffffff;
-    margin-left: 10px;
-    margin-right:  10px;
-    margin-top: 15px;
     font-size: 22px;
-    border-radius: 2px;
-    text-transform: uppercase;
     outline: none;
     cursor: pointer;
 }
 
 .headbar .login-border{
-    border: solid 1px #ffffff;
-    padding: 7px 10px;
+    padding: 5px 18px;
     margin-top: 12px;
-    font-size: 15px;
+    font-size: 19px;
     font-family: 'nexa-bold';
 }
 
@@ -246,9 +258,13 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .headbar .login-border:hover{
-    background: #ffffff;
-    color: #B05307;
+    background: #e06a09;
+    color: #fff;
     transition: 1s;
+}
+
+.headbar .login-border2{
+    border-right: 0px;
 }
 
 .headbar .img{
@@ -256,16 +272,6 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     float: left;
     height: 28px;
     margin-top: 15px;
-}
-
-.headbar .img2{
-    width: auto;
-    height: 40px;
-    display: block;
-    margin-left: 10px;
-    margin-top: 12px;
-    float: left;
-    margin-left: 60px;
 }
 
 .headbar .img3{
@@ -304,6 +310,28 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     margin-top: 20px;
 }
 
+.headbar .headbar-center{
+    display: block;
+    float: left;
+    height: 100%;
+    width: 33%;
+}
+
+.headbar .headbar-center .logo{
+    display: table;
+    margin: 0 auto;
+    width: 20%;
+    margin-top: 12px;
+}
+
+
+.headbar .headbar-center .img{
+    height: 40px;
+    display: table;
+    margin-top: 12px;
+    margin: 0 auto;
+}
+
 .banner-promo{
     height: 150px;
     width: 100%;
@@ -339,8 +367,8 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 
 
 .banner-promo .container{
-    width: 90%;
-    margin-left: 5%;
+    width: 95%;
+    margin-left: 2.5%;
     height: 100%;
     background: url('/assets/img/banner-pat.png');
     background-repeat:repeat;
@@ -478,8 +506,8 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     float: left;
     padding-top: 30px;
     padding-bottom: 40px;
-    padding-left: 4%;
-    padding-right: 4%;
+    padding-left: 3%;
+    padding-right: 3%;
 }
 
 
@@ -629,6 +657,8 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     display: block;
     float: right;
     margin-right: 5px;
+    color: #fff;
+    text-shadow: 1px 1px 1px #000000;
 }
 
 .container-categoria .number{
