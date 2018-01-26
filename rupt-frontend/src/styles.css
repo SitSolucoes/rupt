@@ -126,38 +126,23 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 
 .headbar .title{
     font-family: 'nexa-bold';
-    font-size: 18px;
+    font-size: 21px;
     display: block;
     float: left;
-    color: #FFFDFD;
-    width: auto;
-    height: 100%;
+    clear: both;
+    width: 100%;
+    color: #f0f0f0;
+    /* width: auto; */
+    /* height: 100%; */
     position: relative;
-    left: 10px;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-top: 20px;
+    padding: 6px 15px;
     font-weight: 500;
-    text-transform: uppercase;
+    text-transform: capitalize;
 }
 
-.active-link{
+.headbar .active-link{
     background: #B05307;
-    font-size: 90px;
-    font-family: 'nexa-bold';
-    font-size: 16px;
-    display: block;
-    float: left;
-    color: #FFFDFD;
-    width: auto;
-    height: 100%;
-    position: relative;
-    left: 10px;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-top: 20px;
-    font-weight: 500;
-    text-transform: uppercase;
+    color: #fff;
 }
 
 .headbar .headbar-left{
@@ -171,6 +156,10 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     color: #fff;
     font-size: 25px;
     margin-top: 18px;
+}
+
+.headbar .headbar-left .fa-bars:hover{
+    opacity: .8;
 }
 
 .headbar .headbar-right{
@@ -192,7 +181,9 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     font-weight: bolder;
     margin-left: 5px;
     margin-top: 20px;
+    margin-right: 15px;
     text-transform: capitalize;
+    font-size: 17px;
 }
 
 .headbar .headbar-right .btn{
@@ -206,7 +197,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     display: block;
     float: left;
     position: absolute;
-    right: 90px;
+    right: 70px;
     top: 13px;
     color: #fff;
     width: 17px;
@@ -283,8 +274,8 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 
 .headbar .headbar-right .area-img{
     border-radius: 100%;
-    width: 38px;
-    height: 38px;
+    width: 40px;
+    height: 40px;
     display: block;
     margin-top: 12px;
     float: left;
@@ -293,14 +284,14 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .headbar .img4{
-    height: 40px;
+    height: 42px;
 }
 
 .headbar .img5{
     display: block;
     float: left;
     height: 18px;
-    margin-top: 21px;
+    margin-top: 17px;
     position: relative;
     right: 30px;
 }
@@ -321,15 +312,19 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     display: table;
     margin: 0 auto;
     width: 20%;
-    margin-top: 12px;
+    margin-top: 10px;
 }
 
 
 .headbar .headbar-center .img{
-    height: 40px;
+    height: 45px;
     display: table;
-    margin-top: 12px;
     margin: 0 auto;
+}
+
+.side-nav{
+    padding-top: 20px;
+    background: #282824;
 }
 
 .banner-promo{

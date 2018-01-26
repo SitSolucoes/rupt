@@ -1,5 +1,5 @@
 <div id="ModalCadastro" class="modal modal5 modal6"
-     materialize="modal" [materializeParams]="[{dismissible: false}]" 
+     materialize="modal" [materializeParams]="[{dismissible: false}]"
      [materializeActions]="modalActions">
     <modal-cadastro-leitor (closeModal)="closeModal($event)"></modal-cadastro-leitor>
 </div>
@@ -31,7 +31,9 @@
     </div>
 
     <ul class="side-nav" id="menu-mobile">
-        <a>qualquer coisa</a> 
+        <a routerLink="/faq" class="title" routerLinkActive="active-link">Faq </a>
+        <a routerLink="/contato" class="title" routerLinkActive="active-link">contato</a>
+
     </ul>
 
     <!--
@@ -42,16 +44,16 @@
     <!--<input type="text" class="search" maxlength="30" name="marca" placeholder="Pesquisar">
     <img src="../../../assets/img/search2.png" class="img5">-->
 
-        
+
     <div class="headbar-right" *ngIf="leitor?.id">
         <a routerLink="/perfil/{{ leitor.nick }}">
             <div class="area-img">
-            <img src="{{ leitor.src_foto.indexOf('http') >= 0 ? leitor.src_foto : url + 'profile/' + leitor.src_foto }}" class="img4">
+                <img src="{{ leitor.src_foto.indexOf('http') >= 0 ? leitor.src_foto : url + 'profile/' + leitor.src_foto }}" class="img4">
             </div>
-            <p>{{ leitor.nome.split(' ')[0] }}</p> 
+            <p>{{ leitor.nome.split(' ')[0] }}</p>
         </a>
 
-        <div class="login"> | </div>
+        <div class="login"></div>
         <img src="../../../assets/img/bell.png" class="img">
         <div class="notificacao"> 3</div>
         <a class='dropdown-button btn' data-activates='dropdown1' materialize="dropdown"><img src="../../../assets/img/arrow.png" class="img img6"></a>
@@ -76,10 +78,10 @@
             </div>
         </a>
         <div style="border-right:solid 1px #ffffff;display:block;float:left;width:2px;height:20px;margin-top: 20px;"></div>
-        <a (click)="openModal()">  
+        <a (click)="openModal()">
             <div class="login login-border">
-                   Registrar
-            </div> 
+                Registrar
+            </div>
         </a>
         <button type="submit" class="btn btn-default" id="search-button">
             <i class="fa fa-search" aria-hidden="true"></i>
