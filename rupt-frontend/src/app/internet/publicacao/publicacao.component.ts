@@ -9,18 +9,19 @@ import { Leitor } from 'app/classes/leitor';
 import { Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, ViewChild } from '@angular/core';
 
 import * as $ from 'jquery';
 import { UploadItem } from 'app/classes/upload-item';
 import { Post } from 'app/classes/post';
 import { ValidaCampo } from 'app/shared/valida-campo';
+import {ImageCropperComponent, CropperSettings} from 'ng2-img-cropper';
 
 @Component({
   selector: 'app-publicacao',
   templateUrl: './publicacao.component.html',
-  styleUrls: ['./publicacao.component.css']
 })
+
 export class PublicacaoComponent implements OnInit {
   categorias: Categoria[];
   erro: boolean = false;
@@ -29,7 +30,6 @@ export class PublicacaoComponent implements OnInit {
   loading: boolean = false;
   mensagemErro: string = '';
   post: Post = new Post();
-  url_img: string;
   url_img_style: string;
   validaCampo: ValidaCampo = new ValidaCampo();
   
@@ -40,7 +40,14 @@ export class PublicacaoComponent implements OnInit {
   ]
 
   modalExcluir = new EventEmitter<string|MaterializeAction>();
+  modalImagem = new EventEmitter<string|MaterializeAction>();
   modalRascunho = new EventEmitter<string|MaterializeAction>();
+
+  
+  cropperSettings: CropperSettings;
+  data:any;
+  @ViewChild('cropper', undefined)cropper:ImageCropperComponent;
+
 
   constructor(private _formBuilder: FormBuilder,
               private _leitorService: LeitoresService,
@@ -49,7 +56,22 @@ export class PublicacaoComponent implements OnInit {
               private _postService: PostsService,
               private _uploadFileService: UploadFileService,
               private _activatedRoute: ActivatedRoute,
-              ) { }
+              ) {
+                
+      this.cropperSettings = new CropperSettings();                
+
+      this.cropperSettings = new CropperSettings();
+      this.cropperSettings.minWidth = 400;
+      this.cropperSettings.minWidth = 400;
+      this.cropperSettings.croppedWidth = 400;
+      this.cropperSettings.croppedHeight = 400;
+      //this.cropperSettings.canvasWidth = 400;
+      //this.cropperSettings.canvasHeight = 400;
+      this.cropperSettings.preserveSize = true;
+      this.cropperSettings.cropperClass = 'canvas';
+      this.cropperSettings.noFileInput = true;
+      this.data = {};
+  }
 
   ngOnInit() {
       window.scrollTo( 0, 0);
@@ -78,6 +100,20 @@ export class PublicacaoComponent implements OnInit {
           }
         }
       );
+  }
+
+  fileChangeListener($event) {
+    var image:any = new Image();
+    var file:File = $event.target.files[0];
+    var myReader:FileReader = new FileReader();
+    var that = this;
+    myReader.onloadend = function (loadEvent:any) {
+        image.src = loadEvent.target.result;
+        that.cropper.setImage(image);
+
+    };
+
+    myReader.readAsDataURL(file);
   }
 
   createForm(){
@@ -124,10 +160,12 @@ export class PublicacaoComponent implements OnInit {
   }
 
   onSubmit(){
-    var width = $('#imagem-hidden').width();
-    var height = $('#imagem-hidden').height();
-    
-    console.log(width + '|' + height);
+    if ((<HTMLInputElement>window.document.getElementById('imagem')).files[0]){
+      console.log('tem imagem');
+    }
+    else {
+      console.log('não tem');
+    }
 
     if (!this.formulario.valid){
       Object.keys(this.formulario.controls).forEach(campo => {
@@ -140,10 +178,6 @@ export class PublicacaoComponent implements OnInit {
       var s = $(window).scrollTop();
 
       $(window).scrollTop(s + 100);
-    }
-    else if ((width > 0 || height > 0) && (width != 400 || height != 400)){
-      this.erro = true;
-      this.mensagemErro = 'A imagem de capa deve ter resolução de 400 x 400 pixels.';
     }
     else {
       this.loading = true;
@@ -222,9 +256,7 @@ export class PublicacaoComponent implements OnInit {
 
 /////////MODAIS/////////
   openModalExcluir(){
-    this.modalExcluir.emit({
-        action: 'modal',
-        params: ['open']});
+    this.modalExcluir.emit({action: 'modal',params: ['open']});
   }
 
   closeModalExcluir(e){
@@ -232,6 +264,14 @@ export class PublicacaoComponent implements OnInit {
         this.modalExcluir.emit({action:'modal',params:['close']});
         this._router.navigate(['/perfil/'+ this.leitor.nick]);
     }
+  }
+
+  openModalImagem(){
+      this.modalImagem.emit({action: 'modal', params: ['open']});
+  }
+
+  closeModalImagem(){
+      this.modalImagem.emit({ action:'modal', params:['close']});
   }
 
   openModalRascunho() {
@@ -242,21 +282,6 @@ export class PublicacaoComponent implements OnInit {
       if(e){
           this.modalRascunho.emit({ action:'modal', params:['close']});
       }
-  }
-
-  //IMAGEM CADASTRO
-  imgShow(e){
-    if(e.target.files && e.target.files[0]){
-      let reader = new FileReader();
-
-      //console.log(target);
-      reader.onload = (event:any) => {
-          this.url_img_style = 'url('+event.target.result+')';
-          this.url_img = event.target.result;
-      }
-      //console.log(e.target);
-      reader.readAsDataURL(e.target.files[0]);
-    }
   }
 
   public editor;

@@ -1,7 +1,3 @@
-<!-- não apagar, é usado para a validação do tamanho da imagem -->
-<img src='{{ url_img }}' id='imagem-hidden' style="display:none">
-<!-- fim não apagar -->
-
 <div id="modalExcluir" class="modal modal2 modal4"
      materialize="modal" [materializeParams]="[{dismissible: false}]"
      [materializeActions]="modalExcluir">
@@ -14,6 +10,36 @@
      [materializeActions]="modalRascunho">
      <modal-rascunho (closeModalRascunho)="closeModalRascunho($event)" [post]='post'></modal-rascunho>
 </div>
+<div id="modalImagem" class="modal"
+    materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalImagem">
+
+    <div class="modal-content">
+        <div class="title"  *ngIf="action != 'loading'">
+            <span>Recortar imagem</span>
+            <a click="#" class="modal-action modal-close close">x</a>
+        </div>
+          
+        <div class="modal-imagem-content">
+            <div class="file-field input-field file-upload">
+                <div class="button-input">
+                    <span>
+                        <i class="fa fa-picture-o" aria-hidden="true"></i>      
+                        Selecionar imagem
+                    </span>
+                    <input id="imagem" type="file" (change)="fileChangeListener($event)">
+                </div>
+                <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text">
+                </div>
+            </div>
+            <img-cropper #cropper [image]="data" [settings]="cropperSettings"></img-cropper>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <a (click)="closeModalImagem()"><button type="submit" class="button color button2"> Confirmar </button></a>
+    </div>
+</div>
     
 <div class="publicacao">
     <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
@@ -24,7 +50,7 @@
                 [ngClass]="{'invalid': verificaValidTouched('titulo')}"
             > 
             <!--editor-->
-            <quill-editor style="margin-top: 7%; text-align: left;" formControlName='conteudo'
+            <quill-editor formControlName='conteudo'
                             [options]="editorOptions"
                             (blur)="onEditorBlured($event)"
                             (focus)="onEditorFocused($event)"
@@ -44,17 +70,19 @@
                 </select>
             </div>
             <div class="right-container-imagem-destaque">
-                <span>Imagem de Destaque</span>
-
-                <div class="container-imagem" [ngStyle]="{'background-image': url_img_style}">
-                    <div class="no_image" (click)="img.click()">
-                        <i class="material-icons large" style="display: block">image</i> 
-                        Clique para Adicionar...   
-                        <br>Resolução (400 x 400 pixels)
-                    </div>
-                    <input type="file" #img id='imagem' style="display:none" (change)="imgShow($event)">
+                <button type="button" class="button button-border" (click)="openModalImagem()" [disabled]='loading'>
+                    <i class="fa fa-picture-o" aria-hidden="true"></i>  
+                    Inserir imagem de destaque
+                </button>
+                
+                <input type="file" #img id='imagem' style="display:none" (change)="imgShow($event)">
+                
+                <div class="container-imagem" *ngIf="data.image">
+                    <span class="result rounded">
+                        <img [src]="data.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
+                    </span>
                 </div>
-                <div class="menu">
+                <div class="menu" *ngIf="data.image">
                     <div class="row menu-radio">
                         <input type="checkbox" class="filled-in" id='adulto' formControlName='adulto'/>
                         <label for="adulto">Imagem com conteudo inapropriado</label>
@@ -62,7 +90,7 @@
                 </div>
             </div>
             <div class="right-container-buttons info">
-                <button type="button" class="button background-orange" (click)="onSubmit()" [disabled]='loading'>
+                <button type="button" class="button background-orange color button2" (click)="onSubmit()" [disabled]='loading'>
                     <i class="fa fa-spinner fa-pulse fa-3x fa-fw" *ngIf='loading'></i>    
                     Publicar
                 </button>
