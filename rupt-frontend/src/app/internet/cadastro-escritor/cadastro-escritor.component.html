@@ -26,7 +26,7 @@
                 <div class="menu">
                     <label> CPF *</label>
                     <input type="text" class="input" maxlength="14" formControlName='cpf' mask='000.000.000-00' placeholder="Insira seu CPF"
-                    [ngClass]="{'invalid': verificaValidTouched('cpf')}" (blur)="validaCpf()">
+                    [ngClass]="{'invalid': verificaValidTouched('cpf') || cpfInvalido || cpfUsado}" (blur)="validaCpf()">
 
                     <div class="error" *ngIf="verificaValidTouched('cpf')">{{ mensagemErro('cpf') }}</div>
                     <div class="error" *ngIf="!verificaValidTouched('cpf') && cpfInvalido">CPF inválido</div>
@@ -139,19 +139,27 @@
                 </div>
             </div>
 
-            <div class="error-alert success" *ngIf='salvo'> 
-                <img src="../../../assets/img/success.png"  class="img-button img-button2">
-                Salvo com sucesso.
-            </div>
+            <div class="form-footer">
+                <button type='button' (click)="clickSubmitEditar()" class="button" *ngIf='leitor.escritor'>
+                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw" *ngIf='loading'></i>
+                    Salvar
+                </button>
+                
+                <button type="button" class="button background-orange" *ngIf="!leitor.escritor" (click)="next()" 
+                    [disabled]="!formulario.valid || cpfInvalido || cpfUsado">
+                    Próximo
+                </button>
+                
+                <div class="error-alert success" *ngIf='salvo'> 
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                    Salvo com sucesso
+                </div>
 
-            <button type='button' (click)="onSubmitEditar()" class="button background-orange" *ngIf='leitor.escritor'>
-                Salvar
-            </button>
-            
-            <button type="button" class="button background-orange" *ngIf="!leitor.escritor" (click)="next()" 
-                [disabled]="!formulario.valid || cpfInvalido || cpfUsado">
-                Próximo
-            </button>
+                <div class="error-alert" *ngIf='erro'> 
+                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                    Verifique os campos em vermelho
+                </div>
+            </div>
         </div>
         <div [hidden]="page != 2">
             <div class="progress">

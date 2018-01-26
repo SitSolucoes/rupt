@@ -16,6 +16,7 @@ import { UploadItem } from 'app/classes/upload-item';
 import { Post } from 'app/classes/post';
 import { ValidaCampo } from 'app/shared/valida-campo';
 import {ImageCropperComponent, CropperSettings} from 'ng2-img-cropper';
+import { ConnectionFactory } from 'app/classes/connection-factory';
 
 @Component({
   selector: 'app-publicacao',
@@ -30,7 +31,7 @@ export class PublicacaoComponent implements OnInit {
   loading: boolean = false;
   mensagemErro: string = '';
   post: Post = new Post();
-  url_img_style: string;
+  url_imagem = ConnectionFactory.API_IMAGEM;
   validaCampo: ValidaCampo = new ValidaCampo();
   
   estilos = [
@@ -160,13 +161,6 @@ export class PublicacaoComponent implements OnInit {
   }
 
   onSubmit(){
-    if ((<HTMLInputElement>window.document.getElementById('imagem')).files[0]){
-      console.log('tem imagem');
-    }
-    else {
-      console.log('não tem');
-    }
-
     if (!this.formulario.valid){
       Object.keys(this.formulario.controls).forEach(campo => {
           const control = this.formulario.get(campo);
@@ -177,7 +171,10 @@ export class PublicacaoComponent implements OnInit {
 
       var s = $(window).scrollTop();
 
-      $(window).scrollTop(s + 100);
+      if (this.data.image || (this.post && this.post.src_imagem && this.post.src_imagem != ''))
+        $(window).scrollTop(s + 400);
+      else
+        $(window).scrollTop(s + 100);
     }
     else {
       this.loading = true;

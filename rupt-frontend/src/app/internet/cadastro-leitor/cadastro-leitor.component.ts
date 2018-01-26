@@ -24,25 +24,28 @@ export class CadastroLeitorComponent implements OnInit {
   
   leitor: Leitor = new Leitor();
   form: FormGroup;
-  spinner: boolean = false;
+  loading: boolean = false;
   message: any;
   textButton: string = "Cadastrar";
   enviado: boolean;
+  erro: boolean;
 
   dataInvalida: boolean;
   senhaInvalida: boolean;
   emailInvalido: boolean;
   nickInvalido: boolean;
+  nickRepetido: boolean;
   validaCampo: ValidaCampo = new ValidaCampo();
+  validando: boolean = false;
 
   //para visualização de miniaturas
   url_perfil;
   url_capa;
 
   selectOptions: Option[] = [
-    {value: 'M', name: 'Masculino'},
-    {value: 'F', name: 'Feminino'},
-    {value: 'O', name: 'Outros'}
+    {value: 'm', name: 'Masculino'},
+    {value: 'f', name: 'Feminino'},
+    {value: 'o', name: 'Outros'}
   ];
 
   constructor(private _formBuilder: FormBuilder,
@@ -51,6 +54,8 @@ export class CadastroLeitorComponent implements OnInit {
     private _router: Router) { }
 
   ngOnInit() {
+    window.scrollTo( 0, 0);
+
     this.createForm();
 
     this._leitoresService.leitor.subscribe(
@@ -100,30 +105,50 @@ export class CadastroLeitorComponent implements OnInit {
   }
 
   validaNick(){
+    this.validando = true;
+    this.nickInvalido = false;
+
     if (this.form.get('nick').value){
       if (this.form.get('nick').value.length >= 3){
         this._leitoresService.validaNick(this.form.get('nick').value, this.form.get('id').value).subscribe(
           (nick: boolean) => {
-            this.nickInvalido = nick
-            if(this.nickInvalido){
+            this.nickRepetido = nick
+            if(this.nickRepetido){
               this.nickEl.nativeElement.focus();
             }
+            else {
+              var regexp = new RegExp(/[!#$%&'()*+,-./:;?@[\\\]`{|}~]/);
+              let result = regexp.test(this.form.get('nick').value);
+              if (result == true){
+                this.nickInvalido = true;
+                this.nickEl.nativeElement.focus();
+              }
+            }
+            
+            this.validando = false;
           }
         );
       }
-      else
-        this.nickInvalido = false;
+      else{
+        this.nickRepetido = false;
+        this.validando = false;
+      }
     }
-    else
-        this.nickInvalido = false;
+    else{
+      this.nickRepetido = false;
+      this.validando = false;
+    }
   }
 
   validaEmail(){
+    this.validando = true;
+    
     if (this.form.get('email').value){
       if (this.form.get('email').value.length >= 6){
         this._leitoresService.validaEmail(this.form.get('email').value, this.form.get('id').value).subscribe(
           (email: boolean) => {
             this.emailInvalido = email;
+            this.validando = false;
             /*if(this.emailInvalido == true){
               console.log('retornou true');
               this.emailEl.nativeElement.focus(); 
@@ -135,12 +160,16 @@ export class CadastroLeitorComponent implements OnInit {
       else {
           this.emailInvalido = false;
           this.emailEl.nativeElement.focus(); 
+          this.validando = false;
       }
     }
     else{
         this.emailInvalido = false;
         this.emailEl.nativeElement.focus(); 
+        this.validando = false;
     }
+
+    
   }
 
   imgShow(e, target){
@@ -177,29 +206,37 @@ export class CadastroLeitorComponent implements OnInit {
     })
   }
 
+  clickSubmit(){
+      this.erro = false;
+      this.loading = true;
+
+      setTimeout(()=>{ 
+        if (this.validando == true)
+          this.clickSubmit();
+        else 
+          this.onSubmit();
+      }, 500); 
+  }
+
   onSubmit(){
       this.validaSenhas();
 
       this.enviado = false;
-      this.spinner = true;
       if (!this.form.valid){
         Object.keys(this.form.controls).forEach(campo => {
             const control = this.form.get(campo);
             control.markAsTouched();
-        })
-        this.spinner = false;
+        });
+        this.erro = true;
+        this.loading = false;
       }
-      else if (!this.nickInvalido && !this.emailInvalido && !this.dataInvalida && !this.senhaInvalida){
+      else if (!this.nickInvalido && !this.nickRepetido && !this.emailInvalido && !this.dataInvalida && !this.senhaInvalida){
             if (this.form.get('id').value == 0){
               if ((this.form.get('password').value == this.form.get('confirma_senha').value)){
                 this._leitoresService.createLeitor(this.form).subscribe(
                   (data: any) => {
                     this.leitor.id = data;
                     this.uploadFiles(false);
-                  },
-                  (error) =>{
-                    this.spinner = false;
-                    //console.log(error);
                   }
                 );
               }
@@ -208,10 +245,12 @@ export class CadastroLeitorComponent implements OnInit {
               this._leitoresService.updateLeitor(this.form, this.form.get('id').value).subscribe(
                 (response) => { 
                   this.uploadFiles(true);
-                  this.spinner = false;
-                  }
-                )
+                })
             }
+      }
+      else {
+        this.erro = true;
+        this.loading = false;
       }
   }
 
@@ -238,7 +277,7 @@ export class CadastroLeitorComponent implements OnInit {
     if ((<HTMLInputElement>window.document.getElementById('capa')).files[0]){
       files.push((<HTMLInputElement>window.document.getElementById('capa')).files[0]);
       files_name.push('doc2');
-      console.log('capa');
+      
     }
 
     if (files.length > 0){
@@ -249,12 +288,12 @@ export class CadastroLeitorComponent implements OnInit {
         this._uploadFileService.onSuccessUpload = (item, response, status, headers) => {
               // success callback
               if (!edit){
-                this.spinner = false;
+                this.loading = false;
                 this.doLogin();
               }
               else{
                 this.enviado = true;
-                this.spinner = false;
+                this.loading = false;
               } 
         };
         this._uploadFileService.onErrorUpload = (item, response, status, headers) => {
@@ -267,11 +306,11 @@ export class CadastroLeitorComponent implements OnInit {
       }
       else 
         if (!edit)  {
-          this.spinner = false;
+          this.loading = false;
           this.doLogin();
         }
         else {
-          this.spinner = false;
+          this.loading = false;
           this.enviado = true;
         }
   }
@@ -279,7 +318,6 @@ export class CadastroLeitorComponent implements OnInit {
   doLogin(){
     this._leitoresService.doLogin(this.form).subscribe(
       (ret: any) => {
-          this.spinner = false;
           this._router.navigate(['/']);
       },  
     );

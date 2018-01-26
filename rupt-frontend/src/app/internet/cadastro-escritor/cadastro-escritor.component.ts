@@ -24,10 +24,13 @@ export class CadastroEscritorComponent implements OnInit {
   
   cpfInvalido: boolean;
   cpfUsado: boolean;
-  salvo: boolean;
+  erro: boolean;
   leitor: Leitor = new Leitor();
+  loading: boolean;
   page: number = 1;
+  salvo: boolean;
   validaCampo: ValidaCampo = new ValidaCampo();
+  validando: boolean;
   url = ConnectionFactory.API_IMAGEM + 'docs/';
 
   formulario: FormGroup;
@@ -42,6 +45,8 @@ export class CadastroEscritorComponent implements OnInit {
               private _uploadFileService: UploadFileService) { }
 
   ngOnInit() {
+      window.scrollTo( 0, 0);
+
       this.createForm();
 
       this._leitorService.leitor.subscribe(
@@ -57,6 +62,7 @@ export class CadastroEscritorComponent implements OnInit {
             }
             else{
               this.formulario.patchValue({
+                id: this.leitor.id,
                 nome: this.leitor.nome,
                 nick: this.leitor.nick,
                 email: this.leitor.email,
@@ -96,6 +102,7 @@ export class CadastroEscritorComponent implements OnInit {
 
   createForm(){
     this.formulario = this._formBuilder.group({
+        id: '0',
         nome: '',
         nick: '',
         email: '',
@@ -138,6 +145,10 @@ export class CadastroEscritorComponent implements OnInit {
   }
 
   validaCpf(){
+    this.cpfUsado = false;
+    this.cpfInvalido = false;
+    this.validando = true;
+
     if (this.formulario.get('cpf').value){
       let cpf = this.formulario.get('cpf').value.replace(/\D/g,'');
 
@@ -145,20 +156,28 @@ export class CadastroEscritorComponent implements OnInit {
         this.cpfInvalido = !validarCpf(cpf);
 
         if (!this.cpfInvalido){
-          this._escritorService.existCpf(cpf, 0).subscribe(
+          this._escritorService.existCpf(cpf, this.formulario.get('id').value).subscribe(
             (cpfUsado: boolean) => {
               this.cpfUsado = cpfUsado;
+              this.validando = false;
             }
           );
+        }
+        else {
+          this.validando = false;
         }
       }
       else {
         this.cpfUsado = false;
         this.cpfInvalido = true;
+        this.validando = false;
       }
     }
-    else
-      this.cpfUsado = false;
+    else {
+        this.cpfUsado = false;
+        this.validando = false;
+    }
+      
   }
 
   consultaCep(){
@@ -192,34 +211,58 @@ export class CadastroEscritorComponent implements OnInit {
     )
   }
 
+  clickSubmitEditar(){
+    this.erro = false;
+    this.loading = true;
+
+    setTimeout(()=>{ 
+      if (this.validando == true)
+        this.clickSubmitEditar();
+      else 
+        this.onSubmitEditar();
+    }, 500); 
+  }
+
   onSubmitEditar(){
     this.salvo = false;
 
-    //como o campo ta disable na tela, pode ter algum espertão que libere o campo pelo f12 e edite o campo,
-    //e como depois de aceito não pode mais mudar os dados, isso ta aqui pra garantir que não vai mudar
-    if (this.leitor.escritor.status == 'a'){
-      this.formulario.controls.rg.enable();
-      this.formulario.controls.cpf.enable();
-      
-      this.formulario.patchValue({
-        rg: this.leitor.escritor.rg,
-        cpf: this.leitor.escritor.cpf,
-        status: this.leitor.escritor.status
+    if (!this.formulario.valid || this.cpfInvalido || this.cpfUsado){
+      Object.keys(this.formulario.controls).forEach(campo => {
+          const control = this.formulario.get(campo);
+          control.markAsTouched();
       });
-    };
-
-    this._escritorService.updateEscritor(this.formulario, this.leitor.id).subscribe(
-      (response) => { 
+      this.erro = true;
+      this.loading = false;
+    }
+    else {
+        //como o campo ta disable na tela, pode ter algum espertão que libere o campo pelo f12 e edite o campo,
+        //e como depois de aceito não pode mais mudar os dados, isso ta aqui pra garantir que não vai mudar
         if (this.leitor.escritor.status == 'a'){
-          this.formulario.controls.rg.disable();
-          this.formulario.controls.cpf.disable();
-          this.salvo = true; 
-        }
-        else {
-            this.uploadFiles(true);
-        }
-      }
-    )
+          this.formulario.controls.rg.enable();
+          this.formulario.controls.cpf.enable();
+          
+          this.formulario.patchValue({
+            rg: this.leitor.escritor.rg,
+            cpf: this.leitor.escritor.cpf,
+            status: this.leitor.escritor.status
+          });
+        };
+
+        this._escritorService.updateEscritor(this.formulario, this.leitor.id).subscribe(
+          (response) => { 
+            if (this.leitor.escritor.status == 'a'){
+              this.formulario.controls.rg.disable();
+              this.formulario.controls.cpf.disable();
+              this.salvo = true; 
+
+              this.loading = false;
+            }
+            else {
+                this.uploadFiles(true);
+            }
+          }
+        )
+    }
   }
 
   uploadFiles(upload){
@@ -246,6 +289,8 @@ export class CadastroEscritorComponent implements OnInit {
 
           this._uploadFileService.onSuccessUpload = (item, response, status, headers) => {
                 // success callback
+                this.loading = false;
+
                 if(!upload)
                   this._router.navigate(['perfil']);
                 else 
@@ -259,11 +304,13 @@ export class CadastroEscritorComponent implements OnInit {
           };
           this._uploadFileService.upload(myUploadItem);
       }
-      else 
+      else {
+        this.loading = false;
         if(!upload)
           this._router.navigate(['perfil']);
         else 
           this.salvo = true; 
+      }
   }
 
 }

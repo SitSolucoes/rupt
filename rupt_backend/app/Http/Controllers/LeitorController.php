@@ -103,8 +103,12 @@ class LeitorController extends Controller
                 
         $leitor->save();
 
+        $leitor = Leitor::where('id', $leitor->id)
+                        ->with('escritor')
+                        ->first();
+
         $response = [
-            'message' => "Leitor alterado com Sucesso",
+            'message' => "Leitor alterado com sucesso",
             'leitor' => $leitor
         ];
 
@@ -118,7 +122,7 @@ class LeitorController extends Controller
         if($leitor_id != null){
             $leitor = $this->getById($leitor_id)->first();
             return response()->json([
-                'message' => 'Leitor criado com sucesso!',
+                'message' => 'Leitor criado com sucesso',
                 'id' => $leitor->id,
             ],201);        
         }
@@ -218,14 +222,12 @@ class LeitorController extends Controller
 
     public function validaEmail($email, $id){
         $leitor = Leitor::where("email", $email)
+                        ->where('id', '<>', $id)
                         ->first();
 
         if ($leitor == null)
             return response()->json(['email' => false], 200);
 
-        if($leitor->id === $id)
-            return response()->json(['email' => false]);        
-            
         return response()->json(['email' => true], 200);
     }
 

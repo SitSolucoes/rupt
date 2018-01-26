@@ -77,12 +77,13 @@
                 
                 <input type="file" #img id='imagem' style="display:none" (change)="imgShow($event)">
                 
-                <div class="container-imagem" *ngIf="data.image">
+                <div class="container-imagem" *ngIf="data.image || (post && post.src_imagem && post.src_imagem != '')">
                     <span class="result rounded">
-                        <img [src]="data.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
+                        <img *ngIf="data.image" [src]="data.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
+                        <img *ngIf="!data.image" src="{{ url_imagem + 'posts/' + post.src_imagem }}">
                     </span>
                 </div>
-                <div class="menu" *ngIf="data.image">
+                <div class="menu" *ngIf="data.image || (post && post.src_imagem && post.src_imagem != '')">
                     <div class="row menu-radio">
                         <input type="checkbox" class="filled-in" id='adulto' formControlName='adulto'/>
                         <label for="adulto">Imagem com conteudo inapropriado</label>
@@ -98,10 +99,12 @@
         </div>
     </div>
 
-    <div id='error-alert'>
-        <div class="error-alert" *ngIf='erro'> 
-            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-            {{ mensagemErro }}
+    <div class="form-footer">
+        <div id='error-alert'>
+            <div class="error-alert" *ngIf='erro'> 
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                {{ mensagemErro }}
+            </div>
         </div>
     </div>
 
