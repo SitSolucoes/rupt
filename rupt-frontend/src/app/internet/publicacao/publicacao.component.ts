@@ -9,24 +9,31 @@ import { Leitor } from 'app/classes/leitor';
 import { Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, ViewChild } from '@angular/core';
 
 import * as $ from 'jquery';
 import { UploadItem } from 'app/classes/upload-item';
 import { Post } from 'app/classes/post';
+import { ValidaCampo } from 'app/shared/valida-campo';
+import {ImageCropperComponent, CropperSettings} from 'ng2-img-cropper';
+import { ConnectionFactory } from 'app/classes/connection-factory';
 
 @Component({
   selector: 'app-publicacao',
   templateUrl: './publicacao.component.html',
-  styleUrls: ['./publicacao.component.css']
 })
+
 export class PublicacaoComponent implements OnInit {
   categorias: Categoria[];
+  erro: boolean = false;
   formulario: FormGroup;
   leitor: Leitor;
+  loading: boolean = false;
+  mensagemErro: string = '';
   post: Post = new Post();
-  rascunho_param = {titulo: 'Sem Título', conteudo: 'Sem conteudo'};
-  url_img;
+  url_imagem = ConnectionFactory.API_IMAGEM;
+  validaCampo: ValidaCampo = new ValidaCampo();
+  
   estilos = [
     {value: 1, option: 'Imagem e Texto'},
     {value: 2, option: 'Apenas imagens'},
@@ -34,7 +41,14 @@ export class PublicacaoComponent implements OnInit {
   ]
 
   modalExcluir = new EventEmitter<string|MaterializeAction>();
+  modalImagem = new EventEmitter<string|MaterializeAction>();
   modalRascunho = new EventEmitter<string|MaterializeAction>();
+
+  
+  cropperSettings: CropperSettings;
+  data:any;
+  @ViewChild('cropper', undefined)cropper:ImageCropperComponent;
+
 
   constructor(private _formBuilder: FormBuilder,
               private _leitorService: LeitoresService,
@@ -43,7 +57,22 @@ export class PublicacaoComponent implements OnInit {
               private _postService: PostsService,
               private _uploadFileService: UploadFileService,
               private _activatedRoute: ActivatedRoute,
-              ) { }
+              ) {
+                
+      this.cropperSettings = new CropperSettings();                
+
+      this.cropperSettings = new CropperSettings();
+      this.cropperSettings.minWidth = 400;
+      this.cropperSettings.minWidth = 400;
+      this.cropperSettings.croppedWidth = 400;
+      this.cropperSettings.croppedHeight = 400;
+      //this.cropperSettings.canvasWidth = 400;
+      //this.cropperSettings.canvasHeight = 400;
+      this.cropperSettings.preserveSize = true;
+      this.cropperSettings.cropperClass = 'canvas';
+      this.cropperSettings.noFileInput = true;
+      this.data = {};
+  }
 
   ngOnInit() {
       window.scrollTo( 0, 0);
@@ -62,7 +91,6 @@ export class PublicacaoComponent implements OnInit {
 
       this._leitorService.verificaLogin().subscribe(
         (response) => {
-          
           if (!response)
             this._router.navigate(['/']);
           else{
@@ -75,18 +103,31 @@ export class PublicacaoComponent implements OnInit {
       );
   }
 
+  fileChangeListener($event) {
+    var image:any = new Image();
+    var file:File = $event.target.files[0];
+    var myReader:FileReader = new FileReader();
+    var that = this;
+    myReader.onloadend = function (loadEvent:any) {
+        image.src = loadEvent.target.result;
+        that.cropper.setImage(image);
+
+    };
+
+    myReader.readAsDataURL(file);
+  }
+
   createForm(){
     this.formulario = this._formBuilder.group({
-      id: '',
-      categoria_id: [-1, Validators.required],
+      id: '0',
+      categoria_id: ['', Validators.required],
       leitor_id: [''],
       titulo: ['', Validators.required],
       conteudo: ['', Validators.required],
       adulto: '',
       tipo_post: 3,
-      regiao_id: [-1, Validators.required],
-      rascunho: false
-    })
+      regiao_id: [''],
+    });
   }
 
   getPost(){
@@ -100,8 +141,9 @@ export class PublicacaoComponent implements OnInit {
               id: post.id,
               titulo: post.titulo,
               conteudo: post.conteudo,
+              categoria_id: post.categorias_post[0].categoria.id,
+              adulto: post.adulto == true ? true : false,
             });
-
           }
         )
       }
@@ -114,35 +156,129 @@ export class PublicacaoComponent implements OnInit {
     )
   }
 
-  onSubmit(rascunho = false){
-    if(rascunho){
-      this.formulario.value.rascunho = true;
+  verificaValidTouched(campo: string){
+    return this.validaCampo.verificaValidTouched(campo, this.formulario);
+  }
+
+  onSubmit(){
+    if (!this.formulario.valid){
+      Object.keys(this.formulario.controls).forEach(campo => {
+          const control = this.formulario.get(campo);
+          control.markAsTouched();
+          this.erro = true;
+          this.mensagemErro = 'Preencha os campos em vermelho.';
+      });
+
+      var s = $(window).scrollTop();
+
+      if (this.data.image || (this.post && this.post.src_imagem && this.post.src_imagem != ''))
+        $(window).scrollTop(s + 400);
+      else
+        $(window).scrollTop(s + 100);
     }
-    if(this.formulario.value.tipo_post == -1)
+    else {
+      this.loading = true;
+      
+      //tipo 1 = imagem com texto // 2 = imagem só // 3 = so texto
+      let tipo = 3;
+      
+      if ((<HTMLInputElement>window.document.getElementById('imagem')).files[0]){
+          tipo = 1;
+      }
+
       this.formulario.patchValue({
-        tipo_post: 3
+          tipo_post: tipo
       });
 
-    //quantidade de imagens
-    let qnt_imgs = this.formulario.value.conteudo.split('<img').length - 1;
-    if(qnt_imgs === 0)
-      this.formulario.patchValue({
-        tipo_post: 3
-      });
+      if (!this.post || this.post.publishedAt == null){
+          this._postService.create(this.formulario).subscribe(
+            (response) => { 
+              this.post = response;
+              this.uploadFiles(true); 
+            }
+          )
+      }
+      else {
+        this._postService.update(this.formulario).subscribe(
+          (response) => { 
+            this.post = response;
+            this.uploadFiles(false); 
+          }
+        )
+      }
+    }
+  }
 
-    if(qnt_imgs <= 2)
-      this.formulario.patchValue({
-        tipo_post: 1
-      });
-
-    if(qnt_imgs > 2)
-      this.formulario.patchValue({
-        tipo_post: 2
-      });
+  //UPLOAD
+  uploadFiles(rascunho: boolean){
+    let files = new Array();
+    let files_name = new Array();
     
-    this._postService.create(this.formulario).subscribe(
-      (response) => { this.uploadFiles(response) }
-    )
+    if ((<HTMLInputElement>window.document.getElementById('imagem')).files[0]){
+      files.push((<HTMLInputElement>window.document.getElementById('imagem')).files[0]);
+      files_name.push('doc1');
+    }
+
+    if (files.length > 0){
+        let myUploadItem = new UploadItem(files, files_name, "posts/uploadImages/" + this.post.id);
+        
+        myUploadItem.formData = { FormDataKey: 'Form Data Value' };  // (optional) form data can be sent with file
+
+        this._uploadFileService.onSuccessUpload = (item, response, status, headers) => {
+              this.loading = false;
+
+              // success callback
+              if (rascunho == true)
+                  this.openModalRascunho();
+              else 
+                  this._router.navigate(['noticia/'+ this.post.id]);
+        };
+        this._uploadFileService.onErrorUpload = (item, response, status, headers) => {
+              // error callback
+        };
+        this._uploadFileService.onCompleteUpload = (item, response, status, headers) => {
+              // complete callback, called regardless of success or failure
+        };
+        this._uploadFileService.upload(myUploadItem);
+      }
+      else {
+          this.loading = false;
+
+          if (rascunho == true)
+            this.openModalRascunho();
+          else
+            this._router.navigate(['noticia/' + this.post.id]);
+      }
+  }
+
+/////////MODAIS/////////
+  openModalExcluir(){
+    this.modalExcluir.emit({action: 'modal',params: ['open']});
+  }
+
+  closeModalExcluir(e){
+    if(e){
+        this.modalExcluir.emit({action:'modal',params:['close']});
+        this._router.navigate(['/perfil/'+ this.leitor.nick]);
+    }
+  }
+
+  openModalImagem(){
+      this.modalImagem.emit({action: 'modal', params: ['open']});
+  }
+
+  closeModalImagem(){
+      this.modalImagem.emit({ action:'modal', params:['close']});
+  }
+
+  openModalRascunho() {
+      this.modalRascunho.emit({action: 'modal', params: ['open']});
+  }
+
+  closeModalRascunho(e){
+      if(e){
+          this.modalRascunho.emit({ action:'modal', params:['close']});
+      }
   }
 
   public editor;
@@ -162,6 +298,7 @@ export class PublicacaoComponent implements OnInit {
     'link',
     'image',
   ];
+
   public editorOptions = { 
     placeholder: "Escreva seu texto aqui...",
     modules: { 
@@ -179,83 +316,5 @@ export class PublicacaoComponent implements OnInit {
   onEditorCreated(quill) {
     this.editor = quill;
   }
-
-//////////UPLOAD////////
-  uploadFiles(post_id){
-    let files = new Array();
-    let files_name = new Array();
-    
-    if ((<HTMLInputElement>window.document.getElementById('imagem')).files[0]){
-      files.push((<HTMLInputElement>window.document.getElementById('imagem')).files[0]);
-      files_name.push('doc1');
-    }
-
-    if (files.length > 0){
-        let myUploadItem = new UploadItem(files, files_name, "posts/uploadImages/"+post_id);
-        
-        myUploadItem.formData = { FormDataKey: 'Form Data Value' };  // (optional) form data can be sent with file
-
-        this._uploadFileService.onSuccessUpload = (item, response, status, headers) => {
-              // success callback
-              this._router.navigate(['noticia/'+post_id]);
-        };
-        this._uploadFileService.onErrorUpload = (item, response, status, headers) => {
-              // error callback
-        };
-        this._uploadFileService.onCompleteUpload = (item, response, status, headers) => {
-              // complete callback, called regardless of success or failure
-        };
-        this._uploadFileService.upload(myUploadItem);
-      }
-      else 
-          this._router.navigate(['noticia/'+post_id]);
-  }
-
-/////////MODAIS/////////
-  openModalExcluir(){
-    this.modalExcluir.emit({
-        action: 'modal',
-        params: ['open']});
-  }
-
-  closeModalExcluir(e){
-    if(e){
-        this.modalExcluir.emit({action:'modal',params:['close']});
-        this._router.navigate(['/perfil/'+ this.leitor.nick]);
-    }
-  }
-
-    openModalRascunho() {
-        if(this.formulario.value.titulo)
-          this.rascunho_param.titulo = this.formulario.value.titulo;
-        if(this.formulario.value.conteudo)
-          this.rascunho_param.conteudo = this.formulario.value.titulo;
-        this.modalRascunho.emit({
-            action: 'modal',
-            params: ['open']});
-    }
-
-    closeModalRascunho(e){
-        if(e){
-            this.modalRascunho.emit({
-                action:'modal',
-                params:['close']
-            });
-        }
-    }
-
-//////////IMAGEM CADASTRO////////
-    imgShow(e){
-      if(e.target.files && e.target.files[0]){
-        let reader = new FileReader();
-  
-        //console.log(target);
-        reader.onload = (event:any) => {
-            this.url_img = event.target.result;
-        }
-        //console.log(e.target);
-        reader.readAsDataURL(e.target.files[0]);
-      }
-    }
 
 }

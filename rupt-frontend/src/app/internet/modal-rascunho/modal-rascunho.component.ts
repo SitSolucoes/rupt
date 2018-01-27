@@ -3,9 +3,11 @@ import { Router } from '@angular/router';
 import { LeitoresService } from './../../services/leitores.service';
 import { Option } from './../../shared/option';
 import { FormBuilder, FormGroup, Validator } from '@angular/forms';
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { UploadFileService } from "./../../services/upload-file.service";
 import { UploadItem } from "./../../classes/upload-item";
+import { Post } from 'app/classes/post';
+import { PostsService } from 'app/services/posts.service';
 
 @Component({
   selector: 'modal-rascunho',
@@ -13,15 +15,43 @@ import { UploadItem } from "./../../classes/upload-item";
   styleUrls: ['./modal-rascunho.component.css']
 })
 export class ModalRascunhoComponent implements OnInit {
-    @Output('closeModal') closeModalRascunho = new EventEmitter();
-    constructor(private _router: Router) { }
+    
+    @Input() post: Post;
+    @Output() closeModalRascunho = new EventEmitter();
 
-  ngOnInit() {
-  }
+    loadingExcluir: boolean = false;
+    loadingPublicar: boolean = false;
 
-    redirectRascunho(){
-        this.closeModalRascunho.emit(true);
-        this._router.navigate(['rascunho']);
+    constructor(private _router: Router,
+                private _postService: PostsService) { }
+
+    ngOnInit() {
+    }
+
+    publicar(){
+        this.loadingPublicar = true;
+
+        this._postService.publicar(this.post.id).subscribe(
+          (response) => {
+            this.loadingPublicar = false;
+
+            this.closeModalRascunho.emit(true);
+            this._router.navigate(['noticia/'+ this.post.id]);
+          }
+        )
+    }
+
+    excluir(){
+        this.loadingExcluir = true;
+
+        this._postService.delete(this.post.id).subscribe(
+          (response) => {
+            this.loadingExcluir = false;
+
+            this.closeModalRascunho.emit(true);
+            this._router.navigate(['perfil', this.post.autor.nick]);
+          }
+        )
     }
 
 }

@@ -16,6 +16,7 @@ export class ModalLoginComponent implements OnInit {
   
   erro: boolean;
   formulario: FormGroup;
+  loading: boolean;
   mensagemErro: string;
   login_sub;
 
@@ -99,9 +100,12 @@ export class ModalLoginComponent implements OnInit {
 
   onSubmit(){
     this.erro = false;
+    this.loading = true;
 
     this._leitorService.doLogin(this.formulario).subscribe(
       (response) => { 
+        this.loading = false;
+
         if (response[0] == false){
           this.erro = true;
           this.mensagemErro = response[1];

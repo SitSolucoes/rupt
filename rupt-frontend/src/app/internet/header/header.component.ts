@@ -6,7 +6,11 @@ import { NgForm } from '@angular/forms/src/directives';
 import { Leitor } from './../../classes/leitor';
 import { any } from 'codelyzer/util/function';
 import { Component, OnInit, EventEmitter } from '@angular/core';
+<<<<<<< HEAD
 import { AuthService } from 'angular2-social-login/dist/auth.service';
+=======
+declare var $: any;
+>>>>>>> 5a7a843fc1820394b30982c0dcdb910747f03ef1
 
 @Component({
   selector: 'header',
@@ -30,6 +34,8 @@ export class HeaderComponent implements OnInit {
       this._leitorService.leitor.subscribe(
         (leitor: Leitor) => { this.leitor = leitor }
       )
+
+      $('.button-collapse').sideNav();
 
       this._leitorService.verificaLogin().subscribe();
   }

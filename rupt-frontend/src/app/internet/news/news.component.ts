@@ -36,6 +36,7 @@ export class NewsComponent implements OnInit {
   form;
   leitor = null;
   leitorLogado: boolean = localStorage.getItem('l') != null;
+  loading: boolean;
   maisLidos: Post[];
   
   post: Post;
@@ -87,8 +88,11 @@ export class NewsComponent implements OnInit {
   }
 
   onSubmit(){
+    this.loading = true; 
+
     this._postService.createComentario(this.form).subscribe(
       ( ret ) => {
+        this.loading = false;
         if(ret.sucesso === 'OK'){
           this.comentarios = ret.comentarios;
         }

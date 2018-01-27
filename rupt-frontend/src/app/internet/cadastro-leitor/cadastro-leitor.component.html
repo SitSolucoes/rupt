@@ -11,7 +11,7 @@
     </a>
     
     <div class="area"> 
-        <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
+        <form [formGroup]="form" (ngSubmit)="clickSubmit()" autocomplete="off">
             <div class="menu">
                 <label> Nome </label>
                 
@@ -26,10 +26,11 @@
                 <label> Nick </label> 
                 
                 <input type="text" class="input" maxlength="20" name="nick" placeholder="A sua marca na Rupt" #nick formControlName="nick"
-                [ngClass]="{'invalid': verificaValidTouched('nick') || nickInvalido}" (blur)="validaNick()" >
+                [ngClass]="{'invalid': verificaValidTouched('nick') || nickRepetido || nickInvalido}" (blur)="validaNick()" >
 
                 <div class="error" *ngIf="verificaValidTouched('nick')">{{ mensagemErro('nick') }}</div>
-                <div class="error" *ngIf="!verificaValidTouched('nick') && nickInvalido">Nick já cadastrado</div>
+                <div class="error" *ngIf="!verificaValidTouched('nick') && nickRepetido">Nick já cadastrado</div>
+                <div class="error" *ngIf="!verificaValidTouched('nick') && nickInvalido">Só é permitido o uso de letras, números e underline</div>
             </div>
             <div class="menu">
 
@@ -54,11 +55,11 @@
             </div>
             <div class="menu">
                     <div class="row menu-radio">
-                            <input name="sexo" type="radio" id="f" value="m" [checked]="form.get('sexo').value == 'F'"/>
+                            <input name="sexo" type="radio" id="f" value="m" [checked]="form.get('sexo').value == 'f'"/>
                             <label for="f" (click)="selectSexo('f')">Feminino</label>
-                            <input name="sexo" type="radio" id="m" value="f" [checked]="form.get('sexo').value == 'M'"/>
+                            <input name="sexo" type="radio" id="m" value="f" [checked]="form.get('sexo').value == 'm'"/>
                             <label for="m" (click)="selectSexo('m')">Masculino</label>
-                            <input name="sexo" type="radio" id="o" value="o" [checked]="form.get('sexo').value == 'O'"/>
+                            <input name="sexo" type="radio" id="o" value="o" [checked]="form.get('sexo').value == 'o'"/>
                             <label for="o" (click)="selectSexo('o')">Outro</label>
                     </div>
             </div>
@@ -103,27 +104,21 @@
                 </div>
 
             </div>
-            
-            <button type="submit" class="button" id="submit-contato">
-                {{ textButton }}
-            </button>
-            
-            <div class="spinner clear" *ngIf="spinner">
-                <div class="preloader-wrapper big active" >
-                    <div class="spinner-layer spinner-rupt">
-                    <div class="circle-clipper left">
-                        <div class="circle"></div>
-                    </div><div class="gap-patch">
-                        <div class="circle"></div>
-                    </div><div class="circle-clipper right">
-                        <div class="circle"></div>
-                    </div>
-                    </div>
+
+            <div class="form-footer">
+                <button type="submit" class="button" [ngClass]='{ medium: !leitor.id}' id="submit-contato">
+                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw" *ngIf='loading'></i>
+                    {{ textButton }}
+                </button>
+                
+                <div class="error-alert" *ngIf='erro'> 
+                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                    Verifique os campos em vermelho
                 </div>
-            </div>
-            <div class="error-alert success" *ngIf='enviado'> 
-                <img src="../../../assets/img/success.png"  class="img-button img-button2">
-                Salvo com sucesso.
+                <div class="error-alert success" *ngIf='enviado'> 
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                    Salvo com sucesso
+                </div>
             </div>
         </form>
     </div>

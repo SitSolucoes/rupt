@@ -41,6 +41,7 @@ export class UserComponent implements OnInit {
   interacoesLeitor: InteracaoLeitor[];
   
   modalCompartilhar = new EventEmitter<string|MaterializeAction>();
+  modalCompartilharMensagem = new EventEmitter<string|MaterializeAction>();
   modalDenuncia = new EventEmitter<string|MaterializeAction>();
   modalExcluir = new EventEmitter<string|MaterializeAction>();
 
@@ -238,6 +239,16 @@ export class UserComponent implements OnInit {
     this.getTimeline();
 
     this.modalExcluir.emit({action: 'modal', params: ['close']});
+  }
+
+  openModalCompartilharMensagem(){
+    this.modalCompartilharMensagem.emit({ action: 'modal', params: ['open']});
+
+    setTimeout(() => this.closeModalCompartilharMensagem(), 2500);
+  }
+
+  closeModalCompartilharMensagem(){
+    this.modalCompartilharMensagem.emit({ action:'modal', params:['close'] });
   }
 
   openModalDenuncia(p){

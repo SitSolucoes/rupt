@@ -13,7 +13,6 @@ export class PostsService {
   private headers = new Headers({'Content-Type': 'application/json'});
 
   getEscritor(id){
-    
     return this._http.get(this._url + 'getEscritor/' + id, {headers: this.headers})
       .map(
           (response: Response) => { 
@@ -90,13 +89,25 @@ export class PostsService {
 
   create(form){
     return this._http.post(this._url + 'posts/create', JSON.stringify(form.value), {headers: this.headers}).map(
-      (response) => { return response.json().post_id }
+      (response) => { return response.json().post }
     )
+  }
+
+  publicar(id){
+      return this._http.post(this._url + 'posts/publicar', JSON.stringify({id: id}), {headers: this.headers}).map(
+        (response) => { return response.json() }
+      )
   }
 
   delete(id){
     return this._http.post(this._url + 'posts/delete', JSON.stringify({id: id}), {headers: this.headers}).map(
       (response) => { return response.json().msg }
+    )
+  }
+
+  update(form){
+    return this._http.post(this._url + 'posts/update', JSON.stringify(form.value), {headers: this.headers}).map(
+      (response) => { return response.json().post }
     )
   }
 

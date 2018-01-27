@@ -16,9 +16,6 @@ export class LeitoresService {
   constructor(private _http: Http) { }
 
   private createBody(form){
-    console.log("createBody");
-    console.log(form);
-
     return JSON.stringify(
         {
          fb_uid: form.value.fb_uid,

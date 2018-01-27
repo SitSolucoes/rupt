@@ -53,7 +53,10 @@
                     <div class="error col s12">{{ mensagemErro }}</div>
                 </div>
 
-                <button type="submit" class="button" id="submit-contato">Entrar</button>
+                <button type="submit" class="button" id="submit-contato">
+                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw" *ngIf='loading'></i>    
+                    Entrar
+                </button>
 
                 <a (click)="openModalEsqSen()"><div class="text">Esqueceu a senha?</div></a>
 

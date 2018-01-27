@@ -28,7 +28,7 @@ class PostCategoriaController extends Controller
     }
 
     public function update($categoria_id, $post_id){
-        $postCategoria = PostCategoria::where('post_idPost', $post_id)->first();
+        $postCategoria = PostCategoria::where('post_idPost', $post_id)->orderBy('id')->first();
 
         if ($postCategoria->categoria_idCategoria != $categoria_id){
             PostCategoria::where('post_idPost', $post_id)->delete();

@@ -126,44 +126,51 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 
 .headbar .title{
     font-family: 'nexa-bold';
-    font-size: 18px;
+    font-size: 21px;
     display: block;
     float: left;
-    color: #FFFDFD;
-    width: auto;
-    height: 100%;
+    clear: both;
+    width: 100%;
+    color: #f0f0f0;
+    /* width: auto; */
+    /* height: 100%; */
     position: relative;
-    left: 10px;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-top: 20px;
+    padding: 6px 15px;
     font-weight: 500;
-    text-transform: uppercase;
+    text-transform: capitalize;
 }
 
-.active-link{
+.headbar .active-link{
     background: #B05307;
-    font-size: 90px;
-    font-family: 'nexa-bold';
-    font-size: 16px;
-    display: block;
+    color: #fff;
+}
+
+.headbar .headbar-left{
     float: left;
-    color: #FFFDFD;
-    width: auto;
     height: 100%;
-    position: relative;
-    left: 10px;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-top: 20px;
-    font-weight: 500;
-    text-transform: uppercase;
+    width: 33%;
+    padding-left: 30px;
+}
+
+.headbar .headbar-left .fa-bars{
+    color: #fff;
+    font-size: 25px;
+    margin-top: 18px;
+}
+
+.headbar .headbar-left .fa-bars:hover{
+    opacity: .8;
 }
 
 .headbar .headbar-right{
     float: right;
     height: 100%;
-    padding-right: 60px;
+    padding-right: 30px;
+}
+
+.headbar .headbar-right .fa-search{
+    font-size: 23px;
+    margin-top: 12px;
 }
 
 .headbar .headbar-right p{
@@ -174,7 +181,9 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     font-weight: bolder;
     margin-left: 5px;
     margin-top: 20px;
+    margin-right: 15px;
     text-transform: capitalize;
+    font-size: 17px;
 }
 
 .headbar .headbar-right .btn{
@@ -188,7 +197,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     display: block;
     float: left;
     position: absolute;
-    right: 90px;
+    right: 70px;
     top: 13px;
     color: #fff;
     width: 17px;
@@ -222,21 +231,15 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     float: left;
     font-family: 'nexa';
     color: #ffffff;
-    margin-left: 10px;
-    margin-right:  10px;
-    margin-top: 15px;
     font-size: 22px;
-    border-radius: 2px;
-    text-transform: uppercase;
     outline: none;
     cursor: pointer;
 }
 
 .headbar .login-border{
-    border: solid 1px #ffffff;
-    padding: 7px 10px;
-    margin-top: 12px;
-    font-size: 15px;
+    padding: 5px 15px;
+    margin-top: 11px;
+    font-size: 20px;
     font-family: 'nexa-bold';
 }
 
@@ -246,9 +249,13 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .headbar .login-border:hover{
-    background: #ffffff;
-    color: #B05307;
+    background: #e06a09;
+    color: #fff;
     transition: 1s;
+}
+
+.headbar .login-border2{
+    border-right: 0px;
 }
 
 .headbar .img{
@@ -256,16 +263,6 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     float: left;
     height: 28px;
     margin-top: 15px;
-}
-
-.headbar .img2{
-    width: auto;
-    height: 40px;
-    display: block;
-    margin-left: 10px;
-    margin-top: 12px;
-    float: left;
-    margin-left: 60px;
 }
 
 .headbar .img3{
@@ -277,8 +274,8 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 
 .headbar .headbar-right .area-img{
     border-radius: 100%;
-    width: 38px;
-    height: 38px;
+    width: 40px;
+    height: 40px;
     display: block;
     margin-top: 12px;
     float: left;
@@ -287,14 +284,14 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .headbar .img4{
-    height: 40px;
+    height: 42px;
 }
 
 .headbar .img5{
     display: block;
     float: left;
     height: 18px;
-    margin-top: 21px;
+    margin-top: 17px;
     position: relative;
     right: 30px;
 }
@@ -302,6 +299,32 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .headbar .img6{
     height: 20px;
     margin-top: 20px;
+}
+
+.headbar .headbar-center{
+    display: block;
+    float: left;
+    height: 100%;
+    width: 33%;
+}
+
+.headbar .headbar-center .logo{
+    display: table;
+    margin: 0 auto;
+    width: 20%;
+    margin-top: 10px;
+}
+
+
+.headbar .headbar-center .img{
+    height: 45px;
+    display: table;
+    margin: 0 auto;
+}
+
+.side-nav{
+    padding-top: 20px;
+    background: #282824;
 }
 
 .banner-promo{
@@ -315,7 +338,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .banner-promo2{
-    height: 250px;
+    height: 150px;
     margin-bottom: 20px;
 }
 
@@ -339,12 +362,12 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 
 
 .banner-promo .container{
-    width: 90%;
-    margin-left: 5%;
-    height: 100%;
+    width: 95%;
+    margin-left: 2.5%;
     background: url('/assets/img/banner-pat.png');
     background-repeat:repeat;
     overflow: hidden;
+    max-width: 100%;
 }
 
 .banner-promo .img{
@@ -363,7 +386,6 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     float: left;
     margin-right: 1px;
     overflow:hidden;
-    box-shadow: 1px 3px 1px #B9B7B7;
 }
 
 .banner .info-slider{
@@ -478,8 +500,8 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     float: left;
     padding-top: 30px;
     padding-bottom: 40px;
-    padding-left: 4%;
-    padding-right: 4%;
+    padding-left: 3%;
+    padding-right: 3%;
 }
 
 
@@ -519,8 +541,8 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .menu-top .container-slider{
-    padding-left: 5% !important;
-    padding-right: 5% !important;
+    padding-left: 3% !important;
+    padding-right: 3% !important;
 }
 
 
@@ -629,6 +651,8 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     display: block;
     float: right;
     margin-right: 5px;
+    color: #fff;
+    text-shadow: 1px 1px 1px #000000;
 }
 
 .container-categoria .number{
@@ -646,11 +670,11 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .info-img-text .title{
     display: block;
     float: left;
-    width: 235px;
+    width: 260px;
     max-height: 60px;
     overflow: hidden;
     margin-left: 20px;
-    margin-top: 15px;
+    margin-top: 10px;
     font-size: 17px;
     line-height: 22px;
 }
@@ -676,7 +700,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     float: left;
     position: absolute;
     bottom: 0px;
-    right: -10px;
+    right: 0px;
     width: 48%;
     /* margin-left: 2%; */
 }
@@ -706,7 +730,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     overflow: hidden;
     display: block;
     float: left;
-    margin-left: 5px;
+    margin-left: 10px;
 }
 
 .container-categoria .info-post .area-post{
@@ -714,7 +738,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     float: right;
     width: auto;
     /* height: 10px; */
-    max-width: 75px;
+    width: 80px;
     margin-right: 20px;
 }
 
@@ -745,15 +769,16 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .info-post p {
-    width: 100px;
+    max-width: 110px;
     display: block;
     float: left;
-    font-family: 'gilroy';
+    font-family: 'lato';
     font-weight: bold;
-    font-size: 13px;
+    font-size: 14.5px;
     color: #646363;
     margin-left: 10px;
     margin-top: 15px;
+    overflow: hidden;
 }
 
 .container-categoria .underline{
@@ -825,6 +850,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     height: 250px !important;
     margin-left: 0px;
     margin-right: 5px;
+    outline: none;
 }
 
 .slick-slide2 {
@@ -2316,6 +2342,12 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     text-transform: uppercase;
     font-size: 13px;
     font-family: nexa-bold;
+    padding-top: 2px;
+}
+
+.news .container .comentarios .profile .button i{
+    font-size: 16px;
+    margin-right: 5px;
 }
 
 .news .container .comentarios .profile .user{
@@ -2436,13 +2468,67 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     margin-top: 10px;
     margin-bottom: 40px;
     padding: 10px;
-    border: 1px solid #f97000;
+    border: 0px;
     background: #f97000;
     font-weight: bolder;
     text-transform: capitalize;
     font-size: 16px;
     color: #fff;
     border-radius: 2px;
+}
+
+.news .button-modal i{
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+.modal-rascunho{
+    max-height: 400px;
+}
+
+.modal-rascunho .news .area-top2 {
+    padding-top: 5px;
+    max-height: 150px;
+    height: auto;
+}
+
+.modal-rascunho .news .container2{
+    max-height: 280px;
+    height: auto;
+    width: 95%;
+    overflow: auto;
+    margin-top: 10px;
+    margin-left: 2.5%;
+}
+
+.modal-rascunho .news{
+    height: auto;
+    padding-bottom: 0px;
+}
+
+.modal-rascunho .button-area{
+    display: table;
+    margin: auto;
+}
+
+.modal-rascunho .news .button-modal{
+    margin-bottom: 10px;
+    margin-left: 0;
+    width: 120px;
+}
+
+.modal-rascunho .news .container .frame{
+    margin-top: 30px;
+}
+
+.modal-rascunho .news .area-top .title{
+    width: 95%;
+    font-size: 30px;
+    line-height: 35px;
+}
+
+.modal-rascunho .news .container .frame .info{
+    line-height: 28px;
 }
 
 .contato{
@@ -2573,6 +2659,8 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     padding-top: 10px;
     padding-bottom: 10px;
     border-radius: 4px;
+    text-align: center;
+    position: relative;
 }
 
 .img-button{
@@ -2593,6 +2681,8 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .success{
     background: green;
 }
+
+
 
     /*---------------- faq ---------- */
 
@@ -2773,25 +2863,6 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
   background: #fff;
 }
 
-.cadastro .container .area .button{
-	width: 120px;
-	height: 40px;
-	border-radius: 3px;
-	text-align: center;
-	outline: none;
-	display: block;
-	float: right;
-	margin-bottom: 20px;
-	margin-top: 10px;
-	background: #f97000;
-	border: 1px solid #f97000;
-	color: #ffffff;
-	text-transform: uppercase;
-	font-size: 14px;
-	font-family: nexa-bold;
-	clear: both;
-}
-
 .cadastro .container .area .button:hover{
   opacity: .8;
 }
@@ -2910,22 +2981,6 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     width: 50%;
 }
 
-.cadastro-escritor .container .button {
-    display: block;
-    float: right;
-    margin-left: 10px;
-    margin-top: 20px;
-    padding: 8px;
-    padding-left: 10px;
-    padding-right: 10px;
-    color: #ffffff;
-    font-weight: 600;
-    background: #828282;
-    border: 1px solid #828282;
-    border-radius: 2px;
-    position: relative;
-    right: 30px;
-}
 
 .cadastro-escritor .container .background-orange{
      background: #f97000;
@@ -3007,11 +3062,11 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .login-modal .login-container .button{
-    width: 20% !important;
+    width: 120px !important;
     height: 35px !important;
     border: 1px solid #f97000 !important;
     color: #fff;
-    padding-top: 2px !important;
+    padding-top: 4px !important;
     font-family: lato;
     font-size: 16px !important;
     border-radius: 2px;
@@ -3019,6 +3074,11 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     opacity: .9;
     margin-bottom: 30px;
     float: right;
+}
+
+.login-modal .login-container .button i{
+    font-size: 16px;
+    margin-right: 5px;
 }
 
 .login-modal .login-container .img{
@@ -3245,6 +3305,11 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 
 
 /* editor de texto */
+quill-editor{
+    display: table;
+    width: 100%;
+}
+
 .ql-snow .ql-picker.ql-size .ql-picker-label::before,
 .ql-snow .ql-picker.ql-size .ql-picker-item::before {
   content: 'Normal'!important;
@@ -3267,28 +3332,27 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .ql-container .ql-editor{
-    min-height: 310px !important;
     font-family: lato;
     font-size: 15px;
+    min-height: 450px!important;
+    padding-bottom: 1rem;
+    height: auto;
 }
 
 .ql-container.ql-snow{
-    height: 98.448%;
+    min-height: 450px !important;
 }
 
 .ql-editor{
     overflow-y: auto;
     background: #fff;
+    
 }
 
 .ql-toolbar.ql-snow{
-    margin-top: 7%;
-    border-top: 1px solid #ccc !important;
     background: #fff;
-    border-left: 1px solid #ccc !important;
-    border-bottom: 1px solid #ccc !important;
-    border-right: 1px solid #ccc !important;
-    /*border-top: 0px !important;*/
+    border-top: none!important;
+    border-top: 1px solid #ccc !important;
 }
 
 .generico-modal{
@@ -3498,4 +3562,353 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     background: #fff;
     color: #5e5e5e;
     border: 1px solid #5e5e5e;;
+}
+
+.publicacao .container{
+    text-align: center;
+    margin: 0px;
+    width: 100%;
+    padding: 10px 10px 10px 10px;
+    height: 100% !important;
+    float: left;
+    margin-left: 3%;
+}
+
+.publicacao .container h3{
+    display: block;
+    margin: 0 auto;
+    width: 85%;
+    font-size: 34px;
+    line-height: 50px;
+    color: #3b3b3b;
+    font-family: 'gilroy-bold';
+    text-align: center;
+    letter-spacing: -2px;
+    text-transform: uppercase;
+    padding: 30px;
+}
+
+/*CONTAINER LEFT*/
+.publicacao .container_left{
+    float: left;
+    width: 65% !important;
+    display: table;
+    height: 410px !important;
+    margin-right: 4%;
+}
+
+.publicacao .container_left input{
+    float: left;
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+/*CONTAINER RIGHT*/
+.publicacao .container_right{
+    float: left;
+    background: white;
+    width: 30% !important;
+    display: inline-block !important;
+    padding: 1.5% !important;
+    border: 1px solid #ccc;
+    text-align: left;
+    color: rgb(148, 148, 148);
+}
+
+.publicacao .container_right .right-container-input-group{
+    height: 100px;
+    width: 100%;
+}
+
+.publicacao .container_right .right-container-imagem-destaque span{
+    font-size: 18px;
+    display: block;
+    text-align: center;
+    font-family: 'nexa-bold';
+    margin-bottom: 10px;
+}
+
+.publicacao .container_right .right-container-imagem-destaque img, .no_image{
+    width: 200px;
+    height: 200px;
+    margin-bottom: 2%;
+}
+
+.publicacao .container-imagem{
+    background-size: 250px 250px;
+    width: 200px;
+    height: 200px;
+    display: table;
+    margin: auto;
+}
+
+.publicacao .no_image{
+    padding-top: 60px;
+    background-color: rgba(198, 198, 198, 0.6);
+    color: rgb(50, 48, 48);
+    text-align: center;
+    vertical-align: center;
+    cursor: pointer;
+    margin-bottom: 0;
+    height: 250px;
+}
+
+/* QUILL EDITOR*/
+.publicacao .ql-editor {
+    height: 450px;
+}
+
+.publicacao .ql-container{
+    height: 76%;   
+}
+
+.publicacao .ql-toolbar.ql-snow{
+    text-align: left;
+}
+
+/*STYLES*/
+.publicacao{
+    display: block;
+    float: left;
+    width: 100%;
+    padding-bottom: 40px;
+}
+
+.publicacao .container{
+    width: 90%;
+    margin-left: 5%;
+    margin-top: -9px;
+}
+
+.publicacao .container .top{
+    display: block;
+    width: 100%;
+    /*border-bottom: 1px solid #ccc;*/
+}
+
+.publicacao .container .top select{
+    display: block;
+    background: #fff;
+    border: 1px solid #ccc;
+    height: 36px;
+    border-bottom: 1px solid #ccc;
+}
+
+.publicacao .container .top .input{
+    width: 100%;
+    background: #fff;
+    border-radius: 0px;
+    border: 1px solid #ccc;
+    margin-bottom: 1%; 
+}
+
+.publicacao .top .input:nth-child(1){
+    margin-bottom: 3% !important;
+}
+
+.publicacao .container .top .input2{
+    border-top: 0px;
+}
+
+.publicacao .right-container-buttons{
+    display: table;
+    height: 50px;
+    margin: 0 auto;
+    margin-top: 20px;
+    width: 100%;
+    margin-bottom: 3px;
+}
+
+.publicacao .button{
+    width: auto;
+    display: block;
+    float: left;
+    position: relative;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #d9d9d9;
+    background: #d9d9d9;
+    font-weight: bolder;
+    font-size: 16px;
+    color: #4f4f4f;
+    border-radius: 2px;
+    display: table-cell;
+    width: 100%;
+}
+
+.publicacao .button2{
+    margin-top: 0;
+}
+
+.publicacao .button-border{
+    border: 1px solid #f97000;
+    background: transparent;
+    color: #f97000;
+    margin-bottom: 25px;
+}
+
+.publicacao .button i{
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    font-size: 20px;
+}
+
+.publicacao .button:hover{
+    background: #fff;
+    color: #f97000;
+    border: 1px solid #f97000;
+    transition: 0.5s;
+}
+
+.publicacao .color{
+    background: #f97000;
+    border: 1px solid #f97000;
+    color: #ffffff;
+}
+
+.publicacao .color:hover{
+    border: 1px solid #f97000;
+    color: #f97000;
+}
+
+
+.publicacao .container [type="checkbox"] + label{
+    margin-left: 15px;
+}
+
+.publicacao .container input[type=text].valid:not(.browser-default){
+    border-bottom: 1px solid #005f96;
+}
+
+.modal-imagem-content{ 
+    padding: 70px 30px 10px 30px;
+}
+
+.modal-imagem-content .file-upload{
+    display: table;
+    margin: auto;
+}
+
+.modal-imagem-content .file-field .file-path-wrapper{
+    display: none;
+}
+
+.modal-imagem-content .button-input{
+    width: auto;
+    display: block;
+    float: left;
+    position: relative;
+    margin-right: 10px;
+    margin-bottom: 20px;
+    padding: 8px;
+    padding-left: 12px;
+    padding-right: 12px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    background: #ccc;
+    font-weight: bolder;
+    font-size: 16px;
+    color: #5e5e5e;
+    opacity: 1;
+}
+
+.modal-imagem-content .button-input i{
+    margin-right: 10px;
+}
+
+.modal-imagem-content canvas{
+    display: table;
+    margin: auto;
+}
+
+.form-footer{
+    display: table;
+    width: 100%;
+}
+
+.form-footer .button{
+    width: 120px;
+    height: 40px;
+    border-radius: 3px;
+    text-align: center;
+    outline: none;
+    display: block;
+    float: right;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    background: #f97000;
+    border: 1px solid #f97000;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-family: nexa-bold;
+    clear: both;
+}
+
+.form-footer .button.medium{
+    width: 150px;
+}
+
+.form-footer .button .fa-spinner{
+    font-size: 16px;
+    margin-right: 10px;
+    margin-left: -10px;
+}
+
+.form-footer .error-alert{
+    clear: none;
+    width: 350px;
+}
+
+.form-footer .error-alert i{
+    position: relative;
+    margin-right: 10px;
+}
+
+.form-footer .error-alert.success{
+    width: 250px;
+}
+
+.modal.modal-mensagem{
+    background: transparent!important;
+}
+
+.modal-mensagem{
+    position: fixed;
+    top: 0!important;
+    z-index: 1000;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .95);
+    max-height: 100%!important;
+}
+
+.modal-mensagem .image-area{
+    display: table;
+    margin: auto;
+    margin-top: 10%;
+}
+
+.modal-mensagem .image-area img{
+    width: 300px;
+}
+
+.modal-mensagem .title{
+    display: block;
+    margin: 0 auto;
+    font-size: 36px;
+    line-height: 50px;
+    color: white;
+    font-family: 'gilroy-bold';
+    text-align: center;
+}
+
+.modal-mensagem .button{
+    float: none;
+    display: table;
+    margin: auto;
+    margin-top: 20px;
+    position: relative;
 }

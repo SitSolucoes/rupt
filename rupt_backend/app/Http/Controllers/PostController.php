@@ -29,10 +29,8 @@ class PostController extends Controller
         $post = $this->create($request, $post);
         $post->autor_idLeitor = $request->leitor_id;
         $post->tipo_post = $request->tipo_post;
-        //if(!$request->rascunho)
-        //$post->published_at = new Date(); 
         $post->visualizacoes = 0;
-        $post->publishedAt = date('Y-m-d H:i:s');
+        //$post->publishedAt = date('Y-m-d H:i:s');
         
         $post->save();
 
@@ -42,7 +40,9 @@ class PostController extends Controller
         $c = new TimelineController();
         $c->create($request->leitor_id, $post->id);
 
-        return response()->json(['post_id' => $post->id], 201);
+        $post = $this->getById($post->id);
+
+        return response()->json(['post' => $post->first()], 201);
     }
 
     public function update(Request $request){
@@ -53,6 +53,10 @@ class PostController extends Controller
 
         $c = new PostCategoriaController();
         $c->update($request->categoria_id, $post->id);
+
+        $post = $this->getById($post->id);
+
+        return response()->json(['post' => $post->first()], 201);
     }
 
     public function delete(Request $request){
@@ -66,6 +70,14 @@ class PostController extends Controller
         return response()->json(['msg', 'Excluido com sucesso.'], 200);
     }
 
+    public function publicar(Request $request){
+        $post = Post::find($request->id);
+        $post->publishedAt = date('Y-m-d H:i:s');
+        $post->save();
+
+        return response()->json(['publicado' => true], 200);
+    }
+
     public function removePorDenuncia($id, $admin_id){
         $post = Post::find($id);
         $post->deleted_at = date("Y-m-d H:i:s");
@@ -74,7 +86,10 @@ class PostController extends Controller
     }
 
     public function getById($id){
-        $post = Post::where('id', $id)->get();
+        $post = Post::where('id', $id)
+                    ->with('autor')
+                    ->with('categoriasPost')
+                    ->get();
 
         return $post;
     }
@@ -202,6 +217,12 @@ class PostController extends Controller
 
     public function uploadImages (Request $request, $id){
         $post = Post::find($id);
+
+        if ($post->path && $post->path != ''){
+            $path = public_path()."/".$path_logo;
+            \File::Delete($path);
+        }
+
         $path = public_path()."/"."posts/";
         
         if (isset($_FILES['doc1']['tmp_name'])){
