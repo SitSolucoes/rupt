@@ -9,7 +9,6 @@ import { Post } from './../../classes/post';
 import { Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, EventEmitter, Input } from '@angular/core';
-
 import { PostsService } from './../../services/posts.service';
 import { VisualizacoesService } from 'app/services/visualizacoes.service';
 import { InteracoesService } from 'app/services/interacoes.service';
@@ -49,6 +48,7 @@ export class NewsComponent implements OnInit {
   interagiu: boolean = false;
 
   modalCompartilhar = new EventEmitter<string|MaterializeAction>();
+  modalCompartilharMensagem = new EventEmitter<string|MaterializeAction>();
   modalDenuncia = new EventEmitter<string|MaterializeAction>();
   modalExcluir = new EventEmitter<string|MaterializeAction>();
   modalLoading = new EventEmitter<string|MaterializeAction>();
@@ -218,7 +218,7 @@ export class NewsComponent implements OnInit {
       }
   }
 
-  interagePost(i){
+  interagePost(i: Interacao){
       let interacaoLeitor = new InteracaoLeitor();
       interacaoLeitor.post_idPost = this.post.id;
       interacaoLeitor.leitor_idLeitor = this.leitor.id;
@@ -231,6 +231,9 @@ export class NewsComponent implements OnInit {
 
             this.verifyInteragiuPost();
             this.countInteracao();
+
+            if (i.compartilhar == true && i.externa == false)
+                this.openModalCompartilharMensagem();
          }
       );
   }
@@ -270,18 +273,23 @@ export class NewsComponent implements OnInit {
     this.modalExcluir.emit({action: 'modal', params: ['close']});
   }
 
+  openModalCompartilharMensagem(){
+    this.modalCompartilharMensagem.emit({ action: 'modal', params: ['open']});
+
+    setTimeout(() => this.closeModalCompartilharMensagem(), 2500);
+  }
+
+  closeModalCompartilharMensagem(){
+    this.modalCompartilharMensagem.emit({ action:'modal', params:['close'] });
+  }
+
   openModalDenuncia() {
-    this.modalDenuncia.emit({
-         action: 'modal',
-         params: ['open']});
+    this.modalDenuncia.emit({ action: 'modal', params: ['open']});
   }
 
   closeModalDenuncia(e){
     if(e){
-      this.modalDenuncia.emit({
-        action:'modal',
-        params:['close']
-      });
+      this.modalDenuncia.emit({ action:'modal', params:['close']});
     }
   }
 

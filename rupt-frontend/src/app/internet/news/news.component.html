@@ -19,6 +19,13 @@
         <modal-compartilhar [interacoes]='interacoes' [interacoesLeitor]='interacoesLeitor' (compartilhar)="compartilhar($event)"></modal-compartilhar>
     </div>
 
+    <div id="modal-mensagem-compartilhar" class="modal modal-mensagem"
+        materialize="modal" [materializeParams]="[{dismissible: true}]"
+        [materializeActions]="modalCompartilharMensagem">
+
+        <modal-mensagem-compartilhar></modal-mensagem-compartilhar>
+    </div>
+
     <div id="modalExcluir" class="modal modal2 modal4" materialize="modal" [materializeParams]="[{dismissible: false}]"
         [materializeActions]="modalExcluir">
         <modal-excluir (closeModalExcluir)="closeModalExcluir($event)" (excluiuCompartilhamento)='excluiuCompartilhamento($event)'

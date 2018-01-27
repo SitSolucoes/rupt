@@ -218,6 +218,8 @@ export class UserComponent implements OnInit {
           this.refreshInteracao(this.post.id, response.interacoes, response.interacoesLeitor, false);
        }
     );
+
+    this.openModalCompartilharMensagem();
   }
 
   openModalCompartilhar(interacoes: Interacao[], interacoesLeitor: InteracaoLeitor[], post: Post){
