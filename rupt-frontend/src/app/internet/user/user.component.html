@@ -17,6 +17,13 @@
     <modal-compartilhar [interacoes]='interacoes' [interacoesLeitor]='interacoesLeitor' (compartilhar)="compartilhar($event)"></modal-compartilhar>
 </div>
 
+<div id="modal-mensagem-compartilhar" class="modal modal-mensagem"
+    materialize="modal" [materializeParams]="[{dismissible: true}]"
+    [materializeActions]="modalCompartilharMensagem">
+
+    <modal-mensagem-compartilhar></modal-mensagem-compartilhar>
+</div>
+
 <div class="user user-patrocinador">
     <img src="{{ url + 'profile/' + leitor.src_capa }}" class="img-pat" *ngIf='leitor?.escritor?.patrocinador '>
 
@@ -79,6 +86,8 @@
 
                 <div class="title subtitle">  @{{ leitor.nick }} </div>
 
+                <button (click)='openModalCompartilharMensagem()'>abrir</button>
+
             </div>
 
             <div class="button button-orange" *ngIf="leitorLogado.id && leitor.id != leitorLogado.id"> Seguir </div>
@@ -101,171 +110,193 @@
        <div class="feed" [ngClass]="{'feed2' : leitor?.escritor?.patrocinador}">
             <div class="status">
                 <ul id="tabs-swipe-demo" class="tabs" materialize="tabs">
-                    <li class="menu tab col s3"><a href="#test-swipe-1" class=" active"> Notícias
-                        <font class="title"> {{ timeline?.length }} </font>  </a> </li>
+                    <li class="menu tab col s3">
+                        <a href="#page1" class=" active"> 
+                            Notícias
+                            <font class="title"> {{ timeline?.length }} </font>  
+                        </a> 
+                    </li>
 
-                <li class="menu tab col s3"> <a href="#test-swipe-2"> Leitores
-                    <font class="title"> 2.700 </font> </a></li>
+                    <li class="menu tab col s3">
+                        <a href="#page2"> 
+                            Rascunhos
+                            <font class="title"> {{ timeline?.length }} </font>  
+                        </a> 
+                    </li>
 
-                <li class="menu tab col s3"><a href="#test-swipe-3"> Seguindo
-                    <font class="title"> 15 </font></a> </li>
+                    <li class="menu tab col s3"> 
+                        <a href="#page3"> 
+                            Leitores
+                            <font class="title"> 2.700 </font> 
+                        </a>
+                    </li>
+
+                    <li class="menu tab col s3">
+                        <a href="#page4"> 
+                            Seguindo
+                            <font class="title"> 15 </font>
+                        </a> 
+                    </li>
                 </ul>
             </div>
 
-           <div id="test-swipe-1">
+           <div id="page1">
 
-            <div class="post-none" *ngIf='timeline?.length == 0'>
-                Sem publicações até o momento
-            </div>
+                <div class="post-none" *ngIf='timeline?.length == 0'>
+                    Sem publicações até o momento
+                </div>
 
-            <div class="search" *ngIf='timeline?.length > 0'>
-                <input class="input-search" maxlength="30" name="marca" placeholder="Pesquise uma publicação" type="text" [(ngModel)]="filtro">
+                <div class="search" *ngIf='timeline?.length > 0'>
+                    <input class="input-search" maxlength="30" name="marca" placeholder="Pesquise uma publicação" type="text" [(ngModel)]="filtro">
 
-                <a (click)='search()'>
-                    <img src="../../../assets/img/search2.png" class="img6">
-                </a>
-            </div>
+                    <a (click)='search()'>
+                        <img src="../../../assets/img/search2.png" class="img6">
+                    </a>
+                </div>
 
-            <div class="post" *ngFor='let t of timelineFiltro'>
-
-                <a routerLink='../{{ leitor.nick }}'>
-                    <div class="img-area">
-                        <img src="{{ leitor.src_foto.indexOf('http') >= 0 ? leitor.src_foto : url + 'profile/' + leitor.src_foto }}"  class="img">
-                    </div>
-                </a>
-
-                <div class="text" [ngClass]="{'text2' : leitor?.escritor?.patrocinador}">
+                <div class="post" *ngFor='let t of timelineFiltro'>
 
                     <a routerLink='../{{ leitor.nick }}'>
-                        <font class="title name"> {{ leitor.nome }} </font>
-                    </a>
-                    <font class="share" *ngIf="leitor.id != t.post.autor.id">
-                        - Compartilhou a <b><a routerLink="../../noticia/{{t.post.id}}">publicação</a></b> de
-                        {{ t.post.autor.nome }}.
-                    </font>
-
-                    <!-- não é a propria tl -->
-                    <span class="dropdown-area">
-                        <a class='dropdown-button btn' data-activates='dropdown' materialize="dropdown" *ngIf="t.leitor_idLeitor != leitorLogado.id && leitorLogado.id">
-                            <img src="../../../assets/img/dot.png" class="img img5">
-                        </a>
-
-                        <ul id='dropdown' class='dropdown-content' style="top: 60px !important;">
-                            <!-- Caso user seja escritor <li><a routerLink="cadastro-escritor">Editar Perfil</a></li>-->
-                            <li>
-                                <a (click)='openModalCompartilhar(t.interacoes, t.interacoesLeitor, t.post)'>Compartilhar</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a (click)="openModalDenuncia(t.post)"> Denunciar </a>
-                            </li>
-                        </ul>
-                    </span>
-
-                    <!-- propria tl mas post compartilhado -->
-                    <a class='dropdown-button btn' *ngIf="t.post.autor.id != leitorLogado.id && t.leitor_idLeitor == leitorLogado.id">
-                        <img src="../../../assets/img/x.png" (click)="openModalExcluir(t)" class="img img5 img6" title='Excluir'>
-                    </a>
-                    
-                    <!-- tl dele com post próprio -->
-                    <a routerLink='../../publicacao/{{ t.post.id }}' *ngIf="t.post.autor.id == leitorLogado.id">
-                        <i class="fa fa-pencil-square-o img img5" aria-hidden="true" title='Editar'></i>
-                    </a>
-
-                    <font class="title title2">
-                        {{ calcHour( t.created_at ) }}
-                    </font>
-
-                </div>
-                
-                <div class="info " *ngIf="leitor.id == t.post.autor.id">
-                    <a routerLink="../../noticia/{{t.post.id}}">
-                        <div class="new">
-                            {{ t.post.titulo }}
-                        </div>
-
-                        <div *ngIf='t.post.src_imagem'>
-                            <div class="border" >
-                                <img src="{{ url + 'posts/' + t.post.src_imagem }}" class="img3"
-                                [ngClass]="{'post-adulto' : t.post.adulto == 1}"
-                                >
-                            </div>
+                        <div class="img-area">
+                            <img src="{{ leitor.src_foto.indexOf('http') >= 0 ? leitor.src_foto : url + 'profile/' + leitor.src_foto }}"  class="img">
                         </div>
                     </a>
-                    <!--interacoes-->
-                    <div class="status" *ngIf='leitorLogado.id'>
-                        <span *ngFor='let i of t.interacoes'>
-                            <img *ngIf='i.compartilhar == false' src="../../../assets/{{ i.src_icone }}" class="img4 cursor-pointer"
-                                (click)="interageTimeline(t, i)" [ngClass]="{'pb': !checkInteracao(i.id, t.interacoesLeitor)}">
-                        </span>
-                        <div class="total">{{ countInteracoes(t.interacoes) }}</div>
-                    </div>
-                    <div class="status" *ngIf='!leitorLogado.id'>
-                        <span *ngFor='let i of t.interacoes'>
-                            <img *ngIf='i.compartilhar == false' src="../../../assets/{{ i.src_icone }}" class="img4">
-                        </span>
-                        <div class="total">{{ countInteracoes(t.interacoes) }}</div>
-                    </div>
-                </div>
 
-                <div class="info" *ngIf="leitor.id != t.post.autor.id">
-                    <div class="info2">
-                        <a routerLink='/perfil/{{ t.post.autor.nick }}'>
-                            <div class="img-area img-area2">
-                                <img src="{{ url + 'profile/' + t.post.autor.src_foto }}"  class="img4">
-                            </div>
+                    <div class="text" [ngClass]="{'text2' : leitor?.escritor?.patrocinador}">
+
+                        <a routerLink='../{{ leitor.nick }}'>
+                            <font class="title name"> {{ leitor.nome }} </font>
                         </a>
+                        <font class="share" *ngIf="leitor.id != t.post.autor.id">
+                            - Compartilhou a <b><a routerLink="../../noticia/{{t.post.id}}">publicação</a></b> de
+                            {{ t.post.autor.nome }}.
+                        </font>
 
-                        <div class="text">
-
-                            <a routerLink='/perfil/{{ t.post.autor.nick }}'>
-                                <font class="title"> {{ t.post.autor.nome }} </font>
+                        <!-- não é a propria tl -->
+                        <span class="dropdown-area">
+                            <a class='dropdown-button btn' data-activates='dropdown' materialize="dropdown" *ngIf="t.leitor_idLeitor != leitorLogado.id && leitorLogado.id">
+                                <img src="../../../assets/img/dot.png" class="img img5">
                             </a>
 
-                            <font class="title title2">
-                                {{ calcHour( t.post.publishedAt ) }}
-                            </font>
+                            <ul id='dropdown' class='dropdown-content' style="top: 60px !important;">
+                                <!-- Caso user seja escritor <li><a routerLink="cadastro-escritor">Editar Perfil</a></li>-->
+                                <li>
+                                    <a (click)='openModalCompartilhar(t.interacoes, t.interacoesLeitor, t.post)'>Compartilhar</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a (click)="openModalDenuncia(t.post)"> Denunciar </a>
+                                </li>
+                            </ul>
+                        </span>
 
-                        </div>
+                        <!-- propria tl mas post compartilhado -->
+                        <a class='dropdown-button btn' *ngIf="t.post.autor.id != leitorLogado.id && t.leitor_idLeitor == leitorLogado.id">
+                            <img src="../../../assets/img/x.png" (click)="openModalExcluir(t)" class="img img5 img6" title='Excluir'>
+                        </a>
+                        
+                        <!-- tl dele com post próprio -->
+                        <a routerLink='../../publicacao/{{ t.post.id }}' *ngIf="t.post.autor.id == leitorLogado.id">
+                            <i class="fa fa-pencil-square-o img img5" aria-hidden="true" title='Editar'></i>
+                        </a>
 
+                        <font class="title title2">
+                            {{ calcHour( t.created_at ) }}
+                        </font>
+
+                    </div>
+                    
+                    <div class="info " *ngIf="leitor.id == t.post.autor.id">
                         <a routerLink="../../noticia/{{t.post.id}}">
-
                             <div class="new">
                                 {{ t.post.titulo }}
                             </div>
 
                             <div *ngIf='t.post.src_imagem'>
-                            <!-- <div class="border" > -->
-                                    <div class="border border2">
-                                        <!--
-                                        <img src="{{ url + 'posts/' + t.post.src_imagem }}" class="img3">
-                                        -->
-                                        <img src="{{ url + 'posts/' + t.post.src_imagem }}" class="img3 img7">
+                                <div class="border" >
+                                    <img src="{{ url + 'posts/' + t.post.src_imagem }}" class="img3"
+                                    [ngClass]="{'post-adulto' : t.post.adulto == 1}"
+                                    >
                                 </div>
                             </div>
                         </a>
+                        <!--interacoes-->
+                        <div class="status" *ngIf='leitorLogado.id'>
+                            <span *ngFor='let i of t.interacoes'>
+                                <img *ngIf='i.compartilhar == false' src="../../../assets/{{ i.src_icone }}" class="img4 cursor-pointer"
+                                    (click)="interageTimeline(t, i)" [ngClass]="{'pb': !checkInteracao(i.id, t.interacoesLeitor)}">
+                            </span>
+                            <div class="total">{{ countInteracoes(t.interacoes) }}</div>
+                        </div>
+                        <div class="status" *ngIf='!leitorLogado.id'>
+                            <span *ngFor='let i of t.interacoes'>
+                                <img *ngIf='i.compartilhar == false' src="../../../assets/{{ i.src_icone }}" class="img4">
+                            </span>
+                            <div class="total">{{ countInteracoes(t.interacoes) }}</div>
+                        </div>
                     </div>
 
-                    <div class="status" *ngIf='leitorLogado.id'>
-                        <span *ngFor='let i of t.interacoes'>
-                            <img *ngIf='i.compartilhar == false' src="../../../assets/{{ i.src_icone }}" class="img4 cursor-pointer"
-                                (click)="interageTimeline(t, i)" [ngClass]="{'pb': !checkInteracao(i.id, t.interacoesLeitor)}">
-                        </span>
-                        <div class="total">{{ countInteracoes(t.interacoes) }}</div>
+                    <div class="info" *ngIf="leitor.id != t.post.autor.id">
+                        <div class="info2">
+                            <a routerLink='/perfil/{{ t.post.autor.nick }}'>
+                                <div class="img-area img-area2">
+                                    <img src="{{ url + 'profile/' + t.post.autor.src_foto }}"  class="img4">
+                                </div>
+                            </a>
+
+                            <div class="text">
+
+                                <a routerLink='/perfil/{{ t.post.autor.nick }}'>
+                                    <font class="title"> {{ t.post.autor.nome }} </font>
+                                </a>
+
+                                <font class="title title2">
+                                    {{ calcHour( t.post.publishedAt ) }}
+                                </font>
+
+                            </div>
+
+                            <a routerLink="../../noticia/{{t.post.id}}">
+
+                                <div class="new">
+                                    {{ t.post.titulo }}
+                                </div>
+
+                                <div *ngIf='t.post.src_imagem'>
+                                <!-- <div class="border" > -->
+                                        <div class="border border2">
+                                            <!--
+                                            <img src="{{ url + 'posts/' + t.post.src_imagem }}" class="img3">
+                                            -->
+                                            <img src="{{ url + 'posts/' + t.post.src_imagem }}" class="img3 img7">
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="status" *ngIf='leitorLogado.id'>
+                            <span *ngFor='let i of t.interacoes'>
+                                <img *ngIf='i.compartilhar == false' src="../../../assets/{{ i.src_icone }}" class="img4 cursor-pointer"
+                                    (click)="interageTimeline(t, i)" [ngClass]="{'pb': !checkInteracao(i.id, t.interacoesLeitor)}">
+                            </span>
+                            <div class="total">{{ countInteracoes(t.interacoes) }}</div>
+                        </div>
+                        <div class="status" *ngIf='!leitorLogado.id'>
+                            <span *ngFor='let i of t.interacoes'>
+                                <img *ngIf='i.compartilhar == false' src="../../../assets/{{ i.src_icone }}" class="img4">
+                            </span>
+                            <div class="total">{{ countInteracoes(t.interacoes) }}</div>
+                        </div>
                     </div>
-                    <div class="status" *ngIf='!leitorLogado.id'>
-                        <span *ngFor='let i of t.interacoes'>
-                            <img *ngIf='i.compartilhar == false' src="../../../assets/{{ i.src_icone }}" class="img4">
-                        </span>
-                        <div class="total">{{ countInteracoes(t.interacoes) }}</div>
-                    </div>
+
                 </div>
-
-            </div>
            </div>
 
+           <div id='page2'>
+               rascunhos
+           </div>
 
-           <div id="test-swipe-2">
+           <div id="page3">
 
                <div class="leitores">
 
@@ -400,7 +431,7 @@
            </div>
 
 
-           <div id="test-swipe-3">
+           <div id="page4">
 
                <div class="leitores">
 

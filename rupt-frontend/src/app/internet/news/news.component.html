@@ -135,11 +135,14 @@
 
             <div class="profile" *ngIf="leitorLogado">
                 <div class="img-area">  
-                    <img src="{{ leitor?.src_foto.indexOf('http') >= 0 ? leitor?.src_foto : url + 'profile/' + leitor?.src_foto }} }}" class="img"> 
+                    <img src="{{ url + 'profile/' + leitor?.src_foto }}" class="img"> 
                 </div>
                 <form [formGroup]="form" (ngSubmit)="onSubmit()">
                     <input type="text" class="input" maxlength="140" name="comentario" formControlName="comentario" placeholder="Escreva um comentário..." >
-                    <button type="submit" class="button" [disabled]="form.value.comentario === ''" id="submit-contato"> Enviar </button>
+                    <button type="submit" class="button" [disabled]="form.value.comentario === ''" id="submit-contato"> 
+                        <i class="fa fa-spinner fa-pulse fa-3x fa-fw" *ngIf='loading'></i>   
+                        Enviar 
+                    </button>
                 </form>
             </div>
 

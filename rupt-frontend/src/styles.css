@@ -2342,6 +2342,12 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     text-transform: uppercase;
     font-size: 13px;
     font-family: nexa-bold;
+    padding-top: 2px;
+}
+
+.news .container .comentarios .profile .button i{
+    font-size: 16px;
+    margin-right: 5px;
 }
 
 .news .container .comentarios .profile .user{
@@ -3056,11 +3062,11 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .login-modal .login-container .button{
-    width: 20% !important;
+    width: 120px !important;
     height: 35px !important;
     border: 1px solid #f97000 !important;
     color: #fff;
-    padding-top: 2px !important;
+    padding-top: 4px !important;
     font-family: lato;
     font-size: 16px !important;
     border-radius: 2px;
@@ -3068,6 +3074,11 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     opacity: .9;
     margin-bottom: 30px;
     float: right;
+}
+
+.login-modal .login-container .button i{
+    font-size: 16px;
+    margin-right: 5px;
 }
 
 .login-modal .login-container .img{
@@ -3836,6 +3847,10 @@ quill-editor{
     clear: both;
 }
 
+.form-footer .button.medium{
+    width: 150px;
+}
+
 .form-footer .button .fa-spinner{
     font-size: 16px;
     margin-right: 10px;
@@ -3854,4 +3869,46 @@ quill-editor{
 
 .form-footer .error-alert.success{
     width: 250px;
+}
+
+.modal.modal-mensagem{
+    background: transparent!important;
+}
+
+.modal-mensagem{
+    position: fixed;
+    top: 0!important;
+    z-index: 1000;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .95);
+    max-height: 100%!important;
+}
+
+.modal-mensagem .image-area{
+    display: table;
+    margin: auto;
+    margin-top: 10%;
+}
+
+.modal-mensagem .image-area img{
+    width: 300px;
+}
+
+.modal-mensagem .title{
+    display: block;
+    margin: 0 auto;
+    font-size: 36px;
+    line-height: 50px;
+    color: white;
+    font-family: 'gilroy-bold';
+    text-align: center;
+}
+
+.modal-mensagem .button{
+    float: none;
+    display: table;
+    margin: auto;
+    margin-top: 20px;
+    position: relative;
 }

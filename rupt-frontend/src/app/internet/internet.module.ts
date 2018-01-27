@@ -36,8 +36,9 @@ import { ModalRascunhoComponent } from './modal-rascunho/modal-rascunho.componen
 import { VisualizacoesService } from 'app/services/visualizacoes.service';
 import { InteracoesService } from 'app/services/interacoes.service';
 import { InteracoesLeitorService } from 'app/services/interacoes-leitor.service';
-import { ModalCompartilharComponent } from './modal-compartilhar/modal-compartilhar.component';
 import {ImageCropperComponent, CropperSettings} from 'ng2-img-cropper';
+import { ModalCompartilharComponent } from 'app/internet/compartilhar/modal-compartilhar/modal-compartilhar.component';
+import { ModalMensagemComponent } from './compartilhar/modal-mensagem/modal-mensagem.component';
 
 @NgModule({ 
   imports: [
@@ -74,7 +75,8 @@ import {ImageCropperComponent, CropperSettings} from 'ng2-img-cropper';
     RedefineSenhaComponent,
     ModalRascunhoComponent,
     ModalCompartilharComponent,
-    ImageCropperComponent
+    ImageCropperComponent,
+    ModalMensagemComponent
   ],
   providers: [
     CategoriaLeitorService,
