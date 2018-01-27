@@ -6,7 +6,11 @@ import { NgForm } from '@angular/forms/src/directives';
 import { Leitor } from './../../classes/leitor';
 import { any } from 'codelyzer/util/function';
 import { Component, OnInit, EventEmitter } from '@angular/core';
+<<<<<<< HEAD
+import { AuthService } from 'angular2-social-login/dist/auth.service';
+=======
 declare var $: any;
+>>>>>>> 5a7a843fc1820394b30982c0dcdb910747f03ef1
 
 @Component({
   selector: 'header',
@@ -23,7 +27,8 @@ export class HeaderComponent implements OnInit {
   modalRascunho = new EventEmitter<string|MaterializeAction>();
   
   constructor(private _leitorService: LeitoresService,
-              private _router: Router) { }
+              private _router: Router,
+              private _auth: AuthService) { }
 
   ngOnInit() {
       this._leitorService.leitor.subscribe(
@@ -88,7 +93,13 @@ export class HeaderComponent implements OnInit {
 
   logout(){
     this._leitorService.logout();
+    this._fb_logout();
     this._router.navigate(['/']);
   }
 
+  private _fb_logout(){
+    this._auth.logout().subscribe(
+      (data)=>{console.log(data)}
+    )
+  }
 }

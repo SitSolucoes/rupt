@@ -40,15 +40,28 @@ export class ModalCadastroLeitorComponent implements OnInit {
           (retorno) => {
             if(retorno.resultado == true){
               //não precisa cadastrar
+              console.log("trouxe usuário da base com sucesso.");
+              console.log(form_leitor);
+              console.log("Do Login com esse form / \\");
+              
               this.doLogin(form_leitor);
               this.closeModal.emit(true);
             }else{
-              console.log('feito o login')
+              console.log("criando leitor");
+              console.log(form_leitor);
               this._leitorService.createLeitor(form_leitor).subscribe(
                 (leitor)=>{ 
+                  console.log("terminou de criar o leitor, deu boa")
+                  console.log("foi pra login");
                   this.doLogin(form_leitor);
+                  console.log("enviando comando de fechar modal")
                   this.closeModal.emit(true);
-              });
+                },
+                (error)=>{
+                  console.log("Deu problema na criação deste usuário.");
+                  console.log(typeof error);
+                  console.log(error);
+                });
               //this._leitorService.createLeitor()
             }
         });
@@ -60,6 +73,8 @@ export class ModalCadastroLeitorComponent implements OnInit {
   }
 
   doLogin(form){
+    console.log("formulário que chegou na doLogin");
+    console.log(form);
     this._leitorService.doLogin(form).subscribe(
       (ret: any) => {
           //this.spinner = false;

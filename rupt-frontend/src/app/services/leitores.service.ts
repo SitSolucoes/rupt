@@ -18,6 +18,7 @@ export class LeitoresService {
   private createBody(form){
     return JSON.stringify(
         {
+         fb_uid: form.value.fb_uid,
          nome: form.value.nome,
          nick: form.value.nick,
          email: form.value.email,
@@ -26,26 +27,34 @@ export class LeitoresService {
          sexo: form.value.sexo,
          src_foto: form.value.src_foto != null && form.value.src_foto != '' ? form.value.src_foto : '',
          ativo: form.value.ativo,
-         fb_login: form.value.fb_login ? true : false,
-         fb_uid: form.value.fb_uid != null ? form.value.uid : null,
-         token: form.value.token != null ? form.value.token : null,
+         fb_login: form.value.fb_login,
+         token: form.value.token,
          password: form.value.password
-      });
+        }
+    );
   }
   
   createLeitor(form){
     const body = this.createBody(form);
+    console.log("body do createLeitor(): ");
+    console.log(body);
+    console.log("Form value: ");
     console.log(form.value);
     return this._http.post(this._url + 'storeLeitor', body, {headers: this.headers}).map(
     (response: Response)=>{
+      console.log("do create leitor é retornado somente o ID da variavel: ");
+      console.log(response);
         return response.json().id;
     });
   } 
 
   checkFBToken(token, uid){
+    console.log("checa token: " + token + ' ' + uid);
     return this._http.get(this._url + 'checkFbToken/' + token + '/' + uid)
       .map(
         (response: Response) => {
+          console.log("resposta da checagem de token:");
+          console.log(response);
           return response.json();
         }
       );
@@ -140,9 +149,13 @@ export class LeitoresService {
 
   doLogin(form){
     const body = JSON.stringify(form.value);
+    console.log("depois de criar a constante body");
+    console.log(body);
       return this._http.put(this._url + 'leitor/signin', body, {headers: this.headers}).map(
         (response: Response) => { 
           if (response.json().login == true){
+            console.log("logado com sucesso. Retorno: ");
+            console.log(response);
             localStorage.setItem('l', this.base64.encode(response.json().leitor.id));
             localStorage.setItem('token', response.json().token);
   
