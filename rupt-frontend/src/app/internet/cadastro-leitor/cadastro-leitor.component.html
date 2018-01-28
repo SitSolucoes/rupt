@@ -1,3 +1,35 @@
+<div id="modalImagem" class="modal"
+    materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalImagem">
+
+    <div class="modal-content">
+        <div class="title"  *ngIf="action != 'loading'">
+            <span>Recortar imagem</span>
+            <a click="#" class="modal-action modal-close close">x</a>
+        </div>
+          
+        <div class="modal-imagem-content">
+            <div class="file-field input-field file-upload">
+                <div class="button-input">
+                    <span>
+                        <i class="fa fa-picture-o" aria-hidden="true"></i>      
+                        Selecionar imagem
+                    </span>
+                    <input id="imagem" type="file" (change)="fileChangeListener($event)">
+                </div>
+                <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text">
+                </div>
+            </div>
+            <img-cropper #cropper [image]="data" [settings]="cropperSettings"></img-cropper>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <a (click)="closeModalImagem()"><button type="submit" class="button color button2"> Confirmar </button></a>
+    </div>
+</div>
+
+
 <div class="cadastro">
   <div class="container">
     <p> Dados pessoais </p>
@@ -54,14 +86,14 @@
                 <div class="error" *ngIf="!verificaValidTouched('email') && emailInvalido">Email já cadastrado</div>
             </div>
             <div class="menu">
-                    <div class="row menu-radio">
-                            <input name="sexo" type="radio" id="f" value="m" [checked]="form.get('sexo').value == 'f'"/>
-                            <label for="f" (click)="selectSexo('f')">Feminino</label>
-                            <input name="sexo" type="radio" id="m" value="f" [checked]="form.get('sexo').value == 'm'"/>
-                            <label for="m" (click)="selectSexo('m')">Masculino</label>
-                            <input name="sexo" type="radio" id="o" value="o" [checked]="form.get('sexo').value == 'o'"/>
-                            <label for="o" (click)="selectSexo('o')">Outro</label>
-                    </div>
+                <div class="row menu-radio">
+                    <input name="sexo" type="radio" id="f" value="m" [checked]="form.get('sexo').value == 'f'"/>
+                    <label for="f" (click)="selectSexo('f')">Feminino</label>
+                    <input name="sexo" type="radio" id="m" value="f" [checked]="form.get('sexo').value == 'm'"/>
+                    <label for="m" (click)="selectSexo('m')">Masculino</label>
+                    <input name="sexo" type="radio" id="o" value="o" [checked]="form.get('sexo').value == 'o'"/>
+                    <label for="o" (click)="selectSexo('o')">Outro</label>
+                </div>
             </div>
             <div class="menu ">
                 <label> Biografia 
@@ -72,6 +104,68 @@
                 <textarea class="textarea" formControlName='biografia' maxlength="300"></textarea>
             </div>  
             <div class="menu marginless">
+                <div class="input-img">
+                    <button type="button" class="button button-border" (click)="openModalImagem()" [disabled]='loading'>
+                        <i class="fa fa-picture-o" aria-hidden="true"></i>  
+                        Inserir imagem de destaque
+                    </button>
+                    
+                    <input type="file" #img id='imagem' style="display:none" (change)="imgShow($event)">
+                    
+                    <div class="container-imagem" *ngIf="data.image">
+                        <span class="result rounded">
+                            <img *ngIf="data.image" [src]="data.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
+                        </span>
+                    </div>
+                </div>
+
+                <!--
+
+                <div class="input-img">
+                    <label> Foto de perfil </label>
+
+                    <div class="image">
+                        <div class="file-field input-field file-upload">
+                            <div class="button-input">
+                                <div class="icon-area">
+                                    <i class="fa fa-picture-o" aria-hidden="true"></i>
+                                </div>
+                                <span>
+                                    Adicionar imagem
+                                </span>
+                                <input id="imagem" type="file" (change)="fileChangeListener($event)">
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-img">
+                    <label> Foto de capa </label>
+
+                    <div class="image" [ngStyle]="{'background': url_capa}">
+                        <div class="file-field input-field file-upload">
+                            <div class="button-input">
+                                <div class="icon-area">
+                                    <i class="fa fa-picture-o" aria-hidden="true"></i>
+                                </div>
+                                <span>
+                                    Adicionar imagem
+                                </span>
+                                <input id="imagem" type="file" (change)="showCapa($event)">
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                -->
+
+                <!--
                 <label> Foto de perfil </label>
                 <input type="file" name="arquivo1" (change)="imgShow($event, 'perfil')" id="foto" class="input-img" style="margin-bottom:9px;"/>
                 <img *ngIf="url_perfil" [src]="url_perfil" style="max-width: 60px; display: block;">
@@ -79,6 +173,7 @@
                 <label> Foto de capa </label>
                 <input type="file" name="arquivo2" id="capa" class="input-img" (change)="imgShow($event, 'capa')"/>
                 <img *ngIf="url_capa" [src]="url_capa" style="max-width: 100%; display: block;">
+                -->
             </div>
 
             <div *ngIf="!leitor.id">

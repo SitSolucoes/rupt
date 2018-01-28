@@ -10,6 +10,8 @@ import { FormBuilder, FormGroup, Validator } from '@angular/forms';
 import { Component, OnInit, EventEmitter, Output, ElementRef, ViewChild } from '@angular/core';
 import { UploadFileService } from "./../../services/upload-file.service";
 import { UploadItem } from "./../../classes/upload-item";
+import { MaterializeAction } from 'angular2-materialize';
+import { CropperSettings, ImageCropperComponent } from 'ng2-img-cropper';
 
 @Component({
   selector: 'cadastro-leitor',
@@ -48,10 +50,32 @@ export class CadastroLeitorComponent implements OnInit {
     {value: 'o', name: 'Outros'}
   ];
 
+  modalImagem = new EventEmitter<string|MaterializeAction>();
+
+  cropperSettings: CropperSettings;
+  data:any;
+  @ViewChild('cropper', undefined)cropper:ImageCropperComponent;
+
   constructor(private _formBuilder: FormBuilder,
-    private _uploadFileService: UploadFileService,
-    private _leitoresService: LeitoresService,
-    private _router: Router) { }
+      private _uploadFileService: UploadFileService,
+      private _leitoresService: LeitoresService,
+      private _router: Router) { 
+
+      this.cropperSettings = new CropperSettings();                
+
+      this.cropperSettings = new CropperSettings();
+      this.cropperSettings.minWidth = 400;
+      this.cropperSettings.minWidth = 400;
+      this.cropperSettings.croppedWidth = 400;
+      this.cropperSettings.croppedHeight = 400;
+      //this.cropperSettings.canvasWidth = 400;
+      //this.cropperSettings.canvasHeight = 400;
+      this.cropperSettings.preserveSize = true;
+      this.cropperSettings.cropperClass = 'canvas';
+      this.cropperSettings.noFileInput = true;
+      this.cropperSettings.touchRadius = 50;
+      this.data = {};
+  }
 
   ngOnInit() {
     window.scrollTo( 0, 0);
@@ -69,6 +93,20 @@ export class CadastroLeitorComponent implements OnInit {
           }            
       }
     )
+  }
+
+  fileChangeListener($event) {
+    var image:any = new Image();
+    var file:File = $event.target.files[0];
+    var myReader:FileReader = new FileReader();
+    var that = this;
+    myReader.onloadend = function (loadEvent:any) {
+        image.src = loadEvent.target.result;
+        that.cropper.setImage(image);
+
+    };
+
+    myReader.readAsDataURL(file);
   }
 
   createForm(){
@@ -168,22 +206,18 @@ export class CadastroLeitorComponent implements OnInit {
         this.emailEl.nativeElement.focus(); 
         this.validando = false;
     }
-
-    
   }
 
-  imgShow(e, target){
+  showCapa(e){
+    console.log('show-capa');
+
     if(e.target.files && e.target.files[0]){
       let reader = new FileReader();
 
-      //console.log(target);
       reader.onload = (event:any) => {
-        if(target == 'perfil')
-          this.url_perfil = event.target.result;
-        if(target == 'capa')
-          this.url_capa = event.target.result;
+        this.url_capa = 'url("'+event.target.result+'")';
       }
-      //console.log(e.target);
+      
       reader.readAsDataURL(e.target.files[0]);
     }
   }
@@ -204,6 +238,14 @@ export class CadastroLeitorComponent implements OnInit {
     this.form.patchValue({
       sexo: s
     })
+  }
+
+  openModalImagem(){
+    this.modalImagem.emit({action: 'modal', params: ['open']});
+  }
+
+  closeModalImagem(){
+    this.modalImagem.emit({ action:'modal', params:['close']});
   }
 
   clickSubmit(){

@@ -2818,8 +2818,44 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .cadastro .container .area .input-img{
-    margin-bottom: 20px;
-    font-size: 15px;
+    height: 200px; 
+    width: 200px;
+    float: left;
+}
+
+.cadastro .container .area .input-img .image{
+    height: 150px;
+    width: 150px;
+    background: #ccc;    
+    color: #f0f0f0;
+    background-size: auto 150px!important;
+    text-shadow: 1px 1px 5px #000;
+}
+
+.cadastro .container .area .input-img .image .input-field{
+    margin-top: 0;
+}
+
+.cadastro .container .area .input-img .image .file-field .file-path-wrapper{
+    display: none;
+}
+
+.cadastro .container .area .input-img .image .icon-area{
+    display: table;
+    margin: auto;
+    font-size: 30px;
+    padding-top: 25%;
+}
+
+.cadastro .container .area .input-img .image span{
+    text-align: center;
+    display: table;
+    margin: auto;
+}
+
+.cadastro .container .area{
+    float: right;
+    margin-right: 0;
 }
 
 .cadastro .container .area label{
