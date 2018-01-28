@@ -35,18 +35,17 @@
     </div>
 
         <div class="login-modal">
+            <div class="social-medias">
+                <a target="_blank" (click)="signIn('facebook')">
+                    <div class="area"><i class="fa fa-facebook" aria-hidden="true"></i><div style="color: #243861;display:block;float:left;margin-right: 10px;">|</div> Login com o Facebook</div>
+                </a>
+                <div class="area area2"><i class="fa fa-linkedin" aria-hidden="true"></i><div style="color: #243861;display:block;float:left;margin-right: 10px;">|</div> Login com o Linkedin</div>
+            </div>
             <div class="login-container">
-                <div class="social-medias">
-                        <a target="_blank" (click)="signIn('facebook')">
-                            <img src="../../../assets/img/face2.png" class="img">
-                        </a>
-                </div>
             <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
 
-                <img src="../../../assets/img/profile2.png" class="img">
                 <input type="text" class="input" maxlength="30" name="email" formControlName="email" placeholder="E-mail">
 
-                <img src="../../../assets/img/lock.png" class="img">
                 <input type="password" class="input" maxlength="20" name="senha" formControlName="password" placeholder="Password">
 
                 <div *ngIf="erro">

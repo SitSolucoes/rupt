@@ -97,8 +97,7 @@
 
             <a routerLink="../../publicacao" *ngIf="leitor.id == leitorLogado.id && leitor.escritor && leitor.escritor.status != 'r'">
                 <div class="write-area">
-                    <img src="../../../assets/img/write.png" class="img3">
-
+                    <i class="fa fa-pencil img3" aria-hidden="true"></i>
                     <p>Escrever uma nova publicação</p>
 
                 </div>
@@ -190,7 +189,7 @@
 
                         <!-- propria tl mas post compartilhado -->
                         <a class='dropdown-button btn' *ngIf="t.post.autor.id != leitorLogado.id && t.leitor_idLeitor == leitorLogado.id">
-                            <img src="../../../assets/img/x.png" (click)="openModalExcluir(t)" class="img img5 img6" title='Excluir'>
+                           <i class="fa fa-times img img5 img6" title='Excluir' aria-hidden="true" (click)="openModalExcluir(t)"></i>
                         </a>
                         
                         <!-- tl dele com post próprio -->

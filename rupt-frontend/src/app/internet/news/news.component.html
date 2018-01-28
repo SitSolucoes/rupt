@@ -63,12 +63,12 @@
 
     <div class="area">
 
-      <font *ngIf="!rascunho">Por</font>
-      <a *ngIf="!rascunho" routerLink='/perfil/{{ post.autor.nick }}'>
-          <font class="name"> {{ post?.autor?.nick }} </font> 
-      </a>
-      
-      <img *ngIf="!rascunho" src="../../../assets/img/marcador.png" class="img"> 
+      <font *ngIf="!rascunho" class="name">Por
+          <a *ngIf="!rascunho" routerLink='/perfil/{{ post.autor.nick }}'>{{ post?.autor?.nick }}
+          </a>
+      </font>
+
+        <i *ngIf="!rascunho" class="fa fa-minus img" aria-hidden="true"></i>
       <b *ngIf="!rascunho" > {{ calcHour( post.publishedAt ) }} </b>
 
         <div class="social">
@@ -77,7 +77,7 @@
             <img src="../../../assets/img/rupt-ico.png" class="img">
 
             <p> {{ interacoesTotal[1] }} </p>
-            <img src="../../../assets/img/share2.png" class="img">
+            <i class="fa fa-share img" aria-hidden="true"></i>
 
             <img  title='Denunciar' *ngIf='leitor && leitor.id != post.autor.id' src="../../../assets/img/report.png" class="img report" (click)="openModalDenuncia()">
             <a routerLink='../../publicacao/{{ post.id }}' *ngIf='leitor && leitor.id == post.autor.id'>
@@ -108,8 +108,7 @@
 
             <div class="area2">
                 <div (click)='openModalCompartilhar()'>
-                    <img src="../../../assets/img/share.png" class="img">
-
+                    <i class="fa fa-share img" aria-hidden="true"></i>
                     <p>Compartilhar</p>
                     <span class="count">{{ interacoesTotal[1] }}</span>
                 </div>
@@ -126,7 +125,7 @@
 
             <div class="area2">
                 <div (click)='openModalCompartilhar()'>
-                    <img src="../../../assets/img/share.png" class="img">
+                    <i class="fa fa-share img" aria-hidden="true"></i>
 
                     <p>Compartilhar</p>
                     <span class="count">{{ interacoesTotal[1] }}</span>
