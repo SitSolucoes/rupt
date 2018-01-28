@@ -197,7 +197,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     display: block;
     float: left;
     position: absolute;
-    right: 70px;
+    right: 60px;
     top: 13px;
     color: #fff;
     width: 17px;
@@ -237,8 +237,8 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .headbar .login-border{
-    padding: 5px 15px;
-    margin-top: 11px;
+    padding: 0px 15px;
+    margin-top: 15px;
     font-size: 20px;
     font-family: 'nexa-bold';
 }
@@ -420,7 +420,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     overflow: hidden;
     width: 300px;
     color: #ffffff;
-    font-family: 'nexa-bold';
+    font-family: 'gilroy-bold';
     text-transform: uppercase;
     font-size: 23px;
     clear: both;
@@ -474,7 +474,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .container-categoria .title{
-    font-family: 'nexa-bold';
+    font-family: 'gilroy-bold';
     font-size: 20px;
     color: #454545;
     text-transform: uppercase;
@@ -671,7 +671,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     display: block;
     float: left;
     width: 260px;
-    max-height: 60px;
+    max-height: 61px;
     overflow: hidden;
     margin-left: 20px;
     margin-top: 10px;
@@ -701,7 +701,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     position: absolute;
     bottom: 0px;
     right: 0px;
-    width: 48%;
+    width: 50%;
     /* margin-left: 2%; */
 }
 
@@ -736,9 +736,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .container-categoria .info-post .area-post{
     display: block;
     float: right;
-    width: auto;
-    /* height: 10px; */
-    width: 80px;
+    width: 90px;
     margin-right: 20px;
 }
 
@@ -747,18 +745,19 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .info-post .img-cal{
-    height: 25px;
     display: block;
     float: left;
-    margin-top: 12px;
+    margin-top: 18px;
     margin-left: 10px;
+    font-size: 20px;
+    color: #4f4f4f;
 }
 
 .info-post .time {
     font-family: 'gilroy';
     font-weight: bold;
     font-size: 13px;
-    width: 33px;
+    width: 40px;
     height: 15px;
     overflow: hidden;
     color: #646363;
@@ -940,17 +939,17 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     float: left;
     padding-top: 35px;
     padding-bottom: 30px;
-    padding-left: 5%;
+    padding-left: 2.5%;
 }
 
 .rodape .container .border{
     width: 1px;
-    height: 30px;
+    height: 25px;
     display: block;
     float: left;
     background: #ccc;
     margin-right: 40px;
-    margin-top: 5px;
+    margin-top: 8px;
 }
 
 .rodape .container .img{
@@ -958,6 +957,11 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     display: block;
     float: left;
     margin-right: 40px;
+    margin-top: 2px;
+}
+
+.rodape .container .img:hover{
+    cursor: pointer;
 }
 
 .rodape .container-bottom{
@@ -992,6 +996,10 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     font-weight: bolder;
     color: #AAAAAA;
     font-size: 15px;
+}
+
+.rodape .info:hover{
+    opacity: .8;
 }
 
 /* modal  */
@@ -1112,12 +1120,13 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .modal-content .info .img:hover{
-    -webkit-transform: translateY(-4px);
-    transform: translateY(-4px);
+    -webkit-transform: translateY(-3px);
+    transform: translateY(-3px);
     -webkit-transition:0.1s ease-out;
     -moz-transition: 0.1s ease-out;
     -o-transition: 0.1s ease-out;
     -ms-transition: 0.1s ease-out;
+    cursor: pointer;
 }
 
 .modal-content .register{
@@ -1213,7 +1222,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     border-radius: 2px;
     background: #ccc;
     font-weight: bolder;
-    font-size: 16px;
+    font-size: 17px;
     color: #5e5e5e;
     opacity: 1;
 }
@@ -2534,22 +2543,22 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .contato{
   float: left;
   width: 100%;
-  margin-bottom: 60px;
+  margin-bottom: 30px;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
 .contato .title{
     display: block;
     float: left;
     width: 30%;
-    margin-bottom: 80px;
-    font-family: 'gilroy';
+    margin-bottom: 70px;
+    font-family: 'gilroy-bold';
     font-weight: bold;
     font-size: 30px;
-    color: #403d3d;
+    color: #5c5757;
     position: relative;
-    left: 70px;
     top: 60px;
-    letter-spacing: -1px;
 }
 
 .contato .underline{
@@ -2559,7 +2568,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .contato .img-logo{
-  display: block;
+  display: none;
   float: right;
   margin-right: 70px;
   height: 150px;
@@ -2574,8 +2583,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .contato .menu{
   display: block;
   float: left;
-  width: 60%;
-  margin-left: 70px;
+  width: 65%;
   margin-top: 20px;
   clear: both;
 }
@@ -2593,7 +2601,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
   height: 40px !important;
   font-size: 16px;
   padding-left: 5px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 
 .contato .menu .input-area{
@@ -2613,7 +2621,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
   margin-right: 70px;
   position: relative;
   top: 300px;
-  height: 200px;
+  height: 190px;
 }
 
 .contato .button{
@@ -2683,28 +2691,46 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 
+/*---------------- Termos-Política ---------- */
 
-    /*---------------- faq ---------- */
+.termos{
+    display: block;
+    float: left;
+    width: 100%;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.termos .politica{
+    text-align: justify;
+    padding-top: 60px;
+    padding-bottom: 40px;
+    padding-left: 40px;
+    padding-right: 40px;
+    font-size: 14px;
+}
+
+/*---------------- faq ---------- */
 
 .faq{
     float: left;
     width: 100%;
     margin-bottom: 60px;
+    padding-left: 30px;
+    padding-right: 30px;
 }
 
 .faq .title{
     display: block;
     float: left;
     width: 40%;
-    font-family: 'gilroy';
-    font-weight: bolder;
-    font-size:30px;
-    color: #403d3d;
+    font-family: 'gilroy-bold';
+    font-weight: 900;
+    font-size: 30px;
+    color: #5c5757;
     position: relative;
-    left: 70px;
     margin-top: 60px;
-    margin-bottom: 40px;
-    letter-spacing: -1px;
+    margin-bottom: 20px;
 }
 
 .faq .title2{
@@ -2718,7 +2744,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .faq .img-logo{
-  display: block;
+  display: none;
   float: right;
   margin-right: 70px;
   height: 190px;
@@ -2734,11 +2760,10 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .faq .collapsible{
    display: block;
    float: left;
-   width: 70%;
-   position: relative;
-   left: 70px;
+   width: 80%;
    clear: both;
-   box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, .1);
+    border: 0px;
+    box-shadow: 0px;
 }
 
 .faq .collapsible .img{
@@ -3046,6 +3071,12 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     margin-bottom: 10px;
 }
 
+.login-modal .social-medias{
+    display: block;
+    float: left;
+    width: 50%;
+}
+
 .login-modal .login-container{
     display: block;
     margin: 0 auto;
@@ -3095,9 +3126,18 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     font-weight: bolder;
 }
 
+.login-modal .text{
+    display: block;
+    float: left;
+}
+
+.login-modal .text:hover{
+    cursor: pointer;
+}
+
 .modal2{
     top: 20% !important;
-    width: 45%;
+    width: 55%;
 }
 
 .modal3{

@@ -39,6 +39,7 @@ import { InteracoesLeitorService } from 'app/services/interacoes-leitor.service'
 import {ImageCropperComponent, CropperSettings} from 'ng2-img-cropper';
 import { ModalCompartilharComponent } from 'app/internet/compartilhar/modal-compartilhar/modal-compartilhar.component';
 import { ModalMensagemComponent } from './compartilhar/modal-mensagem/modal-mensagem.component';
+import { PoliticaComponent } from './termos/politica/politica.component';
 
 @NgModule({ 
   imports: [
@@ -76,7 +77,8 @@ import { ModalMensagemComponent } from './compartilhar/modal-mensagem/modal-mens
     ModalRascunhoComponent,
     ModalCompartilharComponent,
     ImageCropperComponent,
-    ModalMensagemComponent
+    ModalMensagemComponent,
+    PoliticaComponent
   ],
   providers: [
     CategoriaLeitorService,

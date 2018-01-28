@@ -102,6 +102,10 @@ export class ModalCadastroLeitorComponent implements OnInit {
     })
   }
 
+  fechaModal(){
+      this.closeModal.emit(true);
+  }
+
 
 
 }
