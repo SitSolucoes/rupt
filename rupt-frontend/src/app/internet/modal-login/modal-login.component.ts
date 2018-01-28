@@ -36,7 +36,7 @@ export class ModalLoginComponent implements OnInit {
         this._leitorService.checkFBToken(data.token, data.uid).subscribe(
           (retorno) => {
             if(retorno.resultado == true){
-              //não precisa cadastrar
+              this.doLogin(form_leitor);
               this.closeModalLogin.emit(true);
             }else{
               this._leitorService.createLeitor(form_leitor).subscribe(

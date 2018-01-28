@@ -41,6 +41,7 @@
     "ng2-inputmask": "^0.2.5",
     "ng2-pagination": "^2.0.2",
     "ng2-twitter": "^0.3.0",
+    "ngx-facebook": "^2.4.0",
     "ngx-quill-editor": "^2.2.2",
     "rxjs": "^5.1.0",
     "zone.js": "^0.8.4"
