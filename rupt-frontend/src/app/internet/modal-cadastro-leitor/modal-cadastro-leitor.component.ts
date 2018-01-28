@@ -39,22 +39,12 @@ export class ModalCadastroLeitorComponent implements OnInit {
         this._leitorService.checkFBToken(data.token, data.uid).subscribe(
           (retorno) => {
             if(retorno.resultado == true){
-              //não precisa cadastrar
-              console.log("trouxe usuário da base com sucesso.");
-              console.log(form_leitor);
-              console.log("Do Login com esse form / \\");
-              
               this.doLogin(form_leitor);
               this.closeModal.emit(true);
             }else{
-              console.log("criando leitor");
-              console.log(form_leitor);
               this._leitorService.createLeitor(form_leitor).subscribe(
                 (leitor)=>{ 
-                  console.log("terminou de criar o leitor, deu boa")
-                  console.log("foi pra login");
                   this.doLogin(form_leitor);
-                  console.log("enviando comando de fechar modal")
                   this.closeModal.emit(true);
                 },
                 (error)=>{

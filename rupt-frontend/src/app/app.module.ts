@@ -16,6 +16,8 @@ import { Angular2SocialLoginModule } from "angular2-social-login";
 import { SliderComponent } from 'app/internet/slider/slider.component';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { QuillEditorModule } from 'ngx-quill-editor';
+import { FacebookModule } from 'ngx-facebook';
+
 
 
 let providers = {
@@ -39,6 +41,7 @@ let providers = {
   imports: [
     BrowserModule,
     FormsModule,
+    FacebookModule.forRoot(),
     HttpModule,
     AdminModule,
     InternetModule,

@@ -37,9 +37,10 @@
         <div class="login-modal">
             <div class="login-container">
                 <div class="social-medias">
-                        <a target="_blank" (click)="signIn('facebook')">
-                            <img src="../../../assets/img/face2.png" class="img">
-                        </a>
+                    <span class="media-title">Entre com a sua rede social</span>
+                    <a target="_blank" (click)="signIn('facebook')">
+                        <img src="../../../assets/img/face2.png" class="img">
+                    </a>
                 </div>
             <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
 
