@@ -211,7 +211,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .headbar .headbar-right .dropdown-content li > a{
-    font-size: 14px;
+    font-size: 15px;
     text-align: center;
     color: #000;
     background: #fff;
@@ -730,13 +730,13 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     overflow: hidden;
     display: block;
     float: left;
-    margin-left: 10px;
+    margin-left: 20px;
 }
 
 .container-categoria .info-post .area-post{
     display: block;
     float: right;
-    width: 90px;
+    max-width: 90px;
     margin-right: 20px;
 }
 
@@ -962,6 +962,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 
 .rodape .container .img:hover{
     cursor: pointer;
+    opacity: .9;
 }
 
 .rodape .container-bottom{
@@ -975,6 +976,10 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     text-align: center;
     color: #AAAAAA;
     font-size: 13px;
+}
+
+.rodape .container-bottom:hover{
+    opacity: .9;
 }
 
 .rodape .categoria{
@@ -1269,14 +1274,17 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 
 .modal-excluir .container-excluir .button{
     height: auto !important;
-    padding: 2px !important;
+    padding: 4px !important;
     display: block;
     margin-bottom: 15px !important;
     margin: 0 auto;
     float: none;
-    font-size: 18px !important;
+    font-family: Lato;
+    font-size: 16px !important;
+    font-weight: bolder;
     background-color: #F44336 !important;
     color: #fff;
+    border-radius: 2px;
     border: 1px solid #F44336 !important;
     width: 70% !important;
 }
@@ -1338,7 +1346,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     display: block;
     float: left;
     height: 70px;
-    width: 70%;
+    width: 73%;
     background: #fff;
     padding-left: 30px;
     padding-top: 13px;
@@ -1358,17 +1366,18 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .user .area .write-area{
     display: block;
     float: right;
-    width: 150px;
     height: 50px;
     margin-right: 40px;
     overflow: hidden;
 }
 
 .user .area .img3{
-    height: 40px;
+    font-size: 30px;
+    color: #f97000;
     display: block;
     float: left;
     margin-top: 2px;
+    margin-right: 10px;
 }
 
 .user .area .write-area p{
@@ -1428,8 +1437,8 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .user .bio{
     display: block;
     float: left;
-    width: 26%;
-    padding-left: 60px;
+    width: 24%;
+    padding-left: 30px;
     padding-right: 1%;
     padding-top: 20px;
     position: relative;
@@ -1509,7 +1518,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     display: block;
     position: relative;
     float: left;
-    width: 51%;
+    width: 54%;
     background: #fff;
     margin-top: 10px;
     margin-bottom: 20px;
@@ -1582,6 +1591,8 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     display: block;
     float: left;
     width: 100%;
+    padding-left: 5%;
+    padding-right: 3%;
     border-bottom: 1px solid #E8E8E8;
     padding-bottom: 20px;
     padding-top: 10px;
@@ -1607,7 +1618,6 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     height: 50px;
     width: 50px;
     border-radius: 100%;
-    margin-left: 30px;
     margin-top: 10px;
     overflow: hidden;
 }
@@ -1637,14 +1647,15 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 
 .user .feed .post .img6{
     height: 22px;
-    margin-top: 15px;
-    margin-right: 7px;
+    font-size: 18px;
+    margin-top: 0px;
+    color: #4f4f4f;
 }
 
 .user .feed .post .text{
     display: block;
     float: left;
-    width: 80%;
+    width: 90%;
     line-height: 20px;
 }
 
@@ -1712,7 +1723,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     font-family: 'nexa-bold';
     margin-top: 8px;
     margin-left: 15px;
-    color: #f97000;
+    color: #000;
 }
 
 .user .feed .post .title2{
@@ -1807,10 +1818,9 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .user .feed .post .status .img4{
     display: block;
     float: left;
-    height: 43px;
+    height: 40px;
     position: relative;
     bottom: 3px;
-    margin-right: -6px;
 }
 
 .user .feed .post .status .img4.pb{
@@ -1826,7 +1836,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .user .feed .search .input-search{
-    width: 90%;
+    width: 91%;
     height: 40px;
     display: block;
     float: left;
@@ -1836,12 +1846,11 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     background: #f7f7f7;
     border: 1px solid #f7f7f7;
     border-radius: 2px;
-    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, .2) !important;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, .3) !important;
 }
 
 .user .feed .search input[type=text]:not(.browser-default):focus:not([readonly]), input[type=password]:not(.browser-default):focus:not([readonly]){
     background: #fff;
-    border: 1px solid #fff;
 }
 
 .user .feed .search .img6{
@@ -1913,7 +1922,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     width: 18%;
     background: #fff;
     margin-left: 0%;
-    margin-right: 4%;
+    margin-right: 3%;
     margin-top: 10px;
     margin-bottom: 10px;
 }
@@ -1994,8 +2003,8 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .news .area-top{
-  width: 70%;
-  margin-left: 60px;
+  width: 75%;
+  margin-left: 30px;
   margin-top: 20px;
   padding-top: 30px;
 }
@@ -2018,13 +2027,12 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
   margin-bottom: 10px;
   margin-right: 10px;
   font-size: 16px;
-  font-family: 'gilroy';
-  padding: 8px;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  font-family: 'nexa-bold';
+  padding: 5px 8px;
   color: #fff;
   text-align: center;
-  border-radius: 5px;
+  border-radius: 2px;
+  letter-spacing: 1px;
 }
 
 .news .area-top .tag:last-child{
@@ -2051,22 +2059,22 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
   margin: 0 auto;
   width: 85%;
   font-size: 34px;
-  line-height: 50px;
+  line-height: 40px;
   color: #3b3b3b;
   font-family: 'gilroy-bold';
   text-align: center;
-  letter-spacing: -2px;
+  letter-spacing: -1px;
 }
 
 .news .container{
   display: block;
   float: left;
   margin-top: 30px;
-  width: 70%;
+  width: 75%;
   background: #fff;
   padding-left: 10px;
   padding-right: 10px;
-  margin-left: 60px;
+  margin-left: 30px;
   overflow: auto;
 }
 
@@ -2084,7 +2092,6 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
   height: 50px;
   width: 100%;
   border-bottom: 1px solid #E8E8E8;
-  padding-left: 20px;
   padding-top: 15px;
   font-family: lato;
   font-size: 13px;
@@ -2092,13 +2099,19 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 
 .news .container .area .img{
   height: 10px;
+  color: #f97000;
+  margin: 0px 5px;
 }
 
 .news .container .area .name{
   font-family: 'gilroy-bold';
   color: #575757;
-  font-size: 18px;
+  font-size: 17px;
   text-transform: capitalize;
+}
+
+.news .container .area .name a{
+  color: #575757;
 }
 
 .news .container .area .social{
@@ -2124,25 +2137,31 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .news .container .area b{
-    color: #8c8c8c;
+    color: #9e9e9e;
     position: relative;
-    bottom: 2px;
+    font-family: gilroy;
 }
 
 .news .container .area .social .img{
-  height: 20px;
-  margin-right: 15px;
+  height: 30px;
+  font-size: 20px;
+  margin-right: 20px;
+  margin-left: 2px;
   display: block;
   float: left;
+  margin-top: -5px;
+}
+
+.news .container .area .social .fa-share{
+  margin-top: 0px;
 }
 
 .news .container .area .social .edit{
-    height: 18px;
     margin-left: 5px;
     border-radius: 0px;
     display: block;
     float: right;
-    font-size: 22px;
+    font-size: 25px;
     color: #f97000;
 }
 
@@ -2179,10 +2198,10 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
   padding-bottom: 60px;
   font-size: 18px;
   font-family: 'Lato';
-  line-height: 38px;
+  line-height: 33px;
   color: #4F4F4F;
   text-align: justify;
-   margin-top: 20px;
+  margin-top: 40px;
 }
 
 .news .container .fb-size{
@@ -2199,8 +2218,8 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .news .container .reactions .area2{
     display: block;
     float: left;
-    margin-left: 15px!important;
-    margin-right: 15px;
+    margin-left: 8px !important;
+    margin-right: 8px;
     position: relative;
     left:8%!important;
 }
@@ -2209,11 +2228,15 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     height: 45px;
     display: block;
     margin: 0 auto;
+    text-align: center;
+    font-size: 25px;
+}
+
+.news .container .reactions .area2 .fa{
+    padding-top: 5px;
 }
 
 .news .container .reactions .area2 .img:hover{
-    transform: scale(1.8);
-    transition: transform 0.30s;
     cursor: pointer;
 }
 
@@ -2237,13 +2260,15 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .news .container .reactions .area2 p{
     width: 100%;
     display: block;
-    color: #7a7a7a;
+    color: #4a4a4a;
     float: left;
     clear: both;
     font-size: 14px;
+    font-weight: bold;
     text-align: center;
-    margin-top: 10px;
-    letter-spacing: -1px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    letter-spacing: 0px;
 }
 
 .news .container .reactions .area2 .count{
@@ -2252,7 +2277,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     color: #7a7a7a;
     float: left;
     clear: both;
-    font-size: 14px;
+    font-size: 14.5px;
     text-align: center;
     margin-top: 0px;
     letter-spacing: -1px;
@@ -2352,6 +2377,14 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     font-size: 13px;
     font-family: nexa-bold;
     padding-top: 2px;
+}
+
+.news .container .comentarios .profile .button:hover{
+    background: #fff !important;
+    border: 1px solid #f97000;
+    color: #f97000;
+    transition: 0.5s;
+    cursor: pointer;
 }
 
 .news .container .comentarios .profile .button i{
@@ -2541,30 +2574,34 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .contato{
-  float: left;
-  width: 100%;
-  margin-bottom: 30px;
-  padding-left: 30px;
-  padding-right: 30px;
+    display: table;
+    margin: 0 auto;
+    width: 60%;
+    margin-bottom: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
 }
 
 .contato .title{
     display: block;
     float: left;
-    width: 30%;
+    width: 100%;
     margin-bottom: 70px;
     font-family: 'gilroy-bold';
     font-weight: bold;
-    font-size: 30px;
-    color: #5c5757;
+    font-size: 35px;
+    color: #3b3b3b;
     position: relative;
     top: 60px;
+    text-align: center;
 }
 
 .contato .underline{
   background: #f97000;
   height: 2px;
   width: 50px;
+    display: table;
+    margin: 0 auto;
 }
 
 .contato .img-logo{
@@ -2581,9 +2618,10 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .contato .menu{
-  display: block;
+  display: table;
+  margin: 0 auto;
   float: left;
-  width: 65%;
+  width: 100%;
   margin-top: 20px;
   clear: both;
 }
@@ -2617,6 +2655,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .contato .img{
+  display: none;
   float: right;
   margin-right: 70px;
   position: relative;
@@ -2713,8 +2752,9 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 /*---------------- faq ---------- */
 
 .faq{
-    float: left;
-    width: 100%;
+    display: table;
+    margin: 0 auto;
+    width: 70%;
     margin-bottom: 60px;
     padding-left: 30px;
     padding-right: 30px;
@@ -2723,14 +2763,15 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .faq .title{
     display: block;
     float: left;
-    width: 40%;
+    width: 100%;
     font-family: 'gilroy-bold';
     font-weight: 900;
-    font-size: 30px;
-    color: #5c5757;
+    font-size: 35px;
+    color: #3b3b3b;
     position: relative;
     margin-top: 60px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+    text-align: center;
 }
 
 .faq .title2{
@@ -2741,6 +2782,8 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     background: #f97000;
     height: 2px;
     width: 50px;
+    display: table;
+    margin: 0 auto;
 }
 
 .faq .img-logo{
@@ -2760,10 +2803,10 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .faq .collapsible{
    display: block;
    float: left;
-   width: 80%;
+   width: 100%;
    clear: both;
-    border: 0px;
-    box-shadow: 0px;
+   border: 0px;
+   box-shadow: 0px;
 }
 
 .faq .collapsible .img{
@@ -2784,41 +2827,51 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .cadastro{
   display: block;
   float: left;
-  width: 90%;
+  width: 95%;
   padding-bottom: 80px;
 }
 
 .cadastro .button{
     margin-top: 40px;
-    height: 30px;
     text-align: center;
     font-weight: bolder;
-    padding-top: 3px;
+    padding: 8px;
     width: 15%;
-    border-radius: 4px;
+    border-radius: 2px;
     display: block;
     float: right;
     background: #f97000;
+    border: 1px solid #f97000;
     color: #fff;
+    text-transform: capitalize;
+}
+
+.cadastro .button:hover{
+    background: #fff !important;
+    border: 1px solid #f97000;
+    color: #f97000;
+    transition: 0.5s;
 }
 
 .cadastro .container{
-  display: block;
-  float: left;
-  width: 90%;
-  margin-left: 60px;
-  padding-top: 40px;
+    display: block;
+    float: left;
+    width: 100%;
+    margin-left: 30px;
+    padding-top: 40px;
 }
 
 .cadastro .container p{
-  display: block;
-  float: left;
-  width: 80%;
-  margin-bottom: 20px;
-  font-family: 'nexa-bold';
-  font-size: 30px;
-  color: #403d3d;
-  position: relative;
+    display: block;
+    float: left;
+    width: 80%;
+    margin-bottom: 10px;
+    font-family: 'gilroy-bold';
+    letter-spacing: -1px;
+    font-size: 35px;
+    color: #403d3d;
+    position: relative;
+    text-transform: capitalize;
 }
 
 .cadastro .container .area{
@@ -3074,13 +3127,56 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .login-modal .social-medias{
     display: block;
     float: left;
-    width: 50%;
+    width: 40%;
+    padding: 35px 20px;
+    padding-top: 5px;
+    border-right: 1px solid #cccccc;
+}
+
+.login-modal .social-medias .area{
+    display: block;
+    float: left;
+    width: 100%;
+    padding: 10px;
+    background: #4267b2;
+    border: 1px solid #4267b2;
+    color: #fff;
+    border-radius: 2px;
+    margin-bottom: 10px;
+}
+
+.login-modal .social-medias .area:hover{
+    cursor: pointer;
+    background: #fff !important;
+    border: 1px solid #4267b2;
+    color: #4267b2;
+    transition: 0.5s;
+}
+
+.login-modal .social-medias .area2{
+    background: #008ac1;
+    border: 1px solid #008ac1;
+}
+
+.login-modal .social-medias .area2:hover{
+    border: 1px solid #008ac1;
+    color: #008ac1;
+}
+
+.login-modal .social-medias .fa{
+    padding-left: 10px;
+    padding-right: 10px;
+    display: block;
+    float: left;
+    margin-top: 5px;
 }
 
 .login-modal .login-container{
     display: block;
-    margin: 0 auto;
-    width: 75%;
+    float: left;
+    width: 60%;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .login-modal .login-container .input{
@@ -3105,6 +3201,13 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     opacity: .9;
     margin-bottom: 30px;
     float: right;
+}
+
+.login-modal .login-container .button:hover{
+    background: #fff !important;
+    border: 1px solid #f97000;
+    color: #f97000;
+    transition: 0.5s;
 }
 
 .login-modal .login-container .button i{
@@ -3133,6 +3236,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 
 .login-modal .text:hover{
     cursor: pointer;
+    text-decoration: underline;
 }
 
 .modal2{
@@ -3608,7 +3712,7 @@ quill-editor{
     text-align: center;
     margin: 0px;
     width: 100%;
-    padding: 10px 10px 10px 10px;
+    padding: 10px;
     height: 100% !important;
     float: left;
     margin-left: 3%;
@@ -3618,14 +3722,15 @@ quill-editor{
     display: block;
     margin: 0 auto;
     width: 85%;
-    font-size: 34px;
+    font-size: 35px;
     line-height: 50px;
     color: #3b3b3b;
     font-family: 'gilroy-bold';
     text-align: center;
-    letter-spacing: -2px;
-    text-transform: uppercase;
+    letter-spacing: -1px;
+    /* text-transform: uppercase; */
     padding: 30px;
+    padding-top: 50px;
 }
 
 /*CONTAINER LEFT*/
@@ -3717,7 +3822,6 @@ quill-editor{
 .publicacao .container{
     width: 90%;
     margin-left: 5%;
-    margin-top: -9px;
 }
 
 .publicacao .container .top{
@@ -3871,7 +3975,7 @@ quill-editor{
 .form-footer .button{
     width: 120px;
     height: 40px;
-    border-radius: 3px;
+    border-radius: 2px;
     text-align: center;
     outline: none;
     display: block;
