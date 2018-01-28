@@ -14,12 +14,14 @@ import { CadastroLeitorComponent} from './cadastro-leitor/cadastro-leitor.compon
 import { CadastroEscritorComponent } from './cadastro-escritor/cadastro-escritor.component';
 import {PublicacaoComponent} from './publicacao/publicacao.component';
 import { EsqueciSenhaComponent } from './esqueci-senha/esqueci-senha.component';
+import { PoliticaComponent } from './termos/politica/politica.component';
 
 const routes: Routes = [
   { path : '', component: InternetInicioComponent,
     children: [
       { path : 'noticias', component: HomeComponent},
       { path : 'faq', component: FaqComponent},
+      { path : 'politica', component: PoliticaComponent},
       { path : 'perfil/:nick', component: UserComponent },
       { path : 'footer', component: FooterComponent },
       { path : 'perfil/:nick/:torne-se-um-escritor', component: UserComponent },
