@@ -12,12 +12,14 @@ import { UploadFileService } from "./../../services/upload-file.service";
 import { UploadItem } from "./../../classes/upload-item";
 import { MaterializeAction } from 'angular2-materialize';
 import { CropperSettings, ImageCropperComponent } from 'ng2-img-cropper';
+import { BackgroundInputFile } from 'app/shared/background-input-file';
 
 @Component({
   selector: 'cadastro-leitor',
   templateUrl: './cadastro-leitor.component.html',
   styleUrls: ['./cadastro-leitor.component.css']
 })
+
 export class CadastroLeitorComponent implements OnInit {
 
   //VIEW CHILDS FOR FOCUS
@@ -74,7 +76,9 @@ export class CadastroLeitorComponent implements OnInit {
       this.cropperSettings.cropperClass = 'canvas';
       this.cropperSettings.noFileInput = true;
       this.cropperSettings.touchRadius = 50;
+      this.cropperSettings.rounded = true;
       this.data = {};
+      this.data.image = BackgroundInputFile.bg;
   }
 
   ngOnInit() {

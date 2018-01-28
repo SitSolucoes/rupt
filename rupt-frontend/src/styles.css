@@ -2908,6 +2908,11 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     color: #f0f0f0;
     background-size: auto 150px!important;
     text-shadow: 1px 1px 5px #000;
+    cursor: pointer;
+}
+
+.cadastro .container .area .input-img .image.rounded{
+    border-radius: 100%;
 }
 
 .cadastro .container .area .input-img .image .input-field{

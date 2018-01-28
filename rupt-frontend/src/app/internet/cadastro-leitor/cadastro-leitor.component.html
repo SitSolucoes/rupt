@@ -4,7 +4,7 @@
     <div class="modal-content">
         <div class="title"  *ngIf="action != 'loading'">
             <span>Recortar imagem</span>
-            <a click="#" class="modal-action modal-close close">x</a>
+            <a click="#" class="modal-action modal-close close">X</a>
         </div>
           
         <div class="modal-imagem-content">
@@ -14,7 +14,7 @@
                         <i class="fa fa-picture-o" aria-hidden="true"></i>      
                         Selecionar imagem
                     </span>
-                    <input id="imagem" type="file" (change)="fileChangeListener($event)">
+                    <input id="imagem" id='foto' type="file" (change)="fileChangeListener($event)">
                 </div>
                 <div class="file-path-wrapper">
                     <input class="file-path validate" type="text">
@@ -104,6 +104,7 @@
                 <textarea class="textarea" formControlName='biografia' maxlength="300"></textarea>
             </div>  
             <div class="menu marginless">
+                <!--
                 <div class="input-img">
                     <button type="button" class="button button-border" (click)="openModalImagem()" [disabled]='loading'>
                         <i class="fa fa-picture-o" aria-hidden="true"></i>  
@@ -118,13 +119,12 @@
                         </span>
                     </div>
                 </div>
-
-                <!--
+                -->
 
                 <div class="input-img">
                     <label> Foto de perfil </label>
-
-                    <div class="image">
+                    
+                    <div class="image rounded" (click)="openModalImagem()" [ngStyle]="{'background': 'url('+data.image+')'}">
                         <div class="file-field input-field file-upload">
                             <div class="button-input">
                                 <div class="icon-area">
@@ -133,10 +133,6 @@
                                 <span>
                                     Adicionar imagem
                                 </span>
-                                <input id="imagem" type="file" (change)="fileChangeListener($event)">
-                            </div>
-                            <div class="file-path-wrapper">
-                                <input class="file-path validate" type="text">
                             </div>
                         </div>
                     </div>
@@ -154,7 +150,7 @@
                                 <span>
                                     Adicionar imagem
                                 </span>
-                                <input id="imagem" type="file" (change)="showCapa($event)">
+                                <input id="imagem" id='capa' type="file" (change)="showCapa($event)">
                             </div>
                             <div class="file-path-wrapper">
                                 <input class="file-path validate" type="text">
@@ -162,9 +158,7 @@
                         </div>
                     </div>
                 </div>
-
-                -->
-
+                
                 <!--
                 <label> Foto de perfil </label>
                 <input type="file" name="arquivo1" (change)="imgShow($event, 'perfil')" id="foto" class="input-img" style="margin-bottom:9px;"/>
