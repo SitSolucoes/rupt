@@ -4,28 +4,18 @@
             Esqueci minha senha
             <a click="#" class=" modal-action modal-close close">X</a>
         </div>
-
         <div class="login-modal login-modal2">
-
             <div class="container">
-
                 <p> Insira seu email para procurar sua conta. </p>
                 <input type="text" class="input" maxlength="30" name="email"  placeholder="E-mail">
-
                 <div class="error">
                     Sua busca não retornou nenhum resultado. Tente novamente com outras informações.
                 </div>
-
                 <div class="bottom-line">
-
                     <a (click)="redirectCadastro()"><button type="submit" class="button3 button4">Cancelar</button></a>
-
                     <a routerLink="esqueci-senha"><button type="submit" class="button3">Pesquisar</button></a>
-
                 </div>
-
             </div>
-
         </div>
     -->
 
@@ -33,7 +23,6 @@
         Login
         <a click="#" class=" modal-action modal-close close">X</a>
     </div>
-
         <div class="login-modal">
             <div class="social-medias">
                 <a target="_blank" (click)="signIn('facebook')">
@@ -56,11 +45,8 @@
                         <i class="fa fa-spinner fa-pulse fa-3x fa-fw" *ngIf='loading'></i>    
                         Entrar
                     </button>
-
                     <a (click)="openModalEsqSen()"><div class="text">Esqueceu a senha?</div></a>
-
                 </form>
             </div>
         </div>
-
 </div>

@@ -1244,8 +1244,8 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     background: #ccc;
     font-weight: bolder;
     font-size: 17px;
-    color: #5e5e5e;
     opacity: 1;
+    color: #000;
 }
 
 .modal-footer .button2{
@@ -1324,6 +1324,69 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     color: #4f4f4f;
     transition: 0.5s;
 }
+
+.modal-pesquisa{
+    display: block;
+    float: left;
+    width: 100%;
+    height: 200px;
+}
+
+.modal-pesquisa .container {
+    display: block;
+    float: left;
+    width: 100%;
+    margin-top: 10px;
+    padding: 20px;
+}
+
+.modal-pesquisa .input{
+    width: 100%;
+    background: #fff;
+    padding-left: 10px !important;
+    display: table;
+    box-sizing: inherit !important;
+    border: 1px solid #ccc !important;
+}
+
+.modal-pesquisa .button-modal{
+    float: right;
+    background: #ccc;
+    border: 1px solid #ccc;
+    padding: 8px;
+    margin-right: 15px;
+    font-family: lato;
+    font-weight: bolder;
+}
+
+.modal-pesquisa .button-modal:hover{
+    background: #fff !important;
+    border: 1px solid #ccc;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+.modal-pesquisa .button-modal2{
+    margin-right: 0px;
+    color: #fff;
+    border: 1px solid #f97000;
+    background: #f97000;
+}
+
+.modal-pesquisa .button-modal2:hover{
+    border: 1px solid #f97000;
+    color: #f97000;
+}
+
+.modal-pesquisa .button-modal:first-child{
+    margin-right: 0px;
+}
+
+input[type=email]:not(.browser-default):focus:not([readonly]){
+    border-bottom: 1px solid #ccc !important;
+    box-shadow: none !important;
+}
+
 
 /*---------------- user ---------- */
 
@@ -2682,7 +2745,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .contato .button{
 	width: 120px;
 	height: 40px;
-	border-radius: 3px;
+	border-radius: 2px;
 	text-align: center;
 	outline: none;
 	display: block;
@@ -2699,7 +2762,10 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .contato .button:hover{
-  opacity: .8;
+    background: #fff !important;
+    border: 1px solid #f97000;
+    color: #f97000;
+    transition: 0.5s;
 }
 
 .contato select{
