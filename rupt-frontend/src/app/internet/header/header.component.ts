@@ -7,6 +7,8 @@ import { Leitor } from './../../classes/leitor';
 import { any } from 'codelyzer/util/function';
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { AuthService } from 'angular2-social-login/dist/auth.service';
+import { CategoriasService } from 'app/services/categorias.service';
+import { Categoria } from 'app/classes/categoria';
 declare var $: any;
 
 @Component({
@@ -15,48 +17,54 @@ declare var $: any;
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  url = ConnectionFactory.API_IMAGEM;
+
+  categorias: Categoria[] = new Array();
   leitor: Leitor;
   modalActions = new EventEmitter<string|MaterializeAction>();
   modalLogin = new EventEmitter<string|MaterializeAction>();
   modalEsqueciSenha = new EventEmitter<string|MaterializeAction>();
   modalGenerico = new EventEmitter<string|MaterializeAction>();
   modalRascunho = new EventEmitter<string|MaterializeAction>();
+  url = ConnectionFactory.API_IMAGEM;
   
   constructor(private _leitorService: LeitoresService,
               private _router: Router,
-              private _auth: AuthService) { }
+              private _auth: AuthService,
+              private _categoriaService: CategoriasService,
+              ) { }
 
   ngOnInit() {
       this._leitorService.leitor.subscribe(
         (leitor: Leitor) => { this.leitor = leitor }
       )
 
-      $('.button-collapse').sideNav();
+      $('.button-collapse').sideNav({
+        closeOnClick: true,
+      });
 
       this._leitorService.verificaLogin().subscribe();
+      this.getCategorias();
+  }
+
+  getCategorias(){
+      this._categoriaService.getCategoriasAtivas().subscribe(
+        (categorias) => { this.categorias = categorias; }
+      )
   }
 
   openModal() {
-    this.modalActions.emit({
-      action: 'modal',
-      params: ['open']});
+    this.modalActions.emit({ action: 'modal', params: ['open']});
   }
 
   openModalLogin() {
-      this.modalLogin.emit({
-          action: 'modal',
-          params: ['open']});
+      this.modalLogin.emit({ action: 'modal', params: ['open']});
   }
 
   openModalEsqueciSenha(e){
     if(e){
       this.modalLogin.emit({action:"modal",params:['close']});
     }
-    this.modalEsqueciSenha.emit({
-      action: 'modal',
-      params: ['open']
-    });
+    this.modalEsqueciSenha.emit({ action: 'modal', params: ['open']});
   }
   
   closeModal(e){
@@ -88,15 +96,20 @@ export class HeaderComponent implements OnInit {
         }
     }
 
-  logout(){
-    this._leitorService.logout();
-    this._fb_logout();
-    this._router.navigate(['/']);
-  }
+    logout(){
+      this._leitorService.logout();
+      this._fb_logout();
+      this._router.navigate(['/']);
+    }
 
-  private _fb_logout(){
-    this._auth.logout().subscribe(
-      (data)=>{console.log(data)}
-    )
-  }
+    private _fb_logout(){
+      this._auth.logout().subscribe(
+        (data)=>{console.log(data)}
+      )
+    }
+
+    redirect(categoria: Categoria){
+      this._categoriaService.paramCategoria.emit(categoria);
+      this._router.navigate(['/categorias/'+categoria.categoria.replace(' ', '').toLowerCase()]);
+    }
 }

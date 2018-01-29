@@ -41,6 +41,9 @@ import { ModalCompartilharComponent } from 'app/internet/compartilhar/modal-comp
 import { ModalMensagemComponent } from './compartilhar/modal-mensagem/modal-mensagem.component';
 import { PoliticaComponent } from './termos/politica/politica.component';
 import { FacebookModule } from 'ngx-facebook';
+import { CategoriaComponent } from './lista-resultados/categoria/categoria.component';
+import { PesquisaComponent } from './lista-resultados/pesquisa/pesquisa.component';
+import { ListaComponent } from './lista-resultados/lista/lista.component';
 
 @NgModule({ 
   imports: [
@@ -80,7 +83,10 @@ import { FacebookModule } from 'ngx-facebook';
     ModalCompartilharComponent,
     ImageCropperComponent,
     ModalMensagemComponent,
-    PoliticaComponent
+    PoliticaComponent,
+    CategoriaComponent,
+    PesquisaComponent,
+    ListaComponent
   ],
   providers: [
     CategoriaLeitorService,
