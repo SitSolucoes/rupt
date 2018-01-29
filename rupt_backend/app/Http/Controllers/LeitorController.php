@@ -207,8 +207,6 @@ class LeitorController extends Controller
         return response()->json($response, 200);
     }
 
-    
-
     public function validaNick($nick, $id){
         $leitor = Leitor::where("nick", $nick)
                         ->where("id", '<>', $id)
@@ -344,12 +342,18 @@ class LeitorController extends Controller
         $path = public_path()."/"."profile/";
         
         if (isset($_FILES['doc1']['tmp_name'])){
-            move_uploaded_file($_FILES['doc1']['tmp_name'], $path.$id."_profile.".pathinfo($_FILES['doc1']['name'], PATHINFO_EXTENSION));
-            $leitor->src_foto = $id."_profile.".pathinfo($_FILES['doc1']['name'], PATHINFO_EXTENSION);
+            \File::Delete($path.$leitor->src_foto);
+
+            $fileName = md5(uniqid(rand(), true)).'.'.pathinfo($_FILES['doc1']['name'], PATHINFO_EXTENSION);
+            move_uploaded_file($_FILES['doc1']['tmp_name'], $path.$fileName);
+            $leitor->src_foto = $fileName;
         }
         if (isset($_FILES['doc2']['tmp_name'])){
-            move_uploaded_file($_FILES['doc2']['tmp_name'], $path.$id."_capa.".pathinfo($_FILES['doc2']['name'], PATHINFO_EXTENSION));
-            $leitor->src_capa = $id."_capa.".pathinfo($_FILES['doc2']['name'], PATHINFO_EXTENSION);
+            \File::Delete($path.$leitor->src_capa);
+
+            $fileName = md5(uniqid(rand(), true)).'.'.pathinfo($_FILES['doc2']['name'], PATHINFO_EXTENSION);
+            move_uploaded_file($_FILES['doc2']['tmp_name'], $path.$fileName);
+            $leitor->src_capa = $fileName;
         }
         
         $leitor->save();

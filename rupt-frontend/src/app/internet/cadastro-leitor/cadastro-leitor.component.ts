@@ -13,6 +13,7 @@ import { UploadItem } from "./../../classes/upload-item";
 import { MaterializeAction } from 'angular2-materialize';
 import { CropperSettings, ImageCropperComponent } from 'ng2-img-cropper';
 import { BackgroundInputFile } from 'app/shared/background-input-file';
+import { ConnectionFactory } from 'app/classes/connection-factory';
 
 @Component({
   selector: 'cadastro-leitor',
@@ -78,7 +79,7 @@ export class CadastroLeitorComponent implements OnInit {
       this.cropperSettings.touchRadius = 50;
       this.cropperSettings.rounded = true;
       this.data = {};
-      this.data.image = BackgroundInputFile.bg;
+      //this.data.image = BackgroundInputFile.bg;
   }
 
   ngOnInit() {
@@ -87,7 +88,15 @@ export class CadastroLeitorComponent implements OnInit {
     this.createForm();
 
     this._leitoresService.leitor.subscribe(
-      (leitor: Leitor) => { this.leitor = leitor }
+      (leitor: Leitor) => { 
+        this.leitor = leitor ;
+        if (this.leitor.src_capa && this.leitor.src_capa != '')
+          this.url_capa = 'url("'+ ConnectionFactory.API_IMAGEM + 'profile/' + this.leitor.src_capa +'")';
+        if (this.leitor.src_foto && this.leitor.src_foto != ''){
+          this.data.image = ConnectionFactory.API_IMAGEM + 'profile/' + this.leitor.src_foto+'")';
+          this.url_perfil = 'url("'+ ConnectionFactory.API_IMAGEM + 'profile/' + this.leitor.src_foto +'")';
+        }
+      }
     ); 
     this._leitoresService.verificaLogin().subscribe(
       (response) => {
@@ -213,8 +222,6 @@ export class CadastroLeitorComponent implements OnInit {
   }
 
   showCapa(e){
-    console.log('show-capa');
-
     if(e.target.files && e.target.files[0]){
       let reader = new FileReader();
 
@@ -249,6 +256,7 @@ export class CadastroLeitorComponent implements OnInit {
   }
 
   closeModalImagem(){
+    this.url_perfil = this.url_perfil = 'url("'+ this.data.image +'")';;
     this.modalImagem.emit({ action:'modal', params:['close']});
   }
 
@@ -332,6 +340,13 @@ export class CadastroLeitorComponent implements OnInit {
         myUploadItem.formData = { FormDataKey: 'Form Data Value' };  // (optional) form data can be sent with file
 
         this._uploadFileService.onSuccessUpload = (item, response, status, headers) => {
+              this._leitoresService.getLeitor(this.leitor.id).subscribe(
+                (leitor) => { 
+                  this.leitor = leitor; 
+                  this._leitoresService.leitor.emit(leitor);
+                }
+              );
+
               // success callback
               if (!edit){
                 this.loading = false;

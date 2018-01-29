@@ -124,7 +124,7 @@
                 <div class="input-img">
                     <label> Foto de perfil </label>
                     
-                    <div class="image rounded" (click)="openModalImagem()" [ngStyle]="{'background': 'url('+data.image+')'}">
+                    <div class="image rounded" (click)="openModalImagem()" [ngStyle]="{'background': url_perfil}">
                         <div class="file-field input-field file-upload">
                             <div class="button-input">
                                 <div class="icon-area">
@@ -195,7 +195,7 @@
             </div>
 
             <div class="form-footer">
-                <button type="submit" class="button" [ngClass]='{ medium: !leitor.id}' id="submit-contato">
+                <button type="submit" class="button" [ngClass]='{ medium: !leitor.id}'>
                     <i class="fa fa-spinner fa-pulse fa-3x fa-fw" *ngIf='loading'></i>
                     {{ textButton }}
                 </button>

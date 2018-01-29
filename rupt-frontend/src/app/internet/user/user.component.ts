@@ -246,7 +246,7 @@ export class UserComponent implements OnInit {
   openModalCompartilharMensagem(){
     this.modalCompartilharMensagem.emit({ action: 'modal', params: ['open']});
 
-    setTimeout(() => this.closeModalCompartilharMensagem(), 2500);
+    setTimeout(() => this.closeModalCompartilharMensagem(), 1500);
   }
 
   closeModalCompartilharMensagem(){
