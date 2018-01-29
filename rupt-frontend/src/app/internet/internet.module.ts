@@ -42,6 +42,9 @@ import { ModalMensagemComponent } from './compartilhar/modal-mensagem/modal-mens
 import { PoliticaComponent } from './termos/politica/politica.component';
 import { FacebookModule } from 'ngx-facebook';
 import { ModalPesquisaComponent } from './modal-pesquisa/modal-pesquisa.component';
+import { CategoriaComponent } from './lista-resultados/categoria/categoria.component';
+import { PesquisaComponent } from './lista-resultados/pesquisa/pesquisa.component';
+import { ListaComponent } from './lista-resultados/lista/lista.component';
 
 @NgModule({ 
   imports: [
@@ -83,6 +86,9 @@ import { ModalPesquisaComponent } from './modal-pesquisa/modal-pesquisa.componen
     ModalMensagemComponent,
     PoliticaComponent,
     ModalPesquisaComponent
+    CategoriaComponent,
+    PesquisaComponent,
+    ListaComponent
   ],
   providers: [
     CategoriaLeitorService,

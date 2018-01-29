@@ -1,10 +1,14 @@
 import { Observable } from 'rxjs';
 import { Http, Headers, Response } from '@angular/http';
 import { ConnectionFactory } from './../classes/connection-factory';
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
+import { Categoria } from 'app/classes/categoria';
 
 @Injectable()
 export class CategoriasService {
+
+  //usado como parêmtro pra não aparecer na rota
+  paramCategoria = new EventEmitter<Categoria>();
 
   private headers = new Headers({'Content-Type': 'application/json'});
   private _url: string = ConnectionFactory.API_CONNECTION;

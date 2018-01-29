@@ -15,6 +15,7 @@ import { CadastroEscritorComponent } from './cadastro-escritor/cadastro-escritor
 import {PublicacaoComponent} from './publicacao/publicacao.component';
 import { EsqueciSenhaComponent } from './esqueci-senha/esqueci-senha.component';
 import { PoliticaComponent } from './termos/politica/politica.component';
+import { CategoriaComponent } from 'app/internet/lista-resultados/categoria/categoria.component';
 
 const routes: Routes = [
   { path : '', component: InternetInicioComponent,
@@ -33,9 +34,9 @@ const routes: Routes = [
       { path : 'contato', component: ContatoComponent},
       { path : 'esqueci-senha', component:  EsqueciSenhaComponent},
       { path : 'redefinindoSenha/:token', component: RedefineSenhaComponent}, 
+      { path : 'categorias/:categoria', component: CategoriaComponent},
       { path : '', redirectTo: 'noticias', pathMatch: 'full'},
       { path : '**', redirectTo: 'noticias', pathMatch: 'full'},
-
     ]},
 ];
 
