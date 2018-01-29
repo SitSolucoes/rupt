@@ -36,25 +36,16 @@ export class LeitoresService {
   
   createLeitor(form){
     const body = this.createBody(form);
-    console.log("body do createLeitor(): ");
-    console.log(body);
-    console.log("Form value: ");
-    console.log(form.value);
     return this._http.post(this._url + 'storeLeitor', body, {headers: this.headers}).map(
     (response: Response)=>{
-      console.log("do create leitor é retornado somente o ID da variavel: ");
-      console.log(response);
         return response.json().id;
     });
   } 
 
   checkFBToken(token, uid){
-    console.log("checa token: " + token + ' ' + uid);
     return this._http.get(this._url + 'checkFbToken/' + token + '/' + uid)
       .map(
         (response: Response) => {
-          console.log("resposta da checagem de token:");
-          console.log(response);
           return response.json();
         }
       );
@@ -63,7 +54,6 @@ export class LeitoresService {
   validaToken(token){
     return this._http.get(this._url + 'leitor/validaToken/'+token).map(
       (response)=> {
-        console.log(response);
         return response.json();
       }
     )
@@ -149,13 +139,9 @@ export class LeitoresService {
 
   doLogin(form){
     const body = JSON.stringify(form.value);
-    console.log("depois de criar a constante body");
-    console.log(body);
-      return this._http.put(this._url + 'leitor/signin', body, {headers: this.headers}).map(
+    return this._http.put(this._url + 'leitor/signin', body, {headers: this.headers}).map(
         (response: Response) => { 
           if (response.json().login == true){
-            console.log("logado com sucesso. Retorno: ");
-            console.log(response);
             localStorage.setItem('l', this.base64.encode(response.json().leitor.id));
             localStorage.setItem('token', response.json().token);
   

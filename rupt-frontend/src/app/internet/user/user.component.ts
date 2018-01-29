@@ -29,12 +29,14 @@ export class UserComponent implements OnInit {
   filtro: string;
   leitor: Leitor;
   leitorLogado: Leitor;
-  post = new Post();
   timeline;//: Timeline[] = new Array;
   timelineFiltro = new Array;
   url = ConnectionFactory.API_IMAGEM;
 
   idExcluir = 0;
+
+  post = new Post();
+  rascunhos: Post[] = new Array();;
   
   interacao: Interacao;
   interacoes: Interacao[];
@@ -71,6 +73,7 @@ export class UserComponent implements OnInit {
         this._leitorService.verificaLogin().subscribe(
             (response) => {
               this.getTimeline();
+              this.getRascunhos();
         });
 
       });
@@ -90,6 +93,19 @@ export class UserComponent implements OnInit {
         
         }
       )
+  }
+
+  getRascunhos(){
+    this.rascunhos = new Array();
+
+    if (this.leitor.id == this.leitorLogado.id){
+        this._postService.getRascunhos(this.leitorLogado.id).subscribe(
+          (rascunhos: Post[]) => {
+              this.rascunhos = rascunhos;
+          }
+        )
+    }
+
   }
 
   calcHour(date){

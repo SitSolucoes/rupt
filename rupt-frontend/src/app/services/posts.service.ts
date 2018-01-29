@@ -81,10 +81,10 @@ export class PostsService {
   }
 
   getPost(id):Observable<any>{
-    return this._http.get(this._url + 'posts/Post/'+id, {headers: this.headers}).map(
-      (retorno: Response) => {
-        return retorno.json().post
-    }); 
+      return this._http.get(this._url + 'posts/Post/'+id, {headers: this.headers}).map(
+        (retorno: Response) => {
+          return retorno.json().post
+      }); 
   }
 
   create(form){
@@ -111,4 +111,10 @@ export class PostsService {
     )
   }
 
+  getRascunhos(leitor_id){
+      return this._http.post(this._url + 'posts/getRascunhos/', JSON.stringify({leitor_id: leitor_id}), {headers: this.headers}).map(
+        (retorno: Response) => {
+          return retorno.json().rascunhos;
+      });
+  }
 }

@@ -99,7 +99,7 @@
                 <div class="write-area">
                     <i class="fa fa-pencil img3" aria-hidden="true"></i>
                     <p>Escrever uma nova publicação</p>
-
+                    
                 </div>
             </a>
         </div>
@@ -114,10 +114,10 @@
                         </a> 
                     </li>
 
-                    <li class="menu tab col s3">
+                    <li class="menu tab col s3" *ngIf='rascunhos.length > 0 && (leitorLogado.id == leitor.id)'>
                         <a href="#page2"> 
                             Rascunhos
-                            <font class="title"> {{ timeline?.length }} </font>  
+                            <font class="title"> {{ rascunhos?.length }} </font>  
                         </a> 
                     </li>
 
@@ -138,7 +138,6 @@
             </div>
 
            <div id="page1">
-
                 <div class="post-none" *ngIf='timeline?.length == 0'>
                     Sem publicações até o momento
                 </div>
@@ -290,10 +289,24 @@
            </div>
 
            <div id='page2'>
-               rascunhos
-           </div>
+                <div class="post" *ngFor='let r of rascunhos'>
+                    <div class="info">
+                        <a routerLink="../../noticia/{{ r.id }}">
+                            <div class="new">
+                                {{ r.titulo }}
+                            </div>
 
-           <div id="page3">
+                            <div *ngIf='r.src_imagem'>
+                                <div class="border" >
+                                    <img src="{{ url + 'posts/' + r.src_imagem }}" class="img3">
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div id="page3">
 
                <div class="leitores">
 

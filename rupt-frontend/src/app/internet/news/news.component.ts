@@ -177,6 +177,10 @@ export class NewsComponent implements OnInit {
       )
   }
 
+  getRascunhos(){
+    
+  }
+
   verifyInteragiuPost(){
       if (!this.interacoesLeitor || this.interacoesLeitor.length == 0)
           this.interagiu = false;
@@ -304,33 +308,24 @@ export class NewsComponent implements OnInit {
   }
 
   openModalLoading() {
-    this.modalLoading.emit({
-         action: 'modal',
-         params: ['open']});
+    this.modalLoading.emit({ action: 'modal', params: ['open']});
   }
 
   closeModalLoading(e){
     if(e){
-      this.modalLoading.emit({
-        action:'modal',
-        params:['close']
-      });
+      this.modalLoading.emit({ action:'modal', params:['close']});
     }
   }
 
   openModalLogin() {
-    this.modalLogin.emit({
-        action: 'modal',
-        params: ['open']});
+    this.modalLogin.emit({ action: 'modal', params: ['open']});
   }
 
   openModalEsqueciSenha(e){
     if(e){
       this.modalLogin.emit({action:"modal",params:['close']});
     }
-    this.modalEsqueciSenha.emit({
-      action: 'modal',
-      params: ['open']
+    this.modalEsqueciSenha.emit({ action: 'modal', params: ['open']
     });
   }
 

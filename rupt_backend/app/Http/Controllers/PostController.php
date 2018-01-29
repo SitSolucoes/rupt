@@ -235,4 +235,15 @@ class PostController extends Controller
         return response()->json(['message' => "Post salvo com sucesso."], 200);
     }
 
+    public function getRascunhos(Request $request){
+        $rascunhos = Post::where('autor_idLeitor', $request->leitor_id)
+                    ->whereNull('deleted_at')
+                    ->whereNull('publishedAt')
+                    ->with('autor')
+                    ->with('categoriasPost')
+                    ->get();
+
+        return response()->json(['rascunhos' => $rascunhos], 200);
+    }
+
 }
