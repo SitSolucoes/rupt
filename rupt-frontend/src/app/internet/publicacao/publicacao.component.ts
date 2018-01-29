@@ -44,11 +44,9 @@ export class PublicacaoComponent implements OnInit {
   modalImagem = new EventEmitter<string|MaterializeAction>();
   modalRascunho = new EventEmitter<string|MaterializeAction>();
 
-  
   cropperSettings: CropperSettings;
   data:any;
   @ViewChild('cropper', undefined)cropper:ImageCropperComponent;
-
 
   constructor(private _formBuilder: FormBuilder,
               private _leitorService: LeitoresService,
