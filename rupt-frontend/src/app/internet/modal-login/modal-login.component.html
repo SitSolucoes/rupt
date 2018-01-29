@@ -42,30 +42,24 @@
                 <div class="area area2"><i class="fa fa-linkedin" aria-hidden="true"></i><div style="color: #243861;display:block;float:left;margin-right: 10px;">|</div> Login com o Linkedin</div>
             </div>
             <div class="login-container">
-                <div class="social-medias">
-                    <span class="media-title">Entre com a sua rede social</span>
-                    <a target="_blank" (click)="signIn('facebook')">
-                        <img src="../../../assets/img/face2.png" class="img">
-                    </a>
-                </div>
-            <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+                <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
 
-                <input type="text" class="input" maxlength="30" name="email" formControlName="email" placeholder="E-mail">
+                    <input type="text" class="input" maxlength="30" name="email" formControlName="email" placeholder="E-mail">
 
-                <input type="password" class="input" maxlength="20" name="senha" formControlName="password" placeholder="Password">
+                    <input type="password" class="input" maxlength="20" name="senha" formControlName="password" placeholder="Password">
 
-                <div *ngIf="erro">
-                    <div class="error col s12">{{ mensagemErro }}</div>
-                </div>
+                    <div *ngIf="erro">
+                        <div class="error col s12">{{ mensagemErro }}</div>
+                    </div>
 
-                <button type="submit" class="button" id="submit-contato">
-                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw" *ngIf='loading'></i>    
-                    Entrar
-                </button>
+                    <button type="submit" class="button" id="submit-contato">
+                        <i class="fa fa-spinner fa-pulse fa-3x fa-fw" *ngIf='loading'></i>    
+                        Entrar
+                    </button>
 
-                <a (click)="openModalEsqSen()"><div class="text">Esqueceu a senha?</div></a>
+                    <a (click)="openModalEsqSen()"><div class="text">Esqueceu a senha?</div></a>
 
-            </form>
+                </form>
             </div>
         </div>
 

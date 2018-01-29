@@ -40,6 +40,7 @@ import {ImageCropperComponent, CropperSettings} from 'ng2-img-cropper';
 import { ModalCompartilharComponent } from 'app/internet/compartilhar/modal-compartilhar/modal-compartilhar.component';
 import { ModalMensagemComponent } from './compartilhar/modal-mensagem/modal-mensagem.component';
 import { PoliticaComponent } from './termos/politica/politica.component';
+import { FacebookModule } from 'ngx-facebook';
 
 @NgModule({ 
   imports: [
@@ -49,6 +50,7 @@ import { PoliticaComponent } from './termos/politica/politica.component';
     FormsModule,
     ReactiveFormsModule,
     InputMaskModule,
+    FacebookModule.forRoot(),
     QuillEditorModule
   ],
   declarations: [

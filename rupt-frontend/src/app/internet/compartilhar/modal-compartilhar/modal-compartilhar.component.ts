@@ -1,6 +1,9 @@
+import { Global } from './../../../classes/global';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Interacao } from 'app/classes/interacao';
 import { InteracaoLeitor } from 'app/classes/interacao-leitor';
+import { FacebookService, UIParams, InitParams, UIResponse } from 'ngx-facebook';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'modal-compartilhar',
@@ -13,13 +16,36 @@ export class ModalCompartilharComponent implements OnInit {
     @Input() interacoesLeitor: InteracaoLeitor[];
     @Output() compartilhar = new EventEmitter();
 
-    constructor() { }
+    
+
+    constructor(private fb: FacebookService, private _router: Router) { 
+        let initParams: InitParams = {
+            appId: '832278863618741',
+            xfbml: true,
+            version: 'v2.11'
+          };
+       
+          fb.init(initParams);
+    }
 
     ngOnInit() {
+        
     }
 
     interage(i: Interacao){
-        this.compartilhar.emit([i, this.verifyInteragiu(i)]);
+        console.log(Global.URL+this._router.url);
+        let params: UIParams = {
+            href: Global.URL + this._router.url,
+            method: 'share'
+          };
+         
+          this.fb.ui(params).then(
+                (res: UIResponse) =>{
+                    console.log(res)
+                    this.compartilhar.emit([i, this.verifyInteragiu(i)]);
+                } 
+            )
+            .catch((e: any) => console.error(e));
     }
 
     verifyInteragiu(i: Interacao){
