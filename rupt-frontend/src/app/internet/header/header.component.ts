@@ -103,7 +103,7 @@ export class HeaderComponent implements OnInit {
         }
     }
 
-<<<<<<< HEAD
+
     closeModalPesquisa(e){
         if(e){
             this.modalPesquisa.emit({action:"modal",params:['close']});

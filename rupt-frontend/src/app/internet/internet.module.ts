@@ -85,7 +85,7 @@ import { ListaComponent } from './lista-resultados/lista/lista.component';
     ImageCropperComponent,
     ModalMensagemComponent,
     PoliticaComponent,
-    ModalPesquisaComponent
+    ModalPesquisaComponent,
     CategoriaComponent,
     PesquisaComponent,
     ListaComponent

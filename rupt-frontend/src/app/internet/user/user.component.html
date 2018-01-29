@@ -289,13 +289,20 @@
            </div>
 
            <div id='page2'>
+               <!-- quando estiver vazio -->
+               <div class="message">
+                   Nenhum rascunho até o momento
+                   <i class="fa fa-file-text-o" aria-hidden="true"></i>
+               </div>
                 <div class="post" *ngFor='let r of rascunhos'>
                     <div class="info">
                         <a routerLink="../../noticia/{{ r.id }}">
                             <div class="new">
                                 {{ r.titulo }}
-                            </div>
 
+                                <i _ngcontent-c10="" aria-hidden="true" class="fa fa-times" title="Excluir"></i>
+                                <i _ngcontent-c10="" aria-hidden="true" class="fa fa-pencil-square-o" title="Editar"></i>
+                            </div>
                             <div *ngIf='r.src_imagem'>
                                 <div class="border" >
                                     <img src="{{ url + 'posts/' + r.src_imagem }}" class="img3">
@@ -307,133 +314,81 @@
             </div>
 
             <div id="page3">
-
+                <div class="message">
+                    Nenhum leitor até o momento
+                    <i class="fa fa-users" aria-hidden="true"></i>
+                </div>
                <div class="leitores">
-
                    <div class="info">
-
                        <div class="area">
-
                        <img src="../../../assets/img/person.png" class="img">
-
                        </div>
-
                        <p> Raíssa Manoela </p>
-
                        <div class="title"> @Mariazinha </div>
-
                    </div>
 
                    <div class="info">
-
                        <div class="area">
-
                        <img src="../../../assets/img/person2.png" class="img">
-
                        </div>
-
                        <p> Lucas Felipe </p>
-
                        <div class="title"> @Felipinho </div>
-
                    </div>
 
                    <div class="info">
-
                        <div class="area">
-
                        <img src="../../../assets/img/person3.png" class="img">
-
                        </div>
-
                        <p> Marcelos Luscas </p>
-
                        <div class="title"> @Paulinho </div>
-
                    </div>
 
                    <div class="info">
-
                        <div class="area">
-
                        <img src="../../../assets/img/person8.png" class="img">
-
                        </div>
-
                        <p> Marcelos Luscas </p>
-
                        <div class="title"> @Paulinho </div>
-
                    </div>
 
                    <div class="info">
-
                        <div class="area">
-
                            <img src="../../../assets/img/person4.png" class="img">
-
                        </div>
-
                        <p> Marcelos Luscas </p>
-
                        <div class="title"> @Paulinho </div>
-
                    </div>
 
                    <div class="info">
-
                        <div class="area">
-
                        <img src="../../../assets/img/person5.png" class="img">
-
                        </div>
-
                        <p> Marcelos Luscas </p>
-
                        <div class="title"> @Paulinho </div>
-
                    </div>
 
                    <div class="info">
-
                        <div class="area">
-
                        <img src="../../../assets/img/person6.png" class="img">
-
                        </div>
-
                        <p> Marcelos Luscas </p>
-
                        <div class="title"> @Paulinho </div>
-
                    </div>
 
                    <div class="info">
-
                        <div class="area">
-
                        <img src="../../../assets/img/person7.png" class="img">
-
                        </div>
-
                        <p> Marcelos Luscas </p>
-
                        <div class="title"> @Paulinho </div>
-
                    </div>
 
                    <div class="info">
-
                        <div class="area">
-
                        <img src="../../../assets/img/person8.png" class="img">
-
                        </div>
-
                        <p> Marcelos Luscas </p>
-
                        <div class="title"> @Paulinho </div>
-
                    </div>
 
                </div>
@@ -442,6 +397,10 @@
 
 
            <div id="page4">
+               <div class="message">
+                   Não está seguindo nenhum usuário até o momento
+                   <i class="fa fa-user" aria-hidden="true"></i>
+               </div>
 
                <div class="leitores">
 

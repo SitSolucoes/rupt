@@ -1425,10 +1425,10 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     display: block;
     float: left;
     height: 70px;
-    width: 73%;
+    width: 74%;
     background: #fff;
     padding-left: 30px;
-    padding-top: 13px;
+    padding-top: 10px;
     margin-top: 10px;
     position: relative;
 }
@@ -1455,17 +1455,18 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     color: #f97000;
     display: block;
     float: left;
-    margin-top: 2px;
+    margin-top: 8px;
     margin-right: 10px;
 }
 
 .user .area .write-area p{
-    font-size: 13px;
+    font-size: 14px;
+    line-height: 18px;
     font-weight: bolder;
     width: 100px;
     display: block;
     float: right;
-    margin-top: 0px;
+    margin-top: 5px;
     color: #f97000;
 }
 
@@ -1597,7 +1598,7 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     display: block;
     position: relative;
     float: left;
-    width: 54%;
+    width: 55%;
     background: #fff;
     margin-top: 10px;
     margin-bottom: 20px;
@@ -1607,11 +1608,10 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     width: 70%;
 }
 
-
 .user .feed .tabs{
     position: relative;
     overflow-y: hidden;
-    height: 69px;
+    height: 75px;
     width: 100%;
     margin: 0 auto;
 }
@@ -1623,7 +1623,7 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
 .user .feed .status{
   display: block;
   float: left;
-  height: 70px;
+  height: 76px;
   width: 100%;
   border-bottom: 1px solid #E8E8E8;
   background: #fff;
@@ -1635,7 +1635,7 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
   float: left;
   position: relative;
   left: 5%;
-  font-family: 'nexa-bold';
+  font-family: 'gilroy-bold';
   text-align: center;
   font-size: 15px;
   color: #4f4f4f; 
@@ -1644,7 +1644,8 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
 .user .feed .tabs .tab a{
     color: #5e5e5e;
     font-size: 16px;
-    text-transform: none;
+    font-size: 14px;
+    text-transform: uppercase;
 }
 
 .user .feed .tabs .tab a:hover{
@@ -1673,8 +1674,8 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     padding-left: 5%;
     padding-right: 3%;
     border-bottom: 1px solid #E8E8E8;
-    padding-bottom: 20px;
-    padding-top: 10px;
+    padding-bottom: 5px;
+    padding-top: 5px;
 }
 
 .user .feed .post-none{
@@ -1729,6 +1730,11 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     font-size: 18px;
     margin-top: 0px;
     color: #4f4f4f;
+}
+
+.user .feed .post .img6:hover{
+    color: red;
+    transition: 0.3s;
 }
 
 .user .feed .post .text{
@@ -1819,10 +1825,17 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
 .user .feed .post .info{
   display: block;
   float: left;
-  width: 80%;
+  width: 100%;
   padding-left: 15px;
   margin-top: 5px;
   overflow: hidden;
+}
+
+.user .feed .post .info .fa{
+    display: block;
+    float: right;
+    margin-left: 10px;
+    color: #4F4F4F;
 }
 
 .user .feed .post .info2{
@@ -1830,7 +1843,7 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     float: left;
     width: 100%;
     border: 1px solid #e6e6e6;
-    padding: 10px;
+    padding: 5px;
     padding-top: 0px;
 }
 
@@ -1905,6 +1918,24 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
 .user .feed .post .status .img4.pb{
     -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
     filter: grayscale(100%);
+}
+
+.user .feed .message{
+    display: block;
+    float: left;
+    width: 100%;
+    font-family: nexa-bold;
+    color: #4f4f4f;
+    padding: 50px;
+    text-align: center;
+}
+
+.user .feed .message .fa{
+    font-size: 55px;
+    color: #f97000;
+    display: block;
+    clear: both;
+    margin-top: 20px;
 }
 
 .user .feed .search{
@@ -2001,7 +2032,7 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     width: 18%;
     background: #fff;
     margin-left: 0%;
-    margin-right: 3%;
+    margin-right: 2%;
     margin-top: 10px;
     margin-bottom: 10px;
 }
@@ -2831,7 +2862,53 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     font-size: 14px;
 }
 
-/*---------------- faq ---------- */
+/*---------------- Categoria ---------- */
+
+.categoria{
+    display: block;
+    float: left;
+    width: 100%;
+    height: 100%;
+}
+
+.categoria .container{
+    display: block;
+    float: left;
+    width: 100%;
+    height: 300px;
+}
+
+.categoria .tabs{
+    height: 60px;
+    font-family: 'gilroy-bold';
+    font-size: 20px;
+    color: #4f4f4f;
+}
+
+.tabs .tab a{
+    padding: 5px 24px;
+    color: #5e5e5e;
+}
+
+.tabs .tab a:hover, .tabs .tab a.active{
+    color: #f97000;
+}
+
+.tabs .indicator{
+    background-color: #f97000;
+}
+
+.categoria .topico{
+    display: block;
+    float: left;
+    padding-left: 30px;
+    width: 100%;
+    background: #fff;
+    position: fixed;
+    box-shadow: 1px 1px 1px #B9B7B7;
+}
+
+    /*---------------- faq ---------- */
 
 .faq{
     display: table;
