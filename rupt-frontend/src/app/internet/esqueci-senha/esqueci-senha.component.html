@@ -38,7 +38,7 @@
                 </div>
             </div>
         </div>
-        <div *ngIf="enviado">
+        <div *ngIf="enviado || erros?.length > 0">
             <div class="login-modal">
                 <div class="container">
                     <span>{{mensagem}}</span>

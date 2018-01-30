@@ -1,4 +1,5 @@
 import { RedefineSenhaComponent } from './redefine-senha/redefine-senha.component';
+import { RedefinirSenhaComponent } from './redefinir-senha/redefinir-senha.component';
 
 
 import { NgModule } from '@angular/core';
@@ -19,7 +20,8 @@ import { CategoriaComponent } from 'app/internet/lista-resultados/categoria/cate
 
 const routes: Routes = [
   { path : '', component: InternetInicioComponent,
-    children: [
+  children: [
+    { path : 'redefinindoSenha/:token', component: RedefineSenhaComponent}, 
       { path : 'noticias', component: HomeComponent},
       { path : 'faq', component: FaqComponent},
       { path : 'politica', component: PoliticaComponent},
@@ -33,7 +35,6 @@ const routes: Routes = [
       { path : 'publicacao/:id', component: PublicacaoComponent},
       { path : 'contato', component: ContatoComponent},
       { path : 'esqueci-senha', component:  EsqueciSenhaComponent},
-      { path : 'redefinindoSenha/:token', component: RedefineSenhaComponent}, 
       { path : 'categorias/:categoria', component: CategoriaComponent},
       { path : '', redirectTo: 'noticias', pathMatch: 'full'},
       { path : '**', redirectTo: 'noticias', pathMatch: 'full'},

@@ -1,47 +1,61 @@
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { LeitoresService } from './../../services/leitores.service';
+//import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+//import { ActivatedRoute } from '@angular/router';
+//import { LeitoresService } from './../../services/leitores.service';
 import { Component, OnInit } from '@angular/core';
-import { Params } from '@angular/router/src/shared';
 
 @Component({
   selector: 'redefine-senha',
   templateUrl: './redefine-senha.component.html',
   styleUrls: ['./redefine-senha.component.css']
 })
+
 export class RedefineSenhaComponent implements OnInit {
 
-  constructor(private _leitoresService: LeitoresService, private activatedRoute: ActivatedRoute, private _fb: FormBuilder) { }
-
   valido: boolean = false;
-  form: FormGroup; 
+  //form: FormGroup; 
   erros = {
     senha: '',
     token: ''
   }
+  
+  constructor(){
+  }
 
   ngOnInit() {
-    this.activatedRoute.params.subscribe((params: Params) => {
-      console.log(params);
-      this._leitoresService.validaToken(params.token).subscribe(
-        (response) => {
-          console.log('response');
-          console.log(response);
-            if (response.resultado) {
-                this.valido = true;
-                console.log(response);
-                this.montaForm(response.leitor);
-                //this.doLogin(response.email);
-            }else{
-              console.log(response);
-              this.erros.token = response.mensagem;
-            }
-              
-        }
-      )
-    });
-    
+    console.log('construtor novo');
   }
+  
+  /*
+  constructor(private _leitoresService: LeitoresService, 
+              private activatedRoute: ActivatedRoute, 
+              private _fb: FormBuilder) { 
+    this.activatedRoute.params.subscribe(
+      (params) => {
+        this._leitoresService.validaToken(params['token']).subscribe(
+          (response) => {
+              if (response.resultado) {
+                  this.valido = true;
+                  this.createForm();
+                  this.setEmailForm(response.leitor);
+                }else{
+                  this.erros.token = response.mensagem;
+                }
+              }
+            )
+          });
+
+  }
+  private createForm(){
+    console.log('createForm');
+    this.form = this._fb.group({
+      email: ['', Validators.required],
+      novaSenha: ['', Validators.required],
+      confirma_senha: ['', Validators.required]
+    });
+    console.log('criou form');
+  }
+
+
 
   tokenValido(){
     return this.valido;
@@ -58,20 +72,10 @@ export class RedefineSenhaComponent implements OnInit {
       this.erros.senha = "As senhas devem coincidir."
   }
 
-  montaForm(email){
-    this.form = this._fb.group({
-      email: [email],
-      novaSenha: ['', Validators.required],
-      confirma_senha: ['', Validators.required]
+  setEmailForm(email){
+    this.form.patchValue({
+      email: email
     });
   }
-
-  teste(){
-    console.log(this.form);
-  }
-
-  doLogin(email){
-
-  }
-
+*/
 }

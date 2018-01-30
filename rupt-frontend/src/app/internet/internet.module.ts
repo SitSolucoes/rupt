@@ -45,6 +45,7 @@ import { ModalPesquisaComponent } from './modal-pesquisa/modal-pesquisa.componen
 import { CategoriaComponent } from './lista-resultados/categoria/categoria.component';
 import { PesquisaComponent } from './lista-resultados/pesquisa/pesquisa.component';
 import { ListaComponent } from './lista-resultados/lista/lista.component';
+import { RedefinirSenhaComponent } from './redefinir-senha/redefinir-senha.component';
 
 @NgModule({ 
   imports: [
@@ -88,7 +89,8 @@ import { ListaComponent } from './lista-resultados/lista/lista.component';
     ModalPesquisaComponent,
     CategoriaComponent,
     PesquisaComponent,
-    ListaComponent
+    ListaComponent,
+    RedefinirSenhaComponent
   ],
   providers: [
     CategoriaLeitorService,
