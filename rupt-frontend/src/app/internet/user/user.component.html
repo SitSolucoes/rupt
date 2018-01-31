@@ -184,7 +184,7 @@
                         </span>
 
                         <!-- propria tl mas post compartilhado -->
-                        <a class='dropdown-button btn' *ngIf="t.post.autor.id != leitorLogado.id && t.leitor_idLeitor == leitorLogado.id">
+                        <a class='dropdown-button btn' *ngIf="t.leitor_idLeitor == leitorLogado.id">
                             <i class="fa fa-times img img5 img6" title='Excluir' aria-hidden="true" (click)="openModalExcluir(t)"></i>
                         </a>
                         
@@ -292,7 +292,7 @@
                             
                             {{ r.titulo }}
                             
-                            <i aria-hidden="true" class="fa fa-times img6" title="Excluir" (click)="openModalExcluirRascunho(r)"></i>
+                            <i aria-hidden="true" class="fa fa-times img6 excluir-rascunho" title="Excluir" (click)="openModalExcluirRascunho(r)"></i>
 
                             <a routerLink='../../publicacao/{{ btoa(r.id) }}'>
                                 <i class="fa fa-pencil-square-o editar-rascunho" aria-hidden="true" title='Editar'></i>

@@ -1747,16 +1747,17 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     border-radius: 0px;
     display: block;
     float: right;
-    font-size: 22px;
+    font-size: 20px;
     color: #f97000;
 }
 
 .user .feed .post .img6{
     height: 22px;
-    font-size: 18px;
-    margin-top: 0px;
+    font-size: 20px;
+    margin-top: 4px;
     margin-right: 5px;
     color: #4f4f4f;
+    margin-left: 10px;
 }
 
 .user .feed .post .text{
@@ -1863,8 +1864,14 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
 }
 
 .user .feed .post .info .fa.editar-rascunho{
-    margin-top: 1px;
+    margin-top: 2px;
     color: #f97000;
+    font-size: 18px;
+}
+
+.user .feed .post .info .fa.excluir-rascunho{
+    margin-top: 1px;
+    font-size: 18px;
 }
 
 .user .feed .post .img6:hover{
