@@ -2411,6 +2411,15 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     color: #f97000;
 }
 
+.news .container .area .social .excluir{
+    margin-left: 5px;
+    border-radius: 0px;
+    display: block;
+    float: right;
+    font-size: 25px;
+    color: #f97000;
+}
+
 .news .container .frame{
   display: block;
   margin: 0 auto;
