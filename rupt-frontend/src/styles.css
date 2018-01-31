@@ -125,8 +125,8 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 
 
 .headbar .title{
-    font-family: 'nexa-bold';
-    font-size: 21px;
+    font-family: 'nexa';
+    font-size: 20px;
     display: block;
     float: left;
     clear: both;
@@ -135,14 +135,21 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     /* width: auto; */
     /* height: 100%; */
     position: relative;
-    padding: 6px 15px;
-    font-weight: 500;
+    padding: 7px 15px;
+    font-weight: bold;
     text-transform: capitalize;
+    border-bottom: 1px solid #383832;
+}
+
+.headbar .title:hover{
+    cursor: pointer;
+    background: #f0f0f0;
+    color: #282824;
 }
 
 .headbar .active-link{
-    background: #B05307;
-    color: #fff;
+    background: #f0f0f0;
+    color: #282824;
 }
 
 .headbar .headbar-left{
@@ -194,7 +201,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     font-family: 'gilroy-bold';
     font-weight: bolder;
     margin-left: 5px;
-    margin-top: 20px;
+    margin-top: 18px;
     margin-right: 5px;
     text-transform: capitalize;
     font-size: 16px;
@@ -490,10 +497,10 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .container-categoria .title{
-    font-family: 'gilroy-bold';
+    font-family: 'gilroy';
+    font-weight: bold;
     font-size: 20px;
     color: #454545;
-    text-transform: uppercase;
     margin-bottom: 5px;
 }
 
@@ -535,8 +542,12 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     cursor: pointer;
 }
 
+.container-categoria .content:hover{
+    opacity: .8;
+}
+
 .container-categoria .banner-single{
-    width: 300px;
+    width: 100%;
     height: 250px;
     display: block;
     float: left;
@@ -550,6 +561,11 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     float: left;
     margin-right: 15px;
     cursor: pointer;
+}
+
+.container-categoria .content-img-text:hover{
+    opacity: .8;
+    transition: 1s;
 }
 
 .container-categoria .container-slider{
@@ -582,8 +598,8 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .info-text .title{
     display: block;
     float: left;
-    width: 80%;
-    height: 60px;
+    width: 90%;
+    height: 65px;
     overflow: hidden;
     margin-left: 20px;
     margin-top: 15px;
@@ -658,7 +674,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .container-categoria .img-container-duplo{
     left: 10px;
     bottom: 250px;
-    margin-top: 10px;
+    margin-top: 15px;
     width: 100%;
 }
 
@@ -687,11 +703,11 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     display: block;
     float: left;
     width: 260px;
-    max-height: 61px;
+    max-height: 62px;
     overflow: hidden;
     margin-left: 20px;
-    margin-top: 10px;
-    font-size: 17px;
+    margin-top: 15px;
+    font-size: 18px;
     line-height: 22px;
 }
 
@@ -1901,16 +1917,16 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     display: block;
     float: left;
     position: relative;
-    top: 16px;
+    top: 10px;
     left: 10px;
-    font-size: 14px;
+    font-size: 13px;
     color: #575757;
 }
 
 .user .feed .post .status .img4{
     display: block;
     float: left;
-    height: 40px;
+    height: 35px;
     position: relative;
     bottom: 3px;
 }
@@ -2260,6 +2276,12 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
   display: block;
   float: left;
   margin-top: -5px;
+}
+
+.news .container .area .social .fa-exclamation-circle{
+    color: red;
+    margin-top: 0px;
+    font-size: 23px;
 }
 
 .news .container .area .social .fa-share{
@@ -2875,7 +2897,6 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     display: block;
     float: left;
     width: 100%;
-    height: 300px;
 }
 
 .categoria .tabs{
@@ -2903,9 +2924,97 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     float: left;
     padding-left: 30px;
     width: 100%;
+    z-index: 100;
     background: #fff;
     position: fixed;
     box-shadow: 1px 1px 1px #B9B7B7;
+}
+
+.categoria .container .aba{
+    display: block;
+    float: left;
+    min-width: 20%;
+    /* height: 300px; */
+    padding: 10px;
+    background: #fff;
+    margin-top: 100px;
+    margin-left: 30px;
+    margin-bottom: 20px;
+    border-radius: 2px;
+    border: 1px solid #e8e8e8;
+}
+
+.categoria .container .aba a{
+    text-decoration: underline;
+}
+
+.categoria .container .info{
+    display: block;
+    float: left;
+    width: 95%;
+    margin-left: 2.5%;
+    margin-bottom: 60px;
+    border: 1px solid #e8e8e8;
+    padding: 20px 40px;
+}
+
+.categoria .container .info .card{
+    display: block;
+    float: left;
+    background: #fff;
+    width: 30%;
+    height: 250px;
+    margin-right: 1%;
+    margin-left: 2%;
+    margin-bottom: 40px;
+    box-shadow: none;
+}
+
+.categoria .container .info .card .profile{
+    display: block;
+    float: left;
+    width: 90%;
+    height: 210px;
+    background: #f5f5f5;
+    margin-left: 5%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+.categoria .container .info .card .area{
+    display: block;
+    margin: 0 auto;
+    float: none;
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    overflow: hidden;
+    padding: 0px;
+    margin-top: 20px;
+    background: #fff;
+}
+
+.categoria .container .info .card .area .img{
+    height: 100px;
+}
+
+.categoria .container .info .card h1{
+    font-size: 18px;
+    margin: 15px 0px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.container .info .card h2{
+    font-size: 17px;
+    color: #8c8c8c;
+    text-align: center;
+    margin-top: 0px;
+}
+
+.categoria .container .info .card .text{
+    width: 90% !important;
 }
 
     /*---------------- faq ---------- */

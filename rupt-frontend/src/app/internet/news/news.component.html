@@ -74,12 +74,12 @@
         <div class="social">
 
             <p> {{ interacoesTotal[0] }} </p>
-            <img src="../../../assets/img/rupt-ico.png" class="img">
+            <img src="../../../assets/img/rupt-ico.png" class="img" title='Reações'>
 
             <p> {{ interacoesTotal[1] }} </p>
-            <i class="fa fa-share img" aria-hidden="true"></i>
+            <i class="fa fa-share img" aria-hidden="true" title='Compartilhados'></i>
 
-            <img  title='Denunciar' *ngIf='leitor && leitor.id != post.autor.id' src="../../../assets/img/report.png" class="img report" (click)="openModalDenuncia()">
+            <i class="fa fa-exclamation-circle img report" aria-hidden="true" (click)="openModalDenuncia()" title='Denunciar' *ngIf='leitor && leitor.id != post.autor.id' ></i>
             <a routerLink='../../publicacao/{{ post.id }}' *ngIf='leitor && leitor.id == post.autor.id'>
                 <i class="fa fa-pencil-square-o edit" aria-hidden="true" title='Editar'></i>
             </a>

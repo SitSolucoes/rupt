@@ -16,6 +16,7 @@ import {PublicacaoComponent} from './publicacao/publicacao.component';
 import { EsqueciSenhaComponent } from './esqueci-senha/esqueci-senha.component';
 import { PoliticaComponent } from './termos/politica/politica.component';
 import { CategoriaComponent } from 'app/internet/lista-resultados/categoria/categoria.component';
+import { PesquisaComponent } from 'app/internet/lista-resultados/pesquisa/pesquisa.component';
 
 const routes: Routes = [
   { path : '', component: InternetInicioComponent,
@@ -23,6 +24,7 @@ const routes: Routes = [
       { path : 'noticias', component: HomeComponent},
       { path : 'faq', component: FaqComponent},
       { path : 'politica', component: PoliticaComponent},
+      { path : 'pesquisa', component: PesquisaComponent},
       { path : 'perfil/:nick', component: UserComponent },
       { path : 'footer', component: FooterComponent },
       { path : 'perfil/:nick/:torne-se-um-escritor', component: UserComponent },
