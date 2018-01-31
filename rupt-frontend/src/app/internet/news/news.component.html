@@ -79,8 +79,7 @@
             <p> {{ interacoesTotal[1] }} </p>
             <i class="fa fa-share img" aria-hidden="true" title='Compartilhados'></i>
             <i class="fa fa-exclamation-circle img report" aria-hidden="true" (click)="openModalDenuncia()" title='Denunciar' *ngIf='leitor && leitor.id != post.autor.id' ></i>
-            <a routerLink='../../publicacao/{{ post.id }}' *ngIf='leitor && leitor.id == post.autor.id'>
-            
+            <a routerLink='../../publicacao/{{ post.id }}' *ngIf='leitor && leitor.id == post.autor.id'></a>
 
             <img  title='Denunciar' *ngIf='leitor && leitor.id != post.autor.id' src="../../../assets/img/report.png" class="img report" (click)="openModalDenuncia()">
             <a routerLink='../../publicacao/{{ btoa(post.id) }}' *ngIf='leitor && leitor.id == post.autor.id'>
@@ -158,41 +157,69 @@
             <div class="separate" *ngIf='comentarios && comentarios.length > 0' > recentes </div>
 
             <div class="profile" *ngFor="let c of comentarios">
-                
                 <a routerLink='/perfil/{{ c?.comentario?.leitor?.nick }}'>
-                    <div class="img-area">  
-                            
-                        <img src="{{ c?.comentario?.leitor?.src_foto.indexOf('http') >= 0 ? c?.comentario?.leitor?.src_foto : url + 'profile/' + c?.comentario?.leitor?.src_foto }}" class="img"> 
+                    <div class="img-area">
+                        <img src="{{ c?.comentario?.leitor?.src_foto.indexOf('http') >= 0 ? c?.comentario?.leitor?.src_foto : url + 'profile/' + c?.comentario?.leitor?.src_foto }}" class="img">
                     </div>
                 </a>
-
                 <div class="user">
                     <a routerLink='/perfil/{{ c?.comentario?.leitor?.nick }}'>
                         <div class="title"> {{ c.comentario.leitor.nick ? c.comentario.leitor.nick : c.comentario.leitor.nome }} </div>
                     </a>
 
                     <div class="time"> {{ calcHour( c.comentario.created_at ) }}</div>
-
                     {{c.comentario.comentario}}
-
                     <div class="reaction">
-
-                        <div *ngFor='let i of interacoes' class="area2">
+                      <div *ngFor='let i of interacoes' class="area2">
                             <div *ngIf='i.categoria == 2' (click)='interagePost(i)'>
-
                                 <img src="../../../assets/{{ i.src_icone}}" class="img2">
                                 <div class="number">2</div>
-
                             </div>
                         </div>
-
                     </div>
+                </div>
 
+                <div class="profile-resp" *ngFor="let c of comentarios">
+                    <a routerLink='/perfil/{{ c?.comentario?.leitor?.nick }}'>
+                        <div class="img-area">
+                            <img src="{{ c?.comentario?.leitor?.src_foto.indexOf('http') >= 0 ? c?.comentario?.leitor?.src_foto : url + 'profile/' + c?.comentario?.leitor?.src_foto }}" class="img">
+                        </div>
+                    </a>
+                    <div class="user user2">
+                        <a routerLink='/perfil/{{ c?.comentario?.leitor?.nick }}'>
+                            <div class="title"> {{ c.comentario.leitor.nick ? c.comentario.leitor.nick : c.comentario.leitor.nome }} </div>
+                        </a>
+
+                        <div class="time"> {{ calcHour( c.comentario.created_at ) }}</div>
+                        {{c.comentario.comentario}}
+                        <div class="reaction">
+                              <div *ngFor='let i of interacoes' class="area2">
+                                <div *ngIf='i.categoria == 2' (click)='interagePost(i)'>
+                                    <img src="../../../assets/{{ i.src_icone}}" class="img2">
+                                    <div class="number">2</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="comentarios">
+                    <div _ngcontent-c9="" class="profile profile2">
+                        <div _ngcontent-c9="" class="img-area">
+                            <img _ngcontent-c9="" class="img" src="http://localhost:8000/profile/4_profile.png">
+                        </div>
+                        <form _ngcontent-c9="" novalidate="" ng-reflect-form="[object Object]" class="ng-pristine ng-invalid ng-touched">
+                            <input _ngcontent-c9="" class="input ng-pristine ng-invalid ng-touched" formcontrolname="comentario" maxlength="140" name="comentario" placeholder="Escreva um comentário..." type="text" ng-reflect-maxlength="140" ng-reflect-name="comentario">
+                            <button _ngcontent-c9="" class="button" id="submit-contato2" type="submit" disabled="">
+                                <!--bindings={}-->
+                                Enviar
+                            </button>
+                        </form>
+                    </div>
                 </div>
 
             </div>
         </div>
-
     </div>
 
   </div>
