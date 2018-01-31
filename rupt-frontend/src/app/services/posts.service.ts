@@ -1,16 +1,16 @@
 import { Observable } from 'rxjs';
 import { ConnectionFactory } from 'app/classes/connection-factory';
-import { Injectable } from '@angular/core';
-
+import { Injectable, EventEmitter } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
+import { Post } from 'app/classes/post';
 
 @Injectable()
 export class PostsService {
 
-  constructor(private _http: Http) { }
-
   private _url: string = ConnectionFactory.API_CONNECTION;
   private headers = new Headers({'Content-Type': 'application/json'});
+  
+  constructor(private _http: Http) { }
 
   getEscritor(id){
     return this._http.get(this._url + 'getEscritor/' + id, {headers: this.headers})

@@ -1732,10 +1732,7 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     color: #4f4f4f;
 }
 
-.user .feed .post .img6:hover{
-    color: red;
-    transition: 0.3s;
-}
+
 
 .user .feed .post .text{
     display: block;
@@ -1836,6 +1833,15 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     float: right;
     margin-left: 10px;
     color: #4F4F4F;
+    cursor: pointer;
+}
+.user .feed .post .info .fa.editar-rascunho{
+    margin-top: 1px;
+}
+
+.user .feed .post .img6:hover{
+    color: red;
+    transition: 0.3s;
 }
 
 .user .feed .post .info2{

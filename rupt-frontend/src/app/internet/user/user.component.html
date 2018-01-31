@@ -7,7 +7,7 @@
 <div id="modalExcluir" class="modal modal2 modal4" materialize="modal" [materializeParams]="[{dismissible: false}]"
      [materializeActions]="modalExcluir">
     <modal-excluir (closeModalExcluir)="closeModalExcluir($event)" (excluiuCompartilhamento)='excluiuCompartilhamento($event)'
-        [id]='idExcluir' [leitor]='leitorLogado' [op]='2' [interacao]='interacao'>
+        [id]='idExcluir' [leitor]='leitorLogado' [op]='opExcluir' [interacao]='interacao'>
     </modal-excluir>
 </div>
 
@@ -106,42 +106,39 @@
 
        <div class="feed" [ngClass]="{'feed2' : leitor?.escritor?.patrocinador}">
             <div class="status">
-                <ul id="tabs-swipe-demo" class="tabs" materialize="tabs">
+                <ul class="tabs" >
                     <li class="menu tab col s3">
-                        <a href="#page1" class=" active"> 
+                        <a class="active" href="#test1">
                             Notícias
                             <font class="title"> {{ timeline?.length }} </font>  
-                        </a> 
+                        </a>
                     </li>
-
-                    <li class="menu tab col s3" *ngIf='rascunhos.length > 0 && (leitorLogado.id == leitor.id)'>
-                        <a href="#page2"> 
+                    <li class="menu tab col s3" *ngIf='rascunhos.length > 0'>
+                        <a href="#test2">
                             Rascunhos
                             <font class="title"> {{ rascunhos?.length }} </font>  
-                        </a> 
+                        </a>
                     </li>
-
-                    <li class="menu tab col s3"> 
-                        <a href="#page3"> 
+                    <li class="menu tab col s3">
+                        <a href="#test3">
                             Leitores
                             <font class="title"> 2.700 </font> 
                         </a>
                     </li>
-
                     <li class="menu tab col s3">
-                        <a href="#page4"> 
+                        <a href="#test4">
                             Seguindo
                             <font class="title"> 15 </font>
-                        </a> 
+                        </a>
                     </li>
                 </ul>
             </div>
-
-           <div id="page1">
-                <div class="post-none" *ngIf='timeline?.length == 0'>
+            <div id="test1" class="col s12">
+                <div class="message" *ngIf='timeline?.length == 0'>
                     Sem publicações até o momento
+                    <i class="fa fa-file-text-o" aria-hidden="true"></i>
                 </div>
-
+        
                 <div class="search" *ngIf='timeline?.length > 0'>
                     <input class="input-search" maxlength="30" name="marca" placeholder="Pesquise uma publicação" type="text" [(ngModel)]="filtro">
 
@@ -149,7 +146,7 @@
                         <img src="../../../assets/img/search2.png" class="img6">
                     </a>
                 </div>
-
+        
                 <div class="post" *ngFor='let t of timelineFiltro'>
 
                     <a routerLink='../{{ leitor.nick }}'>
@@ -188,11 +185,11 @@
 
                         <!-- propria tl mas post compartilhado -->
                         <a class='dropdown-button btn' *ngIf="t.post.autor.id != leitorLogado.id && t.leitor_idLeitor == leitorLogado.id">
-                           <i class="fa fa-times img img5 img6" title='Excluir' aria-hidden="true" (click)="openModalExcluir(t)"></i>
+                            <i class="fa fa-times img img5 img6" title='Excluir' aria-hidden="true" (click)="openModalExcluir(t)"></i>
                         </a>
                         
                         <!-- tl dele com post próprio -->
-                        <a routerLink='../../publicacao/{{ t.post.id }}' *ngIf="t.post.autor.id == leitorLogado.id">
+                        <a routerLink='../../publicacao/{{ btoa(t.post.id) }}' *ngIf="t.post.autor.id == leitorLogado.id">
                             <i class="fa fa-pencil-square-o img img5" aria-hidden="true" title='Editar'></i>
                         </a>
 
@@ -286,232 +283,69 @@
                     </div>
 
                 </div>
-           </div>
-
-           <div id='page2'>
-               <!-- quando estiver vazio -->
-               <div class="message">
-                   Nenhum rascunho até o momento
-                   <i class="fa fa-file-text-o" aria-hidden="true"></i>
-               </div>
+            </div>
+            <div id="test2" class="col s12" *ngIf='rascunhos.length > 0'>
                 <div class="post" *ngFor='let r of rascunhos'>
                     <div class="info">
-                        <a routerLink="../../noticia/{{ r.id }}">
-                            <div class="new">
-                                {{ r.titulo }}
+                        
+                        <div class="new">
+                            
+                            {{ r.titulo }}
+                            
+                            <i aria-hidden="true" class="fa fa-times img6" title="Excluir" (click)="openModalExcluirRascunho(r)"></i>
 
-                                <i _ngcontent-c10="" aria-hidden="true" class="fa fa-times" title="Excluir"></i>
-                                <i _ngcontent-c10="" aria-hidden="true" class="fa fa-pencil-square-o" title="Editar"></i>
+                            <a routerLink='../../publicacao/{{ btoa(r.id) }}'>
+                                <i class="fa fa-pencil-square-o editar-rascunho" aria-hidden="true" title='Editar'></i>
+                            </a>
+                        </div>
+                        
+                        <div *ngIf='r.src_imagem'>
+                            <div class="border" >
+                                <img src="{{ url + 'posts/' + r.src_imagem }}" class="img3">
                             </div>
-                            <div *ngIf='r.src_imagem'>
-                                <div class="border" >
-                                    <img src="{{ url + 'posts/' + r.src_imagem }}" class="img3">
-                                </div>
-                            </div>
-                        </a>
+                        </div>
+                        
                     </div>
                 </div>
             </div>
-
-            <div id="page3">
+            <div id="test3" class="col s12">
                 <div class="message">
-                    Nenhum leitor até o momento
-                    <i class="fa fa-users" aria-hidden="true"></i>
+                    Não está seguindo nenhum usuário até o momento
+                    <i class="fa fa-user" aria-hidden="true"></i>
                 </div>
-               <div class="leitores">
-                   <div class="info">
-                       <div class="area">
-                       <img src="../../../assets/img/person.png" class="img">
-                       </div>
-                       <p> Raíssa Manoela </p>
-                       <div class="title"> @Mariazinha </div>
-                   </div>
-
-                   <div class="info">
-                       <div class="area">
-                       <img src="../../../assets/img/person2.png" class="img">
-                       </div>
-                       <p> Lucas Felipe </p>
-                       <div class="title"> @Felipinho </div>
-                   </div>
-
-                   <div class="info">
-                       <div class="area">
-                       <img src="../../../assets/img/person3.png" class="img">
-                       </div>
-                       <p> Marcelos Luscas </p>
-                       <div class="title"> @Paulinho </div>
-                   </div>
-
-                   <div class="info">
-                       <div class="area">
-                       <img src="../../../assets/img/person8.png" class="img">
-                       </div>
-                       <p> Marcelos Luscas </p>
-                       <div class="title"> @Paulinho </div>
-                   </div>
-
-                   <div class="info">
-                       <div class="area">
-                           <img src="../../../assets/img/person4.png" class="img">
-                       </div>
-                       <p> Marcelos Luscas </p>
-                       <div class="title"> @Paulinho </div>
-                   </div>
-
-                   <div class="info">
-                       <div class="area">
-                       <img src="../../../assets/img/person5.png" class="img">
-                       </div>
-                       <p> Marcelos Luscas </p>
-                       <div class="title"> @Paulinho </div>
-                   </div>
-
-                   <div class="info">
-                       <div class="area">
-                       <img src="../../../assets/img/person6.png" class="img">
-                       </div>
-                       <p> Marcelos Luscas </p>
-                       <div class="title"> @Paulinho </div>
-                   </div>
-
-                   <div class="info">
-                       <div class="area">
-                       <img src="../../../assets/img/person7.png" class="img">
-                       </div>
-                       <p> Marcelos Luscas </p>
-                       <div class="title"> @Paulinho </div>
-                   </div>
-
-                   <div class="info">
-                       <div class="area">
-                       <img src="../../../assets/img/person8.png" class="img">
-                       </div>
-                       <p> Marcelos Luscas </p>
-                       <div class="title"> @Paulinho </div>
-                   </div>
-
-               </div>
-
-           </div>
-
-
-           <div id="page4">
-               <div class="message">
-                   Não está seguindo nenhum usuário até o momento
-                   <i class="fa fa-user" aria-hidden="true"></i>
-               </div>
-
-               <div class="leitores">
-
-               <div class="info">
-
-                   <div class="area">
-
-                       <img src="../../../assets/img/person8.png" class="img">
-
-                   </div>
-
-                   <p> Marcelos Luscas </p>
-
-                   <div class="title"> @Paulinho </div>
-
-               </div>
-
-               <div class="info">
-
-                   <div class="area">
-
-                       <img src="../../../assets/img/person8.png" class="img">
-
-                   </div>
-
-                   <p> Marcelos Luscas </p>
-
-                   <div class="title"> @Paulinho </div>
-
-               </div>
-
-               <div class="info">
-
-                   <div class="area">
-
-                       <img src="../../../assets/img/person8.png" class="img">
-
-                   </div>
-
-                   <p> Marcelos Luscas </p>
-
-                   <div class="title"> @Paulinho </div>
-
-               </div>
-
-
-               <div class="info">
-
-                   <div class="area">
-
-                       <img src="../../../assets/img/person8.png" class="img">
-
-                   </div>
-
-                   <p> Marcelos Luscas </p>
-
-                   <div class="title"> @Paulinho </div>
-
-               </div>
-
-
-               <div class="info">
-
-                   <div class="area">
-
-                       <img src="../../../assets/img/person8.png" class="img">
-
-                   </div>
-
-                   <p> Marcelos Luscas </p>
-
-                   <div class="title"> @Paulinho </div>
-
-               </div>
-
-               <div class="info">
-
-                   <div class="area">
-
-                       <img src="../../../assets/img/person8.png" class="img">
-
-                   </div>
-
-                   <p> Marcelos Luscas </p>
-
-                   <div class="title"> @Paulinho </div>
-
-               </div>
-
-               <div class="info">
-
-                   <div class="area">
-
-                       <img src="../../../assets/img/person8.png" class="img">
-
-                   </div>
-
-                   <p> Marcelos Luscas </p>
-
-                   <div class="title"> @Paulinho </div>
-
-               </div>
-
-
-
-           </div>
-
-           </div>
-
+         
+                <div class="leitores">
+                    <div class="info">
+                        <div class="area">
+                            <img src="../../../assets/img/person8.png" class="img">
+                        </div>
+        
+                        <p> Marcelos Luscas </p>
+        
+                        <div class="title"> @Paulinho </div>
+                    </div>
+                </div>
+            </div>
+            <div id="test4" class="col s12">
+                    <div class="message">
+                        Não está seguindo nenhum usuário até o momento
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                    </div>
+                 
+                    <div class="leitores">
+                        <div class="info">
+                            <div class="area">
+                                <img src="../../../assets/img/person8.png" class="img">
+                            </div>
+            
+                            <p> Marcelos Luscas </p>
+            
+                            <div class="title"> @Paulinho </div>
+                        </div>
+                    </div>
+            </div>
         </div>
-
+        
         <div class="area-patrocinio" *ngIf='!leitor?.escritor?.patrocinador'>
 
             <div class="patrocinio">

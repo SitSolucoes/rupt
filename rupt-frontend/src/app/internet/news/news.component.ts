@@ -177,8 +177,8 @@ export class NewsComponent implements OnInit {
       )
   }
 
-  getRascunhos(){
-    
+  btoa(post_id){
+      return btoa(post_id);
   }
 
   verifyInteragiuPost(){

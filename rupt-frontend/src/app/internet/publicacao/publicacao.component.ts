@@ -131,8 +131,15 @@ export class PublicacaoComponent implements OnInit {
   getPost(){
     this._activatedRoute.params.subscribe(params => {
       if (params['id']){
-        this._postService.getPost(params['id']).subscribe(
+        let post_id = atob(params['id']);
+
+        this._postService.getPost(post_id).subscribe(
           (post: Post) => { 
+
+            if (post.autor.id != this.leitor.id){
+              this._router.navigate(['/publicacao']);
+            }
+
             this.post = post; 
 
             this.formulario.patchValue({

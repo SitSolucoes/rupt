@@ -161,7 +161,6 @@ class PostController extends Controller
     public function getPost($id){
         $post = Post::where('id', $id)
                     ->whereNull('deleted_at')
-                    ->whereNotNull('publishedAt')
                     ->with('autor')
                     ->with('categoriasPost')
                     ->first();

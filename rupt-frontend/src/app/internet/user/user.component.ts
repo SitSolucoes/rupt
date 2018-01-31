@@ -17,6 +17,8 @@ import { Interacao } from 'app/classes/interacao';
 import { InteracaoLeitor } from 'app/classes/interacao-leitor';
 import { InteracoesLeitorService } from 'app/services/interacoes-leitor.service';
 
+declare var $: any;
+
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
@@ -27,16 +29,19 @@ export class UserComponent implements OnInit {
   base64: Base64 = new Base64();
   calcTime = new CalcTime();
   filtro: string;
+  idExcluir = 0;
+  opExcluir = 1;
+  loading: boolean;
+  url = ConnectionFactory.API_IMAGEM;
+  
   leitor: Leitor;
   leitorLogado: Leitor;
+  
   timeline;//: Timeline[] = new Array;
   timelineFiltro = new Array;
-  url = ConnectionFactory.API_IMAGEM;
-
-  idExcluir = 0;
-
+  
   post = new Post();
-  rascunhos: Post[] = new Array();;
+  rascunhos: Post[] = new Array();
   
   interacao: Interacao;
   interacoes: Interacao[];
@@ -61,21 +66,21 @@ export class UserComponent implements OnInit {
       this.leitorLogado = new Leitor();
 
       this._activatedRoute.params.subscribe(params => {
-        this._leitorService.getLeitorByNick(params['nick']).subscribe(
-          (leitor: Leitor) => {
-            this.leitor = leitor;
-          }
-        );
-        
-        this._leitorService.leitor.subscribe(
-            (leitor: Leitor) => { this.leitorLogado = leitor }
+          this._leitorService.getLeitorByNick(params['nick']).subscribe(
+            (leitor: Leitor) => {
+              this.leitor = leitor;
+            }
           );
-        this._leitorService.verificaLogin().subscribe(
-            (response) => {
-              this.getTimeline();
-              this.getRascunhos();
-        });
+          
+          this._leitorService.leitor.subscribe(
+              (leitor: Leitor) => { this.leitorLogado = leitor }
+          );
 
+          this._leitorService.verificaLogin().subscribe(
+              (response) => {
+                this.getTimeline();
+                this.getRascunhos();
+          });
       });
   }
 
@@ -102,6 +107,11 @@ export class UserComponent implements OnInit {
         this._postService.getRascunhos(this.leitorLogado.id).subscribe(
           (rascunhos: Post[]) => {
               this.rascunhos = rascunhos;
+
+              setTimeout(()=>{ 
+                $('.tabs').tabs();  
+              }, 500); 
+              $('.tabs').tabs();  
           }
         )
     }
@@ -110,6 +120,10 @@ export class UserComponent implements OnInit {
 
   calcHour(date){
     return this.calcTime.calcTime(date);
+  }
+
+  btoa(post_id){
+      return btoa(post_id);
   }
 
   search(){
@@ -213,6 +227,7 @@ export class UserComponent implements OnInit {
   compartilhar(compartilhar){
     if (compartilhar[1] == true){
         this.interacao = compartilhar[0];
+        this.opExcluir = 2;
         this.idExcluir = this.post.id;
         this.modalExcluir.emit({action: 'modal',params: ['open']});
     }
@@ -297,6 +312,7 @@ export class UserComponent implements OnInit {
 
       this.interacao = interacoes[0];
       this.idExcluir = this.post.id;
+      this.opExcluir = 2;
       this.modalExcluir.emit({action: 'modal',params: ['open']});
   }
 
@@ -304,7 +320,23 @@ export class UserComponent implements OnInit {
     if(e){
         this.modalExcluir.emit({action:'modal',params:['close']});
         this.getTimeline();
+        //this.getRascunhos();
+
+        this._postService.getRascunhos(this.leitorLogado.id).subscribe(
+          (rascunhos: Post[]) => {
+              this.rascunhos = rascunhos;
+          }
+        )
     }
   }
+
+  openModalExcluirRascunho(p: Post){
+      this.post = p;
+      this.idExcluir = this.post.id;
+      this.opExcluir = 1;
+      this.modalExcluir.emit({action: 'modal',params: ['open']});
+  }
+
+  
 
 }
