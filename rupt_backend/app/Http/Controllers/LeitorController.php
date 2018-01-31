@@ -40,7 +40,18 @@ class LeitorController extends Controller
                 $leitor->nick = $leitor->nome;   
             }
             $leitor->token_fb = $request->input('token');
-            $leitor->uid_fb = $request->input('fb_uid');
+            $leitor->uid_fb = $request->input('uid');
+            $leitor->src_foto = $request->input('src_foto');
+        }
+        if($request->input('google_login') == true){
+            $aux_nick_nr = Leitor::where('nick', 'like', '%' . $leitor->nome . '%')->count();
+            if($aux_nick_nr != null && $aux_nick_nr > 0){
+                $leitor->nick .= $aux_nick_nr;
+            }else{
+                $leitor->nick = $leitor->nome;   
+            }
+            $leitor->token_google = $request->input('token');
+            $leitor->google_uid = $request->input('uid');
             $leitor->src_foto = $request->input('src_foto');
         }
 
@@ -69,6 +80,26 @@ class LeitorController extends Controller
         return response()->json((object)$retorno, 200);        
         
         
+    }
+
+    public function checkGoogleToken($token, $uid){
+        $retorno = [
+            'resultado' => false,
+            'leitor' => null
+        ];
+        
+        if(!$token || $token == null){
+            return response()->json($retorno, 200); 
+        }
+
+        $leitor = Leitor::where('google_uid', $uid)->orWhere('token_google', $token)->get()->first();
+        
+        if($leitor != null){
+            $retorno['leitor'] = $leitor;
+            $retorno['resultado'] = true;
+        }
+        
+        return response()->json((object)$retorno, 200);        
     }
 
     private function getById($id){
@@ -284,9 +315,15 @@ class LeitorController extends Controller
             return response()->json(['login' => "Email e/ou Senha incorretos"], 200);
         
         if($request->fb_login != null && $request->fb_login != false){
-            $leitor = Leitor::where('token_fb', $request->token)->orWhere('uid_fb', $request->fb_uid)->with('escritor')->first();
+            $leitor = Leitor::where('token_fb', $request->token)->orWhere('uid_fb', $request->uid)->with('escritor')->first();
         }else{
-            $leitor = Leitor::where('email', $request->email)->with('escritor')->first();
+            if($request->google_login != null || $request->google_login != false)
+                $leitor = Leitor::where('token_google', $request->token)
+                                ->orWhere('google_uid', $request->uid)
+                                ->where('email', $request->email)
+                                ->with('escritor')->first();
+            else
+                $leitor = Leitor::where('email', $request->email)->with('escritor')->first();
         }
         
         if ($leitor){
@@ -297,7 +334,7 @@ class LeitorController extends Controller
                 $logado = true;
             }else {
                 if($request->fb_login != null && $request->fb_login != false){
-                    if($request->token == $leitor->token_fb || $request->fb_uid == $leitor->uid_fb){
+                    if($request->token == $leitor->token_fb || $request->uid == $leitor->uid_fb){
                         $logado = true;
                     }
                 }

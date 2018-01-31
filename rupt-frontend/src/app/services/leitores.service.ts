@@ -51,6 +51,15 @@ export class LeitoresService {
       );
   }
 
+  checkGoogleToken(token, uid){
+    return this._http.get(this._url + 'checkGoogleToken/' + token + '/' + uid)
+      .map(
+        (response: Response) => {
+          return response.json();
+        }
+      );
+  }
+
   validaToken(token){
     return this._http.get(this._url + 'leitor/validaToken/'+token).map(
       (response)=> {
