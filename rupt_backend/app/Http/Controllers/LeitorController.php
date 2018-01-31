@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
-use App\Mail\EsqueciSenhaLeitor;
+use App\Mail\esqueciSenhaLeitor;
 use App\Leitor;
 
 class LeitorController extends Controller

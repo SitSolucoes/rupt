@@ -9,6 +9,7 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
 import { AuthService } from 'angular2-social-login/dist/auth.service';
 import { CategoriasService } from 'app/services/categorias.service';
 import { Categoria } from 'app/classes/categoria';
+import { PostsService } from 'app/services/posts.service';
 declare var $: any;
 
 @Component({
@@ -32,6 +33,7 @@ export class HeaderComponent implements OnInit {
               private _router: Router,
               private _auth: AuthService,
               private _categoriaService: CategoriasService,
+              private _postService: PostsService
               ) { }
 
   ngOnInit() {
@@ -116,14 +118,15 @@ export class HeaderComponent implements OnInit {
     this._router.navigate(['/']);
   }
 
-    private _fb_logout(){
-      this._auth.logout().subscribe(
-        (data)=>{console.log(data)}
-      )
-    }
+  private _fb_logout(){
+    this._auth.logout().subscribe(
+      (data)=>{console.log(data)}
+    )
+  }
 
-    redirect(categoria: Categoria){
-      this._categoriaService.paramCategoria.emit(categoria);
-      this._router.navigate(['/categorias/'+categoria.categoria.replace(' ', '').toLowerCase()]);
-    }
+  redirect(categoria: Categoria){
+    this._categoriaService.paramCategoria.emit(categoria);
+    this._router.navigate(['/categorias/'+categoria.categoria.replace(' ', '').toLowerCase()]);
+  }
+
 }

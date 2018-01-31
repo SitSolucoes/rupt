@@ -78,9 +78,12 @@
 
             <p> {{ interacoesTotal[1] }} </p>
             <i class="fa fa-share img" aria-hidden="true" title='Compartilhados'></i>
-
             <i class="fa fa-exclamation-circle img report" aria-hidden="true" (click)="openModalDenuncia()" title='Denunciar' *ngIf='leitor && leitor.id != post.autor.id' ></i>
             <a routerLink='../../publicacao/{{ post.id }}' *ngIf='leitor && leitor.id == post.autor.id'>
+            
+
+            <img  title='Denunciar' *ngIf='leitor && leitor.id != post.autor.id' src="../../../assets/img/report.png" class="img report" (click)="openModalDenuncia()">
+            <a routerLink='../../publicacao/{{ btoa(post.id) }}' *ngIf='leitor && leitor.id == post.autor.id'>
                 <i class="fa fa-pencil-square-o edit" aria-hidden="true" title='Editar'></i>
             </a>
         </div>

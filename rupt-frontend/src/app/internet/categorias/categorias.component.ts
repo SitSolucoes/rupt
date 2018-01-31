@@ -29,6 +29,8 @@ export class CategoriasComponent implements OnInit {
   }
 
   getPosts(){
+    //se não tiver nada la, tentar pegar pelo nome 
+
     this._postsService.getCategoryPostsSlider().subscribe(
       (p: any) =>{
         this.categorias = p.posts;
