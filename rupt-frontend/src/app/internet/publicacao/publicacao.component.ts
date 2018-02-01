@@ -195,7 +195,7 @@ export class PublicacaoComponent implements OnInit {
           tipo_post: tipo
       });
 
-      if (!this.post || this.post.publishedAt == null){
+      if (!this.post){
           this._postService.create(this.formulario).subscribe(
             (response) => { 
               this.post = response;
@@ -207,7 +207,10 @@ export class PublicacaoComponent implements OnInit {
         this._postService.update(this.formulario).subscribe(
           (response) => { 
             this.post = response;
-            this.uploadFiles(false); 
+            if (this.post.publishedAt == null)
+                this.uploadFiles(true); 
+            else 
+                this.uploadFiles(false);
           }
         )
       }
@@ -250,7 +253,7 @@ export class PublicacaoComponent implements OnInit {
           this.loading = false;
 
           if (rascunho == true)
-            this.openModalRascunho();
+              this.openModalRascunho();
           else
             this._router.navigate(['noticia/' + this.post.id]);
       }

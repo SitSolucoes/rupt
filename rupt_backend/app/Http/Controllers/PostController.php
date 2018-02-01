@@ -171,7 +171,7 @@ class PostController extends Controller
     public function postsPorCategoria($id){
         return Post::select('posts.*')
             ->whereNull('posts.deleted_at')
-            //->whereNotNull('posts.publishedAt')
+            ->whereNotNull('posts.publishedAt')
             ->join('post_categoria', 'posts.id', '=', 'post_categoria.post_idPost')
             ->where('post_categoria.categoria_idCategoria', $id)
             ->orderBy('posts.publishedAt', 'desc')->get();
@@ -240,6 +240,7 @@ class PostController extends Controller
                     ->whereNull('publishedAt')
                     ->with('autor')
                     ->with('categoriasPost')
+                    ->orderBy('updated_at', 'desc')
                     ->get();
 
         return response()->json(['rascunhos' => $rascunhos], 200);
