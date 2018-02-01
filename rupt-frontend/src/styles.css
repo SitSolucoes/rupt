@@ -1883,7 +1883,7 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     border-radius: 0px;
     display: block;
     float: right;
-    font-size: 22px;
+    font-size: 20px;
     color: #f97000;
 }
 
@@ -1893,7 +1893,6 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     margin-top: 0px;
     margin-right: 5px;
     color: #4f4f4f;
-    margin-top: 5px;
 }
 
 .user .feed .post .text{
