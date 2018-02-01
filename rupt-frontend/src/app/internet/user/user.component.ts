@@ -16,6 +16,8 @@ import { InteracoesService } from 'app/services/interacoes.service';
 import { Interacao } from 'app/classes/interacao';
 import { InteracaoLeitor } from 'app/classes/interacao-leitor';
 import { InteracoesLeitorService } from 'app/services/interacoes-leitor.service';
+import { SeguidorService } from 'app/services/seguidor.service';
+import { Seguidor } from 'app/classes/seguidor';
 
 declare var $: any;
 
@@ -52,15 +54,18 @@ export class UserComponent implements OnInit {
   modalDenuncia = new EventEmitter<string|MaterializeAction>();
   modalExcluir = new EventEmitter<string|MaterializeAction>();
 
+  seguindo: boolean;
+  listSeguidores: Seguidor[] = new Array();
+  listSeguindo: Seguidor[] = new Array();
+
   constructor(private _activatedRoute: ActivatedRoute,
               private _leitorService: LeitoresService, 
               private _timelineService: TimelineService,
               private _postService: PostsService,
-              private _interacoesLeitorService: InteracoesLeitorService) { }
+              private _interacoesLeitorService: InteracoesLeitorService,
+              private _seguidorService: SeguidorService) { }
 
   ngOnInit() {
-      console.log('user.component');
-
       window.scrollTo(0, 0);
 
       this.leitor = new Leitor();
@@ -71,6 +76,7 @@ export class UserComponent implements OnInit {
           this._leitorService.getLeitorByNick(params['nick']).subscribe(
             (leitor: Leitor) => {
               this.leitor = leitor;
+              this.verifyFollow();
             }
           );
           
@@ -80,8 +86,11 @@ export class UserComponent implements OnInit {
 
           this._leitorService.verificaLogin().subscribe(
               (response) => {
+                this.verifyFollow();
                 this.getTimeline();
                 this.getRascunhos();
+                this.getSeguidores();
+                this.getSeguindo();
           });
       });
   }
@@ -253,6 +262,54 @@ export class UserComponent implements OnInit {
     );
 
     this.openModalCompartilharMensagem();
+  }
+
+  verifyFollow(){
+      let seguidor = new Seguidor();
+      seguidor.escritor_id = this.leitor.id;
+      seguidor.leitor_id = this.leitorLogado.id;
+      
+      this._seguidorService.verify(seguidor).subscribe(
+        ( response ) => { this.seguindo = response }
+      )
+  }
+
+  follow(){
+      let seguidor = new Seguidor();
+      seguidor.escritor_id = this.leitor.id;
+      seguidor.leitor_id = this.leitorLogado.id;
+
+      this._seguidorService.follow(seguidor).subscribe(
+        (response) => { 
+            this.seguindo = response;
+            this.getSeguidores();
+        }
+      )
+  }
+
+  unfollow(){
+      let seguidor = new Seguidor();
+      seguidor.escritor_id = this.leitor.id;
+      seguidor.leitor_id = this.leitorLogado.id;
+
+      this._seguidorService.unfollow(seguidor).subscribe(
+        (response) => { 
+            this.seguindo = response;
+            this.getSeguidores();
+        }
+      )
+  } 
+
+  getSeguidores(){
+      this._seguidorService.seguidores(this.leitor.id).subscribe(
+        ( response ) => { this.listSeguidores = response }
+      )
+  }
+
+  getSeguindo(){
+      this._seguidorService.seguindo(this.leitor.id).subscribe(
+          ( response ) => { this.listSeguindo = response }
+      )
   }
 
   openModalCompartilhar(interacoes: Interacao[], interacoesLeitor: InteracaoLeitor[], post: Post){

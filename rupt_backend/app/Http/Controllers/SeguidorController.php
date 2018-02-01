@@ -3,22 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Seguir;
+use App\Seguidor;
 
 class SeguidorController extends Controller
 {
     public function follow(Request $request){
-        $seguir = new Seguir();
+        $seguidor = new Seguidor();
 
-        $seguir->leitor_idLeitor = $request->leitor_id;
-        $seguir->escritor_idEscritor = $request->escritor_id;
-        $seguir->save();
+        $seguidor->leitor_idLeitor = $request->leitor_id;
+        $seguidor->escritor_idEscritor = $request->escritor_id;
+        $seguidor->save();
 
         return response()->json(['follow' => true], 201);
     }
 
     public function unfollow(Request $request){
-        Seguir::where('leitor_idLeitor', $request->leitor_id)
+        Seguidor::where('leitor_idLeitor', $request->leitor_id)
               ->where('escritor_idEscritor', $request->escritor_id)
               ->delete();
 
@@ -26,13 +26,29 @@ class SeguidorController extends Controller
     }
 
     public function verify(Request $request){
-        $seguir = Seguir::where('leitor_idLeitor', $request->leitor_id)
+        $seguidor = Seguidor::where('leitor_idLeitor', $request->leitor_id)
                         ->where('escritor_idEscritor', $request->escritor_id)
                         ->first();
 
-        if ($seguir)
+        if ($seguidor)
             return response()->json(['follow' => true], 200);
 
         return response()->json(['follow' => false], 200);
+    }
+
+    public function seguindo($escritor_id){
+        $seguindo = Seguidor::where('leitor_idLeitor', $escritor_id)
+                            ->with('escritor')
+                            ->get();
+
+        return response()->json(['seguindo' => $seguindo], 200);
+    }
+
+    public function seguidores($escritor_id){
+        $seguidores = Seguidor::where('escritor_idEscritor', $escritor_id)
+                              ->with('leitor')
+                              ->get();
+
+        return response()->json(['seguidores' => $seguidores], 200);
     }
 }

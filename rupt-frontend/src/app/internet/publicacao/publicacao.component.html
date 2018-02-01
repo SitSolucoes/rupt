@@ -44,7 +44,9 @@
 <div class="publicacao">
     <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
     <div class="container">
-        <h3>Nova Publicação</h3>
+        <h3 *ngIf='!post.id'>Nova Publicação</h3>
+        <h3 *ngIf='post.id && post.publishedAt != null'>Editar Publicação</h3>
+        <h3 *ngIf='post.id && post.publishedAt == null'>Editar Rascunho</h3>
         <div class="container_left">
             <input type="text" class="input input2" maxlength="150" formControlName='titulo' placeholder="Insira o título da sua notícia"
                 [ngClass]="{'invalid': verificaValidTouched('titulo')}"
@@ -99,7 +101,6 @@
                 </button>
 
                 <button *ngIf='post.id' type="button" class="button button3" (click)="openModalExcluir()" [disabled]='loading'>
-                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw" *ngIf='loading'></i>    
                     Excluir
                 </button>
             </div>

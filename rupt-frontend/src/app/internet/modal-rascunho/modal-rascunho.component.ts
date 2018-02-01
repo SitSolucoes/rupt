@@ -8,6 +8,7 @@ import { UploadFileService } from "./../../services/upload-file.service";
 import { UploadItem } from "./../../classes/upload-item";
 import { Post } from 'app/classes/post';
 import { PostsService } from 'app/services/posts.service';
+import { ConnectionFactory } from 'app/classes/connection-factory';
 
 @Component({
   selector: 'modal-rascunho',
@@ -21,6 +22,7 @@ export class ModalRascunhoComponent implements OnInit {
 
     loadingExcluir: boolean = false;
     loadingPublicar: boolean = false;
+    url = ConnectionFactory.API_IMAGEM;
 
     constructor(private _router: Router,
                 private _postService: PostsService) { }

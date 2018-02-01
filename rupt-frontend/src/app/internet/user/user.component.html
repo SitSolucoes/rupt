@@ -88,7 +88,14 @@
 
             </div>
 
-            <div class="button button-orange" *ngIf="leitorLogado.id && leitor.id != leitorLogado.id"> Seguir </div>
+            <a class="button button-orange" *ngIf="leitorLogado.id && leitor.id != leitorLogado.id && !seguindo" (click)='follow()'> 
+                <i class="fa fa-user-plus"></i>
+                Seguir 
+            </a>
+            <a class="button button-orange button-seguindo" *ngIf="leitorLogado.id && leitor.id != leitorLogado.id && seguindo" (click)='unfollow()'> 
+                <i class="fa fa-check" aria-hidden="true"></i>
+                <i class="fa fa-times" aria-hidden="true"></i>
+            </a>
 
             <a routerLink="../../cadastro-escritor" 
                 *ngIf="leitor.id == leitorLogado.id && (!leitor.escritor || leitor.escritor.status == 'r')"> 
@@ -122,13 +129,13 @@
                     <li class="menu tab col s3">
                         <a href="#test3">
                             Leitores
-                            <font class="title"> 2.700 </font> 
+                            <font class="title"> {{ listSeguidores.length }} </font> 
                         </a>
                     </li>
                     <li class="menu tab col s3">
                         <a href="#test4">
                             Seguindo
-                            <font class="title"> 15 </font>
+                            <font class="title"> {{ listSeguindo.length }} </font>
                         </a>
                     </li>
                 </ul>
@@ -309,40 +316,40 @@
                 </div>
             </div>
             <div id="test3" class="col s12">
-                <div class="message">
-                    Não está seguindo nenhum usuário até o momento
-                    <i class="fa fa-user" aria-hidden="true"></i>
+                <div class="message" *ngIf='listSeguidores.length == 0'>
+                    Nenhum leitor até o momento
+                    <i class="fa fa-users" aria-hidden="true"></i>
                 </div>
          
                 <div class="leitores">
-                    <div class="info">
+                    <div class="info" *ngFor='let seguidor of listSeguidores'>
                         <div class="area">
-                            <img src="../../../assets/img/person8.png" class="img">
+                            <img src="{{ url + 'profile/' + seguidor.leitor.src_foto }}" class="img">
                         </div>
         
-                        <p> Marcelos Luscas </p>
+                        <p> {{ seguidor.leitor.nome }} </p>
         
-                        <div class="title"> @Paulinho </div>
+                        <div class="title"> @{{ seguidor.leitor.nick }} </div>
                     </div>
                 </div>
             </div>
             <div id="test4" class="col s12">
-                    <div class="message">
-                        Não está seguindo nenhum usuário até o momento
-                        <i class="fa fa-user" aria-hidden="true"></i>
-                    </div>
-                 
-                    <div class="leitores">
-                        <div class="info">
-                            <div class="area">
-                                <img src="../../../assets/img/person8.png" class="img">
-                            </div>
-            
-                            <p> Marcelos Luscas </p>
-            
-                            <div class="title"> @Paulinho </div>
+                <div class="message" *ngIf='listSeguindo.length == 0'>
+                    Não está seguindo nenhum usuário até o momento
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                </div>
+                
+                <div class="leitores">
+                    <div class="info" *ngFor='let seguindo of listSeguindo'>
+                        <div class="area">
+                            <img src="{{ url + 'profile/' + seguindo.escritor.src_foto }}" class="img">
                         </div>
+        
+                        <p> {{ seguindo.escritor.nome }} </p>
+    
+                    <div class="title"> @{{ seguindo.escritor.nick }} </div>
                     </div>
+                </div>
             </div>
         </div>
         

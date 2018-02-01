@@ -1636,10 +1636,44 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     border-radius: 2px;
     position: relative;
     right: 30px;
+    cursor: pointer;
 }
 
 .user .button-orange{
   background: #f97000;
+}
+
+.user .button-seguindo:after{
+    content: "Seguindo";
+}
+
+.user .button-seguindo:hover:after{
+    content: "Deixar de seguir";
+}
+
+.user .button .fa{
+    margin-right: 5px;
+}
+
+.user .button-seguindo .fa-check{
+    display: inline-block;
+}
+
+.user .button-seguindo .fa-times{
+    display: none;
+}
+
+.user .button-seguindo:hover{
+    background: #ccc;
+    color: #5e5e5e;
+}
+
+.user .button-seguindo:hover .fa-check{
+    display: none;
+}
+
+.user .button-seguindo:hover .fa-times{
+    display: inline-block;
 }
 
 .user .bio{
@@ -1848,13 +1882,13 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     border-radius: 0px;
     display: block;
     float: right;
-    font-size: 22px;
+    font-size: 20px;
     color: #f97000;
 }
 
 .user .feed .post .img6{
     height: 22px;
-    font-size: 18px;
+    font-size: 20px;
     margin-top: 0px;
     margin-right: 5px;
     color: #4f4f4f;
@@ -1968,6 +2002,10 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
 .user .feed .post .info .fa.editar-rascunho{
     margin-top: 1px;
     color: #f97000;
+}
+
+.user .feed .post .info .fa.excluir-rascunho{
+    margin-top: 0px;
 }
 
 .user .feed .post .img6:hover{
@@ -4540,3 +4578,5 @@ quill-editor{
     margin-top: 20px;
     position: relative;
 }
+
+/*teste*/
