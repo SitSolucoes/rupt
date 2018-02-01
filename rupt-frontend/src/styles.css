@@ -1463,7 +1463,6 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     box-sizing: inherit !important;
     border: 1px solid #ccc !important;
     font-size: 1.2rem !important;
-    height: 3.5rem !important;
     display: block;
     float: left;
 }
@@ -1473,8 +1472,8 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     float: right;
     background: #ccc;
     border: 1px solid #ccc;
-    padding: 10px 20px;
-    border-radius: 1px;
+    padding: 12.5px 20px;
+    width: 20%;
     margin-top: 2px;
     margin-right: 15px;
     font-family: lato;
