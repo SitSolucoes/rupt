@@ -63,7 +63,7 @@
             <div class=" right-container-input-group top">
                 <select name="categoria" class="input" formControlName='categoria_id' [ngClass]="{'invalid': verificaValidTouched('categoria_id')}">
                     <option disabled value='' selected>Categoria</option>
-                    <option *ngFor="let categoria of categorias" [value]='categoria.id'>{{ categoria.categoria }}</option>
+                <option *ngFor="let categoria of categorias" [value]='categoria.id'>{{ categoria.categoria }}</option>
                 </select>
                 <!--
                 <select name="regiao" class="input" formControlName="regiao_id">
@@ -98,7 +98,7 @@
                     Publicar
                 </button>
 
-                <button type="button" class="button background-orange color button2" (click)="onSubmit()" [disabled]='loading'>
+                <button *ngIf='post.id' type="button" class="button button3" (click)="openModalExcluir()" [disabled]='loading'>
                     <i class="fa fa-spinner fa-pulse fa-3x fa-fw" *ngIf='loading'></i>    
                     Excluir
                 </button>
