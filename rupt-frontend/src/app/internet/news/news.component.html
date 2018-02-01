@@ -29,7 +29,7 @@
     <div id="modalExcluir" class="modal modal2 modal4" materialize="modal" [materializeParams]="[{dismissible: false}]"
         [materializeActions]="modalExcluir">
         <modal-excluir (closeModalExcluir)="closeModalExcluir($event)" (excluiuCompartilhamento)='excluiuCompartilhamento($event)'
-            [id]='post.id' [leitor]='leitor' [op]='2' [interacao]='interacao'>
+            [id]='post.id' [leitor]='leitor' [op]='opExcluir' [interacao]='interacao'>
         </modal-excluir>
     </div>
 
@@ -79,11 +79,7 @@
             <p> {{ interacoesTotal[1] }} </p>
             <i class="fa fa-share img" aria-hidden="true" title='Compartilhados'></i>
             <i class="fa fa-exclamation-circle img report" aria-hidden="true" (click)="openModalDenuncia()" title='Denunciar' *ngIf='leitor && leitor.id != post.autor.id' ></i>
-            <a routerLink='../../publicacao/{{ post.id }}' *ngIf='leitor && leitor.id == post.autor.id'></a>
-
-            <img  title='Denunciar' *ngIf='leitor && leitor.id != post.autor.id' src="../../../assets/img/report.png" class="img report" (click)="openModalDenuncia()">
-            
-            <i *ngIf='leitor && leitor.id == post.autor.id' aria-hidden="true" class="fa fa-times excluir" title="Excluir" (click)="openModalExcluir()"></i>
+            <i *ngIf='leitor && leitor.id == post.autor.id' aria-hidden="true" class="fa fa-times excluir" title="Excluir" (click)="openModalExcluir(1)"></i>
             
             <a routerLink='../../publicacao/{{ btoa(post.id) }}' *ngIf='leitor && leitor.id == post.autor.id'>
                 <i class="fa fa-pencil-square-o edit" aria-hidden="true" title='Editar'></i>
@@ -100,7 +96,7 @@
 
         <div class="info" [innerHTML]="post.conteudo"></div>
 
-        <div class="reactions" *ngIf="leitorLogado">
+        <div class="reactions" *ngIf="leitor">
             <div *ngFor='let i of interacoes' class="area2">
                 <div *ngIf='i.categoria == 1 && i.compartilhar == false' (click)='interagePost(i)'>
                     <img src="../../../assets/{{ i.src_icone }}" class="img"
@@ -121,7 +117,7 @@
                 </div>
             </div>
         </div> 
-        <div class="reactions" *ngIf="!leitorLogado">
+        <div class="reactions" *ngIf="!leitor">
             <div *ngFor='let i of interacoes' class="area2">
                 <div *ngIf='i.categoria == 1 && i.compartilhar == false'>
                     <img src="../../../assets/{{ i.src_icone }}" class="img disabled">
@@ -146,13 +142,13 @@
 
             <div class="subtitle">Os comentários dessa sessão são de responsabilidade exclusiva de seus autores e não representam a opnião deste site. Se achar algo que viole os <b>Termos de uso</b>, denuncie. Leia as <a routerLink="../../faq">perguntas mais frequentes</a> para saber o que é impróprio ou ilegal.</div>
 
-            <div class="profile" *ngIf="leitorLogado">
+            <div class="profile" *ngIf="leitor">
                 <div class="img-area">  
                     <img src="{{ url + 'profile/' + leitor?.src_foto }}" class="img"> 
                 </div>
                 <form [formGroup]="form" (ngSubmit)="onSubmit()">
                     <input type="text" class="input" maxlength="140" name="comentario" formControlName="comentario" placeholder="Escreva um comentário..." >
-                    <button type="submit" class="button" [disabled]="form.value.comentario === ''" id="submit-contato"> 
+                    <button type="submit" class="button" [disabled]="form.value.comentario === ''"> 
                         <i class="fa fa-spinner fa-pulse fa-3x fa-fw" *ngIf='loading'></i>   
                         Enviar 
                     </button>
@@ -184,6 +180,7 @@
                     </div>
                 </div>
 
+                <!--
                 <div class="profile-resp" *ngFor="let c of comentarios">
                     <a routerLink='/perfil/{{ c?.comentario?.leitor?.nick }}'>
                         <div class="img-area">
@@ -209,19 +206,18 @@
                 </div>
 
                 <div class="comentarios">
-                    <div _ngcontent-c9="" class="profile profile2">
-                        <div _ngcontent-c9="" class="img-area">
-                            <img _ngcontent-c9="" class="img" src="http://localhost:8000/profile/4_profile.png">
+                    <div class="profile profile2">
+                        <div class="img-area">
+                            <img class="img" src="http://localhost:8000/profile/4_profile.png">
                         </div>
-                        <form _ngcontent-c9="" novalidate="" ng-reflect-form="[object Object]" class="ng-pristine ng-invalid ng-touched">
-                            <input _ngcontent-c9="" class="input ng-pristine ng-invalid ng-touched" formcontrolname="comentario" maxlength="140" name="comentario" placeholder="Escreva um comentário..." type="text" ng-reflect-maxlength="140" ng-reflect-name="comentario">
-                            <button _ngcontent-c9="" class="button" id="submit-contato2" type="submit" disabled="">
-                                <!--bindings={}-->
+                        <form novalidate="" ng-reflect-form="[object Object]" class="ng-pristine ng-invalid ng-touched">
+                            <input class="input ng-pristine ng-invalid ng-touched" formcontrolname="comentario" maxlength="140" name="comentario" placeholder="Escreva um comentário..." type="text" ng-reflect-maxlength="140" ng-reflect-name="comentario">
+                            <button class="button" type="submit" disabled="">
                                 Enviar
                             </button>
                         </form>
                     </div>
-                </div>
+                </div> -->
 
             </div>
         </div>

@@ -2323,12 +2323,17 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
 }
 
 .news .container .area .social .excluir{
-    margin-left: 5px;
+    margin-left: 20px;
     border-radius: 0px;
     display: block;
     float: right;
     font-size: 25px;
-    color: #f97000;
+    margin-top: -2px;
+    cursor: pointer;
+}
+
+.news .container .area .social .excluir:hover{
+    color: red;
 }
 
 .news .container .frame{

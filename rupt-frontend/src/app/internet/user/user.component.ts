@@ -59,6 +59,8 @@ export class UserComponent implements OnInit {
               private _interacoesLeitorService: InteracoesLeitorService) { }
 
   ngOnInit() {
+      console.log('user.component');
+
       window.scrollTo(0, 0);
 
       this.leitor = new Leitor();
