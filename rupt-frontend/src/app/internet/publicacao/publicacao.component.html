@@ -47,6 +47,7 @@
         <h3 *ngIf='!post.id'>Nova Publicação</h3>
         <h3 *ngIf='post.id && post.publishedAt != null'>Editar Publicação</h3>
         <h3 *ngIf='post.id && post.publishedAt == null'>Editar Rascunho</h3>
+        <div class="underline"></div>
         <div class="container_left">
             <input type="text" class="input input2" maxlength="150" formControlName='titulo' placeholder="Insira o título da sua notícia"
                 [ngClass]="{'invalid': verificaValidTouched('titulo')}"
@@ -61,6 +62,7 @@
                             [ngClass]="{'invalid': verificaValidTouched('conteudo')}">
             </quill-editor> 
         </div>
+        <div class="underline"></div>
         <div class="container_right">
             <div class=" right-container-input-group top">
                 <select name="categoria" class="input" formControlName='categoria_id' [ngClass]="{'invalid': verificaValidTouched('categoria_id')}">
