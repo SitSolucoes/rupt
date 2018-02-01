@@ -334,22 +334,22 @@
                 </div>
             </div>
             <div id="test4" class="col s12">
-                    <div class="message" *ngIf='listSeguindo.length == 0'>
-                        Não está seguindo nenhum usuário até o momento
-                        <i class="fa fa-user" aria-hidden="true"></i>
-                    </div>
-                 
-                    <div class="leitores">
-                        <div class="info" *ngFor='let seguindo of listSeguindo'>
-                            <div class="area">
-                                <img src="{{ url + 'profile/' + seguindo.escritor.src_foto }}" class="img">
-                            </div>
-            
-                            <p> {{ seguindo.escritor.nome }} </p>
-        
-                        <div class="title"> @{{ seguindo.escritor.nick }} </div>
+                <div class="message" *ngIf='listSeguindo.length == 0'>
+                    Não está seguindo nenhum usuário até o momento
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                </div>
+                
+                <div class="leitores">
+                    <div class="info" *ngFor='let seguindo of listSeguindo'>
+                        <div class="area">
+                            <img src="{{ url + 'profile/' + seguindo.escritor.src_foto }}" class="img">
                         </div>
+        
+                        <p> {{ seguindo.escritor.nome }} </p>
+    
+                    <div class="title"> @{{ seguindo.escritor.nick }} </div>
                     </div>
+                </div>
             </div>
         </div>
         
