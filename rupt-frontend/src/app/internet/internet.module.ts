@@ -46,6 +46,7 @@ import { CategoriaComponent } from './lista-resultados/categoria/categoria.compo
 import { PesquisaComponent } from './lista-resultados/pesquisa/pesquisa.component';
 import { ListaComponent } from './lista-resultados/lista/lista.component';
 import { RedefinirSenhaComponent } from './redefinir-senha/redefinir-senha.component';
+import { SeguidorService } from 'app/services/seguidor.service';
 
 @NgModule({ 
   imports: [
@@ -97,7 +98,8 @@ import { RedefinirSenhaComponent } from './redefinir-senha/redefinir-senha.compo
     TimelineService,
     VisualizacoesService,
     InteracoesService,
-    InteracoesLeitorService
+    InteracoesLeitorService,
+    SeguidorService
   ]
 })
 export class InternetModule { }

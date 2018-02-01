@@ -135,6 +135,13 @@ Route::post('interacaoLeitor/desfazCompartilhamento', ['uses' => 'InteracaoLeito
 
 Route::post('visualizacoes/create', ['uses' => 'VisualizacaoController@create']);
 
+//seguir
+Route::post('seguidor/follow', ['uses' => 'SeguidorController@follow']);
+Route::post('seguidor/unfollow', ['uses' => 'SeguidorController@unfollow']);
+Route::post('seguidor/verify', ['uses' => 'SeguidorController@verify']);
+Route::get('seguidor/seguindo/{id}', ['uses' => 'SeguidorController@seguindo']);
+Route::get('seguidor/seguidores/{id}', ['uses' => 'SeguidorController@seguidores']);
+
 //Mensagens
 Route::get('/getMensagens/naoLidas', [
           'uses' => 'MensagemController@getMensagens_nLidas'
