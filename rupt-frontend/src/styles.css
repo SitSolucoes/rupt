@@ -2765,6 +2765,32 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     margin-bottom: 10px;
 }
 
+.news .not-found{
+    width: 95%;
+    max-width: 95%;
+    padding-bottom: 15%;
+    padding-top: 30px;
+    margin: auto;
+}
+
+.news .not-found .message{
+    display: table;
+    margin: auto;
+    padding-top: 15%;
+    font-family: nexa-bold;
+    color: #4f4f4f;
+    font-size: 22px;
+    text-align: center;
+}
+
+.news .not-found .message i{
+    font-size: 55px;
+    color: #f97000;
+    display: block;
+    clear: both;
+    margin-top: 20px;
+}
+
 .news .fb-comments span{
   width: 100% !important;
 }
