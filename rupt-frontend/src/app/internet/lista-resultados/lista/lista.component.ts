@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Post } from 'app/classes/post';
 
 @Component({
   selector: 'app-lista',
@@ -6,6 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./lista.component.css']
 })
 export class ListaComponent implements OnInit {
+
+  @Input() search: string;
+  @Input() posts: Post[];
+
+  XXX: string = 'teste<br>';
 
   constructor() { }
 

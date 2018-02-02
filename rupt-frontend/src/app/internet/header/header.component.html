@@ -37,7 +37,7 @@
 
     <ul class="side-nav" id="menu-mobile">
         <!--<a *ngFor='let c of categorias' routerLink="/" class="title" routerLinkActive="active-link">{{ c.categoria }}</a>-->
-        <a *ngFor='let c of categorias' (click)='redirect(c)' class="title">{{ c.categoria }}</a>
+        <a *ngFor='let c of categorias' routerLink='/categorias/{{ c.link }}' class="title">{{ c.categoria }}</a>
     </ul>
 
     <!--

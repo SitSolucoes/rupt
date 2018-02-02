@@ -246,4 +246,19 @@ class PostController extends Controller
         return response()->json(['rascunhos' => $rascunhos], 200);
     }
 
+    public function getPostsByCategoria($categoria_id){
+        $posts = Post::whereNull('deleted_at')
+            ->whereNotNull('publishedAt')
+            ->whereIn('id', function($query) use ($categoria_id) {
+                $query->select('post_idPost')
+                      ->from('post_categoria')
+                      ->where('categoria_idCategoria', $categoria_id);
+            })
+            ->orderBy('publishedAt', 'desc')
+            ->with('autor')
+            ->get();
+
+        return response()->json(['posts' => $posts], 200);
+    }
+
 }

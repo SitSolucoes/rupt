@@ -7,9 +7,6 @@ import { Categoria } from 'app/classes/categoria';
 @Injectable()
 export class CategoriasService {
 
-  //usado como parêmtro pra não aparecer na rota
-  paramCategoria = new EventEmitter<Categoria>();
-
   private headers = new Headers({'Content-Type': 'application/json'});
   private _url: string = ConnectionFactory.API_CONNECTION;
   
@@ -72,6 +69,12 @@ export class CategoriasService {
     (response: Response)=>{
       return response.json().categoria;
     });
+  }
+
+  getCategoriaByLink(link){
+      return this._http.get(this._url + 'categoria/getCategoriaByLink/' + link, {headers: this.headers}).map(
+        (response ) => { return response.json().categoria }
+      )
   }
 
 }

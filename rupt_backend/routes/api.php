@@ -73,6 +73,7 @@ Route::get('/categoria/getCategoriasAtivas', ['uses' => 'CategoriaController@get
 Route::post('/categoria/create', ['uses' => 'CategoriaController@create']);
 Route::post('/categoria/update/{id}', ['uses' => 'CategoriaController@update']);
 Route::post('/categoria/createSubCategoria/{id}', ['uses' => 'CategoriaController@createSubCategoria']);
+Route::get('/categoria/getCategoriaByLink/{link}', ['uses' => 'CategoriaController@getCategoriaByLink']);
 
 //categoria filtro
 Route::post('categoriaFiltro/save', ['uses' => 'CategoriaFiltroController@save']);
@@ -127,6 +128,7 @@ Route::post('posts/uploadImages/{id}', ['uses' => 'PostController@uploadImages']
 Route::post('posts/delete', ['uses' => 'PostController@delete']);
 Route::post('posts/update', ['uses' => 'PostController@update']);
 Route::post('posts/getRascunhos', ['uses' => 'PostController@getRascunhos']);
+Route::get('posts/getPostsByCategoria/{id}', ['uses' => 'PostController@getPostsByCategoria']);
 
 Route::get('interacoes/getAll/{post_id}/{categoria}', ['uses' => 'InteracaoController@getByCategoria']);
 Route::get('interacaoLeitor/getInteracoesLeitorPost/{post_id}/{leitor_id}', ['uses' => 'InteracaoLeitorController@getInteracoesLeitorPost']);

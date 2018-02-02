@@ -1,151 +1,41 @@
 <div class="categoria">
     <div class="container">
         <div class="aba">
-    Mostrando resultados para <a href="">arctic</a>
+            Mostrando resultados para <a>{{ search }}</a>
         </div>
 
-<div class="container-categoria info">
-    <div class="info-text card">
-        <div class="banner-single">
-            <div class="title"> Terrorismo na casa Branca mata 12 pessoas </div>
-            <div class="text"> Vamos hoje na casa dos netos, amiguinho porque...</div>
-            <div class="info-post">
-                <div class="img-person">
-                    <img src="../../../assets/img/person.png" class="img">
-                </div>
-                <p> Marcela Prado </p>
-                <div class="area-post">
-                    <i class="fa fa-calendar-o img-cal" aria-hidden="true"></i>
-                    <div class="time"> 12/08 </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="info-text card">
-        <div class="banner-single">
-            <div class="title"> Três são presos após roubo de carga de R$ 500 mil em Mogi </div>
-            <div class="text"> Vamos hoje na casa dos netos, amiguinho porque...</div>
-            <div class="info-post">
-                <div class="img-person">
-                    <img src="../../../assets/img/person3.png" class="img">
-                </div>
-                <p> Marcela Prado </p>
-                <div class="area-post">
-                    <i class="fa fa-calendar-o img-cal" aria-hidden="true"></i>
-                    <div class="time"> 12/08 </div>
+        <div class="container-categoria info">
+            <div class="info-text card" *ngFor='let post of posts'>
+                <div class="banner-single">
+                    <div class="title"> {{ post.titulo }} </div>
+                    
+                    <div class="text" [innerHTML]="post.conteudo.replace('<br>', '')"></div>
+                    
+                    <div class="info-post">
+                        <div class="img-person">
+                            <img src="../../../assets/img/person.png" class="img">
+                        </div>
+                        <p> Marcela Prado </p>
+                        <div class="area-post">
+                            <i class="fa fa-calendar-o img-cal" aria-hidden="true"></i>
+                            <div class="time"> 12/08 </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <!-- card pessoa
-    <div class="card">
-        <div class="profile">
-            <div class="area">
-                <img src="../../../assets/img/section12.png" class="img">
+            
+            <!-- card pessoa
+            <div class="card">
+                <div class="profile">
+                    <div class="area">
+                        <img src="../../../assets/img/section12.png" class="img">
+                    </div>
+                    <h1>Marcelos Luscas</h1>
+                    <h2>@Paulinho</h2>
+                </div>
             </div>
-            <h1>Marcelos Luscas</h1>
-            <h2>@Paulinho</h2>
-        </div>
-    </div>
-    -->
+            -->
 
-    <div class="info-text card">
-        <div class="banner-single">
-            <div class="title"> Três são presos após roubo de carga de R$ 500 mil em Mogi </div>
-            <div class="text"> Vamos hoje na casa dos netos, amiguinho porque...</div>
-            <div class="info-post">
-                <div class="img-person">
-                    <img src="../../../assets/img/person3.png" class="img">
-                </div>
-                <p> Marcela Prado </p>
-                <div class="area-post">
-                    <i class="fa fa-calendar-o img-cal" aria-hidden="true"></i>
-                    <div class="time"> 12/08 </div>
-                </div>
-            </div>
         </div>
-    </div>
-    <div class="info-text card">
-        <div class="banner-single">
-            <div class="title"> Três são presos após roubo de carga de R$ 500 mil em Mogi </div>
-            <div class="text"> Vamos hoje na casa dos netos, amiguinho porque...</div>
-            <div class="info-post">
-                <div class="img-person">
-                    <img src="../../../assets/img/person3.png" class="img">
-                </div>
-                <p> Marcela Prado </p>
-                <div class="area-post">
-                    <i class="fa fa-calendar-o img-cal" aria-hidden="true"></i>
-                    <div class="time"> 12/08 </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="info-text card">
-        <div class="banner-single">
-            <div class="title"> Três são presos após roubo de carga de R$ 500 mil em Mogi </div>
-            <div class="text"> Vamos hoje na casa dos netos, amiguinho porque...</div>
-            <div class="info-post">
-                <div class="img-person">
-                    <img src="../../../assets/img/person3.png" class="img">
-                </div>
-                <p> Marcela Prado </p>
-                <div class="area-post">
-                    <i class="fa fa-calendar-o img-cal" aria-hidden="true"></i>
-                    <div class="time"> 12/08 </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="info-text card">
-        <div class="banner-single">
-            <div class="title"> Três são presos após roubo de carga de R$ 500 mil em Mogi </div>
-            <div class="text"> Vamos hoje na casa dos netos, amiguinho porque...</div>
-            <div class="info-post">
-                <div class="img-person">
-                    <img src="../../../assets/img/person3.png" class="img">
-                </div>
-                <p> Marcela Prado </p>
-                <div class="area-post">
-                    <i class="fa fa-calendar-o img-cal" aria-hidden="true"></i>
-                    <div class="time"> 12/08 </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="info-text card">
-        <div class="banner-single">
-            <div class="title"> Três são presos após roubo de carga de R$ 500 mil em Mogi </div>
-            <div class="text"> Vamos hoje na casa dos netos, amiguinho porque...</div>
-            <div class="info-post">
-                <div class="img-person">
-                    <img src="../../../assets/img/person3.png" class="img">
-                </div>
-                <p> Marcela Prado </p>
-                <div class="area-post">
-                    <i class="fa fa-calendar-o img-cal" aria-hidden="true"></i>
-                    <div class="time"> 12/08 </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="info-text card">
-        <div class="banner-single">
-            <div class="title"> Três são presos após roubo de carga de R$ 500 mil em Mogi </div>
-            <div class="text"> Vamos hoje na casa dos netos, amiguinho porque...</div>
-            <div class="info-post">
-                <div class="img-person">
-                    <img src="../../../assets/img/person3.png" class="img">
-                </div>
-                <p> Marcela Prado </p>
-                <div class="area-post">
-                    <i class="fa fa-calendar-o img-cal" aria-hidden="true"></i>
-                    <div class="time"> 12/08 </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div>
     </div>
 </div>
