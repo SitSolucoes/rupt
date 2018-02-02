@@ -136,19 +136,20 @@ export class PublicacaoComponent implements OnInit {
         this._postService.getPost(post_id).subscribe(
           (post: Post) => { 
 
-            if (post.autor.id != this.leitor.id){
+            if (!post || post.autor.id != this.leitor.id){
               this._router.navigate(['/publicacao']);
             }
+            else {
+                this.post = post; 
 
-            this.post = post; 
-
-            this.formulario.patchValue({
-              id: post.id,
-              titulo: post.titulo,
-              conteudo: post.conteudo,
-              categoria_id: post.categorias_post[0].categoria.id,
-              adulto: post.adulto == true ? true : false,
-            });
+                this.formulario.patchValue({
+                  id: post.id,
+                  titulo: post.titulo,
+                  conteudo: post.conteudo,
+                  categoria_id: post.categorias_post[0].categoria.id,
+                  adulto: post.adulto == true ? true : false,
+                });
+            }
           }
         )
       }
@@ -195,7 +196,7 @@ export class PublicacaoComponent implements OnInit {
           tipo_post: tipo
       });
 
-      if (!this.post || this.post.publishedAt == null){
+      if (!this.post.id){
           this._postService.create(this.formulario).subscribe(
             (response) => { 
               this.post = response;
@@ -207,7 +208,10 @@ export class PublicacaoComponent implements OnInit {
         this._postService.update(this.formulario).subscribe(
           (response) => { 
             this.post = response;
-            this.uploadFiles(false); 
+            if (this.post.publishedAt == null)
+                this.uploadFiles(true); 
+            else 
+                this.uploadFiles(false);
           }
         )
       }
@@ -250,13 +254,12 @@ export class PublicacaoComponent implements OnInit {
           this.loading = false;
 
           if (rascunho == true)
-            this.openModalRascunho();
+              this.openModalRascunho();
           else
             this._router.navigate(['noticia/' + this.post.id]);
       }
   }
 
-/////////MODAIS/////////
   openModalExcluir(){
     this.modalExcluir.emit({action: 'modal',params: ['open']});
   }

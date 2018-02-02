@@ -1,5 +1,5 @@
 
-<div class="news" *ngIf='post'>
+<div class="news">
   
     <div id="modalDenuncia" class="modal modal2 modal4"
         materialize="modal" [materializeParams]="[{dismissible: false}]"
@@ -29,7 +29,7 @@
     <div id="modalExcluir" class="modal modal2 modal4" materialize="modal" [materializeParams]="[{dismissible: false}]"
         [materializeActions]="modalExcluir">
         <modal-excluir (closeModalExcluir)="closeModalExcluir($event)" (excluiuCompartilhamento)='excluiuCompartilhamento($event)'
-            [id]='post.id' [leitor]='leitor' [op]='2' [interacao]='interacao'>
+            [id]='post?.id' [leitor]='leitor' [op]='opExcluir' [interacao]='interacao'>
         </modal-excluir>
     </div>
 
@@ -38,247 +38,257 @@
         [materializeActions]="modalLogin">
         <modal-login (closeModalLogin)="closeModalLogin($event)" (openEsqueciSenha)="openModalEsqueciSenha($event)"></modal-login>
     </div>
+
     <div id="ModalEsqueciSenha" class="modal modal2"
         materialize="modal" [materializeParams]="[{dismissible: false}]"
         [materializeActions]="modalEsqueciSenha">
         <esqueci-senha (closeModalEsqueciSenha)="closeModalEsqueciSenha($event)"></esqueci-senha>
     </div>
 
-  <div class="area-top">
-    
-    <div class="tag-menu" *ngIf="!rascunho">
-      
-        <div class="tag red"> {{ post.categorias_post[0].categoria.categoria }} </div> 
-      
-    </div>  
-
-    <div class="title"> {{ post.titulo }}</div>
-    <div class="editado-text" *ngIf="edited"> 
-        Editado
+    <div *ngIf='!post'>
+        <div class="not-found">
+            <div class="message">
+                Publicação não encontrada
+                <i class="fa fa-file-text-o" aria-hidden="true"></i>
+            </div>
+        </div>
     </div>
 
-  </div>
+    <div *ngIf='post'>
 
-  <div class="container">
+        <div class="area-top">
+        
+            <div class="tag-menu">
+                
+                <div class="tag red"> {{ post.categorias_post[0].categoria.categoria }} </div> 
+                
+            </div>  
 
-    <div class="area">
+            <div class="title"> {{ post.titulo }}</div>
+            <div class="editado-text" *ngIf="edited"> 
+                Editado
+            </div>
 
-      <font *ngIf="!rascunho" class="name">Por
-          <a *ngIf="!rascunho" routerLink='/perfil/{{ post.autor.nick }}'>{{ post?.autor?.nick }}
-          </a>
-      </font>
-
-        <i *ngIf="!rascunho" class="fa fa-minus img" aria-hidden="true"></i>
-      <b *ngIf="!rascunho" > {{ calcHour( post.publishedAt ) }} </b>
-
-        <div class="social">
-
-            <p> {{ interacoesTotal[0] }} </p>
-            <img src="../../../assets/img/rupt-ico.png" class="img" title='Reações'>
-
-            <p> {{ interacoesTotal[1] }} </p>
-            <i class="fa fa-share img" aria-hidden="true" title='Compartilhados'></i>
-            <i class="fa fa-exclamation-circle img report" aria-hidden="true" (click)="openModalDenuncia()" title='Denunciar' *ngIf='leitor && leitor.id != post.autor.id' ></i>
-            <a routerLink='../../publicacao/{{ post.id }}' *ngIf='leitor && leitor.id == post.autor.id'></a>
-
-            <img  title='Denunciar' *ngIf='leitor && leitor.id != post.autor.id' src="../../../assets/img/report.png" class="img report" (click)="openModalDenuncia()">
-            
-            <i *ngIf='leitor && leitor.id == post.autor.id' aria-hidden="true" class="fa fa-times excluir" title="Excluir" (click)="openModalExcluir()"></i>
-            
-            <a routerLink='../../publicacao/{{ btoa(post.id) }}' *ngIf='leitor && leitor.id == post.autor.id'>
-                <i class="fa fa-pencil-square-o edit" aria-hidden="true" title='Editar'></i>
-            </a>
-
-            
         </div>
 
-    </div>
+        <div class="container">
 
-    <div class="frame">
+            <div class="area">
 
-        <img src="{{ url + 'posts/' + post.src_imagem }}" class="img" *ngIf="post.src_imagem && !rascunho">
+                <font *ngIf="!rascunho" class="name">Por
+                    <a *ngIf="!rascunho" routerLink='/perfil/{{ post.autor.nick }}'>{{ post?.autor?.nick }}
+                    </a>
+                </font>
 
-        <div class="info" [innerHTML]="post.conteudo"></div>
+                <i *ngIf="!rascunho" class="fa fa-minus img" aria-hidden="true"></i>
+                <b *ngIf="!rascunho" > {{ calcHour( post.publishedAt ) }} </b>
 
-        <div class="reactions" *ngIf="leitorLogado">
-            <div *ngFor='let i of interacoes' class="area2">
-                <div *ngIf='i.categoria == 1 && i.compartilhar == false' (click)='interagePost(i)'>
-                    <img src="../../../assets/{{ i.src_icone }}" class="img"
-                        [ngClass]="{'pb': interagiu && !checkInteracao(i.id)}"
-                    >
+                <div class="social">
 
-                    <p>{{ i.nome }}</p>
-                    <span class="count">{{ i.count }}</span>
+                    <p> {{ interacoesTotal[0] }} </p>
+                    <img src="../../../assets/img/rupt-ico.png" class="img" title='Reações'>
 
-                </div>
-            </div>
-
-            <div class="area2">
-                <div (click)='openModalCompartilhar()'>
-                    <i class="fa fa-share img" aria-hidden="true"></i>
-                    <p>Compartilhar</p>
-                    <span class="count">{{ interacoesTotal[1] }}</span>
-                </div>
-            </div>
-        </div> 
-        <div class="reactions" *ngIf="!leitorLogado">
-            <div *ngFor='let i of interacoes' class="area2">
-                <div *ngIf='i.categoria == 1 && i.compartilhar == false'>
-                    <img src="../../../assets/{{ i.src_icone }}" class="img disabled">
-                    <p>{{ i.nome }}</p>
-                    <span class="count">{{ i.count }}</span>
-                </div>
-            </div>
-
-            <div class="area2">
-                <div (click)='openModalCompartilhar()'>
-                    <i class="fa fa-share img" aria-hidden="true"></i>
-
-                    <p>Compartilhar</p>
-                    <span class="count">{{ interacoesTotal[1] }}</span>
-                </div>
-            </div>
-        </div> 
-
-        <div class="comentarios">
-
-            <p> <b>{{ comentarios?.length}}</b> comentários </p>
-
-            <div class="subtitle">Os comentários dessa sessão são de responsabilidade exclusiva de seus autores e não representam a opnião deste site. Se achar algo que viole os <b>Termos de uso</b>, denuncie. Leia as <a routerLink="../../faq">perguntas mais frequentes</a> para saber o que é impróprio ou ilegal.</div>
-
-            <div class="profile" *ngIf="leitorLogado">
-                <div class="img-area">  
-                    <img src="{{ url + 'profile/' + leitor?.src_foto }}" class="img"> 
-                </div>
-                <form [formGroup]="form" (ngSubmit)="onSubmit()">
-                    <input type="text" class="input" maxlength="140" name="comentario" formControlName="comentario" placeholder="Escreva um comentário..." >
-                    <button type="submit" class="button" [disabled]="form.value.comentario === ''" id="submit-contato"> 
-                        <i class="fa fa-spinner fa-pulse fa-3x fa-fw" *ngIf='loading'></i>   
-                        Enviar 
-                    </button>
-                </form>
-            </div>
-
-            <div class="separate" *ngIf='comentarios && comentarios.length > 0' > recentes </div>
-
-            <div class="profile" *ngFor="let c of comentarios">
-                <a routerLink='/perfil/{{ c?.comentario?.leitor?.nick }}'>
-                    <div class="img-area">
-                        <img src="{{ c?.comentario?.leitor?.src_foto.indexOf('http') >= 0 ? c?.comentario?.leitor?.src_foto : url + 'profile/' + c?.comentario?.leitor?.src_foto }}" class="img">
-                    </div>
-                </a>
-                <div class="user">
-                    <a routerLink='/perfil/{{ c?.comentario?.leitor?.nick }}'>
-                        <div class="title"> {{ c.comentario.leitor.nick ? c.comentario.leitor.nick : c.comentario.leitor.nome }} </div>
+                    <p> {{ interacoesTotal[1] }} </p>
+                    <i class="fa fa-share img" aria-hidden="true" title='Compartilhados'></i>
+                    <i class="fa fa-exclamation-circle img report" aria-hidden="true" (click)="openModalDenuncia()" title='Denunciar' *ngIf='leitor && leitor.id != post.autor.id' ></i>
+                    <i *ngIf='leitor && leitor.id == post.autor.id' aria-hidden="true" class="fa fa-times excluir" title="Excluir" (click)="openModalExcluir(1)"></i>
+                    
+                    <a routerLink='../../publicacao/{{ btoa(post.id) }}' *ngIf='leitor && leitor.id == post.autor.id'>
+                        <i class="fa fa-pencil-square-o edit" aria-hidden="true" title='Editar'></i>
                     </a>
 
-                    <div class="time"> {{ calcHour( c.comentario.created_at ) }}</div>
-                    {{c.comentario.comentario}}
-                    <div class="reaction">
-                      <div *ngFor='let i of interacoes' class="area2">
-                            <div *ngIf='i.categoria == 2' (click)='interagePost(i)'>
-                                <img src="../../../assets/{{ i.src_icone}}" class="img2">
-                                <div class="number">2</div>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
 
-                <div class="profile-resp" *ngFor="let c of comentarios">
-                    <a routerLink='/perfil/{{ c?.comentario?.leitor?.nick }}'>
-                        <div class="img-area">
-                            <img src="{{ c?.comentario?.leitor?.src_foto.indexOf('http') >= 0 ? c?.comentario?.leitor?.src_foto : url + 'profile/' + c?.comentario?.leitor?.src_foto }}" class="img">
-                        </div>
-                    </a>
-                    <div class="user user2">
-                        <a routerLink='/perfil/{{ c?.comentario?.leitor?.nick }}'>
-                            <div class="title"> {{ c.comentario.leitor.nick ? c.comentario.leitor.nick : c.comentario.leitor.nome }} </div>
-                        </a>
+            </div>
 
-                        <div class="time"> {{ calcHour( c.comentario.created_at ) }}</div>
-                        {{c.comentario.comentario}}
-                        <div class="reaction">
-                              <div *ngFor='let i of interacoes' class="area2">
-                                <div *ngIf='i.categoria == 2' (click)='interagePost(i)'>
-                                    <img src="../../../assets/{{ i.src_icone}}" class="img2">
-                                    <div class="number">2</div>
-                                </div>
-                            </div>
+            <div class="frame">
+
+                <img src="{{ url + 'posts/' + post.src_imagem }}" class="img" *ngIf="post.src_imagem && !rascunho">
+
+                <div class="info" [innerHTML]="post.conteudo"></div>
+
+                <div class="reactions" *ngIf="leitor">
+                    <div *ngFor='let i of interacoes' class="area2">
+                        <div *ngIf='i.categoria == 1 && i.compartilhar == false' (click)='interagePost(i)'>
+                            <img src="../../../assets/{{ i.src_icone }}" class="img"
+                                [ngClass]="{'pb': interagiu && !checkInteracao(i.id)}"
+                            >
+
+                            <p>{{ i.nome }}</p>
+                            <span class="count">{{ i.count }}</span>
+
                         </div>
                     </div>
-                </div>
+
+                    <div class="area2">
+                        <div (click)='openModalCompartilhar()'>
+                            <i class="fa fa-share img" aria-hidden="true"></i>
+                            <p>Compartilhar</p>
+                            <span class="count">{{ interacoesTotal[1] }}</span>
+                        </div>
+                    </div>
+                </div> 
+                <div class="reactions" *ngIf="!leitor">
+                    <div *ngFor='let i of interacoes' class="area2">
+                        <div *ngIf='i.categoria == 1 && i.compartilhar == false'>
+                            <img src="../../../assets/{{ i.src_icone }}" class="img disabled">
+                            <p>{{ i.nome }}</p>
+                            <span class="count">{{ i.count }}</span>
+                        </div>
+                    </div>
+
+                    <div class="area2">
+                        <div (click)='openModalCompartilhar()'>
+                            <i class="fa fa-share img" aria-hidden="true"></i>
+
+                            <p>Compartilhar</p>
+                            <span class="count">{{ interacoesTotal[1] }}</span>
+                        </div>
+                    </div>
+                </div> 
 
                 <div class="comentarios">
-                    <div _ngcontent-c9="" class="profile profile2">
-                        <div _ngcontent-c9="" class="img-area">
-                            <img _ngcontent-c9="" class="img" src="http://localhost:8000/profile/4_profile.png">
+
+                    <p> <b>{{ comentarios?.length}}</b> comentários </p>
+
+                    <div class="subtitle">Os comentários dessa sessão são de responsabilidade exclusiva de seus autores e não representam a opnião deste site. Se achar algo que viole os <b>Termos de uso</b>, denuncie. Leia as <a routerLink="../../faq">perguntas mais frequentes</a> para saber o que é impróprio ou ilegal.</div>
+
+                    <div class="profile" *ngIf="leitor">
+                        <div class="img-area">  
+                            <img src="{{ url + 'profile/' + leitor?.src_foto }}" class="img"> 
                         </div>
-                        <form _ngcontent-c9="" novalidate="" ng-reflect-form="[object Object]" class="ng-pristine ng-invalid ng-touched">
-                            <input _ngcontent-c9="" class="input ng-pristine ng-invalid ng-touched" formcontrolname="comentario" maxlength="140" name="comentario" placeholder="Escreva um comentário..." type="text" ng-reflect-maxlength="140" ng-reflect-name="comentario">
-                            <button _ngcontent-c9="" class="button" id="submit-contato2" type="submit" disabled="">
-                                <!--bindings={}-->
-                                Enviar
+                        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                            <input type="text" class="input" maxlength="140" name="comentario" formControlName="comentario" placeholder="Escreva um comentário..." >
+                            <button type="submit" class="button" [disabled]="form.value.comentario === ''"> 
+                                <i class="fa fa-spinner fa-pulse fa-3x fa-fw" *ngIf='loading'></i>   
+                                Enviar 
                             </button>
                         </form>
                     </div>
+
+                    <div class="separate" *ngIf='comentarios && comentarios.length > 0' > recentes </div>
+
+                    <div class="profile" *ngFor="let c of comentarios">
+                        <a routerLink='/perfil/{{ c?.comentario?.leitor?.nick }}'>
+                            <div class="img-area">
+                                <img src="{{ c?.comentario?.leitor?.src_foto.indexOf('http') >= 0 ? c?.comentario?.leitor?.src_foto : url + 'profile/' + c?.comentario?.leitor?.src_foto }}" class="img">
+                            </div>
+                        </a>
+                        <div class="user">
+                            <a routerLink='/perfil/{{ c?.comentario?.leitor?.nick }}'>
+                                <div class="title"> {{ c.comentario.leitor.nick ? c.comentario.leitor.nick : c.comentario.leitor.nome }} </div>
+                            </a>
+
+                            <div class="time"> {{ calcHour( c.comentario.created_at ) }}</div>
+                            {{c.comentario.comentario}}
+                            <div class="reaction">
+                            <div *ngFor='let i of interacoes' class="area2">
+                                    <div *ngIf='i.categoria == 2' (click)='interagePost(i)'>
+                                        <img src="../../../assets/{{ i.src_icone}}" class="img2">
+                                        <div class="number">2</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--
+                        <div class="profile-resp" *ngFor="let c of comentarios">
+                            <a routerLink='/perfil/{{ c?.comentario?.leitor?.nick }}'>
+                                <div class="img-area">
+                                    <img src="{{ c?.comentario?.leitor?.src_foto.indexOf('http') >= 0 ? c?.comentario?.leitor?.src_foto : url + 'profile/' + c?.comentario?.leitor?.src_foto }}" class="img">
+                                </div>
+                            </a>
+                            <div class="user user2">
+                                <a routerLink='/perfil/{{ c?.comentario?.leitor?.nick }}'>
+                                    <div class="title"> {{ c.comentario.leitor.nick ? c.comentario.leitor.nick : c.comentario.leitor.nome }} </div>
+                                </a>
+
+                                <div class="time"> {{ calcHour( c.comentario.created_at ) }}</div>
+                                {{c.comentario.comentario}}
+                                <div class="reaction">
+                                    <div *ngFor='let i of interacoes' class="area2">
+                                        <div *ngIf='i.categoria == 2' (click)='interagePost(i)'>
+                                            <img src="../../../assets/{{ i.src_icone}}" class="img2">
+                                            <div class="number">2</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="comentarios">
+                            <div class="profile profile2">
+                                <div class="img-area">
+                                    <img class="img" src="http://localhost:8000/profile/4_profile.png">
+                                </div>
+                                <form novalidate="" ng-reflect-form="[object Object]" class="ng-pristine ng-invalid ng-touched">
+                                    <input class="input ng-pristine ng-invalid ng-touched" formcontrolname="comentario" maxlength="140" name="comentario" placeholder="Escreva um comentário..." type="text" ng-reflect-maxlength="140" ng-reflect-name="comentario">
+                                    <button class="button" type="submit" disabled="">
+                                        Enviar
+                                    </button>
+                                </form>
+                            </div>
+                        </div> -->
+
+                    </div>
                 </div>
+            </div>
+
+        </div>
+
+        <div class="top-view" *ngIf="!rascunho">
+
+            <p><font style="color:#f97000">+</font> Lidas </p>
+
+            <div class="info">
+
+            <img src="" class="img">
+
+            <div class="label"></div>
 
             </div>
         </div>
-    </div>
 
-  </div>
-
-  <div class="top-view" *ngIf="!rascunho">
-
-    <p>
-      <font style="color:#f97000">+</font> Lidas </p>
-
-    <div class="info">
-
-      <img src="" class="img">
-
-      <div class="label"></div>
-
-    </div>
-  </div>
-
-  <div class="top-view" *ngIf="!rascunho">
-      
-          <p> Propagandas </p>
-      
-          <div class="info">
-      
-            <img src="../../../assets/img/propaganda6.png" class="img">
-      
-          </div>
-      
-          <div class="info">
-      
-            <img src="../../../assets/img/propaganda5.png" class="img">
-      
-          </div>
-      
-      
-          <div class="info">
-      
-            <img src="../../../assets/img/propaganda7.png" class="img">
-      
-          </div>
-      
-          <div class="info">
-      
-            <img src="../../../assets/img/propaganda8.png" class="img">
-      
-          </div>
-      
-          <div class="info">
-      
-            <img src="../../../assets/img/propaganda9.png" class="img">
-      
-          </div>
-      
+        <div class="top-view">
+        
+            <p> Propagandas </p>
+        
+            <div class="info">
+        
+                <img src="../../../assets/img/propaganda6.png" class="img">
+        
+            </div>
+        
+            <div class="info">
+        
+                <img src="../../../assets/img/propaganda5.png" class="img">
+        
+            </div>
+        
+        
+            <div class="info">
+        
+                <img src="../../../assets/img/propaganda7.png" class="img">
+        
+            </div>
+        
+            <div class="info">
+        
+                <img src="../../../assets/img/propaganda8.png" class="img">
+        
+            </div>
+        
+            <div class="info">
+        
+                <img src="../../../assets/img/propaganda9.png" class="img">
+        
+            </div>
+        
         </div>
+
+    </div>
+
 </div>
 
 

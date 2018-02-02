@@ -124,9 +124,4 @@ export class HeaderComponent implements OnInit {
     )
   }
 
-  redirect(categoria: Categoria){
-    this._categoriaService.paramCategoria.emit(categoria);
-    this._router.navigate(['/categorias/'+categoria.categoria.replace(' ', '').toLowerCase()]);
-  }
-
 }

@@ -14,7 +14,9 @@
 
       <div class="container container2">
         <div class="frame">
-          <div class="info" [innerHTML]="post.conteudo"></div>
+            <img src="{{ url + 'posts/' + post.src_imagem }}" class="img" *ngIf="post.src_imagem">
+
+            <div class="info" [innerHTML]="post.conteudo"></div>
         </div>
       </div>
 

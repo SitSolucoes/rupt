@@ -3,6 +3,7 @@ export class Categoria {
     categoria: string;
     categoria_idCategoria: number;
     status: boolean;
+    link: string;
 
     constructor(){
         this.id = 0;

@@ -117,4 +117,10 @@ export class PostsService {
           return retorno.json().rascunhos;
       });
   }
+
+  getPostsByCategoria(categoria_id){
+      return this._http.get(this._url + 'posts/getPostsByCategoria/'+categoria_id, {headers: this.headers}).map(
+          (response) => { return response.json().posts }
+      )
+  }
 }

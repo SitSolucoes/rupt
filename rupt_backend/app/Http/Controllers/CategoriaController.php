@@ -9,6 +9,46 @@ use App\Categoria;
 
 class CategoriaController extends Controller
 {
+    private function getByLink($link, $id){
+        return Categoria::where('link', $link)
+                        ->where('id', '<>', $id)
+                        ->first();
+    }
+    
+    private function createLink($categoria, $id){
+        $link = str_replace(' ', '-', $categoria);
+
+        $link = strtolower(preg_replace(array("/(á|à|ã|â|ä)/","/(Á|À|Ã|Â|Ä)/","/(é|è|ê|ë)/","/(É|È|Ê|Ë)/","/(í|ì|î|ï)/","/(Í|Ì|Î|Ï)/","/(ó|ò|õ|ô|ö)/","/(Ó|Ò|Õ|Ô|Ö)/","/(ú|ù|û|ü)/","/(Ú|Ù|Û|Ü)/","/(ñ)/","/(Ñ)/","/(ç)/","/(Ç)/"),explode(" ","a A e E i I o O u U n N c C"), $link));
+
+        $i = 2;
+        
+        while ($this->getByLink($link, $id)){
+            $link .= '-'.$i;
+        }
+
+        return $link;
+    }
+
+    public function create(Request $request){
+        $categoria = new Categoria();
+        $categoria->categoria = $request->categoria;
+        $categoria->status = true;
+        $categoria->link = $this->createLink($request->categoria, 0);
+        $categoria->save();
+
+        return response()->json(['mensagem' => "Salvo com sucesso."], 200);
+    }
+
+    public function update(Request $request, $id){
+        $categoria = Categoria::findOrFail($id);
+        $categoria->categoria = $request->categoria;
+        $categoria->status = $request->status;
+        $categoria->link = $this->createLink($request->categoria, $id);
+        $categoria->save();
+
+        return response()->json(['mensagem' => "Salvo com sucesso."], 200);
+    }
+
     public function get($id){
         return Categoria::find($id);
     }
@@ -40,8 +80,6 @@ class CategoriaController extends Controller
                         ->orderBy("categoria_filtros.ordem", 'asc')->get();
     }
 
-
-
     private function recursiveSubCategorias($categorias){
          $listCategoria = new Collection();
 
@@ -63,24 +101,6 @@ class CategoriaController extends Controller
 
         //return response()->json(['subCategorias' => $categorias->get()], 200);
         return $categorias->get();
-    }
-
-    public function create(Request $request){
-        $categoria = new Categoria();
-        $categoria->categoria = $request->categoria;
-        $categoria->status = true;
-        $categoria->save();
-
-        return response()->json(['mensagem' => "Salvo com sucesso."], 200);
-    }
-
-    public function update(Request $request, $id){
-        $categoria = Categoria::findOrFail($id);
-        $categoria->categoria = $request->categoria;
-        $categoria->status = $request->status;
-        $categoria->save();
-
-        return response()->json(['mensagem' => "Salvo com sucesso."], 200);
     }
 
     public function categoriaByPost($id){
@@ -107,4 +127,9 @@ class CategoriaController extends Controller
         return response()->json(['categoria' => $categoria], 200);   
     }
     
+    public function getCategoriaByLink($link){
+        $categoria = $this->getByLink($link, 0);
+
+        return response()->json(['categoria' => $categoria], 200);
+    }
 }

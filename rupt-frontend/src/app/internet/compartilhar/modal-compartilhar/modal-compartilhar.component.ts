@@ -17,7 +17,6 @@ export class ModalCompartilharComponent implements OnInit {
     @Output() compartilhar = new EventEmitter();
 
     
-
     constructor(private fb: FacebookService, private _router: Router) { 
         let initParams: InitParams = {
             appId: '832278863618741',
@@ -33,19 +32,23 @@ export class ModalCompartilharComponent implements OnInit {
     }
 
     interage(i: Interacao){
-        console.log(Global.URL+this._router.url);
-        let params: UIParams = {
-            href: Global.URL + this._router.url,
-            method: 'share'
-          };
-         
-          this.fb.ui(params).then(
+        if (i.id == 6){
+            let params: UIParams = {
+                href: Global.URL + this._router.url,
+                method: 'share'
+            };
+            
+            this.fb.ui(params).then(
                 (res: UIResponse) =>{
                     console.log(res)
                     this.compartilhar.emit([i, this.verifyInteragiu(i)]);
                 } 
             )
             .catch((e: any) => console.error(e));
+        }
+        else {
+            this.compartilhar.emit([i, this.verifyInteragiu(i)]);
+        }
     }
 
     verifyInteragiu(i: Interacao){

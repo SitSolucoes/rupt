@@ -236,10 +236,10 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .headbar .headbar-right .dropdown-content li > a{
-    font-size: 14.5px;
+    font-size: 15px;
     text-align: center;
     background: #fff;
-    padding: 10px 0px;
+    padding: 12px 0px;
 }
 
 .headbar-right .dropdown-content{
@@ -279,7 +279,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     display: block;
     float: left;
     width: 100%;
-    border-bottom: 1px solid #e8e8e8;
+    border-bottom: 1px solid #f5f5f5;
 }
 
 .headbar-right .dropdown-content2 .info .area{
@@ -535,7 +535,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 
 .banner .banner-title{
     position: absolute;
-    top: 50px;
+    top: 40px;
     left: 20px;
     max-height: 90px;
     overflow: hidden;
@@ -1185,7 +1185,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     text-align: center;
     padding-top: 8px;
     padding-bottom: 8px;
-    font-family: 'nexa-bold';
+    font-family: 'gilroy-bold';
 }
 
 .modal-content .info{
@@ -1450,28 +1450,37 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     display: block;
     float: left;
     width: 100%;
-    margin-top: 10px;
+    margin-top: 25px;
     padding: 20px;
 }
 
 .modal-pesquisa .input{
-    width: 100%;
+    width: 80% !important;
     margin-bottom: 10px !important;
     background: #fff;
     padding-left: 10px !important;
     display: table;
     box-sizing: inherit !important;
     border: 1px solid #ccc !important;
+    border-right: 1px solid #fff !important;
+    font-size: 1.2rem !important;
+    display: block;
+    float: left;
 }
 
 .modal-pesquisa .button-modal{
+    display: block;
     float: right;
     background: #ccc;
     border: 1px solid #ccc;
-    padding: 8px;
+    padding: 8.8px 20px;
+    width: 20%;
     margin-right: 15px;
     font-family: lato;
+    font-size: 17px;
     font-weight: bolder;
+    position: relative;
+    right: 1px;
 }
 
 .modal-pesquisa .button-modal .fa-search{
@@ -1629,10 +1638,44 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     border-radius: 2px;
     position: relative;
     right: 30px;
+    cursor: pointer;
 }
 
 .user .button-orange{
   background: #f97000;
+}
+
+.user .button-seguindo:after{
+    content: "Seguindo";
+}
+
+.user .button-seguindo:hover:after{
+    content: "Deixar de seguir";
+}
+
+.user .button .fa{
+    margin-right: 5px;
+}
+
+.user .button-seguindo .fa-check{
+    display: inline-block;
+}
+
+.user .button-seguindo .fa-times{
+    display: none;
+}
+
+.user .button-seguindo:hover{
+    background: #ccc;
+    color: #5e5e5e;
+}
+
+.user .button-seguindo:hover .fa-check{
+    display: none;
+}
+
+.user .button-seguindo:hover .fa-times{
+    display: inline-block;
 }
 
 .user .bio{
@@ -1837,17 +1880,17 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
 .user .feed .post .img5{
     height: 18px;
     margin-left: 5px;
-    margin-top: 13px;
+    margin-top: 10px;
     border-radius: 0px;
     display: block;
     float: right;
-    font-size: 22px;
+    font-size: 20px;
     color: #f97000;
 }
 
 .user .feed .post .img6{
     height: 22px;
-    font-size: 18px;
+    font-size: 20px;
     margin-top: 0px;
     margin-right: 5px;
     color: #4f4f4f;
@@ -1961,6 +2004,10 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
 .user .feed .post .info .fa.editar-rascunho{
     margin-top: 1px;
     color: #f97000;
+}
+
+.user .feed .post .info .fa.excluir-rascunho{
+    margin-top: 0px;
 }
 
 .user .feed .post .img6:hover{
@@ -2412,12 +2459,17 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
 }
 
 .news .container .area .social .excluir{
-    margin-left: 5px;
+    margin-left: 20px;
     border-radius: 0px;
     display: block;
     float: right;
     font-size: 25px;
-    color: #f97000;
+    margin-top: -2px;
+    cursor: pointer;
+}
+
+.news .container .area .social .excluir:hover{
+    color: red;
 }
 
 .news .container .frame{
@@ -2620,7 +2672,7 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
 }
 
 .news .container .comentarios .profile .button{
-    width: 100px;
+    width: 15%;
     height: 40px;
     border-radius: 2px;
     text-align: center;
@@ -2712,6 +2764,32 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     display: block;
     float: right;
     margin-bottom: 10px;
+}
+
+.news .not-found{
+    width: 95%;
+    max-width: 95%;
+    padding-bottom: 15%;
+    padding-top: 30px;
+    margin: auto;
+}
+
+.news .not-found .message{
+    display: table;
+    margin: auto;
+    padding-top: 15%;
+    font-family: nexa-bold;
+    color: #4f4f4f;
+    font-size: 22px;
+    text-align: center;
+}
+
+.news .not-found .message i{
+    font-size: 55px;
+    color: #f97000;
+    display: block;
+    clear: both;
+    margin-top: 20px;
 }
 
 .news .fb-comments span{
@@ -3245,7 +3323,7 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     margin-top: 40px;
     text-align: center;
     font-weight: bolder;
-    padding: 8px;
+    padding: 10px;
     width: 15%;
     border-radius: 2px;
     display: block;
@@ -4191,6 +4269,16 @@ quill-editor{
     display: table;
     height: 410px !important;
     margin-right: 4%;
+    clear: both;
+}
+
+.publicacao .underline{
+    display: block;
+    float: left;
+    height: 2px;
+    width: 100px;
+    background: #f97000;
+    margin-top: 0px;
 }
 
 .publicacao .container_left input{
@@ -4205,14 +4293,13 @@ quill-editor{
     background: white;
     width: 30% !important;
     display: inline-block !important;
-    padding: 1.5% !important;
+    padding: 10px 1.5% !important;
     border: 1px solid #ccc;
     text-align: left;
     color: rgb(148, 148, 148);
 }
 
 .publicacao .container_right .right-container-input-group{
-    height: 100px;
     width: 100%;
 }
 
@@ -4299,7 +4386,7 @@ quill-editor{
 }
 
 .publicacao .top .input:nth-child(1){
-    margin-bottom: 3% !important;
+    margin: 5px 0;
 }
 
 .publicacao .container .top .input2{
@@ -4321,7 +4408,7 @@ quill-editor{
     float: left;
     position: relative;
     margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     padding: 10px;
     border: 1px solid #d9d9d9;
     background: #d9d9d9;
@@ -4337,11 +4424,18 @@ quill-editor{
     margin-top: 0;
 }
 
+.publicacao .button3{
+    background: #ccc;
+    border: 1px solid #ccc;
+    color: #5e5e5e;
+    margin-bottom: 5px;
+}
+
 .publicacao .button-border{
     border: 1px solid #f97000;
     background: transparent;
     color: #f97000;
-    margin-bottom: 25px;
+    margin-bottom: 28px;
 }
 
 .publicacao .button i{
@@ -4356,6 +4450,12 @@ quill-editor{
     color: #f97000;
     border: 1px solid #f97000;
     transition: 0.5s;
+}
+
+.publicacao .button3:hover{
+    background: #dddddd;
+    border: 1px solid #ccc;
+    color: #5e5e5e;
 }
 
 .publicacao .color{
@@ -4516,3 +4616,5 @@ quill-editor{
     margin-top: 20px;
     position: relative;
 }
+
+/*teste*/

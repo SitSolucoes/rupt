@@ -15,6 +15,7 @@ import { InteracoesService } from 'app/services/interacoes.service';
 import { Interacao } from 'app/classes/interacao';
 import { InteracoesLeitorService } from 'app/services/interacoes-leitor.service';
 import { InteracaoLeitor } from 'app/classes/interacao-leitor';
+import { Leitor } from 'app/classes/leitor';
 
 declare var $: any;
 @Component({
@@ -34,9 +35,10 @@ export class NewsComponent implements OnInit {
   edited = false;
   form;
   leitor = null;
-  leitorLogado: boolean = localStorage.getItem('l') != null;
+  /*leitorLogado: boolean = localStorage.getItem('l') != null;*/
   loading: boolean;
   maisLidos: Post[];
+  opExcluir: number = 1;
   
   post: Post;
   url = ConnectionFactory.API_IMAGEM;
@@ -73,17 +75,25 @@ export class NewsComponent implements OnInit {
     }, 15);
 
     this._activatedRoute.params.subscribe(params => {
-        if(params['id']){
-          this.carregaPost(+params['id']);
-          if(this.leitorLogado)
-            this.form = this._formBuilder.group({
-                id: '0',
-                comentario: ['', Validators.required],
-                comentario_idComentario: [''],
-                post_idPost: [params['id']],
-                leitor_idLeitor: [new Base64().decode(localStorage.getItem('l'))]
-              }); 
-        }
+        this._leitoresService.leitor.subscribe(
+            (leitor: Leitor) => { 
+              this.leitor = leitor ;
+        });
+
+        this._leitoresService.verificaLogin().subscribe(
+          (response) => {
+            this.getPost(params['id']);
+        });
+    });
+  }
+
+  createForm(post_id){
+    this.form = this._formBuilder.group({
+        id: '0',
+        comentario: ['', Validators.required],
+        comentario_idComentario: [''],
+        post_idPost: post_id,
+        leitor_idLeitor: this.leitor.id
     });
   }
 
@@ -108,46 +118,54 @@ export class NewsComponent implements OnInit {
     return this.calcTime.calcTime(date);
   }
 
-  carregaPost(id){
+  
+  getPost(id){
     this._postService.getPost(id).subscribe(
-      ( post ) => { 
+      ( post: Post ) => { 
         if (post){
-            this.post = post;
-
-            this.getInteracoes();
-            
-            if(new Date(post.updated_at).getTime() - new Date(post.created_at).getTime() > 30000)
-              this.edited = true;
-            
-              //se o leitor está logado
-            if(localStorage.getItem('l')){
-                let base64 = new Base64();
-                //Popula o leitor + get interações
-                const leitor_id = base64.decode(localStorage.getItem('l'));
-                this._leitoresService.getLeitor(leitor_id).subscribe(
-                    (leitor) => {
-                        this.leitor = leitor;
-
-                        this.getInteracoesLeitorPost();
-
-                        //se não for o dono do post conta uma visualizacao
-                        if (post.autor.id != leitor.id){
-                            this._visualizacoesService.create(post.id, leitor_id).subscribe();
-                        }
-                    }
-                );
+            if(!post.publishedAt || post.publishedAt == null){
+                if (post.autor.id == this.leitor.id)
+                    this._router.navigate(['/publicacao/', this.btoa(post.id)]);
+                
             }
             else {
-                //se não tiver ninguem logado conta uma visualização sem leitor
-                this._visualizacoesService.create(post.id, 0).subscribe();
-            }
+                if (this.leitor)
+                    this.createForm(post.id);
 
-            this._postService.getComentarios(this.post.id).subscribe(
-              (response) => {
-                this.comentarios = response.comentarios;
-                this.pronto();
-              }
-            );
+                this.post = post;
+
+                this.getInteracoes();
+
+                if(new Date(post.updated_at).getTime() - new Date(post.publishedAt).getTime() > 30000)
+                  this.edited = true;
+                
+                  //se o leitor está logado
+                if(this.leitor){
+                    this._leitoresService.getLeitor(this.leitor.id).subscribe(
+                        (leitor) => {
+                            this.leitor = leitor;
+
+                            this.getInteracoesLeitorPost();
+
+                            //se não for o dono do post conta uma visualizacao
+                            if (post.autor.id != leitor.id){
+                                this._visualizacoesService.create(post.id, this.leitor.id).subscribe();
+                            }
+                        }
+                    );
+                }
+                else {
+                    //se não tiver ninguem logado conta uma visualização sem leitor
+                    this._visualizacoesService.create(post.id, 0).subscribe();
+                }
+
+                this._postService.getComentarios(this.post.id).subscribe(
+                  (response) => {
+                    this.comentarios = response.comentarios;
+                    this.pronto();
+                  }
+                );
+            }
         }
         else 
           this.pronto();
@@ -158,6 +176,7 @@ export class NewsComponent implements OnInit {
         ( maisLidos: Post[] )  => { this.maisLidos = maisLidos }
     );
   }
+  
 
   getInteracoes(){
       this._interacoesService.getAll( this.post.id, 1).subscribe(
@@ -245,10 +264,10 @@ export class NewsComponent implements OnInit {
   compartilhar(compartilhar){
       if (compartilhar[1] == true){
           this.interacao = compartilhar[0];
-          this.openModalExcluir();
+          this.openModalExcluir(2);
       }
       else {
-          if (this.leitorLogado)
+          if (this.leitor)
               this.interagePost(compartilhar[0]);
           else 
               this.openModalLogin();
@@ -297,13 +316,15 @@ export class NewsComponent implements OnInit {
     }
   }
 
-  openModalExcluir(){
+  openModalExcluir(opExcluir){
+      this.opExcluir = opExcluir;
       this.modalExcluir.emit({action: 'modal', params: ['open']});
   }
 
   closeModalExcluir(e){
       if (e){
           this.modalExcluir.emit({action: 'modal', params:['close']});
+          this._router.navigate(['/perfil', this.post.autor.nick]);
       }
   }
 

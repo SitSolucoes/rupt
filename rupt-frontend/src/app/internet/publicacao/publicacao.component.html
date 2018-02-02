@@ -44,7 +44,10 @@
 <div class="publicacao">
     <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
     <div class="container">
-        <h3>Nova Publicação</h3>
+        <h3 *ngIf='!post.id'>Nova Publicação</h3>
+        <h3 *ngIf='post.id && post.publishedAt != null'>Editar Publicação</h3>
+        <h3 *ngIf='post.id && post.publishedAt == null'>Editar Rascunho</h3>
+        <div class="underline"></div>
         <div class="container_left">
             <input type="text" class="input input2" maxlength="150" formControlName='titulo' placeholder="Insira o título da sua notícia"
                 [ngClass]="{'invalid': verificaValidTouched('titulo')}"
@@ -59,15 +62,18 @@
                             [ngClass]="{'invalid': verificaValidTouched('conteudo')}">
             </quill-editor> 
         </div>
+        <div class="underline"></div>
         <div class="container_right">
             <div class=" right-container-input-group top">
                 <select name="categoria" class="input" formControlName='categoria_id' [ngClass]="{'invalid': verificaValidTouched('categoria_id')}">
                     <option disabled value='' selected>Categoria</option>
-                    <option *ngFor="let categoria of categorias" [value]='categoria.id'>{{ categoria.categoria }}</option>
+                <option *ngFor="let categoria of categorias" [value]='categoria.id'>{{ categoria.categoria }}</option>
                 </select>
+                <!--
                 <select name="regiao" class="input" formControlName="regiao_id">
                     <option disabled value='' selected>Região</option>
                 </select>
+                -->
             </div>
             <div class="right-container-imagem-destaque">
                 <button type="button" class="button button-border" (click)="openModalImagem()" [disabled]='loading'>
@@ -94,6 +100,10 @@
                 <button type="button" class="button background-orange color button2" (click)="onSubmit()" [disabled]='loading'>
                     <i class="fa fa-spinner fa-pulse fa-3x fa-fw" *ngIf='loading'></i>    
                     Publicar
+                </button>
+
+                <button *ngIf='post.id' type="button" class="button button3" (click)="openModalExcluir()" [disabled]='loading'>
+                    Excluir
                 </button>
             </div>
         </div>
