@@ -1462,8 +1462,8 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     display: table;
     box-sizing: inherit !important;
     border: 1px solid #ccc !important;
+    border-right: 1px solid #fff !important;
     font-size: 1.2rem !important;
-    height: 3.5rem !important;
     display: block;
     float: left;
 }
@@ -1473,13 +1473,14 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     float: right;
     background: #ccc;
     border: 1px solid #ccc;
-    padding: 10px 20px;
-    border-radius: 1px;
-    margin-top: 2px;
+    padding: 8.8px 20px;
+    width: 20%;
     margin-right: 15px;
     font-family: lato;
     font-size: 17px;
     font-weight: bolder;
+    position: relative;
+    right: 1px;
 }
 
 .modal-pesquisa .button-modal .fa-search{
@@ -2671,7 +2672,7 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
 }
 
 .news .container .comentarios .profile .button{
-    width: 100px;
+    width: 15%;
     height: 40px;
     border-radius: 2px;
     text-align: center;
@@ -4268,6 +4269,16 @@ quill-editor{
     display: table;
     height: 410px !important;
     margin-right: 4%;
+    clear: both;
+}
+
+.publicacao .underline{
+    display: block;
+    float: left;
+    height: 2px;
+    width: 100px;
+    background: #f97000;
+    margin-top: 0px;
 }
 
 .publicacao .container_left input{
