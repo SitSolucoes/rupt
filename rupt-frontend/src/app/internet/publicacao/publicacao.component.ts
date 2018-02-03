@@ -121,6 +121,7 @@ export class PublicacaoComponent implements OnInit {
       categoria_id: ['', Validators.required],
       leitor_id: [''],
       titulo: ['', Validators.required],
+      subtitulo: '',
       conteudo: ['', Validators.required],
       adulto: '',
       tipo_post: 3,
@@ -145,6 +146,7 @@ export class PublicacaoComponent implements OnInit {
                 this.formulario.patchValue({
                   id: post.id,
                   titulo: post.titulo,
+                  subtitulo: post.subtitulo,
                   conteudo: post.conteudo,
                   categoria_id: post.categorias_post[0].categoria.id,
                   adulto: post.adulto == true ? true : false,

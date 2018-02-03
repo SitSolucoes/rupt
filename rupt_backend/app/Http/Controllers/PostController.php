@@ -16,11 +16,51 @@ use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
+    private function getByLink($link, $id){
+        return Post::where('link', $link)
+                        ->where('id', '<>', $id)
+                        ->first();
+    }
+    
+    private function createLink($titulo, $id){
+        $link = str_replace(' ', '-', $titulo);
+
+        $link = strtolower(preg_replace(array("/(á|à|ã|â|ä)/","/(Á|À|Ã|Â|Ä)/","/(é|è|ê|ë)/","/(É|È|Ê|Ë)/","/(í|ì|î|ï)/","/(Í|Ì|Î|Ï)/","/(ó|ò|õ|ô|ö)/","/(Ó|Ò|Õ|Ô|Ö)/","/(ú|ù|û|ü)/","/(Ú|Ù|Û|Ü)/","/(ñ)/","/(Ñ)/","/(ç)/","/(Ç)/"),explode(" ","a A e E i I o O u U n N c C"), $link));
+
+        $i = 2;
+        
+        while ($this->getByLink($link, $id)){
+            $link .= '-'.$i;
+        }
+
+        return $link;
+    }
+    
+    private function createConteudoCard($conteudo){
+        //$conteudo = substr($conteudo, 0, 500);
+        $conteudo = str_replace('<br>', '', $conteudo);
+        $conteudo = str_replace('</br>', '', $conteudo);
+        $conteudo = str_replace('<p>', '', $conteudo);
+        $conteudo = str_replace('</p>', '', $conteudo);
+
+        while(strpos($conteudo, '<img') || strpos($conteudo, '<img') === 0){
+            $postImg = strpos($conteudo, '<img');
+            $postImg2 = strpos($conteudo, '/>', $postImg);
+
+            $conteudo = substr($conteudo, 0, $postImg);
+            $conteudo .= substr($conteudo, ($postImg2 + 2));
+        }
+
+        return substr($conteudo, 0, 500);
+    }
+
     private function create(Request $request, $post){
         $post->titulo = $request->titulo;
+        $post->subtitulo = $request->subtitulo;
         $post->conteudo = $request->conteudo;
         $post->adulto = $request->adulto;
-        
+        $post->link = $this->createLink(substr($post->titulo, 0, 180), $post->id);
+        $post->conteudo_card = $this->createConteudoCard($request->conteudo);
         return $post;
     }
 
