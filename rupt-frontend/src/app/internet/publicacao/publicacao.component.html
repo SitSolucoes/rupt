@@ -51,7 +51,10 @@
         <div class="container_left">
             <input type="text" class="input input2" maxlength="150" formControlName='titulo' placeholder="Insira o título da sua notícia"
                 [ngClass]="{'invalid': verificaValidTouched('titulo')}"
-            > 
+            >
+            <input type="text" class="input input2" maxlength="150" formControlName='subtitulo' placeholder="Insira o subtítulo da sua notícia"
+                [ngClass]="{'invalid': verificaValidTouched('subtitulo')}"
+            >
             <!--editor-->
             <quill-editor formControlName='conteudo'
                             [options]="editorOptions"

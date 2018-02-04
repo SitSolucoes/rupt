@@ -23,7 +23,10 @@
                             </div>
                         </div>
                         <div class="title"> {{ p.post.titulo }} </div>
-                        <div class="text"> {{ p.post.subtitulo }}...</div>
+                        
+                        <div class="text" *ngIf='p.post.subtitulo'> {{ p.post.subtitulo }}</div>
+                        <div class="text" *ngIf='!p.post.subtitulo' [innerHTML]="p.post.conteudo_card"></div>
+
                         <div class="info-post">
                             <div class="img-person">
                                 <img src="{{ p.escritor.src_foto.indexOf('http') >= 0 ? p.escritor.src_foto : url + 'profile/' + p.escritor.src_foto }}" class="img">

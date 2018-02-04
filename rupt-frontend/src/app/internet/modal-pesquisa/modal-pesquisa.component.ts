@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'modal-pesquisa',
@@ -7,9 +10,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ModalPesquisaComponent implements OnInit {
 
-  constructor() { }
+  formulario: FormGroup;
+
+  constructor(private _formBuilder: FormBuilder,
+              private _router: Router) { }
 
   ngOnInit() {
+    this.createForm();
+  }
+
+  createForm(){
+      this.formulario = this._formBuilder.group({
+          search: ['', Validators.required]
+      });
+  }
+
+  onSubmit(){
+      let search = this.formulario.get('search').value;
+      search = encodeURI(search.replace(" ", "+"));
+      console.log(search);
+      this._router.navigate(['pesquisa/'+ search.replace(/\+/g,'%20')]);
   }
 
 }

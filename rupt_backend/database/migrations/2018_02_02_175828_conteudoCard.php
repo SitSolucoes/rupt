@@ -15,7 +15,7 @@ class ConteudoCard extends Migration
     {
         Schema::table('posts', function (Blueprint $table) {
             $table->mediumText('conteudo')->nullable()->change();
-            $table->mediumText('conteudo_card')->nullable();
+            $table->string('conteudo_card', 500)->nullable();
             $table->string('link', 100);
         });
     }

@@ -20,16 +20,16 @@ export class CategoriaComponent implements OnInit {
                 private _activatedRoute: ActivatedRoute) { }
 
     ngOnInit() {
-
-      this._activatedRoute.params.subscribe(params => {
-          this._categoriaService.getCategoriaByLink(params['categoria']).subscribe(
-              ( categoria: Categoria) => { 
-                  this.categoria = categoria; 
-                  this.getPosts();
-              }
-          )
-      });
-
+        this._activatedRoute.params.subscribe(params => {
+            this._categoriaService.getCategoriaByLink(params['categoria']).subscribe(
+                ( categoria: Categoria) => { 
+                    if (categoria){
+                        this.categoria = categoria; 
+                        this.getPosts();
+                    }
+                }
+            )
+        });
     }
 
     getPosts(){

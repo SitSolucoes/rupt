@@ -6,22 +6,25 @@
 
         <div class="container-categoria info">
             <div class="info-text card" *ngFor='let post of posts'>
-                <div class="banner-single">
-                    <div class="title"> {{ post.titulo }} </div>
-                    
-                    <div class="text" [innerHTML]="post.conteudo.replace('<br>', '')"></div>
-                    
-                    <div class="info-post">
-                        <div class="img-person">
-                            <img src="../../../assets/img/person.png" class="img">
-                        </div>
-                        <p> Marcela Prado </p>
-                        <div class="area-post">
-                            <i class="fa fa-calendar-o img-cal" aria-hidden="true"></i>
-                            <div class="time"> 12/08 </div>
+                <a routerLink='/noticia/{{ post.id }}'>
+                    <div class="banner-single">
+                        <div class="title"> {{ post.titulo }} </div>
+                        
+                        <div class="text" *ngIf='post.subtitulo'>{{ post.subtitulo }}</div>
+                        <div class="text" *ngIf='!post.subtitulo' [innerHTML]="post.conteudo_card"></div>
+                        
+                        <div class="info-post">
+                            <div class="img-person">
+                                <img src="{{ url + 'profile/' + post.autor.src_foto }}" class="img">
+                            </div>
+                            <p> {{ post.autor.nick }} </p>
+                            <div class="area-post">
+                                <i class="fa fa-calendar-o img-cal" aria-hidden="true"></i>
+                                <div class="time"> {{ post.publishedAt | date:'dd/MM' }} </div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
             
             <!-- card pessoa
