@@ -5,14 +5,15 @@
       <a click="#" class=" modal-action modal-close close">X</a>
     </div>
 
-    <div class="container">
-      <input id="email" #email name="email" type="email" class="input" placeholder="Pesquisar">
-      <a routerLink="/pesquisa">
-      <button type="button" class="button-modal button-modal2" (click)="publicar()" [disabled]='loadingPublicar || loadingExcluir'>
-        <i class="fa fa-spinner fa-pulse fa-3x fa-fw" *ngIf='loadingPublicar'></i>
-        Buscar
-      </button>
-      </a>
-      </div>
+    <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+        <div class="container">
+            <input formControlName='search' maxlength="30" class="input" placeholder="Pesquisar">
+            
+            <button [disabled]='!formulario.valid' type="submit" class="button-modal button-modal2">
+                Buscar
+            </button>
+        </div>
+    </form>
+
   </div>
 </div>

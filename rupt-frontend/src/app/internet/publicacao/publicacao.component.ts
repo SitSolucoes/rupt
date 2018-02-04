@@ -299,7 +299,6 @@ export class PublicacaoComponent implements OnInit {
     'underline', 
     'strike', 
     'blockquote', 
-    { 'header': 2 }, 
     { 'list': 'ordered'}, 
     { 'list': 'bullet' },
     { 'indent': '-1'}, 
