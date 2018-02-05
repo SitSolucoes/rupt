@@ -28,7 +28,9 @@
                 <a target="_blank" (click)="signIn('facebook')">
                     <div class="area"><i class="fa fa-facebook" aria-hidden="true"></i><div style="color: #243861;display:block;float:left;margin-right: 10px;">|</div> Login com o Facebook</div>
                 </a>
-                <div class="area area2"><i class="fa fa-linkedin" aria-hidden="true"></i><div style="color: #243861;display:block;float:left;margin-right: 10px;">|</div> Login com o Linkedin</div>
+                <a target="_blank" (click)="signIn('google')">
+                    <div class="area area2"><i class="fa fa-linkedin" aria-hidden="true"></i><div style="color: #243861;display:block;float:left;margin-right: 10px;">|</div> Login com o Linkedin</div>
+                </a>
             </div>
             <div class="login-container">
                 <form [formGroup]="formulario" (ngSubmit)="onSubmit()">

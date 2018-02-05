@@ -28,6 +28,7 @@ export class LeitoresService {
          src_foto: form.value.src_foto != null && form.value.src_foto != '' ? form.value.src_foto : '',
          ativo: form.value.ativo,
          fb_login: form.value.fb_login,
+         google_login: form.value.google_login,
          token: form.value.token,
          password: form.value.password
         }

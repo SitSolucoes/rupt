@@ -60,29 +60,34 @@ export class ModalCadastroLeitorComponent implements OnInit {
               }
           });
         }else{
-          if(p == 'google')
-          form_leitor.patchValue({
-            google_login: true
-          })
-          this._leitorService.checkGoogleToken(data.token, data.uid).subscribe(
-            (retorno) => {
-              if(retorno.resultado == true){
-                this.doLogin(form_leitor);
-                this.closeModal.emit(true);
-              }else{
-                this._leitorService.createLeitor(form_leitor).subscribe(
-                  (leitor)=>{ 
-                    this.doLogin(form_leitor);
-                    this.closeModal.emit(true);
-                  },
-                  (error)=>{
-                    console.log("Deu problema na criação deste usuário.");
-                    console.log(typeof error);
-                    console.log(error);
-                  });
-                //this._leitorService.createLeitor()
-              }
-          });
+          if(p == 'google'){
+            form_leitor.patchValue({
+              google_login: true
+            });
+            
+            console.log('form_leitor');
+            console.log(form_leitor);
+            
+            this._leitorService.checkGoogleToken(data.token, data.uid).subscribe(
+              (retorno) => {
+                if(retorno.resultado == true){
+                  this.doLogin(form_leitor);
+                  this.closeModal.emit(true);
+                }else{
+                  this._leitorService.createLeitor(form_leitor).subscribe(
+                    (leitor)=>{ 
+                      this.doLogin(form_leitor);
+                      this.closeModal.emit(true);
+                    },
+                    (error)=>{
+                      console.log("Deu problema na criação deste usuário.");
+                      console.log(typeof error);
+                      console.log(error);
+                    });
+                  //this._leitorService.createLeitor()
+                }
+            });
+          }
         }
       },
       (error) => {
