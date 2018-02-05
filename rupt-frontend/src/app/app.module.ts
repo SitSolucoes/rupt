@@ -21,7 +21,7 @@ import { QuillEditorModule } from 'ngx-quill-editor';
 
 let providers = {
    "google": {
-     "clientId": "GOOGLE_CLIENT_ID"
+     "clientId": "859984199306-ud1i2baj0qgn0oq94ildpseifb1om79f.apps.googleusercontent.com"//secret m52BaIBkA4-vjzZtje4jPXC7
    },
    "linkedin": {
      "clientId": "LINKEDIN_CLIENT_ID"

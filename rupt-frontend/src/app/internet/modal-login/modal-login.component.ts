@@ -33,25 +33,56 @@ export class ModalLoginComponent implements OnInit {
         console.log(data);
         //CRIA UM FORMULARIO FICTÍCIO PRA CRIAR UM LEITOR, JÁ INSERINDO TOKEN
         let form_leitor = this.createFormLeitor(data);
-        this._leitorService.checkFBToken(data.token, data.uid).subscribe(
-          (retorno) => {
-            if(retorno.resultado == true){
-              this.doLogin(form_leitor);
-              this.closeModalLogin.emit(true);
-            }else{
-              this._leitorService.createLeitor(form_leitor).subscribe(
-                (leitor)=>{ 
-                  this.doLogin(form_leitor);
-                  this.closeModalLogin.emit(true);
-                },
-                (error)=>{
-                  console.log("Deu problema na criação deste usuário.");
-                  console.log(typeof error);
-                  console.log(error);
-                });
-              //this._leitorService.createLeitor()
-            }
-        });
+        if(p == 'facebook'){
+          form_leitor.patchValue({
+            fb_login: true
+          })
+          this._leitorService.checkFBToken(data.token, data.uid).subscribe(
+            (retorno) => {
+              if(retorno.resultado == true){
+                this.doLogin(form_leitor);
+                this.closeModalLogin.emit(true);
+              }else{
+                this._leitorService.createLeitor(form_leitor).subscribe(
+                  (leitor)=>{ 
+                    this.doLogin(form_leitor);
+                    this.closeModalLogin.emit(true);
+                  },
+                  (error)=>{
+                    console.log("Deu problema na criação deste usuário.");
+                    console.log(typeof error);
+                    console.log(error);
+                  });
+                //this._leitorService.createLeitor()
+              }
+          });
+        }
+        
+        if(p == 'google'){
+          form_leitor.patchValue({
+            google_login: true
+          });
+          this._leitorService.checkGoogleToken(data.token, data.uid).subscribe(
+            (retorno) => {
+              if(retorno.resultado == true){
+                this.doLogin(form_leitor);
+                this.closeModalLogin.emit(true);
+              }else{
+                this._leitorService.createLeitor(form_leitor).subscribe(
+                  (leitor)=>{ 
+                    this.doLogin(form_leitor);
+                    this.closeModalLogin.emit(true);
+                  },
+                  (error)=>{
+                    console.log("Deu problema na criação deste usuário.");
+                    console.log(typeof error);
+                    console.log(error);
+                  });
+                //this._leitorService.createLeitor()
+              }
+          });
+        }
+
       },
       (error) => {
         console.log(error);
@@ -77,9 +108,10 @@ export class ModalLoginComponent implements OnInit {
       nascimento: [''],
       src_foto: [data.image],
       email: [data.email],
-      fb_login: [true],
+      fb_login: [false],
+      google_login: [false],
       token: [data.token],
-      fb_uid: [data.uid],
+      uid: [data.uid],
       password: [''],
       confirma_senha: [''],
       ativo: true,

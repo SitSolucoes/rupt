@@ -34,6 +34,7 @@ Route::get('/validaEmail/{email}/{id}',['uses' => "AdminController@validaEmail"]
 Route::post('/storeLeitor',['uses' => 'LeitorController@store']);
 Route::get('/getLeitores',['uses' => 'LeitorController@getLeitores']);
 Route::get('/checkFbToken/{token}/{uid}',['uses' => 'LeitorController@checkFbToken']);
+Route::get('/checkGoogleToken/{token}/{uid}',['uses' => 'LeitorController@checkGoogleToken']);
 Route::get('/getLeitor/{id}',['uses' => 'LeitorController@getLeitor']);
 Route::put('/updateLeitor/{id}',['uses' => 'LeitorController@update']);
 Route::get('/validaNick/{nick}/{id}', ['uses' => 'LeitorController@validaNick']);
