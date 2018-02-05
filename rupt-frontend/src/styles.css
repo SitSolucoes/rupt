@@ -29,6 +29,10 @@ body{
     font-family: lato;
 }
 
+.modal-overlay{
+    opacity: .7 !important;
+}
+
 strong{
     font-weight: bolder;
 }
@@ -104,7 +108,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     float: left;
     position: fixed;
     z-index: 1000;
-    box-shadow: 1px 1px 1px #B9B7B7;
+    box-shadow: 0px 0.5px 3.5px 0px #707070;
 }
 
 .header-margin{
@@ -218,6 +222,10 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     float: left;
 }
 
+.headbar .headbar-right .btn:hover{
+    opacity: .9;
+}
+
 .headbar .headbar-right .notificacao{
     display: block;
     float: left;
@@ -269,17 +277,23 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     float: left;
     width: 100%;
     padding: 8px 15px;
-    font-size: 14px;
-    font-family: gilroy-bold;
-    color: #4f4f4f;
+    font-size: 16px;
+    font-family: lato;
+    font-weight: bold;
+    background: #f0f0f0;
+    color: #2b2b2b;
     border-bottom: 1px solid #e8e8e8;
 }
 
 .headbar-right .dropdown-content2 .info{
     display: block;
     float: left;
-    width: 100%;
-    border-bottom: 1px solid #f5f5f5;
+    width: 100% ;
+    padding: 8px 2px;
+}
+
+.headbar-right .dropdown-content2 .info:hover{
+    opacity: .9;
 }
 
 .headbar-right .dropdown-content2 .info .area{
@@ -595,7 +609,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .container-categoria .title{
-    font-family: 'gilroy';
+    font-family: lato;
     font-weight: bold;
     font-size: 20px;
     color: #454545;
@@ -1199,8 +1213,9 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .modal-content .info p{
     text-align: center;
     font-size: 18px;
-    font-family: gilroy-bold;
-    color: #3b3b3b;
+    font-family: lato;
+    font-weight: bold;
+    color: #4f4f4f;
     clear: both;
     padding-left: 30px;
     padding-right: 30px;
@@ -1468,6 +1483,11 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     float: left;
 }
 
+.modal-pesquisa input:not([type]):focus:not([readonly]){
+    border-bottom: 0px;
+    box-shadow: none !important;
+}
+
 .modal-pesquisa .button-modal{
     display: block;
     float: right;
@@ -1580,6 +1600,10 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     overflow: hidden;
 }
 
+.user .area .write-area:hover{
+    opacity: .8;
+}
+
 .user .area .img3{
     font-size: 30px;
     color: #f97000;
@@ -1632,6 +1656,7 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     padding: 8px;
     padding-left: 10px;
     padding-right: 10px;
+    margin-top: 10px;
     color: #ffffff;
     font-weight: 600;
     background: #005a87;
@@ -1798,7 +1823,7 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
   display: block;
   float: left;
   position: relative;
-  left: 5%;
+  left: 2%;
   font-family: 'gilroy-bold';
   text-align: center;
   font-size: 15px;
@@ -1835,7 +1860,7 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     display: block;
     float: left;
     width: 100%;
-    padding-left: 5%;
+    padding-left: 2%;
     border-bottom: 1px solid #E8E8E8;
     padding-bottom: 5px;
     padding-top: 5px;
@@ -1867,6 +1892,8 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
 
 .user .feed .post .img{
     height: 55px;
+    color: #4f4f4f;
+    margin-right: 10px;
 }
 
 .user .feed .post .img2{
@@ -1881,6 +1908,7 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     height: 18px;
     margin-left: 5px;
     margin-top: 10px;
+    margin-right: 0px;
     border-radius: 0px;
     display: block;
     float: right;
@@ -1892,14 +1920,14 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     height: 22px;
     font-size: 20px;
     margin-top: 0px;
-    margin-right: 5px;
+    margin-right: 8px;
     color: #4f4f4f;
 }
 
 .user .feed .post .text{
     display: block;
     float: left;
-    width: 91%;
+    width: 90.5%;
     line-height: 20px;
 }
 
@@ -1986,7 +2014,7 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
 .user .feed .post .info{
   display: block;
   float: left;
-  width: 100%;
+  width: 97%;
   padding-left: 15px;
   margin-top: 5px;
   overflow: hidden;
@@ -2123,13 +2151,13 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
 }
 
 .user .feed .search .input-search{
-    width: 91%;
+    width: 95%;
     height: 40px;
     display: block;
     float: left;
     margin-top: 10px;
     margin-bottom: 10px;
-    margin-left: 5%;
+    margin-left: 2.5%;
     background: #f7f7f7;
     border: 1px solid #f7f7f7;
     border-radius: 2px;
@@ -2144,9 +2172,9 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     height: 20px;
     display: block;
     float: left;
-    position: relative;
+    position: absolute;
     right: 35px;
-    top: 20px;
+    top: 95px;
 }
 
 .user .feed .leitores{
@@ -3224,6 +3252,12 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     margin: 15px 0px;
     margin-bottom: 10px;
     text-align: center;
+    color: #000;
+    font-weight: bold;
+}
+
+.categoria .container .info .card h1 a{
+    color: #000;
 }
 
 .container .info .card h2{
@@ -3658,7 +3692,7 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     float: left;
     width: 40%;
     padding: 35px 20px;
-    padding-top: 5px;
+    padding-top: 0px;
     border-right: 1px solid #cccccc;
 }
 
@@ -3683,13 +3717,13 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
 }
 
 .login-modal .social-medias .area2{
-    background: #008ac1;
-    border: 1px solid #008ac1;
+    background: #dc4a38;
+    border: 1px solid #dc4a38;
 }
 
 .login-modal .social-medias .area2:hover{
-    border: 1px solid #008ac1;
-    color: #008ac1;
+    border: 1px solid #dc4a38;
+    color: #dc4a38;
 }
 
 .login-modal .social-medias .fa{
@@ -3698,6 +3732,7 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     display: block;
     float: left;
     margin-top: 5px;
+    width: 40px;
 }
 
 .login-modal .login-container{
@@ -4616,5 +4651,7 @@ quill-editor{
     margin-top: 20px;
     position: relative;
 }
+
+
 
 /*teste*/
