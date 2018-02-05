@@ -43,10 +43,10 @@ Route::put('/leitor/signin',['uses' => 'LeitorController@signin']);
 Route::post('leitor/verificaLogin', ['uses' => 'LeitorController@verificaLogin']);
 Route::put('leitor/redefineSenha', ['uses' => 'LeitorController@redefineSenha']);
 Route::get('leitor/validaToken/{token}', ['uses' => 'LeitorController@validaToken']);
-
 Route::post('leitor/uploadImages/{id}', ['uses' => 'LeitorController@uploadImages']);
 Route::post('/esqueciSenhaLeitor', ['uses' => 'LeitorController@esqueciSenha']);
 Route::get('leitor/getLeitorByNick/{nick}', ['uses' => 'LeitorController@getLeitorByNick']);
+Route::post('leitor/pesquisa', ['uses' => 'LeitorController@pesquisa']);
 
 //escritores
 Route::get('/getEscritores',['uses' => 'EscritorController@getEscritores']);
@@ -129,6 +129,7 @@ Route::post('posts/delete', ['uses' => 'PostController@delete']);
 Route::post('posts/update', ['uses' => 'PostController@update']);
 Route::post('posts/getRascunhos', ['uses' => 'PostController@getRascunhos']);
 Route::get('posts/getPostsByCategoria/{id}', ['uses' => 'PostController@getPostsByCategoria']);
+Route::post('posts/pesquisaUltimos', ['uses' => 'PostController@pesquisaUltimos']);
 
 Route::get('interacoes/getAll/{post_id}/{categoria}', ['uses' => 'InteracaoController@getByCategoria']);
 Route::get('interacaoLeitor/getInteracoesLeitorPost/{post_id}/{leitor_id}', ['uses' => 'InteracaoLeitorController@getInteracoesLeitorPost']);

@@ -17,26 +17,45 @@
                         Pessoas
                     </a>
                 </li>
-                <li class="menu tab col s3">
-                    <a href="#page4">
-                        Publicações
-                    </a>
-                </li>
             </ul>
         </div>
 
 
         <div id="page1">
-            <app-lista></app-lista>
+            <app-lista [search]='search' [list]='posts' [tipo]='1' *ngIf='search != "" && listPostDestaque.length > 0'></app-lista>
+
+            <div *ngIf='search == "" || listPostDestaque.length == 0' class="news">
+                <div class="not-found">
+                    <div class="message">
+                        Nenhuma publicação encontrada
+                        <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
         </div>
         <div id="page2">
-            <app-lista></app-lista>
+            <app-lista [search]='search' [list]='posts' [tipo]='1' *ngIf='search != "" && listPostUltimos.length > 0'></app-lista>
+
+            <div *ngIf='search == "" || listPostUltimos.length == 0' class="news">
+                <div class="not-found">
+                    <div class="message">
+                        Nenhuma publicação encontrada
+                        <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
         </div>
         <div id="page3">
-            <app-lista></app-lista>
-        </div>
-        <div id="page4">
-            <app-lista></app-lista>
+            <app-lista [search]='search' [list]='listLeitores' [tipo]='2' *ngIf='search != "" && listLeitores.length > 0'></app-lista>
+
+            <div *ngIf='search == "" || listLeitores.length == 0' class="news">
+                <div class="not-found">
+                    <div class="message">
+                        Nenhum escritor encontrado
+                        <i class="fa fa-users" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

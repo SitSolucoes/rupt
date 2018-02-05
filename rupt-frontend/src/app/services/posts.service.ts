@@ -112,7 +112,7 @@ export class PostsService {
   }
 
   getRascunhos(leitor_id){
-      return this._http.post(this._url + 'posts/getRascunhos/', JSON.stringify({leitor_id: leitor_id}), {headers: this.headers}).map(
+      return this._http.post(this._url + 'posts/getRascunhos', JSON.stringify({leitor_id: leitor_id}), {headers: this.headers}).map(
         (retorno: Response) => {
           return retorno.json().rascunhos;
       });
@@ -120,6 +120,12 @@ export class PostsService {
 
   getPostsByCategoria(categoria_id){
       return this._http.get(this._url + 'posts/getPostsByCategoria/'+categoria_id, {headers: this.headers}).map(
+          (response) => { return response.json().posts }
+      )
+  }
+
+  pesquisaUltimos(search){
+      return this._http.post(this._http + 'posts/pesquisaUltimos', JSON.stringify({ search: search })).map(
           (response) => { return response.json().posts }
       )
   }

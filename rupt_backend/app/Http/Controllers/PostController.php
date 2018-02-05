@@ -301,4 +301,14 @@ class PostController extends Controller
         return response()->json(['posts' => $posts], 200);
     }
 
+    public function pesquisaUltimos(Request $request){
+        $posts = Post::where('titulo', 'like', '%'.$request->search.'%')
+                     ->orWhere('subtitulo', 'like', '%'.$request->search.'%')
+                     ->orWhere('conteudo', 'like', '%'.$request->search.'%')
+                     ->orderBy('publishedAt')
+                     ->get();
+
+        return response()->json(['posts' => $posts], 200);
+    }
+
 }

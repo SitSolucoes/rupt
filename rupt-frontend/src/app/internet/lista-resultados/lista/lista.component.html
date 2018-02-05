@@ -1,11 +1,11 @@
 <div class="categoria">
     <div class="container">
         <div class="aba">
-            Mostrando resultados para <a>{{ search }}</a>
+            Mostrando resultados para <a>{{ search }} {{ tipo }}</a>
         </div>
 
-        <div class="container-categoria info">
-            <div class="info-text card" *ngFor='let post of posts'>
+        <div class="container-categoria info" *ngIf='tipo == 1'>
+            <div class="info-text card" *ngFor='let post of list'>
                 <a routerLink='/noticia/{{ post.id }}'>
                     <div class="banner-single">
                         <div class="title"> {{ post.titulo }} </div>
@@ -26,19 +26,22 @@
                     </div>
                 </a>
             </div>
-            
-            <!-- card pessoa
-            <div class="card">
-                <div class="profile">
-                    <div class="area">
-                        <img src="../../../assets/img/section12.png" class="img">
-                    </div>
-                    <h1>Marcelos Luscas</h1>
-                    <h2>@Paulinho</h2>
-                </div>
-            </div>
-            -->
-
         </div>
+
+        <div class="container-categoria info">
+            <div class="card" *ngFor='let leitor of list'>
+                <a routerLink='/perfil/{{ leitor.nick }}'>
+                    <div class="profile">
+                        <div class="area">
+                            <img src="{{ url + 'profile/' + leitor.src_foto }}" class="img">
+                        </div>
+                        <h1>{{ leitor.nome }}</h1>
+                        <h2>@{{ leitor.nick }}</h2>
+                    </div>
+                </a>
+                
+            </div>
+        </div>
+
     </div>
 </div>

@@ -361,4 +361,13 @@ class LeitorController extends Controller
         return response()->json(['message' => "Escritor alterado com sucesso."], 200);
     }
 
+    public function pesquisa(Request $request){
+        $leitores = Leitor::where('nome', 'like', '%'.$request->search.'%')
+                          ->orWhere('nick', 'like', '%'.$request->search.'%')
+                          ->orderBy('nome')
+                          ->get();
+
+        return response()->json(['leitores' => $leitores], 200);
+    }
+
 }

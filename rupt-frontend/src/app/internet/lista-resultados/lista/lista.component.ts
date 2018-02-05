@@ -10,7 +10,8 @@ import { ConnectionFactory } from 'app/classes/connection-factory';
 export class ListaComponent implements OnInit {
 
   @Input() search: string;
-  @Input() posts: Post[];
+  @Input() list;
+  @Input() tipo: number;
 
   url: string = ConnectionFactory.API_IMAGEM;
 

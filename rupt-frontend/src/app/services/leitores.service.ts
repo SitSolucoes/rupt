@@ -120,7 +120,6 @@ export class LeitoresService {
     )
   }
 
-
   validaNick(nick, id){
     return this._http.get(this._url + 'validaNick/' + nick + "/" + id).map(
       (response: Response) => {
@@ -183,5 +182,11 @@ export class LeitoresService {
         return response.json().leitor;
       }
     )
+  }
+
+  pesquisaLeitor(search){
+      return this._http.post(this._url + 'leitor/pesquisa', JSON.stringify({search: search}), { headers: this.headers}).map(
+        ( response: Response) => { return response.json().leitores }
+      )
   }
 }
