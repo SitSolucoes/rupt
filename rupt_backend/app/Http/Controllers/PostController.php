@@ -302,12 +302,28 @@ class PostController extends Controller
     }
 
     public function pesquisaUltimos(Request $request){
-        $posts = Post::where('titulo', 'like', '%'.$request->search.'%')
+        $posts = Post::whereNull('deleted_at')
+                     ->whereNotNull('publishedAt')
+                     ->where('titulo', 'like', '%'.$request->search.'%')
                      ->orWhere('subtitulo', 'like', '%'.$request->search.'%')
                      ->orWhere('conteudo', 'like', '%'.$request->search.'%')
-                     ->orderBy('publishedAt')
+                     ->orderBy('publishedAt', 'desc')
+                     ->with('autor')
                      ->get();
+        
+        return response()->json(['posts' => $posts], 200);
+    }
 
+    public function pesquisaDestaques(Request $request){
+        $posts = Post::whereNull('deleted_at')
+                     ->whereNotNull('publishedAt')
+                     ->where('titulo', 'like', '%'.$request->search.'%')
+                     ->orWhere('subtitulo', 'like', '%'.$request->search.'%')
+                     ->orWhere('conteudo', 'like', '%'.$request->search.'%')
+                     ->orderBy('publishedAt', 'desc')
+                     ->with('autor')
+                     ->get();
+        
         return response()->json(['posts' => $posts], 200);
     }
 

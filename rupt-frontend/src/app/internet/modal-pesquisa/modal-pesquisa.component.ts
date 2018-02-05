@@ -27,9 +27,7 @@ export class ModalPesquisaComponent implements OnInit {
 
   onSubmit(){
       let search = this.formulario.get('search').value;
-      search = encodeURI(search.replace(" ", "+"));
-      console.log(search);
-      this._router.navigate(['pesquisa/'+ search.replace(/\+/g,'%20')]);
+      this._router.navigate(['pesquisa/'+ search]);
   }
 
 }

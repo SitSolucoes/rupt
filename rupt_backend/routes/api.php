@@ -131,6 +131,7 @@ Route::post('posts/update', ['uses' => 'PostController@update']);
 Route::post('posts/getRascunhos', ['uses' => 'PostController@getRascunhos']);
 Route::get('posts/getPostsByCategoria/{id}', ['uses' => 'PostController@getPostsByCategoria']);
 Route::post('posts/pesquisaUltimos', ['uses' => 'PostController@pesquisaUltimos']);
+Route::post('posts/pesquisaDestaques', ['uses' => 'PostController@pesquisaDestaques']);
 
 Route::get('interacoes/getAll/{post_id}/{categoria}', ['uses' => 'InteracaoController@getByCategoria']);
 Route::get('interacaoLeitor/getInteracoesLeitorPost/{post_id}/{leitor_id}', ['uses' => 'InteracaoLeitorController@getInteracoesLeitorPost']);

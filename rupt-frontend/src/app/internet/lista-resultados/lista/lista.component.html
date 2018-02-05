@@ -1,7 +1,7 @@
 <div class="categoria">
     <div class="container">
         <div class="aba">
-            Mostrando resultados para <a>{{ search }} {{ tipo }}</a>
+            Mostrando resultados para <a>{{ search }}</a>
         </div>
 
         <div class="container-categoria info" *ngIf='tipo == 1'>
@@ -28,7 +28,7 @@
             </div>
         </div>
 
-        <div class="container-categoria info">
+        <div class="container-categoria info" *ngIf='tipo == 2'>
             <div class="card" *ngFor='let leitor of list'>
                 <a routerLink='/perfil/{{ leitor.nick }}'>
                     <div class="profile">
@@ -39,7 +39,7 @@
                         <h2>@{{ leitor.nick }}</h2>
                     </div>
                 </a>
-                
+
             </div>
         </div>
 

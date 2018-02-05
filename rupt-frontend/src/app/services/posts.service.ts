@@ -125,8 +125,14 @@ export class PostsService {
   }
 
   pesquisaUltimos(search){
-      return this._http.post(this._http + 'posts/pesquisaUltimos', JSON.stringify({ search: search })).map(
-          (response) => { return response.json().posts }
-      )
+    return this._http.post(this._url + 'posts/pesquisaUltimos', JSON.stringify({search: search}), { headers: this.headers}).map(
+      ( response: Response) => { return response.json().posts }
+    )
+  }
+
+  pesquisaDestaques(search){
+    return this._http.post(this._url + 'posts/pesquisaDestaques', JSON.stringify({search: search}), {headers: this.headers}).map(
+      ( response: Response ) => { return response.json().posts }
+    )
   }
 }
