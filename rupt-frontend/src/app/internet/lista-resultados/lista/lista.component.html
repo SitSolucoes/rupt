@@ -8,7 +8,7 @@
             <div class="info-text card" *ngFor='let post of list'>
                 <a routerLink='/noticia/{{ post.id }}'>
                     <div class="banner-single">
-                        <div class="title"> {{ post.titulo }} {{ post.peso }}</div>
+                        <div class="title"> {{ post.titulo }}</div>
                         
                         <div class="text" *ngIf='post.subtitulo'>{{ post.subtitulo }}</div>
                         <div class="text" *ngIf='!post.subtitulo' [innerHTML]="post.conteudo_card"></div>
