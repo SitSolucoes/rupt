@@ -27,12 +27,14 @@ export class ModalLoginComponent implements OnInit {
   ngOnInit() {
     this.createForm();
   }
+  
   signIn(p){
     this.login_sub = this._auth.login(p).subscribe(
       (data: any)=>{
         console.log(data);
         //CRIA UM FORMULARIO FICTÍCIO PRA CRIAR UM LEITOR, JÁ INSERINDO TOKEN
         let form_leitor = this.createFormLeitor(data);
+
         if(p == 'facebook'){
           form_leitor.patchValue({
             fb_login: true
@@ -40,11 +42,13 @@ export class ModalLoginComponent implements OnInit {
           this._leitorService.checkFBToken(data.token, data.uid).subscribe(
             (retorno) => {
               if(retorno.resultado == true){
+                console.log('logando pelo facebook');
                 this.doLogin(form_leitor);
                 this.closeModalLogin.emit(true);
               }else{
                 this._leitorService.createLeitor(form_leitor).subscribe(
                   (leitor)=>{ 
+                    console.log('leitor criado e logando');
                     this.doLogin(form_leitor);
                     this.closeModalLogin.emit(true);
                   },
@@ -65,11 +69,13 @@ export class ModalLoginComponent implements OnInit {
           this._leitorService.checkGoogleToken(data.token, data.uid).subscribe(
             (retorno) => {
               if(retorno.resultado == true){
+                console.log('logando pelo google');
                 this.doLogin(form_leitor);
                 this.closeModalLogin.emit(true);
               }else{
                 this._leitorService.createLeitor(form_leitor).subscribe(
                   (leitor)=>{ 
+                    console.log('leitor criado pelo google');
                     this.doLogin(form_leitor);
                     this.closeModalLogin.emit(true);
                   },
@@ -104,7 +110,7 @@ export class ModalLoginComponent implements OnInit {
       id: '0',
       nome: [data.name],
       nick: [''],
-      sexo: [data.gender == 'male' ? 'm' : 'f'],
+      sexo: [data.gender === 'male' ? 'm' : 'f'],
       nascimento: [''],
       src_foto: [data.image],
       email: [data.email],
