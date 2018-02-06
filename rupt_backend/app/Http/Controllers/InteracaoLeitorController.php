@@ -182,4 +182,20 @@ class InteracaoLeitorController extends Controller
 
         return response()->json(['interacoes' => $interacoesCount, 'interacoesLeitor' => $interacoesLeitor], 200);
     }
+
+    public static function sumPeso($post_id){
+        $interacoes = InteracaoLeitor::where('post_idPost', $post_id)
+                                    ->whereNull('comentario_idComentario')
+                                    ->whereNull('timeline_idTimeline')
+                                    ->with('interacao')
+                                    ->get();
+
+        $sum = 0;
+
+        foreach( $interacoes as $interacao ){
+            $sum += $interacao->interacao->peso;
+        }
+
+        return $sum;
+    }
 }
