@@ -1,14 +1,14 @@
 <div class="categoria">
     <div class="container">
         <div class="aba">
-            Mostrando resultados para <a>{{ search }} {{ tipo }}</a>
+            Mostrando resultados para <a>{{ search }}</a>
         </div>
 
         <div class="container-categoria info" *ngIf='tipo == 1'>
             <div class="info-text card" *ngFor='let post of list'>
                 <a routerLink='/noticia/{{ post.id }}'>
                     <div class="banner-single">
-                        <div class="title"> {{ post.titulo }} </div>
+                        <div class="title"> {{ post.titulo }} {{ post.peso }}</div>
                         
                         <div class="text" *ngIf='post.subtitulo'>{{ post.subtitulo }}</div>
                         <div class="text" *ngIf='!post.subtitulo' [innerHTML]="post.conteudo_card"></div>
@@ -28,7 +28,7 @@
             </div>
         </div>
 
-        <div class="container-categoria info">
+        <div class="container-categoria info" *ngIf='tipo == 2'>
             <div class="card" *ngFor='let leitor of list'>
                 <a routerLink='/perfil/{{ leitor.nick }}'>
                     <div class="profile">
@@ -39,7 +39,7 @@
                         <h2>@{{ leitor.nick }}</h2>
                     </div>
                 </a>
-                
+
             </div>
         </div>
 

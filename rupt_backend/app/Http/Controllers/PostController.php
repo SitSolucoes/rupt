@@ -12,10 +12,16 @@ use App\Http\Controllers\LeitorController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\PostCategoriaController;
 use App\Http\Controllers\TimelineController;
+use App\Http\Controllers\ComentarioController;
+use App\Http\Controllers\InteracaoLeitorController;
 use Illuminate\Support\Facades\DB;
+
+use Illuminate\Database\Eloquent\Collection;
 
 class PostController extends Controller
 {
+    private $pesoComentario = 10;
+    
     private function getByLink($link, $id){
         return Post::where('link', $link)
                         ->where('id', '<>', $id)
@@ -302,13 +308,49 @@ class PostController extends Controller
     }
 
     public function pesquisaUltimos(Request $request){
-        $posts = Post::where('titulo', 'like', '%'.$request->search.'%')
-                     ->orWhere('subtitulo', 'like', '%'.$request->search.'%')
-                     ->orWhere('conteudo', 'like', '%'.$request->search.'%')
-                     ->orderBy('publishedAt')
+        $posts = Post::whereNull('deleted_at')
+                     ->whereNotNull('publishedAt')
+                     ->where(function ($query) use ($request){
+                        $query->where('titulo', 'like', '%'.$request->search.'%')
+                              ->orWhere('subtitulo', 'like', '%'.$request->search.'%')
+                              ->orWhere('conteudo', 'like', '%'.$request->search.'%');
+                     })
+                     ->orderBy('publishedAt', 'desc')
+                     ->with('autor')
+                     ->get();
+        
+        return response()->json(['posts' => $posts], 200);
+    }
+
+    public function pesquisaDestaques(Request $request){
+        $posts = Post::whereNull('deleted_at')
+                     ->whereNotNull('publishedAt')
+                     ->where(function ($query) use ($request){
+                        $query->where('titulo', 'like', '%'.$request->search.'%')
+                              ->orWhere('subtitulo', 'like', '%'.$request->search.'%')
+                              ->orWhere('conteudo', 'like', '%'.$request->search.'%');
+                     })
+                     ->orderBy('publishedAt', 'desc')
+                     ->with('autor')
                      ->get();
 
-        return response()->json(['posts' => $posts], 200);
+        $postsPeso = new Collection();                     
+
+        foreach($posts as $post){
+            $comentarios = ComentarioController::countComentarios($post->id)*$this->pesoComentario;
+            $interacoes = InteracaoLeitorController::sumPeso($post->id);
+
+            $post->peso = $comentarios + $interacoes + $post->visualizacoes;
+            
+            $postsPeso->push($post);
+        }
+
+        $order = $postsPeso->sortByDesc('peso');
+        $array = $order->values()->toArray();
+
+        //echo json_encode($array);
+
+        return response()->json(['posts' => $array], 200);
     }
 
 }

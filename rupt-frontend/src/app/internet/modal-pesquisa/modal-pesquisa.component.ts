@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Validators } from '@angular/forms';
@@ -10,6 +10,9 @@ import { Validators } from '@angular/forms';
 })
 export class ModalPesquisaComponent implements OnInit {
 
+  @Input() focus: boolean;
+  @ViewChild("search") searchEl: ElementRef;
+
   formulario: FormGroup;
 
   constructor(private _formBuilder: FormBuilder,
@@ -17,6 +20,8 @@ export class ModalPesquisaComponent implements OnInit {
 
   ngOnInit() {
     this.createForm();
+    
+    //this.searchEl.nativeElement.focus();
   }
 
   createForm(){
@@ -27,9 +32,11 @@ export class ModalPesquisaComponent implements OnInit {
 
   onSubmit(){
       let search = this.formulario.get('search').value;
-      search = encodeURI(search.replace(" ", "+"));
-      console.log(search);
-      this._router.navigate(['pesquisa/'+ search.replace(/\+/g,'%20')]);
+      this._router.navigate(['pesquisa/'+ search]);
+  }
+
+  ngOnChanges(changes: any) {
+      this.searchEl.nativeElement.focus();
   }
 
 }

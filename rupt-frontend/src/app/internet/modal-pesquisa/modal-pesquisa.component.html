@@ -7,7 +7,7 @@
 
     <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
         <div class="container">
-            <input formControlName='search' maxlength="30" class="input" placeholder="Pesquisar">
+            <input formControlName='search' maxlength="30" class="input" placeholder="Pesquisar" autofocus #search>
             
             <button [disabled]='!formulario.valid' type="submit" class="button-modal button-modal2 modal-action modal-close">
                 Buscar

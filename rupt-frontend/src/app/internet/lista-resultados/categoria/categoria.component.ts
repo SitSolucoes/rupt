@@ -20,6 +20,8 @@ export class CategoriaComponent implements OnInit {
                 private _activatedRoute: ActivatedRoute) { }
 
     ngOnInit() {
+        window.scrollTo(0, 0);
+
         this._activatedRoute.params.subscribe(params => {
             this._categoriaService.getCategoriaByLink(params['categoria']).subscribe(
                 ( categoria: Categoria) => { 

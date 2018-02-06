@@ -18,7 +18,7 @@ export class LeitoresService {
   private createBody(form){
     return JSON.stringify(
         {
-         fb_uid: form.value.fb_uid,
+         uid: form.value.uid,
          nome: form.value.nome,
          nick: form.value.nick,
          email: form.value.email,

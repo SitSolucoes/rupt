@@ -3,17 +3,17 @@
         <div class="topico">
             <ul id="tabs-swipe-demo" class="tabs" materialize="tabs">
                 <li class="menu tab col s3">
-                    <a href="#page1" class=" active">
+                    <a href="#destaques" class=" active">
                         Em destaque
                     </a>
                 </li>
                 <li class="menu tab col s3">
-                    <a href="#page2">
+                    <a href="#ultimos">
                         Últimos
                     </a>
                 </li>
                 <li class="menu tab col s3">
-                    <a href="#page3">
+                    <a href="#pessoas">
                         Pessoas
                     </a>
                 </li>
@@ -21,38 +21,50 @@
         </div>
 
 
-        <div id="page1">
-            <app-lista [search]='search' [list]='posts' [tipo]='1' *ngIf='search != "" && listPostDestaque.length > 0'></app-lista>
+        <div id="destaques">
+            <app-lista [search]='search' [list]='listPostDestaques' [tipo]='1' *ngIf='search != "" && listPostDestaques.length > 0'></app-lista>
 
-            <div *ngIf='search == "" || listPostDestaque.length == 0' class="news">
+            <div *ngIf='search == "" || listPostDestaques.length == 0' class="news">
                 <div class="not-found">
-                    <div class="message">
+                    <div class="message" *ngIf='!loadingPostDestaques'>
                         Nenhuma publicação encontrada
                         <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                    </div>
+                    <div class="message" *ngIf='loadingPostDestaques'>
+                        Carregando publicações
+                        <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>   
                     </div>
                 </div>
             </div>
         </div>
-        <div id="page2">
-            <app-lista [search]='search' [list]='posts' [tipo]='1' *ngIf='search != "" && listPostUltimos.length > 0'></app-lista>
+        <div id="ultimos">
+            <app-lista [search]='search' [list]='listPostUltimos' [tipo]='1' *ngIf='search != "" && listPostUltimos.length > 0'></app-lista>
 
             <div *ngIf='search == "" || listPostUltimos.length == 0' class="news">
                 <div class="not-found">
-                    <div class="message">
+                    <div class="message" *ngIf='!loadingPostUltimos'>
                         Nenhuma publicação encontrada
                         <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                    </div>
+                    <div class="message" *ngIf='loadingPostUltimos'>
+                        Carregando publicações
+                        <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>   
                     </div>
                 </div>
             </div>
         </div>
-        <div id="page3">
+        <div id="pessoas">
             <app-lista [search]='search' [list]='listLeitores' [tipo]='2' *ngIf='search != "" && listLeitores.length > 0'></app-lista>
 
             <div *ngIf='search == "" || listLeitores.length == 0' class="news">
                 <div class="not-found">
-                    <div class="message">
+                    <div class="message" *ngIf='!loadingLeitores'>
                         Nenhum escritor encontrado
                         <i class="fa fa-users" aria-hidden="true"></i>
+                    </div>
+                    <div class="message" *ngIf='loadingLeitores'>
+                        Carregando escritores
+                        <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>   
                     </div>
                 </div>
             </div>

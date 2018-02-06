@@ -39,7 +39,7 @@ export class ModalCadastroLeitorComponent implements OnInit {
         if(p == 'facebook'){
           form_leitor.patchValue({
             fb_login: true
-          })
+          });
           this._leitorService.checkFBToken(data.token, data.uid).subscribe(
             (retorno) => {
               if(retorno.resultado == true){
@@ -64,7 +64,7 @@ export class ModalCadastroLeitorComponent implements OnInit {
             form_leitor.patchValue({
               google_login: true
             });
-            
+
             console.log('form_leitor');
             console.log(form_leitor);
             

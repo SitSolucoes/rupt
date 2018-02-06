@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Comentario;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 
 class ComentarioController extends Controller
 {
@@ -13,6 +14,7 @@ class ComentarioController extends Controller
         
         $comentario = new Comentario();
         $comentario = $this->createComentario($request, $comentario);
+        $comentario->ativo = true;
         
         $comentario->save();
 
@@ -76,7 +78,9 @@ class ComentarioController extends Controller
         return $respostas;
     }
 
-    public function likeComentario($id){
-
+    public static function countComentarios($post_id){
+        return Comentario::where('post_idPost', $post_id)
+                           ->where('ativo', 1)
+                           ->count();
     }
 }

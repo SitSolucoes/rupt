@@ -63,20 +63,23 @@ class LeitorController extends Controller
         
         $retorno = [
             'resultado' => false,
-            'leitor' => null
+            'leitor' => null,
+            'token' => $token,
+            'uid' => $uid
         ];
         
         if(!$token || $token == null){
-            return response()->json($retorno, 200);
+            return response()->json(['mensagem' => 'Token ou Id inválido'], 500);
         }
-
-        $leitor = Leitor::where('token_fb', $token)->orWhere('uid_fb', $uid)->get()->first();
+        
+        $leitor = Leitor::where('uid_fb', '=', $uid)->get();
         
         if($leitor != null){
             $retorno['leitor'] = $leitor;
             $retorno['resultado'] = true;
         }
         
+        $retorno['leitor'] = $leitor;
         return response()->json((object)$retorno, 200);        
         
         
