@@ -6,31 +6,27 @@
     </div>
 
     <div class="info">
-
         <p> Cadastrado na RUPT, você só tem a ganhar! </p>
-
         <div class="subtitle">
             Estando cadastrado, você consegue visualizar todas as notícias publicadas pelos Escritores e mais, caso você tenha interesse, poderá se tornar um Escritor e ganhar dinheiro com as suas publicaçõe! Leia o <a href="#">Contrato</a> e a <a routerLink="/politica" (click)="fechaModal()">Política de Privacidade</a> ou para maiores informações: <a href="#">clique aqui </a>
         </div>
-
         <p> Cadastre-se utilizando as redes sociais </p>
-
-        <div class="img-area">
+        <div class="img-area img-area2">
+            <div class="login-modal login-modal3">
+            <div class="social-medias social-medias2">
             <a target="_blank" (click)="signIn('facebook')">
-            <img src="../../../assets/img/face2.png" class="img">
+                <div class="area"><i class="fa fa-facebook" aria-hidden="true"></i><div style="color: #243861;display:block;float:left;margin-right: 10px;">|</div> Login com o Facebook</div>
             </a>
-            <a (click)="this.signIn('google')" target="_blank">
-            <img src="../../../assets/img/linkedin.png" class="img">
+            <a target="_blank" (click)="signIn('google')">
+                <div class="area area2"><i class="fa fa-google-plus"></i><div style="color: #243861;display:block;float:left;margin-right: 10px;">|</div> Login com o Google +</div>
             </a>
+            </div>
+            </div>
             <!--<a target="_blank" target="_blank">
             <img src="../../../assets/img/twitter2.png" class="img">
             </a>-->
-
         </div>
-
         <p> ou  </p>
-
-    
     </div>
 </div>
 <div class="modal-footer">

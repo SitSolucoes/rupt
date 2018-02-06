@@ -1212,7 +1212,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 
 .modal-content .info p{
     text-align: center;
-    font-size: 18px;
+    font-size: 17.5px;
     font-family: lato;
     font-weight: bold;
     color: #4f4f4f;
@@ -1257,6 +1257,10 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
   padding-top: 0px;
   margin-top: 5px;
   border-radius: 5px;
+}
+
+.modal-content .info .img-area2{
+    width: 90%;
 }
 
 .modal-content .info .img{
@@ -1362,19 +1366,19 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     display: block;
     float: left;
     position: relative;
-    margin-right: 10px;
+    margin-left: 10px;
     margin-top: 5px;
     margin-bottom: 40px;
-    padding: 8px;
+    padding: 10px;
     padding-left: 12px;
     padding-right: 12px;
     border: 1px solid #ccc;
     border-radius: 2px;
     background: #ccc;
     font-weight: bolder;
-    font-size: 17px;
+    font-size: 16px;
     opacity: 1;
-    color: #000;
+    color: #2b2b2b;
 }
 
 .modal-footer .button2{
@@ -3678,6 +3682,10 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     padding-bottom: 40px;
 }
 
+.login-modal3{
+    margin-top: 10px;
+}
+
 .login-modal2 .error{
     border: 1px solid red;
     padding: 10px;
@@ -3696,6 +3704,15 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     border-right: 1px solid #cccccc;
 }
 
+.login-modal .social-medias2{
+    border-right: 0px;
+    float: none;
+    display: table;
+    margin: 0 auto;
+    width: 100%;
+    padding-bottom: 0px;
+}
+
 .login-modal .social-medias .area{
     display: block;
     float: left;
@@ -3706,6 +3723,13 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     color: #fff;
     border-radius: 2px;
     margin-bottom: 10px;
+    font-family: nexa-bold;
+}
+
+.login-modal .social-medias2 .area{
+    width: 45%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
 }
 
 .login-modal .social-medias .area:hover{
@@ -3731,7 +3755,7 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     padding-right: 10px;
     display: block;
     float: left;
-    margin-top: 5px;
+    margin-top: 3px;
     width: 40px;
 }
 
