@@ -6,63 +6,80 @@ import { Post } from 'app/classes/post';
 import { PostsService } from 'app/services/posts.service';
 
 @Component({
-  selector: 'app-pesquisa',
-  templateUrl: './pesquisa.component.html',
-  styleUrls: ['./pesquisa.component.css']
+    selector: 'app-pesquisa',
+    templateUrl: './pesquisa.component.html',
+    styleUrls: ['./pesquisa.component.css']
 })
+
 export class PesquisaComponent implements OnInit {
 
-  listLeitores: Leitor[] = new Array();
-  listPostUltimos: Post[] = new Array();
-  listPostDestaques: Post[] = new Array();
+    listLeitores: Leitor[] = new Array();
+    listPostUltimos: Post[] = new Array();
+    listPostDestaques: Post[] = new Array();
 
-  search: string = "";
+    loadingLeitores: boolean = false;
+    loadingPostUltimos: boolean = false;
+    loadingPostDestaques: boolean = false;
 
-  constructor(private _activatedRoute: ActivatedRoute,
-              private _leitorService: LeitoresService,
-              private _postService: PostsService) { }
+    search: string = "";
 
-  ngOnInit() {
-    window.scrollTo(0, 0);
+    constructor(private _activatedRoute: ActivatedRoute,
+                private _leitorService: LeitoresService,
+                private _postService: PostsService) { }
 
-    this._activatedRoute.params.subscribe(params => {
-      if (params['search'] && params['search'] != ''){
-          this.search = params['search'];
+    ngOnInit() {
+        window.scrollTo(0, 0);
 
-          this.getDestaques();
-          this.getUltimos();
-          this.getLeitores();
-      }
-      else {
-          this.search = '';
-      }
-      /*this._leitorService.getCategoriaByLink(params['categoria']).subscribe(
-          ( categoria: Categoria) => { 
-              if (categoria){
-                  this.categoria = categoria; 
-                  this.getPosts();
-              }
-          }
-      )*/
-    });
-  }
+        this._activatedRoute.params.subscribe(params => {
+        if (params['search'] && params['search'] != ''){
+            this.search = params['search'];
 
-  getLeitores(){
-      this._leitorService.pesquisaLeitor(this.search).subscribe(
-          ( response ) => { this.listLeitores = response }
-      )
-  }
+            this.getDestaques();
+            this.getUltimos();
+            this.getLeitores();
+        }
+        else {
+            this.search = '';
+        }
+        /*this._leitorService.getCategoriaByLink(params['categoria']).subscribe(
+            ( categoria: Categoria) => { 
+                if (categoria){
+                    this.categoria = categoria; 
+                    this.getPosts();
+                }
+            }
+        )*/
+        });
+    }
 
-  getDestaques(){
-      this._postService.pesquisaDestaques(this.search).subscribe(
-          ( response ) => { this.listPostDestaques = response; console.log(response) }
-      )
-  }
+    getLeitores(){
+        this.loadingLeitores = true;
+        this._leitorService.pesquisaLeitor(this.search).subscribe(
+            ( response ) => { 
+                this.listLeitores = response 
+                this.loadingLeitores = false;
+            }
+        )
+    }
 
-  getUltimos(){
-      this._postService.pesquisaUltimos(this.search).subscribe(
-          ( response ) => { this.listPostUltimos = response }
-      )
-  }
+    getDestaques(){
+        this.loadingPostDestaques = true;
+        this._postService.pesquisaDestaques(this.search).subscribe(
+            ( response ) => { 
+                this.listPostDestaques = response;
+                this.loadingPostDestaques = false;
+            }
+        )
+    }
+
+    getUltimos(){
+        this.loadingPostUltimos = true;
+        this._postService.pesquisaUltimos(this.search).subscribe(
+            ( response ) => { 
+                this.listPostUltimos = response;
+                this.loadingPostUltimos = false;
+            }
+        )
+    }
 
 }

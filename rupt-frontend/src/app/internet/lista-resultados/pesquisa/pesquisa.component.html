@@ -26,9 +26,13 @@
 
             <div *ngIf='search == "" || listPostDestaques.length == 0' class="news">
                 <div class="not-found">
-                    <div class="message">
+                    <div class="message" *ngIf='!loadingPostDestaques'>
                         Nenhuma publicação encontrada
                         <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                    </div>
+                    <div class="message" *ngIf='loadingPostDestaques'>
+                        Carregando publicações
+                        <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>   
                     </div>
                 </div>
             </div>
@@ -38,9 +42,13 @@
 
             <div *ngIf='search == "" || listPostUltimos.length == 0' class="news">
                 <div class="not-found">
-                    <div class="message">
+                    <div class="message" *ngIf='!loadingPostUltimos'>
                         Nenhuma publicação encontrada
                         <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                    </div>
+                    <div class="message" *ngIf='loadingPostUltimos'>
+                        Carregando publicações
+                        <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>   
                     </div>
                 </div>
             </div>
@@ -50,9 +58,13 @@
 
             <div *ngIf='search == "" || listLeitores.length == 0' class="news">
                 <div class="not-found">
-                    <div class="message">
+                    <div class="message" *ngIf='!loadingLeitores'>
                         Nenhum escritor encontrado
                         <i class="fa fa-users" aria-hidden="true"></i>
+                    </div>
+                    <div class="message" *ngIf='loadingLeitores'>
+                        Carregando escritores
+                        <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>   
                     </div>
                 </div>
             </div>

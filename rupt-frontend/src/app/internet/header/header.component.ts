@@ -27,6 +27,8 @@ export class HeaderComponent implements OnInit {
   modalGenerico = new EventEmitter<string|MaterializeAction>();
   modalRascunho = new EventEmitter<string|MaterializeAction>();
   modalPesquisa= new EventEmitter<string|MaterializeAction>();
+  openedSearch: boolean = false;
+
   url = ConnectionFactory.API_IMAGEM;
 
   constructor(private _leitorService: LeitoresService,
@@ -63,11 +65,14 @@ export class HeaderComponent implements OnInit {
       this.modalLogin.emit({ action: 'modal', params: ['open']});
   }
 
-    openModalPesquisa() {
-        this.modalPesquisa.emit({
-            action: 'modal',
-            params: ['open']});
-    }
+  openModalPesquisa() {
+    this.modalPesquisa.emit({ action: 'modal', params: ['open']});
+    this.openedSearch = true;  
+
+    setTimeout(() => {
+        this.openedSearch = false;
+    }, 1000);
+  }
 
   openModalEsqueciSenha(e){
     if(e){

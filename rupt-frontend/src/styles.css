@@ -2820,6 +2820,12 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     margin-top: 20px;
 }
 
+.news .not-found .message .fa-spinner{
+    display: table;
+    margin: auto;
+    margin-top: 15px;
+}
+
 .news .fb-comments span{
   width: 100% !important;
 }

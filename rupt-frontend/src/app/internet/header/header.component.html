@@ -21,7 +21,7 @@
 <div id="ModalPesquisa" class="modal modal2 modal4"
      materialize="modal" [materializeParams]="[{dismissible: true}]"
      [materializeActions]="modalPesquisa">
-    <modal-pesquisa (closeModalPesquisa)="closeModalPesquisa($event)"></modal-pesquisa>
+    <modal-pesquisa [focus]='openedSearch' (closeModalPesquisa)="closeModalPesquisa($event)"></modal-pesquisa>
 </div>
 
 <div class="headbar">
