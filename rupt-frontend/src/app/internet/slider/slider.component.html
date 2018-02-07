@@ -13,9 +13,8 @@
 </div>
 -->
 <div class="container-slider">
-    <section class="regular slider">
         <slick-slider *ngIf="sliderPosts">
-            <div class="banner" *ngFor="let p of sliderPosts" >
+            <div class="banner" *ngFor="let p of sliderPosts">
                 <img src="{{ url + 'posts/' + p.src_imagem }}" class="img shadow"
                     [ngClass]="{'post-adulto' : p.adulto == 1}" (click)="openNew(p.id)" id="logo">
                 <div class="info-slider">
@@ -24,5 +23,5 @@
                 </div>
             </div>
         </slick-slider>
-    </section>
+
 </div>
