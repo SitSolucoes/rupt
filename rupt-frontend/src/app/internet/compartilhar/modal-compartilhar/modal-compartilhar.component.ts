@@ -1,3 +1,4 @@
+import { ShareButtons } from '@ngx-share/core';
 import { Global } from './../../../classes/global';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Interacao } from 'app/classes/interacao';
@@ -17,7 +18,7 @@ export class ModalCompartilharComponent implements OnInit {
     @Output() compartilhar = new EventEmitter();
 
     
-    constructor(private fb: FacebookService, private _router: Router) { 
+    constructor(private fb: FacebookService, private _router: Router, private _share: ShareButtons) { 
         let initParams: InitParams = {
             appId: '832278863618741',
             xfbml: true,

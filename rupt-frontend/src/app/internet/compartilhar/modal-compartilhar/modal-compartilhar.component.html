@@ -10,8 +10,21 @@
         <div class="icons">
             <div *ngFor='let i of interacoes' class="area">
                 <div *ngIf='i.categoria == 1 && i.compartilhar == 1' (click)='interage(i)'>
-                    <img *ngIf="i.id != 82" src="../../../assets/{{ i.src_icone }}" class="img">
-                    <g:plus *ngIf="i.id == 82" action="share"></g:plus>
+                    <!-- facebook button -->
+                    
+                    <button shareButton="facebook" *ngIf="i.id == 6" [style.backgroundColor]="_share.prop.facebook.color">
+                            <i [class]="_share.prop.facebook.icon"></i>
+                    </button>
+                    <!-- google plus button -->
+                    <button shareButton="google" *ngIf="i.id == 82" [style.backgroundColor]="_share.prop.google.color">
+                        <i [class]="_share.prop.google.icon"></i>
+                    </button>
+                    <!-- twitter button -->
+                    <button shareButton="twitter" *ngIf="i.id == 7" [style.backgroundColor]="_share.prop.twitter.color">
+                        <i [class]="_share.prop.twitter.icon"></i>
+                    </button>
+                    <!--<img  src="../../../assets/{{ i.src_icone }}" class="img">-->
+                    
                     <p>{{ i.nome }}</p>
                     
                     <p *ngIf='verifyInteragiu(i)' class="desfazer">(Desfazer)</p>

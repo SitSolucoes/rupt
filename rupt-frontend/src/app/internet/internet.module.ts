@@ -1,3 +1,5 @@
+import { HttpModule } from '@angular/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TimelineService } from './../services/timeline.service';
 import { Timeline } from './../classes/timeline';
 import { CategoriaLeitorService } from './../services/categoria-leitor.service';
@@ -7,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterializeModule } from 'angular2-materialize';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ShareModule } from '@ngx-share/core';
 
 import { InternetRoutingModule } from './internet-routing.module';
 import { HomeComponent } from './home/home.component';
@@ -47,7 +50,7 @@ import { PesquisaComponent } from './lista-resultados/pesquisa/pesquisa.componen
 import { ListaComponent } from './lista-resultados/lista/lista.component';
 import { RedefinirSenhaComponent } from './redefinir-senha/redefinir-senha.component';
 import { SeguidorService } from 'app/services/seguidor.service';
-import {SlickSlider2Component} from './slider/slick-slider2/slick-slider2.component';
+import { SlickSlider2Component } from 'app/internet/slider/slick-slider2/slick-slider2.component';
 
 @NgModule({ 
   imports: [
@@ -58,7 +61,10 @@ import {SlickSlider2Component} from './slider/slick-slider2/slick-slider2.compon
     ReactiveFormsModule,
     InputMaskModule,
     FacebookModule.forRoot(),
-    QuillEditorModule
+    QuillEditorModule,
+    HttpClientModule,
+    HttpModule,      // (Required) for share counts
+    ShareModule.forRoot()
   ],
   declarations: [
     FaqComponent,
@@ -100,6 +106,7 @@ import {SlickSlider2Component} from './slider/slick-slider2/slick-slider2.compon
     TimelineService,
     VisualizacoesService,
     InteracoesService,
+    HttpClient,
     InteracoesLeitorService,
     SeguidorService
   ]
