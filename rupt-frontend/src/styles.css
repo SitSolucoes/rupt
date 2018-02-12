@@ -25,7 +25,7 @@ body{
     width: 100%;
     padding: 0px;
     margin: 0px;
-    background: #f2f2f2;
+    background: #f7f7f7;
     font-family: lato;
 }
 
@@ -684,7 +684,11 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .container-categoria .container-slider{
-    padding: 0px !important;
+    padding: 20px 0px !important;
+}
+
+.container-slider-mobile{
+    display: none;
 }
 
 .menu-top .container-slider{
@@ -940,7 +944,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     float: left;
     padding-top: 40px;
     padding-bottom: 80px;
-    background: #ededed;
+    background: #f7f7f7;
     padding-left: 5%;
     padding-right: 5%;
     padding-bottom: 0px;
@@ -1722,6 +1726,10 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     font-family: lato;
 }
 
+.user .bio .profile-info-mobile{
+    display: none;
+}
+
 .user .bio2{
     bottom: 0px;
 }
@@ -1776,6 +1784,10 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     padding-left: 15px;
     padding-top: 20px;
     padding-bottom: 15px;
+}
+
+.user .bio .info-mobile{
+    display: none;
 }
 
 .user .bio .info .img{
@@ -3363,6 +3375,7 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
   display: block;
   float: left;
   width: 95%;
+  margin-left: 2.5%;
   padding-bottom: 80px;
 }
 
@@ -3370,8 +3383,7 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     margin-top: 40px;
     text-align: center;
     font-weight: bolder;
-    padding: 10px;
-    width: 15%;
+    padding: 10px 20px;
     border-radius: 2px;
     display: block;
     float: right;
@@ -3392,14 +3404,12 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     display: block;
     float: left;
     width: 100%;
-    margin-left: 30px;
     padding-top: 40px;
 }
 
 .cadastro .container p{
     display: block;
     float: left;
-    width: 80%;
     margin-bottom: 10px;
     font-family: 'gilroy-bold';
     letter-spacing: -1px;
@@ -3774,6 +3784,13 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     width: 60%;
     padding-left: 20px;
     padding-right: 20px;
+}
+
+.login-modal .login-container2{
+    width: 70%;
+    display: table;
+    margin: 0 auto;
+    float: none;
 }
 
 .login-modal .login-container .input{
@@ -4704,6 +4721,26 @@ quill-editor{
         width: 290px;
     }
 
+    .user .bio .profile{
+        left: -2%;
+    }
+
+    .user .feed .status .menu{
+         left: 0px;
+    }
+
+    .user .area-patrocinio .patrocinio .img{
+        height: 240px;
+    }
+
+    .user .bio .info{
+        padding-left: 6px;
+    }
+
+    .user .feed .post .info .img7{
+        max-height: 300px;
+    }
+
 }
 
 
@@ -4810,10 +4847,288 @@ quill-editor{
         padding-bottom: 20px;
     }
 
+    .headbar .headbar-center{
+        width: auto;
+        margin-left: 5%;
+    }
+
+    .headbar .headbar-left{
+        width: auto;
+    }
+
+    .modal6 {
+        width: 80% !important;
+        top: 10% !important;
+    }
+
+    .modal-content .info .img-area2 {
+        width: 100%;
+    }
+
+    .modal2 {
+        top: 20% !important;
+        width: 90%;
+    }
+
+    .user .bio .rating{
+        margin: 0px;
+        margin-bottom: 10px;
+    }
+
+    .user .bio .profile-info-mobile{
+        display: block;
+        width: auto;
+        float: right;
+        background: #fff;
+        margin-left: 1%;
+        padding: 0px;
+    }
+
+    .user .bio{
+        width: 100%;
+        bottom: 0px;
+        background: #fff;
+    }
+
+    .user .bio .profile{
+        bottom: 100px;
+    }
+
+    .user .bio .info{
+        margin-top: -100px;
+    }
+
+    .user .bio .info-mobile{
+        margin-top: 5px;
+        width: 100%;
+        overflow: hidden;
+        padding: 0px;
+        display: block;
+        float: left;
+        font-family: 'gilroy-bold';
+        font-size: 19px;
+        text-transform: capitalize;
+        clear: both;
+    }
+
+    .user .bio .info-mobile .subtitle{
+        font-family: 'lato' !important;
+        font-size: 16px;
+        clear: both;
+        color: #696969;
+        position: relative;
+        bottom: 5px;
+    }
+
+    .user .area{
+       display: none;
+    }
+
+    .user .area-patrocinio{
+        display: none;
+    }
+
+    .user .feed{
+        width: 95%;
+        left: 2.5%;
+        clear: both;
+        position: relative;
+        top: 20px;
+        margin-bottom: 100px;
+    }
+
+    .user .feed .post .text{
+        width: 98%;
+    }
+
+    .user .feed .post .info .border{
+        max-height: 150px;
+    }
+
+    .user .feed .post .info .img3{
+        max-height: 150px;
+    }
+
+    .cadastro .container .area .menu-mobile{
+        width: 99%;
+        margin-bottom: 10px;
+    }
+
+    .publicacao .container{
+        width: 100%;
+        margin-left: 0px;
+    }
+
+    .publicacao .container_left{
+        width: 95% !important;
+        margin-left: 2.5%;
+    }
+
+    .publicacao .underline{
+        margin-left: 2.5%;
+    }
+
+    .publicacao .container_right{
+        width: 95% !important;
+        margin-left: 2.5%;
+        margin-top: 30px;
+    }
+
 }
 
 @media screen and (max-width: 576px) {
 
+    .banner-promo .img {
+        max-width: 480px;
+    }
+
+    .headbar .headbar-center .img{
+        height: 40px;
+        margin-top: 2px;
+    }
+
+    .container-slider-screen{
+        display: none;
+    }
+
+    .container-slider-mobile{
+        display: block;
+    }
+
+    .drag-target{
+        width: 0px;
+    }
+
+    .menu-top .container-slider {
+        padding-left: 6% !important;
+        padding-right: 6% !important;
+    }
+
+    .info-post .time{
+        height: 20px;
+    }
+
+    .rodape .container{
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    .rodape .container .logo{
+        height: 100px;
+        display: block;
+        float: left;
+    }
+
+    .login-modal .social-medias{
+        width: 42%;
+    }
+
+    .login-modal .login-container{
+        width: 58%;
+        padding-left: 10px;
+        padding-right: 0px;
+    }
+
+    .login-modal .social-medias .area{
+        font-size: 12px;
+    }
+
+    .login-modal .social-medias{
+        padding: 0px 10px;
+    }
+
+    .login-modal .social-medias .fa{
+        width: 20px;
+        padding-left: 0px;
+    }
+
+    .user .bio .profile{
+        width: 150px;
+        height: 150px;
+    }
+
+    .user .bio .profile .img{
+        height: 160px;
+    }
+
+    .user .bio .info{
+        padding: 0px;
+    }
+
+    .user .area{
+        height: auto;
+    }
+
+    .user .bio{
+        padding-top: 5px;
+    }
+
+    .user .bio .profile-info-mobile{
+        margin-top: 5px;
+    }
+
+    .user .feed .post .info .border{
+        max-height: 200px;
+    }
+
+    .user .feed .post .info .img3{
+        max-height: 200px;
+    }
+
+    .headbar .headbar-right{
+        padding-right: 10px;
+    }
+
+    .headbar .headbar-right .notificacao{
+        right: 40px;
+    }
+
+    .headbar .headbar-left{
+        padding-left: 10px;
+    }
+
+    .headbar-right .dropdown-content2{
+        right: 15px !important;
+    }
+
+    .user .area .write-area{
+        margin-right: 10px;
+    }
+
+    .cadastro .container{
+        padding-top: 0px;
+    }
+
+    .cadastro .container p{
+        font-size: 30px;
+    }
+
+    .cadastro .container{
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .categoria .container .info{
+        padding: 20px 20px;
+    }
+
+    .categoria .container .info .card{
+        width: 45%;
+        margin-right: 2.5%;
+        margin-left: 2.5%;
+    }
+
+    .news .not-found .message{
+        font-size: 20px;
+    }
+
+    .faq{
+        width: 100%;
+    }
+
+    .contato{
+        width: 100%;
+    }
 
 
 }
