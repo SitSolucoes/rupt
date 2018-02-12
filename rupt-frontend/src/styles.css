@@ -4954,6 +4954,26 @@ quill-editor{
         margin-bottom: 10px;
     }
 
+    .publicacao .container{
+        width: 100%;
+        margin-left: 0px;
+    }
+
+    .publicacao .container_left{
+        width: 95% !important;
+        margin-left: 2.5%;
+    }
+
+    .publicacao .underline{
+        margin-left: 2.5%;
+    }
+
+    .publicacao .container_right{
+        width: 95% !important;
+        margin-left: 2.5%;
+        margin-top: 30px;
+    }
+
 }
 
 @media screen and (max-width: 576px) {
@@ -5093,7 +5113,9 @@ quill-editor{
     }
 
     .categoria .container .info .card{
-        width: 50%;
+        width: 45%;
+        margin-right: 2.5%;
+        margin-left: 2.5%;
     }
 
     .news .not-found .message{
