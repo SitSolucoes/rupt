@@ -10,7 +10,7 @@ import { ConnectionFactory } from 'app/classes/connection-factory';
 })
 export class SliderComponent implements OnInit {
   @Output() ready = new EventEmitter();
-
+  variableWidth: true;
   sliderPosts: any;
   sliderPostsHTML: string = '';
   url = ConnectionFactory.API_IMAGEM;

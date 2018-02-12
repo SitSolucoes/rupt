@@ -47,6 +47,7 @@ import { PesquisaComponent } from './lista-resultados/pesquisa/pesquisa.componen
 import { ListaComponent } from './lista-resultados/lista/lista.component';
 import { RedefinirSenhaComponent } from './redefinir-senha/redefinir-senha.component';
 import { SeguidorService } from 'app/services/seguidor.service';
+import {SlickSlider2Component} from './slider/slick-slider2/slick-slider2.component';
 
 @NgModule({ 
   imports: [
@@ -73,6 +74,7 @@ import { SeguidorService } from 'app/services/seguidor.service';
     SliderComponent,
     CadastroLeitorComponent,
     SlickSliderComponent,
+    SlickSlider2Component,
     CadastroEscritorComponent,
     CategoriaSliderComponent,
     CategoriasComponent,

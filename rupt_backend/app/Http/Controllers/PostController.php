@@ -264,11 +264,11 @@ class PostController extends Controller
         $post = Post::find($id);
 
         if ($post->path && $post->path != ''){
-            $path = public_path()."/".$path_logo;
+            $path = public_path()."/".$post->path;
             \File::Delete($path);
         }
 
-        $path = public_path()."/"."posts/";
+        $path = public_path()."/posts/";
         
         if (isset($_FILES['doc1']['tmp_name'])){
             move_uploaded_file($_FILES['doc1']['tmp_name'], $path.$id.".".pathinfo($_FILES['doc1']['name'], PATHINFO_EXTENSION));

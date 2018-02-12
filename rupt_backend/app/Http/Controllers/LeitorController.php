@@ -108,7 +108,8 @@ class LeitorController extends Controller
     }
 
     private function getById($id){
-        $leitor = Leitor::where('id', $id)->get();
+        $leitor = Leitor::where('id', $id)
+                        ->with('escritor')->get();
         return $leitor;
     }
 
@@ -389,7 +390,7 @@ class LeitorController extends Controller
 
     public function uploadImages (Request $request, $id){
         $leitor = Leitor::find($id);
-        $path = public_path()."/"."profile/";
+        $path = public_path()."/profile/";
         
         if (isset($_FILES['doc1']['tmp_name'])){
             \File::Delete($path.$leitor->src_foto);

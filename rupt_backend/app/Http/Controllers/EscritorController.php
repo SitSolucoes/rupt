@@ -99,7 +99,7 @@ class EscritorController extends Controller
     }
 
     public function uploadDocs (Request $request, $id){
-        $path = public_path()."/"."docs/";
+        $path = public_path().'/docs/';
         
         move_uploaded_file($_FILES['doc1']['tmp_name'], $path.$id."_1.".pathinfo($_FILES['doc1']['name'], PATHINFO_EXTENSION));
         move_uploaded_file($_FILES['doc2']['tmp_name'], $path.$id."_2.".pathinfo($_FILES['doc2']['name'], PATHINFO_EXTENSION));

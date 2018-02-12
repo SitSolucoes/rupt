@@ -2,7 +2,7 @@
     <div class="area light">
         <div class="title"> {{ categoria.nome }} </div>
         <div class="underline"></div>
-        <slick-slider *ngIf="categoria.posts">
+        <slick-slider2 *ngIf="categoria.posts">
             <div name="post" *ngFor="let p of categoria.posts" (click)="openNew(p.post.id)">
                 <!--tipo imagem + texto -->
                 <div *ngIf="p.post.tipo_post == 1 && p.post.src_imagem != ''" class="content-img-text">
@@ -88,6 +88,6 @@
                     </div>
                 </div>
             </div>
-        </slick-slider>
+        </slick-slider2>
     </div>
 </div>

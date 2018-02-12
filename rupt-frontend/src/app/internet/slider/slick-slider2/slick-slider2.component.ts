@@ -2,20 +2,19 @@ import { Component, Input, ElementRef, AfterViewInit, AfterContentInit} from '@a
 declare var jQuery: any;
 
 @Component({
-    selector: 'slick-slider',
+    selector: 'slick-slider2',
     template: `
         <ng-content></ng-content>
     `
 })
-export class SlickSliderComponent implements AfterContentInit{
+export class SlickSlider2Component implements AfterContentInit{
     @Input() options: any;
 
     $element: any;
 
     defaultOptions: any = {
         infinite: true,
-        slidesToShow: 3,
-        slidesToScroll: 3
+        variableWidth: true
     };
 
     constructor(private el: ElementRef) {
