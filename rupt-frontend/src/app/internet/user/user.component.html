@@ -48,8 +48,40 @@
 
         <div class=" bio" [ngClass]="{'bio2' : leitor?.escritor?.patrocinador}">
             <div class="profile"> <img src="{{ leitor.src_foto.indexOf('http') >= 0 ? leitor.src_foto : url + 'profile/' + leitor.src_foto }}" class="img"> </div>
+            <div class="area profile-info-mobile" [ngClass]="{'area3' : leitor?.escritor?.patrocinador}">
 
+                <a class="button button-orange" *ngIf="leitorLogado.id && leitor.id != leitorLogado.id && !seguindo" (click)='follow()'>
+                    <i class="fa fa-user-plus"></i>
+                    Seguir
+                </a>
+                <a class="button button-orange button-seguindo" *ngIf="leitorLogado.id && leitor.id != leitorLogado.id && seguindo" (click)='unfollow()'>
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </a>
+
+                <a routerLink="../../cadastro-escritor"
+                   *ngIf="leitor.id == leitorLogado.id && (!leitor.escritor || leitor.escritor.status == 'r')">
+                    <div class="button"> Tornar-se escritor </div>
+                </a>
+
+                <a routerLink="../../publicacao" *ngIf="leitor.id == leitorLogado.id && leitor.escritor && leitor.escritor.status != 'r'">
+                    <div class="write-area">
+                        <i class="fa fa-pencil img3" aria-hidden="true"></i>
+                        <p>Escrever uma nova publicação</p>
+
+                    </div>
+                </a>
+
+            </div>
             <div class="info">
+
+                <div class="info info-mobile">
+
+                    <div class="title">  {{ leitor.nome }} </div>
+
+                    <div class="title subtitle">  @{{ leitor.nick }} </div>
+
+                </div>
 
                 <div class="rating">
                     <img src="../../../assets/img/star.png" class="img">

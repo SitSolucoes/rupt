@@ -12,7 +12,7 @@
         </div>
         <div *ngIf="!enviado">
             <div class="login-modal">
-                <div class="login-container">
+                <div class="login-container login-container2">
                     <!--<input type="text" class="input" maxlength="30" name="marca" readonly placeholder="joao@hotmail.com">-->
                     <form [formGroup]="formulario" *ngIf="!spinner" (ngSubmit)="onSubmit()">
                         <input type="text" class="input" maxlength="30" formControlName="email" name="marca" placeholder="e-mail">
