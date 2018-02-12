@@ -11,7 +11,7 @@
             <div *ngFor='let i of interacoes' class="area">
                 <div *ngIf='i.categoria == 1 && i.compartilhar == 1' (click)='interage(i)'>
                     <img *ngIf="i.id != 82" src="../../../assets/{{ i.src_icone }}" class="img">
-                    <g:plus *ngIf="i.id == 82" action="share"></g:plus>
+                    <!--<g:plus *ngIf="i.id == 82" action="share"></g:plus>-->
                     <p>{{ i.nome }}</p>
                     
                     <p *ngIf='verifyInteragiu(i)' class="desfazer">(Desfazer)</p>

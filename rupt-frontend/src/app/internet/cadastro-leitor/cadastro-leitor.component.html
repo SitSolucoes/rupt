@@ -95,7 +95,7 @@
                     <label for="o" (click)="selectSexo('o')">Outro</label>
                 </div>
             </div>
-            <div class="menu ">
+            <div class="menu menu-mobile">
                 <label> Biografia 
                     <font style='font-size: 12px' *ngIf="form.get('biografia').value">
                         ({{ 300 - form.get('biografia').value.length }})
@@ -103,7 +103,7 @@
                 </label>
                 <textarea class="textarea" formControlName='biografia' maxlength="300"></textarea>
             </div>  
-            <div class="menu marginless">
+            <div class="menu marginless menu-mobile">
                 <!--
                 <div class="input-img">
                     <button type="button" class="button button-border" (click)="openModalImagem()" [disabled]='loading'>
