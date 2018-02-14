@@ -1161,7 +1161,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 /* modal  */
 
 .modal{
-    overflow: hidden;
+    /*overflow: hidden;*/
     max-height: 80%;
     border-radius: 2px;
 }
@@ -2344,7 +2344,7 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
 }
 
 .news .area-top2{
-    width: 80%;
+    width: 90%;
     padding-top: 15px;
 }
 
@@ -2398,6 +2398,17 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
   font-family: 'gilroy-bold';
   text-align: center;
   letter-spacing: -1px;
+}
+.news .area-top .subtitle{
+    display: block;
+    margin: 0 auto;
+    width: 85%;
+    text-align: center;
+    letter-spacing: -1px;
+    font-size: 20px;
+    line-height: 25px;
+    font-family: lato;
+    margin-bottom: 10px;
 }
 
 .news .container{
@@ -2935,7 +2946,7 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
 
 .modal-rascunho .news .area-top2 {
     padding-top: 5px;
-    max-height: 150px;
+    max-height: 180px;
     height: auto;
 }
 
@@ -3878,7 +3889,8 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
 
 .modal7{
     width: 70% !important;
-    top: 10% !important;
+    top: 5% !important;
+    max-height: 95%;
 }
 
 .login-modal .container .text{

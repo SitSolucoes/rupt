@@ -10,10 +10,12 @@
         </div>
 
         <div class="title"> {{ post.titulo }} </div>
+        <div *ngIf='post.subtitulo' class="subtitle">{{ post.subtitulo }}</div>
       </div>
 
       <div class="container container2">
         <div class="frame">
+
             <img src="{{ url + 'posts/' + post.src_imagem }}" class="img" *ngIf="post.src_imagem">
 
             <div class="info" [innerHTML]="post.conteudo"></div>

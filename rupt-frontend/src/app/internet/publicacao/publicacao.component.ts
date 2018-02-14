@@ -282,7 +282,12 @@ export class PublicacaoComponent implements OnInit {
   }
 
   openModalRascunho() {
-      this.modalRascunho.emit({action: 'modal', params: ['open']});
+      this._postService.getPost(this.post.id).subscribe(
+        ( response ) => {
+            this.post = response;
+            this.modalRascunho.emit({action: 'modal', params: ['open']});
+        }
+      );
   }
 
   closeModalRascunho(e){

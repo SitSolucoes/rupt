@@ -409,7 +409,7 @@ class LeitorController extends Controller
         
         $leitor->save();
 
-        return response()->json(['message' => "Escritor alterado com sucesso."], 200);
+        return response()->json(['post' => "Escritor alterado com sucesso."], 200);
     }
 
     public function pesquisa(Request $request){

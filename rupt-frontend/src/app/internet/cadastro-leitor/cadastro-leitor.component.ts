@@ -165,14 +165,14 @@ export class CadastroLeitorComponent implements OnInit {
           (nick: boolean) => {
             this.nickRepetido = nick
             if(this.nickRepetido){
-              this.nickEl.nativeElement.focus();
+              //this.nickEl.nativeElement.focus();
             }
             else {
               var regexp = new RegExp(/[!#$%&'()*+,-./:;?@[\\\]`{|}~]/);
               let result = regexp.test(this.form.get('nick').value);
               if (result == true){
                 this.nickInvalido = true;
-                this.nickEl.nativeElement.focus();
+                //this.nickEl.nativeElement.focus();
               }
             }
             
@@ -210,13 +210,13 @@ export class CadastroLeitorComponent implements OnInit {
       }
       else {
           this.emailInvalido = false;
-          this.emailEl.nativeElement.focus(); 
+          //this.emailEl.nativeElement.focus(); 
           this.validando = false;
       }
     }
     else{
         this.emailInvalido = false;
-        this.emailEl.nativeElement.focus(); 
+        //this.emailEl.nativeElement.focus(); 
         this.validando = false;
     }
   }

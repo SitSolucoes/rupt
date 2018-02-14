@@ -65,6 +65,8 @@
             </div>  
 
             <div class="title"> {{ post.titulo }}</div>
+            <div *ngIf='post.subtitulo' class="subtitle">{{ post.subtitulo }}</div>
+
             <div class="editado-text" *ngIf="edited"> 
                 Editado
             </div>
@@ -160,7 +162,7 @@
                         </div>
                         <form [formGroup]="form" (ngSubmit)="onSubmit()">
                             <input type="text" class="input" maxlength="140" name="comentario" formControlName="comentario" placeholder="Escreva um comentário..." >
-                            <button type="submit" class="button" [disabled]="form.value.comentario === ''"> 
+                            <button type="submit" class="button" [disabled]="form.value.comentario === '' || loading"> 
                                 <i class="fa fa-spinner fa-pulse fa-3x fa-fw" *ngIf='loading'></i>   
                                 Enviar 
                             </button>

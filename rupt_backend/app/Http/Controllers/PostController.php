@@ -260,10 +260,11 @@ class PostController extends Controller
         return response()->json($ret, 200);
     }
 
+    
     public function uploadImages (Request $request, $id){
         $post = Post::find($id);
 
-        if ($post->path && $post->path != ''){
+        if ($post->src_imagem && $post->src_imagem != ''){
             $path = public_path()."/".$post->path;
             \File::Delete($path);
         }
@@ -271,8 +272,9 @@ class PostController extends Controller
         $path = public_path()."/posts/";
         
         if (isset($_FILES['doc1']['tmp_name'])){
-            move_uploaded_file($_FILES['doc1']['tmp_name'], $path.$id.".".pathinfo($_FILES['doc1']['name'], PATHINFO_EXTENSION));
-            $post->src_imagem = $id.".".pathinfo($_FILES['doc1']['name'], PATHINFO_EXTENSION);
+            $fileName = md5(uniqid(rand(), true)).'.'.pathinfo($_FILES['doc1']['name'], PATHINFO_EXTENSION);
+            move_uploaded_file($_FILES['doc1']['tmp_name'], $path.$fileName);
+            $post->src_imagem = $fileName;
         }
         
         $post->save();
