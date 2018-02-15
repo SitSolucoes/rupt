@@ -33,6 +33,7 @@ export class NewsComponent implements OnInit {
   data_atual: Date;
   denuncias;
   edited = false;
+  ready: boolean = false;
   form;
   leitor = null;
   /*leitorLogado: boolean = localStorage.getItem('l') != null;*/
@@ -70,9 +71,7 @@ export class NewsComponent implements OnInit {
   ngOnInit() {
     window.scrollTo( 0, 0);
 
-    setTimeout(()=>{
-      this.openModalLoading();
-    }, 15);
+
 
     this._activatedRoute.params.subscribe(params => {
         this._leitoresService.leitor.subscribe(
@@ -351,6 +350,6 @@ export class NewsComponent implements OnInit {
   }
 
   pronto(){
-    this.closeModalLoading(true);
+    this.ready = true;
   }
 }

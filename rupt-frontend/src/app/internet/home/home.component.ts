@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
 
   leitor: Leitor = new Leitor();
   modalCategoria = new EventEmitter<string|MaterializeAction>();
-  
+  ready: boolean = false;
   slidersProntos = 0;
 
   constructor(private _leitorService: LeitoresService,
@@ -97,10 +97,10 @@ export class HomeComponent implements OnInit {
   }
 
   pronto(){
-    
     this.slidersProntos += 1;
     if(this.slidersProntos == 2){
       this.closeModalLoading(true);
     }
+      this.ready = true;
   }
 }

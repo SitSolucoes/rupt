@@ -29,6 +29,27 @@ body{
     font-family: lato;
 }
 
+.loading{
+    display: block;
+    float: left;
+    width: 100%;
+    padding: 10% 0px;
+    font-size: 22px;
+    text-align: center;
+    color: #424242;
+    font-family: lato;
+    font-weight: bolder;
+}
+
+.loading .fa{
+    display: table;
+    margin: 0 auto;
+    margin-top: 15px;
+    clear: both;
+    font-size:  60px;
+    color: #f97000;
+}
+
 .modal-overlay{
     opacity: .7 !important;
 }
@@ -239,6 +260,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     text-align: center;
     height: 17px;
     border-radius: 100%;
+    box-shadow: 0px 1px 1px darkred;
     background: red;
     color: #fff;
 }
@@ -294,6 +316,8 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 
 .headbar-right .dropdown-content2 .info:hover{
     opacity: .9;
+    background: #f0f0f0;
+    cursor: pointer;
 }
 
 .headbar-right .dropdown-content2 .info .area{
@@ -353,7 +377,6 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 
 .headbar-right .dropdown-content2 .title:hover{
     opacity: 1;
-    background: #fff;
     cursor: initial;
 }
 
@@ -1851,7 +1874,6 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
 
 .user .feed .tabs .tab a{
     color: #5e5e5e;
-    font-size: 16px;
     font-size: 14px;
     text-transform: uppercase;
 }
@@ -2522,6 +2544,7 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     display: block;
     float: right;
     font-size: 25px;
+    margin-right: 5px;
     margin-top: -2px;
     cursor: pointer;
 }
@@ -2865,7 +2888,7 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
   float: left;
   background: #fff;
   width: 18%;
-  margin-left: 30px;
+  margin-left: 2%;
   margin-top: 30px;
 }
 
@@ -3191,7 +3214,7 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
 }
 
 .tabs .tab a{
-    padding: 5px 24px;
+    padding: 5px 20px;
     color: #5e5e5e;
 }
 
@@ -4128,8 +4151,7 @@ quill-editor{
 .generico-modal{
     display: block;
     float: left;
-    width: 100%;
-    padding-bottom: 40px;
+    width: 30px !important;
 }
 
 .generico-modal .button{
@@ -4752,7 +4774,6 @@ quill-editor{
     .user .feed .post .info .img7{
         max-height: 300px;
     }
-
 }
 
 
@@ -4986,17 +5007,32 @@ quill-editor{
         margin-top: 30px;
     }
 
+    .news .area-top{
+        width: 90%;
+    }
+
+    .news .container{
+        width: 90%;
+    }
+
+    .news .container .frame .info{
+        padding-bottom: 0px;
+    }
+
+    .news .top-view{
+        display: none;
+    }
 }
 
 @media screen and (max-width: 576px) {
 
     .banner-promo .img {
-        max-width: 480px;
+        max-width: 340px;
     }
 
     .headbar .headbar-center .img{
-        height: 40px;
-        margin-top: 2px;
+        height: 35px;
+        margin-top: 4px;
     }
 
     .container-slider-screen{
@@ -5012,8 +5048,7 @@ quill-editor{
     }
 
     .menu-top .container-slider {
-        padding-left: 6% !important;
-        padding-right: 6% !important;
+        padding: 0px 6% !important;
     }
 
     .info-post .time{
@@ -5050,8 +5085,11 @@ quill-editor{
     }
 
     .login-modal .social-medias .fa{
-        width: 20px;
-        padding-left: 0px;
+        display: none;
+    }
+
+    .login-modal .social-medias .border{
+        display: none;
     }
 
     .user .bio .profile{
@@ -5092,7 +5130,7 @@ quill-editor{
     }
 
     .headbar .headbar-right .notificacao{
-        right: 40px;
+        right: 48px;
     }
 
     .headbar .headbar-left{
@@ -5142,9 +5180,92 @@ quill-editor{
         width: 100%;
     }
 
+    .news{
+        padding-bottom: 30px;
+    }
 
+    .news .container{
+        width: 95%;
+        margin-left: 2.5%;
+    }
+
+    .news .container .comentarios .profile .input{
+        width: 82%;
+    }
+
+    .news .container .frame{
+        width: 95%;
+    }
+
+    .news .container .area .social .fa-exclamation-circle{
+        margin-right: 10px;
+    }
+
+    .news .area-top .title{
+        font-size: 32px;
+    }
+
+    .modal-content .title{
+        font-size: 20px;
+    }
+
+    .modal6{
+        width: 90% !important;
+        top: 7% !important;
+    }
+
+    .modal-content .info p{
+        font-size: 16px;
+    }
+
+    .login-modal .social-medias{
+        width: 100%;
+    }
+
+    .login-modal .social-medias2 .area{
+        width: 45%;
+        font-size: 10px;
+        margin-left: 2.5%;
+        margin-right: 2.5%;
+        padding: 10px 5px;
+    }
+
+    .headbar .headbar-right .fa{
+        margin-left: 5px;
+        margin-right: 10px;
+    }
+
+    .modal-footer .button{
+        margin-bottom: 20px;
+    }
+
+    .modal-pesquisa .button-modal{
+        padding: 7px 10px;
+    }
+
+    .modal-pesquisa .button-modal{
+        width: 25%;
+    }
+
+    .modal-pesquisa .input{
+        width: 75% !important;
+    }
+
+    .info-text .title{
+        font-size: 16px;
+    }
+
+    .info-img-text .title{
+        font-size: 16px;
+    }
+
+    .headbar-right .dropdown-content2 .title{
+        font-size: 15px;
+    }
+
+    .headbar-right .dropdown-content2 .info h2{
+        margin-bottom: 5px;
+    }
 }
-
-
 
 /*teste*/

@@ -35,6 +35,7 @@ export class UserComponent implements OnInit {
   opExcluir = 1;
   loading: boolean;
   url = ConnectionFactory.API_IMAGEM;
+  ready: boolean = false;
   
   leitor: Leitor;
   leitorLogado: Leitor;
@@ -395,6 +396,11 @@ export class UserComponent implements OnInit {
       this.opExcluir = 1;
       this.modalExcluir.emit({action: 'modal',params: ['open']});
   }
+
+
+    pronto(){
+        this.ready = true;
+    }
 
   
 

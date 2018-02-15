@@ -7,11 +7,6 @@
         <modal-generico [action]="'denuncia'" [idObj]="post?.id" (closeModalGenerico)="closeModalDenuncia($event)"></modal-generico>
     </div>
 
-    <div id="modalLoading" class="loading-modal modal modal2 modal4"
-        materialize="modal" [materializeParams]="[{dismissible: false}]"
-        [materializeActions]="modalLoading">
-        <modal-generico [action]="'loading'" [obj]="'Carregando'" (closeModalGenerico)="closeModalLoading($event)"></modal-generico>
-    </div>
 
     <div id="modalCompartilhar" class="modal modal2 modal4"
         materialize="modal" [materializeParams]="[{dismissible: true}]"
@@ -45,84 +40,66 @@
         <esqueci-senha (closeModalEsqueciSenha)="closeModalEsqueciSenha($event)"></esqueci-senha>
     </div>
 
-    <div *ngIf='!post'>
-        <div class="not-found">
-            <div class="message">
+    <div *ngIf='!post && ready'>
+        <div class="message">
                 Publicação não encontrada
                 <i class="fa fa-file-text-o" aria-hidden="true"></i>
-            </div>
         </div>
     </div>
 
-    <div *ngIf='post'>
+    <div *ngIf='!ready' class="loading">
+        <div class="message">
+            Carregando...
+            <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+        </div>
+    </div>
 
+    <div *ngIf='post && ready'>
         <div class="area-top">
-        
             <div class="tag-menu">
-                
-                <div class="tag red"> {{ post.categorias_post[0].categoria.categoria }} </div> 
-                
-            </div>  
-
+                <div class="tag red"> {{ post.categorias_post[0].categoria.categoria }} </div>
+            </div>
             <div class="title"> {{ post.titulo }}</div>
             <div *ngIf='post.subtitulo' class="subtitle">{{ post.subtitulo }}</div>
-
             <div class="editado-text" *ngIf="edited"> 
                 Editado
             </div>
-
         </div>
-
         <div class="container">
-
             <div class="area">
-
                 <font *ngIf="!rascunho" class="name">Por
                     <a *ngIf="!rascunho" routerLink='/perfil/{{ post.autor.nick }}'>{{ post?.autor?.nick }}
                     </a>
                 </font>
-
                 <i *ngIf="!rascunho" class="fa fa-minus img" aria-hidden="true"></i>
                 <b *ngIf="!rascunho" > {{ calcHour( post.publishedAt ) }} </b>
 
                 <div class="social">
-
                     <p> {{ interacoesTotal[0] }} </p>
                     <img src="../../../assets/img/rupt-ico.png" class="img" title='Reações'>
-
                     <p> {{ interacoesTotal[1] }} </p>
                     <i class="fa fa-share img" aria-hidden="true" title='Compartilhados'></i>
                     <i class="fa fa-exclamation-circle img report" aria-hidden="true" (click)="openModalDenuncia()" title='Denunciar' *ngIf='leitor && leitor.id != post.autor.id' ></i>
                     <i *ngIf='leitor && leitor.id == post.autor.id' aria-hidden="true" class="fa fa-times excluir" title="Excluir" (click)="openModalExcluir(1)"></i>
-                    
                     <a routerLink='../../publicacao/{{ btoa(post.id) }}' *ngIf='leitor && leitor.id == post.autor.id'>
                         <i class="fa fa-pencil-square-o edit" aria-hidden="true" title='Editar'></i>
                     </a>
-
-                    
                 </div>
-
             </div>
 
             <div class="frame">
-
                 <img src="{{ url + 'posts/' + post.src_imagem }}" class="img" *ngIf="post.src_imagem && !rascunho">
-
                 <div class="info" [innerHTML]="post.conteudo"></div>
-
                 <div class="reactions" *ngIf="leitor">
                     <div *ngFor='let i of interacoes' class="area2">
                         <div *ngIf='i.categoria == 1 && i.compartilhar == false' (click)='interagePost(i)'>
                             <img src="../../../assets/{{ i.src_icone }}" class="img"
                                 [ngClass]="{'pb': interagiu && !checkInteracao(i.id)}"
                             >
-
                             <p>{{ i.nome }}</p>
                             <span class="count">{{ i.count }}</span>
-
                         </div>
                     </div>
-
                     <div class="area2">
                         <div (click)='openModalCompartilhar()'>
                             <i class="fa fa-share img" aria-hidden="true"></i>

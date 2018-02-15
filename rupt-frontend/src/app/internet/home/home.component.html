@@ -5,13 +5,15 @@
     <app-modal-categorias (closeModalCategoria)="closeModalCategoria($event)" [id]="leitor.id"></app-modal-categorias>
 </div>
 
-<div id="modalLoading" class="loading-modal modal modal2 modal4"
-    materialize="modal" [materializeParams]="[{dismissible: false}]"
-    [materializeActions]="modalLoading">
-    <modal-generico [action]="'loading'" [obj]="'Carregando postagens'" (closeModalGenerico)="closeModalLoading($event)"></modal-generico>
+
+<div *ngIf='!ready' class="loading">
+    <div class="message">
+        Carregando...
+        <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+    </div>
 </div>
 
-
+<div *ngIf='ready'>
 <!--publicidade-->
 <div class="banner-promo">
     <!--<div class="area">
@@ -32,8 +34,10 @@
         <img src="../assets/img/C (2).png" class="img">
     </div>
 </div>
+</div>
 
 <categorias (ready)="pronto($event)"></categorias>
+
     
     
 
