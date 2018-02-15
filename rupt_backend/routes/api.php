@@ -186,3 +186,8 @@ Route::post('pagamento/uploadDoc/{id}', ['uses' => 'PagamentoController@uploadDo
 //timeline
 Route::get('timeline/getTimeline/{id}/{leitor_id}', ['uses' => 'TimelineController@getTimeline']);
 Route::post('timeline/deleteTimeline', ['uses' => 'TimelineController@deleteTimeline']);
+
+//notificações
+Route::post('notificacao/create', ['uses' => 'NotificacaoController@create']);
+Route::post('notificacao/getNotificacoes', ['uses' => 'NotificacaoController@getNotificacoes']);
+Route::post('notificacao/markAsRead', ['uses' => 'NotificacaoController@markAsRead']);
