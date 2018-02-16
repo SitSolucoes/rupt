@@ -667,7 +667,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 
 
 .container-categoria .light{
-    background: #e7e7e7;
+    background: #f5f5f5;
 }
 
 .container-categoria .content{
@@ -3777,6 +3777,7 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     border-radius: 2px;
     margin-bottom: 10px;
     font-family: nexa-bold;
+    text-align: center;
 }
 
 .login-modal .social-medias2 .area{
@@ -4151,16 +4152,15 @@ quill-editor{
 .generico-modal{
     display: block;
     float: left;
-    width: 30px !important;
+    padding: 25px;
 }
 
-.generico-modal .button{
-    background: #ccc;
-    border: #ccc;
-    display: block;
-    float: left;
-    margin-right: 100px;
-    margin-top: 100px;
+.generico-modal .container{
+    display: table;
+    margin: 0 auto;
+    float: none;
+    width: auto;
+    background: transparent;
 }
 
 .generico-modal .text{
@@ -4171,18 +4171,27 @@ quill-editor{
 
 .generico-modal .button{
     display: block;
-    float: none;
-    margin: 0 auto;
-    margin-top: 20px;
+    float: left;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 0.5%;
+    margin-right: 0.5%;
     border: 1px solid #d1d1d1;
+    background: #ccc;
     text-transform: uppercase;
+    width: 49% !important;
     height: auto !important;
-    width: auto !important;
-    padding: 8px !important;
-    padding-left: 15px !important;
-    padding-right: 15px !important;
-    font-size: 16px !important;
+    padding: 8px 10px !important;
+    font-size: 15px !important;
     border-radius: 3px;
+    font-family: nexa-bold;
+}
+
+.generico-modal .button:hover{
+    background-color: red !important;
+    border: 1px solid red;
+    color: #fff;
+    transition: 0.35s;
 }
 
 .modal-compartilhar .title{
@@ -4736,6 +4745,79 @@ quill-editor{
     position: relative;
 }
 
+@media screen and (min-width: 1292px) {
+    .news {
+        display: table;
+        float: none;
+        margin: 0 auto;
+        width: 100%;
+        max-width: 1000px;
+        padding-bottom: 60px;
+    }
+
+    .user {
+        float: left;
+        width: 100%;
+        float: none;
+        margin: 0 auto;
+        width: 100%;
+        max-width: 1000px;
+        padding-bottom: 60px;
+    }
+
+    .user .bio{
+        padding-left: 0px;
+    }
+
+    .publicacao{
+        float: left;
+        width: 100%;
+        float: none;
+        margin: 0 auto;
+        width: 100%;
+        max-width: 1000px;
+        padding-bottom: 60px;
+    }
+
+    .home{
+        float: left;
+        width: 100%;
+        float: none;
+        margin: 0 auto;
+        width: 100%;
+        max-width: 1000px;
+        padding-bottom: 60px;
+    }
+
+    .cadastro{
+        float: left;
+        width: 100%;
+        float: none;
+        margin: 0 auto;
+        width: 100%;
+        max-width: 1000px;
+        padding-bottom: 60px;
+    }
+
+    .categoria{
+        float: left;
+        width: 100%;
+        float: none;
+        margin: 0 auto;
+        width: 100%;
+        max-width: 1000px;
+        padding-bottom: 60px;
+    }
+
+    .banner-promo .img{
+        max-width: 920px;
+    }
+
+    .categoria .topico{
+        position: relative;
+    }
+}
+
 @media screen and (max-width: 992px) {
 
     .menu-top .img{
@@ -5031,8 +5113,24 @@ quill-editor{
     }
 
     .headbar .headbar-center .img{
-        height: 35px;
-        margin-top: 4px;
+        height: 28px;
+        margin-top: 7px;
+    }
+
+    .headbar .headbar-center{
+        margin-left: 2%;
+    }
+
+    .headbar .login-border{
+        font-size: 18px;
+        padding: 0px 5px;
+        margin-top: 20px;
+    }
+
+    .headbar .headbar-right .fa-search{
+        font-size: 18px;
+        margin-top: 28px;
+        margin-top: 24px;
     }
 
     .container-slider-screen{
@@ -5048,7 +5146,11 @@ quill-editor{
     }
 
     .menu-top .container-slider {
-        padding: 0px 6% !important;
+        padding: 0px 8% !important;
+    }
+
+    .menu-top .img{
+        height: 330px !important;
     }
 
     .info-post .time{
@@ -5061,9 +5163,17 @@ quill-editor{
     }
 
     .rodape .container .logo{
-        height: 100px;
+        height: auto;
+        width: 100%;
         display: block;
         float: left;
+    }
+
+    .rodape .container .img{
+        display: table;
+        margin: 0 auto;
+        float: none;
+        margin-right: 0px;
     }
 
     .login-modal .social-medias{
@@ -5071,7 +5181,7 @@ quill-editor{
     }
 
     .login-modal .login-container{
-        width: 58%;
+        width: 95%;
         padding-left: 10px;
         padding-right: 0px;
     }
@@ -5111,6 +5221,15 @@ quill-editor{
 
     .user .bio{
         padding-top: 5px;
+        padding-left: 15px;
+    }
+
+    .user .feed .post .info{
+        padding-left: 0px;
+    }
+
+    .user .feed .post .info .new{
+        padding-right: 0px;
     }
 
     .user .bio .profile-info-mobile{
@@ -5223,7 +5342,7 @@ quill-editor{
     }
 
     .login-modal .social-medias2 .area{
-        width: 45%;
+        width: 95%;
         font-size: 10px;
         margin-left: 2.5%;
         margin-right: 2.5%;
@@ -5265,6 +5384,19 @@ quill-editor{
 
     .headbar-right .dropdown-content2 .info h2{
         margin-bottom: 5px;
+    }
+
+    .rodape .container .border{
+        display: none;
+    }
+
+    .tabs .tab a{
+        padding: 5px 10px;
+    }
+
+    .container-categoria .area{
+        padding-left: 10%;
+        padding-right: 10%;
     }
 }
 
