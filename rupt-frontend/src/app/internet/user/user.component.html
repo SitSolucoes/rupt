@@ -205,12 +205,15 @@
                         </font>
 
                         <!-- não é a propria tl -->
-                        <span class="dropdown-area">
-                            <a class='dropdown-button btn' data-activates='dropdown' materialize="dropdown" *ngIf="t.leitor_idLeitor != leitorLogado.id && leitorLogado.id">
+                        <span class="dropdown-area" style="position: relative; display: block" *ngIf="t.leitor_idLeitor != leitorLogado.id && leitorLogado.id && t.post.autor.id != leitorLogado.id">
+                            <!-- Dropdown Trigger -->
+                            <a materialize='dropdown' class='dropdown-button btn'
+                            data-beloworigin="true" [attr.data-activates]="'t_dropdown'+t.id">
                                 <i class="fa fa-ellipsis-h img"></i>
                             </a>
 
-                            <ul id='dropdown' class='dropdown-content' style="top: 60px !important;">
+                            <!-- Dropdown Structure -->
+                            <ul id='t_dropdown{{ t.id }}' class='dropdown-content'>
                                 <!-- Caso user seja escritor <li><a routerLink="cadastro-escritor">Editar Perfil</a></li>-->
                                 <li>
                                     <a (click)='openModalCompartilhar(t.interacoes, t.interacoesLeitor, t.post)'>Compartilhar</a>
@@ -220,6 +223,8 @@
                                     <a (click)="openModalDenuncia(t.post)"> Denunciar </a>
                                 </li>
                             </ul>
+
+                            
                         </span>
 
                         <!-- propria tl mas post compartilhado -->
@@ -228,7 +233,7 @@
                         </a>
                         
                         <!-- tl dele com post próprio -->
-                        <a routerLink='../../publicacao/{{ btoa(t.post.id) }}' *ngIf="t.post.autor.id == leitorLogado.id">
+                        <a routerLink='../../publicacao/{{ btoa(t.post.id) }}' *ngIf="t.leitor_idLeitor == leitorLogado.id && t.post.autor.id == leitorLogado.id">
                             <i class="fa fa-pencil-square-o img img5" aria-hidden="true" title='Editar'></i>
                         </a>
 

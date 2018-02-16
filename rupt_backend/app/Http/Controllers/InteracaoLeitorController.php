@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\InteracaoLeitor;
+use App\Notificacao;
+use App\Http\Controllers\NotificacaoController;
 use App\Http\Controllers\InteracaoController;
 use App\Http\Controllers\TimelineController;
+use App\Http\Controllers\PostController;
 
 class InteracaoLeitorController extends Controller
 {
-    private function createInteracao(Request $request){
+    private function createInteracao(Request $request, $tipoInteracao){
         $interacaoLeitor = new InteracaoLeitor();
 
         $interacaoLeitor->post_idPost = $request->post_idPost;
@@ -19,6 +22,51 @@ class InteracaoLeitorController extends Controller
         $interacaoLeitor->interacao_idInteracao = $request->interacao['id'];
 
         $interacaoLeitor->save();
+
+        /*
+        tipoInteracao: 
+            1 - post
+            2 - timeline
+            3 - comentário
+        tipo: 
+            3 - reação
+            4 - compartilhar 
+        */
+
+        $c = new PostController();
+        $post = $c->getById($request->post_idPost);
+        $post = $post->first();
+
+        $notificacao = new Notificacao();
+        $notificacao->escritor_idEscritor = $post->autor->id;
+        $notificacao->leitor_idLeitor = $request->leitor_idLeitor;
+        $notificacao->lida = false;
+
+        switch ($tipoInteracao) {
+            case 1:
+                if ($request->interacao['compartilhar']){
+                    $notificacao->tipo = 4;
+                    $notificacao->descricao = 'compartilhou a sua publicação';
+                }
+                else{
+                    $notificacao->tipo = 3;
+                    $notificacao->descricao = 'reagiu a sua publicação';
+                }
+
+                $notificacao->rota = '/noticia/'.$post->link;
+                break;
+            case 2:
+                $notificacao->descricao = 'reagiu a uma publicação';
+                $notificacao->rota = '/noticia/'.$post->link;
+                break;
+            case 3:
+                $notificacao->tipo = 3;
+                $notificacao->descricao = 'reagiu ao seu comentário';
+                $notificacao->rota = '/noticia/'.$post->link;    
+                break;
+        }
+
+        NotificacaoController::create($notificacao);
     }
 
     private function interagePost(Request $request){
@@ -50,7 +98,7 @@ class InteracaoLeitorController extends Controller
         //se a interação não existia ou se é compartilhar, cria uma nova
         //se a interação já existia, quer dizer que ele ta desfazendo ela
         if (!$exist)
-            $this->createInteracao($request);
+            $this->createInteracao($request, 1);
 
         $c = new InteracaoController();
         $interacoesCount = $c->getInteracoes($request->post_idPost, 1, false);
@@ -79,7 +127,7 @@ class InteracaoLeitorController extends Controller
         //se a interação não existia, cria uma nova
         //se a interação já existia, quer dizer que ele ta desfazendo ela
         if ($exist == false)
-            $this->createInteracao($request);
+            $this->createInteracao($request, 3);
 
         return response()->json(['ok' => 'true'], 201);
     }
@@ -110,7 +158,7 @@ class InteracaoLeitorController extends Controller
         //se a interação não existia ou se é compartilhar, cria uma nova
         //se a interação já existia, quer dizer que ele ta desfazendo ela
         if (!$exist)
-            $this->createInteracao($request);
+            $this->createInteracao($request, 2);
 
         $c = new InteracaoController();
         $interacoesCount = $c->getInteracoes($request->timeline_idTimeline, 1, true);

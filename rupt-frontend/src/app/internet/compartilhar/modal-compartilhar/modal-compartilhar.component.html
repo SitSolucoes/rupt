@@ -12,20 +12,30 @@
                 <div *ngIf='i.categoria == 1 && i.compartilhar == 1' (click)='interage(i)'>
                     <!-- facebook button -->
                     
-                    <button shareButton="facebook" *ngIf="i.id == 6" [style.backgroundColor]="_share.prop.facebook.color">
-                            <i [class]="_share.prop.facebook.icon"></i>
+                    <button shareButton="facebook" *ngIf="i.id == 6">
+                        <img  src="../../../assets/{{ i.src_icone }}" class="img">
+                
+                        <p>{{ i.nome }}</p>
                     </button>
                     <!-- google plus button -->
-                    <button shareButton="google" *ngIf="i.id == 82" [style.backgroundColor]="_share.prop.google.color">
-                        <i [class]="_share.prop.google.icon"></i>
+                    <button shareButton="google" *ngIf="i.id == 8">
+                        <img  src="../../../assets/{{ i.src_icone }}" class="img">
+                
+                        <p>{{ i.nome }}</p>
                     </button>
                     <!-- twitter button -->
-                    <button shareButton="twitter" *ngIf="i.id == 7" [style.backgroundColor]="_share.prop.twitter.color">
-                        <i [class]="_share.prop.twitter.icon"></i>
+                    <button shareButton="twitter" *ngIf="i.id == 7">
+                        <img  src="../../../assets/{{ i.src_icone }}" class="img">
+                
+                        <p>{{ i.nome }}</p>
                     </button>
-                    <!--<img  src="../../../assets/{{ i.src_icone }}" class="img">-->
                     
-                    <p>{{ i.nome }}</p>
+                    <!-- rupt -->
+                    <button *ngIf="i.id < 6">
+                        <img  src="../../../assets/{{ i.src_icone }}" class="img">
+                
+                        <p>{{ i.nome }}</p>
+                    </button>
                     
                     <p *ngIf='verifyInteragiu(i)' class="desfazer">(Desfazer)</p>
                 </div>

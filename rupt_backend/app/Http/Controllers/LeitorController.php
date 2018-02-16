@@ -72,7 +72,7 @@ class LeitorController extends Controller
             return response()->json(['mensagem' => 'Token ou Id inválido'], 500);
         }
         
-        $leitor = Leitor::where('uid_fb', '=', $uid)->get();
+        $leitor = Leitor::where('uid_fb', '=', $uid)->first();
         
         if($leitor != null){
             $retorno['leitor'] = $leitor;
@@ -81,8 +81,6 @@ class LeitorController extends Controller
         
         $retorno['leitor'] = $leitor;
         return response()->json((object)$retorno, 200);        
-        
-        
     }
 
     public function checkGoogleToken($token, $uid){
