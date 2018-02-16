@@ -52,6 +52,7 @@ import { RedefinirSenhaComponent } from './redefinir-senha/redefinir-senha.compo
 import { SeguidorService } from 'app/services/seguidor.service';
 import {SlickSlider2Component} from './slider/slick-slider2/slick-slider2.component';
 import { SlickSliderMobileComponent } from './slider/slick-slider-mobile/slick-slider-mobile.component';
+import { NotificacaoService } from '../services/notificacao.service';
 
 @NgModule({ 
   imports: [
@@ -110,7 +111,8 @@ import { SlickSliderMobileComponent } from './slider/slick-slider-mobile/slick-s
     InteracoesService,
     HttpClient,
     InteracoesLeitorService,
-    SeguidorService
+    SeguidorService,
+    NotificacaoService
   ]
 })
 export class InternetModule { }

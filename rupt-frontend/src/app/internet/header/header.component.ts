@@ -10,6 +10,8 @@ import { AuthService } from 'angular2-social-login/dist/auth.service';
 import { CategoriasService } from 'app/services/categorias.service';
 import { Categoria } from 'app/classes/categoria';
 import { PostsService } from 'app/services/posts.service';
+import { NotificacaoService } from '../../services/notificacao.service';
+import { Notificacao } from '../../classes/notificacao';
 declare var $: any;
 
 @Component({
@@ -29,18 +31,24 @@ export class HeaderComponent implements OnInit {
   modalPesquisa= new EventEmitter<string|MaterializeAction>();
   openedSearch: boolean = false;
 
+  notificacoes: Notificacao[] = new Array();
+
   url = ConnectionFactory.API_IMAGEM;
 
   constructor(private _leitorService: LeitoresService,
               private _router: Router,
               private _auth: AuthService,
               private _categoriaService: CategoriasService,
-              private _postService: PostsService
+              private _postService: PostsService,
+              private _notificacaoService: NotificacaoService
               ) { }
 
   ngOnInit() {
       this._leitorService.leitor.subscribe(
-        (leitor: Leitor) => { this.leitor = leitor }
+        (leitor: Leitor) => { 
+          this.leitor = leitor;
+          this.getNotificacoes();  
+        }
       )
 
       $('.button-collapse').sideNav({
@@ -49,6 +57,12 @@ export class HeaderComponent implements OnInit {
 
       this._leitorService.verificaLogin().subscribe();
       this.getCategorias();
+  }
+
+  getNotificacoes(){
+      this._notificacaoService.getNotificacoes(this.leitor.id).subscribe(
+          ( response ) => { this.notificacoes = response }
+      )
   }
 
   getCategorias(){
@@ -125,7 +139,7 @@ export class HeaderComponent implements OnInit {
 
   private _fb_logout(){
     this._auth.logout().subscribe(
-      (data)=>{console.log(data)}
+      (data)=>{}
     )
   }
 

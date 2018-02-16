@@ -12,12 +12,6 @@ export class NotificacaoService {
 
 	constructor(private _http: Http) { }
 
-	create(notificacao: Notificacao){
-		return this._http.post(this._url + 'notificacao/create', JSON.stringify(notificacao), {headers: this.headers}).map(
-			( response ) => { return true }
-		)
-	}
-
 	markAsRead(escritor_id){
 		const body = { escritor_id: escritor_id };
 

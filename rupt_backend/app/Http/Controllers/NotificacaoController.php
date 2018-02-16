@@ -7,18 +7,16 @@ use App\Notificacao;
 
 class NotificacaoController extends Controller
 {
-    public function create(Request $request){
+    public static function create($n){
         $notificacao = new Notificacao();
 
-        $notificacao->escritor_idEscritor = $request->escritor_id;
-        $notificacao->leitor_idLeitor = $request->leitor_id;
-        $notificacao->descricao = $request->descricao;
-        $notificacao->rota = $request->rota;
-        $notificacao->lida = $request->lida;
+        $notificacao->escritor_idEscritor = $n->escritor_idEscritor;
+        $notificacao->leitor_idLeitor = $n->leitor_idLeitor;
+        $notificacao->descricao = $n->descricao;
+        $notificacao->rota = $n->rota;
+        $notificacao->lida = $n->lida;
 
         $notificacao->save();
-
-        return response()->json(['notificacao' => true], 201);
     }
 
     private function get($escritor_id){

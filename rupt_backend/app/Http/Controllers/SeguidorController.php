@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Seguidor;
+use App\Notificacao;
+use App\Http\Controllers\NotificacaoController;
+use App\Http\Controllers\LeitorController;
 
 class SeguidorController extends Controller
 {
@@ -13,6 +16,18 @@ class SeguidorController extends Controller
         $seguidor->leitor_idLeitor = $request->leitor_id;
         $seguidor->escritor_idEscritor = $request->escritor_id;
         $seguidor->save();
+
+        $c = new LeitorController();
+        $leitor = $c->getById($request->escritor_id)->first();
+
+        $notificacao = new Notificacao();
+        $notificacao->escritor_idEscritor = $request->escritor_id;
+        $notificacao->leitor_idLeitor = $request->leitor_id;
+        $notificacao->descricao = 'está te seguindo';
+        $notificacao->rota = '/perfil/'.$leitor->nick;
+        $notificacao->lida = false;
+
+        NotificacaoController::create($notificacao);
 
         return response()->json(['follow' => true], 201);
     }

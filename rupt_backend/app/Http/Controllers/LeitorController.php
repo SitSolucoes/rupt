@@ -107,7 +107,7 @@ class LeitorController extends Controller
         return response()->json((object)$retorno, 200);        
     }
 
-    private function getById($id){
+    public function getById($id){
         $leitor = Leitor::where('id', $id)
                         ->with('escritor')->get();
         return $leitor;

@@ -23,9 +23,7 @@ export class HomeComponent implements OnInit {
               private _categoriaLeitorService: CategoriaLeitorService) {}
 
   ngOnInit() {
-    setTimeout(()=>{
-      this.openModalLoading();
-    }, 1)
+    
     this._leitorService.leitor.subscribe(
       (leitor: Leitor) => { this.leitor = leitor; }
     );
@@ -78,29 +76,11 @@ export class HomeComponent implements OnInit {
     this.modalCategoria.emit({action:"modal",params:['close']});
   }
 
-  modalLoading = new EventEmitter<string|MaterializeAction>();
-
-  openModalLoading() {
-    
-    this.modalLoading.emit({
-         action: 'modal',
-         params: ['open']});
-  }
-
-  closeModalLoading(e){
-    if(e){
-      this.modalLoading.emit({
-        action:'modal',
-        params:['close']
-      });
+    pronto(){
+        this.slidersProntos += 1;
+        if(this.slidersProntos == 2){
+            this.ready = true;
+        }
     }
-  }
 
-  pronto(){
-    this.slidersProntos += 1;
-    if(this.slidersProntos == 2){
-      this.closeModalLoading(true);
-    }
-      this.ready = true;
-  }
 }
