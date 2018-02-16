@@ -68,6 +68,7 @@ export class UserComponent implements OnInit {
 
   ngOnInit() {
       window.scrollTo(0, 0);
+      this.refreshTabs();
 
       this.leitor = new Leitor();
       this.leitor.escritor = new Escritor();
@@ -96,6 +97,13 @@ export class UserComponent implements OnInit {
       });
   }
 
+  refreshTabs(){
+    setTimeout(()=>{ 
+      $('.tabs').tabs();  
+    }, 500); 
+    $('.tabs').tabs(); 
+  }
+
   getTimeline(){
       this.timelineFiltro = new Array();
 
@@ -104,6 +112,7 @@ export class UserComponent implements OnInit {
           this.timeline = timeline;
           this.timelineFiltro = timeline;
           
+          this.refreshTabs();
           /*for(let t of this.timeline){
               this.timelineFiltro.push(t);
           }*/
@@ -119,11 +128,7 @@ export class UserComponent implements OnInit {
         this._postService.getRascunhos(this.leitorLogado.id).subscribe(
           (rascunhos: Post[]) => {
               this.rascunhos = rascunhos;
-
-              setTimeout(()=>{ 
-                $('.tabs').tabs();  
-              }, 500); 
-              $('.tabs').tabs();  
+              this.refreshTabs();
           }
         )
     }
@@ -303,13 +308,19 @@ export class UserComponent implements OnInit {
 
   getSeguidores(){
       this._seguidorService.seguidores(this.leitor.id).subscribe(
-        ( response ) => { this.listSeguidores = response }
+        ( response ) => { 
+          this.listSeguidores = response; 
+          this.refreshTabs();
+        }
       )
   }
 
   getSeguindo(){
       this._seguidorService.seguindo(this.leitor.id).subscribe(
-          ( response ) => { this.listSeguindo = response }
+          ( response ) => { 
+            this.listSeguindo = response;
+            this.refreshTabs();
+          }
       )
   }
 
@@ -401,7 +412,4 @@ export class UserComponent implements OnInit {
     pronto(){
         this.ready = true;
     }
-
-  
-
 }

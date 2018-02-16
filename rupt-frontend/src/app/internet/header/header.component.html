@@ -65,17 +65,29 @@
         </a>
         <a *ngIf='notificacoes.length > 0' class='dropdown-button btn' data-activates='dropdown2' materialize="dropdown">
             <i class="fa fa-bell img" aria-hidden="true"></i>
-            <div class="notificacao"> <font style="position: relative; bottom: 10px">3</font></div>
+            <div class="notificacao"> 
+                <font style="position: relative; bottom: 10px">{{ countNotificacoesNaoLidas() }}</font>
+            </div>
         </a>
         <ul id='dropdown2' class='dropdown-content dropdown-content2' style="top: 60px !important;">
             <div class="title"> Notificações </div>
-            <div class="info">
-                <div class="area">
-                    <img src="../../../assets/img/person.png" class="img">
-                </div>
-                <h1><b>Luciana Medeiros</b> está te seguindo</h1>
-                <h2> <i class="fa fa-user" aria-hidden="true"></i> 24 de janeiro  às 17:05</h2>
+            
+            <div class="info" *ngFor='let n of notificacoes'>
+                <a routerLink='{{ n.rota }}'>
+                    <div class="area">
+                        <img src="{{ url + 'profile/' + n.leitor.src_foto }}" class="img">
+                    </div>
+                    <h1><b>{{ n.leitor.nome }}</b> {{ n.descricao }}</h1>
+                    <h2> 
+                        <i *ngIf='n.tipo == 2' class="fa fa-user" aria-hidden="true"></i> 
+                        {{ n.created_at | date:'d' }} de 
+                        {{ n.created_at | date:'MMMM' }} às
+                        {{ n.created_at | date:'j:mm ' }}
+                    </h2>
+                </a>
             </div>
+
+            <!--
             <div class="info">
                 <div class="area">
                     <img src="../../../assets/img/person2.png" class="img">
@@ -111,7 +123,7 @@
                 <h1><b>Pedro Silva</b> comentou na sua publicação</h1>
                 <h2> <i class="fa fa-comment" aria-hidden="true"></i> 24 de janeiro  às 17:05</h2>
             </div>
-
+            -->
         </ul>
         <a class='dropdown-button btn' data-activates='dropdown1' materialize="dropdown"><i class="fa fa-chevron-circle-down img" aria-hidden="true"></i></a>
         <!-- Dropdown Structure -->

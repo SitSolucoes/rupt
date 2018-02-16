@@ -26,6 +26,7 @@ class SeguidorController extends Controller
         $notificacao->descricao = 'está te seguindo';
         $notificacao->rota = '/perfil/'.$leitor->nick;
         $notificacao->lida = false;
+        $notificacao->tipo = 2; //2 - seguir
 
         NotificacaoController::create($notificacao);
 

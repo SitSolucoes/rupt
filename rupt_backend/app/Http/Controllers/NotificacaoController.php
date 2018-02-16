@@ -7,6 +7,15 @@ use App\Notificacao;
 
 class NotificacaoController extends Controller
 {
+    /*
+    tipo: 
+        1 - adm
+        2 - seguir
+        3 - reação
+        4 - compartilhar 
+        5 - comentar
+    */
+
     public static function create($n){
         $notificacao = new Notificacao();
 
@@ -15,6 +24,7 @@ class NotificacaoController extends Controller
         $notificacao->descricao = $n->descricao;
         $notificacao->rota = $n->rota;
         $notificacao->lida = $n->lida;
+        $notificacao->tipo = $n->tipo;
 
         $notificacao->save();
     }
@@ -22,6 +32,7 @@ class NotificacaoController extends Controller
     private function get($escritor_id){
         return Notificacao::where('escritor_idEscritor', $escritor_id)
                                    ->orderBy('created_at', 'desc')
+                                   ->with('leitor')
                                    ->limit('20')
                                    ->get();
     }

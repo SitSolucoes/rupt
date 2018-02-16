@@ -65,6 +65,16 @@ export class HeaderComponent implements OnInit {
       )
   }
 
+  countNotificacoesNaoLidas(){
+      let nLidas = this.notificacoes.filter((element) => {
+          if (element.lida == false)
+              return true;
+          return false;
+      });
+
+      return nLidas.length;
+  }
+
   getCategorias(){
       this._categoriaService.getCategoriasAtivas().subscribe(
         (categorias) => { this.categorias = categorias; }
