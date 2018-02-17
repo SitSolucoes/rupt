@@ -15,9 +15,9 @@ export class ModalCompartilharComponent implements OnInit {
 
     @Input() interacoes: Interacao[];
     @Input() interacoesLeitor: InteracaoLeitor[];
+    @Input() autorPost: boolean;
     @Output() compartilhar = new EventEmitter();
 
-    
     constructor(private fb: FacebookService, private _router: Router, private _share: ShareButtons) { 
         let initParams: InitParams = {
             appId: '832278863618741',

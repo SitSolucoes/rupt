@@ -14,7 +14,8 @@
 <div id="modalCompartilhar" class="modal modal2 modal4"
     materialize="modal" [materializeParams]="[{dismissible: true}]"
     [materializeActions]="modalCompartilhar">
-    <modal-compartilhar [interacoes]='interacoes' [interacoesLeitor]='interacoesLeitor' (compartilhar)="compartilhar($event)"></modal-compartilhar>
+    <modal-compartilhar [interacoes]='interacoes' [interacoesLeitor]='interacoesLeitor' [autorPost]='false'
+    (compartilhar)="compartilhar($event)"></modal-compartilhar>
 </div>
 
 <div id="modal-mensagem-compartilhar" class="modal modal-mensagem"
