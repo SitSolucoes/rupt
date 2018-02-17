@@ -27,8 +27,8 @@ export class SliderComponent implements OnInit {
     this.getSliderPostsHTML();
   }
 
-  openNew(id){
-    this._router.navigate(['/noticia', id]);
+  openNew(link){
+    this._router.navigate(['/noticia', link]);
   }
 
 

@@ -22,8 +22,8 @@ export class CategoriaSliderComponent implements OnInit {
     //console.log(this.categoria);  
   }
 
-  openNew(id){
-    this._router.navigate(['noticia', id]);
+  openNew(link){
+    this._router.navigate(['noticia', link]);
   }
 
 

@@ -242,7 +242,7 @@ export class PublicacaoComponent implements OnInit {
               if (rascunho == true)
                   this.openModalRascunho();
               else 
-                  this._router.navigate(['noticia/'+ this.post.id]);
+                  this._router.navigate(['noticia/'+ this.post.link]);
         };
         this._uploadFileService.onErrorUpload = (item, response, status, headers) => {
               // error callback
@@ -258,7 +258,7 @@ export class PublicacaoComponent implements OnInit {
           if (rascunho == true)
               this.openModalRascunho();
           else
-            this._router.navigate(['noticia/' + this.post.id]);
+            this._router.navigate(['noticia/' + this.post.link]);
       }
   }
 

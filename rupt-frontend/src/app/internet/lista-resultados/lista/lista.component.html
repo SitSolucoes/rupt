@@ -6,7 +6,7 @@
 
         <div class="container-categoria info" *ngIf='tipo == 1'>
             <div class="info-text card" *ngFor='let post of list'>
-                <a routerLink='/noticia/{{ post.id }}'>
+                <a routerLink='/noticia/{{ post.link }}'>
                     <div class="banner-single">
                         <div class="title"> {{ post.titulo }}</div>
                         

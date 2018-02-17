@@ -8,6 +8,7 @@ export class Post {
     conteudo: string;
     conteudo_card: string;
     src_imagem: string;
+    link: string;
 
     autor_idLeitor: number;
     idAdmin_deleted: number;

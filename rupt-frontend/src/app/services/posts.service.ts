@@ -87,6 +87,12 @@ export class PostsService {
       }); 
   }
 
+  getPostsByLink(link):Observable<any>{
+      return this._http.get(this._url + 'posts/getPostByLink/'+link, {headers: this.headers}).map(
+          ( response ) => { return response.json().post }
+      )
+  }
+
   create(form){
     return this._http.post(this._url + 'posts/create', JSON.stringify(form.value), {headers: this.headers}).map(
       (response) => { return response.json().post }
