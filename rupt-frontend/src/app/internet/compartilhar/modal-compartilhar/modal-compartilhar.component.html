@@ -31,13 +31,13 @@
                     </button>
                     
                     <!-- rupt -->
-                    <button *ngIf="i.id < 6">
+                    <button *ngIf="i.id < 6 && autorPost == false">
                         <img  src="../../../assets/{{ i.src_icone }}" class="img">
                 
                         <p>{{ i.nome }}</p>
+
+                        <p *ngIf='verifyInteragiu(i)' class="desfazer">(Desfazer)</p>
                     </button>
-                    
-                    <p *ngIf='verifyInteragiu(i)' class="desfazer">(Desfazer)</p>
                 </div>
             </div>
   
