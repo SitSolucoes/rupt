@@ -71,8 +71,6 @@ export class NewsComponent implements OnInit {
   ngOnInit() {
     window.scrollTo( 0, 0);
 
-
-
     this._activatedRoute.params.subscribe(params => {
         this._leitoresService.leitor.subscribe(
             (leitor: Leitor) => { 
@@ -81,7 +79,7 @@ export class NewsComponent implements OnInit {
 
         this._leitoresService.verificaLogin().subscribe(
           (response) => {
-            this.getPost(params['id']);
+            this.getPost(params['link']);
         });
     });
   }
@@ -118,8 +116,8 @@ export class NewsComponent implements OnInit {
   }
 
   
-  getPost(id){
-    this._postService.getPost(id).subscribe(
+  getPost(link){
+    this._postService.getPostsByLink(link).subscribe(
       ( post: Post ) => { 
         if (post){
             if(!post.publishedAt || post.publishedAt == null){

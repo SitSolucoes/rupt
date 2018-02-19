@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Comentario;
+use App\Notificacao;
+use App\Http\Controllers\NotificacaoController;
+use App\Http\Controllers\PostController;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -17,6 +20,22 @@ class ComentarioController extends Controller
         $comentario->ativo = true;
         
         $comentario->save();
+
+        if (!$comentario->comentario_idComentario || $comentario->comentario_idComentario == 0){
+            $c = new PostController();
+            $post = $c->getById($request->post_idPost);
+            $post = $post->first();
+
+            $notificacao = new Notificacao();
+            $notificacao->escritor_idEscritor = $post->autor->id;
+            $notificacao->leitor_idLeitor = $request->leitor_idLeitor;
+            $notificacao->lida = false;
+            $notificacao->tipo = 5;
+            $notificacao->descricao = 'comentou a sua publicação';
+            $notificacao->rota = '/noticia/'.$post->link;
+
+            NotificacaoController::create($notificacao);
+        }
 
         $comentarios = $this->comentariosFromPost($comentario->post_idPost);
 

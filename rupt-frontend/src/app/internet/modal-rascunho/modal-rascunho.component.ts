@@ -38,7 +38,7 @@ export class ModalRascunhoComponent implements OnInit {
             this.loadingPublicar = false;
 
             this.closeModalRascunho.emit(true);
-            this._router.navigate(['noticia/'+ this.post.id]);
+            this._router.navigate(['noticia/'+ this.post.link]);
           }
         )
     }

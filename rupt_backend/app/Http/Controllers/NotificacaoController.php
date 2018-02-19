@@ -38,12 +38,16 @@ class NotificacaoController extends Controller
     }
 
     public function markAsRead(Request $request){
-        $notificacao = Notificacao::where('escritor_idEscritor', $request->escritor_id);
+        $notificacoes = Notificacao::where('escritor_idEscritor', $request->escritor_id)
+                                  ->where('lida', 0)
+                                  ->get();
 
-        $notificacao->lida = true;
+        foreach ($notificacoes as $notificacao) {
+            $notificacao->lida = true;
 
-        $notificacao->save();
-
+            $notificacao->save();
+        }
+            
         return response()->json(['notificacoes' => $this->get($request->escritor_id)], 200);
     }
 

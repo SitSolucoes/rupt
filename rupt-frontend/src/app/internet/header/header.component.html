@@ -63,11 +63,13 @@
             <i class="fa fa-search" aria-hidden="true"></i>
         </button>
         </a>
-        <a *ngIf='notificacoes.length > 0' class='dropdown-button btn' data-activates='dropdown2' materialize="dropdown">
-            <i class="fa fa-bell img" aria-hidden="true"></i>
-            <div class="notificacao"> 
+        <a *ngIf='notificacoes.length > 0' (click)='markAsRead()' class='dropdown-button btn' data-activates='dropdown2' materialize="dropdown">
+            <i *ngIf='countNotificacoesNaoLidas() > 0'class="fa fa-bell img" aria-hidden="true"></i>
+            <div *ngIf='countNotificacoesNaoLidas() > 0' class="notificacao"> 
                 <font style="position: relative; bottom: 10px">{{ countNotificacoesNaoLidas() }}</font>
             </div>
+
+            <i class="fa fa-bell-o" aria-hidden="true" *ngIf='countNotificacoesNaoLidas() == 0'></i>
         </a>
         <ul id='dropdown2' class='dropdown-content dropdown-content2' style="top: 60px !important;">
             <div class="title"> Notificações </div>
@@ -77,12 +79,15 @@
                     <div class="area">
                         <img src="{{ url + 'profile/' + n.leitor.src_foto }}" class="img">
                     </div>
-                    <h1><b>{{ n.leitor.nome }}</b> {{ n.descricao }}</h1>
-                    <h2> 
+                    <h1><b>{{ n.leitor.nick }}</b> {{ n.descricao }}</h1>
+                    <h2>
+                        <img *ngIf='n.tipo == 3' src="../../../assets/img/rupt-ico.png" class="img2 fa"> 
                         <i *ngIf='n.tipo == 2' class="fa fa-user" aria-hidden="true"></i> 
+                        <i *ngIf='n.tipo == 4' class="fa fa-share" aria-hidden="true"></i>
+                        <i *ngIf='n.tipo == 5' class="fa fa-comment" aria-hidden="true"></i>
                         {{ n.created_at | date:'d' }} de 
                         {{ n.created_at | date:'MMMM' }} às
-                        {{ n.created_at | date:'j:mm ' }}
+                        {{ n.created_at | date:'shortTime' }}
                     </h2>
                 </a>
             </div>

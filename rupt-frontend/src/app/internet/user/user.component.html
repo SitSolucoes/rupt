@@ -201,7 +201,7 @@
                             <font class="title name"> {{ leitor.nome }} </font>
                         </a>
                         <font class="share" *ngIf="leitor.id != t.post.autor.id">
-                            - Compartilhou a <b><a routerLink="../../noticia/{{t.post.id}}">publicação</a></b> de
+                            - Compartilhou a <b><a routerLink="../../noticia/{{t.post.link}}">publicação</a></b> de
                             {{ t.post.autor.nome }}.
                         </font>
 
@@ -245,7 +245,7 @@
                     </div>
                     
                     <div class="info " *ngIf="leitor.id == t.post.autor.id">
-                        <a routerLink="../../noticia/{{t.post.id}}">
+                        <a routerLink="../../noticia/{{t.post.link}}">
                             <div class="new">
                                 {{ t.post.titulo }}
                             </div>
@@ -294,7 +294,7 @@
 
                             </div>
 
-                            <a routerLink="../../noticia/{{t.post.id}}">
+                            <a routerLink="../../noticia/{{t.post.link}}">
 
                                 <div class="new">
                                     {{ t.post.titulo }}

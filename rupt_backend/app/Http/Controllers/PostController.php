@@ -32,6 +32,8 @@ class PostController extends Controller
         $link = str_replace(' ', '-', $titulo);
 
         $link = strtolower(preg_replace(array("/(á|à|ã|â|ä)/","/(Á|À|Ã|Â|Ä)/","/(é|è|ê|ë)/","/(É|È|Ê|Ë)/","/(í|ì|î|ï)/","/(Í|Ì|Î|Ï)/","/(ó|ò|õ|ô|ö)/","/(Ó|Ò|Õ|Ô|Ö)/","/(ú|ù|û|ü)/","/(Ú|Ù|Û|Ü)/","/(ñ)/","/(Ñ)/","/(ç)/","/(Ç)/"),explode(" ","a A e E i I o O u U n N c C"), $link));
+        $link = preg_replace('/[^a-z0-9]/i', '-', $link);
+        $link = str_replace('--', '-', $link);
 
         $i = 2;
         
@@ -138,6 +140,15 @@ class PostController extends Controller
                     ->get();
 
         return $post;
+    }
+
+    public function getPostByLink($link){
+        $post = Post::where('link', $link)
+                    ->with('autor')
+                    ->with('categoriasPost')
+                    ->first();
+
+        return response()->json(['post' => $post], 200);
     }
 
     public function getEscritor($id){

@@ -29,7 +29,7 @@ const routes: Routes = [
       { path : 'perfil/:nick', component: UserComponent },
       { path : 'footer', component: FooterComponent },
       { path : 'perfil/:nick/:torne-se-um-escritor', component: UserComponent },
-      { path : 'noticia/:id', component: NewsComponent },
+      { path : 'noticia/:link', component: NewsComponent },
       { path : 'cadastro', component: CadastroLeitorComponent },
       { path : 'cadastro-escritor', component: CadastroEscritorComponent },
       { path : 'publicacao', component: PublicacaoComponent },
