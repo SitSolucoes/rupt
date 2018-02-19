@@ -50,6 +50,25 @@ body{
     color: #f97000;
 }
 
+.message{
+    display: block;
+    float: left;
+    width: 100%;
+    font-family: nexa-bold;
+    color: #4f4f4f;
+    padding: 50px;
+    text-align: center;
+}
+
+.message .fa{
+    font-size: 55px;
+    color: #f97000;
+    display: block;
+    clear: both;
+    margin-top: 20px;
+}
+
+
 .modal-overlay{
     opacity: .7 !important;
 }
@@ -155,7 +174,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 
 
 .headbar .title{
-    font-family: 'nexa';
+    font-family: 'gilroy';
     font-size: 18px;
     display: block;
     float: left;
@@ -742,7 +761,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     display: block;
     float: left;
     width: 90%;
-    height: 65px;
+    max-height: 65px;
     overflow: hidden;
     margin-left: 20px;
     margin-top: 15px;
@@ -783,7 +802,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .container-categoria .img{
     width: auto;
     height: 250px;
-    filter: brightness(85%);
+    filter: brightness(70%);
 }
 
 .container-categoria .img-container{
@@ -846,7 +865,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     display: block;
     float: left;
     width: 260px;
-    max-height: 62px;
+    max-height: 65px;
     overflow: hidden;
     margin-left: 20px;
     margin-top: 15px;
@@ -917,6 +936,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 
 .img-person .img{
     height: 100%;
+    filter: brightness(100%);
 }
 
 .info-post .img-cal{
@@ -956,7 +976,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .container-categoria .underline{
-    height: 3px;
+    height: 5px;
     width: 40px;
     background: #f97000;
     margin-top: 0px;
@@ -2360,7 +2380,7 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
 
 .news .area-top{
   width: 75%;
-  margin-left: 30px;
+  margin-left: 2.5%;
   margin-top: 20px;
   padding-top: 30px;
 }
@@ -2373,7 +2393,6 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
 .news .area-top .tag-menu{
   display: table;
   margin: 0 auto;
-  height: 50px;
 }
 
 .news .area-top .tag{
@@ -3588,7 +3607,7 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     display: block;
     float: left;
     width: 95%;
-    margin-left: 30px;
+    margin-left: 2.5%;
     padding-top: 40px;
 }
 
@@ -4403,7 +4422,7 @@ quill-editor{
 .publicacao .underline{
     display: block;
     float: left;
-    height: 2px;
+    height: 4px;
     width: 100px;
     background: #f97000;
     margin-top: 0px;
@@ -4910,7 +4929,7 @@ quill-editor{
         text-shadow: 1px 1px 1px #000000;
         position: relative;
         bottom: 255px;
-        width: 204px;
+        width: 90%;
         max-height: 90px;
         color: #fff;
     }
@@ -5093,7 +5112,7 @@ quill-editor{
     }
 
     .news .area-top{
-        width: 90%;
+        width: 95%;
     }
 
     .news .container{
@@ -5115,36 +5134,36 @@ quill-editor{
         max-width: 340px;
     }
 
-    .headbar .headbar-center .img{
+    .headbar .headbar-center .img {
         height: 28px;
         margin-top: 7px;
     }
 
-    .headbar .headbar-center{
+    .headbar .headbar-center {
         margin-left: 2%;
     }
 
-    .headbar .login-border{
+    .headbar .login-border {
         font-size: 18px;
         padding: 0px 5px;
         margin-top: 20px;
     }
 
-    .headbar .headbar-right .fa-search{
+    .headbar .headbar-right .fa-search {
         font-size: 18px;
         margin-top: 28px;
         margin-top: 24px;
     }
 
-    .container-slider-screen{
+    .container-slider-screen {
         display: none;
     }
 
-    .container-slider-mobile{
+    .container-slider-mobile {
         display: block;
     }
 
-    .drag-target{
+    .drag-target {
         width: 0px;
     }
 
@@ -5152,95 +5171,102 @@ quill-editor{
         padding: 0px 8% !important;
     }
 
-    .menu-top .img{
+    .menu-top .img {
         height: 330px !important;
     }
 
-    .info-post .time{
+    .info-post .time {
         height: 20px;
     }
 
-    .rodape .container{
+    .rodape .container {
         padding-top: 20px;
         padding-bottom: 20px;
     }
 
-    .rodape .container .logo{
+    .rodape .container .logo {
         height: auto;
         width: 100%;
         display: block;
         float: left;
     }
 
-    .rodape .container .img{
+    .rodape .container .img {
         display: table;
         margin: 0 auto;
         float: none;
-        margin-right: 0px;
     }
 
-    .login-modal .social-medias{
+    .login-modal{
+        margin-top: 20px;
+    }
+
+    .login-modal .social-medias {
         width: 42%;
     }
 
-    .login-modal .login-container{
-        width: 95%;
+    .login-modal .login-container {
+        width: 97%;
         padding-left: 10px;
         padding-right: 0px;
     }
 
-    .login-modal .social-medias .area{
+    .login-modal .social-medias .area {
         font-size: 12px;
     }
 
-    .login-modal .social-medias{
+    .login-modal .social-medias {
         padding: 0px 10px;
     }
 
-    .login-modal .social-medias .fa{
+    .login-modal .social-medias .fa {
         display: none;
     }
 
-    .login-modal .social-medias .border{
-        display: none;
+    .login-modal .social-medias .border {
+        display: none !important;
     }
 
-    .user .bio .profile{
+    .user .bio .profile {
         width: 150px;
         height: 150px;
     }
 
-    .user .bio .profile .img{
+    .user .bio .profile .img {
         height: 160px;
     }
 
-    .user .bio .info{
+    .user .bio .info {
         padding: 0px;
     }
 
-    .user .area{
+    .user .area {
         height: auto;
     }
 
-    .user .bio{
+    .user .bio {
         padding-top: 5px;
         padding-left: 15px;
     }
 
-    .user .feed .post .info{
+    .user .feed .post .info {
         padding-left: 0px;
     }
 
-    .user .bio .profile-info-mobile{
+    .user .bio .profile-info-mobile {
         margin-top: 5px;
     }
 
-    .user .feed .post .info .border{
+    .user .feed .post .info .border {
         max-height: 200px;
     }
 
-    .user .feed .post .info .img3{
+    .user .feed .post .info .img3 {
         max-height: 200px;
+    }
+
+    .user .feed .post .info{
+        width: 100%;
     }
 
     .headbar .headbar-right{
@@ -5263,8 +5289,8 @@ quill-editor{
         margin-right: 10px;
     }
 
-    .cadastro .container{
-        padding-top: 0px;
+    .cadastro{
+        padding-bottom: 20px;
     }
 
     .cadastro .container p{
@@ -5272,8 +5298,17 @@ quill-editor{
     }
 
     .cadastro .container{
-        padding-left: 15px;
-        padding-right: 15px;
+        padding-top: 0px;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .cadastro .container .area .input-img{
+        width: 185px;
+    }
+
+    .cadastro .button{
+        padding: 10px 10px;
     }
 
     .categoria .container .info{
@@ -5294,8 +5329,18 @@ quill-editor{
         width: 100%;
     }
 
+    .faq .title{
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+
     .contato{
         width: 100%;
+    }
+
+    .contato .title{
+        top: 30px;
+        margin-bottom: 30px;
     }
 
     .news{
@@ -5359,14 +5404,15 @@ quill-editor{
 
     .modal-pesquisa .button-modal{
         padding: 7px 10px;
-    }
-
-    .modal-pesquisa .button-modal{
+        display: block;
         width: 25%;
+        float: right;
+        clear: both;
     }
 
     .modal-pesquisa .input{
-        width: 75% !important;
+        width: 100% !important;
+        border: 1px solid #ccc !important;
     }
 
     .info-text .title{
@@ -5383,6 +5429,7 @@ quill-editor{
 
     .headbar-right .dropdown-content2 .info h2{
         margin-bottom: 5px;
+        margin-left: 10px;
     }
 
     .rodape .container .border{
@@ -5393,10 +5440,119 @@ quill-editor{
         padding: 5px 10px;
     }
 
-    .container-categoria .area{
-        padding-left: 10%;
-        padding-right: 10%;
+    .container-categoria .area {
+        padding-left: 7%;
+        padding-right: 7%;
     }
+
+    .slick-prev{
+        left: -18px;
+    }
+
+    .slick-next{
+        right: -18px;
+    }
+
+    .slick-prev:before, .slick-next:before{
+        font-size: 18px;
+    }
+
+    .banner-promo2{
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    .container-categoria .content{
+        margin-right: 0px;
+        margin: 0 auto;
+    }
+
+    .container-categoria .content-img-text{
+        float: none;
+        display: block;
+        margin-right: 0px;
+        margin: 0 auto;
+    }
+
+    .container-categoria .underline{
+        display: table;
+        margin: 0 auto;
+    }
+
+    .publicacao .container h3{
+        padding-top: 30px;
+        padding-bottom: 10px;
+    }
+
+    .publicacao .container_right{
+        margin-top: 0px;
+    }
+
+    .publicacao .underline{
+        margin-top: 20px;
+    }
+
+    .cadastro-escritor .container .area label{
+        width: 30%;
+        text-align: left;
+    }
+
+    .cadastro-escritor .container .area .input{
+        width: 60%;
+    }
+
+    .cadastro-escritor .container .area .text{
+        margin-left: 0px;
+    }
+
+    .cadastro-escritor .container .area p{
+        margin: 10px 0px;
+    }
+
+    .cadastro-escritor .img-area{
+        width: 100%;
+    }
+
+    .categoria .topico{
+        padding-left: 0px;
+    }
+
+    .categoria .container .info .card{
+        width: 100%;
+        margin-right: 0px;
+        margin-left: 0px;
+    }
+
+    .categoria .container .aba{
+        margin-top: 30px;
+    }
+
+    .categoria .container .active .aba{
+        margin-top: 90px;
+    }
+
+    .news .container .reactions .area2{
+        left: 0%!important;
+        margin-left: 5px !important;
+        margin-right: 5px;
+    }
+
+    .news .container .reactions .area2 .img.disabled{
+        height: 50px;
+    }
+
+    .news .container .comentarios .profile .user{
+        width: 75%;
+    }
+
+    .news .container .frame .img{
+        height: 150px;
+    }
+
+    .news .area-top{
+        margin-top: 0px;
+    }
+
 }
 
 /*teste*/

@@ -23,7 +23,6 @@
 
         <div id="destaques">
             <app-lista [search]='search' [list]='listPostDestaques' [tipo]='1' *ngIf='search != "" && listPostDestaques.length > 0'></app-lista>
-
             <div *ngIf='search == "" || listPostDestaques.length == 0' class="news">
                 <div class="not-found">
                     <div class="message" *ngIf='!loadingPostDestaques'>
