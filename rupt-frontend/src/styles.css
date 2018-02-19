@@ -660,6 +660,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     font-size: 20px;
     color: #454545;
     margin-bottom: 5px;
+    text-align: left;
 }
 
 .container-categoria .title2{
@@ -2334,12 +2335,10 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     width: 40%;
     margin-top: 8%;
     border-radius: 4px;
-    background: #d9d9d9;
     padding: 20px;
 }
 
 .user .not-found .container .background{
-    background: #ebebeb;
     height: 100%;
 }
 
@@ -2354,20 +2353,26 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     margin: 0 auto;
     margin-top: 20px;
     margin-bottom: 5px;
-    height: 70px;
+    /* height: 70px; */
+    text-align: center;
+    font-size: 46px;
+    color: #f97000;
+    margin-bottom: 120px;
 }
 
 .user .not-found .container p{
-    font-family: nexa;
+    font-family: nexa-bold;
     font-weight: bolder;
     text-align: center;
     display: block;
     width: 100%;
-    font-size: 20px;
+    font-size: 22px;
     margin-top: 0px;
     margin-bottom: 30px;
-    color: #3d3d3d;
-    letter-spacing: -1px;
+    color: #4f4f4f;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 /*---------------- news ---------- */
@@ -2449,6 +2454,8 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     font-size: 20px;
     line-height: 25px;
     font-family: lato;
+    color: #5e5e5e;
+    margin-top: 10px;
     margin-bottom: 10px;
 }
 
@@ -2882,6 +2889,9 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     color: #4f4f4f;
     font-size: 22px;
     text-align: center;
+    position: relative;
+    top: 50%;
+    transform: translateY(-15%);
 }
 
 .news .not-found .message i{
@@ -3248,7 +3258,6 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
 .categoria .topico{
     display: block;
     float: left;
-    padding-left: 30px;
     width: 100%;
     z-index: 100;
     background: #fff;
@@ -3292,7 +3301,8 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     height: 250px;
     margin-right: 1%;
     margin-left: 2%;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
+    margin-top: 20px;
     box-shadow: none;
 }
 
@@ -5145,7 +5155,7 @@ quill-editor{
 
     .headbar .login-border {
         font-size: 18px;
-        padding: 0px 5px;
+        padding: 0px 10px;
         margin-top: 20px;
     }
 
@@ -5270,7 +5280,7 @@ quill-editor{
     }
 
     .headbar .headbar-right{
-        padding-right: 10px;
+        padding-right: 00px;
     }
 
     .headbar .headbar-right .notificacao{
@@ -5323,6 +5333,7 @@ quill-editor{
 
     .news .not-found .message{
         font-size: 20px;
+        transform: translateY(0%);
     }
 
     .faq{
@@ -5387,7 +5398,6 @@ quill-editor{
 
     .login-modal .social-medias2 .area{
         width: 95%;
-        font-size: 10px;
         margin-left: 2.5%;
         margin-right: 2.5%;
         padding: 10px 5px;
@@ -5443,6 +5453,14 @@ quill-editor{
     .container-categoria .area {
         padding-left: 7%;
         padding-right: 7%;
+    }
+
+    .container-categoria .title{
+        font-size: 18px;
+    }
+
+    .container-categoria .center{
+        text-align: center;
     }
 
     .slick-prev{
