@@ -6,7 +6,7 @@ export class ConnectionFactory {
         //'http://rupt.news/api/public/api/'; //SERVIDOR DA RUPT
 
     public static API_IMAGEM = 
-        //"http://localhost:8000/"; //
-        "http://sitsolucoes.com.br/api/laravel/public/"; //TESTE
+        "http://localhost:8000/"; //
+        //"http://sitsolucoes.com.br/api/laravel/public/"; //TESTE
         //'http://rupt.news/api/public/'; //servidor da rupt
 }

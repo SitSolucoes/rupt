@@ -75,6 +75,8 @@ export class UserComponent implements OnInit {
       this.leitorLogado = new Leitor();
 
       this._activatedRoute.params.subscribe(params => {
+          window.scrollTo(0, 0);
+
           this._leitorService.getLeitorByNick(params['nick']).subscribe(
             (leitor: Leitor) => {
               this.leitor = leitor;

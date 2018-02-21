@@ -231,7 +231,10 @@ class LeitorController extends Controller
     }
 
     public function getLeitorByNick($nick){
-        $leitor = Leitor::where('nick', $nick)->with('escritor')->first();
+        $leitor = Leitor::where('nick', $nick)
+                        ->where('ativo', 1)
+                        ->with('escritor')
+                        ->first();
 
         return response()->json(['leitor' => $leitor], 200);
     }

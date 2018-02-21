@@ -144,6 +144,7 @@ class PostController extends Controller
 
     public function getPostByLink($link){
         $post = Post::where('link', $link)
+                    ->whereNull('deleted_at')
                     ->with('autor')
                     ->with('categoriasPost')
                     ->first();

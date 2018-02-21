@@ -36,7 +36,7 @@
                 <div class="area2">
                     <i class="fa fa-user img" aria-hidden="true"></i>
                 </div>
-                <p> Perfil Não Encontrado </p>
+                <p> Escritor não encontrado </p>
             </div>
         </div>
     </div>
@@ -148,32 +148,32 @@
             <div class="status">
                 <ul class="tabs" >
                     <li class="menu tab col s3">
-                        <a class="active" href="#test1">
+                        <a class="active" href="#noticias">
                             Notícias
                             <font class="title"> {{ timeline?.length }} </font>  
                         </a>
                     </li>
                     <li class="menu tab col s3" *ngIf='rascunhos.length > 0'>
-                        <a href="#test2">
+                        <a href="#rascunhos">
                             Rascunhos
                             <font class="title"> {{ rascunhos?.length }} </font>  
                         </a>
                     </li>
                     <li class="menu tab col s3">
-                        <a href="#test3">
+                        <a href="#leitores">
                             Leitores
                             <font class="title"> {{ listSeguidores.length }} </font> 
                         </a>
                     </li>
                     <li class="menu tab col s3">
-                        <a href="#test4">
+                        <a href="#seguindo">
                             Seguindo
                             <font class="title"> {{ listSeguindo.length }} </font>
                         </a>
                     </li>
                 </ul>
             </div>
-            <div id="test1" class="col s12">
+            <div id="noticias" class="col s12">
                 <div class="message" *ngIf='timeline?.length == 0'>
                     Sem publicações até o momento
                     <i class="fa fa-file-text-o" aria-hidden="true"></i>
@@ -329,7 +329,7 @@
 
                 </div>
             </div>
-            <div id="test2" class="col s12" *ngIf='rascunhos.length > 0'>
+            <div id="rascunhos" class="col s12" *ngIf='rascunhos.length > 0'>
                 <div class="post" *ngFor='let r of rascunhos'>
                     <div class="info">
                         
@@ -353,7 +353,7 @@
                     </div>
                 </div>
             </div>
-            <div id="test3" class="col s12">
+            <div id="leitores" class="col s12">
                 <div class="message" *ngIf='listSeguidores.length == 0'>
                     Nenhum leitor até o momento
                     <i class="fa fa-users" aria-hidden="true"></i>
@@ -361,17 +361,19 @@
          
                 <div class="leitores">
                     <div class="info" *ngFor='let seguidor of listSeguidores'>
-                        <div class="area">
-                            <img src="{{ url + 'profile/' + seguidor.leitor.src_foto }}" class="img">
-                        </div>
-        
-                        <p> {{ seguidor.leitor.nome }} </p>
-        
-                        <div class="title"> @{{ seguidor.leitor.nick }} </div>
+                        <a routerLink="/perfil/{{ seguidor.leitor.nick }}">
+                            <div class="area">
+                                <img src="{{ url + 'profile/' + seguidor.leitor.src_foto }}" class="img">
+                            </div>
+            
+                            <p> {{ seguidor.leitor.nome }} </p>
+            
+                            <div class="title"> @{{ seguidor.leitor.nick }} </div>
+                        </a>
                     </div>
                 </div>
             </div>
-            <div id="test4" class="col s12">
+            <div id="seguindo" class="col s12">
                 <div class="message" *ngIf='listSeguindo.length == 0'>
                     Não está seguindo nenhum usuário até o momento
                     <i class="fa fa-user" aria-hidden="true"></i>
@@ -379,13 +381,15 @@
                 
                 <div class="leitores">
                     <div class="info" *ngFor='let seguindo of listSeguindo'>
-                        <div class="area">
-                            <img src="{{ url + 'profile/' + seguindo.escritor.src_foto }}" class="img">
-                        </div>
+                        <a routerLink="/perfil/{{ seguindo.escritor.nick }}">
+                            <div class="area">
+                                <img src="{{ url + 'profile/' + seguindo.escritor.src_foto }}" class="img">
+                            </div>
+            
+                            <p> {{ seguindo.escritor.nome }} </p>
         
-                        <p> {{ seguindo.escritor.nome }} </p>
-    
-                    <div class="title"> @{{ seguindo.escritor.nick }} </div>
+                            <div class="title"> @{{ seguindo.escritor.nick }} </div>
+                        </a>
                     </div>
                 </div>
             </div>
