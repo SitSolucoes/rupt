@@ -50,6 +50,7 @@ export class DenunciasService {
       }
     );
   }
+  
   getDetalhes(d){
     return this._http.get(this._url + 'denuncias/getDetalhes/'+d.id)
     .map((ret)=>{

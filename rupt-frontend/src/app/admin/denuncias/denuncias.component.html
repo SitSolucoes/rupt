@@ -2,18 +2,35 @@
     <i class="material-icons">view_list</i> Denúncias
 </div>
 
-<div id="modalDetalhes" class="modal center-sheet" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions">
+<div id="modalDetalhes" class="modal center-sheet modal-denuncia" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions">
     <div class="modal-content">
-        Denúncia de {{denuncia_selecionada?.motivo}}
+        <div class="news">
+            <div class="area-top area-top2">
+                <div class="tag-menu">
+                    <div class="tag red"> {{denuncia_selecionada?.motivo}} </div>
+                    <div class="tag tag2"> Denúncias: 5 </div>
+                </div>
+
+                <div class="title"> {{ denuncia_selecionada?.post.titulo }} </div>
+                <div *ngIf='denuncia_selecionada?.post.subtitulo' class="subtitle">{{ denuncia_selecionada?.post.subtitulo }}</div>
+            </div>
+      
+            <div class="container container2">
+                <div class="frame">
         
-        <p><strong>Titulo</strong></p>
-        <p>{{denuncia_selecionada?.post.titulo}}</p>
-        <p>Conteúdo</p>
-        <p [innerHTML]="denuncia_selecionada?.post.conteudo"></p>
-        <p>Status</p>
-        <p>{{denuncia_selecionada?.detalhes.status == 'A' ? 'Não Avaliada' : denuncia_selecionada?.detalhes.status == 'I' ? 'Ignorada' : 'Post Deletado'}}</p>
-        <!--<p>Link parar o post</p>
-            <p><a [router] target="_blank">Notícia</a></p>-->
+                    <img src="{{ url + 'posts/' + denuncia_selecionada?.post.src_imagem }}" class="img" *ngIf="denuncia_selecionada?.post.src_imagem">
+        
+                    <div class="info" [innerHTML]="denuncia_selecionada?.post.conteudo"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tag-menu-bottom">
+            <div class="tag tag2">Status:</div>
+            <div class="tag red"> 
+                {{denuncia_selecionada?.detalhes.status == 'A' ? 'Não Avaliada' : denuncia_selecionada?.detalhes.status == 'I' ? 'Ignorada' : 'Post Deletado'}}
+            </div>
+        </div>
         
     </div>
     <div class="modal-footer">

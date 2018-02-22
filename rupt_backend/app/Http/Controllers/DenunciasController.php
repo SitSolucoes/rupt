@@ -4,13 +4,23 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Denuncia;
-use App\Post;
 use App\MotivoDenuncia;
+use App\Notificacao;
+use App\Post;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\PostController;
 use App\Http\Controllers\LeitorController;
+use App\Http\Controllers\NotificacaoController;
+use App\Http\Controllers\PostController;
 
 class DenunciasController extends Controller{
+
+    /*
+    status: 
+    i - ignorado
+    a - aberto / pendente
+    r - removido / aceito
+    */
+    
     public function getDenuncias(){
         $denuncias = Denuncia::select(DB::raw('denuncias.*, count(post_idPost) as quantidade'))
                              ->whereIn('status', ['A', 'I'])
@@ -54,19 +64,29 @@ class DenunciasController extends Controller{
         if($request->action != 'i'){
             //atualiza post
             try{
+                /*exclui o post*/
                 $c = new PostController();
                 $c->removePorDenuncia($request->post_idPost, $request->idAdmin_Deleted);
+
+                /*cria a notificalção*/
+                $notificacao = new Notificacao();
+                $notificacao->descricao = 'está te seguindo';
+                $notificacao->rota = '/perfil/'.$leitor->nick;
+                $notificacao->lida = false;
+                $notificacao->tipo = 2; //2 - seguir
+
+                NotificacaoController::create($notificacao);
 
                 //atualiza denuncia
                 $denuncias = Denuncia::where('post_idPost', $request->post_idPost)
                                     ->where('motivo_idMotivo', $request->motivo_idMotivo)
                                     ->get();
+
                 foreach($denuncias as $d){
                     $d->status = "R";
                     $d->admin_idAdmin = $request->idAdmin_deleted;
                     $d->save();
                 }
-
 
                 return response()->json([
                     'status' => true
