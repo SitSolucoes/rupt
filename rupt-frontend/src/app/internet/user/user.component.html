@@ -190,8 +190,10 @@
                 <div class="post" *ngFor='let t of timelineFiltro'>
 
                     <a routerLink='../{{ leitor.nick }}'>
-                        <div class="img-area">
-                            <img src="{{ leitor.src_foto.indexOf('http') >= 0 ? leitor.src_foto : url + 'profile/' + leitor.src_foto }}"  class="img">
+                        <div class="profile-img">
+                            <div class="img-area">
+                                <img src="{{ leitor.src_foto.indexOf('http') >= 0 ? leitor.src_foto : url + 'profile/' + leitor.src_foto }}"  class="img">
+                            </div>
                         </div>
                     </a>
 

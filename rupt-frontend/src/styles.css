@@ -83,6 +83,7 @@ input[type=password]:not(.browser-default)
   width: auto;
   background: #fff;
   padding-left: 10px;
+  padding-right: 10px;
   font-size: 16px;
   color: #363636;
   margin-bottom: 15px;
@@ -139,6 +140,13 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 
 .clear{
     clear: both;
+}
+
+.home{
+    display: block;
+    float: left;
+    padding-bottom: 20px;
+    width: 100%;
 }
 
 .headbar{
@@ -289,6 +297,8 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     font-size: 15px;
     text-align: center;
     background: #fff;
+    font-weight: bold;
+    color: #3d3d3d;
     padding: 12px 0px;
 }
 
@@ -302,7 +312,8 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     width: 350px !important;
     right: 50px !important;
     left: auto !important;
-    height: 400px;
+    height: auto;
+    max-height: 400px;
     overflow: auto;
     overflow-x: hidden;
     text-align: left;
@@ -319,7 +330,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     float: left;
     width: 100%;
     padding: 8px 15px;
-    font-size: 16px;
+    font-size: 14px;
     font-family: lato;
     font-weight: bold;
     background: #f0f0f0;
@@ -335,8 +346,11 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .headbar-right .dropdown-content2 .info:hover{
-    opacity: .9;
-    background: #f0f0f0;
+    -webkit-transition:0.20s ease-out;
+    -moz-transition: 0.20s ease-out;
+    -o-transition: 0.20s ease-out;
+    -ms-transition: 0.20s ease-out;
+    background: #f2f2f2;
     cursor: pointer;
 }
 
@@ -385,6 +399,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     float: left;
     padding-right: 10px;
     width: 75%;
+    color: #000;
 }
 
 .headbar-right .dropdown-content2 .info h2{
@@ -401,8 +416,12 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .headbar .headbar-right .dropdown-content li > a:hover{
-    background: #f97000;
-    color: #fff;
+    -webkit-transition: 0.20s ease-out;
+    -moz-transition: 0.20s ease-out;
+    -o-transition: 0.20s ease-out;
+    -ms-transition: 0.20s ease-out;
+    background: #f2f2f2;
+    cursor: pointer;
 }
 
 .headbar .login{
@@ -419,6 +438,10 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     margin-top: 15px;
     font-size: 20px;
     font-family: 'nexa-bold';
+}
+
+.headbar .headbar-right .opc{
+    padding-right: 0px;
 }
 
 .headbar .login-border a{
@@ -506,18 +529,13 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .banner-promo{
-    height: 150px;
+    height: 90px;
     width: 100%;
     display: block;
     float: left;
-    padding-top: 30px;
-    padding-bottom: 30px;
+    margin-top: 40px;
+    margin-bottom: 40px;
     overflow: hidden;
-}
-
-.banner-promo2{
-    height: 150px;
-    margin-bottom: 20px;
 }
 
 .banner-promo .area{
@@ -616,8 +634,13 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     margin-left: 7.5px;
 }
 
+.menu-top .slick-slide:hover .img{
+    filter: brightness(90%);
+    transition: 0.35s;
+}
+
 .menu-top .img{
-    height: 400px !important;
+    height: 350px !important;
     width: auto;
     float: left;
 }
@@ -681,7 +704,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     display: block;
     float: left;
     padding-top: 30px;
-    padding-bottom: 40px;
+    padding-bottom: 30px;
     padding-left: 3%;
     padding-right: 3%;
 }
@@ -722,9 +745,9 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     cursor: pointer;
 }
 
-.container-categoria .content-img-text:hover{
-    opacity: .8;
-    transition: 1s;
+.container-categoria .content-img-text:hover  .img{
+    transition: 0.35s;
+    filter: brightness(90%);
 }
 
 .container-categoria .container-slider{
@@ -878,7 +901,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     display: block;
     float: left;
     width: 235px;
-    height: 90px;
+    height: 85px;
     overflow: hidden;
     margin-left: 20px;
     margin-top: 5px;
@@ -886,7 +909,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     font-size: 15px;
     font-family: lato;
     color: #828181;
-    line-height: 22px;
+    line-height: 21px;
 }
 
 .container-categoria .info-post {
@@ -1264,10 +1287,10 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 
 .modal-content .info p{
     text-align: center;
-    font-size: 17.5px;
+    font-size: 16px;
     font-family: lato;
     font-weight: bold;
-    color: #4f4f4f;
+    color: #545454;
     clear: both;
     padding-left: 30px;
     padding-right: 30px;
@@ -1421,9 +1444,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     margin-left: 10px;
     margin-top: 5px;
     margin-bottom: 40px;
-    padding: 10px;
-    padding-left: 12px;
-    padding-right: 12px;
+    padding: 8px 14px;
     border: 1px solid #ccc;
     border-radius: 2px;
     background: #ccc;
@@ -1652,7 +1673,7 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     display: block;
     float: right;
     height: 50px;
-    margin-right: 40px;
+    margin-right: 30px;
     overflow: hidden;
 }
 
@@ -1806,7 +1827,7 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
 }
 
 .user .bio .rating{
-    display: table;
+    display: none;
     margin: 0 auto;
     margin-bottom: 10px;
     font-family: gilroy;
@@ -1826,9 +1847,7 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     margin-top: 10px;
     line-height: 22px;
     background: #fff;
-    padding-left: 15px;
-    padding-top: 20px;
-    padding-bottom: 15px;
+    padding: 15px;
 }
 
 .user .bio .info-mobile{
@@ -1923,10 +1942,8 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     display: block;
     float: left;
     width: 100%;
-    padding-left: 2%;
     border-bottom: 1px solid #E8E8E8;
-    padding-bottom: 5px;
-    padding-top: 5px;
+    padding: 10px 2%;
 }
 
 .user .feed .post-none{
@@ -1941,6 +1958,13 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     font-weight: bolder;
     font-family: Gilroy;
     font-size: 17px;
+}
+
+.user .feed .post .profile-img{
+    display: block;
+    overflow: hidden;
+    float: left;
+    width: 7.5%;
 }
 
 .user .feed .post .img-area{
@@ -1990,7 +2014,7 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
 .user .feed .post .text{
     display: block;
     float: left;
-    width: 90.5%;
+    width: 92.5%;
     line-height: 20px;
 }
 
@@ -2055,10 +2079,11 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     float: left;
     line-height: 18px;
     font-size: 16px;
-    font-family: 'nexa-bold';
+    font-family: 'gilroy-bold';
+    text-transform: capitalize;
     margin-top: 8px;
     margin-left: 15px;
-    color: #000;
+    color: #2b2b2b;
 }
 
 .user .feed .post .title2{
@@ -2077,9 +2102,8 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
 .user .feed .post .info{
   display: block;
   float: left;
-  width: 97%;
+  width: 100%;
   padding-left: 15px;
-  margin-top: 5px;
   overflow: hidden;
 }
 
@@ -2110,8 +2134,9 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     display: block;
     float: left;
     width: 100%;
-    border: 1px solid #e6e6e6;
-    padding: 5px;
+    border: 1px solid #E8E8E8;
+    margin: 10px 0px;
+    padding: 8px;
     padding-top: 0px;
 }
 
@@ -2213,13 +2238,13 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
 }
 
 .user .feed .search .input-search{
-    width: 95%;
+    width: 96%;
     height: 40px;
     display: block;
     float: left;
     margin-top: 10px;
     margin-bottom: 10px;
-    margin-left: 2.5%;
+    margin-left: 2%;
     background: #f7f7f7;
     border: 1px solid #f7f7f7;
     border-radius: 2px;
@@ -2235,7 +2260,7 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     display: block;
     float: left;
     position: absolute;
-    right: 35px;
+    right: 20px;
     top: 95px;
 }
 
@@ -2494,6 +2519,9 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
   height: 10px;
   color: #f97000;
   margin: 0px 5px;
+  font-size: 8px;
+  position: relative;
+  bottom: 2px;
 }
 
 .news .container .area .name{
@@ -2538,7 +2566,7 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
 .news .container .area .social .img{
   height: 30px;
   font-size: 20px;
-  margin-right: 20px;
+  margin-right: 15px;
   margin-left: 2px;
   display: block;
   float: left;
@@ -2615,7 +2643,6 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
   line-height: 33px;
   color: #4F4F4F;
   text-align: justify;
-  margin-top: 40px;
 }
 
 .news .container .fb-size{
@@ -3416,7 +3443,7 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
    width: 100%;
    clear: both;
    border: 0px;
-   box-shadow: 0px;
+   box-shadow: 0px 0.5px 3.5px 0px #707070;
 }
 
 .faq .collapsible .img{
@@ -3867,11 +3894,12 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
 }
 
 .login-modal .login-container .button{
-    width: 120px !important;
-    height: 35px !important;
+    width: auto !important;
+    height: auto !important;
     border: 1px solid #f97000 !important;
     color: #fff;
     padding-top: 4px !important;
+    padding: 8px 12px !important;
     font-family: lato;
     font-size: 16px !important;
     border-radius: 2px;
@@ -3944,6 +3972,13 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     width: 70% !important;
     top: 5% !important;
     max-height: 95%;
+}
+
+.modal8{
+    overflow-y: hidden !important;
+    overflow-x: hidden !important;
+    top: 25% !important;
+    width: 60%;
 }
 
 .login-modal .container .text{
@@ -4019,7 +4054,8 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     display: block;
     float: left;
     max-height: 350px;
-    padding-bottom: 30px;
+    height: auto;
+    padding-bottom: 20px;
     width: 100%;
 }
 
@@ -4027,8 +4063,9 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     display: block;
     float: left;
     width: 20%;
-    height: 60px;
-    margin-right: 20px;
+    /* height: 60px; */
+    margin-right: 1%;
+    margin-left: 1%;
     position: relative;
     left: 6%;
     border-radius: 4px;
@@ -4036,10 +4073,11 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
 
 .login-categorias .container .info .area{
     width: 100%;
-    height: 70px;
-    display: block;
+    /* height: 70px; */
+    display: table;
     margin: 0 auto;
     overflow: hidden;
+    -webkit-filter: brightness(50%);
     filter: brightness(50%);
     border-radius: 4px;
 }
@@ -4060,16 +4098,22 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
 .login-categorias .container .info .button3{
     background: transparent;
     color: #4f4f4f;
-    border: 1px solid #4f4f4f;
-    width: 85%;
+    border: 1px solid #d1d1d1;
+    border-radius: 3px;
+    max-width: 100%;
     position: relative;
-    bottom: 50px;
+    /* bottom: 50px; */
     font-family: nexa-bold;
     text-transform: uppercase;
     display: block;
-    padding: 5px;
-    font-size: 13px;
+    padding: 8px 10px;
+    font-size: 14px;
     margin: 0 auto;
+}
+
+.login-categorias .container .info .button3:hover{
+    color: #f97000;
+    border: 1px solid #f97000;
 }
 
 .login-categorias .container .info .active{
@@ -4078,13 +4122,11 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
 }
 
 .login-categorias .bottom{
-    width: 90%;
-    height: 70px;
+    width: 96%;
     display: block;
     float: left;
-    border-top: 1px solid #b5b5b5;
-    margin-right: 40px;
-    margin-left: 40px;
+    margin-right: 20px;
+    margin-left: 20px;
     padding-top: 5px;
     padding-bottom: 5px;
 }
@@ -4097,7 +4139,7 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     position: relative !important;
     margin-right: 20px !important;
     margin-top: 10px !important;
-    margin-bottom: 40px !important;
+    margin-bottom: 20px !important;
     padding: 10px !important;
     border: 1px solid #d9d9d9 !important;
     background: #d9d9d9 !important;
@@ -4105,7 +4147,7 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     font-family: 'nexa-bold' !important;
     font-size: 13px !important;
     color: #4f4f4f !important;
-    border-radius: 5px !important;
+    border-radius: 2px !important;
 }
 
 .login-categorias .bottom .background-orange{
@@ -4198,6 +4240,10 @@ quill-editor{
     margin-top: 40px;
 }
 
+.generico-modal .text2{
+    margin-top: 0px;
+}
+
 .generico-modal .button{
     display: block;
     float: left;
@@ -4216,9 +4262,16 @@ quill-editor{
     font-family: nexa-bold;
 }
 
+.generico-modal .button2{
+    display: table;
+    float: none;
+    margin: 0 auto;
+    margin-top: 15px;
+}
+
 .generico-modal .button:hover{
     background-color: red !important;
-    border: 1px solid red;
+    border: 1px solid red !important;
     color: #fff;
     transition: 0.35s;
 }
@@ -4432,8 +4485,8 @@ quill-editor{
 .publicacao .underline{
     display: block;
     float: left;
-    height: 4px;
-    width: 100px;
+    height: 5px;
+    width: 40px;
     background: #f97000;
     margin-top: 0px;
 }
@@ -4783,6 +4836,10 @@ quill-editor{
         padding-bottom: 60px;
     }
 
+    .news .container {
+        margin-bottom: 60px;
+    }
+
     .user {
         float: left;
         max-width: 1500px;
@@ -4790,10 +4847,6 @@ quill-editor{
         margin: 0 auto;
         width: 100%;
         padding-bottom: 60px;
-    }
-
-    .user .bio{
-        padding-left: 0px;
     }
 
     .publicacao{
@@ -4881,12 +4934,22 @@ quill-editor{
         height: 240px;
     }
 
-    .user .bio .info{
-        padding-left: 6px;
-    }
-
     .user .feed .post .info .img7{
         max-height: 300px;
+    }
+
+    .user .feed .post .profile-img{
+        width: 10.5%;
+    }
+
+    .user .feed .post .text{
+        width: 89.5%;
+    }
+
+    .login-categorias .container .info{
+        margin-right: 0px;
+        left: 0px;
+        width: 32%;
     }
 }
 
@@ -5136,6 +5199,15 @@ quill-editor{
     .news .top-view{
         display: none;
     }
+
+    .user .feed .post .text{
+        width: 91%;
+    }
+
+    .user .feed .post .profile-img{
+        width: 8.5%;
+    }
+
 }
 
 @media screen and (max-width: 576px) {
@@ -5277,6 +5349,19 @@ quill-editor{
 
     .user .feed .post .info{
         width: 100%;
+    }
+
+    .user .feed .post .profile-img{
+        width: 12.5%;
+    }
+
+    .user .feed .post .text{
+        width: 87%;
+    }
+
+    .user .feed .post .info .new{
+        font-size: 15px;
+        line-height: 20px;
     }
 
     .headbar .headbar-right{
@@ -5569,6 +5654,16 @@ quill-editor{
 
     .news .area-top{
         margin-top: 0px;
+    }
+
+    .login-categorias .container .info{
+        margin-right: 0px;
+        left: 0px;
+        width: 49%;
+    }
+
+    .login-categorias .container .info .button3{
+        font-size: 12px;
     }
 
 }
