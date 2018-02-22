@@ -779,3 +779,59 @@ span.badge.new:after {
 	padding-left: 24px;
 	color: red;
 }
+
+.modal-denuncia .modal-content .title{
+	background: transparent;
+    border-bottom: none;
+    display: table;
+    margin: auto;
+    text-align: center;
+	float: none;
+	padding-top: 10px;
+}
+
+.modal-denuncia .news{
+	float: left;
+	padding-bottom: 20px;
+}
+
+.modal-denuncia .news .container2{
+	height: auto;
+}
+
+.modal-denuncia .news p{
+	font-weight: normal;
+}
+
+.modal-denuncia .news .area-top2{
+	padding-top: 0px;
+}
+
+.tag-menu-bottom .tag{
+	min-width: 100px;
+    display: table;
+    margin: auto;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-family: 'nexa-bold';
+    padding: 5px 8px;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    letter-spacing: 1px;
+}
+
+.modal-denuncia .news .area-top .tag{
+	margin-right: auto;
+}
+
+.modal-denuncia .tag2{
+	color: #3b3b3b!important;
+    clear: both;
+	text-align: center!important;    
+	display: table!important;    
+	margin: auto;
+	float: none!important;    
+	margin-top: 0px;
+	padding-top: 0px!important;
+}
