@@ -117,7 +117,9 @@ export class NewsComponent implements OnInit {
 
   
   getPost(link){
-    this._postService.getPostsByLink(link).subscribe(
+    let leitor_id = this.leitor ? this.leitor.id : 0;
+
+    this._postService.getPostsByLink(link, leitor_id).subscribe(
       ( post: Post ) => { 
         if (post){
             if(!post.publishedAt || post.publishedAt == null){
@@ -138,18 +140,12 @@ export class NewsComponent implements OnInit {
                 
                   //se o leitor está logado
                 if(this.leitor){
-                    this._leitoresService.getLeitor(this.leitor.id).subscribe(
-                        (leitor) => {
-                            this.leitor = leitor;
+                    this.getInteracoesLeitorPost();
 
-                            this.getInteracoesLeitorPost();
-
-                            //se não for o dono do post conta uma visualizacao
-                            if (post.autor.id != leitor.id){
-                                this._visualizacoesService.create(post.id, this.leitor.id).subscribe();
-                            }
-                        }
-                    );
+                    //se não for o dono do post conta uma visualizacao
+                    if (post.autor.id != this.leitor.id){
+                        this._visualizacoesService.create(post.id, this.leitor.id).subscribe();
+                    }
                 }
                 else {
                     //se não tiver ninguem logado conta uma visualização sem leitor

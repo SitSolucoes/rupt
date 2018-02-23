@@ -81,7 +81,7 @@
                         <img src="{{ url + 'profile/' + n.leitor.src_foto }}" class="img">
                     </div>
                     <div class="area" *ngIf='!n.leitor'>
-                        <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                        <img src="../../../assets/img/favicon.png" class="img">
                     </div>
 
                     
@@ -92,7 +92,7 @@
                         <i *ngIf='n.tipo == 2' class="fa fa-user" aria-hidden="true"></i> 
                         <i *ngIf='n.tipo == 4' class="fa fa-share" aria-hidden="true"></i>
                         <i *ngIf='n.tipo == 5' class="fa fa-comment" aria-hidden="true"></i>
-                        <i *ngIf='n.tipo == 6' class="fa fa-exclamation-triangle red" aria-hidden="true"></i>
+                        <i *ngIf='n.tipo == 6' class="fa fa-exclamation-circle red" aria-hidden="true"></i>
                         {{ n.created_at | date:'d' }} de 
                         {{ n.created_at | date:'MMMM' }} às
                         {{ n.created_at | date:'shortTime' }}

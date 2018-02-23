@@ -7,7 +7,6 @@
         <modal-generico [action]="'denuncia'" [idObj]="post?.id" (closeModalGenerico)="closeModalDenuncia($event)"></modal-generico>
     </div>
 
-
     <div id="modalCompartilhar" class="modal modal2 modal4"
         materialize="modal" [materializeParams]="[{dismissible: true}]"
         [materializeActions]="modalCompartilhar">
@@ -54,6 +53,18 @@
         </div>
     </div>
 
+    <div *ngIf='post && post?.deleted_at && leitor?.id == post?.autor.id && ready'>
+        <div  class="news">
+            <div class="not-found">
+                <div class="message">
+                    Sua publicação foi removida após denúncias de <br>
+                    {{ post.motivo_denuncia.motivo }}
+                    <i class="fa fa-ban" aria-hidden="true"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div *ngIf='!ready' class="loading">
         <div class="message">
             Carregando...
@@ -61,7 +72,7 @@
         </div>
     </div>
 
-    <div *ngIf='post && ready'>
+    <div *ngIf='post && !post?.deleted_at && ready'>
         <div class="area-top">
             <div class="tag-menu">
                 <div class="tag red"> {{ post.categorias_post[0].categoria.categoria }} </div>

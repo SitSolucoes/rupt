@@ -394,7 +394,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .headbar-right .dropdown-content2 .info .fa.red{
-    color: #8B1A1A;
+    color: red;
 }
 
 .headbar-right .dropdown-content2 .info .img2{
@@ -2429,7 +2429,7 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
 .news .area-top{
   width: 75%;
   margin-left: 2.5%;
-  margin-top: 20px;
+  margin-top: 40px;
   padding-top: 30px;
 }
 
