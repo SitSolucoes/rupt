@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Collection;
 use App\Categoria;
 use App\Post;
 use App\PostCategoria;
-use App\Visualizacao;
+use App\visualizacoes;
 
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ComentarioController;
@@ -153,13 +153,20 @@ class PostController extends Controller
                     ->first();
 
         if ($post->autor->id == $request->leitor_id){
-            $post->motivo_denuncia = DenunciasController::getMotivoByPost($post->id);
+            if ($post->deleted_at)
+                $post->motivo_denuncia = DenunciasController::getMotivoByPost($post->id);
 
             return response()->json(['post' => $post], 200);
         }
-        else 
-            return response()->json(['post' => null], 200);
-        
+        else {
+            $post->visualizacoes = $post->visualizacoes + 1;
+            $post->save();
+
+            if ($post->deleted_at)
+                return response()->json(['post' => null], 200);
+            
+            return response()->json(['post' => $post], 200);
+        }
     }
 
     public function getEscritor($id){
@@ -173,7 +180,7 @@ class PostController extends Controller
     }
 
     public function getPostsMaisLidos(){
-        $idPosts_q = Visualizacao::select(DB::raw('post_idPost as id, count(*) as q'))
+        $idPosts_q = visualizacoes::select(DB::raw('post_idPost as id, count(*) as q'))
         ->whereIn('post_idPost', Post::select('id')
         ->whereNull('deleted_at')
         ->whereDate('publishedAt', '>=', DB::raw('DATE(DATE_ADD(NOW(), INTERVAL - 100 DAY))'))
@@ -201,7 +208,7 @@ class PostController extends Controller
     public function getSliderPosts(){
         //ultimas 24h
         
-        $idPosts_q = Visualizacao::select(DB::raw('post_idPost as id, count(*) as q'))
+        $idPosts_q = visualizacoes::select(DB::raw('post_idPost as id, count(*) as q'))
                         ->whereIn('post_idPost', Post::select('id')
                         ->whereNull('deleted_at')
                         ->whereDate('publishedAt', '>=', DB::raw('DATE(DATE_ADD(NOW(), INTERVAL - 300 DAY))'))->get())
