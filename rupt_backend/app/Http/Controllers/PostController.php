@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Collection;
 use App\Categoria;
 use App\Post;
 use App\PostCategoria;
-use App\visualizacoes;
+use App\visualizacao;
 
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ComentarioController;
@@ -159,9 +159,6 @@ class PostController extends Controller
             return response()->json(['post' => $post], 200);
         }
         else {
-            $post->visualizacoes = $post->visualizacoes + 1;
-            $post->save();
-
             if ($post->deleted_at)
                 return response()->json(['post' => null], 200);
             
@@ -180,7 +177,7 @@ class PostController extends Controller
     }
 
     public function getPostsMaisLidos(){
-        $idPosts_q = visualizacoes::select(DB::raw('post_idPost as id, count(*) as q'))
+        $idPosts_q = Visualizacoes::select(DB::raw('post_idPost as id, count(*) as q'))
         ->whereIn('post_idPost', Post::select('id')
         ->whereNull('deleted_at')
         ->whereDate('publishedAt', '>=', DB::raw('DATE(DATE_ADD(NOW(), INTERVAL - 100 DAY))'))
@@ -208,7 +205,7 @@ class PostController extends Controller
     public function getSliderPosts(){
         //ultimas 24h
         
-        $idPosts_q = visualizacoes::select(DB::raw('post_idPost as id, count(*) as q'))
+        $idPosts_q = Visualizacao::select(DB::raw('post_idPost as id, count(*) as q'))
                         ->whereIn('post_idPost', Post::select('id')
                         ->whereNull('deleted_at')
                         ->whereDate('publishedAt', '>=', DB::raw('DATE(DATE_ADD(NOW(), INTERVAL - 300 DAY))'))->get())
@@ -363,6 +360,7 @@ class PostController extends Controller
                      })
                      ->orderBy('publishedAt', 'desc')
                      ->with('autor')
+                     ->with('visualizacoes')
                      ->get();
 
         $postsPeso = new Collection();                     
@@ -371,15 +369,13 @@ class PostController extends Controller
             $comentarios = ComentarioController::countComentarios($post->id)*$this->pesoComentario;
             $interacoes = InteracaoLeitorController::sumPeso($post->id);
 
-            $post->peso = $comentarios + $interacoes + $post->visualizacoes;
+            $post->peso = $comentarios + $interacoes + sizeof($post->visualizacoes);
             
             $postsPeso->push($post);
         }
 
         $order = $postsPeso->sortByDesc('peso');
         $array = $order->values()->toArray();
-
-        //echo json_encode($array);
 
         return response()->json(['posts' => $array], 200);
     }
