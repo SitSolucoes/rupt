@@ -15,4 +15,8 @@ class Post extends Model
                     ->with('categoria')->orderBy('id');
     }
 
+    public function visualizacoes(){
+        return $this->hasMany('App\Visualizacao', 'post_idPost', 'id');
+    }
+
 }
