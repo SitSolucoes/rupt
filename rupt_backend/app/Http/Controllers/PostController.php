@@ -3,20 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Collection;
+
+use App\Categoria;
 use App\Post;
 use App\PostCategoria;
-use App\Categoria;
 use App\Visualizacao;
-use App\Http\Controllers\EscritorController;
-use App\Http\Controllers\LeitorController;
+
 use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\ComentarioController;
+use App\Http\Controllers\DenunciasController;
+use App\Http\Controllers\EscritorController;
+use App\Http\Controllers\InteracaoLeitorController;
+use App\Http\Controllers\LeitorController;
 use App\Http\Controllers\PostCategoriaController;
 use App\Http\Controllers\TimelineController;
-use App\Http\Controllers\ComentarioController;
-use App\Http\Controllers\InteracaoLeitorController;
-use Illuminate\Support\Facades\DB;
-
-use Illuminate\Database\Eloquent\Collection;
 
 class PostController extends Controller
 {
@@ -142,14 +144,22 @@ class PostController extends Controller
         return $post;
     }
 
-    public function getPostByLink($link){
-        $post = Post::where('link', $link)
-                    ->whereNull('deleted_at')
+    public function getPostByLink(Request $request){
+        //echo $request;
+
+        $post = Post::where('link', $request->link)
                     ->with('autor')
                     ->with('categoriasPost')
                     ->first();
 
-        return response()->json(['post' => $post], 200);
+        if ($post->autor->id == $request->leitor_id){
+            $post->motivo_denuncia = DenunciasController::getMotivoByPost($post->id);
+
+            return response()->json(['post' => $post], 200);
+        }
+        else 
+            return response()->json(['post' => null], 200);
+        
     }
 
     public function getEscritor($id){

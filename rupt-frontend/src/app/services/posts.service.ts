@@ -87,8 +87,13 @@ export class PostsService {
       }); 
   }
 
-  getPostsByLink(link):Observable<any>{
-      return this._http.get(this._url + 'posts/getPostByLink/'+link, {headers: this.headers}).map(
+  getPostsByLink(link, leitor_id):Observable<any>{
+      const body = JSON.stringify({
+          link: link,
+          leitor_id: leitor_id
+      })
+
+      return this._http.post(this._url + 'posts/getPostByLink', body, {headers: this.headers}).map(
           ( response ) => { return response.json().post }
       )
   }

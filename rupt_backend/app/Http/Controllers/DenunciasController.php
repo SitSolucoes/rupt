@@ -91,7 +91,7 @@ class DenunciasController extends Controller{
                     $d->admin_idAdmin = $request->idAdmin_deleted;
                     $d->save();
                 }
-                
+
                 return response()->json(['status' => true], 200);
             }catch(Exception $ex){
                 return response()->json(['status' => false], 500);
@@ -188,5 +188,14 @@ class DenunciasController extends Controller{
         ->get();
 
         return response()->json((object)['quantidade' => $count[0]['quantidade']], 200);
+    }
+
+    public static function getMotivoByPost($post_id){
+        $denuncia = Denuncia::where('post_idPost', $post_id)
+                            ->where('status', 'R')
+                            ->with('motivo')
+                            ->first();
+
+        return $denuncia->motivo;
     }
 }
