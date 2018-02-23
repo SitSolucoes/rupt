@@ -76,15 +76,22 @@
             
             <div class="info" *ngFor='let n of notificacoes'>
                 <a routerLink='{{ n.rota }}'>
-                    <div class="area">
+                    <div class="area" *ngIf='n.leitor'>
                         <img src="{{ url + 'profile/' + n.leitor.src_foto }}" class="img">
                     </div>
-                    <h1><b>{{ n.leitor.nick }}</b> {{ n.descricao }}</h1>
+                    <div class="area" *ngIf='!n.leitor'>
+                        <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                    </div>
+
+                    
+                    <h1 *ngIf='n.leitor'><b>{{ n.leitor.nick }}</b> {{ n.descricao }}</h1>
+                    <h1 *ngIf='!n.leitor'>{{ n.descricao }}</h1>
                     <h2>
                         <img *ngIf='n.tipo == 3' src="../../../assets/img/rupt-ico.png" class="img2 fa"> 
                         <i *ngIf='n.tipo == 2' class="fa fa-user" aria-hidden="true"></i> 
                         <i *ngIf='n.tipo == 4' class="fa fa-share" aria-hidden="true"></i>
                         <i *ngIf='n.tipo == 5' class="fa fa-comment" aria-hidden="true"></i>
+                        <i *ngIf='n.tipo == 6' class="fa fa-exclamation-triangle red" aria-hidden="true"></i>
                         {{ n.created_at | date:'d' }} de 
                         {{ n.created_at | date:'MMMM' }} às
                         {{ n.created_at | date:'shortTime' }}

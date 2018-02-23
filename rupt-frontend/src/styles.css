@@ -371,12 +371,22 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     margin-top: 0px;
 }
 
+.headbar-right .dropdown-content2 .info .area .fa{
+    font-size: 35px;
+    margin-top: 22px;
+    color: #f97000;
+}
+
 .headbar-right .dropdown-content2 .info .fa{
     color: #365899;
     margin-top: 5px;
     margin-left: 10px;
     margin-right: 10px;
     font-size: 20px;
+}
+
+.headbar-right .dropdown-content2 .info .fa.red{
+    color: #8B1A1A;
 }
 
 .headbar-right .dropdown-content2 .info .img2{

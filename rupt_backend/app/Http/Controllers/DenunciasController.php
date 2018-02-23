@@ -67,13 +67,17 @@ class DenunciasController extends Controller{
                 /*exclui o post*/
                 $c = new PostController();
                 $c->removePorDenuncia($request->post_idPost, $request->idAdmin_Deleted);
+                
+                $post = $c->getById($request->post_idPost);
+                $post = $post->first();
 
                 /*cria a notificalção*/
                 $notificacao = new Notificacao();
-                $notificacao->descricao = 'está te seguindo';
-                $notificacao->rota = '/perfil/'.$leitor->nick;
+                $notificacao->escritor_idEscritor = $post->autor_idLeitor;
+                $notificacao->descricao = 'Sua publicação foi removida após denúncias';
+                $notificacao->rota = '/noticia/'.$post->link; 
                 $notificacao->lida = false;
-                $notificacao->tipo = 2; //2 - seguir
+                $notificacao->tipo = 6; //2 - denuncia
 
                 NotificacaoController::create($notificacao);
 
@@ -87,14 +91,10 @@ class DenunciasController extends Controller{
                     $d->admin_idAdmin = $request->idAdmin_deleted;
                     $d->save();
                 }
-
-                return response()->json([
-                    'status' => true
-                ], 200);
+                
+                return response()->json(['status' => true], 200);
             }catch(Exception $ex){
-                return response()->json([
-                    'status' => false
-                ], 500);
+                return response()->json(['status' => false], 500);
             }
         }else{
             try{    
@@ -102,18 +102,16 @@ class DenunciasController extends Controller{
                 $denuncias = Denuncia::where('post_idPost', $request->post_idPost)
                                     ->where('motivo_idMotivo', $request->motivo_idMotivo)
                                     ->get();
+
                 foreach($denuncias as $d){
                     $d->status = "I";
                     $d->admin_idAdmin = $request->idAdmin_deleted;
                     $d->save();
                 }
-                return response()->json([
-                    'status' => true
-                ], 200);
+
+                return response()->json(['status' => true], 200);
             }catch(Exception $ex){
-                return response()->json([
-                    'status' => false
-                ], 500);
+                return response()->json(['status' => false], 500);
             }
         }
     }

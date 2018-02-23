@@ -112,16 +112,8 @@ input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):
     box-shadow: none;
 }
 
-
-
 .character-counter{
 	margin-top: -25px;
-}
-
-.dropdown-content{
-	/*left: auto!important;
-	margin-bottom: 10px;
-	width: 100%!important;*/
 }
 
 .dropdown-content li>a{

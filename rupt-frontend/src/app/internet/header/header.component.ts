@@ -64,9 +64,9 @@ export class HeaderComponent implements OnInit {
         this._notificacaoService.getNotificacoes(this.leitor.id).subscribe(
             ( response ) => { 
                 this.notificacoes = response ;
-                setTimeout(()=>{ 
+                /*setTimeout(()=>{ 
                     this.getNotificacoes();
-                }, 1000*30);
+                }, 1000*30);*/
             }
         )
     }
