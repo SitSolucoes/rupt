@@ -93,8 +93,13 @@ export class CadastroLeitorComponent implements OnInit {
         if (this.leitor.src_capa && this.leitor.src_capa != '')
           this.url_capa = 'url("'+ ConnectionFactory.API_IMAGEM + 'profile/' + this.leitor.src_capa +'")';
         if (this.leitor.src_foto && this.leitor.src_foto != ''){
-          this.data.image = ConnectionFactory.API_IMAGEM + 'profile/' + this.leitor.src_foto+'")';
-          this.url_perfil = 'url("'+ ConnectionFactory.API_IMAGEM + 'profile/' + this.leitor.src_foto +'")';
+          if(this.leitor.src_foto.indexOf('ttp') > 0){
+            this.data.image = this.leitor.src_foto;
+            this.url_perfil = 'url("' + this.leitor.src_foto + '")';
+          }else{
+            this.data.image = ConnectionFactory.API_IMAGEM + 'profile/' + this.leitor.src_foto+'")';
+            this.url_perfil = 'url("' + ConnectionFactory.API_IMAGEM + 'profile/' + this.leitor.src_foto +'")';
+          }
         }
       }
     ); 
