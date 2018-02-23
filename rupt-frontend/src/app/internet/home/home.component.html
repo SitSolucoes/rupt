@@ -1,47 +1,46 @@
 <!--modal filtro categorias-->
-<div class="home">
-<div id="ModalCategoria" class="modal modal3 modal4 modal8"
-    materialize="modal" [materializeParams]="[{dismissible: false}]"
-    [materializeActions]="modalCategoria">
-    <app-modal-categorias (closeModalCategoria)="closeModalCategoria($event)" [id]="leitor.id"></app-modal-categorias>
-</div>
 
-<div *ngIf='!ready' class="loading">
-    <div class="message">
-        Carregando...
-        <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+    <div id="ModalCategoria" class="modal modal3 modal4 modal8"
+         materialize="modal" [materializeParams]="[{dismissible: false}]"
+         [materializeActions]="modalCategoria">
+        <app-modal-categorias (closeModalCategoria)="closeModalCategoria($event)" [id]="leitor.id"></app-modal-categorias>
     </div>
-</div>
 
-<div [hidden]='!ready'>
-    <!--publicidade-->
-    <div class="banner-promo">
-        <!--<div class="area">
-            <div class="title"> publicidade </div>
-        </div>-->
-        <div class="container">
-            <img src="../assets/img/C (1).png" class="img">
+    <div *ngIf='!ready' class="loading">
+        <div class="message">
+            Carregando...
+            <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
         </div>
     </div>
-    <div class="menu-top container-categoria">
-        <!--slider-->
-        <slider (ready)="pronto($event)"></slider>
-    </div>
+
+    <div [hidden]='!ready'>
+        <!--publicidade-->
+        <div class="banner-promo">
+            <!--<div class="area">
+                <div class="title"> publicidade </div>
+            </div>-->
+            <div class="container">
+                <img src="../assets/img/C (1).png" class="img">
+            </div>
+        </div>
+        <div class="menu-top container-categoria">
+            <!--slider-->
+            <slider (ready)="pronto($event)"></slider>
+        </div>
 
 
-    <div class="banner-promo banner-promo2">
-        <div class="container">
-            <img src="../assets/img/C (2).png" class="img">
+        <div class="banner-promo banner-promo2">
+            <div class="container">
+                <img src="../assets/img/C (2).png" class="img">
+            </div>
         </div>
     </div>
-</div>
 
-<categorias (ready)="pronto($event)"></categorias>
-</div>
+    <categorias (ready)="pronto($event)"></categorias>
 
 
-    
-    
+
+
 
 
 

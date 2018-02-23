@@ -29,6 +29,13 @@ body{
     font-family: lato;
 }
 
+*  {
+    margin:0;
+    padding:0;
+}
+
+html, body {height:100%;}
+
 .loading{
     display: block;
     float: left;
@@ -147,6 +154,8 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     float: left;
     padding-bottom: 20px;
     width: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 .headbar{
@@ -164,7 +173,6 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     display: block;
     float: left;
     width: 100%;
-    height: 100%;
     margin-top: 60px;
 }
 
@@ -1101,7 +1109,8 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 }
 
 .rodape{
-    position: relative;
+    position: absolute;
+    bottom: -200px;
     width: 100%;
     display: block;
     float: left;
@@ -2345,7 +2354,6 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
   padding: 5px;
   padding-bottom: 20px;
   padding-top: 15px;
-  margin-bottom: 15px;
   border-radius: 3px;
   position: relative;
 }
@@ -3270,6 +3278,7 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     display: block;
     float: left;
     width: 100%;
+    max-width: 100%;
 }
 
 .categoria .tabs{
@@ -3309,7 +3318,7 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     /* height: 300px; */
     padding: 10px;
     background: #fff;
-    margin-top: 100px;
+    margin-top: 60px;
     margin-left: 30px;
     margin-bottom: 20px;
     border-radius: 2px;
@@ -4837,7 +4846,7 @@ quill-editor{
     position: relative;
 }
 
-@media screen and (min-width: 1292px) {
+@media screen and (min-width: 1592px) {
     .news {
         float: none;
         max-width: 1500px;
@@ -4859,6 +4868,22 @@ quill-editor{
         padding-bottom: 60px;
     }
 
+    .user .bio{
+        padding-left: 0px;
+    }
+
+    .user .area{
+        width: 76%;
+    }
+
+    .user .feed{
+        width: 57%;
+    }
+
+    .user .area-patrocinio{
+        margin-right: 0%;
+    }
+
     .publicacao{
         width: 100%;
         max-width: 1500px;
@@ -4873,9 +4898,20 @@ quill-editor{
     }
 
     .home{
+        display: table;
+        float: none;
+        width: 100%;
+        max-width: 1500px;
+        height: 90%;
+        margin: 0 auto;
+        padding-bottom: 60px;
+    }
+
+    .center-large-screen{
         width: 100%;
         max-width: 1500px;
         float: none;
+        display: block;
         margin: 0 auto;
         padding-bottom: 60px;
     }
