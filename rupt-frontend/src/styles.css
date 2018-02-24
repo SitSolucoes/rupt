@@ -3754,6 +3754,28 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     width: 50%;
 }
 
+.cadastro-escritor .container .area .status{
+    width: 100%;
+    float: left;
+    display: block;
+    margin-bottom: 40px;
+}
+
+.cadastro-escritor .container .area .error-alert{
+    float: left;
+    margin-left: 20px;
+    text-align: left;
+    padding: 10px 15px;
+    width: auto;
+}
+
+.cadastro-escritor .container .area .error-alert.grey{
+    background: darkgrey;
+}
+
+.cadastro-escritor .container .area .error-alert i{
+    margin-right: 10px;
+}
 
 .cadastro-escritor .container .background-orange{
      background: #f97000;

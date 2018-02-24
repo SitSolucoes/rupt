@@ -148,11 +148,15 @@ export class LeitoresService {
 
   doLogin(form){
     const body = JSON.stringify(form.value);
+    
     return this._http.put(this._url + 'leitor/signin', body, {headers: this.headers}).map(
         (response: Response) => { 
           if (response.json().login == true){
             localStorage.setItem('l', this.base64.encode(response.json().leitor.id));
             localStorage.setItem('token', response.json().token);
+            //localStorage.setItem('x')
+
+            console.log(new Date());
   
             this.leitor.emit(response.json().leitor);
             
@@ -182,6 +186,11 @@ export class LeitoresService {
 
     return this._http.post(this._url + 'leitor/verificaLogin', body, {headers: this.headers}).map(
       (response: Response) => {
+
+        var a = new Date(); // Current date now.
+        var b = new Date(2010, 0, 1, 0, 0, 0, 0); // Start of 2010.
+        var d = (b.getTime()-a.getTime()); // Difference in milliseconds.
+
         if (response.json().leitor != false){
           this.leitor.emit(response.json().leitor);
             

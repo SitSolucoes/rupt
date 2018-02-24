@@ -13,8 +13,28 @@
             <div class="area">
                 <p> Dados pessoais </p>
 
-                <div class="text"> Olá, {{ leitor.nome }}. Para se tornar um escritor é necessário completar seu cadastro. <br/>
-                    Preencha os campos abaixo corretamente que sua solicitação será enviada para avaliação. </div>
+                <div class="text" *ngIf="!leitor.escritor"> Olá, {{ leitor.nome }}. Para se tornar um escritor é necessário completar seu cadastro. <br/>
+                    Preencha os campos abaixo corretamente que sua solicitação será enviada para avaliação. 
+                </div>
+
+                <div class="status" *ngIf="leitor?.escritor">
+
+                    <div class="error-alert success" *ngIf='leitor.escritor.status == "a"'> 
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                        Cadastro aceito
+                    </div>
+
+                    <div class="error-alert" *ngIf='leitor.escritor.status == "r"'> 
+                        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                        Cadastro recusado: {{ leitor.escritor.motivo_recusa }}
+                    </div>
+
+                    <div class="error-alert grey" *ngIf='leitor.escritor.status == "p"'> 
+                        <i class="fa fa-hourglass-half" aria-hidden="true"></i>
+                        Em análise
+                    </div>
+
+                </div>
 
                 <div class="menu">
                     <label> RG *</label>
