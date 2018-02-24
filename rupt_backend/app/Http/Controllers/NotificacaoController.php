@@ -14,7 +14,8 @@ class NotificacaoController extends Controller
         3 - reação
         4 - compartilhar 
         5 - comentar
-        6 - denuncia
+        6 - erro
+        7 - Cadastro aceito
     */
 
     public static function create($n){

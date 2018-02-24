@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Escritor;
+use App\Notificacao;
 use App\Http\Controllers\LeitorController;
+use App\Http\Controllers\NotificacaoController;
 
 class EscritorController extends Controller
 {
@@ -121,6 +123,15 @@ class EscritorController extends Controller
 
         $escritor->save();
 
+        $notificacao = new Notificacao();
+        $notificacao->escritor_idEscritor = $escritor->leitor_idLeitor;
+        $notificacao->descricao = 'Seu cadastro foi recusado';
+        $notificacao->rota = '/cadastro-escritor';
+        $notificacao->lida = false;
+        $notificacao->tipo = 6; //6 - erro
+
+        NotificacaoController::create($notificacao);
+
         return response()->json(['message' => "Escritor recusado."], 200);
     }
 
@@ -133,6 +144,15 @@ class EscritorController extends Controller
         $escritor->data_aceite = date('Y-m-d H:i:s');
 
         $escritor->save();
+
+        $notificacao = new Notificacao();
+        $notificacao->escritor_idEscritor = $escritor->leitor_idLeitor;
+        $notificacao->descricao = 'Seu cadastro foi aprovado';
+        $notificacao->rota = '/cadastro-escritor';
+        $notificacao->lida = false;
+        $notificacao->tipo = 7; //7 - cadastro aprovado
+
+        NotificacaoController::create($notificacao);
 
         return response()->json(['message' => "Escritor aceito."], 200);
     }

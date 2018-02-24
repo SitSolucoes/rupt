@@ -397,6 +397,10 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     color: #8B1A1A;
 }
 
+.headbar-right .dropdown-content2 .info .fa.green{
+    color: green;
+}
+
 .headbar-right .dropdown-content2 .info .img2{
     margin-top: 0px !important;
     height: 25px;
