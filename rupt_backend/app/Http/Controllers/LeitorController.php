@@ -190,15 +190,17 @@ class LeitorController extends Controller
         try{
             if($leitor != null){    
                 if(!$leitor->ativo)
-                    return response()->json(['retorno' => false, 'mensagem' => 'Seu usuário está desativado, caso você nunca tenha recebido nenhum aviso ou alerta sobre este tema, por favor, entre em contato.'], 200);
-                $destino = $leitor->email;
+                    return response()->json(['retorno' => false, 'mensagem' => 'Sua conta foi desativada, entre em contato para recuperá-la'], 200);
+                
+                    $destino = $leitor->email;
                 $rdm_token = str_random(60);
                 $leitor->token_esqueci_senha = $rdm_token;
                 $leitor->save();
+                
                 Mail::to($destino)->send(new esqueciSenhaLeitor($rdm_token));
-                return response()->json(['retorno' => true, 'mensagem' => "Um e-mail foi enviado com as instruções para recuperação da senha."]);
+                return response()->json(['retorno' => true, 'mensagem' => "Um e-mail foi enviado com as instruções para recuperação da senha"]);
             }else{
-                return response()->json(['retorno' => false, 'mensagem' => "Seu email não foi encontrado em nossa base de dados, por favor confira os dados digitados."], 200);
+                return response()->json(['retorno' => false, 'mensagem' => "E-mail não encontrado"], 200);
             }
         }catch(ErrorException $e){
             return response()->json(['retorno' => false, 'mensagem' => "Um erro inesperado ocorreu, tente novamente mais tarde"], 200);

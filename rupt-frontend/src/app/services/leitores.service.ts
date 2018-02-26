@@ -154,10 +154,12 @@ export class LeitoresService {
           if (response.json().login == true){
             localStorage.setItem('l', this.base64.encode(response.json().leitor.id));
             localStorage.setItem('token', response.json().token);
+
+            let now = new Date();
+            localStorage.setItem('exp', now.getTime().toString());
+
             //localStorage.setItem('x')
 
-            console.log(new Date());
-  
             this.leitor.emit(response.json().leitor);
             
             return [true, response.json().leitor];
@@ -178,19 +180,35 @@ export class LeitoresService {
   verificaLogin(){
     let token = localStorage.getItem("token");
     let id = this.base64.decode(localStorage.getItem("l"));
+    let time = Number(localStorage.getItem('exp'));
+
+    console.log('time: '+ time);
+
+    let now = new Date();
+
+    let dif = now.getTime() - time;
+
+    let minutes = 1000 * 60;
+    let hours = minutes * 60;
+
+    dif = dif/hours;
+
+    if (time == 0 || dif > 1){
+        localStorage.removeItem('token');
+        return Observable.of(false);
+    }
     
-    const body = JSON.stringify({
+    localStorage.setItem('exp', now.getTime().toString());
+    
+    
+    let body = JSON.stringify({
       id: id,
       token: token
-    })
+    });
 
     return this._http.post(this._url + 'leitor/verificaLogin', body, {headers: this.headers}).map(
       (response: Response) => {
-
-        var a = new Date(); // Current date now.
-        var b = new Date(2010, 0, 1, 0, 0, 0, 0); // Start of 2010.
-        var d = (b.getTime()-a.getTime()); // Difference in milliseconds.
-
+        
         if (response.json().leitor != false){
           this.leitor.emit(response.json().leitor);
             

@@ -3990,6 +3990,13 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     text-decoration: underline;
 }
 
+.login-modal .mensagem{
+    display: table;
+    margin: auto;
+    font-size: 17px;
+    margin-bottom: 40px;
+}
+
 .modal2{
     top: 20% !important;
     width: 55%;
