@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Collection;
 use App\Categoria;
 use App\Post;
 use App\PostCategoria;
-use App\visualizacao;
+use App\Visualizacao;
 
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ComentarioController;
@@ -177,7 +177,7 @@ class PostController extends Controller
     }
 
     public function getPostsMaisLidos(){
-        $idPosts_q = Visualizacoes::select(DB::raw('post_idPost as id, count(*) as q'))
+        $idPosts_q = Visualizacao::select(DB::raw('post_idPost as id, count(*) as q'))
         ->whereIn('post_idPost', Post::select('id')
         ->whereNull('deleted_at')
         ->whereDate('publishedAt', '>=', DB::raw('DATE(DATE_ADD(NOW(), INTERVAL - 100 DAY))'))

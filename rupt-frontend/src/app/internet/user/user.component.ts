@@ -79,8 +79,8 @@ export class UserComponent implements OnInit {
 
           this._leitorService.getLeitorByNick(params['nick']).subscribe(
             (leitor: Leitor) => {
-              this.leitor = leitor;
-              this.verifyFollow();
+                this.leitor = leitor;
+                this.verificaLogin();
             }
           );
           
@@ -88,15 +88,19 @@ export class UserComponent implements OnInit {
               (leitor: Leitor) => { this.leitorLogado = leitor }
           );
 
-          this._leitorService.verificaLogin().subscribe(
-              (response) => {
-                this.verifyFollow();
-                this.getTimeline();
-                this.getRascunhos();
-                this.getSeguidores();
-                this.getSeguindo();
-          });
+          
       });
+  }
+
+  verificaLogin(){
+    this._leitorService.verificaLogin().subscribe(
+      (response) => {
+        this.verifyFollow();
+        this.getTimeline();
+        this.getRascunhos();
+        this.getSeguidores();
+        this.getSeguindo();
+    });
   }
 
   refreshTabs(){
