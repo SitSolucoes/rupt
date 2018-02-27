@@ -35,4 +35,12 @@ class CategoriaFiltroController extends Controller
 
         return response()->json(['categoriasFiltro' => $categoriasFiltro], 200);
     }
+
+    public function get(){
+        return CategoriaFiltro::orderBy('ordem')
+            ->whereHas('categoria', function ($query) {
+                    $query->where('status', 1);
+            })
+            ->with('categoria')->get();
+    }
 }

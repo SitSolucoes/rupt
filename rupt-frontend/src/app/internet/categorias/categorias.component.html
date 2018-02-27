@@ -1,1 +1,3 @@
-<categoria-slider *ngFor="let categoria of categorias" [categoria]="categoria"></categoria-slider>
+<div *ngFor="let categoria of categorias; let i = index">
+    <categoria-slider *ngIf='categoria.posts.length > 0' [categoria]="categoria" [index]='i'></categoria-slider>
+</div>

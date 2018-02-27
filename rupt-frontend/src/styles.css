@@ -4814,7 +4814,7 @@ quill-editor{
 }
 
 .form-footer .button.medium{
-    width: 150px;
+    width: auto;
 }
 
 .form-footer .button .fa-spinner{

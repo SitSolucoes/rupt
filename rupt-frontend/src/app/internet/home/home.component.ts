@@ -76,11 +76,11 @@ export class HomeComponent implements OnInit {
     this.modalCategoria.emit({action:"modal",params:['close']});
   }
 
-    pronto(){
-        this.slidersProntos += 1;
-        if(this.slidersProntos == 2){
-            this.ready = true;
-        }
-    }
+  pronto(){
+      this.slidersProntos += 1;
+      if(this.slidersProntos == 2){
+          this.ready = true;
+      }
+  }
 
 }

@@ -211,9 +211,11 @@
                 </div>
             
             </div>
-            <button type="button" class="button background-orange" (click)="next()">Próximo</button>
+            <div class="form-footer">
+                <button type="button" class="button background-orange" (click)="next()">Próximo</button>
             
-            <button type="button" class="button" (click)="prev()">Voltar</button>
+                <button type="button" class="button" (click)="prev()">Voltar</button>
+            </div>
         </div>
         <div [hidden]='page != 3'>
             <div class="progress">
@@ -247,9 +249,14 @@
 
                 </div>
             </div>
-            <button type="submit" [disabled]="processando" class="button background-orange">Salvar</button>
-            <button type="submit" [disabled]="processando" class="button background-green">Pular</button>
-            <button type="button" class="button" (click)="prev()">Voltar</button>
+            <div class="form-footer">
+                <button type="submit" [disabled]="processando" class="button background-orange">
+                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw" *ngIf='processando'></i>
+                    Salvar
+                </button>
+                <button type="submit" [disabled]="processando" class="button background-green">Pular</button>
+                <button type="button" class="button" (click)="prev()">Voltar</button>
+            </div>
         </div>
     </div>
 </form>

@@ -280,6 +280,7 @@ export class CadastroLeitorComponent implements OnInit {
   onSubmit(){
       if(this.processando)
         return;
+        
       this.processando = true;
 
       this.validaSenhas();

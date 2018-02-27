@@ -182,8 +182,6 @@ export class LeitoresService {
     let id = this.base64.decode(localStorage.getItem("l"));
     let time = Number(localStorage.getItem('exp'));
 
-    console.log('time: '+ time);
-
     let now = new Date();
 
     let dif = now.getTime() - time;
