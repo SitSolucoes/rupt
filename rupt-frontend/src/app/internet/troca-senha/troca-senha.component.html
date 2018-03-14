@@ -1,0 +1,30 @@
+
+<div class="container">
+  <p> Trocar Senha </p>
+      
+  <div *ngIf="!enviado">
+      <div class="login-modal">
+          <div class="login-container login-container2">
+              <!--<input type="text" class="input" maxlength="30" name="marca" readonly placeholder="joao@hotmail.com">-->
+              <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                  
+                  <input type="password" class="input" maxlength="30" formControlName="antiga" name="antiga" placeholder="Senha Antiga"  autocomplete="off">
+                  
+                  <input type="password" class="input" maxlength="30" formControlName="senha" name="senha" placeholder="Nova Senha" [ngClass]="{'invalid': verificaValidTouched('senha')}"  autocomplete="off">
+                  <div class="error" *ngIf="verificaValidTouched('senha')">{{ mensagemErro('password') }}</div>
+                  
+                  <input type="password" class="input" maxlength="30" formControlName="confirma" name="confirma" placeholder="Confirmar Nova Senha" autocomplete="off">
+                  <div class="error" *ngIf="form.get('senha').value != form.get('confirma').value">Senhas não coincdem</div>
+                  
+                  <span class='error'>{{mensagem}}</span>
+                  
+
+                  <button type="submit" class="button">
+                      <i class="fa fa-spinner fa-pulse fa-3x fa-fw" *ngIf='loading'></i>   
+                      Trocar 
+                  </button>
+              </form>    
+          </div>
+      </div>
+  </div>
+</div>

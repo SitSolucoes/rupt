@@ -148,6 +148,7 @@
             <li >
                 <a *ngIf="leitor.escritor && leitor.escritor.status != 'r'" routerLink='/publicacao'>Publicar</a>
                 <a *ngIf="!leitor.escritor || leitor.escritor.status == 'r'" routerLink="/cadastro-escritor">Tornar-se escritor</a>
+                <a routerLink="/troca-senha">Trocar Senha</a>
             </li>
             <li><a (click)="logout()">Logout</a></li>
         </ul>

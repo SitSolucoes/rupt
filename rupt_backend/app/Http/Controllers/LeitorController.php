@@ -424,4 +424,19 @@ class LeitorController extends Controller
         return response()->json(['leitores' => $leitores], 200);
     }
 
+    public function trocaSenha(Request $request){
+        $leitor = Leitor::where('id', $request->idLeitor)
+                          ->where('password', $request->senha)
+                          ->get()
+                          ->first();
+        if(!$leitor)
+            return response()->json(['erro' => 'Senha antiga inválida'], 400);
+        
+        $leitor->password = Hash::make($request->password);
+        $leitor->save();
+
+        return response()->json(['sucesso' => 'Senha alterada com sucesso!'], 200);
+        
+    }
+
 }

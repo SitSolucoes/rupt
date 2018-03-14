@@ -1,3 +1,4 @@
+import { TrocaSenhaComponent } from './troca-senha/troca-senha.component';
 import { RedefineSenhaComponent } from './redefine-senha/redefine-senha.component';
 import { RedefinirSenhaComponent } from './redefinir-senha/redefinir-senha.component';
 
@@ -38,6 +39,7 @@ const routes: Routes = [
       { path : 'esqueci-senha', component:  EsqueciSenhaComponent},
       { path : 'categorias/:categoria', component: CategoriaComponent},
       { path : 'pesquisa/:search', component: PesquisaComponent},
+      { path : 'troca-senha', component: TrocaSenhaComponent},
       { path : '', redirectTo: 'noticias', pathMatch: 'full'},
       { path : '**', redirectTo: 'noticias', pathMatch: 'full'},
     ]},
