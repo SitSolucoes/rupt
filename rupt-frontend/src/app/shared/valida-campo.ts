@@ -2,7 +2,8 @@ import { FormGroup } from "@angular/forms";
 
 export class ValidaCampo {
   verificaValidTouched(campo: string, formulario: FormGroup){
-      return (!formulario.get(campo).valid && formulario.get(campo).touched);
+      if(formulario)
+        return (!formulario.get(campo).valid && formulario.get(campo).touched);
   }
 
   mensagemErro(campo: string, formulario: FormGroup){

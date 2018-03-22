@@ -106,6 +106,23 @@ export class LeitoresService {
     );
   }
 
+  trocaSenha(f){
+    const body = JSON.stringify({
+      idLeitor: f.value.idLeitor,
+      senhaAntiga: f.value.antiga,
+      password: f.value.senha
+    });
+
+    return this._http.put(this._url + 'troca-senha', body, {headers: this.headers}).map(
+      (response: Response) =>{
+        return response.json().sucesso;
+      },
+      (erro) => {
+        return erro.json().erro;
+      }
+    )
+  }
+
   getLeitores(): Observable<any>{
      return this._http.get(this._url + 'getLeitores')
       .map(

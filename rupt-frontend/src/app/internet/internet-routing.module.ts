@@ -23,7 +23,7 @@ import { PesquisaComponent } from 'app/internet/lista-resultados/pesquisa/pesqui
 const routes: Routes = [
   { path : '', component: InternetInicioComponent,
   children: [
-    { path : 'redefinindoSenha/:token', component: RedefineSenhaComponent}, 
+      { path : 'redefinindoSenha/:token', component: RedefineSenhaComponent}, 
       { path : 'noticias', component: HomeComponent},
       { path : 'faq', component: FaqComponent},
       { path : 'politica', component: PoliticaComponent},
