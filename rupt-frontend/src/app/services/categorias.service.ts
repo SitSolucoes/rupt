@@ -21,7 +21,7 @@ export class CategoriasService {
   }
 
   getCategorias(): Observable<any>{
-    return this._http.get(this._url + 'categoria/getCategorias').map(
+    return this._http.get(this._url + 'categoria/getCategorias', {headers: this.headers}).map(
       (response: Response) => {
         return response.json().categorias;
       }
@@ -29,7 +29,7 @@ export class CategoriasService {
   };
 
   getCategoriasAtivas(): Observable<any>{
-    return this._http.get(this._url + 'categoria/getCategoriasAtivas').map(
+    return this._http.get(this._url + 'categoria/getCategoriasAtivas', {headers: this.headers}).map(
       (response: Response) => {
         return response.json().categorias;
       }
@@ -37,7 +37,7 @@ export class CategoriasService {
   }
 
   getSubCategorias(id): Observable<any>{
-    return this._http.get(this._url + 'categoria/getSubCategorias/'+id).map(
+    return this._http.get(this._url + 'categoria/getSubCategorias/'+id, {headers: this.headers}).map(
       (response: Response) => {
         return response.json().subCategorias;
       }
