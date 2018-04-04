@@ -152,7 +152,6 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 .home{
     display: block;
     float: left;
-    padding-bottom: 20px;
     width: 100%;
     position: relative;
     min-height: 100%;
@@ -5295,6 +5294,10 @@ quill-editor{
         width: 8.5%;
     }
 
+    .rodape{
+        bottom: -240px;
+    }
+
 }
 
 @media screen and (max-width: 576px) {
@@ -5751,6 +5754,10 @@ quill-editor{
 
     .login-categorias .container .info .button3{
         font-size: 12px;
+    }
+
+    .rodape{
+        bottom: -255px;
     }
 
 }
