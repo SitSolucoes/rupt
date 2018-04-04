@@ -33,18 +33,26 @@ export class RedefineSenhaComponent implements OnInit {
               private _fb: FormBuilder) {
     this.activatedRoute.params.subscribe(
       (params) => {
+        console.log("Params: ");
+        console.log(params);
         this._leitoresService.validaToken(params['token']).subscribe(
           (response) => {
-              if (response.resultado) {
+            if (response.resultado) {
+                  console.log("Response: ");
+                  console.log(response);
                   this.valido = true;
                   this.createForm();
                   this.setEmailForm(response.leitor);
-                }else{
-                  this.erros.token = response.mensagem;
-                }
-              }
-            )
-          });
+            }else{
+              this.erros.token = response.mensagem;
+            }
+          },
+          (erro) => {
+            console.log("deu pau");
+            console.log(erro);
+          }
+        )
+      },);
   }
 
   private createForm(){
@@ -65,7 +73,12 @@ export class RedefineSenhaComponent implements OnInit {
     if(this.form.value.novaSenha == this.form.value.confirma_senha) {
       this._leitoresService.redefineSenha(this.form).subscribe(
         (data)=> {
-          this.mensagem = data.retorno;
+          console.log("data: ");
+          console.log(data);
+          this.mensagem = data;
+        },
+        (erro) => {
+          this.mensagem = "Problemas de conexão, tente novamente mais tarde ou entre em contato com nossa equipe";
         }
       );
     }else {

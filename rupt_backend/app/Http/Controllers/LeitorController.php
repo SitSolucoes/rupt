@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
-use App\Mail\esqueciSenhaLeitor;
+use App\Mail\EsqueciSenhaLeitor;
 use App\Leitor;
 
 class LeitorController extends Controller
@@ -197,7 +197,7 @@ class LeitorController extends Controller
                 $leitor->token_esqueci_senha = $rdm_token;
                 $leitor->save();
                 
-                Mail::to($destino)->send(new esqueciSenhaLeitor($rdm_token));
+                Mail::to($destino)->send(new EsqueciSenhaLeitor($rdm_token));
                 return response()->json(['retorno' => true, 'mensagem' => "Um e-mail foi enviado com as instruções para recuperação da senha"]);
             }else{
                 return response()->json(['retorno' => false, 'mensagem' => "E-mail não encontrado"], 200);
@@ -426,10 +426,9 @@ class LeitorController extends Controller
 
     public function trocaSenha(Request $request){
         $leitor = Leitor::where('id', $request->idLeitor)
-                          ->where('password', $request->senha)
                           ->get()
                           ->first();
-        if(!$leitor)
+        if(!$leitor && Hash::check($leitor->password, $request->senhaAntiga))
             return response()->json(['erro' => 'Senha antiga inválida'], 400);
         
         $leitor->password = Hash::make($request->password);

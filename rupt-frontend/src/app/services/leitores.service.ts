@@ -79,7 +79,7 @@ export class LeitoresService {
     
     return this._http.put(this._url + 'leitor/redefineSenha', body, {headers: this.headers}).map(
       (response)=>{
-        return response.json().resultado;
+        return response.json().retorno;
       }
     )
   }

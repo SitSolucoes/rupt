@@ -7,8 +7,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class esqueciSenhaLeitor extends Mailable
-{
+class EsqueciSenhaLeitor extends Mailable{
     use Queueable, SerializesModels;
 
     /**
