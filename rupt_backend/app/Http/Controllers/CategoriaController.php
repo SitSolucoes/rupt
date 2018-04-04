@@ -72,6 +72,12 @@ class CategoriaController extends Controller
         return Categoria::where('status', 1)->orderBy("categoria")
         ->where("categoria_idCategoria", null)->get();
     }
+
+    private function getSubCategorias($id){
+        return Categoria::where('categoria_idCategoria', $id)
+                        ->where('status', 1)
+                        ->get();
+    }
     
     private function recursiveSubCategorias($categorias){
          $listCategoria = new Collection();
