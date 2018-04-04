@@ -93,6 +93,7 @@
                         <i *ngIf='n.tipo == 4' class="fa fa-share" aria-hidden="true"></i>
                         <i *ngIf='n.tipo == 5' class="fa fa-comment" aria-hidden="true"></i>
                         <i *ngIf='n.tipo == 6' class="fa fa-exclamation-circle red" aria-hidden="true"></i>
+                        <i *ngIf='n.tipo == 7' class="fa fa-check green" aria-hidden="true"></i>
                         {{ n.created_at | date:'d' }} de 
                         {{ n.created_at | date:'MMMM' }} às
                         {{ n.created_at | date:'shortTime' }}
@@ -147,6 +148,7 @@
             <li >
                 <a *ngIf="leitor.escritor && leitor.escritor.status != 'r'" routerLink='/publicacao'>Publicar</a>
                 <a *ngIf="!leitor.escritor || leitor.escritor.status == 'r'" routerLink="/cadastro-escritor">Tornar-se escritor</a>
+                <a routerLink="/troca-senha">Trocar Senha</a>
             </li>
             <li><a (click)="logout()">Logout</a></li>
         </ul>

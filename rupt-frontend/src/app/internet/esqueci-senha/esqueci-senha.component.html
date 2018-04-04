@@ -5,45 +5,34 @@
         <div class="area">
         -->
 <div class="modal-content">
-        <div class="title">
-                <span *ngIf="!spinner"> Esqueci Senha  </span>
-                <a click="#" class=" modal-action modal-close close">X</a>
-                <span *ngIf="spinner"> Enviando...</span>
-        </div>
-        <div *ngIf="!enviado">
-            <div class="login-modal">
-                <div class="login-container login-container2">
-                    <!--<input type="text" class="input" maxlength="30" name="marca" readonly placeholder="joao@hotmail.com">-->
-                    <form [formGroup]="formulario" *ngIf="!spinner" (ngSubmit)="onSubmit()">
-                        <input type="text" class="input" maxlength="30" formControlName="email" name="marca" placeholder="e-mail">
+    <div class="title">
+        <span> Esqueci Senha  </span>
+        <a click="#" class=" modal-action modal-close close">X</a>
+    </div>
+    <div *ngIf="!enviado">
+        <div class="login-modal">
+            <div class="login-container login-container2">
+                <!--<input type="text" class="input" maxlength="30" name="marca" readonly placeholder="joao@hotmail.com">-->
+                <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+                    <input type="text" class="input" maxlength="30" formControlName="email" name="email" placeholder="E-mail">
 
-                        <input type="text" class="input" maxlength="30" formControlName="confirma" name="marca" placeholder="confirmar e-mail">
+                    <input type="text" class="input" maxlength="30" formControlName="confirma" name="confirma" placeholder="Confirmar e-mail">
 
-                        <button type="submit" class="button"> Enviar </button>
-                    </form>    
-                    
-                    <div class="spinner" *ngIf="spinner">
-                        <div class="preloader-wrapper big active" >
-                            <div class="spinner-layer spinner-rupt">
-                                <div class="circle-clipper left">
-                                    <div class="circle"></div>
-                                </div><div class="gap-patch">
-                                    <div class="circle"></div>
-                                </div><div class="circle-clipper right">
-                                    <div class="circle"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    <span class='error'>{{mensagem}}</span>
+
+                    <button type="submit" class="button">
+                        <i class="fa fa-spinner fa-pulse fa-3x fa-fw" *ngIf='loading'></i>   
+                        Enviar 
+                    </button>
+                </form>    
             </div>
         </div>
-        <div *ngIf="enviado || erros?.length > 0">
-            <div class="login-modal">
-                <div class="container">
-                    <span>{{mensagem}}</span>
-                    <button type="button" (click)="voltar()" class="button button2"> Fechar </button>
-                </div>
+    </div>
+    <div *ngIf="enviado">
+        <div class="login-modal">
+            <div class="container">
+                <p class="mensagem">Verifique seu email para a recuperação da senha</p>
             </div>
         </div>
+    </div>
 </div>

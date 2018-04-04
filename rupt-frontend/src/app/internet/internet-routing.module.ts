@@ -1,3 +1,4 @@
+import { TrocaSenhaComponent } from './troca-senha/troca-senha.component';
 import { RedefineSenhaComponent } from './redefine-senha/redefine-senha.component';
 import { RedefinirSenhaComponent } from './redefinir-senha/redefinir-senha.component';
 
@@ -22,7 +23,7 @@ import { PesquisaComponent } from 'app/internet/lista-resultados/pesquisa/pesqui
 const routes: Routes = [
   { path : '', component: InternetInicioComponent,
   children: [
-    { path : 'redefinindoSenha/:token', component: RedefineSenhaComponent}, 
+      { path : 'redefinindoSenha/:token', component: RedefineSenhaComponent}, 
       { path : 'noticias', component: HomeComponent},
       { path : 'faq', component: FaqComponent},
       { path : 'politica', component: PoliticaComponent},
@@ -38,6 +39,7 @@ const routes: Routes = [
       { path : 'esqueci-senha', component:  EsqueciSenhaComponent},
       { path : 'categorias/:categoria', component: CategoriaComponent},
       { path : 'pesquisa/:search', component: PesquisaComponent},
+      { path : 'troca-senha', component: TrocaSenhaComponent},
       { path : '', redirectTo: 'noticias', pathMatch: 'full'},
       { path : '**', redirectTo: 'noticias', pathMatch: 'full'},
     ]},

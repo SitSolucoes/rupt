@@ -34,7 +34,7 @@ export class CadastroLeitorComponent implements OnInit {
   textButton: string = "Cadastrar";
   enviado: boolean;
   erro: boolean;
-
+  processando: boolean = false;
   dataInvalida: boolean;
   senhaInvalida: boolean;
   emailInvalido: boolean;
@@ -278,6 +278,11 @@ export class CadastroLeitorComponent implements OnInit {
   }
 
   onSubmit(){
+      if(this.processando)
+        return;
+        
+      this.processando = true;
+
       this.validaSenhas();
 
       this.enviado = false;
@@ -296,6 +301,7 @@ export class CadastroLeitorComponent implements OnInit {
                   (data: any) => {
                     this.leitor.id = data;
                     this.uploadFiles(false);
+                    this.processando = false;
                   }
                 );
               }
@@ -304,10 +310,12 @@ export class CadastroLeitorComponent implements OnInit {
               this._leitoresService.updateLeitor(this.form, this.form.get('id').value).subscribe(
                 (response) => { 
                   this.uploadFiles(true);
+                  this.processando = false;
                 })
             }
       }
       else {
+        this.processando = false;
         this.erro = true;
         this.loading = false;
       }

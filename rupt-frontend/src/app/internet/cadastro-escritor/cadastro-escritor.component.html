@@ -13,8 +13,28 @@
             <div class="area">
                 <p> Dados pessoais </p>
 
-                <div class="text"> Olá, {{ leitor.nome }}. Para se tornar um escritor é necessário completar seu cadastro. <br/>
-                    Preencha os campos abaixo corretamente que sua solicitação será enviada para avaliação. </div>
+                <div class="text" *ngIf="!leitor.escritor"> Olá, {{ leitor.nome }}. Para se tornar um escritor é necessário completar seu cadastro. <br/>
+                    Preencha os campos abaixo corretamente que sua solicitação será enviada para avaliação. 
+                </div>
+
+                <div class="status" *ngIf="leitor?.escritor">
+
+                    <div class="error-alert success" *ngIf='leitor.escritor.status == "a"'> 
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                        Cadastro aprovado
+                    </div>
+
+                    <div class="error-alert" *ngIf='leitor.escritor.status == "r"'> 
+                        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                        Cadastro recusado: {{ leitor.escritor.motivo_recusa }}
+                    </div>
+
+                    <div class="error-alert grey" *ngIf='leitor.escritor.status == "p"'> 
+                        <i class="fa fa-hourglass-half" aria-hidden="true"></i>
+                        Em análise
+                    </div>
+
+                </div>
 
                 <div class="menu">
                     <label> RG *</label>
@@ -191,9 +211,11 @@
                 </div>
             
             </div>
-            <button type="button" class="button background-orange" (click)="next()">Próximo</button>
+            <div class="form-footer">
+                <button type="button" class="button background-orange" (click)="next()">Próximo</button>
             
-            <button type="button" class="button" (click)="prev()">Voltar</button>
+                <button type="button" class="button" (click)="prev()">Voltar</button>
+            </div>
         </div>
         <div [hidden]='page != 3'>
             <div class="progress">
@@ -227,9 +249,14 @@
 
                 </div>
             </div>
-            <button type="submit" class="button background-orange">Salvar</button>
-            <button type="submit" class="button background-green">Pular</button>
-            <button type="button" class="button" (click)="prev()">Voltar</button>
+            <div class="form-footer">
+                <button type="submit" [disabled]="processando" class="button background-orange">
+                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw" *ngIf='processando'></i>
+                    Salvar
+                </button>
+                <button type="submit" [disabled]="processando" class="button background-green">Pular</button>
+                <button type="button" class="button" (click)="prev()">Voltar</button>
+            </div>
         </div>
     </div>
 </form>

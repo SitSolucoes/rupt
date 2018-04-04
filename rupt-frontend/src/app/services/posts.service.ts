@@ -54,12 +54,9 @@ export class PostsService {
   }
 
   getSliderPosts(){
-    return this._http.get(this._url + 'posts/getSliderPosts', {headers: this.headers})
-      .map((retorno: Response) => {
-        return{
-          'posts': retorno.json().posts
-        };
-      }); 
+    return this._http.get(this._url + 'posts/getSliderPosts', {headers: this.headers}).map(
+        ( response ) => { return response.json().posts }
+    )
   }
 
   getMaisLidas():Observable<any>{
@@ -72,12 +69,9 @@ export class PostsService {
   }
 
   getCategoryPostsSlider(){
-    return this._http.get(this._url + 'posts/PostsToHome', {headers: this.headers})
-      .map((retorno: Response) => {
-        return{
-          'posts': retorno.json().retorno
-        };
-      }); 
+    return this._http.get(this._url + 'posts/PostsToHome', {headers: this.headers}).map(
+      ( response ) => { return response.json().categorias }
+    )
   }
 
   getPost(id):Observable<any>{

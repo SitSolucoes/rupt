@@ -39,7 +39,7 @@ Route::get('/getLeitor/{id}',['uses' => 'LeitorController@getLeitor']);
 Route::put('/updateLeitor/{id}',['uses' => 'LeitorController@update']);
 Route::get('/validaNick/{nick}/{id}', ['uses' => 'LeitorController@validaNick']);
 Route::get('/validaEmailLeitor/{nick}/{id}', ['uses' => 'LeitorController@validaEmail']);
-
+Route::put('/troca-senha', ['uses' => 'LeitorController@trocaSenha']);
 Route::put('/leitor/signin',['uses' => 'LeitorController@signin']);
 Route::post('leitor/verificaLogin', ['uses' => 'LeitorController@verificaLogin']);
 Route::put('leitor/redefineSenha', ['uses' => 'LeitorController@redefineSenha']);
@@ -51,7 +51,7 @@ Route::post('leitor/pesquisa', ['uses' => 'LeitorController@pesquisa']);
 
 //escritores
 Route::get('/getEscritores',['uses' => 'EscritorController@getEscritores']);
-Route::get('/getSolicitacoes', ['uses' => 'EscritorController@getSolicitacoes']);
+Route::get('/getSolicitacoes', ['uses' => 'EscritorControlleleitoresr@getSolicitacoes']);
 Route::get('/countSolicitacoes', ['uses' => 'LeitorController@countSolicitacoes']);
 Route::put('/createEscritor/{id}/{admin_idAdmin}',['uses' => 'EscritorController@create']);
 Route::put('/updateEscritor/{id}',['uses' => 'EscritorController@update']);

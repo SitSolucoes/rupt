@@ -53,6 +53,7 @@ import { SeguidorService } from 'app/services/seguidor.service';
 import {SlickSlider2Component} from './slider/slick-slider2/slick-slider2.component';
 import { SlickSliderMobileComponent } from './slider/slick-slider-mobile/slick-slider-mobile.component';
 import { NotificacaoService } from '../services/notificacao.service';
+import { TrocaSenhaComponent } from './troca-senha/troca-senha.component';
 
 @NgModule({ 
   imports: [
@@ -102,7 +103,8 @@ import { NotificacaoService } from '../services/notificacao.service';
     PesquisaComponent,
     ListaComponent,
     RedefinirSenhaComponent,
-    SlickSliderMobileComponent
+    SlickSliderMobileComponent,
+    TrocaSenhaComponent
   ],
   providers: [
     CategoriaLeitorService,

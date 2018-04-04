@@ -397,6 +397,10 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
     color: #8B1A1A;
 }
 
+.headbar-right .dropdown-content2 .info .fa.green{
+    color: green;
+}
+
 .headbar-right .dropdown-content2 .info .img2{
     margin-top: 0px !important;
     height: 25px;
@@ -3758,6 +3762,28 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     width: 50%;
 }
 
+.cadastro-escritor .container .area .status{
+    width: 100%;
+    float: left;
+    display: block;
+    margin-bottom: 40px;
+}
+
+.cadastro-escritor .container .area .error-alert{
+    float: left;
+    margin-left: 20px;
+    text-align: left;
+    padding: 10px 15px;
+    width: auto;
+}
+
+.cadastro-escritor .container .area .error-alert.grey{
+    background: darkgrey;
+}
+
+.cadastro-escritor .container .area .error-alert i{
+    margin-right: 10px;
+}
 
 .cadastro-escritor .container .background-orange{
      background: #f97000;
@@ -3966,6 +3992,13 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
 .login-modal .text:hover{
     cursor: pointer;
     text-decoration: underline;
+}
+
+.login-modal .mensagem{
+    display: table;
+    margin: auto;
+    font-size: 17px;
+    margin-bottom: 40px;
 }
 
 .modal2{
@@ -4785,7 +4818,7 @@ quill-editor{
 }
 
 .form-footer .button.medium{
-    width: 150px;
+    width: auto;
 }
 
 .form-footer .button .fa-spinner{

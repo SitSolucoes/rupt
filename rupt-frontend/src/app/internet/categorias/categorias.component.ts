@@ -32,10 +32,9 @@ export class CategoriasComponent implements OnInit {
     //se não tiver nada la, tentar pegar pelo nome 
 
     this._postsService.getCategoryPostsSlider().subscribe(
-      (p: any) =>{
-        this.categorias = p.posts;
+      ( response ) =>{
+        this.categorias = response;
         this.pronto();
-        //console.log(p.posts);
       }
     );
   }

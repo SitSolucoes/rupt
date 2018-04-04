@@ -11,12 +11,15 @@ import { ConnectionFactory } from 'app/classes/connection-factory';
 export class CategoriaSliderComponent implements OnInit {
 
   @Input('categoria') categoria: any;
+  @Input('index') index: number;
 
   nomeCategoria;
+  posts; 
   url = ConnectionFactory.API_IMAGEM;
-  posts;/////tipo 1 = imagem com texto ///// 2 = imagem só //////// 3 = so texto
-  constructor(private _escritoresService: EscritoresService,  private _router: Router) {   
-   }
+  
+  //tipo 1 = imagem com texto // 2 = imagem só // 3 = so texto
+
+  constructor(private _escritoresService: EscritoresService,  private _router: Router) {}
 
   ngOnInit() {
     //console.log(this.categoria);  
@@ -26,6 +29,4 @@ export class CategoriaSliderComponent implements OnInit {
     this._router.navigate(['noticia', link]);
   }
 
-
-  
 }

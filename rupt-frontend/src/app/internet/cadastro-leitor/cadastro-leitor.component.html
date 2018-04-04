@@ -177,7 +177,7 @@
                     <label> Senha </label> 
                     
                     <input type="password" class="input" maxlength="30" name="senha" placeholder="Sua Senha" formControlName="password"
-                    [ngClass]="{'invalid': verificaValidTouched('password')}">
+                    [ngClass]="{'invalid': verificaValidTouched('password')}" autocomplete="off">
 
                     <div class="error" *ngIf="verificaValidTouched('password')">{{ mensagemErro('password') }}</div>
 
@@ -187,7 +187,7 @@
                     <label> Confirmar Senha </label> 
                     
                     <input type="password" class="input" maxlength="30" name="confirma" placeholder="Confirmar Senha" formControlName="confirma_senha"
-                    (blur)="validaSenhas()">
+                    (blur)="validaSenhas()" autocomplete="off">
                     
                     <div class="error" *ngIf="form.get('password').value != form.get('confirma_senha').value">Senhas não coincdem</div>
                 </div>

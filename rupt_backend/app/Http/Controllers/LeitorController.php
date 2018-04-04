@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
-use App\Mail\esqueciSenhaLeitor;
+use App\Mail\EsqueciSenhaLeitor;
 use App\Leitor;
 
 class LeitorController extends Controller
@@ -190,15 +190,17 @@ class LeitorController extends Controller
         try{
             if($leitor != null){    
                 if(!$leitor->ativo)
-                    return response()->json(['retorno' => false, 'mensagem' => 'Seu usuário está desativado, caso você nunca tenha recebido nenhum aviso ou alerta sobre este tema, por favor, entre em contato.'], 200);
-                $destino = $leitor->email;
+                    return response()->json(['retorno' => false, 'mensagem' => 'Sua conta foi desativada, entre em contato para recuperá-la'], 200);
+                
+                    $destino = $leitor->email;
                 $rdm_token = str_random(60);
                 $leitor->token_esqueci_senha = $rdm_token;
                 $leitor->save();
-                Mail::to($destino)->send(new esqueciSenhaLeitor($rdm_token));
-                return response()->json(['retorno' => true, 'mensagem' => "Um e-mail foi enviado com as instruções para recuperação da senha."]);
+                
+                Mail::to($destino)->send(new EsqueciSenhaLeitor($rdm_token));
+                return response()->json(['retorno' => true, 'mensagem' => "Um e-mail foi enviado com as instruções para recuperação da senha"]);
             }else{
-                return response()->json(['retorno' => false, 'mensagem' => "Seu email não foi encontrado em nossa base de dados, por favor confira os dados digitados."], 200);
+                return response()->json(['retorno' => false, 'mensagem' => "E-mail não encontrado"], 200);
             }
         }catch(ErrorException $e){
             return response()->json(['retorno' => false, 'mensagem' => "Um erro inesperado ocorreu, tente novamente mais tarde"], 200);
@@ -420,6 +422,20 @@ class LeitorController extends Controller
                           ->get();
 
         return response()->json(['leitores' => $leitores], 200);
+    }
+
+    public function trocaSenha(Request $request){
+        $leitor = Leitor::where('id', $request->idLeitor)
+                          ->get()
+                          ->first();
+        if(!$leitor && Hash::check($leitor->password, $request->senhaAntiga))
+            return response()->json(['erro' => 'Senha antiga inválida'], 400);
+        
+        $leitor->password = Hash::make($request->password);
+        $leitor->save();
+
+        return response()->json(['sucesso' => 'Senha alterada com sucesso!'], 200);
+        
     }
 
 }

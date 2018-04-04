@@ -24,7 +24,7 @@ export class SliderComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    this.getSliderPostsHTML();
+    this.getSliderPosts();
   }
 
   openNew(link){
@@ -32,10 +32,10 @@ export class SliderComponent implements OnInit {
   }
 
 
-  getSliderPostsHTML(){
+  getSliderPosts(){
     this._postServices.getSliderPosts().subscribe(
-      (retorno: any) => {
-        this.sliderPosts = retorno.posts;
+      (response: any) => {
+        this.sliderPosts = response;
         this.pronto();
     });
   }

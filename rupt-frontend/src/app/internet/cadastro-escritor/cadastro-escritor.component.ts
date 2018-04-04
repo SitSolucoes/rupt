@@ -25,6 +25,7 @@ export class CadastroEscritorComponent implements OnInit {
   cpfInvalido: boolean;
   cpfUsado: boolean;
   erro: boolean;
+  processando: boolean = false;
   leitor: Leitor = new Leitor();
   loading: boolean;
   page: number = 1;
@@ -204,9 +205,18 @@ export class CadastroEscritorComponent implements OnInit {
   }
 
   onSubmit(){
+    if(this.processando)
+      return;
+
+    this.processando = true;
+
     this._escritorService.createEscritor(this.formulario, this.leitor.id, false).subscribe(
       (response) => { 
         this.uploadFiles(false);
+        this.processando = false;
+      },
+      error =>{
+        this.processando = false;
       }
     )
   }
@@ -224,6 +234,11 @@ export class CadastroEscritorComponent implements OnInit {
   }
 
   onSubmitEditar(){
+  if(this.processando)
+    return;
+
+  this.processando = true;
+
     this.salvo = false;
 
     if (!this.formulario.valid || this.cpfInvalido || this.cpfUsado){
@@ -254,10 +269,11 @@ export class CadastroEscritorComponent implements OnInit {
               this.formulario.controls.rg.disable();
               this.formulario.controls.cpf.disable();
               this.salvo = true; 
-
+              this.processando = false;
               this.loading = false;
             }
             else {
+                this.processando = false;
                 this.uploadFiles(true);
             }
           }

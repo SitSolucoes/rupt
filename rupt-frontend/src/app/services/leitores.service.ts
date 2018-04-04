@@ -79,7 +79,7 @@ export class LeitoresService {
     
     return this._http.put(this._url + 'leitor/redefineSenha', body, {headers: this.headers}).map(
       (response)=>{
-        return response.json().resultado;
+        return response.json().retorno;
       }
     )
   }
@@ -104,6 +104,23 @@ export class LeitoresService {
         return r.json();
       }
     );
+  }
+
+  trocaSenha(f){
+    const body = JSON.stringify({
+      idLeitor: f.value.idLeitor,
+      senhaAntiga: f.value.antiga,
+      password: f.value.senha
+    });
+
+    return this._http.put(this._url + 'troca-senha', body, {headers: this.headers}).map(
+      (response: Response) =>{
+        return response.json().sucesso;
+      },
+      (erro) => {
+        return erro.json().erro;
+      }
+    )
   }
 
   getLeitores(): Observable<any>{
@@ -148,12 +165,18 @@ export class LeitoresService {
 
   doLogin(form){
     const body = JSON.stringify(form.value);
+    
     return this._http.put(this._url + 'leitor/signin', body, {headers: this.headers}).map(
         (response: Response) => { 
           if (response.json().login == true){
             localStorage.setItem('l', this.base64.encode(response.json().leitor.id));
             localStorage.setItem('token', response.json().token);
-  
+
+            let now = new Date();
+            localStorage.setItem('exp', now.getTime().toString());
+
+            //localStorage.setItem('x')
+
             this.leitor.emit(response.json().leitor);
             
             return [true, response.json().leitor];
@@ -174,14 +197,33 @@ export class LeitoresService {
   verificaLogin(){
     let token = localStorage.getItem("token");
     let id = this.base64.decode(localStorage.getItem("l"));
+    let time = Number(localStorage.getItem('exp'));
+
+    let now = new Date();
+
+    let dif = now.getTime() - time;
+
+    let minutes = 1000 * 60;
+    let hours = minutes * 60;
+
+    dif = dif/hours;
+
+    if (time == 0 || dif > 1){
+        localStorage.removeItem('token');
+        return Observable.of(false);
+    }
     
-    const body = JSON.stringify({
+    localStorage.setItem('exp', now.getTime().toString());
+    
+    
+    let body = JSON.stringify({
       id: id,
       token: token
-    })
+    });
 
     return this._http.post(this._url + 'leitor/verificaLogin', body, {headers: this.headers}).map(
       (response: Response) => {
+        
         if (response.json().leitor != false){
           this.leitor.emit(response.json().leitor);
             

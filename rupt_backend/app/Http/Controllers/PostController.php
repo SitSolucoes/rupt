@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Collection;
+use Carbon\Carbon;
 
 use App\Categoria;
 use App\Post;
 use App\PostCategoria;
-use App\visualizacao;
+use App\Visualizacao;
 
-use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\CategoriaFiltroController;
 use App\Http\Controllers\ComentarioController;
 use App\Http\Controllers\DenunciasController;
 use App\Http\Controllers\EscritorController;
@@ -79,7 +80,6 @@ class PostController extends Controller
         $post = $this->create($request, $post);
         $post->autor_idLeitor = $request->leitor_id;
         $post->tipo_post = $request->tipo_post;
-        $post->visualizacoes = 0;
         //$post->publishedAt = date('Y-m-d H:i:s');
         
         $post->save();
@@ -144,6 +144,16 @@ class PostController extends Controller
         return $post;
     }
 
+    public function getPost($id){
+        $post = Post::where('id', $id)
+                    ->whereNull('deleted_at')
+                    ->with('autor')
+                    ->with('categoriasPost')
+                    ->first();
+
+        return response()->json(['post' => $post], 200);
+    }
+
     public function getPostByLink(Request $request){
         //echo $request;
 
@@ -177,7 +187,7 @@ class PostController extends Controller
     }
 
     public function getPostsMaisLidos(){
-        $idPosts_q = Visualizacoes::select(DB::raw('post_idPost as id, count(*) as q'))
+        $idPosts_q = Visualizacao::select(DB::raw('post_idPost as id, count(*) as q'))
         ->whereIn('post_idPost', Post::select('id')
         ->whereNull('deleted_at')
         ->whereDate('publishedAt', '>=', DB::raw('DATE(DATE_ADD(NOW(), INTERVAL - 100 DAY))'))
@@ -203,8 +213,48 @@ class PostController extends Controller
     }
 
     public function getSliderPosts(){
-        //ultimas 24h
+        $max_size = Post::whereNull('deleted_at')
+                        ->whereNotNull('publishedAt')
+                        ->count();
+
+        $posts = [];
+        $days = 1;
         
+        // get the current time
+        $current = Carbon::now();
+
+        while(sizeof($posts) < 15 && sizeof($posts) < $max_size){
+            $max_days = $current->addDays($days);
+            $days = $days*3;
+
+            $posts = Post::whereNull('deleted_at')
+                        ->whereNotNull('publishedAt')
+                        ->where('publishedAt', '<=', $max_days)
+                        ->orderBy('publishedAt', 'desc')
+                        ->with('autor')
+                        ->with('visualizacoes')
+                        ->with('categoriasPost')
+                        ->get();
+        }
+
+        $postsPeso = new Collection();                     
+
+        foreach($posts as $post){
+            $comentarios = ComentarioController::countComentarios($post->id)*$this->pesoComentario;
+            $interacoes = InteracaoLeitorController::sumPeso($post->id);
+
+            $post->peso = $comentarios + $interacoes + sizeof($post->visualizacoes);
+            
+            $postsPeso->push($post);
+        }
+        
+        $limit = $postsPeso->take(20);
+        $order = $limit->sortByDesc('peso');
+        $array = $order->values()->toArray();
+
+        return response()->json(['posts' => $array], 200);
+
+        /*
         $idPosts_q = Visualizacao::select(DB::raw('post_idPost as id, count(*) as q'))
                         ->whereIn('post_idPost', Post::select('id')
                         ->whereNull('deleted_at')
@@ -228,62 +278,75 @@ class PostController extends Controller
             'posts' => $posts
         ];
         return response()->json($retorno, 200);
+        */
     }
 
-    public function getPost($id){
-        $post = Post::where('id', $id)
-                    ->whereNull('deleted_at')
-                    ->with('autor')
-                    ->with('categoriasPost')
-                    ->first();
-
-        return response()->json(['post' => $post], 200);
-    }
-
-    public function postsPorCategoria($id){
-        return Post::select('posts.*')
-            ->whereNull('posts.deleted_at')
-            ->whereNotNull('posts.publishedAt')
-            ->join('post_categoria', 'posts.id', '=', 'post_categoria.post_idPost')
-            ->where('post_categoria.categoria_idCategoria', $id)
-            ->orderBy('posts.publishedAt', 'desc')->get();
-    }
-
+    
     public function getSliderPostsByCategory(){
-        $cat_con = new CategoriaController();
-        $retorno = [];
+        $c = new CategoriaFiltroController();
+        $categoria_filtros = $c->get();
 
-        $categorias = $cat_con->categoriasToHome();
+        $categorias = new Collection();
 
-        foreach($categorias as $c){
-            $subs = $cat_con->getSubCategorias($c->id);
-            $tmp_posts = $this->postsPorCategoria($c->id);
+        foreach($categoria_filtros as $cat_filtro){
+            $categoria = $cat_filtro->categoria;
+
+            $max_size = Post::whereNull('deleted_at')
+                            ->whereNotNull('publishedAt')
+                            ->whereIn('id', function($query) use ($categoria) {
+                                $query->select('post_idPost')
+                                    ->from('post_categoria')
+                                    ->where('categoria_idCategoria', $categoria->id);
+                            })
+                            ->count();
+
             $posts = [];
-            if($subs->count() > 0)
-                foreach($subs as $s)
-                    foreach($this->postsPorCategoria($s->id) as $p)
-                        $tmp_posts[] = $p;
-            foreach($tmp_posts as $p)
-                $posts[] = (object) [
-                    "post" => $p,
-                    "escritor" => $p->autor,
-                    "visualizacoes" =>  300,//$p->getVisualizacoes(),
-                    "likes" => (3000>1000) ? (3000/1000) . 'k' : 3000, //$p->getIteracoes(),
-                    "comentarios" => ["comentario", "comentario", "comentario"],//$p->getComentarios()
-                ];
+            $days = 1;
             
-            $retorno[] = (object) [
-                "nome" => $c->categoria,
-                "posts" => $posts
-            ];
+            // get the current time
+            $current = Carbon::now();
+
+            while(sizeof($posts) < 20 && sizeof($posts) < $max_size){
+                // add 30 days to the current time
+                $max_days = $current->addDays($days);
+                $days = $days*3;
+
+                $posts = Post::whereNull('deleted_at')
+                            ->whereNotNull('publishedAt')
+                            ->where('publishedAt', '<=', $max_days)
+                            ->whereIn('id', function($query) use ($categoria) {
+                                $query->select('post_idPost')
+                                    ->from('post_categoria')
+                                    ->where('categoria_idCategoria', $categoria->id);
+                            })
+                            ->orderBy('publishedAt', 'desc')
+                            ->with('autor')
+                            ->with('visualizacoes')
+                            ->get();
+            }
+
+            if (sizeof($posts) > 0){
+                $postsPeso = new Collection();                     
+                
+                foreach($posts as $post){
+                    $comentarios = ComentarioController::countComentarios($post->id)*$this->pesoComentario;
+                    $interacoes = InteracaoLeitorController::sumPeso($post->id);
+
+                    $post->peso = $comentarios + $interacoes + sizeof($post->visualizacoes);
+                    
+                    $postsPeso->push($post);
+                }
+                
+                $limit = $postsPeso->take(20);
+                $order = $limit->sortByDesc('peso');
+                $array = $order->values()->toArray();
+
+                $categoria->posts = $array;
+                $categorias->push($categoria);
+            }   
         }
 
-        $ret = [
-            "retorno" => $retorno
-        ];
-
-
-        return response()->json($ret, 200);
+        return response()->json(['categorias' => $categorias], 200);
     }
 
     
@@ -370,7 +433,7 @@ class PostController extends Controller
             $interacoes = InteracaoLeitorController::sumPeso($post->id);
 
             $post->peso = $comentarios + $interacoes + sizeof($post->visualizacoes);
-            
+
             $postsPeso->push($post);
         }
 

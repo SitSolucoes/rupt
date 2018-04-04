@@ -1,8 +1,9 @@
-<!--<div class="cadastro">
+<div class="cadastro">
   <div class="container" >
     <p *ngIf="erros.token != ''"> {{erros.token}} </p>
-    <p *ngIf="tokenValido()"> Olá! Por favor insira sua nova senha </p>
-    <div class="area" *ngIf="erros.token == ''"> 
+    <p *ngIf="mensagem != ''"> {{ mensagem }} </p>
+    <div class="area" *ngIf="erros.token == '' && mensagem == ''"> 
+      <p *ngIf="tokenValido()"> Olá! Por favor insira sua nova senha </p>
       <div class="error" *ngIf="erros.senha != ''"> {{erros.senha}} </div>
       <form [formGroup]="form" *ngIf="form != null" (ngSubmit)="onSubmit()">
         <div class="menu">
@@ -13,13 +14,10 @@
           <label> Confirmar Senha </label> 
           <input type="password" class="input" maxlength="20" name="confirma_senha" placeholder="Confirme sua nova senha" formControlName="confirma_senha">
         </div>
-        <button type="submit" class="button" (blur)="form ? console.log(form) : console.log('form nulo?!?!?!')" [disabled]="!form?.valid">Alterar</button>
+        <button type="submit" class="button" [disabled]="!form?.valid">Alterar</button>
       </form>
     </div>
   </div>
   
-  <div class="container" *ngIf="!tokenValido()">
-    <p> {{erro}} </p>
-  </div>
   
-</div>-->
+</div>

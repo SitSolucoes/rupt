@@ -77,7 +77,7 @@ class DenunciasController extends Controller{
                 $notificacao->descricao = 'Sua publicação foi removida após denúncias';
                 $notificacao->rota = '/noticia/'.$post->link; 
                 $notificacao->lida = false;
-                $notificacao->tipo = 6; //2 - denuncia
+                $notificacao->tipo = 6; //6 - erro
 
                 NotificacaoController::create($notificacao);
 

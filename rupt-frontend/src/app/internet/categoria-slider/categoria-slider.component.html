@@ -1,151 +1,154 @@
 <div class="container-categoria">
-    <div class="area light">
-        <div class="title center"> {{ categoria.nome }} </div>
+    <div class="area" [ngClass]="{'light' : index%2 == 0}">
+        <div class="title center"> {{ categoria.categoria }}</div>
         <div class="underline"></div>
+        
         <div class="container-slider-mobile">
             <slick-slider-mobile *ngIf="categoria.posts">
-                <div name="post" *ngFor="let p of categoria.posts" (click)="openNew(p.post.id)">
-                    <!--tipo imagem + texto -->
-                    <div *ngIf="p.post.tipo_post == 1 && p.post.src_imagem != ''" class="content-img-text">
-                        <div class="info-img-text">
-                            <div class="banner-img-text">
-                                <!--../../../assets/img/section4.png-->
-                                <img src="{{ url + 'posts/' + p.post.src_imagem }}" class="img shadow"
-                                     [ngClass]="{'post-adulto' : p.post.adulto == 1}">
-                            </div>
-                            <div class="title"> {{ p.post.titulo }} </div>
-
-                            <div class="text" *ngIf='p.post.subtitulo'> {{ p.post.subtitulo }}</div>
-                            <div class="text" *ngIf='!p.post.subtitulo' [innerHTML]="p.post.conteudo_card"></div>
-
-                            <div class="info-post">
-                                <div class="img-person">
-                                    <img src="{{ p.escritor.src_foto.indexOf('http') >= 0 ? p.escritor.src_foto : url + 'profile/' + p.escritor.src_foto }}" class="img">
+                <div name="post" *ngFor="let post of categoria.posts">
+                    <a routerLink='/noticia/{{ post.link }}'>
+                        <!--tipo imagem + texto -->
+                        <div *ngIf="post.tipo_post == 1 && post.src_imagem != ''" class="content-img-text">
+                            <div class="info-img-text">
+                                <div class="banner-img-text">
+                                    <!--../../../assets/img/section4.png-->
+                                    <img src="{{ url + 'posts/' + post.src_imagem }}" class="img shadow"
+                                        [ngClass]="{'post-adulto' : post.adulto == 1}">
                                 </div>
-                                <p> {{ p.escritor.nick}}</p>
-                                <div class="area-post">
-                                    <i class="fa fa-calendar-o img-cal" aria-hidden="true"></i>
-                                    <div class="time">{{ p.post.publishedAt | date:'dd/MM' }} </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- tipo texto -->
-                    <div *ngIf="p.post.tipo_post == 3 || p.post.src_imagem == ''" class="content" >
-                        <div class="info-text">
-                            <div class="banner-single">
-                                <div class="title"> {{ p.post.titulo }} </div>
-                                <div class="text"> {{ p.post.subtitulo }}...</div>
+                                <div class="title"> {{ post.titulo }} </div>
+
+                                <div class="text" *ngIf='post.subtitulo'> {{ post.subtitulo }}</div>
+                                <div class="text" *ngIf='!post.subtitulo' [innerHTML]="post.conteudo_card"></div>
+
                                 <div class="info-post">
                                     <div class="img-person">
-                                        <img src="{{ p.escritor.src_foto.indexOf('http') >= 0 ? p.escritor.src_foto : url + 'profile/' + p.escritor.src_foto }}" class="img">
+                                        <img src="{{ post.autor.src_foto.indexOf('http') >= 0 ? post.autor.src_foto : url + 'profile/' + post.autor.src_foto }}" class="img">
                                     </div>
-                                    <p> Marcela Prado </p>
+                                    <p> {{ post.autor.nick}}</p>
                                     <div class="area-post">
                                         <i class="fa fa-calendar-o img-cal" aria-hidden="true"></i>
-                                        <div class="time"> {{ p.post.publishedAt }} </div>
+                                        <div class="time">{{ post.publishedAt | date:'dd/MM' }} </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- tipo imagem -->
-                    <div  *ngIf="p.post.tipo_post == 2 && p.post.src_imagem != ''" class="content">
-                        <div class="info-img">
-                            <div class="banner-img-text banner-solo">
-                                <img src="{{ p.post.src_imagem }}" class="img shadow">
-                                <div class="img-container img-container-duplo img-container-size">
-                                    <div class="title"> {{ p.post.titulo }} </div>
-                                </div>
-                                <div class="info-post info-post2 info-post3">
-                                    <div class="img-person">
-                                        <img src="{{ p.escritor.src_foto.indexOf('http') >= 0 ? p.escritor.src_foto : url + 'profile/' + p.escritor.src_foto }}" class="img">
-                                    </div>
-                                    <p> {{ p.escritor.nick }} </p>
-                                    <div class="area-post">
-                                        <i class="fa fa-calendar-o img-cal" aria-hidden="true"></i>
-                                        <div class="time">{{ p.post.publishedAt | date:'dd/MM' }} </div>
+                        <!-- tipo texto -->
+                        <div *ngIf="post.tipo_post == 3 || post.src_imagem == ''" class="content" >
+                            <div class="info-text">
+                                <div class="banner-single">
+                                    <div class="title"> {{ post.titulo }} </div>
+                                    <div class="text"> {{ post.subtitulo }}...</div>
+                                    <div class="info-post">
+                                        <div class="img-person">
+                                            <img src="{{ post.autor.src_foto.indexOf('http') >= 0 ? post.autor.src_foto : url + 'profile/' + post.autor.src_foto }}" class="img">
+                                        </div>
+                                        <p> {{ post.autor.nick}}</p>
+                                        <div class="area-post">
+                                            <i class="fa fa-calendar-o img-cal" aria-hidden="true"></i>
+                                            <div class="time"> {{ post.publishedAt }} </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                        <!-- tipo imagem -->
+                        <div  *ngIf="post.tipo_post == 2 && post.src_imagem != ''" class="content">
+                            <div class="info-img">
+                                <div class="banner-img-text banner-solo">
+                                    <img src="{{ post.src_imagem }}" class="img shadow">
+                                    <div class="img-container img-container-duplo img-container-size">
+                                        <div class="title"> {{ post.titulo }} </div>
+                                    </div>
+                                    <div class="info-post info-post2 info-post3">
+                                        <div class="img-person">
+                                            <img src="{{ post.autor.src_foto.indexOf('http') >= 0 ? post.autor.src_foto : url + 'profile/' + post.autor.src_foto }}" class="img">
+                                        </div>
+                                        <p> {{ post.autor.nick }} </p>
+                                        <div class="area-post">
+                                            <i class="fa fa-calendar-o img-cal" aria-hidden="true"></i>
+                                            <div class="time">{{ post.publishedAt | date:'dd/MM' }} </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
                 </div>
             </slick-slider-mobile>
         </div>
-
-
-
+        
         <div class="container-slider-screen">
-        <slick-slider2 *ngIf="categoria.posts">
-            <div name="post" *ngFor="let p of categoria.posts" (click)="openNew(p.post.link)">
-                <!--tipo imagem + texto -->
-                <div *ngIf="p.post.tipo_post == 1 && p.post.src_imagem != ''" class="content-img-text">
-                    <div class="info-img-text">
-                        <div class="banner-img-text">
-                            <!--../../../assets/img/section4.png-->
-                            <img src="{{ url + 'posts/' + p.post.src_imagem }}" class="img shadow"
-                                [ngClass]="{'post-adulto' : p.post.adulto == 1}">
-                        </div>
-                        <div class="title"> {{ p.post.titulo }} </div>
-                        
-                        <div class="text" *ngIf='p.post.subtitulo'> {{ p.post.subtitulo }}</div>
-                        <div class="text" *ngIf='!p.post.subtitulo' [innerHTML]="p.post.conteudo_card"></div>
+            <slick-slider2 *ngIf="categoria.posts">
+                <div name="post" *ngFor="let post of categoria.posts">
+                    <!--tipo imagem + texto -->
+                    <a routerLink='/noticia/{{ post.link }}'>
+                        <div *ngIf="post.tipo_post == 1 && post.src_imagem != ''" class="content-img-text">
+                            <div class="info-img-text">
+                                <div class="banner-img-text">
+                                    <!--../../../assets/img/section4.png-->
+                                    <img src="{{ url + 'posts/' + post.src_imagem }}" class="img shadow"
+                                        [ngClass]="{'post-adulto' : post.adulto == 1}">
+                                </div>
+                                <div class="title"> {{ post.titulo }} </div>
+                                
+                                <div class="text" *ngIf='post.subtitulo'> {{ post.subtitulo }}</div>
+                                <div class="text" *ngIf='!post.subtitulo' [innerHTML]="post.conteudo_card"></div>
 
-                        <div class="info-post">
-                            <div class="img-person">
-                                <img src="{{ p.escritor.src_foto.indexOf('http') >= 0 ? p.escritor.src_foto : url + 'profile/' + p.escritor.src_foto }}" class="img">
-                            </div>
-                            <p> {{ p.escritor.nick}}</p>
-                            <div class="area-post">
-                                <i class="fa fa-calendar-o img-cal" aria-hidden="true"></i>
-                                <div class="time">{{ p.post.publishedAt | date:'dd/MM' }} </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- tipo texto -->
-                <div *ngIf="p.post.tipo_post == 3 || p.post.src_imagem == ''" class="content" >
-                    <div class="info-text">
-                        <div class="banner-single">
-                            <div class="title"> {{ p.post.titulo }} </div>
-                            <div class="text"> {{ p.post.subtitulo }}...</div>
-                            <div class="info-post">
-                                <div class="img-person">
-                                    <img src="{{ p.escritor.src_foto.indexOf('http') >= 0 ? p.escritor.src_foto : url + 'profile/' + p.escritor.src_foto }}" class="img">
-                                </div>
-                                <p> Marcela Prado </p>
-                                <div class="area-post">
-                                    <i class="fa fa-calendar-o img-cal" aria-hidden="true"></i>
-                                    <div class="time"> {{ p.post.publishedAt }} </div>
+                                <div class="info-post">
+                                    <div class="img-person">
+                                        <img src="{{ post.autor.src_foto.indexOf('http') >= 0 ? post.autor.src_foto : url + 'profile/' + post.autor.src_foto }}" class="img">
+                                    </div>
+                                    <p> {{ post.autor.nick}}</p>
+                                    <div class="area-post">
+                                        <i class="fa fa-calendar-o img-cal" aria-hidden="true"></i>
+                                        <div class="time">{{ post.publishedAt | date:'dd/MM' }} </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <!-- tipo imagem -->
-                <div  *ngIf="p.post.tipo_post == 2 && p.post.src_imagem != ''" class="content">
-                    <div class="info-img">
-                        <div class="banner-img-text banner-solo">
-                            <img src="{{ p.post.src_imagem }}" class="img shadow">
-                            <div class="img-container img-container-duplo img-container-size">
-                                <div class="title"> {{ p.post.titulo }} </div>
-                            </div>
-                            <div class="info-post info-post2 info-post3">
-                                <div class="img-person">
-                                    <img src="{{ p.escritor.src_foto.indexOf('http') >= 0 ? p.escritor.src_foto : url + 'profile/' + p.escritor.src_foto }}" class="img">
-                                </div>
-                                <p> {{ p.escritor.nick }} </p>
-                                <div class="area-post">
-                                    <i class="fa fa-calendar-o img-cal" aria-hidden="true"></i>
-                                    <div class="time">{{ p.post.publishedAt | date:'dd/MM' }} </div>
+                        <!-- tipo texto -->
+                        <div *ngIf="post.tipo_post == 3 || post.src_imagem == ''" class="content" >
+                            <div class="info-text">
+                                <div class="banner-single">
+                                    <div class="title"> {{ post.titulo }} </div>
+                                    <div class="text"> {{ post.subtitulo }}...</div>
+                                    <div class="info-post">
+                                        <div class="img-person">
+                                            <img src="{{ post.autor.src_foto.indexOf('http') >= 0 ? post.autor.src_foto : url + 'profile/' + post.autor.src_foto }}" class="img">
+                                        </div>
+                                        <p> {{ post.autor.nick}}</p>
+                                        <div class="area-post">
+                                            <i class="fa fa-calendar-o img-cal" aria-hidden="true"></i>
+                                            <div class="time"> {{ post.publishedAt }} </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                        <!-- tipo imagem -->
+                        <div  *ngIf="post.tipo_post == 2 && post.src_imagem != ''" class="content">
+                            <div class="info-img">
+                                <div class="banner-img-text banner-solo">
+                                    <img src="{{ post.src_imagem }}" class="img shadow">
+                                    <div class="img-container img-container-duplo img-container-size">
+                                        <div class="title"> {{ post.titulo }} </div>
+                                    </div>
+                                    <div class="info-post info-post2 info-post3">
+                                        <div class="img-person">
+                                            <img src="{{ post.autor.src_foto.indexOf('http') >= 0 ? post.autor.src_foto : url + 'profile/' + post.autor.src_foto }}" class="img">
+                                        </div>
+                                        <p> {{ post.autor.nick }} </p>
+                                        <div class="area-post">
+                                            <i class="fa fa-calendar-o img-cal" aria-hidden="true"></i>
+                                            <div class="time">{{ post.publishedAt | date:'dd/MM' }} </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
                 </div>
-            </div>
-        </slick-slider2>
-    </div>
+            </slick-slider2>
+        </div>
     </div>
 </div>
