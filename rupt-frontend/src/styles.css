@@ -3290,7 +3290,7 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
 }
 
 .tabs .tab a{
-    padding: 5px 20px;
+    padding: 5px 30px;
     color: #5e5e5e;
 }
 
@@ -3308,7 +3308,7 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     width: 100%;
     z-index: 100;
     background: #fff;
-    position: fixed;
+    position: relative;
     box-shadow: 1px 1px 1px #B9B7B7;
 }
 
@@ -3319,11 +3319,15 @@ input[type=email]:not(.browser-default):focus:not([readonly]){
     /* height: 300px; */
     padding: 10px;
     background: #fff;
-    margin-top: 100px;
+    margin-top: 60px;
     margin-left: 30px;
     margin-bottom: 20px;
     border-radius: 2px;
     border: 1px solid #e8e8e8;
+}
+
+.categoria .container .aba2{
+    margin-top: 60px;
 }
 
 .categoria .container .aba a{
