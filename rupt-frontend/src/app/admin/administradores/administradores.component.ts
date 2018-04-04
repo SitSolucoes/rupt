@@ -2,7 +2,6 @@ import { Component, OnInit, EventEmitter, HostListener } from '@angular/core';
 import { NgForm } from '@angular/forms/src/directives';
 import {MaterializeAction} from 'angular2-materialize';
 import { AdministradoresService } from '../../services/administradores.service';
-import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { Option } from './../../shared/option';
 import { ActivatedRoute } from '@angular/router';
@@ -41,8 +40,7 @@ export class AdministradoresComponent implements OnInit {
 
   constructor(private _adminService: AdministradoresService,
               private _route: ActivatedRoute,
-              private _router: Router,
-              private _location: Location) { }
+              private _router: Router) { }
 
   ngOnInit() {
     if(this._route.snapshot.params['id']){
@@ -95,7 +93,7 @@ export class AdministradoresComponent implements OnInit {
       this._adminService.updateAdmin(form, this.admin_selecionado.id).subscribe(
         (response: any) => {
           if(this._route.snapshot.params['id']){
-            this._location.back();
+            history.go(-1);
           }
           else {
            this.message = response;
@@ -194,7 +192,7 @@ export class AdministradoresComponent implements OnInit {
     this.modalActions.emit({action:"modal",params:['close']});
     if(this._route.snapshot.params['id']){
       //this.closeMessage();
-      this._location.back();
+      history.go(-1);
     }
     this.clear();
   }
@@ -207,9 +205,10 @@ export class AdministradoresComponent implements OnInit {
       this.modalMessage.emit({action:"modal",params:['open']});
    }
 
+  
   @HostListener('window:popstate', ['$event'])
   onPopState(event) {
-    this.closeMessage();
-    this.closeModal();
+    this.modalActions.emit({action:"modal",params:['close']});
   }
+  
 }
