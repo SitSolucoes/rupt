@@ -116,6 +116,7 @@ Route::get('/denuncia/getEscritor/{id}', [
 ]);
 
 Route::get('/posts/PostsToHome/', ['uses' => 'PostController@getSliderPostsByCategory']);
+Route::post('posts/getHomeLogado', ['uses' => 'PostController@getHomeLogado']);
 Route::get('posts/getSliderPosts/', ['uses' => 'PostController@getSliderPosts']);
 Route::get('posts/getPostsMaisLidos/', ['uses' => 'PostController@getPostsMaisLidos']);
 Route::get('/posts/Post/{id}', ['uses' => 'PostController@getPost']);

@@ -18,4 +18,10 @@ class CategoriaLeitorController extends Controller
 
         return response()->json(['mensagem' => 'Salvo com sucesso.'], 201);
     }
+
+    public static function getByLeitor($leitor_idLeitor){
+        return CategoriaLeitor::where('leitor_idLeitor', $leitor_idLeitor)
+                              ->with('categoria')
+                              ->get();
+    }
 }

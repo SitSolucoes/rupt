@@ -74,6 +74,12 @@ export class PostsService {
     )
   }
 
+  getHomeLogado(leitor_id){
+    return this._http.post(this._url + 'posts/getHomeLogado', JSON.stringify({leitor_id: leitor_id}), {headers: this.headers}).map(
+      ( response ) => { return response.json().categorias }
+    )
+  }
+
   getPost(id):Observable<any>{
       return this._http.get(this._url + 'posts/Post/'+id, {headers: this.headers}).map(
         (retorno: Response) => {

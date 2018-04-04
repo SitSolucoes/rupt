@@ -202,6 +202,11 @@ export class PublicacaoComponent implements OnInit {
           this._postService.create(this.formulario).subscribe(
             (response) => { 
               this.post = response;
+
+              this.formulario.patchValue({
+                id: response.id
+              });
+
               this.uploadFiles(true); 
             }
           )

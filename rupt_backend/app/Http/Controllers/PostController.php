@@ -20,6 +20,7 @@ use App\Http\Controllers\InteracaoLeitorController;
 use App\Http\Controllers\LeitorController;
 use App\Http\Controllers\PostCategoriaController;
 use App\Http\Controllers\TimelineController;
+use App\Http\Controllers\CategoriaLeitorController;
 
 class PostController extends Controller
 {
@@ -281,14 +282,10 @@ class PostController extends Controller
         */
     }
 
-    
-    public function getSliderPostsByCategory(){
-        $c = new CategoriaFiltroController();
-        $categoria_filtros = $c->get();
-
+    private function createCategoryList($list){
         $categorias = new Collection();
 
-        foreach($categoria_filtros as $cat_filtro){
+        foreach($list as $cat_filtro){
             $categoria = $cat_filtro->categoria;
 
             $max_size = Post::whereNull('deleted_at')
@@ -345,6 +342,23 @@ class PostController extends Controller
                 $categorias->push($categoria);
             }   
         }
+
+        return $categorias;
+    }
+
+    public function getSliderPostsByCategory(){
+        $c = new CategoriaFiltroController();
+        $categoria_filtros = $c->get();
+
+        $categorias = $this->createCategoryList($categoria_filtros);
+
+        return response()->json(['categorias' => $categorias], 200);
+    }
+
+    public function getHomeLogado(Request $request){
+        $cat = CategoriaLeitorController::getByLeitor($request->leitor_id);
+
+        $categorias = $this->createCategoryList($cat);
 
         return response()->json(['categorias' => $categorias], 200);
     }
